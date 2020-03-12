@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>7. Batch Processing | Pega Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="7. Batch Processing: 이미지 일괄 처리Reference  A Fiji Scripting Tutorial #3. Inspecting properties and pixels of an image    대량의 이미지를 한번에 처리해야 하는 경우, 이미지를 하나 하나 불러오는 것보다 일괄처리가 효과적입니다.  이미지가 모여 있는 폴더를 지정할 수도">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7. Batch Processing">
+<meta property="og:url" content="https://jehyunlee.github.com/2020/01/31/ImageJ-tutorial-7-Batch/index.html">
+<meta property="og:site_name" content="Pega Blog">
+<meta property="og:description" content="7. Batch Processing: 이미지 일괄 처리Reference  A Fiji Scripting Tutorial #3. Inspecting properties and pixels of an image    대량의 이미지를 한번에 처리해야 하는 경우, 이미지를 하나 하나 불러오는 것보다 일괄처리가 효과적입니다.  이미지가 모여 있는 폴더를 지정할 수도">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.com/thumbnails/ImageJ-Tutorial/7_batch_1.PNG">
+<meta property="article:published_time" content="2020-01-31T06:22:00.000Z">
+<meta property="article:modified_time" content="2020-01-31T13:39:22.496Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.com/thumbnails/ImageJ-Tutorial/7_batch_1.PNG">
+    
+    <link rel="canonical" href="https://jehyunlee.github.com/2020/01/31/imagej-tutorial-7-batch/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Blog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ImageJ-tutorial-7-Batch" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        7. Batch Processing
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/01/31/ImageJ-tutorial-7-Batch/" class="article-date">
+         <time datetime="2020-01-31T06:22:00.000Z" itemprop="datePublished">2020-01-31</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="7-Batch-Processing-이미지-일괄-처리"><a href="#7-Batch-Processing-이미지-일괄-처리" class="headerlink" title="7. Batch Processing: 이미지 일괄 처리"></a>7. Batch Processing: 이미지 일괄 처리</h2><p><strong>Reference</strong></p>
+<blockquote>
+<p><a href="https://www.ini.uzh.ch/~acardona/fiji-tutorial/#s3" target="_blank" rel="noopener">A Fiji Scripting Tutorial #3. Inspecting properties and pixels of an image</a> </p>
+</blockquote>
+<ul>
+<li><p>대량의 이미지를 한번에 처리해야 하는 경우, 이미지를 하나 하나 불러오는 것보다 일괄처리가 효과적입니다.</p>
+</li>
+<li><p>이미지가 모여 있는 폴더를 지정할 수도 있고,<br>분석 대상 이미지들을 화면에 띄운 후 떠 있는 이미지들을 일괄적으로 처리할 수도 있습니다.</p>
+</li>
+</ul>
+<h3 id="7-1-이미지-파일-일괄-처리"><a href="#7-1-이미지-파일-일괄-처리" class="headerlink" title="7.1. 이미지 파일 일괄 처리"></a>7.1. 이미지 파일 일괄 처리</h3><ul>
+<li><p><a href="7_batch_1.zip">그림파일 다섯 개가 있는 예제파일</a>을 받아 한 폴더에 풉니다.</p>
+</li>
+<li><p>아래 코드를 실행하여 다섯 이미지의 데이터를 일괄적으로 구해봅시다.</p>
+<ul>
+<li><p><a href="https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/" target="_blank" rel="noopener"><b>ImageJ &gt; Tutorial &gt; 6. Image Data 분석</b></a> 글에 있는 <b>6.2.2.1.</b> 코드를 이용해 보겠습니다.</p>
+</li>
+<li><p>면적, 평균, 중간값 등을 일괄적으로 추출하기 위해 python의 <code>def</code> 문을 사용하여 함수를 만들어줍니다.</p>
+</li>
+<li><p>그리고 <code>os.listdir()</code> 을 이용해 지정된 디렉토리 내의 함수를 훑으면서 이미지를 분석하고 그 결과를 출력합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image 위치:  </span></span><br><span class="line">folder = <span class="string">r"C:\Arbeitplatz\19_hexoblog_backup\source\_posts\ImageJ-tutorial-7_Multi\7_batch_1"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 일괄 분석</span></span><br><span class="line"><span class="comment"># 2-1. 함수 정의</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getStatistics</span><span class="params">(imp)</span>:</span></span><br><span class="line">    stats = imp.getStatistics()  </span><br><span class="line">    <span class="comment"># 면적, 평균, 중간값, 최소값, 최대값을 가져옴</span></span><br><span class="line">    <span class="keyword">return</span> stats.area, stats.mean, stats.median, stats.min, stats.max</span><br><span class="line"></span><br><span class="line"><span class="comment"># 확장자가 ".tif"인 파일들로부터 데이터 읽어오기.</span></span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(folder):     <span class="comment"># 폴더 안에 있는 파일에 하나씩 접근</span></span><br><span class="line">    <span class="keyword">if</span> filename.endswith(<span class="string">".tif"</span>):       <span class="comment"># 파일 이름이 ".tif"로 끝난다면,</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"\nProcessing"</span>, filename</span><br><span class="line">        fullpath = os.path.join(folder, filename)  <span class="comment"># 폴더명과 파일명을 결합</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"fullpath"</span>, fullpath  </span><br><span class="line">        imp = IJ.openImage(fullpath)    <span class="comment"># 파일을 불러온다.</span></span><br><span class="line">        <span class="keyword">if</span> imp <span class="keyword">is</span> <span class="literal">None</span>:                 <span class="comment"># 파일이 제대로 불러지지 않으면, </span></span><br><span class="line">            <span class="keyword">print</span> <span class="string">"Could not open image from file:"</span>, filename  <span class="comment"># 에러메시지 출력</span></span><br><span class="line">            <span class="keyword">continue</span>                    <span class="comment"># 다른 파일을 읽어본다.</span></span><br><span class="line">        <span class="comment"># 파일이 불러지면, 앞서 정의한 getStatistics() 함수를 실행해서 데이터를 분석한다.</span></span><br><span class="line">        area, mean, median, vmin, vmax = getStatistics(imp)  </span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Image statistics for"</span>, imp.title  </span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Area:"</span>, area</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Mean:"</span>, mean  </span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Median:"</span>, median  </span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Min and max:"</span>, vmin, <span class="string">"-"</span>, vmax  </span><br><span class="line">    <span class="keyword">else</span>:                               <span class="comment"># 파일 이름이 ".tif"로 끝나지 않으면</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Ignoring"</span>, filename      <span class="comment"># 파일 이름만 출력하고 넘어간다.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>실행 결과가 전체를 보이기엔 너무 길어서 아래 창에 마지막 파일에 대한 실행 결과만을 도시하였습니다. </p>
+</li>
+<li><p>파일명(7_batch_1_5.tif), 면적(<code>Area: 2160.97</code>), 평균(<code>Mean: 11800.02</code>), 중간값(<code>Median: 0.0</code>) 등이 출력되어 있습니다.</p>
+</li>
+<li><p>최대값(<code>max: 65535.0</code>)이 이제까지 다룬 이미지(255)와 달리 65536입니다. 16-bit 이기 때문입니다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">Processing 7_batch_1_5.tif</span><br><span class="line">fullpath C:\Arbeitplatz\19_hexoblog_backup\source\_posts\ImageJ-tutorial-7-Batch\7_batch_1\7_batch_1_5.tif</span><br><span class="line">Image statistics for 7_batch_1_5.tif</span><br><span class="line">Area: 2160.97959184</span><br><span class="line">Mean: 11800.0291717</span><br><span class="line">Median: 0.0</span><br><span class="line">Min and max: 0.0 - 65535.0</span><br></pre></td></tr></table></figure>
+
+<p><img src="7_batch_2.PNG" alt=" "></p>
+</li>
+</ul>
+<br>
+
+<h3 id="7-2-이미지-목록-list-만들기"><a href="#7-2-이미지-목록-list-만들기" class="headerlink" title="7.2. 이미지 목록(list) 만들기"></a>7.2. 이미지 목록(<code>list</code>) 만들기</h3><ul>
+<li><p><b>7.1.</b>에서는 특정 위치의 파일들을 하나씩 건드려보는 방식을 취했습니다.</p>
+</li>
+<li><p>그러나 동일한 파일 집합을 대상으로 여러 오퍼레이션을 하는 경우에, 미리 파일을 묶어놓으면 좋습니다.</p>
+</li>
+<li><p>화면에 띄워놓은 이미지들은 <code>WindowManager</code>모듈을 이용하여 리스트 형식으로 모을 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> WindowManager <span class="keyword">as</span> WM</span><br><span class="line"></span><br><span class="line">images = [] <span class="comment"># 빈 리스트 생성</span></span><br><span class="line"><span class="keyword">for</span> id <span class="keyword">in</span> WM.getIDList():</span><br><span class="line">    images.append(WM.getImage(id))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> images</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>처럼 다섯 그림을 모두 띄워놓고 실행하면, 다음과 같은 메시지가 나옵니다.</li>
+</ul>
+<p><img src="7_batch_3.PNG" alt=" "></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[img[&quot;7_batch_1_1.tif&quot; (-67), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_2.tif&quot; (-68), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_3.tif&quot; (-72), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_4.tif&quot; (-73), 16-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_5.tif&quot; (-74), 16-bit, 1536x1103x1x1x1]]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>각 이미지에 대해 -67 ~ -74 까지의 id가 매겨져 있습니다.  </li>
+<li>이미지의 이름이나 크기 등에 무관하게 <code>ImageJ</code>가 실행된 후 열어본 이미지들에 붙는 일련번호입니다.</li>
+<li>그 외의 정보는 <a href="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/" target="_blank" rel="noopener"><b>ImageJ &gt; Tutorial &gt; 2. Image File 구조</b></a> 에 기술되어 있습니다.</li>
+</ul>
+<br>
+</li>
+<li><p>이미지 리스트 작성을 더 짧게 할 수도 있습니다.<br> <a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/" target="_blank" rel="noopener"><b>ImageJ &gt; Tutorial &gt; 4. Python Basic</b></a> 에서 설명한 <code>list comprehension</code>과 <code>map</code>을 사용하면 됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> WindowManager <span class="keyword">as</span> WM</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. list comprehension</span></span><br><span class="line">images_lc = [WM.getImage(id) <span class="keyword">for</span> id <span class="keyword">in</span> WM.getIDList()]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. map</span></span><br><span class="line">images_map = map(WM.getImage, WM.getIDList())</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"images (list comprehension):\n"</span>, images_lc</span><br><span class="line"><span class="keyword">print</span> <span class="string">"\nimages (map):\n"</span>, images_map</span><br></pre></td></tr></table></figure>
+<ul>
+<li>다음과 같이 두 가지 방식에서 동일한 결과가 얻어집니다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">images (list comprehension):</span><br><span class="line">[img[&quot;7_batch_1_1.tif&quot; (-67), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_2.tif&quot; (-68), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_3.tif&quot; (-72), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_4.tif&quot; (-73), 16-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_5.tif&quot; (-74), 16-bit, 1536x1103x1x1x1]]</span><br><span class="line"></span><br><span class="line">images (map):</span><br><span class="line">[img[&quot;7_batch_1_1.tif&quot; (-67), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_2.tif&quot; (-68), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_3.tif&quot; (-72), 8-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_4.tif&quot; (-73), 16-bit, 1536x1103x1x1x1], img[&quot;7_batch_1_5.tif&quot; (-74), 16-bit, 1536x1103x1x1x1]]</span><br></pre></td></tr></table></figure>
+<br>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-3-이미지-list-활용하기"><a href="#7-3-이미지-list-활용하기" class="headerlink" title="7.3. 이미지 list 활용하기"></a>7.3. 이미지 list 활용하기</h3><h4 id="7-3-1-이름으로-파일-찾기"><a href="#7-3-1-이름으로-파일-찾기" class="headerlink" title="7.3.1. 이름으로 파일 찾기"></a>7.3.1. 이름으로 파일 찾기</h4><ul>
+<li><p>읽어들인 이미지 중에서 내가 찾는 이름(“7_batch_1_4.tif”)의 파일이 있는지 확인해보겠습니다.</p>
+</li>
+<li><p><a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/" target="_blank" rel="noopener"><b>ImageJ &gt; Tutorial &gt; 4. Python Basic</b></a> 에서 설명한 <code>filter</code>를 사용하면 효과적입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> WindowManager <span class="keyword">as</span> WM</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. map을 이용해 image list 작성</span></span><br><span class="line">imps = map(WM.getImage, WM.getIDList())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 함수 이름 비교 함수</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">match</span><span class="params">(imp)</span>:</span></span><br><span class="line">    <span class="comment"># 이미지(imp)의 title에 찾는 이름이 있으면 true</span></span><br><span class="line">    <span class="keyword">return</span> imp.title.find(<span class="string">"7_batch_1_4.tif"</span>) &gt; <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. filter를 이용해서 파일 존재 확인</span></span><br><span class="line">matching = filter(match, imps)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 결과 출력</span></span><br><span class="line"><span class="keyword">print</span> matching</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>실행 결과, 성공적으로 파일을 찾았습니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[img[&quot;7_batch_1_4.tif&quot; (-73), 16-bit, 1536x1103x1x1x1]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>그리고 당연히, <code>filter</code> 대신 <code>for loop</code>, <code>list comprehension</code> 등을 사용할 수 있습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1: 'for' loop (별도의 리스트를 생성해야 합니다)</span></span><br><span class="line">matching = []</span><br><span class="line"><span class="keyword">for</span> imp <span class="keyword">in</span> imps:</span><br><span class="line">    <span class="keyword">if</span> match(imp):</span><br><span class="line">        matching.append(imp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Method 2: list comprehension</span></span><br><span class="line">matching = [imp <span class="keyword">for</span> imp <span class="keyword">in</span> imps <span class="keyword">if</span> match(imp)]</span><br></pre></td></tr></table></figure>
+<br>
+#### 7.3.2. 가장 밝은 이미지 찾기</li>
+<li><p>이미지의 평균 밝기를 비교해서 가장 큰 것을 찾아보겠습니다.</p>
+<ul>
+<li>이미지를 하나씩 열면서 방금 연 이미지의 밝기가 기존 기록보다 더 크면 갱신하는 작업입니다.</li>
+<li><code>for loop</code>과 <code>reduce</code>를 비교해 보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> WindowManager <span class="keyword">as</span> WM</span><br><span class="line"><span class="keyword">from</span> ij.plugin <span class="keyword">import</span> Duplicator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. map을 이용해 image list 작성</span></span><br><span class="line">imps = map(WM.getImage, WM.getIDList())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 평균 명도를 구하는 함수</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bright</span><span class="params">(imp)</span>:</span></span><br><span class="line">    stats = imp.getStatistics()	</span><br><span class="line">    <span class="keyword">return</span> stats.mean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 가장 밝은 이미지 찾기</span></span><br><span class="line"><span class="comment"># 3-1. for loop</span></span><br><span class="line">brightest = <span class="literal">None</span></span><br><span class="line">brightness = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> imp <span class="keyword">in</span> imps:</span><br><span class="line">    a = bright(imp)</span><br><span class="line">    <span class="keyword">if</span> brightest <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        brightest = imp</span><br><span class="line">        brightness = a</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> a &gt; brightness:</span><br><span class="line">            brightest = imp</span><br><span class="line">            brightness = a        </span><br><span class="line">               </span><br><span class="line"><span class="keyword">print</span> <span class="string">"\n# for loop"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Brightest image="</span>, brightest.title</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Brightness="</span>, brightness </span><br><span class="line"></span><br><span class="line">brightest_for = Duplicator().run(brightest)</span><br><span class="line">brightest_for.title = <span class="string">"by_for"</span></span><br><span class="line">brightest_for.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. reduce</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">brightestImage</span><span class="params">(imp1, imp2)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> imp1 <span class="keyword">if</span> bright(imp1) &gt; bright(imp2) <span class="keyword">else</span> imp2</span><br><span class="line"></span><br><span class="line">largest = reduce(brightestImage, imps)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\n# reduce"</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Brightest image="</span>, brightest.title</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Brightest area="</span>, brightness </span><br><span class="line"></span><br><span class="line">brightest_reduce = Duplicator().run(brightest)</span><br><span class="line">brightest_reduce.title = <span class="string">"by_reduce"</span></span><br><span class="line">brightest_reduce.show(<span class="string">"by_reduce"</span>)</span><br></pre></td></tr></table></figure></li>
+<li><code>for loop</code>은 가장 큰 이미지와 그 넓이를 사전에 정의하고, image 리스트인 imps에 저장된 이미지를 하나씩 꺼내보면서 새로 꺼낸 이미지의 넓이가 기존 기록을 갱신했는지 비교합니다.</li>
+<li><code>reduce</code>는 이미지의 넓이를 비교하는 함수(<code>brightestImage</code>)와 이미지 리스트(imps)를 인자로 받아들여, imps에 <code>brightestImage</code>를 적용합니다. </li>
+</ul>
+<p><img src="7_batch_4.PNG" alt=" "></p>
+<br></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.com/2020/01/31/ImageJ-tutorial-7-Batch/" data-id="ck7pan80q000nckuj05t0aodr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "7. Batch Processing",
+        "image": "https://jehyunlee.github.com/thumbnails/ImageJ-Tutorial/7_batch_1.PNG",
+        "keywords": "",
+        "genre": "ImageJ Tutorial",
+        "datePublished": "2020-01-31",
+        "dateCreated": "2020-01-31",
+        "dateModified": "2020-01-31",
+        "url": "https://jehyunlee.github.com/2020/01/31/ImageJ-tutorial-7-Batch/",
+        "description": "7. Batch Processing: 이미지 일괄 처리Reference
+
+A Fiji Scripting Tutorial #3. Inspecting properties and pixels of an image 
+
+
+대량의 이미지를 한번에 처리해야 하는 경우, 이미지를 하나 하나 불러오는 것보다 일괄처리가 효과적입니다.
+
+이미지가 모여 있는 폴더를 지정할 수도",
+        "wordCount": 1645
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/02/03/Python-DS-1-pandas1/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Pandas 1.0
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/01/28/ImageJ-tutorial-6-Inspection/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">6. Image Data 분석</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/03/01/Python-DS-4-matplotlib_colormap/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/4_cmap_1.jpg)" alt="Matplotlib Colormap (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/03/01/Python-DS-4-matplotlib_colormap/" class="title">Matplotlib Colormap (1)</a></p>
+                            <p class="item-date"><time datetime="2020-02-29T15:06:00.000Z" itemprop="datePublished">2020-03-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/16/Python-DS-3-matplotlib_color/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/3_color_1.png)" alt="Matplotlib Colors" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/02/16/Python-DS-3-matplotlib_color/" class="title">Matplotlib Colors</a></p>
+                            <p class="item-date"><time datetime="2020-02-16T13:00:00.000Z" itemprop="datePublished">2020-02-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/2_mpl_1.png)" alt="Matplotlib Defaults &amp; Fonts" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/" class="title">Matplotlib Defaults &amp; Fonts</a></p>
+                            <p class="item-date"><time datetime="2020-02-13T12:00:00.000Z" itemprop="datePublished">2020-02-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/11/ImageJ-tutorial-8-ROI/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/8_roi_1.PNG)" alt="8. Region of Interest" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></p>
+                            <p class="item-title"><a href="/2020/02/11/ImageJ-tutorial-8-ROI/" class="title">8. Region of Interest</a></p>
+                            <p class="item-date"><time datetime="2020-02-11T01:02:00.000Z" itemprop="datePublished">2020-02-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/2_jlabmwin_1.PNG)" alt="Multi window @Jupyter Lab" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="title">Multi window @Jupyter Lab</a></p>
+                            <p class="item-date"><time datetime="2020-02-06T11:16:00.000Z" itemprop="datePublished">2020-02-06</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.com/2020/01/31/ImageJ-tutorial-7-Batch/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
