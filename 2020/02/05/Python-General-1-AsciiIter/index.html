@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="" />
     
-    <meta name="description" content="ASCII code + Iteration      References    점프 투 파이썬, 05-5 내장 함수   전자 통신을 위해 1963년 문자를 부호화한 것을  ASCII code라고 합니다. 현재는 더 많은 문자를 포함하기 위해 확장이 이루어졌으며 국제 표준은 unicode로 제정되어 있기도 합니다.  워드프로세서(MS word, hwp 등)에서는">
+    <meta name="description" content="ASCII code + Iteration     References   점프 투 파이썬, 05-5 내장 함수   전자 통신을 위해 1963년 문자를 부호화한 것을  ASCII code라고 합니다. 현재는 더 많은 문자를 포함하기 위해 확장이 이루어졌으며 국제 표준은 unicode로 제정되어 있기도 합니다.  워드프로세서(MS word, hwp 등)에서는 특">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ASCII code Iteration">
 <meta property="og:url" content="https://jehyunlee.github.com/2020/02/05/Python-General-1-AsciiIter/index.html">
 <meta property="og:site_name" content="Pega Blog">
-<meta property="og:description" content="ASCII code + Iteration      References    점프 투 파이썬, 05-5 내장 함수   전자 통신을 위해 1963년 문자를 부호화한 것을  ASCII code라고 합니다. 현재는 더 많은 문자를 포함하기 위해 확장이 이루어졌으며 국제 표준은 unicode로 제정되어 있기도 합니다.  워드프로세서(MS word, hwp 등)에서는">
+<meta property="og:description" content="ASCII code + Iteration     References   점프 투 파이썬, 05-5 내장 함수   전자 통신을 위해 1963년 문자를 부호화한 것을  ASCII code라고 합니다. 현재는 더 많은 문자를 포함하기 위해 확장이 이루어졌으며 국제 표준은 unicode로 제정되어 있기도 합니다.  워드프로세서(MS word, hwp 등)에서는 특">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.com/thumbnails/Python-General/1_uc_1.png">
 <meta property="article:published_time" content="2020-02-05T12:44:00.000Z">
@@ -204,11 +204,9 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="ASCII-code-Iteration"><a href="#ASCII-code-Iteration" class="headerlink" title="ASCII code + Iteration"></a>ASCII code + Iteration</h2><p align="center">
+            <h2 id="ASCII-code-Iteration"><a href="#ASCII-code-Iteration" class="headerlink" title="ASCII code + Iteration"></a>ASCII code + Iteration</h2><p><p align="center">
   <img src='1_uc_2.png'>
-</p>
-<b> References </b>
-
+</p><br><b> References </b></p>
 <blockquote>
 <p><a href="https://wikidocs.net/32#chr" target="_blank" rel="noopener">점프 투 파이썬, 05-5 내장 함수</a></p>
 </blockquote>
@@ -216,7 +214,7 @@ ga('send', 'pageview');
 <li><p>전자 통신을 위해 1963년 문자를 부호화한 것을  <code>ASCII code</code>라고 합니다. 현재는 더 많은 문자를 포함하기 위해 확장이 이루어졌으며 국제 표준은 <code>unicode</code>로 제정되어 있기도 합니다.</p>
 </li>
 <li><p>워드프로세서(MS word, hwp 등)에서는 특수문자 입력 기능을 이용해 쉽게 입력이 가능하고, 그렇지 않더라도 한글 자음 입력 후 한자 키를 누르는 방식으로도 어렵지 않게 입력이 가능합니다만 간혹 원하는 문자의 코드를 필요로 할 때가 있습니다.</p>
-<br>
+<p><br></p>
 </li>
 <li><p>예컨대, 아래와 같은 그래프를 그릴 때입니다.</p>
 <p><img src="1_uc_3.png" alt=" "></p>
@@ -226,13 +224,11 @@ ga('send', 'pageview');
 </ul>
 <p><b>1. (a) ~ (d) 를 하나씩 만들어 주려면 이렇습니다.</b></p>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">1</span>, ... (후략)...)</span><br><span class="line"></span><br><span class="line">   ... (중략) ...</span><br><span class="line">   </span><br><span class="line">axes[<span class="number">0</span>].text(<span class="number">0.02</span>, <span class="number">0.98</span>, <span class="string">"(a)"</span>, transform=ax.transAxes, fontsize=<span class="number">20</span>, verticalalignment=<span class="string">"top"</span>,)</span><br><span class="line">axes[<span class="number">1</span>].text(<span class="number">0.02</span>, <span class="number">0.98</span>, <span class="string">"(b)"</span>, transform=ax.transAxes, fontsize=<span class="number">20</span>, verticalalignment=<span class="string">"top"</span>,)</span><br><span class="line">axes[<span class="number">2</span>].text(<span class="number">0.02</span>, <span class="number">0.98</span>, <span class="string">"(c)"</span>, transform=ax.transAxes, fontsize=<span class="number">20</span>, verticalalignment=<span class="string">"top"</span>,)</span><br><span class="line">axes[<span class="number">3</span>].text(<span class="number">0.02</span>, <span class="number">0.98</span>, <span class="string">"(d)"</span>, transform=ax.transAxes, fontsize=<span class="number">20</span>, verticalalignment=<span class="string">"top"</span>,)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>text의 위치나 크기 등을 조정하려면 n개의 줄을 모두 다 똑같이 수정해야 하므로 좋지 않습니다.</li>
 </ul>
 <p><b>2. list를 쓰면 조금 편하게 할 수 있습니다. 이제 수정시 <code>for loop</code> 안의 한 줄만 고치면 됩니다.</b></p>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">figid = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]</span><br><span class="line">   </span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">1</span>, ... (후략)...)</span><br><span class="line"></span><br><span class="line">   ... (중략) ...</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):    </span><br><span class="line">    axes[<span class="number">0</span>].text(<span class="number">0.02</span>, <span class="number">0.98</span>, <span class="string">"(figid[i])"</span>, transform=ax.transAxes, fontsize=<span class="number">20</span>, verticalalignment=<span class="string">"top"</span>,)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>plot 수가 늘어나면 list를 고쳐줘야 해서 성가십니다.</li>
 <li><code>plt.subplots()</code>안의 <code>ncols=4</code>와 <code>for loop</code> 안의 <code>range(4)</code>를 <code>len(figid)</code>로 바꾸면 좀 낫습니다.</li>
@@ -240,15 +236,14 @@ ga('send', 'pageview');
 </ul>
 <p><b>3. 좀 낯설지만 이렇게 하면 한 곳만 바꾸면 됩니다.</b></p>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">1</span>, ... (후략)...)</span><br><span class="line"></span><br><span class="line">   ... (중략) ...</span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):    </span><br><span class="line">    axes[<span class="number">0</span>].text(<span class="number">0.02</span>, <span class="number">0.98</span>, <span class="string">"(&#123;&#125;)"</span>.format(chr(ord(<span class="string">"a"</span>) + i)), transform=ax.transAxes, fontsize=<span class="number">20</span>, verticalalignment=<span class="string">"top"</span>,)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>ord(&quot;a&quot;)</code>는 “a” 의 ASCII 값을 확인하는 명령입니다.  </li>
 <li><code>chr()</code>는 ASCII 코드 값을 받아서 해당하는 문자로 바꾸는 명령입니다.  </li>
-<li><code>chr(ord(&quot;a&quot;))</code>에  <code>+ i</code>를 섞어  <code>for loop</code> 안에 놓으면 , for loop을 한바퀴 돌때마다 “a” 뒤의 문자를 하나씩 불러오는 명령이 됩니다. 처음엔 “a”, 다음엔 “b”, 그 다음에는 “c”를 자동으로 불러옵니다.<pre><code>&lt;br&gt;</code></pre></li>
+<li><code>chr(ord(&quot;a&quot;))</code>에  <code>+ i</code>를 섞어  <code>for loop</code> 안에 놓으면 , for loop을 한바퀴 돌때마다 “a” 뒤의 문자를 하나씩 불러오는 명령이 됩니다. 처음엔 “a”, 다음엔 “b”, 그 다음에는 “c”를 자동으로 불러옵니다.<pre><code>&lt;br&gt;
+</code></pre></li>
 </ul>
 <ul>
-<li><p>위 코드에서 “a” 대신 원하는 문자를 입력하면 됩니다.</p>
-</li>
+<li>위 코드에서 “a” 대신 원하는 문자를 입력하면 됩니다.</li>
 <li><p>어떤 방법도, 심지어 웹에서 Ctrl + C/V도 가능합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">75</span>):</span><br><span class="line">    print(<span class="string">"&#123;&#125;"</span>.format(chr(ord(<span class="string">"㉠"</span>) + i)), end=<span class="string">' '</span>)</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">9</span> <span class="keyword">and</span> i%<span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
 <ul>
@@ -264,7 +259,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.com/2020/02/05/Python-General-1-AsciiIter/" data-id="ck7paocs60010ckujdcckf7xk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.com/2020/02/05/Python-General-1-AsciiIter/" data-id="ck7pqzlzh001a6wuj1zey786e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -344,16 +339,14 @@ ga('send', 'pageview');
         "url": "https://jehyunlee.github.com/2020/02/05/Python-General-1-AsciiIter/",
         "description": "ASCII code + Iteration
   
-
  References 
-
 
 점프 투 파이썬, 05-5 내장 함수
 
 
 전자 통신을 위해 1963년 문자를 부호화한 것을  ASCII code라고 합니다. 현재는 더 많은 문자를 포함하기 위해 확장이 이루어졌으며 국제 표준은 unicode로 제정되어 있기도 합니다.
 
-워드프로세서(MS word, hwp 등)에서는",
+워드프로세서(MS word, hwp 등)에서는 특",
         "wordCount": 611
     }
 </script>
@@ -447,26 +440,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/4_cmap_1.jpg)" alt="Matplotlib Colormap (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="title">Matplotlib Colormap (1)</a></p>
-                            <p class="item-date"><time datetime="2020-02-29T15:06:00.000Z" itemprop="datePublished">2020-03-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2020/02/16/Python-DS-3-matplotlib_color/" class="thumbnail">
     
     
@@ -524,6 +497,26 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/2_jlabmwin_1.PNG)" alt="Multi window @Jupyter Lab" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="title">Multi window @Jupyter Lab</a></p>
+                            <p class="item-date"><time datetime="2020-02-06T11:16:00.000Z" itemprop="datePublished">2020-02-06</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -533,7 +526,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -643,21 +636,5 @@ ga('send', 'pageview');
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

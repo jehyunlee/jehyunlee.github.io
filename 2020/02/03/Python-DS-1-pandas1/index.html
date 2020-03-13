@@ -210,7 +210,7 @@ ga('send', 'pageview');
 
 <ul>
 <li>Pandas 1.0이 출시되고 일부 feature가 사라졌고(deprciated) 새로운 기능이 추가되었습니다.</li>
-<li>새로 추가된 기능 중에는 사용자들이 기다리던 기능이 많습니다.<br></li>
+<li>새로 추가된 기능 중에는 사용자들이 기다리던 기능이 많습니다.<br><br></li>
 <li>기존 코드 동작에 문제가 생길까봐 설치를 망설였지만<br>(1) <code>markdown</code>출력이 내장되었고 - 기존엔 이 기능이 없어서 수동으로 만들어 썼습니다.<br>(2) pip install의 기본값이 1.0으로 변경된 것을 보고 더 이상 미룰 수는 없다고 생각했습니다.<br>(3) <a href="https://dev.pandas.io/docs/whatsnew/v1.0.0.html#deprecations" target="_blank" rel="noopener">Deprications</a>에 제가 쓰는 기능이 거의 없습니다.  </li>
 </ul>
 <p><b> References </b></p>
@@ -229,7 +229,6 @@ ga('send', 'pageview');
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python version check</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">print(sys.version)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3.7.4 (default, Aug 13 2019, 20:35:49) </span><br><span class="line">[GCC 7.3.0]</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pandas version check</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">print(pd.__version__)</span><br></pre></td></tr></table></figure>
@@ -247,12 +246,10 @@ ga('send', 'pageview');
 </li>
 <li><p>기존 pandas 사용자께서는 뭔가 달라진 것을 느끼셨을 겁니다.</p>
 </li>
-<li><p>pandas 1.0부터 info()에 Column 이름과 번호가 붙어 조금 알아보기 편리해졌습니다</p>
-</li>
+<li>pandas 1.0부터 info()에 Column 이름과 번호가 붙어 조금 알아보기 편리해졌습니다</li>
 <li><p>아래 부분이 새로 추가된 부분입니다. 사소하지만 명료합니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> #   Column       Non-Null Count  Dtype  </span><br><span class="line">---  ------       --------------  -----</span><br></pre></td></tr></table></figure>
-<br>
-
+<p><br></p>
 </li>
 </ul>
 <h3 id="1-converting-to-Markdown"><a href="#1-converting-to-Markdown" class="headerlink" title="1. converting to Markdown"></a>1. converting to Markdown</h3><ul>
@@ -265,102 +262,20 @@ ga('send', 'pageview');
 </li>
 <li><p>위 경우처럼 데이터에 따라 줄이 넘어가고 보기가 어렵기도 합니다.</p>
 </li>
-<li><p>특히 <code>github</code>등 포스팅 시에 가독성이 떨어지기 때문에 <code>Markdown</code>으로 출력해주는 함수를 만들어 사용했습니다만, pandas 1.0에서는 이를 공식적으로 지원합니다.</p>
-</li>
+<li>특히 <code>github</code>등 포스팅 시에 가독성이 떨어지기 때문에 <code>Markdown</code>으로 출력해주는 함수를 만들어 사용했습니다만, pandas 1.0에서는 이를 공식적으로 지원합니다.</li>
 <li><p>기존에 비해 훨씬 깨끗한 결과를 제공해 줍니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 첫 세 줄을 markdown 형식으로 출력</span></span><br><span class="line">print(dft.head(<span class="number">3</span>).to_markdown())</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>실행 결과</p>
-</li>
+<li>실행 결과</li>
 <li><p>python 실행창에 <code>markdown</code> code로 출력된 것을 <code>github</code> blog에 글로 옮기면 아래와 같이 표로 정리됩니다.</p>
-<table>
-<thead>
-<tr>
-<th align="right"></th>
-<th align="right">PassengerId</th>
-<th align="right">Survived</th>
-<th align="right">Pclass</th>
-<th align="left">Name</th>
-<th align="left">Sex</th>
-<th align="right">Age</th>
-<th align="right">SibSp</th>
-<th align="right">Parch</th>
-<th align="left">Ticket</th>
-<th align="right">Fare</th>
-<th align="left">Cabin</th>
-<th align="left">Embarked</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="left">Braund, Mr. Owen Harris</td>
-<td align="left">male</td>
-<td align="right">22</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">A/5 21171</td>
-<td align="right">7.25</td>
-<td align="left">nan</td>
-<td align="left">S</td>
-</tr>
-<tr>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="left">Cumings, Mrs. John Bradley (Florence Briggs Thayer)</td>
-<td align="left">female</td>
-<td align="right">38</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">PC 17599</td>
-<td align="right">71.2833</td>
-<td align="left">C85</td>
-<td align="left">C</td>
-</tr>
-<tr>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="left">Heikkinen, Miss. Laina</td>
-<td align="left">female</td>
-<td align="right">26</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="left">STON/O2. 3101282</td>
-<td align="right">7.925</td>
-<td align="left">nan</td>
-<td align="left">S</td>
-</tr>
-<tr>
-<td align="right"><br></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
+<p>|    |   PassengerId |   Survived |   Pclass | Name                                                | Sex    |   Age |   SibSp |   Parch | Ticket           |    Fare | Cabin   | Embarked   |<br>|—-:|———————:|—————-:|————-:|:——————————————————————————|:———-|———:|————:|————:|:————————-|————:|:————|:—————-|<br>|  0 |             1 |          0 |        3 | Braund, Mr. Owen Harris                             | male   |    22 |       1 |       0 | A/5 21171        |  7.25   | nan     | S          |<br>|  1 |             2 |          1 |        1 | Cumings, Mrs. John Bradley (Florence Briggs Thayer) | female |    38 |       1 |       0 | PC 17599         | 71.2833 | C85     | C          |<br>|  2 |             3 |          1 |        3 | Heikkinen, Miss. Laina                              | female |    26 |       0 |       0 | STON/O2. 3101282 |  7.925  | nan     | S          |<br><br></p>
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="2-pd-NA-experimental"><a href="#2-pd-NA-experimental" class="headerlink" title="2. pd.NA (experimental)"></a>2. pd.NA (experimental)</h3><ul>
-<li><p>pandas에서는 결측치(missing value) 표현 방식이 깔끔하지 못했습니다.</p>
-</li>
-<li><p>data type에 따라 달랐는데 <code>NaN</code>은 <code>float</code>, <code>None</code>은 <code>object</code>, <code>NaT</code>는 <code>DateTime</code>. 이런 식입니다.<br>여기에 대해서는 <a href="https://dev.to/discdiver/the-weird-world-of-missing-values-in-pandas-3kph" target="_blank" rel="noopener">이 글</a>을 참고하시면 좋을 듯 합니다.  </p>
-</li>
+<li>pandas에서는 결측치(missing value) 표현 방식이 깔끔하지 못했습니다.</li>
+<li>data type에 따라 달랐는데 <code>NaN</code>은 <code>float</code>, <code>None</code>은 <code>object</code>, <code>NaT</code>는 <code>DateTime</code>. 이런 식입니다.<br>여기에 대해서는 <a href="https://dev.to/discdiver/the-weird-world-of-missing-values-in-pandas-3kph" target="_blank" rel="noopener">이 글</a>을 참고하시면 좋을 듯 합니다.  </li>
 <li><p>가장 큰 문제는, <code>integer</code> column에 <code>NaN</code>이 포함되는 순간 <code>float</code>으로 바뀌고, 알아채기도 쉽지 않다는 점입니다.<br>모종의 이유로 <code>int</code> type으로 바꾸려면 아주 속이 터집니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Series 생성 (data type 지정 안함)</span></span><br><span class="line">s = pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="literal">None</span>])</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
 <ul>
@@ -381,61 +296,48 @@ ga('send', 'pageview');
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 원소 중 pd.NA 찾기 (== 사용)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">  <span class="keyword">if</span> s.iloc[i] == pd.NA:</span><br><span class="line">    print(<span class="string">'NA found!'</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line">TypeError                                 Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-8-5bf67e6300d7&gt; in &lt;module&gt;</span><br><span class="line">      1 # 원소 중 pd.NA 찾기 (&#x3D;&#x3D; 사용)</span><br><span class="line">      2 for i in range(3):</span><br><span class="line">----&gt; 3   if s.iloc[i] &#x3D;&#x3D; pd.NA:</span><br><span class="line">      4     print(&#39;NA found!&#39;)</span><br><span class="line"></span><br><span class="line">pandas&#x2F;_libs&#x2F;missing.pyx in pandas._libs.missing.NAType.__bool__()</span><br><span class="line"></span><br><span class="line">TypeError: boolean value of NA is ambiguous</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 원소 중 pd.NA 찾기 (.isna() 사용)</span></span><br><span class="line"><span class="keyword">if</span> s.isna().any():</span><br><span class="line">  print(<span class="string">'NA found!'</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NA found!</span><br></pre></td></tr></table></figure>
-<br>
-
-</li>
+<br></li>
 </ul>
 </li>
 </ul>
 <h3 id="3-Boolean-dtype"><a href="#3-Boolean-dtype" class="headerlink" title="3. Boolean dtype"></a>3. Boolean dtype</h3><ul>
-<li><p>비슷하게, data type만 명기해주면 결측치가 있는 column도 <code>Boolean</code>으로 정의할 수 있습니다.</p>
-</li>
+<li>비슷하게, data type만 명기해주면 결측치가 있는 column도 <code>Boolean</code>으로 정의할 수 있습니다.</li>
 <li><p>아래 두 명령을 비교해 봅시다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 결측치 포함 Series 작성 (data type 지정 안함)</span></span><br><span class="line">s = pd.Series([<span class="literal">True</span>, <span class="literal">False</span>, np.nan])</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     True</span><br><span class="line">1    False</span><br><span class="line">2      NaN</span><br><span class="line">dtype: object</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 결측치 포함 Series 작성 (data type `boolean`으로 지정함)</span></span><br><span class="line">s = pd.Series([<span class="literal">True</span>, <span class="literal">False</span>, np.nan], dtype=<span class="string">'boolean'</span>)</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     True</span><br><span class="line">1    False</span><br><span class="line">2     &lt;NA&gt;</span><br><span class="line">dtype: boolean</span><br></pre></td></tr></table></figure>
-<br>
-
-</li>
+<br></li>
 </ul>
 </li>
 </ul>
 <h3 id="4-String-dtype"><a href="#4-String-dtype" class="headerlink" title="4. String dtype"></a>4. String dtype</h3><ul>
-<li><p>pandas 1.0에 들어오면서 <code>StringDtype</code>이 생겼습니다.</p>
-</li>
-<li><p>기존에는 <code>string</code> 데이터는 <code>object</code>형식의 <code>Numpy Array</code>로 저장되었지만 여러 혼동을 야기하여 변경되었습니다.</p>
-</li>
+<li>pandas 1.0에 들어오면서 <code>StringDtype</code>이 생겼습니다.</li>
+<li>기존에는 <code>string</code> 데이터는 <code>object</code>형식의 <code>Numpy Array</code>로 저장되었지만 여러 혼동을 야기하여 변경되었습니다.</li>
 <li><p><code>string</code>을 사용하면 <code>string</code>과 <code>non-string</code>이 <code>object</code>로 묶어서 처리되는 것을 방지할 수 있다는 장점이 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="string">'abc'</span>, <span class="literal">None</span>, <span class="string">'def'</span>])</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     abc</span><br><span class="line">1    None</span><br><span class="line">2     def</span><br><span class="line">dtype: object</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="string">'abc'</span>, <span class="literal">None</span>, <span class="string">'def'</span>], dtype=<span class="string">"string"</span>)</span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0     abc</span><br><span class="line">1    &lt;NA&gt;</span><br><span class="line">2     def</span><br><span class="line">dtype: string</span><br></pre></td></tr></table></figure>
-<br>  
-
-</li>
+<br>  </li>
 </ul>
 </li>
 </ul>
 <h3 id="5-convert-dtypes"><a href="#5-convert-dtypes" class="headerlink" title="5. convert_dtypes()"></a>5. convert_dtypes()</h3><ul>
-<li><p><code>convert_dtypes()</code>를 사용하면 DataFrame과 Series의 type을 <code>pd.NA</code>를 지원하는 형태들로 바꿀 수 있습니다.</p>
-</li>
+<li><code>convert_dtypes()</code>를 사용하면 DataFrame과 Series의 type을 <code>pd.NA</code>를 지원하는 형태들로 바꿀 수 있습니다.</li>
 <li><p>아래와 같은 DataFrame이 있다고 합시다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"a"</span>: pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=np.dtype(<span class="string">"int32"</span>)),</span><br><span class="line">        <span class="string">"b"</span>: pd.Series([<span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>], dtype=np.dtype(<span class="string">"O"</span>)),</span><br><span class="line">        <span class="string">"c"</span>: pd.Series([<span class="literal">True</span>, <span class="literal">False</span>, np.nan], dtype=np.dtype(<span class="string">"O"</span>)),</span><br><span class="line">        <span class="string">"d"</span>: pd.Series([<span class="string">"h"</span>, <span class="string">"i"</span>, np.nan], dtype=np.dtype(<span class="string">"O"</span>)),</span><br><span class="line">        <span class="string">"e"</span>: pd.Series([<span class="number">10</span>, np.nan, <span class="number">20</span>], dtype=np.dtype(<span class="string">"float"</span>)),</span><br><span class="line">        <span class="string">"f"</span>: pd.Series([np.nan, <span class="number">100.5</span>, <span class="number">200</span>], dtype=np.dtype(<span class="string">"float"</span>)),</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">print(df.to_markdown())</span><br><span class="line">print(df.dtypes)</span><br></pre></td></tr></table></figure>
 <ul>
@@ -449,9 +351,7 @@ ga('send', 'pageview');
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dfn = df.convert_dtypes()</span><br><span class="line">print(dfn.to_markdown())</span><br><span class="line">print(dfn.dtypes)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">|    |   a | b   | c     | d    | e    |     f |</span><br><span class="line">|---:|----:|:----|:------|:-----|:-----|------:|</span><br><span class="line">|  0 |   1 | x   | True  | h    | 10   | nan   |</span><br><span class="line">|  1 |   2 | y   | False | i    | &lt;NA&gt; | 100.5 |</span><br><span class="line">|  2 |   3 | z   | &lt;NA&gt;  | &lt;NA&gt; | 20   | 200   |</span><br><span class="line"></span><br><span class="line">a      Int32</span><br><span class="line">b     string</span><br><span class="line">c    boolean</span><br><span class="line">d     string</span><br><span class="line">e      Int64</span><br><span class="line">f    float64</span><br><span class="line">dtype: object</span><br></pre></td></tr></table></figure>
-<br>
-
-</li>
+<br></li>
 </ul>
 </li>
 </ul>
@@ -466,7 +366,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.com/2020/02/03/Python-DS-1-pandas1/" data-id="ck7pauvnx00007wujble3dfe2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.com/2020/02/03/Python-DS-1-pandas1/" data-id="ck7pqzlz100136wuj5om9by70" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -552,7 +452,7 @@ ga('send', 'pageview');
 Pandas 1.0이 출시되고 일부 feature가 사라졌고(deprciated) 새로운 기능이 추가되었습니다.
 새로 추가된 기능 중에는 사용자들이 기다리던 기능이 많습니다.
 기존 코드 동작에 문제가 생길까봐 설치를 망설였지만(1) markdown출력이 내장되었고 - 기존엔 이 기능이 없어서 수동으",
-        "wordCount": 2415
+        "wordCount": 2785
     }
 </script>
 
@@ -645,26 +545,6 @@ Pandas 1.0이 출시되고 일부 feature가 사라졌고(deprciated) 새로운 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/4_cmap_1.jpg)" alt="Matplotlib Colormap (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="title">Matplotlib Colormap (1)</a></p>
-                            <p class="item-date"><time datetime="2020-02-29T15:06:00.000Z" itemprop="datePublished">2020-03-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2020/02/16/Python-DS-3-matplotlib_color/" class="thumbnail">
     
     
@@ -722,6 +602,26 @@ Pandas 1.0이 출시되고 일부 feature가 사라졌고(deprciated) 새로운 
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/2_jlabmwin_1.PNG)" alt="Multi window @Jupyter Lab" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="title">Multi window @Jupyter Lab</a></p>
+                            <p class="item-date"><time datetime="2020-02-06T11:16:00.000Z" itemprop="datePublished">2020-02-06</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -731,7 +631,7 @@ Pandas 1.0이 출시되고 일부 feature가 사라졌고(deprciated) 새로운 
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -841,21 +741,5 @@ Pandas 1.0이 출시되고 일부 feature가 사라졌고(deprciated) 새로운 
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

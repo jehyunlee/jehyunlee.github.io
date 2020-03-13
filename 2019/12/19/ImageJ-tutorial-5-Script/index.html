@@ -232,11 +232,9 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h4 id="5-1-2-ImageJ-의-Image-Processing-예시"><a href="#5-1-2-ImageJ-의-Image-Processing-예시" class="headerlink" title="5.1.2. ImageJ 의 Image Processing 예시"></a>5.1.2. <code>ImageJ</code> 의 Image Processing 예시</h4><ul>
-<li><p>Image Processing 예시로 <code>median</code>을 적용하는 과정을 간단히 만들어 보았습니다.</p>
-</li>
+<li>Image Processing 예시로 <code>median</code>을 적용하는 과정을 간단히 만들어 보았습니다.</li>
 <li><p>상세한 설명은 앞으로의 포스트에서 차차 하겠습니다.<br>부분별 기능을 코드에 주석으로 달았습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image Processing</span></span><br><span class="line"><span class="comment">## 2.1. Image Pixel Data를 추출해서 32-bit float로 변환</span></span><br><span class="line">ip = imp.getProcessor().convertToFloat()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.2. Median Filter를 radius = 2로 적용</span></span><br><span class="line"><span class="keyword">from</span> ij.plugin.filter <span class="keyword">import</span> RankFilters</span><br><span class="line">radius = <span class="number">2</span></span><br><span class="line">RankFilters().rank(ip, radius, RankFilters.MEDIAN)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.3. ImageProcessor를 다시 ImagePlus 형식으로 변환</span></span><br><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> ImagePlus</span><br><span class="line">imp2 = ImagePlus(imp.title + <span class="string">"median_filtered"</span>, ip)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.4. 이미지를 화면에 표시</span></span><br><span class="line">imp2.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 파일로 저장</span></span><br><span class="line"><span class="keyword">from</span> ij.io <span class="keyword">import</span> FileSaver</span><br><span class="line"></span><br><span class="line"><span class="comment">##3.1. 저장 위치(workdir)과 파일명(workfile) 지정</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">workdir = <span class="string">r'C:\Tmp'</span></span><br><span class="line">workfile = <span class="string">'median.JPG'</span></span><br><span class="line">outpath = os.path.join(workdir, workfile)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 3.2. jpeg 형식(.JPG)로 저장</span></span><br><span class="line">fs = FileSaver(imp2)  </span><br><span class="line">fs.saveAsJpeg(outpath)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>위 코드를 실행하면 아래와 같은 결과를 얻을 수 있습니다.</li>
 <li>원본의 선명한 컬러 그림이 코드가 실행된 후 median처리되어 흑백의 뿌연 그림이 되고, 최종적으로 지정된 장소(<code>C:\Tmp</code>)에 <code>median.JPG</code>라고 저장되었습니다.<br><img src="5_script_2.PNG" alt=" "></li>
@@ -248,9 +246,7 @@ ga('send', 'pageview');
 <li><code>ImageJ</code>가 설치된 폴더 (<code>C:\Users\[본인계정]\Fiji.app</code>) 하부에 <code>plugins</code>가 있습니다.<br>여기에 script를 저장하고 <code>ImageJ</code>를 재시작하면 됩니다.</li>
 <li>파일명에 underscore (<code>_</code>)가 있으면 <code>ImageJ</code>가 자동으로 Plugin으로 인식합니다.</li>
 <li>폴더를 만들고 그 안에 script 파일을 넣으면 <code>plugins</code>에도 폴더가 할당되어 그 안에 들어갑니다.</li>
-<li><code>Pega</code>라는 폴더 안에 튜토리얼 플러그인을 설치한 예시입니다.<br><img src="5_script_3.PNG" alt=" "><br>
-
-</li>
+<li><code>Pega</code>라는 폴더 안에 튜토리얼 플러그인을 설치한 예시입니다.<br><img src="5_script_3.PNG" alt=" "><br><br></li>
 </ul>
 <h3 id="5-2-ImageJ-script-작성"><a href="#5-2-ImageJ-script-작성" class="headerlink" title="5.2. ImageJ script 작성"></a>5.2. <code>ImageJ</code> script 작성</h3><ul>
 <li><code>ImageJ</code>로 구현하고자 하는 최종 목적을 위해 순차적으로 실행할 기능을 설계합니다.</li>
@@ -272,12 +268,9 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h3 id="5-2-2-ImageJ-plugin-파라미터-종류-확인"><a href="#5-2-2-ImageJ-plugin-파라미터-종류-확인" class="headerlink" title="5.2.2. ImageJ plugin 파라미터 종류 확인"></a>5.2.2. <code>ImageJ</code> plugin 파라미터 종류 확인</h3><ul>
-<li><p><code>plugin</code>에 포함된 기능은 ‘ij.run()’을 이용해 비교적 쉽게 실행할 수 있습니다.</p>
-</li>
-<li><p>파라미터를 찾기 위해서는 <code>Macro Recorder</code>를 사용하는 것이 가장 간편합니다.</p>
-</li>
-<li><p><code>FFT</code>는 별도의 파라미터가 없이 실행 가능하므로 <code>median</code>을 실행해 봅시다.</p>
-</li>
+<li><code>plugin</code>에 포함된 기능은 ‘ij.run()’을 이용해 비교적 쉽게 실행할 수 있습니다.</li>
+<li>파라미터를 찾기 위해서는 <code>Macro Recorder</code>를 사용하는 것이 가장 간편합니다.</li>
+<li><code>FFT</code>는 별도의 파라미터가 없이 실행 가능하므로 <code>median</code>을 실행해 봅시다.</li>
 <li><p><code>File &gt; Open Samples &gt; Clown</code>을 선택해서 광대 사진을 띄웁니다.<br><img src="5_script_5.PNG" alt=" "></p>
 <ul>
 <li><code>Plugins &gt; Macros &gt; Record...</code>를 선택하여 매크로 녹화 창을 켭니다.</li>
@@ -288,12 +281,9 @@ ga('send', 'pageview');
 </li>
 <li><p>GUI 환경에서 수행한 위 명령은 script를 통해 아래와 같이 그대로 적용할 수 있습니다.</p>
 </li>
-<li><p><code>IJ.getImage()</code>나 <code>IJ.openImage()</code>로 이미지를 <code>ImagePlus</code>형식으로 로드한 후, <code>IJ.run()</code>을 통해 다음과 같이 이미지, 명령, 파라미터를 함께 넣고 실행합니다.</p>
-</li>
-<li><p>형식은 <code>IJ.run([ImagePlus], &quot;[명령어]&quot;, &quot;[파라미터]&quot;)</code>입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line">IJ.run(imp, <span class="string">"Median 3D..."</span>, <span class="string">"x=2, y=2, z=2"</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="5_script_7.PNG" alt=" "></p>
-</li>
+<li><code>IJ.getImage()</code>나 <code>IJ.openImage()</code>로 이미지를 <code>ImagePlus</code>형식으로 로드한 후, <code>IJ.run()</code>을 통해 다음과 같이 이미지, 명령, 파라미터를 함께 넣고 실행합니다.</li>
+<li>형식은 <code>IJ.run([ImagePlus], &quot;[명령어]&quot;, &quot;[파라미터]&quot;)</code>입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line">IJ.run(imp, <span class="string">"Median 3D..."</span>, <span class="string">"x=2, y=2, z=2"</span>)</span><br></pre></td></tr></table></figure>
+<img src="5_script_7.PNG" alt=" "></li>
 </ul>
 <h4 id="5-2-3-ImageJ-JAVA-Class-문법-파라미터-확인"><a href="#5-2-3-ImageJ-JAVA-Class-문법-파라미터-확인" class="headerlink" title="5.2.3. ImageJ JAVA Class 문법, 파라미터 확인"></a>5.2.3. <code>ImageJ</code> <code>JAVA Class</code> 문법, 파라미터 확인</h4><ul>
 <li><p><code>python</code>에서 <code>JAVA</code>를 불러 사용하는 <code>jython</code>의 특징이 가장 크게 발휘되는 부분입니다.<br>바꿔 말하면, <strong>가장 험난한 곳</strong>입니다.</p>
@@ -335,7 +325,6 @@ ga('send', 'pageview');
 </li>
 <li><p>함수와 유사한 <code>Method</code>는 input과 output 형식을 사전에 정의하고 있기 때문에 이를 따라야 합니다. 우리가 찾은 <code>filter</code> method는 <code>ImageStack</code>형식으로 이미지를 받아들이고, 처리할 <code>Field</code>와 파라미터를 아래와 같은 형식으로 넣게 되어 있습니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ImageStack = filter(ImageStack stackorig, <span class="keyword">int</span> filter, <span class="keyword">float</span> vx, <span class="keyword">float</span> vy, <span class="keyword">float</span> vz)</span><br></pre></td></tr></table></figure>
-
 <p><img src="5_script_13.PNG" alt=" "></p>
 </li>
 </ul>
@@ -345,7 +334,6 @@ ga('send', 'pageview');
 <li><p><code>Class</code>형식에 맞게 이미지를 다음과 같은 절차에 따라 처리합니다.</p>
 <p>입출력 형식을 위해 읽어들인 이미지를 <code>ImageStack</code>형식으로 변환하고 필터 적용 결과로 얻어진 <code>ImageStack</code>형식 데이터를 다시 <code>ImagePlus</code>로 변환합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> ImagePlus</span><br><span class="line"><span class="keyword">from</span> ij.plugin <span class="keyword">import</span> Filters3D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image Processing</span></span><br><span class="line"><span class="comment">## 2.1. 이미지를 ImageStack 형식으로 변환</span></span><br><span class="line">stack = imp.getStack()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.2. Constructor: f3d라는 이름의 Filters3D object 생성</span></span><br><span class="line">f3d = Filters3D()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.3. Method: 변환된 이미지(stack)에 Field(f3d.MEDIAN) 적용. </span></span><br><span class="line"><span class="comment">## MEDIAN range vx, vy, vz = 5, 5, 5</span></span><br><span class="line">filtered = f3d.filter(stack, f3d.MEDIAN, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.4. MEDIAN 적용된 이미지 형식을 ImageStack에서 ImagePlus로 변환</span></span><br><span class="line">imp_new = ImagePlus(<span class="string">"Filtered"</span>, filtered)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 화면에 출력</span></span><br><span class="line">imp_new.show()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>위 코드를 <code>clown.jpg</code>에 적용한 결과입니다.</li>
 <li><code>MEDIAN</code> 필터의 범위를 넓게 잡아 선명도가 더 낮아진 모습입니다..</li>
@@ -364,7 +352,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.com/2019/12/19/ImageJ-tutorial-5-Script/" data-id="ck7pan80p000lckujdc8635b6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.com/2019/12/19/ImageJ-tutorial-5-Script/" data-id="ck7pqzlyk000v6wujgimf603x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -539,26 +527,6 @@ Javadocs: ImageJ1, ",
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/4_cmap_1.jpg)" alt="Matplotlib Colormap (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="title">Matplotlib Colormap (1)</a></p>
-                            <p class="item-date"><time datetime="2020-02-29T15:06:00.000Z" itemprop="datePublished">2020-03-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2020/02/16/Python-DS-3-matplotlib_color/" class="thumbnail">
     
     
@@ -616,6 +584,26 @@ Javadocs: ImageJ1, ",
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/2_jlabmwin_1.PNG)" alt="Multi window @Jupyter Lab" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="title">Multi window @Jupyter Lab</a></p>
+                            <p class="item-date"><time datetime="2020-02-06T11:16:00.000Z" itemprop="datePublished">2020-02-06</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -625,7 +613,7 @@ Javadocs: ImageJ1, ",
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -735,21 +723,5 @@ Javadocs: ImageJ1, ",
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

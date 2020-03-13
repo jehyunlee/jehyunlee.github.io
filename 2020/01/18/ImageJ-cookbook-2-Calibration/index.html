@@ -224,11 +224,10 @@ ga('send', 'pageview');
 <li>아래 예제의 <a href="2_cal_2.tif">원본은 여기에서 다운로드</a> 받을 수 있습니다.<br><img src="2_cal_2.PNG" alt=" ">        </li>
 <li>괄호 안의 값은 <code>pixel</code>단위, 괄호 밖의 값은 보정된(<code>calibrated</code>) 실제 길이입니다.</li>
 <li>이미지 우측 하단 $ 2\ \mu\text{m} $  scale bar의 길이는 484 px 입니다. </li>
-<li>메타데이터로부터 얻은 <code>scale</code>이 4.13 nm/px이므로, 확인을 위해 곱해보면 $ 484 \times 4.13 = 1998.92\ \text{nm} $ 이므로 $ \approx 2 \mu\text{m} $ 입니다.<br></li>
+<li>메타데이터로부터 얻은 <code>scale</code>이 4.13 nm/px이므로, 확인을 위해 곱해보면 $ 484 \times 4.13 = 1998.92\ \text{nm} $ 이므로 $ \approx 2 \mu\text{m} $ 입니다.<br><br></li>
 </ul>
 </li>
-<li><p><code>ImageJ</code> <code>Calibration</code>은 크게 두 가지로 나뉘어집니다.</p>
-<ul>
+<li><code>ImageJ</code> <code>Calibration</code>은 크게 두 가지로 나뉘어집니다.<ul>
 <li><strong>Spatial Calibration</strong> : <code>x</code>, <code>y</code>등 길이 방향을 보정합니다.</li>
 <li><strong>Density Calibration</strong>: <code>pixel</code>값을 보정합니다.</li>
 </ul>
@@ -300,8 +299,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h4 id="2-3-2-Density-Calibration-GUI"><a href="#2-3-2-Density-Calibration-GUI" class="headerlink" title="2.3.2. Density Calibration (GUI)"></a>2.3.2. Density Calibration (GUI)</h4><ul>
-<li><p>Density Calibration을 위해선 다음 두 가지 사항이 필요합니다.</p>
-<ol>
+<li>Density Calibration을 위해선 다음 두 가지 사항이 필요합니다.<ol>
 <li>두 지점 이상의 <code>pixel</code>과 데이터(<code>value</code>)  쌍</li>
 <li>Density Calibration의 함수(<code>function</code>): Linear? Polynomial? Exponential?</li>
 </ol>
@@ -345,8 +343,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<br>
-
+<p><br></p>
 <h3 id="2-4-Calibration-python-script"><a href="#2-4-Calibration-python-script" class="headerlink" title="2.4.Calibration (python script)"></a>2.4.Calibration (python script)</h3><h4 id="2-4-1-Spatial-Calibration-python-script"><a href="#2-4-1-Spatial-Calibration-python-script" class="headerlink" title="2.4.1. Spatial Calibration (python script)"></a>2.4.1. Spatial Calibration (python script)</h4><ul>
 <li><p><code>python</code> script를 이용해 현재의 <code>Calibration</code>값을 확인하고, 새로운 <code>Calibration</code>을 적용하겠습니다.</p>
 </li>
@@ -358,7 +355,6 @@ ga('send', 'pageview');
 <li><a href="2_cal_2.tif">같은 이미지</a>를 <code>ImageJ</code>에 띄워 놓고, script 창을 열고 아래 코드를 붙여넣고 실행합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ, ImagePlus</span><br><span class="line"><span class="keyword">from</span> ij.plugin <span class="keyword">import</span> Duplicator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Get Open Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Get Initial Calibration</span></span><br><span class="line">cal = imp.getCalibration()</span><br><span class="line"><span class="keyword">print</span> <span class="string">'before Calibration:'</span>, cal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Duplicate Image</span></span><br><span class="line">imp2 = Duplicator().run(imp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. Apply New Calibration</span></span><br><span class="line">scale = <span class="number">4.13</span> <span class="comment"># nm/px</span></span><br><span class="line">cal.pixelWidth = scale <span class="comment"># pixelWidth : Pixel width in 'unit's</span></span><br><span class="line">cal.pixelHeight = scale <span class="comment"># pixelHeight : Pixel height in 'unit's</span></span><br><span class="line">cal.unit = <span class="string">'nm'</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'after Calibration:'</span>, cal</span><br><span class="line">imp2.setCalibration(cal)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Show New Image</span></span><br><span class="line">imp2.title = <span class="string">'Calibrated'</span></span><br><span class="line">imp2.show()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>실행 결과 </li>
 </ul>
@@ -377,96 +373,98 @@ ga('send', 'pageview');
 <li><p>먼저, 위 <b>2.4.1</b> 코드와 실행 결과를 보면 현재의 <code>Calibration</code>을 읽어서 <code>cal</code>이라는 변수에 저장하고 출력한 결과가 <code>w</code>, <code>h</code>, <code>d</code>, <code>unit</code>, <code>f</code>, <code>nc</code>, <code>table</code>, <code>vunit</code>, <code>bd</code>로 출력됩니다. 각각의 의미는 다음과 같습니다.</p>
 </li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center"><b>변수 이름<br>Variable Name</b></th>
-<th align="center"><b>전체 이름<br>Full Name</b></th>
-<th align="center"><b>의미<br>Meaning</b></th>
-<th align="center"><b>기본값<br>Default Value</b></th>
+<th style="text-align:center"><b>변수 이름<br>Variable Name</b></th>
+<th style="text-align:center"><b>전체 이름<br>Full Name</b></th>
+<th style="text-align:center"><b>의미<br>Meaning</b></th>
+<th style="text-align:center"><b>기본값<br>Default Value</b></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><b>w</b></td>
-<td align="center">pixelWidth</td>
-<td align="center">pixel width scale (unit/px)</td>
-<td align="center">1.0</td>
+<tbody>
+<tr>
+<td style="text-align:center"><b>w</b></td>
+<td style="text-align:center">pixelWidth</td>
+<td style="text-align:center">pixel width scale (unit/px)</td>
+<td style="text-align:center">1.0</td>
 </tr>
 <tr>
-<td align="center"><b>h</b></td>
-<td align="center">pixelHeight</td>
-<td align="center">pixel height scale (unit/px)</td>
-<td align="center">1.0</td>
+<td style="text-align:center"><b>h</b></td>
+<td style="text-align:center">pixelHeight</td>
+<td style="text-align:center">pixel height scale (unit/px)</td>
+<td style="text-align:center">1.0</td>
 </tr>
 <tr>
-<td align="center"><b>d</b></td>
-<td align="center">pixelDepth</td>
-<td align="center">pixel depth scale (unit/px)<br>“slice 한 장의 두께”</td>
-<td align="center">1.0</td>
+<td style="text-align:center"><b>d</b></td>
+<td style="text-align:center">pixelDepth</td>
+<td style="text-align:center">pixel depth scale (unit/px)<br>“slice 한 장의 두께”</td>
+<td style="text-align:center">1.0</td>
 </tr>
 <tr>
-<td align="center"><b>unit</b></td>
-<td align="center">unit</td>
-<td align="center">spatial unit of real world</td>
-<td align="center">“inch”</td>
+<td style="text-align:center"><b>unit</b></td>
+<td style="text-align:center">unit</td>
+<td style="text-align:center">spatial unit of real world</td>
+<td style="text-align:center">“inch”</td>
 </tr>
 <tr>
-<td align="center"><b>f</b></td>
-<td align="center">function</td>
-<td align="center">density calibration fitting function</td>
-<td align="center">20</td>
+<td style="text-align:center"><b>f</b></td>
+<td style="text-align:center">function</td>
+<td style="text-align:center">density calibration fitting function</td>
+<td style="text-align:center">20</td>
 </tr>
 <tr>
-<td align="center"><b>nc</b></td>
-<td align="center">coefficients.length</td>
-<td align="center">function의 coefficient 수<br>(ex. y = a + bx : nc = 2)</td>
-<td align="center">null</td>
+<td style="text-align:center"><b>nc</b></td>
+<td style="text-align:center">coefficients.length</td>
+<td style="text-align:center">function의 coefficient 수<br>(ex. y = a + bx : nc = 2)</td>
+<td style="text-align:center">null</td>
 </tr>
 <tr>
-<td align="center"><b>cTable</b></td>
-<td align="center">cTable.length</td>
-<td align="center">bitDepth에 대응되는 real value 수<br>(ex. bd = 8 : Table size = 256 by 2)</td>
-<td align="center">null</td>
+<td style="text-align:center"><b>cTable</b></td>
+<td style="text-align:center">cTable.length</td>
+<td style="text-align:center">bitDepth에 대응되는 real value 수<br>(ex. bd = 8 : Table size = 256 by 2)</td>
+<td style="text-align:center">null</td>
 </tr>
 <tr>
-<td align="center"><b>vunit</b></td>
-<td align="center">valueUnit</td>
-<td align="center">density unit of real world</td>
-<td align="center">Gray Value</td>
+<td style="text-align:center"><b>vunit</b></td>
+<td style="text-align:center">valueUnit</td>
+<td style="text-align:center">density unit of real world</td>
+<td style="text-align:center">Gray Value</td>
 </tr>
 <tr>
-<td align="center"><b>bd</b></td>
-<td align="center">bitDepth</td>
-<td align="center">data depth. 2^bd.<br>(ex. 256 = 2^8 : bd = 8)</td>
-<td align="center">8</td>
+<td style="text-align:center"><b>bd</b></td>
+<td style="text-align:center">bitDepth</td>
+<td style="text-align:center">data depth. 2^bd.<br>(ex. 256 = 2^8 : bd = 8)</td>
+<td style="text-align:center">8</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li><p>공식문서에서 이 부분에 대한 설명이 매우 불친절합니다.</p>
 </li>
 <li><p>자세한 설명은 소스코드를 열어 이해할 수 밖에 없었습니다. 상세한 설명이 있다면 제보바랍니다.</p>
 <p><b>[ 관련 공식문서 링크 ]</b> <a href="https://imagej.nih.gov/ij/developer/source/ij/measure/Calibration.java.html" target="_blank" rel="noopener">Calibration</a>, <a href="https://imagej.nih.gov/ij/developer/api/ij/measure/CurveFitter.html" target="_blank" rel="noopener">CurveFitter</a>, <a href="https://imagej.nih.gov/ij/developer/api/constant-values.html" target="_blank" rel="noopener">Constant Field Values</a></p>
-<br>
+<p><br></p>
 </li>
 <li><p>위에서 4개의 인자(<code>w</code>, <code>h</code>, <code>d</code>, <code>unit</code>)는 Spatial Calibration에 연관된 것이고,<br>아래 5개의 인자(<code>f</code>, <code>nc</code>, <code>cTable</code>, <code>vunit</code>, <code>bd</code>)는 Density Calibration에 연관된 것입니다.</p>
 </li>
 </ul>
 <ul>
 <li><p><code>bd</code>=8이라면 0~255까지 256개의 값에 대응되는 value를 cTable로 입력해야 하기 때문에 Density Calibration을 python script로 수행하기엔 좀 성가십니다.</p>
-<br>
+<p><br></p>
 </li>
 <li><p>따라서, Density Calibration을 python script로 수행할 때는 <a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-5-Script/" target="_blank" rel="noopener"><b>ImageJ &gt; Tutorial &gt; 5. Python Script 작성</b></a>에 있는 <code>IJ.run()</code>을 사용하시는 것을 추천합니다.</p>
 <ul>
 <li><b>2.3.2</b>의 Density Calibration 과정을 <code>IJ.run()</code>으로 옮기면 다음과 같이 한 줄로 표현됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IJ.run(imp, <span class="string">"Calibrate..."</span>, <span class="string">"function=[Straight Line] unit=[Degrees Celsius] text1=[0 254] text2=[-2 45] show"</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>메뉴의 <b>Analyze &gt; Calibrate…</b>를 실행하되, <code>function</code>, <code>unit</code>, pixel value(<code>text1</code>), real value(<code>text2</code>)를 넣고 calibration 결과를 보이라(<code>show</code>)는 의미입니다.</li>
 <li>아래 코드를 실행하면 Density Calibration 전후의 parameter를 비교해서 보여줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ, ImagePlus</span><br><span class="line"><span class="keyword">from</span> ij.plugin <span class="keyword">import</span> Duplicator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Get Open Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Get Initial Calibration</span></span><br><span class="line">cal = imp.getCalibration()</span><br><span class="line">f = cal.getFunction()</span><br><span class="line">coef = cal.getCoefficients()</span><br><span class="line">cTable = cal.getCTable()</span><br><span class="line">vunit = cal.getValueUnit()</span><br><span class="line">bd = imp.getBitDepth()</span><br><span class="line"><span class="keyword">print</span> <span class="string">'before Calibration:'</span>, cal</span><br><span class="line"><span class="keyword">print</span> <span class="string">'f:'</span>, f</span><br><span class="line"><span class="keyword">print</span> <span class="string">'coef:'</span>, coef</span><br><span class="line"><span class="keyword">print</span> <span class="string">'cTable:'</span>, cTable</span><br><span class="line"><span class="keyword">print</span> <span class="string">'vunit:'</span>, vunit</span><br><span class="line"><span class="keyword">print</span> <span class="string">'bd:'</span>, bd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Duplicate Image</span></span><br><span class="line">imp2 = Duplicator().run(imp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. Apply New Calibration</span></span><br><span class="line">IJ.run(imp, <span class="string">"Calibrate..."</span>, <span class="string">"function=[Straight Line] unit=[Degrees Celsius] text1=[0 254] text2=[-2 45] show"</span>)</span><br><span class="line">imp2.setCalibration(cal)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Get Final Calibration</span></span><br><span class="line">cal2 = imp2.getCalibration()</span><br><span class="line">f = cal2.getFunction()</span><br><span class="line">coef = cal2.getCoefficients()</span><br><span class="line">cTable = cal2.getCTable()</span><br><span class="line">vunit = cal2.getValueUnit()</span><br><span class="line">bd = imp2.getBitDepth()</span><br><span class="line"><span class="keyword">print</span> <span class="string">'after Calibration:'</span>, cal2</span><br><span class="line"><span class="keyword">print</span> <span class="string">'f:'</span>, f</span><br><span class="line"><span class="keyword">print</span> <span class="string">'coef:'</span>, coef</span><br><span class="line"><span class="keyword">print</span> <span class="string">'cTable:'</span>, cTable</span><br><span class="line"><span class="keyword">print</span> <span class="string">'vunit:'</span>, vunit</span><br><span class="line"><span class="keyword">print</span> <span class="string">'bd:'</span>, bd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Show New Image</span></span><br><span class="line">imp2.title = <span class="string">'Calibrated'</span></span><br><span class="line">imp2.show()</span><br></pre></td></tr></table></figure>
-
 <p><img src="2_cal_12.PNG" alt=" "></p>
 <ul>
 <li><p>Density Calibration <code>function</code> 값이 20에서 0으로 변했습니다.<br><a href="https://imagej.nih.gov/ij/developer/api/constant-values.html" target="_blank" rel="noopener">관련 공식 문서</a>를 보시면 <b>NONE</b>에서 <b>STRAIGHT_LINE</b>으로 변경되었다는 의미라는 것을 알 수 있습니다.</p>
@@ -486,7 +484,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.com/2020/01/18/ImageJ-cookbook-2-Calibration/" data-id="ck7pamvgr0000ckuj4titeqcc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.com/2020/01/18/ImageJ-cookbook-2-Calibration/" data-id="ck7pqzluc00046wujen1jat59" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -576,7 +574,7 @@ BraINstinct0
 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.
 
 대개 pixel 하나당 흑백(Grays",
-        "wordCount": 1620
+        "wordCount": 1621
     }
 </script>
 
@@ -669,26 +667,6 @@ BraINstinct0
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/4_cmap_1.jpg)" alt="Matplotlib Colormap (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2020/03/01/Python-DS-5-matplotlib_colormap2/" class="title">Matplotlib Colormap (1)</a></p>
-                            <p class="item-date"><time datetime="2020-02-29T15:06:00.000Z" itemprop="datePublished">2020-03-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2020/02/16/Python-DS-3-matplotlib_color/" class="thumbnail">
     
     
@@ -746,6 +724,26 @@ BraINstinct0
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/2_jlabmwin_1.PNG)" alt="Multi window @Jupyter Lab" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/02/06/Python-General-2-JupyterLabMultiWindow/" class="title">Multi window @Jupyter Lab</a></p>
+                            <p class="item-date"><time datetime="2020-02-06T11:16:00.000Z" itemprop="datePublished">2020-02-06</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -755,7 +753,7 @@ BraINstinct0
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -865,21 +863,5 @@ BraINstinct0
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
