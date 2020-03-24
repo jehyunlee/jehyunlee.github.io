@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.com/thumbnails/Python-DS/2_mpl_1.png">
 <meta property="article:published_time" content="2020-02-13T12:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-12T22:20:57.209Z">
+<meta property="article:modified_time" content="2020-03-22T07:58:31.901Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.com/thumbnails/Python-DS/2_mpl_1.png">
@@ -341,7 +341,7 @@ ga('send', 'pageview');
 <li><p>운영체제에 관계없이 한 덩어리의 코드를 실행해서 한글을 구현하고자 한다면 다음 코드 뭉치를 복사하여 실행하면 편리합니다.</p>
 </li>
 <li><p>Windows와 Linux에 적용되며, Linux에서 처음 실행 시는 <code>!apt-get</code> 앞에 있는 <code>#</code>를 제거하고 실행하여 폰트를 설치해야 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os, copy, sys, platform</span><br><span class="line">system = platform.system()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> system == <span class="string">'Windows'</span>:</span><br><span class="line">    datapath = os.getcwd() + <span class="string">'\\'</span></span><br><span class="line">    imagepath = datapath + <span class="string">'images\\'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ttf 폰트 전체개수</span></span><br><span class="line">    font_list[:<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">    f = [f.name <span class="keyword">for</span> f <span class="keyword">in</span> fm.fontManager.ttflist]</span><br><span class="line">    f[:<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">    [(f.name, f.fname) <span class="keyword">for</span> f <span class="keyword">in</span> fm.fontManager.ttflist <span class="keyword">if</span> <span class="string">'Nanum'</span> <span class="keyword">in</span> f.name]</span><br><span class="line"></span><br><span class="line">    path = <span class="string">'C:\\Windows\\Fonts\\NanumBarunGothic.ttf'</span></span><br><span class="line">    font_name = fm.FontProperties(fname=path, size=<span class="number">50</span>).get_name()</span><br><span class="line"></span><br><span class="line">    print(font_name)</span><br><span class="line">    plt.rc(<span class="string">'font'</span>, family=font_name)</span><br><span class="line">    print(<span class="string">"# matplotlib 한글 사용 가능"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> system == <span class="string">'Linux'</span>:</span><br><span class="line">    datapath = os.getcwd() + <span class="string">'//'</span></span><br><span class="line">    imagepath = datapath + <span class="string">'images//'</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">#     !apt-get update -qq</span></span><br><span class="line"><span class="comment">#     !apt-get install fonts-nanum* -qq</span></span><br><span class="line"></span><br><span class="line">    path = <span class="string">'/usr/share/fonts/truetype/nanum/NanumGothic.ttf'</span>  <span class="comment"># 설치된 나눔글꼴중 원하는 녀석의 전체 경로를 가져오자</span></span><br><span class="line">    font_name = fm.FontProperties(fname=path, size=<span class="number">10</span>).get_name()</span><br><span class="line"></span><br><span class="line">    print(font_name)</span><br><span class="line">    plt.rc(<span class="string">'font'</span>, family=font_name)</span><br><span class="line"></span><br><span class="line">    fm._rebuild()</span><br><span class="line">    mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span></span><br><span class="line">    print(<span class="string">"# matplotlib 한글 사용 가능"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    sys.exit(<span class="string">'ERROR: Sorry, my code has compatibility with Windows and Linux only.'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.font_manager <span class="keyword">as</span> fm </span><br><span class="line"><span class="keyword">import</span> os, copy, sys, platform</span><br><span class="line">system = platform.system()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> system == <span class="string">'Windows'</span>:</span><br><span class="line">    datapath = os.getcwd() + <span class="string">'\\'</span></span><br><span class="line">    imagepath = datapath + <span class="string">'images\\'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ttf 폰트 전체개수</span></span><br><span class="line">    font_list[:<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">    f = [f.name <span class="keyword">for</span> f <span class="keyword">in</span> fm.fontManager.ttflist]</span><br><span class="line">    f[:<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">    [(f.name, f.fname) <span class="keyword">for</span> f <span class="keyword">in</span> fm.fontManager.ttflist <span class="keyword">if</span> <span class="string">'Nanum'</span> <span class="keyword">in</span> f.name]</span><br><span class="line"></span><br><span class="line">    path = <span class="string">'C:\\Windows\\Fonts\\NanumBarunGothic.ttf'</span></span><br><span class="line">    font_name = fm.FontProperties(fname=path, size=<span class="number">50</span>).get_name()</span><br><span class="line"></span><br><span class="line">    print(font_name)</span><br><span class="line">    plt.rc(<span class="string">'font'</span>, family=font_name)</span><br><span class="line">    print(<span class="string">"# matplotlib 한글 사용 가능"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> system == <span class="string">'Linux'</span>:</span><br><span class="line">    datapath = os.getcwd() + <span class="string">'//'</span></span><br><span class="line">    imagepath = datapath + <span class="string">'images//'</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">#     !apt-get update -qq</span></span><br><span class="line"><span class="comment">#     !apt-get install fonts-nanum* -qq</span></span><br><span class="line"></span><br><span class="line">    path = <span class="string">'/usr/share/fonts/truetype/nanum/NanumGothic.ttf'</span>  <span class="comment"># 설치된 나눔글꼴중 원하는 녀석의 전체 경로를 가져오자</span></span><br><span class="line">    font_name = fm.FontProperties(fname=path, size=<span class="number">10</span>).get_name()</span><br><span class="line"></span><br><span class="line">    print(font_name)</span><br><span class="line">    plt.rc(<span class="string">'font'</span>, family=font_name)</span><br><span class="line"></span><br><span class="line">    fm._rebuild()</span><br><span class="line">    mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span></span><br><span class="line">    print(<span class="string">"# matplotlib 한글 사용 가능"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    sys.exit(<span class="string">'ERROR: Sorry, my code has compatibility with Windows and Linux only.'</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>위 설정 후 한글이 들어간 그래프를 그려보겠습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># log의 지수가 깨지는 문제를 잘 보여주기 위해 폰트 크기를 키웁니다.</span></span><br><span class="line">plt.rcParams[<span class="string">'font.size'</span>] = <span class="number">20</span> </span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">data_x = [<span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">0.1</span>, <span class="number">1</span>, <span class="number">10</span>]</span><br><span class="line">data_y = [<span class="number">10</span>, <span class="number">24</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">40</span>]</span><br><span class="line">ax.plot(data_x, data_y)</span><br><span class="line">ax.set_title(<span class="string">'한글 그래프'</span>)</span><br><span class="line">ax.set_xscale(<span class="string">'log'</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
@@ -367,7 +367,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.com/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/" data-id="ck7qyle2d000z4cuj77zvgwp7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.com/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/" data-id="ck857xs1x000nnkujaryf38cb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -443,14 +443,14 @@ ga('send', 'pageview');
         "genre": "Python Data Science",
         "datePublished": "2020-02-13",
         "dateCreated": "2020-02-13",
-        "dateModified": "2020-03-13",
+        "dateModified": "2020-03-22",
         "url": "https://jehyunlee.github.com/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/",
         "description": "
 Matplotlib은 Python Visualization의 기둥이라고 해도 과언이 아닙니다.
 자유도가 높아 원하는 그림을 자유롭게 그릴 수 있지만, 한편으로 명령어와 인자들이 자꾸 잊혀집니다.
 약간의 짜증을 담아 Matplotlib의 기초 코드를 정리해둡니다.
 혼동을 방지하기 위해 pyplot 기반 명령어는 제외하고 object oriented inte",
-        "wordCount": 1763
+        "wordCount": 1778
     }
 </script>
 
@@ -519,6 +519,26 @@ Matplotlib은 Python Visualization의 기둥이라고 해도 과언이 아닙니
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/03/20/Python-DS-6-plateau_detection/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/6_pld_1.png)" alt="Plateau Detection" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/03/20/Python-DS-6-plateau_detection/" class="title">Plateau Detection</a></p>
+                            <p class="item-date"><time datetime="2020-03-20T08:23:00.000Z" itemprop="datePublished">2020-03-20</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -600,26 +620,6 @@ Matplotlib은 Python Visualization의 기둥이라고 해도 과언이 아닙니
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2020/02/11/ImageJ-tutorial-8-ROI/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/8_roi_1.PNG)" alt="8. Region of Interest" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></p>
-                            <p class="item-title"><a href="/2020/02/11/ImageJ-tutorial-8-ROI/" class="title">8. Region of Interest</a></p>
-                            <p class="item-date"><time datetime="2020-02-11T01:02:00.000Z" itemprop="datePublished">2020-02-11</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -629,7 +629,7 @@ Matplotlib은 Python Visualization의 기둥이라고 해도 과언이 아닙니
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
