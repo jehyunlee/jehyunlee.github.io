@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.com/thumbnails/Python-DS/9_mpla_0.png">
 <meta property="article:published_time" content="2020-03-30T21:18:00.000Z">
-<meta property="article:modified_time" content="2020-03-31T03:18:37.895Z">
+<meta property="article:modified_time" content="2020-03-31T04:48:45.319Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.com/thumbnails/Python-DS/9_mpla_0.png">
@@ -270,7 +270,7 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>background color, grid color 등은 <a href="https://matplotlib.org/users/style_sheets.html" target="_blank" rel="noopener"><code>plt.style.use()</code></a>를 사용하면 설정이 용이합니다.</li>
-<li>fontsize, linewith 등은 seaborn의 <a href="https://seaborn.pydata.org/generated/seaborn.set_context.html" target="_blank" rel="noopener"><code>seaborn.set_context()</code></a>를 사용하면 좋습니다.</li>
+<li>fontsize, linewidth 등은 seaborn의 <a href="https://seaborn.pydata.org/generated/seaborn.set_context.html" target="_blank" rel="noopener"><code>seaborn.set_context()</code></a>를 사용하면 좋습니다.</li>
 <li>그림의 크기를 함께 바꿔봅시다. <code>plt.subplots()</code> 안에 <code>figsize=(가로, 세로)</code>를 넣으면 됩니다.<br>단위는 inch입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">plt.style.use(<span class="string">'seaborn-whitegrid'</span>)</span><br><span class="line">sns.set_context(<span class="string">'talk'</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 시각화 기본 설정이 변경되었습니다.<br><img src="9_mpla_4.png" alt=""></li>
@@ -291,6 +291,18 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
+<ul>
+<li>잠시 pandas와의 연계기를 살펴보겠습니다.  (<a href="https://subinium.github.io/" target="_blank" rel="noopener">안수빈님</a> 제안 감사드립니다)</li>
+<li>pandas의 <code>DataFrame.from_dict()</code> 기능을 이용해서 dataframe을 만듭니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame.from_dict(data, orient=<span class="string">'index'</span>, columns=[<span class="string">'revenue'</span>])</span><br></pre></td></tr></table></figure>
+<img src="9_mpla_14.png" alt=""></li>
+</ul>
+<ul>
+<li>dataframe에 직접 <code>.plot()</code>을 수행합니다. 가로방향 bar plot이니 <code>kind=&#39;barh&#39;</code>를 넣습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(kind=<span class="string">'barh'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과: 깔끔하게 bar plot이 나왔습니다.<br>이 그래프도 여러 옵션을 통해 아름답게 만들 수 있지만, 본 글에서는 다루지 않겠습니다.<br><img src="9_mpla_15.png" alt=""></li>
+</ul>
+</li>
+</ul>
 <h4 id="2-4-Color-Setting"><a href="#2-4-Color-Setting" class="headerlink" title="2.4. Color Setting"></a>2.4. Color Setting</h4><blockquote>
 <p><a href="https://seaborn.pydata.org/generated/seaborn.barplot.html?highlight=barplot#seaborn.barplot" target="_blank" rel="noopener">seaborn.barplot</a></p>
 </blockquote>
@@ -307,7 +319,7 @@ ga('send', 'pageview');
 <ul>
 <li>barplot 자체를 seaborn으로 그릴 수도 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">4</span>))</span><br><span class="line">sns.barplot(group_data, group_names)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: bar마다 다른 색상이 적용되었습니다.<br>matplotlib과는 y축 label이 뒤집혀 있네요.<br><img src="9_mpla_7.png" alt=""></li>
+<li>실행결과: bar마다 다른 색상이 적용되었습니다.<br>자세히 보니 matplotlib과는 y축 label 순서가 뒤집혀 있네요.<br><img src="9_mpla_7.png" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -376,7 +388,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.com/2020/03/31/Python-DS-9-matplotlib_axis/" data-id="ck8fc2o3o00105oujbhay299f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.com/2020/03/31/Python-DS-9-matplotlib_axis/" data-id="ck8ffdcny000xh8uj8oeu0hz8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -458,7 +470,7 @@ ga('send', 'pageview');
 Matplotlib은 자유도가 높은 만큼 건드릴 곳이 많아서 익숙해지기가 영 만만치 않습니다.
 저도 이 바람에 Matplotlib을 버릴까 했으나 Matplotlib에 의존하는 라이브러리가 너무 많더군요.
 피할 수 없다면, 헷갈리지 않게 그리는 방법을 익혀봅시다.1234import matplotlib.pyplot as pltimport matplotlib",
-        "wordCount": 1496
+        "wordCount": 1570
     }
 </script>
 
