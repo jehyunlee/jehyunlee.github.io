@@ -6,21 +6,27 @@
     
 
     
-    <title>Archive: 2019/12 | Pega Devlog</title>
+    <title>Raster Data Sampling on Polygons | Pega Devlog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Pega&#39;s Development log for myself and others">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pega Devlog">
-<meta property="og:url" content="https://jehyunlee.github.io/archives/2019/12/index.html">
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="References  QGISwikipedia: GeoTIFFwikipedia: ShapefileSampling Raster Data using Points or Polygons   QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.4.13-Madeira 입니다.  1. Lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raster Data Sampling on Polygons">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Pega&#39;s Development log for myself and others">
+<meta property="og:description" content="References  QGISwikipedia: GeoTIFFwikipedia: ShapefileSampling Raster Data using Points or Polygons   QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.4.13-Madeira 입니다.  1. Lo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/1_rza_0.PNG">
+<meta property="article:published_time" content="2020-04-09T01:43:00.000Z">
+<meta property="article:modified_time" content="2020-04-09T03:14:22.124Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/1_rza_0.PNG">
     
-    <link rel="canonical" href="https://jehyunlee.github.io/archives/2019/12/"/>
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/04/09/gis-qgis-1-rasterzonalanalysis/"/>
 
     
         <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
@@ -163,261 +169,190 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>Archive: 2019/12
+    <a class="page-title-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/GIS/QGIS/">QGIS</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-GIS-QGIS-1-RasterZonalAnalysis" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2019" class="archive-year"><i class="icon fa fa-calendar-o"></i>2019</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/12/19/ImageJ-tutorial-5-Script/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/5_script_2.PNG)" alt="5. Python Script 작성" class="thumbnail-image"></span>
-    
-    
-        
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
-            </div>
-            <div class="date"><time datetime="2019-12-19T03:00:00.000Z" itemprop="datePublished">2019-12-19</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/12/19/ImageJ-tutorial-5-Script/">5. Python Script 작성</a>
+        Raster Data Sampling on Polygons
         </h1>
     
 
-        <p class="article-excerpt">
-            5.1. ImageJ Script 예시Reference
-
-A Fiji Scripting Tutorial #3. Inspecting properties and pixels of an imageA Fiji Scripting Tutorial #4. Finding the java documentation for any class
-Javadocs: ImageJ1, 
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" class="article-date">
+         <time datetime="2020-04-09T01:43:00.000Z" itemprop="datePublished">2020-04-09</time>
+      </a>
     </div>
-</article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/12/19/ImageJ-tutorial-4-Python/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/4_python_1.PNG)" alt="4. Python Basic" class="thumbnail-image"></span>
-    
-    
-        
 
-    
-</a>
+                
 
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
+                
+                
+
+                
+
             </div>
-            <div class="date"><time datetime="2019-12-19T02:59:13.000Z" itemprop="datePublished">2019-12-19</time></div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><b>References</b></p>
+<blockquote>
+<p><a href="https://qgis.org/ko/site/" target="_blank" rel="noopener">QGIS</a><br><a href="https://en.wikipedia.org/wiki/GeoTIFF" target="_blank" rel="noopener">wikipedia: GeoTIFF</a><br><a href="https://en.wikipedia.org/wiki/Shapefile" target="_blank" rel="noopener">wikipedia: Shapefile</a><br><a href="https://www.qgistutorials.com/en/docs/sampling_raster_data.html" target="_blank" rel="noopener">Sampling Raster Data using Points or Polygons</a></p>
+</blockquote>
+<ul>
+<li><a href="https://qgis.org/ko/site/" target="_blank" rel="noopener">QGIS</a>에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정리합니다.</li>
+<li>사용한 QGIS의 버전은 <code>3.4.13-Madeira</code> 입니다.</li>
+</ul>
+<h3 id="1-Load-Data-raster-file-and-shapefile"><a href="#1-Load-Data-raster-file-and-shapefile" class="headerlink" title="1. Load Data (raster file and shapefile)"></a>1. Load Data (raster file and shapefile)</h3><ul>
+<li>먼저 raster data를 불러옵니다.</li>
+<li><code>Layer &gt; Add Raster Layer...</code>를 이용해도 되고, 탐색기에서 끌어와도 됩니다.<br><br><img src="1_rza_1.PNG" alt="raster file"></li>
+</ul>
+<ul>
+<li>이번에는 건물 데이터를 불러옵니다.  </li>
+<li>마찬가지로 <code>Layer &gt; Add Vector Layer...</code>를 이용해도 되고, 탐색기에서 끌어와도 됩니다.<br><br><img src="1_rza_2.PNG" alt="shapefile">  </li>
+</ul>
+<ul>
+<li>참고로, 예제로 사용한 건물은 영화 레지던트 이블로도 유명해진 대전정부청사입니다.<br><br><img src="1_rza_3.jpg" alt="">  </li>
+</ul>
+<h3 id="2-Data-Analysis"><a href="#2-Data-Analysis" class="headerlink" title="2. Data Analysis"></a>2. Data Analysis</h3><ul>
+<li>raster file의 데이터를 shapefile의 feature에 투영하겠습니다.</li>
+<li>우측 상단의 톱니바퀴 모양을 클릭해서 <b>[공간 처리 툴박스]</b>를 실행합니다.</li>
+<li>검색창에 <b>zonal statistics</b> 또는 <b>구역 통계</b>을 입력하여 검색합니다.<br><br><img src="1_rza_4.PNG" alt="클릭하면 커집니다"></li>
+</ul>
+<ul>
+<li><b>래스터 레이어</b>에 아까 불렀던 raster file, <b>벡터 레이어</b>에 shapefile을 입력합니다.</li>
+<li><b>산출 열 접두어</b>에 결과물에 붙을 접두어를 입력 후, <b>계산할 통계</b>에서 계산할 항목을 선택합니다.<br><img src="1_rza_5.PNG" alt="클릭하면 커집니다"></li>
+</ul>
+<ul>
+<li><b>확인</b>을 누르면 다소의 시간이 소요된 후 다시 구역 통계 화면으로 돌아옵니다.<br></li>
+</ul>
+<h3 id="3-Data-Verification"><a href="#3-Data-Verification" class="headerlink" title="3. Data Verification"></a>3. Data Verification</h3><ul>
+<li>계산된 데이터는 shapefile에 새 컬럼의 형태로 포함되어 있습니다.</li>
+<li><b>레이어</b>의 shapefile에서 우클릭으로 <b>속성 테이블 열기</b>를 통해 추가된 데이터를 확인할 수 있습니다.<br><img src="1_rza_6.PNG" alt="클릭하면 커집니다"></li>
+</ul>
+<ul>
+<li>속성 테이블에 접두어로 입력한 <code>proj_</code>와 분석을 수행한 항목이 컬럼명으로 지정되어 있습니다.<br><img src="1_rza_7.PNG" alt=""></li>
+</ul>
+<h3 id="4-Data-Export"><a href="#4-Data-Export" class="headerlink" title="4. Data Export"></a>4. Data Export</h3><ul>
+<li><code>내보내기 &gt; 객체를 다른 이름으로 저장 &gt;</code>에서 <code>.xlsx</code>를 선택하면 엑셀 파일로 내보낼 수 있습니다.</li>
+<li>간혹 한글이 깨진 채로 나갈 때가 있는데, 인코딩 옵션을 조정하여 해결할 수 있습니다.<br><img src="1_rza_8.png" alt="여기를 고칩니다"></li>
+</ul>
+<ul>
+<li>기본값(<b>system</b>)을 <b>UTF-8</b>로 바꿔주면 한글이 잘 나옵니다.<br><img src="1_rza_9.PNG" alt=""></li>
+</ul>
+
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/12/19/ImageJ-tutorial-4-Python/">4. Python Basic</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            4.1. Python 문법을 공부하는 이유
-ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python을 구현한 것입니다.
-주로 web 환경에 많이 사용되는 JVM과 python의 연동이 자유로워 Java Class와 .jar 파일을 아무런 변환이나 노력 없이 그대로 끌어다 사용할 수 있다는 장점이 있습니다. 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/12/16/ImageJ-tutorial-3-DevEnv/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/3_file_3.PNG)" alt="3. ImageJ Python 개발 환경" class="thumbnail-image"></span>
-    
-    
-        
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
-            </div>
-            <div class="date"><time datetime="2019-12-16T01:59:49.000Z" itemprop="datePublished">2019-12-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/12/16/ImageJ-tutorial-3-DevEnv/">3. ImageJ Python 개발 환경</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
+        <footer class="article-footer">
             
-ImageJ Jython 개발 환경을 설정하겠습니다.
-ImageJ에서는 통합개발환경(IDE)을 제공하지 않아 유사한 환경을 만들어줘야 합니다.  
 
-Reference
 
-A Fiji Scripting Tutorial #2. Your first Fiji script
 
-3.1. Image 불러오기
-앞서 드린 설명에 따라 Boat.gif 이미지를 띄웁니다.  
+    <a data-url="https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" data-id="ck8s466q40000mcujbn0jarh8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
 
-        </p>
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Raster Data Sampling on Polygons",
+        "image": "https://jehyunlee.github.io/thumbnails/GIS-QGIS/1_rza_0.PNG",
+        "keywords": "",
+        "genre": "GIS QGIS",
+        "datePublished": "2020-04-09",
+        "dateCreated": "2020-04-09",
+        "dateModified": "2020-04-09",
+        "url": "https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/",
+        "description": "References
+
+QGISwikipedia: GeoTIFFwikipedia: ShapefileSampling Raster Data using Points or Polygons
+
+
+QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정리합니다.
+사용한 QGIS의 버전은 3.4.13-Madeira 입니다.
+
+1. Lo",
+        "wordCount": 248
+    }
+</script>
+
 </article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/2_image_17.PNG)" alt="2. Image File 구조" class="thumbnail-image"></span>
-    
-    
-        
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
-            </div>
-            <div class="date"><time datetime="2019-12-15T19:33:13.000Z" itemprop="datePublished">2019-12-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/">2. Image File 구조</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.  
-최대한 간결하게 필수적인 지식만 전달하고자 합니다.  
-
-Reference
-
-A Fiji Scripting Tutorial #2. Your first Fiji script
-
-2.1. Image File 구조
-ImageJ로 다룰 image는 bitmap 형식입니다.  
-전체 이미지는 p
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/12/15/ImageJ-tutorial-1-ImageJInstallation/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/ImageJ-Tutorial/1_install_0.PNG)" alt="1. ImageJ 설치" class="thumbnail-image"></span>
-    
-    
-        
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
-            </div>
-            <div class="date"><time datetime="2019-12-15T00:58:39.000Z" itemprop="datePublished">2019-12-15</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/12/15/ImageJ-tutorial-1-ImageJInstallation/">1. ImageJ 설치</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            1.1. 아래 링크에서 ImageJ-Fiji를 다운로드 받습니다.
-Download Link : https://imagej.net/Fiji/Downloads  
-여기서는 Windows-64bit 버전을 기준으로 하겠습니다.  
-
-  
-1.2. 압축을 풀면 다음과 같이 Fiji.app 폴더 안에 프로그램이 담겨 있습니다.
-C:\Program Files에 복사하
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
 
 
 
@@ -447,6 +382,19 @@ C:\Program Files에 복사하
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/04/08/Python-General-4-ChromeRemoteDesktopLinux/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Ubuntu Desktop @Chrome Remote Desktop</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -610,6 +558,8 @@ C:\Program Files에 복사하
     <script>
     var disqus_shortname = 'hexo-theme-hueman';
     
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/';
     
     (function() {
     var dsq = document.createElement('script');
