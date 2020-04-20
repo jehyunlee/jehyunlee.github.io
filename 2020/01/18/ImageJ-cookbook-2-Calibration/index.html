@@ -12,16 +12,16 @@
     
     <meta name="keywords" content="" />
     
-    <meta name="description" content="Reference  Earth Analysis Techniques: Introduction to Image Analysis  Contributor  BraINstinct0  2.1. Calibration의 의미 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.  대개 pixel 하나당 흑백(Grays">
+    <meta name="description" content="Reference  Earth Analysis Techniques: Introduction to Image Analysis  Contributor  BraINstinct0  1. Calibration의 의미 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.  대개 pixel 하나당 흑백(Graysca">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2. Image Calibration">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Reference  Earth Analysis Techniques: Introduction to Image Analysis  Contributor  BraINstinct0  2.1. Calibration의 의미 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.  대개 pixel 하나당 흑백(Grays">
+<meta property="og:description" content="Reference  Earth Analysis Techniques: Introduction to Image Analysis  Contributor  BraINstinct0  1. Calibration의 의미 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.  대개 pixel 하나당 흑백(Graysca">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/2_cal_2.jpg">
 <meta property="article:published_time" content="2020-01-18T09:30:00.000Z">
-<meta property="article:modified_time" content="2020-01-28T03:27:36.999Z">
+<meta property="article:modified_time" content="2020-04-19T22:19:35.853Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/2_cal_2.jpg">
@@ -217,7 +217,7 @@ ga('send', 'pageview');
 <blockquote>
 <p><a href="https://github.com/BraINstinct0" target="_blank" rel="noopener">BraINstinct0</a></p>
 </blockquote>
-<h3 id="2-1-Calibration의-의미"><a href="#2-1-Calibration의-의미" class="headerlink" title="2.1. Calibration의 의미"></a>2.1. Calibration의 의미</h3><ul>
+<h3 id="1-Calibration의-의미"><a href="#1-Calibration의-의미" class="headerlink" title="1. Calibration의 의미"></a>1. Calibration의 의미</h3><ul>
 <li><p><a href="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/">이미지 파일의 구조</a>에 대한 글에서, 이미지는 2차원 공간상에 위치한 <code>pixel</code>의 집합이라고 말씀드렸습니다.</p>
 </li>
 <li><p>대개 <code>pixel</code> 하나당 흑백(<code>Grayscale</code>) 이미지의 경우 숫자 하나가, 컬러 이미지의 경우 숫자 3개가 RGB <code>channel</code>의 형태로 할당되어 있습니다.</p>
@@ -238,7 +238,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h3 id="2-2-Calibration의-활용"><a href="#2-2-Calibration의-활용" class="headerlink" title="2.2. Calibration의 활용"></a>2.2. Calibration의 활용</h3><ul>
+<h3 id="2-Calibration의-활용"><a href="#2-Calibration의-활용" class="headerlink" title="2. Calibration의 활용"></a>2. Calibration의 활용</h3><ul>
 <li><p>Calibration이 된 이미지를 이용해 측정해봅시다.</p>
 <ul>
 <li><code>DEM</code>: Digital Elevation Model이라는 종류의 데이터가 있습니다. </li>
@@ -262,7 +262,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h3 id="2-3-Calibration-GUI"><a href="#2-3-Calibration-GUI" class="headerlink" title="2.3.Calibration (GUI)"></a>2.3.Calibration (GUI)</h3><h4 id="2-3-1-Spatial-Calibration-GUI"><a href="#2-3-1-Spatial-Calibration-GUI" class="headerlink" title="2.3.1. Spatial Calibration (GUI)"></a>2.3.1. Spatial Calibration (GUI)</h4><ul>
+<h3 id="3-Calibration-GUI"><a href="#3-Calibration-GUI" class="headerlink" title="3.Calibration (GUI)"></a>3.Calibration (GUI)</h3><h4 id="3-1-Spatial-Calibration-GUI"><a href="#3-1-Spatial-Calibration-GUI" class="headerlink" title="3.1. Spatial Calibration (GUI)"></a>3.1. Spatial Calibration (GUI)</h4><ul>
 <li><p>이미지의 Scale Bar를 이용하여 Spatial Calibration을 설정해 보겠습니다.</p>
 <ul>
 <li><p>메인 창에서 <strong>Line Selection Tool</strong>을 선택하고 Scale Bar를 따라 선을 긋습니다. 첫 지점을 클릭하고 <code>shift</code>키를 누른 채 마우스를 이동하면 포인터를 수평으로만 움직일 수 있습니다.</p>
@@ -303,7 +303,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h4 id="2-3-2-Density-Calibration-GUI"><a href="#2-3-2-Density-Calibration-GUI" class="headerlink" title="2.3.2. Density Calibration (GUI)"></a>2.3.2. Density Calibration (GUI)</h4><ul>
+<h4 id="3-2-Density-Calibration-GUI"><a href="#3-2-Density-Calibration-GUI" class="headerlink" title="3.2. Density Calibration (GUI)"></a>3.2. Density Calibration (GUI)</h4><ul>
 <li>Density Calibration을 위해선 다음 두 가지 사항이 필요합니다.<ol>
 <li>두 지점 이상의 <code>pixel</code>과 데이터(<code>value</code>)  쌍</li>
 <li>Density Calibration의 함수(<code>function</code>): Linear? Polynomial? Exponential?</li>
@@ -349,7 +349,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <p><br></p>
-<h3 id="2-4-Calibration-python-script"><a href="#2-4-Calibration-python-script" class="headerlink" title="2.4.Calibration (python script)"></a>2.4.Calibration (python script)</h3><h4 id="2-4-1-Spatial-Calibration-python-script"><a href="#2-4-1-Spatial-Calibration-python-script" class="headerlink" title="2.4.1. Spatial Calibration (python script)"></a>2.4.1. Spatial Calibration (python script)</h4><ul>
+<h3 id="4-Calibration-python-script"><a href="#4-Calibration-python-script" class="headerlink" title="4.Calibration (python script)"></a>4.Calibration (python script)</h3><h4 id="4-1-Spatial-Calibration-python-script"><a href="#4-1-Spatial-Calibration-python-script" class="headerlink" title="4.1. Spatial Calibration (python script)"></a>4.1. Spatial Calibration (python script)</h4><ul>
 <li><p><code>python</code> script를 이용해 현재의 <code>Calibration</code>값을 확인하고, 새로운 <code>Calibration</code>을 적용하겠습니다.</p>
 </li>
 <li><p><code>getCalibration()</code>으로 현재 이미지의 <code>Calibration</code>값을 읽고,</p>
@@ -372,7 +372,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h4 id="2-4-2-Density-Calibration-python-script"><a href="#2-4-2-Density-Calibration-python-script" class="headerlink" title="2.4.2. Density Calibration (python script)"></a>2.4.2. Density Calibration (python script)</h4><ul>
+<h4 id="4-2-Density-Calibration-python-script"><a href="#4-2-Density-Calibration-python-script" class="headerlink" title="4.2. Density Calibration (python script)"></a>4.2. Density Calibration (python script)</h4><ul>
 <li><p>Density Calibration 또한 <code>python</code> script를 이용해 진행할 수 있습니다.</p>
 </li>
 <li><p>먼저, 위 <b>2.4.1</b> 코드와 실행 결과를 보면 현재의 <code>Calibration</code>을 읽어서 <code>cal</code>이라는 변수에 저장하고 출력한 결과가 <code>w</code>, <code>h</code>, <code>d</code>, <code>unit</code>, <code>f</code>, <code>nc</code>, <code>table</code>, <code>vunit</code>, <code>bd</code>로 출력됩니다. 각각의 의미는 다음과 같습니다.</p>
@@ -489,7 +489,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/" data-id="ck9143y16000824uj4nn37h6d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/" data-id="ck985k6i400041guj0shedl5v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -565,7 +565,7 @@ ga('send', 'pageview');
         "genre": "ImageJ Cookbook",
         "datePublished": "2020-01-18",
         "dateCreated": "2020-01-18",
-        "dateModified": "2020-01-28",
+        "dateModified": "2020-04-20",
         "url": "https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/",
         "description": "Reference
 
@@ -575,10 +575,10 @@ Contributor
 
 BraINstinct0
 
-2.1. Calibration의 의미
+1. Calibration의 의미
 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.
 
-대개 pixel 하나당 흑백(Grays",
+대개 pixel 하나당 흑백(Graysca",
         "wordCount": 1617
     }
 </script>
@@ -648,6 +648,26 @@ BraINstinct0
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/ImageJ-Cookbook/3_cth_2.jpg)" alt="3. Threshold on channels" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></p>
+                            <p class="item-title"><a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="title">3. Threshold on channels</a></p>
+                            <p class="item-date"><time datetime="2020-04-19T22:20:00.000Z" itemprop="datePublished">2020-04-20</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -729,26 +749,6 @@ BraINstinct0
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/8_foc_1.png)" alt="Fast.ai의 $fit\_one\_cycle$ 방법론 이해" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/" class="title">Fast.ai의 $fit\_one\_cycle$ 방법론 이해</a></p>
-                            <p class="item-date"><time datetime="2020-03-27T17:24:00.000Z" itemprop="datePublished">2020-03-28</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -758,7 +758,7 @@ BraINstinct0
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">4</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">4</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -868,5 +868,21 @@ BraINstinct0
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

@@ -12,16 +12,16 @@
     
     <meta name="keywords" content="" />
     
-    <meta name="description" content="Reference  ImageJ + Python Cookbook  1.1. Loading CSV File csv 파일을 읽는 예제입니다.  예제 파일은 여기에서 다운받을 수 있습니다.   1.1.1. CSV 파일 읽어서 결과 보여주기  1234567import csvfilepath &#x3D; r&#39;C:\Tmp\loadexample.csv&#39;f &#x3D; open(filepa">
+    <meta name="description" content="Reference  ImageJ + Python Cookbook  1. Loading CSV File csv 파일을 읽는 예제입니다.  예제 파일은 여기에서 다운받을 수 있습니다.   1.1. CSV 파일 읽어서 결과 보여주기  1234567import csvfilepath &#x3D; r&#39;C:\Tmp\loadexample.csv&#39;f &#x3D; open(filepath,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1. CSV file I&#x2F;O">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/01/11/ImageJ-cookbook-1-CSVIO/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Reference  ImageJ + Python Cookbook  1.1. Loading CSV File csv 파일을 읽는 예제입니다.  예제 파일은 여기에서 다운받을 수 있습니다.   1.1.1. CSV 파일 읽어서 결과 보여주기  1234567import csvfilepath &#x3D; r&#39;C:\Tmp\loadexample.csv&#39;f &#x3D; open(filepa">
+<meta property="og:description" content="Reference  ImageJ + Python Cookbook  1. Loading CSV File csv 파일을 읽는 예제입니다.  예제 파일은 여기에서 다운받을 수 있습니다.   1.1. CSV 파일 읽어서 결과 보여주기  1234567import csvfilepath &#x3D; r&#39;C:\Tmp\loadexample.csv&#39;f &#x3D; open(filepath,">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/cookbook.jpg">
 <meta property="article:published_time" content="2020-01-11T13:52:00.000Z">
-<meta property="article:modified_time" content="2020-01-11T15:43:48.525Z">
+<meta property="article:modified_time" content="2020-04-19T22:20:45.523Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/cookbook.jpg">
@@ -213,36 +213,36 @@ ga('send', 'pageview');
 <blockquote>
 <p><a href="http://wiki.cmci.info/documents/120206pyip_cooking/python_imagej_cookbook#threshold_to_create_a_mask_binary" target="_blank" rel="noopener">ImageJ + Python Cookbook</a></p>
 </blockquote>
-<h2 id="1-1-Loading-CSV-File"><a href="#1-1-Loading-CSV-File" class="headerlink" title="1.1. Loading CSV File"></a>1.1. Loading CSV File</h2><ul>
+<h2 id="1-Loading-CSV-File"><a href="#1-Loading-CSV-File" class="headerlink" title="1. Loading CSV File"></a>1. Loading CSV File</h2><ul>
 <li><p><code>csv</code> 파일을 읽는 예제입니다.</p>
 </li>
 <li><p>예제 파일은 <a href="https://github.com/jehyunlee/image_processing/blob/master/imagej_script_python/data/loadexample.csv" target="_blank" rel="noopener">여기에서 다운</a>받을 수 있습니다.</p>
 </li>
 </ul>
-<h3 id="1-1-1-CSV-파일-읽어서-결과-보여주기"><a href="#1-1-1-CSV-파일-읽어서-결과-보여주기" class="headerlink" title="1.1.1. CSV 파일 읽어서 결과 보여주기"></a>1.1.1. CSV 파일 읽어서 결과 보여주기</h3>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">filepath = <span class="string">r'C:\Tmp\loadexample.csv'</span></span><br><span class="line">f = open(filepath, <span class="string">'rb'</span>)</span><br><span class="line">data = csv.reader(f, delimiter=<span class="string">' '</span>)</span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">', '</span>.join(row)</span><br></pre></td></tr></table></figure>
+<h3 id="1-1-CSV-파일-읽어서-결과-보여주기"><a href="#1-1-CSV-파일-읽어서-결과-보여주기" class="headerlink" title="1.1. CSV 파일 읽어서 결과 보여주기"></a>1.1. CSV 파일 읽어서 결과 보여주기</h3>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">filepath = <span class="string">r'C:\Tmp\loadexample.csv'</span></span><br><span class="line">f = open(filepath, <span class="string">'rb'</span>)</span><br><span class="line">data = csv.reader(f, delimiter=<span class="string">' '</span>)</span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">', '</span>.join(row)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과<br><img src="1_csvio_1.PNG" alt=" "><br><br></li>
 </ul>
-<h4 id="1-1-2-CSV-파일-읽어서-특정-컬럼을-창으로-띄워주기"><a href="#1-1-2-CSV-파일-읽어서-특정-컬럼을-창으로-띄워주기" class="headerlink" title="1.1.2. CSV 파일 읽어서 특정 컬럼을 창으로 띄워주기"></a>1.1.2. CSV 파일 읽어서 특정 컬럼을 창으로 띄워주기</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> util.opencsv <span class="keyword">import</span> CSVReader</span><br><span class="line"><span class="keyword">from</span> java.io <span class="keyword">import</span> FileReader</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readCSV</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    reader = CSVReader(FileReader(filepath), <span class="string">","</span>)</span><br><span class="line">    ls = reader.readAll()</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> ls:</span><br><span class="line"> 	      IJ.log(item[<span class="number">2</span>])</span><br><span class="line"> </span><br><span class="line">filepath = <span class="string">r'C:\Tmp\loadexample.csv'</span></span><br><span class="line">readCSV(filepath)</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-CSV-파일-읽어서-특정-컬럼을-창으로-띄워주기"><a href="#1-2-CSV-파일-읽어서-특정-컬럼을-창으로-띄워주기" class="headerlink" title="1.2. CSV 파일 읽어서 특정 컬럼을 창으로 띄워주기"></a>1.2. CSV 파일 읽어서 특정 컬럼을 창으로 띄워주기</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> util.opencsv <span class="keyword">import</span> CSVReader</span><br><span class="line"><span class="keyword">from</span> java.io <span class="keyword">import</span> FileReader</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readCSV</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    reader = CSVReader(FileReader(filepath), <span class="string">","</span>)</span><br><span class="line">    ls = reader.readAll()</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> ls:</span><br><span class="line"> 	      IJ.log(item[<span class="number">2</span>])</span><br><span class="line"> </span><br><span class="line">filepath = <span class="string">r'C:\Tmp\loadexample.csv'</span></span><br><span class="line">readCSV(filepath)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과<br><img src="1_csvio_2.PNG" alt=" "><br><br></li>
 </ul>
-<h3 id="1-2-Save-as-CSV-File"><a href="#1-2-Save-as-CSV-File" class="headerlink" title="1.2. Save as CSV File"></a>1.2. Save as CSV File</h3><ul>
+<h3 id="2-Save-as-CSV-File"><a href="#2-Save-as-CSV-File" class="headerlink" title="2. Save as CSV File"></a>2. Save as CSV File</h3><ul>
 <li><code>csv</code> 파일을 쓰는 예제입니다.</li>
 </ul>
-<h4 id="1-2-1-python방식-pythonic"><a href="#1-2-1-python방식-pythonic" class="headerlink" title="1.2.1. python방식 : pythonic"></a>1.2.1. <code>python</code>방식 : <code>pythonic</code></h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">r'C:\Tmp\saveexample1.csv'</span>, <span class="string">'wb'</span>)</span><br><span class="line">writer = csv.writer(f)</span><br><span class="line">writer.writerow([<span class="string">'does this work'</span>])</span><br><span class="line">writer.writerow([<span class="string">'Spam'</span>, <span class="string">'Lovely Spam'</span>, <span class="string">'Wonderful Spam'</span>])</span><br><span class="line"><span class="comment">#can chop down more</span></span><br><span class="line">writer.writerows([<span class="string">'Spam'</span>, <span class="string">'Lovely Spam'</span>, <span class="string">'Wonderful Spam'</span>])</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-python방식-pythonic"><a href="#2-1-python방식-pythonic" class="headerlink" title="2.1. python방식 : pythonic"></a>2.1. <code>python</code>방식 : <code>pythonic</code></h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">r'C:\Tmp\saveexample1.csv'</span>, <span class="string">'wb'</span>)</span><br><span class="line">writer = csv.writer(f)</span><br><span class="line">writer.writerow([<span class="string">'does this work'</span>])</span><br><span class="line">writer.writerow([<span class="string">'Spam'</span>, <span class="string">'Lovely Spam'</span>, <span class="string">'Wonderful Spam'</span>])</span><br><span class="line"><span class="comment">#can chop down more</span></span><br><span class="line">writer.writerows([<span class="string">'Spam'</span>, <span class="string">'Lovely Spam'</span>, <span class="string">'Wonderful Spam'</span>])</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과<br><img src="1_csvio_3.PNG" alt=" "><br><br></li>
 </ul>
-<h4 id="1-2-2-Numerical-data-pythonic"><a href="#1-2-2-Numerical-data-pythonic" class="headerlink" title="1.2.2. Numerical data (pythonic)"></a>1.2.2. Numerical data (<code>pythonic</code>)</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os, csv</span><br><span class="line"></span><br><span class="line"><span class="comment"># prepare test data to write to a csv file</span></span><br><span class="line">data1 = range(<span class="number">10</span>)</span><br><span class="line">data2 = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> data1]</span><br><span class="line">data3 = [pow(x, <span class="number">3</span>) <span class="keyword">for</span> x <span class="keyword">in</span> data1]</span><br><span class="line"><span class="keyword">print</span> data3</span><br><span class="line"></span><br><span class="line"><span class="comment"># prepare path</span></span><br><span class="line">root = <span class="string">r"C:\Tmp"</span></span><br><span class="line">filename = <span class="string">r"saveexample2.csv"</span></span><br><span class="line">fullpath = os.path.join(root, filename)</span><br><span class="line"><span class="keyword">print</span> fullpath</span><br><span class="line"></span><br><span class="line"><span class="comment"># open the file first (if its not there, newly created)</span></span><br><span class="line">f = open(fullpath, <span class="string">'wb'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create csv writer</span></span><br><span class="line">writer = csv.writer(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for loop to write each row</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(data1)):</span><br><span class="line">    row = [data1[i], data2[i], data3[i]]</span><br><span class="line">    writer.writerow(row)</span><br><span class="line"></span><br><span class="line"><span class="comment">#writer.writerows([data1, data2, data3])</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># close the file. </span></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-Numerical-data-pythonic"><a href="#2-2-Numerical-data-pythonic" class="headerlink" title="2.2. Numerical data (pythonic)"></a>2.2. Numerical data (<code>pythonic</code>)</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os, csv</span><br><span class="line"></span><br><span class="line"><span class="comment"># prepare test data to write to a csv file</span></span><br><span class="line">data1 = range(<span class="number">10</span>)</span><br><span class="line">data2 = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> data1]</span><br><span class="line">data3 = [pow(x, <span class="number">3</span>) <span class="keyword">for</span> x <span class="keyword">in</span> data1]</span><br><span class="line"><span class="keyword">print</span> data3</span><br><span class="line"></span><br><span class="line"><span class="comment"># prepare path</span></span><br><span class="line">root = <span class="string">r"C:\Tmp"</span></span><br><span class="line">filename = <span class="string">r"saveexample2.csv"</span></span><br><span class="line">fullpath = os.path.join(root, filename)</span><br><span class="line"><span class="keyword">print</span> fullpath</span><br><span class="line"></span><br><span class="line"><span class="comment"># open the file first (if its not there, newly created)</span></span><br><span class="line">f = open(fullpath, <span class="string">'wb'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create csv writer</span></span><br><span class="line">writer = csv.writer(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for loop to write each row</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(data1)):</span><br><span class="line">    row = [data1[i], data2[i], data3[i]]</span><br><span class="line">    writer.writerow(row)</span><br><span class="line"></span><br><span class="line"><span class="comment">#writer.writerows([data1, data2, data3])</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># close the file. </span></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과<br><img src="1_csvio_4.PNG" alt=" "><br><br></li>
 </ul>
-<h4 id="1-2-3-java-활용"><a href="#1-2-3-java-활용" class="headerlink" title="1.2.3. java 활용"></a>1.2.3. <code>java</code> 활용</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> util.opencsv <span class="keyword">import</span> CSVWriter</span><br><span class="line"><span class="keyword">from</span> java.io <span class="keyword">import</span> FileWriter</span><br><span class="line"><span class="keyword">from</span> java.lang.reflect <span class="keyword">import</span> Array</span><br><span class="line"><span class="keyword">from</span> java.lang <span class="keyword">import</span> String, Class</span><br><span class="line"></span><br><span class="line">writer = CSVWriter(FileWriter(<span class="string">r'C:\Tmp\saveexample3.csv'</span>), <span class="string">','</span>)</span><br><span class="line">data = Array.newInstance(Class.forName(<span class="string">"java.lang.String"</span>), <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">data[<span class="number">0</span>] = str(<span class="number">11</span>)</span><br><span class="line">data[<span class="number">1</span>] = str(<span class="number">23</span>)</span><br><span class="line">data[<span class="number">2</span>] = str(<span class="number">5555</span>)</span><br><span class="line">writer.writeNext(data)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-java-활용"><a href="#2-3-java-활용" class="headerlink" title="2.3. java 활용"></a>2.3. <code>java</code> 활용</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> util.opencsv <span class="keyword">import</span> CSVWriter</span><br><span class="line"><span class="keyword">from</span> java.io <span class="keyword">import</span> FileWriter</span><br><span class="line"><span class="keyword">from</span> java.lang.reflect <span class="keyword">import</span> Array</span><br><span class="line"><span class="keyword">from</span> java.lang <span class="keyword">import</span> String, Class</span><br><span class="line"></span><br><span class="line">writer = CSVWriter(FileWriter(<span class="string">r'C:\Tmp\saveexample3.csv'</span>), <span class="string">','</span>)</span><br><span class="line">data = Array.newInstance(Class.forName(<span class="string">"java.lang.String"</span>), <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">data[<span class="number">0</span>] = str(<span class="number">11</span>)</span><br><span class="line">data[<span class="number">1</span>] = str(<span class="number">23</span>)</span><br><span class="line">data[<span class="number">2</span>] = str(<span class="number">5555</span>)</span><br><span class="line">writer.writeNext(data)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과<br><img src="1_csvio_5.PNG" alt=" "><br><br></li>
 </ul>
-<h4 id="1-2-4-java의-jarray-module-활용"><a href="#1-2-4-java의-jarray-module-활용" class="headerlink" title="1.2.4. java의 jarray module 활용"></a>1.2.4. <code>java</code>의 <code>jarray</code> module 활용</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> util.opencsv <span class="keyword">import</span> CSVWriter</span><br><span class="line"><span class="keyword">from</span> java.io <span class="keyword">import</span> FileWriter</span><br><span class="line"><span class="keyword">from</span> java.lang <span class="keyword">import</span> String</span><br><span class="line"><span class="keyword">from</span> jarray <span class="keyword">import</span> array <span class="keyword">as</span> jarr</span><br><span class="line"></span><br><span class="line">writer = CSVWriter(FileWriter(<span class="string">r'C:\Tmp\saveexample4.csv'</span>), <span class="string">','</span>)</span><br><span class="line">header = [<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>]</span><br><span class="line">jheader = jarr(header, String)</span><br><span class="line">data = [<span class="number">11</span>,<span class="number">23</span>,<span class="number">5555</span>]</span><br><span class="line">datas = map(str, data)</span><br><span class="line">jdata = jarr(datas, String)</span><br><span class="line">writer.writeNext(jheader)</span><br><span class="line">writer.writeNext(jdata)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-java의-jarray-module-활용"><a href="#2-4-java의-jarray-module-활용" class="headerlink" title="2.4. java의 jarray module 활용"></a>2.4. <code>java</code>의 <code>jarray</code> module 활용</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> util.opencsv <span class="keyword">import</span> CSVWriter</span><br><span class="line"><span class="keyword">from</span> java.io <span class="keyword">import</span> FileWriter</span><br><span class="line"><span class="keyword">from</span> java.lang <span class="keyword">import</span> String</span><br><span class="line"><span class="keyword">from</span> jarray <span class="keyword">import</span> array <span class="keyword">as</span> jarr</span><br><span class="line"></span><br><span class="line">writer = CSVWriter(FileWriter(<span class="string">r'C:\Tmp\saveexample4.csv'</span>), <span class="string">','</span>)</span><br><span class="line">header = [<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>]</span><br><span class="line">jheader = jarr(header, String)</span><br><span class="line">data = [<span class="number">11</span>,<span class="number">23</span>,<span class="number">5555</span>]</span><br><span class="line">datas = map(str, data)</span><br><span class="line">jdata = jarr(datas, String)</span><br><span class="line">writer.writeNext(jheader)</span><br><span class="line">writer.writeNext(jdata)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과<br><img src="1_csvio_6.PNG" alt=" "><br><br></li>
 </ul>
@@ -253,7 +253,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/01/11/ImageJ-cookbook-1-CSVIO/" data-id="ck9143y0y000524uj6reuc2ug" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/01/11/ImageJ-cookbook-1-CSVIO/" data-id="ck985k6i100031gujc4d2dg19" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -329,19 +329,19 @@ ga('send', 'pageview');
         "genre": "ImageJ Cookbook",
         "datePublished": "2020-01-11",
         "dateCreated": "2020-01-11",
-        "dateModified": "2020-01-12",
+        "dateModified": "2020-04-20",
         "url": "https://jehyunlee.github.io/2020/01/11/ImageJ-cookbook-1-CSVIO/",
         "description": "Reference
 
 ImageJ + Python Cookbook
 
-1.1. Loading CSV File
+1. Loading CSV File
 csv 파일을 읽는 예제입니다.
 
 예제 파일은 여기에서 다운받을 수 있습니다.
 
 
-1.1.1. CSV 파일 읽어서 결과 보여주기  1234567import csvfilepath = r'C:\Tmp\loadexample.csv'f = open(filepa",
+1.1. CSV 파일 읽어서 결과 보여주기  1234567import csvfilepath = r'C:\Tmp\loadexample.csv'f = open(filepath, ",
         "wordCount": 648
     }
 </script>
@@ -411,6 +411,26 @@ csv 파일을 읽는 예제입니다.
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/ImageJ-Cookbook/3_cth_2.jpg)" alt="3. Threshold on channels" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></p>
+                            <p class="item-title"><a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="title">3. Threshold on channels</a></p>
+                            <p class="item-date"><time datetime="2020-04-19T22:20:00.000Z" itemprop="datePublished">2020-04-20</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -492,26 +512,6 @@ csv 파일을 읽는 예제입니다.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/8_foc_1.png)" alt="Fast.ai의 $fit\_one\_cycle$ 방법론 이해" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/" class="title">Fast.ai의 $fit\_one\_cycle$ 방법론 이해</a></p>
-                            <p class="item-date"><time datetime="2020-03-27T17:24:00.000Z" itemprop="datePublished">2020-03-28</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -521,7 +521,7 @@ csv 파일을 읽는 예제입니다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">4</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">4</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -631,5 +631,21 @@ csv 파일을 읽는 예제입니다.
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
