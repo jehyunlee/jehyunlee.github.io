@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Data Cleansing Functions | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="데이터 분석에 앞서 잘못된 부분을 찾아내고 이를 메꾸는 작업을 데이터 정리(data cleansing)이라고 합니다. 데이터를 받으면 데이터 타입(type), 크기(length) 등이 잘못된 경우도 있고, 개별 데이터는 정상적이지만 이것들을 합쳤더니(merge) 결측치가 양산되거나 중복되는 경우도 있습니다. 분석이나 예측모델 생성시 문제의 원인이 되기 때">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Cleansing Functions">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="데이터 분석에 앞서 잘못된 부분을 찾아내고 이를 메꾸는 작업을 데이터 정리(data cleansing)이라고 합니다. 데이터를 받으면 데이터 타입(type), 크기(length) 등이 잘못된 경우도 있고, 개별 데이터는 정상적이지만 이것들을 합쳤더니(merge) 결측치가 양산되거나 중복되는 경우도 있습니다. 분석이나 예측모델 생성시 문제의 원인이 되기 때">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/11_dcf_1.jpg">
+<meta property="article:published_time" content="2020-04-23T21:59:00.000Z">
+<meta property="article:modified_time" content="2020-04-24T04:32:48.155Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/11_dcf_1.jpg">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/04/24/python-ds-11-data_cln_fn/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-11-data_cln_fn" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Data Cleansing Functions
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/04/24/Python-DS-11-data_cln_fn/" class="article-date">
+         <time datetime="2020-04-23T21:59:00.000Z" itemprop="datePublished">2020-04-24</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>데이터 분석에 앞서 잘못된 부분을 찾아내고 이를 메꾸는 작업을 데이터 정리(data cleansing)이라고 합니다.</li>
+<li>데이터를 받으면 데이터 타입(type), 크기(length) 등이 잘못된 경우도 있고, 개별 데이터는 정상적이지만 이것들을 합쳤더니(merge) 결측치가 양산되거나 중복되는 경우도 있습니다.</li>
+<li>분석이나 예측모델 생성시 문제의 원인이 되기 때문에 처음에 정리를 할 필요가 있습니다.</li>
+</ul>
+<p><b>References</b></p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Data_cleansing" target="_blank" rel="noopener">wikipedia: Data cleansing</a></p>
+</blockquote>
+<ul>
+<li>데이터 정리엔 다음 과정들이 포함됩니다.</li>
+</ul>
+<ol>
+<li>데이터 <b>타입</b> 확인 및 처리: <code>chk_type()</code></li>
+<li><b>결측치</b> 확인 및 처리: <code>show()</code>, <code>chk_nan()</code></li>
+<li><b>중복치</b> 확인 및 처리: <code>pandas.DataFrame(, Series, Index).duplicated([{key_column}]).sum()</code></li>
+<li><b>병합데이터 일치</b> 확인 및 처리: <code>cmp_dfs()</code></li>
+</ol>
+<ul>
+<li>단일 column(list, array, pandas.Series 등)은 비교적 문제가 간단하지만, column간, dataframe간에 문제가 생기면 신경이 곤두섭니다. </li>
+<li>데이터 정리에 사용할 수 있는 함수를 몇 개 소개합니다.</li>
+</ul>
+<h2 id="1-데이터-타입-확인"><a href="#1-데이터-타입-확인" class="headerlink" title="1. 데이터 타입 확인"></a>1. 데이터 타입 확인</h2><ul>
+<li>함수에 데이터를 넣을 때, 특정 타입만을 받아들여야 할 때가 있습니다.</li>
+<li><p>타입이 잘못되면 어디선가 에러가 나지만, 깊은 곳에서 에러가 나면 원인을 찾기 힘드니 데이터를 받자마자 타입을 점검하는 것이 효과적입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 변수(var)가 예상한 타입(typename)이면 True, 아니면 False 출력</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chk_type</span><span class="params">(var, typename)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    check type of variable</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    var : variable</span></span><br><span class="line"><span class="string">    typename : (str)type name </span></span><br><span class="line"><span class="string">               'array' is regarded as 'list' as well.    </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    typename_tol = <span class="string">'nullnullnull'</span>   <span class="comment"># dummy letters</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 'list' and 'array' are regarded as same type</span></span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">'list'</span>: typename_tol = <span class="string">'array'</span></span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">'array'</span>: typename_tol = <span class="string">'list'</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> typename <span class="keyword">in</span> str(type(var)) <span class="keyword">or</span> typename_tol <span class="keyword">in</span> str(type(var)):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>예시</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>) <span class="comment"># type: numpy.ndarray </span></span><br><span class="line"></span><br><span class="line">chk_type(x, <span class="string">'array'</span>)  <span class="comment"># type test 통과</span></span><br></pre></td></tr></table></figure>
+<p><img src="11_dcf_1.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li>예상 타입과 실제가 다를 경우<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chk_type(x, <span class="string">'float'</span>)  <span class="comment"># type test 실패</span></span><br></pre></td></tr></table></figure>
+<img src="11_dcf_2.png" alt=""></li>
+</ul>
+<h2 id="2-결측치-확인"><a href="#2-결측치-확인" class="headerlink" title="2. 결측치 확인"></a>2. 결측치 확인</h2><blockquote>
+<p><a href="https://github.com/ResidentMario/missingno" target="_blank" rel="noopener">github: missingno</a></p>
+</blockquote>
+<ul>
+<li>결측치 관련하여 <a href="https://github.com/ResidentMario/missingno" target="_blank" rel="noopener">missingno</a>라는 좋은 라이브러리가 있습니다.</li>
+<li>여기에 대한 글은 많으니 본 글에서는 다루지 않겠습니다.</li>
+</ul>
+<h3 id="2-1-numpy-array"><a href="#2-1-numpy-array" class="headerlink" title="2.1. numpy array"></a>2.1. numpy array</h3><ul>
+<li>결측치가 있는 numpy data를 만들고, 여기서 결측치의 갯수와 위치를 확인해 봅시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>, dtype=<span class="string">'float'</span>)    <span class="comment"># 예제 데이터 만들기</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):   <span class="comment"># 예제 데이터에 랜덤으로 결측치 3개 심기</span></span><br><span class="line">    idx = randint(<span class="number">0</span>, <span class="number">9</span>)</span><br><span class="line">    x[idx] = np.nan</span><br><span class="line"></span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_3.png" alt=""></li>
+</ul>
+<ul>
+<li>결측치 index 확인<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idxnan = np.where(np.isnan(x))[<span class="number">0</span>]</span><br><span class="line">print(idxnan)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_4.png" alt=""></li>
+</ul>
+<ul>
+<li>결측치를 제외한 데이터 추출<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x1 = np.delete(x, idxnan)</span><br><span class="line">print(x1)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_5.png" alt=""></li>
+</ul>
+<h3 id="2-2-pandas-DataFrame"><a href="#2-2-pandas-DataFrame" class="headerlink" title="2.2. pandas DataFrame"></a>2.2. pandas DataFrame</h3><ul>
+<li>jupyter notebook에서 cell의 마지막 줄에 dataframe 이름만 입력하면 예쁜 table이 나오지만, cell 중간에 dataframe의 내용을 알아보기 위해 <code>print(df)</code>를 하면 숫자들의 나열로만 나와 알아보기 힘듭니다. </li>
+<li>cell 중간에 dataframe을 출력해도 예쁘게 나올 함수를 간단하게 만들 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> HTML</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(df)</span>:</span></span><br><span class="line">    display(HTML(df.to_html()))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>10행 x 3열 DataFrame을 만들어서 테스트합시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dim = <span class="number">10</span></span><br><span class="line">x = np.arange(dim, dtype=<span class="string">'float'</span>)</span><br><span class="line">y = np.arange(dim, dtype=<span class="string">'float'</span>)</span><br><span class="line">c = np.arange(dim, dtype=<span class="string">'float'</span>)</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">'X'</span>:x, <span class="string">'Y'</span>:y, <span class="string">'C'</span>:c&#125;)</span><br><span class="line">show(df)</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_6.png" alt=""></li>
+</ul>
+<ul>
+<li>일부 데이터를 랜덤하게 결측치로 만듭니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):  <span class="comment"># 컬럼별로 최대 3개를 결측시키겠습니다.</span></span><br><span class="line">        idx = randint(<span class="number">0</span>, dim<span class="number">-1</span>)</span><br><span class="line">        df.loc[idx, col] = np.nan</span><br><span class="line"></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_7.png" alt=""></li>
+</ul>
+<ul>
+<li><code>.plot</code> 명령으로 데이터를 출력하면 결측치를 제외하고 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(<span class="string">'X'</span>, <span class="string">'Y'</span>, kind=<span class="string">'scatter'</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_8.png" alt=""></li>
+</ul>
+<ul>
+<li><code>c=&#39;C&#39;, cmap=&#39;jet&#39;</code>를 추가해서 colormap까지 입혀보겠습니다.</li>
+<li>색상 결측치까지 반영되어 데이터가 사라집니다: (7, 7) 지점이 사라졌습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(<span class="string">'X'</span>, <span class="string">'Y'</span>, c=<span class="string">'C'</span>, kind=<span class="string">'scatter'</span>, cmap=<span class="string">'jet'</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_9.png" alt=""></li>
+</ul>
+<h3 id="2-3-결측치-합집합-제거"><a href="#2-3-결측치-합집합-제거" class="headerlink" title="2.3. 결측치 합집합 제거"></a>2.3. 결측치 합집합 제거</h3><ul>
+<li>에러의 소지가 되는 결측치를 자동으로 제거해 주어서 좋지만, 데이터 손실량을 알 수 없습니다.</li>
+<li>앞서 사용한 <code>np.where()</code>와 <code>np.delete()</code>를 이용해서 결측치 위치를 확인하고 삭제할 수 있지만, 방심하면 엉뚱한 데이터끼리 붙어버립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delnan</span><span class="params">(arr)</span>:</span></span><br><span class="line">    idxnan = np.where(np.isnan(arr))[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> np.delete(arr, idxnan)</span><br><span class="line"></span><br><span class="line">x1 = delnan(df[<span class="string">'X'</span>].tolist())</span><br><span class="line">y1 = delnan(df[<span class="string">'Y'</span>].tolist())</span><br><span class="line">c1 = delnan(df[<span class="string">'C'</span>].tolist())</span><br><span class="line"></span><br><span class="line">plt.scatter(x1, y1, c=c1, cmap=<span class="string">'jet'</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<img src="11_dcf_10.png" alt=""></li>
+</ul>
+<ul>
+<li>보시다시피 네 개 밖에 없어야 할 점이 7개나 있고, y=x에서도 벗어납니다.</li>
+<li>이럴 때는 독립된 결측치를 먼저 합집합으로 만든 후에 x, y, c에서 모두 삭제해야 합니다.</li>
+<li>이 과정을 하나의 함수로 실행해 보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chk_nan</span><span class="params">(*args)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    returns null-free dataset.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    *args : array-like data (list, numpy.ndarray, pd.Series)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    data_names = []</span><br><span class="line">    data = []</span><br><span class="line">    data_nanidx = []</span><br><span class="line">    data_new = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, arg <span class="keyword">in</span> enumerate(args):</span><br><span class="line">        <span class="comment"># data should be array-like</span></span><br><span class="line">        <span class="keyword">assert</span> chk_type(arg, <span class="string">'list'</span>) <span class="keyword">or</span> chk_type(arg, <span class="string">'array'</span>) <span class="keyword">or</span> chk_type(arg, <span class="string">'series'</span>), <span class="string">"Only array-like data is acceptable"</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># data names</span></span><br><span class="line">        <span class="keyword">if</span> chk_type(arg, <span class="string">'series'</span>):</span><br><span class="line">            data_names.append(arg.name)</span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            data_names.append(<span class="string">f'data_<span class="subst">&#123;i&#125;</span>'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># data</span></span><br><span class="line">        data.append(np.array(arg))</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># null values</span></span><br><span class="line">        data_nanidx.append(np.where(np.isnan(arg))[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> len(data_nanidx[i]) &gt; <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">f'# WARNING <span class="subst">&#123;data_names[i]&#125;</span>: Number of null values=<span class="subst">&#123;len(data_nanidx[i])&#125;</span> of <span class="subst">&#123;len(data[i])&#125;</span>.'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># union indices of null values </span></span><br><span class="line">    data_nanidx_all = reduce(<span class="keyword">lambda</span> a, b: list(set(a) | set(b)), data_nanidx)</span><br><span class="line">    print(<span class="string">f'# Total number of missing data: <span class="subst">&#123;len(data_nanidx_all)&#125;</span>'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, datum <span class="keyword">in</span> enumerate(data):</span><br><span class="line">        data_new.append(np.delete(data[i], data_nanidx_all))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> data_new</span><br></pre></td></tr></table></figure></li>
+<li><code>assert</code>를 사용해서 <code>&#39;list&#39;, &#39;array&#39;, &#39;series&#39;</code>에만 적용되도록 했습니다.</li>
+<li>합집합을 구하는 <code>set(A) | set(B)</code> 명령을 사용했으며,</li>
+<li><code>*args</code>와 <code>reduce</code>를 이용해서 입력받는 인자의 갯수에 무관하게 동작합니다.</li>
+</ul>
+<ul>
+<li><p>아까 만들었던, 결측치가 있는 <code>numpy.ndarray</code>에 적용해 보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x2, y2, c2 = chk_nan(x, y, c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># pandas Series도 입력 가능합니다.</span></span><br><span class="line"><span class="comment"># x2, y2, c2 = chk_nan(df['X'], df['Y'], df['C']) </span></span><br><span class="line"></span><br><span class="line">plt.scatter(x2, y2, c=c2, cmap=<span class="string">'jet'</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="11_dcf_11.png" alt=""></p>
+</li>
+<li><p>각 항의 결측치 갯수와 함께 전체적으로 몇 개의 데이터가 빠졌는지 알려줍니다.</p>
+</li>
+<li>plot도 정상적으로 출력됩니다.<ul>
+<li>matplotlib은 자체적으로 결측치를 정상적으로 제거하고 plot을 수행합니다.</li>
+<li><code>chk_nan()</code>은 plot보다 다른 작업시 결측치를 오류 없이 처리할 때 유용합니다.<br>일례로 <code>seaborn</code>의 <code>distplot()</code>은 결측치가 있으면 동작하지 않습니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-데이터-중복치-확인"><a href="#3-데이터-중복치-확인" class="headerlink" title="3. 데이터 중복치 확인"></a>3. 데이터 중복치 확인</h2><blockquote>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html" target="_blank" rel="noopener">pandas.DataFrame.duplicated</a><br><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.duplicated.html?highlight=duplicated#pandas.Series.duplicated" target="_blank" rel="noopener">pandas.Seires.duplicated</a><br><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Index.duplicated.html?highlight=duplicated#pandas.Index.duplicated" target="_blank" rel="noopener">pandas.Index.duplicated</a></p>
+</blockquote>
+<ul>
+<li>pandas는 중복값을 확인할 수 있는 <code>.duplicated()</code> 제거하는 <code>.drop_duplicates()</code>를 제공합니다.</li>
+<li>이와 관련된 설명은 웹에 많이 있으니 두 가지만 전달드리려 합니다.</li>
+</ul>
+<p><b>1. 중복치 확인은 key 값을 넣고 하자 :</b> </p>
+<ul>
+<li><code>df.duplicated()</code>의 기본값은 행 전체를 비교하므로 일부만 중복되면 다른 데이터로 간주합니다.<br>보통 데이터는 기준이 되는 key 값이 있으므로 <code>.duplicated([{key_column}])</code>를 수행하는 것이 좋습니다.</li>
+<li><b>중복치 갯수</b>는 뒤에 <code>.sum()</code>을 붙이면 간단합니다.<br>중복 여부를 True(1)/False(0)로 표기한 Series를 출력하기 때문입니다.</li>
+<li>중복치를 제거하기 전에 <b>중복 데이터를 뽑아서 육안으로 검사</b>를 하는 것이 좋습니다.<br><b>중복 자체가 뭔가 많이 잘못된 겁니다.</b> 경험상 결측보다 중복이 있을 때 고생스런 일이 더 많았습니다.<br></li>
+</ul>
+<p><b>2. <code>.drop_duplicates()</code>는 기본적으로 첫 데이터를 남긴다 :</b> </p>
+<ul>
+<li>데이터의 중복을 확인한 후에는 어떤 것을 지울지 선택해야 합니다.</li>
+<li>중복치를 제거하는 명령으로 <code>drop_duplicates()</code>를 사용하는데, <code>keep=&#39;first&#39;</code>가 기본 옵션입니다.</li>
+<li>여러 중복 데이터 중 첫 데이터만을 남기고 삭제하기 때문에 옳지 못한 선택일 수 있습니다.</li>
+<li><b>중복 데이터의 feature를 종합적으로 살펴본 후 선택해야 합니다.</b> 때로는 수동 삭제가 필요합니다.</li>
+</ul>
+<ul>
+<li>아래는 제가 실제로 겪은 중복 데이터 사례입니다.</li>
+<li>철거된 건물(붉은 실선)이 신축 건물(녹색 다각형)과 겹쳐 있습니다.<br><br><img src="11_dcf_12.png" alt=""></li>
+</ul>
+<h2 id="4-병합데이터-일치-여부-확인"><a href="#4-병합데이터-일치-여부-확인" class="headerlink" title="4. 병합데이터 일치 여부 확인"></a>4. 병합데이터 일치 여부 확인</h2><p><img src="11_dcf_13.png" alt=""></p>
+<ul>
+<li>두 dataframe A와 B을 합칠 때 집합의 포함관계를 살펴야 합니다.</li>
+<li>key feature 기준 <script type="math/tex">A=B</script>라면 가장 좋겠으나, <script type="math/tex">A - B \ne \emptyset</script> 이면 B에 결측치가 생기기 때문입니다.</li>
+<li><p><script type="math/tex">A-B, B-A, A \cap B, A \cup B</script>는 다음 함수로 한번에 확인 가능합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmp_dfs</span><span class="params">(df1, df2, key1, key2=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    check type of variable</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    df1, df2   : (pandas.DataFrame)</span></span><br><span class="line"><span class="string">    key1, key2 : (str) key column name of df1 and df2, respectively.</span></span><br><span class="line"><span class="string">                 if key2 == None: key2 = key1</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> key2 == <span class="literal">None</span>: key2 = key1</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">assert</span> key1 <span class="keyword">in</span> df1.columns</span><br><span class="line">    <span class="keyword">assert</span> key2 <span class="keyword">in</span> df2.columns</span><br><span class="line">    </span><br><span class="line">    dfkey1 = df1[key1].tolist()</span><br><span class="line">    dfkey2 = df2[key2].tolist()</span><br><span class="line"></span><br><span class="line">    df1_2 = list(set(dfkey1) - set(dfkey2))</span><br><span class="line">    df2_1 = list(set(dfkey2) - set(dfkey1))</span><br><span class="line">    df1n2 = list(set(dfkey1) &amp; set(dfkey2))</span><br><span class="line">    df1u2 = list(set(dfkey1) | set(dfkey2))</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">f'# No. of df1= <span class="subst">&#123;df1.shape[<span class="number">0</span>]&#125;</span>, df2= <span class="subst">&#123;df2.shape[<span class="number">0</span>]&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'- No. of [df1 - df2] = <span class="subst">&#123;len(df1_2)&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'- No. of [df2 - df1] = <span class="subst">&#123;len(df2_1)&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'- No. of [df1 &amp; df2] = <span class="subst">&#123;len(df1n2)&#125;</span>'</span>)</span><br><span class="line">    print(<span class="string">f'- No. of [df1 | df2] = <span class="subst">&#123;len(df1u2)&#125;</span>'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df1_2, df2_1, df1n2, df1u2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>예제 DataFrame을 두 개 만들어서 비교해 보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;<span class="string">'A'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">'B'</span>:[<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>]&#125;)</span><br><span class="line">df2 = pd.DataFrame(&#123;<span class="string">'A'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>], <span class="string">'D'</span>:[<span class="number">11</span>,<span class="number">12</span>,<span class="number">14</span>]&#125;)</span><br><span class="line"></span><br><span class="line">cmp_dfs(df1, df2, <span class="string">'A'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="11_dcf_14.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li>차례대로 출력되는 <script type="math/tex">A-B, B-A, A \cap B, A \cup B</script> 를 변수로 저장해 활용할 수 있습니다.</li>
+</ul>
+<ul>
+<li><code>cmp_dfs()</code>함수는 key feature만 비교하므로, 좀 더 자세히 볼 여지가 있습니다.<ul>
+<li>차집합을 <b>버릴 것인지(<code>inner join</code>)</b>, 결측치를 만들며 <b>포함할 것인지(<code>outer join</code>)</b>.</li>
+<li>교집합은 <b>key feature 외 다른 값들은 어떤지</b>. 데이터의 <b>수</b>, <b>타입</b>,<b>내용</b>을 모두 확인합니다.</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/" data-id="ck9dp95wi000kqwuj1qgj8k38" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Data Cleansing Functions",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/11_dcf_1.jpg",
+        "keywords": "",
+        "genre": "Python Data Science",
+        "datePublished": "2020-04-24",
+        "dateCreated": "2020-04-24",
+        "dateModified": "2020-04-24",
+        "url": "https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/",
+        "description": "
+데이터 분석에 앞서 잘못된 부분을 찾아내고 이를 메꾸는 작업을 데이터 정리(data cleansing)이라고 합니다.
+데이터를 받으면 데이터 타입(type), 크기(length) 등이 잘못된 경우도 있고, 개별 데이터는 정상적이지만 이것들을 합쳤더니(merge) 결측치가 양산되거나 중복되는 경우도 있습니다.
+분석이나 예측모델 생성시 문제의 원인이 되기 때",
+        "wordCount": 2114
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/04/21/Python-DS-10-matplotlib_Tools/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Matplotlib-Tools</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/24/Python-DS-11-data_cln_fn/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/11_dcf_1.jpg)" alt="Data Cleansing Functions" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/04/24/Python-DS-11-data_cln_fn/" class="title">Data Cleansing Functions</a></p>
+                            <p class="item-date"><time datetime="2020-04-23T21:59:00.000Z" itemprop="datePublished">2020-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/21/Python-DS-10-matplotlib_Tools/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/10_mpl_tools.png)" alt="Matplotlib-Tools" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/04/21/Python-DS-10-matplotlib_Tools/" class="title">Matplotlib-Tools</a></p>
+                            <p class="item-date"><time datetime="2020-04-21T02:03:00.000Z" itemprop="datePublished">2020-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/ImageJ-Cookbook/3_cth_2.jpg)" alt="3. Threshold on channels" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></p>
+                            <p class="item-title"><a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="title">3. Threshold on channels</a></p>
+                            <p class="item-date"><time datetime="2020-04-19T22:20:00.000Z" itemprop="datePublished">2020-04-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/15/GIS-Python-1-GoogleMapNaverMap/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-Python/1_gnmap_1.PNG)" alt="Google Map, Naver Map URL 만들기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/Python/">Python</a></p>
+                            <p class="item-title"><a href="/2020/04/15/GIS-Python-1-GoogleMapNaverMap/" class="title">Google Map, Naver Map URL 만들기</a></p>
+                            <p class="item-date"><time datetime="2020-04-15T08:11:00.000Z" itemprop="datePublished">2020-04-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-QGIS/1_rza_0.PNG)" alt="Raster Data Sampling on Polygons" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/QGIS/">QGIS</a></p>
+                            <p class="item-title"><a href="/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" class="title">Raster Data Sampling on Polygons</a></p>
+                            <p class="item-date"><time datetime="2020-04-09T01:43:00.000Z" itemprop="datePublished">2020-04-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
