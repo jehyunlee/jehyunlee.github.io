@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>X-Window on Docker on WSL 2 | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="References  Microsoft: WSL 2와 WSL 1 비교Microsoft: Windows 10에 Linux용 Windows 하위 시스템 설치 가이드docker blog: Docker Desktop: WSL 2 Best practicesubuntu Discourse: Getting graphical applications to work on W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="X-Window on Docker on WSL 2">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/06/09/Python-General-5-wdvx/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="References  Microsoft: WSL 2와 WSL 1 비교Microsoft: Windows 10에 Linux용 Windows 하위 시스템 설치 가이드docker blog: Docker Desktop: WSL 2 Best practicesubuntu Discourse: Getting graphical applications to work on W">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/5_wdvx_01.png">
+<meta property="article:published_time" content="2020-06-09T10:22:00.000Z">
+<meta property="article:modified_time" content="2020-06-09T11:54:19.922Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/5_wdvx_01.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/06/09/python-general-5-wdvx/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/General/">General</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-General-5-wdvx" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        X-Window on Docker on WSL 2
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/06/09/Python-General-5-wdvx/" class="article-date">
+         <time datetime="2020-06-09T10:22:00.000Z" itemprop="datePublished">2020-06-09</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="5_wdvx_01.png" alt="MS에 이런 날이 올줄이야"></p>
+<p><b>References</b></p>
+<blockquote>
+<p><a href="https://docs.microsoft.com/ko-kr/windows/wsl/compare-versions" target="_blank" rel="noopener">Microsoft: WSL 2와 WSL 1 비교</a><br><a href="https://docs.microsoft.com/ko-kr/windows/wsl/install-win10" target="_blank" rel="noopener">Microsoft: Windows 10에 Linux용 Windows 하위 시스템 설치 가이드</a><br><a href="https://www.docker.com/blog/docker-desktop-wsl-2-best-practices/" target="_blank" rel="noopener">docker blog: Docker Desktop: WSL 2 Best practices</a><br><a href="https://discourse.ubuntu.com/t/getting-graphical-applications-to-work-on-wsl2/11868" target="_blank" rel="noopener">ubuntu Discourse: Getting graphical applications to work on WSL2</a><br><a href="https://code.visualstudio.com/docs/remote/wsl" target="_blank" rel="noopener">Visual Studio Code: Developing in WSL</a><br><a href="https://driz2le.tistory.com/257" target="_blank" rel="noopener">홀로 떠나는 여행: docker와 GUI 환경 연결</a></p>
+</blockquote>
+<ul>
+<li>Microsoft에서 출시한 <a href="https://docs.microsoft.com/ko-kr/windows/wsl/install-win10" target="_blank" rel="noopener">WSL 2</a>와 <a href="https://www.docker.com/blog/docker-desktop-wsl-2-best-practices/" target="_blank" rel="noopener">docker</a>의 궁합이 매우 좋습니다.</li>
+<li>특히 <a href="https://www.docker.com/blog/docker-desktop-wsl-2-best-practices/" target="_blank" rel="noopener">WSL 2에 Docker를 설치</a>하면 wsl의 단점을 메워줍니다.</li>
+<li>여기에 VSCode를 끼얹어주면 개발 환경이 상당히 편리해집니다.</li>
+</ul>
+<h3 id="1-WSL-Docker-VSCode"><a href="#1-WSL-Docker-VSCode" class="headerlink" title="1. WSL + Docker + VSCode"></a>1. WSL + Docker + VSCode</h3><ul>
+<li>제가 피부로 느끼는 WSL + Docker + VSCode 시스템의 장점은 다음과 같습니다.<br><br><b>1. docker를 따로 실행할 필요가 없습니다 :</b> vscode가 컨테이너를 불러줍니다.<br><br><b>2. WSL과의 파일 공유가 편해집니다 :</b> docker의 volume share가 좋습니다.<br><br><b>3. 그냥 windows를 쓰는 느낌입니다 :</b> 라이브러리 설치 등을 제외하고는 윈도 환경이 됩니다.<br></li>
+</ul>
+<p><img src="5_wdvx_03.png" alt="좌 VSCode 우 Jupyter Lab. 제 환경입니다."><br></p>
+<ul>
+<li>심지어 <code>docker ps</code> 등의 명령도 윈도 파워셸에서 실행할 정도로 자연스럽습니다.<br><br><img src="5_wdvx_02.png" alt=""><br></li>
+<li>그러나 모든 환경이 windows 자체를 쓰는 느낌이라 외려 container에서 X-Window를 띄우려면 어떻게 할지 조금 난감합니다.</li>
+<li><p>아무 설정을 하지 않으면 아래 메시지 이후 에러가 나고 실행이 되지 않습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QStandardPaths: XDG_RUNTIME_DIR not <span class="built_in">set</span>, defaulting to <span class="string">'/tmp/runtime-root'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WSL에 설치된 docker에서 X-Window를 띄우려면 약간의 수고가 필요합니다.</p>
+</li>
+</ul>
+<h3 id="2-X-Window-on-Docker-on-WSL-2"><a href="#2-X-Window-on-Docker-on-WSL-2" class="headerlink" title="2. X-Window on Docker on WSL 2"></a>2. X-Window on Docker on WSL 2</h3><ul>
+<li>다음과 같은 순서로 진행합니다.<br></li>
+</ul>
+<p><b>1. (Windows) Xserver 설치 :</b> <a href="https://sourceforge.net/projects/vcxsrv/" target="_blank" rel="noopener">VcXsrv</a> 등을 설치하고 실행합니다.<br></p>
+<ul>
+<li>XLaunch의 Extra settings에 나오는 Disable access control을 체크합니다.</li>
+<li><a href="https://mobaxterm.mobatek.net/download.html" target="_blank" rel="noopener">mobaxterm</a>을 설치하는 것도 방법입니다.<br></li>
+</ul>
+<p><b>2. (WSL) export DISPLAY :</b> Windows Powershell에서 <code>wsl</code>을 실행해 WSL로 들어갑니다.<br></p>
+<ul>
+<li><code>.bashrc</code>에 DISPLAY 설정을 다음과 같이 추가합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk <span class="string">'&#123;print $2&#125;'</span>):0.0</span><br><span class="line"></span><br><span class="line">xhost +<span class="built_in">local</span>:docker  <span class="comment"># docker에서 실행되는 모든 프로그램을 X-Window와 통신하게 해줍니다.</span></span><br><span class="line">                     <span class="comment"># 제 경우는 이 설정은 동작하지 않은 듯 하나 문제가 없었습니다.</span></span><br><span class="line">			   <span class="comment"># 이 명령을 실행하려면 apt-get install x11-apps 를 먼저 실행해야 합니다.</span></span><br></pre></td></tr></table></figure></li>
+<li><code>source ~/.bashrc</code> 명령으로 설정을 적용합니다.<br><img src="5_wdvx_05.png" alt=""><br></li>
+</ul>
+<p><b>3. (WSL) Container 띄우기 :</b> X11과 DISPLAY를 공유하도록 실행합니다.<br></p>
+<ul>
+<li><code>-v /tmp/.X11-unix:/tmp/.X11-unix</code>과 <code>-e DISPLAY=$DISPLAY</code>가 핵심입니다.</li>
+<li><code>-e DISPLAY=$DISPLAY</code>가 안되면 <code>-e DISPLAY=unix$DISPLAY</code>로 해 봅시다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --name=&#123;컨테이너 이름&#125; -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/c/&#123;로컬디렉토리&#125;:/&#123;wsl디렉토리&#125; -e DISPLAY=<span class="variable">$DISPLAY</span> -p 8888:8888 -p 6006:6006 &#123;docker image&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><b>4. (Docker) X-Window 확인 :</b> 컨테이너에 들어가서 X-Window를 띄워봅니다.</p>
+<ul>
+<li>간단한 X-Window 앱을 설치하고 실행해봅시다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install x11-apps</span><br><span class="line">$ xeyes</span><br></pre></td></tr></table></figure>
+<img src="5_wdvx_06.png" alt="컨테이너의 Jupyter Lab Terminal에서 띄워봤습니다."></li>
+</ul>
+<ul>
+<li>그리고 VSCode나 Jupyter 등에서 X-Window를 띄워볼 수 있습니다.</li>
+<li><code>%matplotlib qt</code>로 그래프를 띄운 모습입니다.<br><br><img src="5_wdvx_07.png" alt=""></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/06/09/Python-General-5-wdvx/" data-id="ckb7vakdr001voktgeku6a5kp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "X-Window on Docker on WSL 2",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-General/5_wdvx_01.png",
+        "keywords": "",
+        "genre": "Python General",
+        "datePublished": "2020-06-09",
+        "dateCreated": "2020-06-09",
+        "dateModified": "2020-06-09",
+        "url": "https://jehyunlee.github.io/2020/06/09/Python-General-5-wdvx/",
+        "description": "
+References
+
+Microsoft: WSL 2와 WSL 1 비교Microsoft: Windows 10에 Linux용 Windows 하위 시스템 설치 가이드docker blog: Docker Desktop: WSL 2 Best practicesubuntu Discourse: Getting graphical applications to work on W",
+        "wordCount": 448
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/05/24/Python-DS-15-Bresenham/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Bresenham&#39;s Line Algorithm</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/09/Python-General-5-wdvx/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/5_wdvx_01.png)" alt="X-Window on Docker on WSL 2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/06/09/Python-General-5-wdvx/" class="title">X-Window on Docker on WSL 2</a></p>
+                            <p class="item-date"><time datetime="2020-06-09T10:22:00.000Z" itemprop="datePublished">2020-06-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/05/24/Python-DS-15-Bresenham/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/15_bresenham_0.png)" alt="Bresenham&#39;s Line Algorithm" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/05/24/Python-DS-15-Bresenham/" class="title">Bresenham&#39;s Line Algorithm</a></p>
+                            <p class="item-date"><time datetime="2020-05-24T07:35:00.000Z" itemprop="datePublished">2020-05-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/05/22/Python-DS-14-10_TF_skills/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/14_10TF_0.jpg)" alt="10 TensorFlow Tricks Every ML Practioner Must Know" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/05/22/Python-DS-14-10_TF_skills/" class="title">10 TensorFlow Tricks Every ML Practioner Must Know</a></p>
+                            <p class="item-date"><time datetime="2020-05-22T01:45:00.000Z" itemprop="datePublished">2020-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/05/11/Python-DS-13-stratified_sampling/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/13_strat_0.png)" alt="Stratified Sampling" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/05/11/Python-DS-13-stratified_sampling/" class="title">Stratified Sampling</a></p>
+                            <p class="item-date"><time datetime="2020-05-10T21:24:00.000Z" itemprop="datePublished">2020-05-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/30/Python-DS-12-auto_focus/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/12_af_1.png)" alt="Automated Focusing" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/04/30/Python-DS-12-auto_focus/" class="title">Automated Focusing</a></p>
+                            <p class="item-date"><time datetime="2020-04-29T22:37:00.000Z" itemprop="datePublished">2020-04-30</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/06/09/Python-General-5-wdvx/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
