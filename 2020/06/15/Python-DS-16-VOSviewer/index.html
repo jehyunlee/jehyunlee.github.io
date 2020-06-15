@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Citation Network on Scopus Data | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="Contributor  김승욱님, Bert님  References  VOSviewerScopusWeb of Science  1. Visualizer: VOSviewer 논문 여러편을 읽고 행간을 파악해서 연구의 흐름을 인지하는 일은 쉽지 않습니다. 익숙한 분야가 아니라면 일단 단어조차 낯선데, 뭐가 중요하고 중요하지 않은지 알기 힘든데다 이 연구와 다른 연">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Citation Network on Scopus Data">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/06/15/Python-DS-16-VOSviewer/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="Contributor  김승욱님, Bert님  References  VOSviewerScopusWeb of Science  1. Visualizer: VOSviewer 논문 여러편을 읽고 행간을 파악해서 연구의 흐름을 인지하는 일은 쉽지 않습니다. 익숙한 분야가 아니라면 일단 단어조차 낯선데, 뭐가 중요하고 중요하지 않은지 알기 힘든데다 이 연구와 다른 연">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/16_VOS_0.png">
+<meta property="article:published_time" content="2020-06-15T07:35:00.000Z">
+<meta property="article:modified_time" content="2020-06-15T08:41:26.761Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/16_VOS_0.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/06/15/python-ds-16-vosviewer/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-16-VOSviewer" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Citation Network on Scopus Data
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/06/15/Python-DS-16-VOSviewer/" class="article-date">
+         <time datetime="2020-06-15T07:35:00.000Z" itemprop="datePublished">2020-06-15</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><b>Contributor</b></p>
+<blockquote>
+<p><a href="https://datadoctorblog.com/" target="_blank" rel="noopener">김승욱님</a>, Bert님</p>
+</blockquote>
+<p><b>References</b></p>
+<blockquote>
+<p><a href="https://www.vosviewer.com/" target="_blank" rel="noopener">VOSviewer</a><br><a href="https://www.scopus.com/" target="_blank" rel="noopener">Scopus</a><br><a href="https://www.webofknowledge.com/" target="_blank" rel="noopener">Web of Science</a></p>
+</blockquote>
+<h3 id="1-Visualizer-VOSviewer"><a href="#1-Visualizer-VOSviewer" class="headerlink" title="1. Visualizer: VOSviewer"></a>1. Visualizer: VOSviewer</h3><ul>
+<li>논문 여러편을 읽고 행간을 파악해서 연구의 흐름을 인지하는 일은 쉽지 않습니다.<ul>
+<li>익숙한 분야가 아니라면 일단 <b>단어조차 낯선데</b>,</li>
+<li><b>뭐가 중요하고 중요하지 않은지</b> 알기 힘든데다</li>
+<li>이 연구와 다른 연구가 <b>어떻게 연결돼있는지</b> 알기 어렵죠.</li>
+<li>어설픈 구글링으로 찾아 <b>한참 읽고보니 시간낭비</b>인 경우도 많습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>VOSviewer는 <a href="https://en.wikipedia.org/wiki/Citation_network" target="_blank" rel="noopener">Citation network</a> Visualizer입니다.<ul>
+<li>논문간의 인용관계를 보여줄 뿐 아니라</li>
+<li>논문의 키워드 빈도에 기반해서 어떤 키워드끼리 연결돼있는지 알려줍니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_1.png" alt="아름다움은 덤입니다."><br></p>
+<ul>
+<li><a href="https://www.webofknowledge.com/" target="_blank" rel="noopener">Web of Science</a>, <a href="https://www.scopus.com/" target="_blank" rel="noopener">Scopus</a>를 비롯한 논문 DB포털과 더불어 EndNote, RefWorks, RIS파일과 같은 Reference manager file들을 읽어오기 때문에 논문을 읽으시는 분이라면 별다른 심리적 장벽이 없을 것입니다.<ul>
+<li>VOSviewer 사용법에 대해서는 참고할 거리가 많으니 생략합니다.</li>
+<li><a href="https://www.vosviewer.com/documentation/Manual_VOSviewer_1.6.8.pdf" target="_blank" rel="noopener">공식 매뉴얼</a>이 있고, </li>
+<li><a href="https://seinecle.github.io/vosviewer-tutorials/generated-html/importing-en.html" target="_blank" rel="noopener">Tutorial</a>도 있습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>본 글에선 Scopus에서 citation 정보를 출력해주지 않아 해결한 과정에 집중합니다.</li>
+</ul>
+<h3 id="2-Data-Crowler-Scopus"><a href="#2-Data-Crowler-Scopus" class="headerlink" title="2. Data Crowler: Scopus"></a>2. Data Crowler: Scopus</h3><blockquote>
+<p><a href="https://pybliometrics.readthedocs.io/en/stable/" target="_blank" rel="noopener">pybliometrics: Python-based API-Wrapper to access Scopus</a><br><a href="https://dev.elsevier.com/apikey/manage" target="_blank" rel="noopener">Elsevier Developers</a><br><a href="https://www.elsevier.com/__data/assets/pdf_file/0007/917179/Scopus-User-Community-Germany-API-final.pdf" target="_blank" rel="noopener">What are Scopus APIs and how are these used?</a></p>
+</blockquote>
+<ul>
+<li>Scopus에 키워드를 넣고 년도, 분야를 설정했더니 1만개가 넘는 결과가 나왔습니다.</li>
+</ul>
+<p><img src="16_VOS_3.png" alt="최근 10년간 논문은 11,079개"><br></p>
+<ul>
+<li>이 많은 논문을 일일이 볼 생각은 애초부터 없었습니다.<ul>
+<li>VOSviewer의 힘을 빌려 맥락을 파악합시다.</li>
+<li>VOSviewer 매뉴얼에서는 <b>Download</b>를 하지 말고 <b>CSV export</b>를 하랍니다.</li>
+<li>Scopus에서는 <b>한번에 200개까지만 받으면 초록도 포함해준다</b>고 합니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_2.png" alt="그런데 레퍼런스와 인용정보가 없습니다."><br></p>
+<ul>
+<li>알고보니 인용정보는 맨 우측, <code>EID</code>를 통해 각 논문의 세부 정보에 액세스해야 합니다.<ul>
+<li>Python에서는 Scopus API wrapper인 <a href="https://pybliometrics.readthedocs.io/en/stable/" target="_blank" rel="noopener">pybliometrics</a>사용을 권장한답니다.</li>
+<li>설치는 <code>pip install pybliometrics</code>로 간단히 되는데, 계정을 만들 차례입니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_4.png" alt="API Key를 만듭니다."><br></p>
+<ul>
+<li><a href="https://dev.elsevier.com/apikey/manage" target="_blank" rel="noopener">Elsevier Developers</a>에 가서 <b>Create API Key</b>를 합니다.<ul>
+<li>회사 지식정보실을 통해서 들어갔으므로 Website URL은 회사 홈페이지를 적었습니다.</li>
+<li>Label에는 제 이름을 적었고 (혹 문제가 되면 교체할겁니다)</li>
+<li>생성된 API Key를 모처에 잘 저장해 두었습니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_5.png" alt="논문 1만여편 데이터를 받읍시다."><br>  </p>
+<ul>
+<li>아까의 검색창에서 검색결과 전체를 다운로드 받습니다.<ul>
+<li>준비가 되면 메일로 보내준다고 메일 주소를 적으라고 합니다.</li>
+<li>제 경우는 20분여만에 메일로 링크를 받았습니다.</li>
+<li>그러나 작업별로 제한이 걸려 있습니다. <a href="https://www.elsevier.com/__data/assets/pdf_file/0007/917179/Scopus-User-Community-Germany-API-final.pdf" target="_blank" rel="noopener">공식문서</a>에 따르면 초록 가져오기는 <b>주당 1만건</b>으로 제한된다고 하니 참고합시다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_6.png" alt="자료를 계획적으로 받아야 합니다."><br>  </p>
+<h3 id="3-Linker-Web-of-Science-format"><a href="#3-Linker-Web-of-Science-format" class="headerlink" title="3. Linker: Web of Science format"></a>3. Linker: Web of Science format</h3><blockquote>
+<p><a href="https://images.webofknowledge.com/images/help/WOS/hs_wos_fieldtags.html" target="_blank" rel="noopener">Web of Science Core Collection Field Tags</a></p>
+</blockquote>
+<ul>
+<li>애초의 목적인 <b>Citation Network</b>를 만들려면 파일 형식을 맞춰야 합니다.<ul>
+<li>30여분간의 구글링으로는 Scopus 출력 .csv의 Network 형식을 찾지 못했습니다.</li>
+<li><a href="https://datadoctorblog.com/" target="_blank" rel="noopener">김승욱님</a>의 도움으로 <a href="https://images.webofknowledge.com/images/help/WOS/hs_wos_fieldtags.html" target="_blank" rel="noopener">Web of Science 형식</a>을 입수했습니다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>Scopus에서 도출한 <code>.csv</code>파일 정보를 이용해 Web of Science 형식의 <code>.txt</code>파일</b>을 만듭시다.<ul>
+<li>여기에 맞춰 변환되도록 <a href="Scopus2WOS.ipynb">컨버터를 만들었습니다</a>.</li>
+<li>제한된 환경의 테스트로 인해 범용성은 충분히 확보하지 못했을 수 있습니다.</li>
+<li>특히 주요 서지정보와 인용정보 외에는 <code>None</code> 처리한 것들이 있으므로 사용시 주의해야 합니다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>데이터 다운로드와 변환 속도는 분당 40편 정도</b>가 되는 것 같습니다.<ul>
+<li>1만편 변환에 4시간 정도가 걸리는 것 같네요.</li>
+<li>글을 쓰는 이 시점에서 2시간 정도가 걸렸는데, 5600편이 변환됐습니다.<br></li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Data-Analysis"><a href="#4-Data-Analysis" class="headerlink" title="4. Data Analysis"></a>4. Data Analysis</h3><ul>
+<li>아직 덜 익었지만 점검을 겸해서 들여다보도록 하겠습니다.</li>
+<li>먼저, 키워드별 분류입니다.</li>
+</ul>
+<p><img src="16_VOS_8.png" alt="정신이 없군요"><br> </p>
+<ul>
+<li><b>일사량(solar irradiation)</b>이라는 키워드만 뽑아보겠습니다.<ul>
+<li>forecasting이라는 키워드와 붙은걸 보니 예측 관련 연구를 주로 하나봅니다.</li>
+<li>…network와 …networks가 둘 다 보입니다. 정리를 해야겠습니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_9.png" alt="solar irradiation"><br></p>
+<ul>
+<li>이번엔 <b>딥러닝</b>을 살펴보겠습니다.<ul>
+<li>최근들어 CNN이 도입된 것 같습니다.</li>
+<li>RNN과 LSTM은 3년 전에 들어오고 논문이 없는걸까요. 잘 안맞은걸까요?</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_10.png" alt="deep learning"><br></p>
+<ul>
+<li><b>어떤 논문이 많이 인용됐는지</b> 한번 보겠습니다.<ul>
+<li>한가운데 nunes라는 이름이 큼직하게 보입니다.</li>
+<li>확대를 해보니 nunes, gao, chen이 반복해서 보입니다. 같은 그룹인걸까요?</li>
+</ul>
+</li>
+</ul>
+<p><img src="16_VOS_11.png" alt="citation"><br>  </p>
+<ul>
+<li>데이터 변환이 끝나면 키워드를 정리하고 나서 다시 그려봐야 할 것 같습니다.<ul>
+<li>약간의 손은 가겠지만 익숙하지 않은 분야를 파악하는데는 확실히 도움이 되네요.</li>
+<li>의미있는 데이터를 도출하려면 VOSviewer의 메트릭을 정확히 알아야겠습니다.</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/06/15/Python-DS-16-VOSviewer/" data-id="ckbg90yvw000tr8tg203d2qxk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Citation Network on Scopus Data",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/16_VOS_0.png",
+        "keywords": "",
+        "genre": "Python Data Science",
+        "datePublished": "2020-06-15",
+        "dateCreated": "2020-06-15",
+        "dateModified": "2020-06-15",
+        "url": "https://jehyunlee.github.io/2020/06/15/Python-DS-16-VOSviewer/",
+        "description": "Contributor
+
+김승욱님, Bert님
+
+References
+
+VOSviewerScopusWeb of Science
+
+1. Visualizer: VOSviewer
+논문 여러편을 읽고 행간을 파악해서 연구의 흐름을 인지하는 일은 쉽지 않습니다.
+익숙한 분야가 아니라면 일단 단어조차 낯선데,
+뭐가 중요하고 중요하지 않은지 알기 힘든데다
+이 연구와 다른 연",
+        "wordCount": 529
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/06/10/Python-General-5-wdvx/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">X-Window on Docker on WSL 2</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/15/Python-DS-16-VOSviewer/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/16_VOS_0.png)" alt="Citation Network on Scopus Data" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/06/15/Python-DS-16-VOSviewer/" class="title">Citation Network on Scopus Data</a></p>
+                            <p class="item-date"><time datetime="2020-06-15T07:35:00.000Z" itemprop="datePublished">2020-06-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/10/Python-General-5-wdvx/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/5_wdvx_01.png)" alt="X-Window on Docker on WSL 2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/06/10/Python-General-5-wdvx/" class="title">X-Window on Docker on WSL 2</a></p>
+                            <p class="item-date"><time datetime="2020-06-09T21:10:00.000Z" itemprop="datePublished">2020-06-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/05/24/Python-DS-15-Bresenham/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/15_bresenham_0.png)" alt="Bresenham&#39;s Line Algorithm" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/05/24/Python-DS-15-Bresenham/" class="title">Bresenham&#39;s Line Algorithm</a></p>
+                            <p class="item-date"><time datetime="2020-05-24T07:35:00.000Z" itemprop="datePublished">2020-05-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/05/22/Python-DS-14-10_TF_skills/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/14_10TF_0.jpg)" alt="10 TensorFlow Tricks Every ML Practioner Must Know" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/05/22/Python-DS-14-10_TF_skills/" class="title">10 TensorFlow Tricks Every ML Practioner Must Know</a></p>
+                            <p class="item-date"><time datetime="2020-05-22T01:45:00.000Z" itemprop="datePublished">2020-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/05/11/Python-DS-13-stratified_sampling/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/13_strat_0.png)" alt="Stratified Sampling" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/05/11/Python-DS-13-stratified_sampling/" class="title">Stratified Sampling</a></p>
+                            <p class="item-date"><time datetime="2020-05-10T21:24:00.000Z" itemprop="datePublished">2020-05-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/06/15/Python-DS-16-VOSviewer/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
