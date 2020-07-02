@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/18_pv_01.png">
 <meta property="article:published_time" content="2020-07-02T03:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-02T04:20:44.703Z">
+<meta property="article:modified_time" content="2020-07-02T04:21:58.031Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/18_pv_01.png">
@@ -240,7 +240,8 @@ ga('send', 'pageview');
 </ul>
 <h3 id="Paraview-Programmable-Filter"><a href="#Paraview-Programmable-Filter" class="headerlink" title="Paraview Programmable Filter"></a>Paraview Programmable Filter</h3><ul>
 <li>한 시간 구글링 결과 아래와 같은 코드를 만들 수 있었습니다.</li>
-<li><p>원자간 거리가 <code>dist_th</code>값보다 작으면 연결선을 그려주는 코드입니다.</p>
+<li>원자간 거리가 <code>dist_th</code>값보다 작으면 연결선을 그려주는 코드입니다.</li>
+<li><p><b>Filter &gt; Data Analysis &gt; Programmable Filter</b>에서 입력합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dist_th = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">pdi = self.GetPolyDataInput()</span><br><span class="line">pdo = self.GetPolyDataOutput()</span><br><span class="line"></span><br><span class="line">numPoints = pdi.GetNumberOfPoints()</span><br><span class="line">pdo.Allocate()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, numPoints<span class="number">-1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, numPoints<span class="number">-1</span>):</span><br><span class="line">        points = [i, j]</span><br><span class="line">        pi = np.array(pdi.GetPoint(i))</span><br><span class="line">        pj = np.array(pdi.GetPoint(j))</span><br><span class="line">        dist = np.linalg.norm(pi - pj)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dist &lt; dist_th) <span class="keyword">and</span> (dist &gt; <span class="number">0</span>):</span><br><span class="line">            pdo.InsertNextCell(<span class="number">3</span>, <span class="number">2</span>, points)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>그리고 <code>tube</code>를 추가해서 선에 입체감을 부여하면 이렇게 됩니다.</p>
@@ -257,7 +258,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/02/Python-DS-18-pv_bond/" data-id="ckc49czs40000kgtg74rh3xn7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/02/Python-DS-18-pv_bond/" data-id="ckc4a8img00148ktgeq2r1zf2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -341,7 +342,7 @@ ParaviewParaview: Python Programmable FilterVTK: Visualization ToolkitCornell Vi
 Paraview + Python
 범용 Visualizaion Program인 Paraview는 전반적으로 기능이 좋습니다.
 Pyth",
-        "wordCount": 437
+        "wordCount": 444
     }
 </script>
 
