@@ -12,16 +12,16 @@
     
     <meta name="keywords" content="" />
     
-    <meta name="description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMs  1. PCA 이해를 위한 간단한 선형대수학 머신러닝, 딥러닝 공부 블로">
+    <meta name="description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PCA; Dimension Reduction + $\alpha$">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMs  1. PCA 이해를 위한 간단한 선형대수학 머신러닝, 딥러닝 공부 블로">
+<meta property="og:description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
 <meta property="article:published_time" content="2020-07-21T07:59:00.000Z">
-<meta property="article:modified_time" content="2020-07-21T14:51:46.464Z">
+<meta property="article:modified_time" content="2020-07-21T22:50:55.164Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
@@ -210,7 +210,7 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><a href="https://darkpgmr.tistory.com/105" target="_blank" rel="noopener">다크 프로그래머: 선형대수학</a><br><a href="https://en.wikipedia.org/wiki/Singular_value_decomposition" target="_blank" rel="noopener">Wikipedia: Singular Value Decomposition</a><br><a href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb" target="_blank" rel="noopener">핸즈온 머신러닝: 8장-차원 축소</a><br><a href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/" target="_blank" rel="noopener">데이터 사이언스 스쿨: 3.5 PCA</a><br><a href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html" target="_blank" rel="noopener">scikit learn: Faces recognition examples using eigenfaces and SVMs</a></p>
+<p><a href="https://darkpgmr.tistory.com/105" target="_blank" rel="noopener">다크 프로그래머: 선형대수학</a><br><a href="https://en.wikipedia.org/wiki/Singular_value_decomposition" target="_blank" rel="noopener">Wikipedia: Singular Value Decomposition</a><br><a href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb" target="_blank" rel="noopener">핸즈온 머신러닝: 8장-차원 축소</a><br><a href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/" target="_blank" rel="noopener">데이터 사이언스 스쿨: 3.5 PCA</a><br><a href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html" target="_blank" rel="noopener">scikit learn: Faces recognition examples using eigenfaces and SVMs</a><br><a href="https://pathmind.com/kr/wiki/eigenvector" target="_blank" rel="noopener">A.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강의</a></p>
 </blockquote>
 <h2 id="1-PCA-이해를-위한-간단한-선형대수학"><a href="#1-PCA-이해를-위한-간단한-선형대수학" class="headerlink" title="1. PCA 이해를 위한 간단한 선형대수학"></a>1. PCA 이해를 위한 간단한 선형대수학</h2><ul>
 <li>머신러닝, 딥러닝 공부 블로그엔 PCA 관련 글이 상당히 많습니다.</li>
@@ -234,6 +234,13 @@ ga('send', 'pageview');
 <li>이 때 벡터 <script type="math/tex">\boldsymbol{v}</script>를 고유벡터<code>eigenvector</code>, 상수 <script type="math/tex">\lambda</script>를 고유값<code>eigenvalue</code>라고 합니다.<ul>
 <li>기하학적으로, 행렬 <script type="math/tex">A</script>의 고유벡터는 선형변환 <script type="math/tex">A</script>에 의해 방향은 보존되고 크기만 변화되었습니다.</li>
 <li>그리고 고유값 <script type="math/tex">\lambda</script>는 고유벡터가 몇배로 변하는지를 나타내는 값입니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>애니메이션으로 표현하면 다음과 같습니다.<ul>
+<li>파란색 벡터들은 선형변환을 해도 방향이 일정함을 알 수 있습니다.</li>
+<li>파란색 벡터의 방향이 고유벡터의 방향과 같기 때문입니다.<br><img src="21_pca_13.gif" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -273,13 +280,14 @@ ga('send', 'pageview');
 <li><script type="math/tex">A \boldsymbol{v} = U \Sigma V^T \boldsymbol{v}</script>는 기하학적으로 다음과 같습니다.<ul>
 <li><b>Step 1.</b> <script type="math/tex">\boldsymbol{v_1} = V^T \boldsymbol{v}</script> : 회전변환</li>
 <li><b>Step 2.</b> <script type="math/tex">\boldsymbol{v_2} = \Sigma\boldsymbol{v_1}</script> : 크기변화</li>
-<li><b>Step 3.</b> <script type="math/tex">\boldsymbol{v_3} = U \boldsymbol{v_2}</script> : 회전변환<br><img src="https://t1.daumcdn.net/cfile/tistory/2725C84C5260AA5F28" alt=""></li>
+<li><b>Step 3.</b> <script type="math/tex">\boldsymbol{v_3} = U \boldsymbol{v_2}</script> : 회전변환</li>
 </ul>
 </li>
 </ul>
+<p>  <img src="https://t1.daumcdn.net/cfile/tistory/2725C84C5260AA5F28" alt=""></p>
 <ul>
 <li>이 때 <script type="math/tex">V</script>는 <b>직교행렬<code>orthogonal matrix</code></b>입니다.<ul>
-<li>행벡터와 열벡터가 유클리드 공간의 정규 직교 기저<code>basis</code>를 이룹니다.</li>
+<li>행벡터(<script type="math/tex">V^T</script>의 열벡터)가 유클리드 공간의 정규 직교 기저<code>basis</code>를 이룹니다.</li>
 <li><script type="math/tex">m \times n</script> 행렬 <script type="math/tex">A</script>는 <b><script type="math/tex">n</script>개의 feature가 있는 데이터 <script type="math/tex">m</script>개</b>로 표현될 수 있습니다.</li>
 <li><script type="math/tex">V</script>의 차원 <script type="math/tex">n</script>은 주성분의 단위 벡터들로 해석됩니다.</li>
 <li>바꾸어 말하면 <b>feature <script type="math/tex">n</script>개로부터 직교하는 벡터들을 추출한 것</b>입니다.</li>
@@ -297,22 +305,52 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h3 id="2-1-PCA-방법"><a href="#2-1-PCA-방법" class="headerlink" title="2.1. PCA 방법"></a>2.1. PCA 방법</h3><ul>
-<li>PCA의 절차는 다음과 같습니다.<ul>
-<li><b>Step 1.</b> 데이터 <script type="math/tex">X</script>의 공분산<code>covariance</code>행렬 <script type="math/tex">C</script>을 구합니다.</li>
-<li><b>Step 2.</b> <script type="math/tex">C = P \Sigma P^{-1}</script>로 고유값분해를 합니다.</li>
+<li><script type="math/tex">n</script>개의 feature를 가지는 데이터가 <script type="math/tex">m</script>개 있다고 합시다.<ul>
+<li>이 데이터셋 <script type="math/tex">X</script>는 <script type="math/tex">m \times n</script> 행렬로 표현될 수 있습니다.</li>
+<li><script type="math/tex">X</script>의 PCA는 공분산<code>covariance</code>행렬 <script type="math/tex">(n \times n)</script>로부터 구할 수도 있고</li>
+<li>특이값분석 <script type="math/tex">X = U \Sigma V^T</script>으로부터 구할 수도 있습니다.</li>
 </ul>
 </li>
 </ul>
+<h4 id="2-1-1-공분산행렬-고유값분해-PCA"><a href="#2-1-1-공분산행렬-고유값분해-PCA" class="headerlink" title="2.1.1. 공분산행렬 고유값분해 PCA"></a>2.1.1. 공분산행렬 고유값분해 PCA</h4><ul>
+<li><p><b>Step 1.</b> 데이터 <script type="math/tex">X</script>의 공분산<code>covariance</code>행렬 <script type="math/tex">Cov</script>를 구합니다.</p>
+<script type="math/tex; mode=display">Cov = \frac{1}{n-1} X^T X</script></li>
+<li><p><b>Step 2.</b> <script type="math/tex">C = V \Sigma_{Cov} V^{T}</script>로 고유값분해를 합니다.  </p>
+<script type="math/tex; mode=display">\begin{equation}
+\begin{split}
+Cov &= \frac{1}{n-1} X^T X = \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U \Sigma V^T \right)\\
+&= \frac{1}{n-1} \left(V \Sigma U^T \right) \left(U \Sigma V^T \right) = \frac{1}{n-1} V \Sigma^2 V^T\\
+&= V \Sigma_{Cov} V^T 
+\end{split}
+\end{equation}</script></li>
+</ul>
 <ul>
 <li>각 성분의 설명은 다음과 같습니다.  <ul>
-<li><script type="math/tex">\Sigma :</script> <script type="math/tex">\lambda</script> 크기순으로 정렬된 <script type="math/tex">n \times n</script> 대각행렬.</li>
-<li><script type="math/tex">P :</script>  <script type="math/tex">C</script>의 고유벡터 <script type="math/tex">e_i</script>를 열벡터로 가지는 직교행렬.</li>
+<li><script type="math/tex">\Sigma_{Cov} :</script> <script type="math/tex">\lambda</script> 크기순으로 정렬된 <script type="math/tex">n \times n</script> 대각행렬.</li>
+<li><script type="math/tex">V :</script>  <script type="math/tex">Cov</script>의 고유벡터 <script type="math/tex">e_i</script>를 열벡터로 가지는 직교행렬.</li>
 <li>가장 분산이 큰 방향이 <script type="math/tex">e_1</script>이며 <script type="math/tex">e_k</script>의 k가 증가할수록 분산이 줄어듭니다.</li>
 </ul>
 </li>
 </ul>
+<h4 id="2-1-2-특이값분해-PCA"><a href="#2-1-2-특이값분해-PCA" class="headerlink" title="2.1.2. 특이값분해 PCA"></a>2.1.2. 특이값분해 PCA</h4><ul>
+<li><b>Step 1.</b> 데이터 <script type="math/tex">X</script>를 특이값 분해합니다.<script type="math/tex; mode=display">X = U \Sigma V^T</script></li>
+</ul>
 <ul>
-<li>고유벡터의 수 = <script type="math/tex">n</script> = 데이터 feature의 수 <ul>
+<li><code>scipy.linalg.svd</code>, <code>numpy.linalg.svd</code>에서 사용하는 방식입니다.<ul>
+<li>한번에 고유값행렬 <script type="math/tex">\Sigma</script>와 고유벡터행렬 <script type="math/tex">V</script>를 얻을 수 있습니다.</li>
+<li><script type="math/tex">U : m \times m</script> 직교행렬. <script type="math/tex">U</script>의 열벡터는 <script type="math/tex">XX^T</script>의 고유벡터입니다.</li>
+<li><script type="math/tex">V : n \times n</script> 직교행렬. <script type="math/tex">V</script>의 열벡터는 <script type="math/tex">X^TX</script>, 즉 공분산 <script type="math/tex">Cov</script>의 고유벡터입니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-1-3-PCA-결과-활용"><a href="#2-1-3-PCA-결과-활용" class="headerlink" title="2.1.3. PCA 결과 활용"></a>2.1.3. PCA 결과 활용</h4><ul>
+<li>우리 관심사는 <script type="math/tex">n</script>개의 feature를 대표적으로 설명해줄 인자들입니다.<ul>
+<li>따라서 <script type="math/tex">Cov</script>의 고유벡터와 같은 <script type="math/tex">V</script>의 열벡터를 PC1, …, PCn으로 사용합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><script type="math/tex">V</script>의 열벡터 수는 <script type="math/tex">n</script>으로, 데이터 feature 수와 같습니다.<ul>
 <li>고유벡터를 전부 사용하면 PCA의 의미가 없습니다.</li>
 <li>가장 주요한 고유벡터 <script type="math/tex">d</script>개만을 선별하여 사용합니다. </li>
 <li>선별될 <script type="math/tex">d</script>의 수는 시각화(2 or 3), 해석력 확보(ex. &gt;95%)에 따라 다릅니다.</li>
@@ -449,7 +487,7 @@ ga('send', 'pageview');
 <li>샘플간 지오데식 거리<code>geodesic distance</code>(두 노드 사이의 최단 경로를 이루는 노드의 수)를 유지하며 차원을 축소합니다.</li>
 </ul>
 <h4 id="3-2-4-t-SNE"><a href="#3-2-4-t-SNE" class="headerlink" title="3.2.4. t-SNE"></a>3.2.4. t-SNE</h4><ul>
-<li>비슷한 데이터를 가까이, 비슷하지 않은 샘플은 멀리 유지하며 차원을 축솧바니다.</li>
+<li>비슷한 데이터를 가까이, 비슷하지 않은 샘플은 멀리 유지하며 차원을 축소합니다.</li>
 <li>고차원 데이터의 군집을 시각화할 때 주로 사용됩니다.</li>
 </ul>
 <ul>
@@ -538,14 +576,11 @@ ga('send', 'pageview');
         "genre": "Python Data Science",
         "datePublished": "2020-07-21",
         "dateCreated": "2020-07-21",
-        "dateModified": "2020-07-21",
+        "dateModified": "2020-07-22",
         "url": "https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/",
         "description": "
-다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMs
-
-1. PCA 이해를 위한 간단한 선형대수학
-머신러닝, 딥러닝 공부 블로",
-        "wordCount": 1748
+다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강",
+        "wordCount": 1957
     }
 </script>
 
