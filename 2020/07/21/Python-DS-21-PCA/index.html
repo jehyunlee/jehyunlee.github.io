@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>PCA; Dimension Reduction + $\alpha$ | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMs  1. PCA 이해를 위한 간단한 선형대수학 머신러닝, 딥러닝 공부 블로">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCA; Dimension Reduction + $\alpha$">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMs  1. PCA 이해를 위한 간단한 선형대수학 머신러닝, 딥러닝 공부 블로">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
+<meta property="article:published_time" content="2020-07-21T07:59:00.000Z">
+<meta property="article:modified_time" content="2020-07-21T14:26:44.375Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/07/21/python-ds-21-pca/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-21-PCA" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        PCA; Dimension Reduction + $\alpha$
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/07/21/Python-DS-21-PCA/" class="article-date">
+         <time datetime="2020-07-21T07:59:00.000Z" itemprop="datePublished">2020-07-21</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p><a href="https://darkpgmr.tistory.com/105" target="_blank" rel="noopener">다크 프로그래머: 선형대수학</a><br><a href="https://en.wikipedia.org/wiki/Singular_value_decomposition" target="_blank" rel="noopener">Wikipedia: Singular Value Decomposition</a><br><a href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb" target="_blank" rel="noopener">핸즈온 머신러닝: 8장-차원 축소</a><br><a href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/" target="_blank" rel="noopener">데이터 사이언스 스쿨: 3.5 PCA</a><br><a href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html" target="_blank" rel="noopener">scikit learn: Faces recognition examples using eigenfaces and SVMs</a></p>
+</blockquote>
+<h2 id="1-PCA-이해를-위한-간단한-선형대수학"><a href="#1-PCA-이해를-위한-간단한-선형대수학" class="headerlink" title="1. PCA 이해를 위한 간단한 선형대수학"></a>1. PCA 이해를 위한 간단한 선형대수학</h2><ul>
+<li>머신러닝, 딥러닝 공부 블로그엔 PCA 관련 글이 상당히 많습니다.</li>
+<li>그만큼 중요한 기능이지만 많은 글에서 <b>차원 축소</b>에만 초점을 맞추고 있습니다.</li>
+<li>PCA의 본질로부터 이끌어낼 수 있는 차원을 축소 이상의 기능을 살펴보겠습니다.</li>
+<li>PCA는 선형대수에 뿌리를 두고 있습니다. 의미 중심으로 최대한 요약했습니다.</li>
+</ul>
+<h3 id="1-1-고유값eigenvalue-고유벡터eigenvector"><a href="#1-1-고유값eigenvalue-고유벡터eigenvector" class="headerlink" title="1.1. 고유값eigenvalue, 고유벡터eigenvector"></a>1.1. 고유값<code>eigenvalue</code>, 고유벡터<code>eigenvector</code></h3><ul>
+<li><p>행렬에 벡터를 곱하면 행렬이나 벡터가 나오는 것이 일반적입니다.</p>
+<script type="math/tex; mode=display">A \boldsymbol{v} 
+= \begin{pmatrix} a_{11} & a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23} \end{pmatrix} \begin{pmatrix} v_{1} \\ v_{2} \\ v_{3}\end{pmatrix}
+= \begin{pmatrix} a_{11}v_1 + a_{12}v_2 + a_{13}v_3\\ a_{21}v_1 + a_{22}v_2 + a_{23}v_3 \end{pmatrix}</script></li>
+<li><p>그런데, <b>“어떤 행렬 A에 벡터 v를 곱했더니 벡터의 크기만 변하는”</b> 일이 벌어질 때가 있습니다.</p>
+<script type="math/tex; mode=display">A \boldsymbol{v} = \lambda \boldsymbol{v}</script></li>
+<li><p>예를 들면, 이런 상황입니다.</p>
+<script type="math/tex; mode=display">A = \begin{pmatrix} 2 & 0 & -2\\ 1 & 1 & -2 \\ 0 & 0 & 1\end{pmatrix} \text{이고 } \boldsymbol{v}= \begin{pmatrix} 1 \\ 1 \\ 0\end{pmatrix} \text{라면,}</script></li>
+</ul>
+<script type="math/tex; mode=display">A \boldsymbol{v} = 
+\begin{pmatrix} 2 & 0 & -2\\ 1 & 1 & -2 \\ 0 & 0 & 1\end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ 0\end{pmatrix} 
+= \begin{pmatrix} 2 \\ 2 \\ 0\end{pmatrix} = 2 \boldsymbol{v}</script><ul>
+<li>이 때 벡터 <script type="math/tex">\boldsymbol{v}</script>를 고유벡터<code>eigenvector</code>, 상수 <script type="math/tex">\lambda</script>를 고유값<code>eigenvalue</code>라고 합니다.<ul>
+<li>기하학적으로, 행렬 <script type="math/tex">A</script>의 고유벡터는 선형변환 <script type="math/tex">A</script>에 의해 방향은 보존되고 크기만 변화되었습니다.</li>
+<li>그리고 고유값 <script type="math/tex">\lambda</script>는 고유벡터가 몇배로 변하는지를 나타내는 값입니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-고유값분해eigendecomposition"><a href="#1-2-고유값분해eigendecomposition" class="headerlink" title="1.2. 고유값분해eigendecomposition"></a>1.2. 고유값분해<code>eigendecomposition</code></h3><ul>
+<li>하나의 행렬 <script type="math/tex">A</script>는 고유벡터와 고유값을 여럿 가질 수 있습니다.<ul>
+<li>행렬 <script type="math/tex">A</script>의 고유벡터를 열벡터로 갖는 행렬을 <script type="math/tex">P</script>, </li>
+<li>고유값들을 대각원소로 갖는 대각행렬을 <script type="math/tex">\Lambda</script>라고 하면 다음 식이 성립합니다.<br><script type="math/tex">AP = P \Lambda</script>. 즉, <script type="math/tex">A = P \Lambda P^{-1}</script>로 <b>분해</b>됩니다.</li>
+<li>이를 고유값분해<code>eigendecomposition</code>이라 합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>모든 정방행렬을 고유값분해 할 수는 없습니다.<ul>
+<li>그러나 가능하다면 이 때의 고유벡터는 일차 독립입니다.</li>
+<li>사실 거꾸로가 맞습니다.</li>
+<li><b><script type="math/tex">n \times n</script> 정방행렬 <script type="math/tex">A</script>의 고유값분해가 가능하려면 <script type="math/tex">n</script>개의 일차독립인 고유벡터를 가져야 합니다.</b></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-특이값분해Singular-Value-Decomposition-SVD"><a href="#1-2-특이값분해Singular-Value-Decomposition-SVD" class="headerlink" title="1.2. 특이값분해Singular Value Decomposition(SVD)"></a>1.2. 특이값분해<code>Singular Value Decomposition</code>(SVD)</h3><ul>
+<li>정방행렬이 아니어도 비슷한 방식으로 분해될 수 있습니다.<ul>
+<li>특이값분해<code>Singular Value Decomposition</code>(SVD)이라고 합니다.</li>
+<li>임의의 <script type="math/tex">m \times n</script> 행렬의 특이값분해는 다음과 같이 정의됩니다.<ul>
+<li><script type="math/tex">A= U \Sigma V^T</script>.</li>
+</ul>
+</li>
+<li>이 때 <script type="math/tex">U</script>, <script type="math/tex">\Sigma</script>, <script type="math/tex">V</script>는 각기 다음과 같습니다.<ul>
+<li><script type="math/tex">U: m \times m</script> 직교행렬</li>
+<li><script type="math/tex">\Sigma: m \times n</script> 직사각 대각행렬</li>
+<li><script type="math/tex">V: n \times n</script> 직교행렬</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><script type="math/tex">A \boldsymbol{v} = U \Sigma V^T \boldsymbol{v}</script>는 기하학적으로 다음과 같습니다.<ul>
+<li><b>Step 1.</b> <script type="math/tex">\boldsymbol{v_1} = V^T \boldsymbol{v}</script> : 회전변환</li>
+<li><b>Step 2.</b> <script type="math/tex">\boldsymbol{v_2} = \Sigma\boldsymbol{v_1}</script> : 크기변화</li>
+<li><b>Step 3.</b> <script type="math/tex">\boldsymbol{v_3} = U \boldsymbol{v_2}</script> : 회전변환<br><img src="https://t1.daumcdn.net/cfile/tistory/2725C84C5260AA5F28" alt=""></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>이 때 <script type="math/tex">V</script>는 <b>직교행렬<code>orthogonal matrix</code></b>입니다.<ul>
+<li>행벡터와 열벡터가 유클리드 공간의 정규 직교 기저<code>basis</code>를 이룹니다.</li>
+<li><script type="math/tex">m \times n</script> 행렬 <script type="math/tex">A</script>는 <b><script type="math/tex">n</script>개의 feature가 있는 데이터 <script type="math/tex">m</script>개</b>로 표현될 수 있습니다.</li>
+<li><script type="math/tex">V</script>의 차원 <script type="math/tex">n</script>은 주성분의 단위 벡터들로 해석됩니다.</li>
+<li>바꾸어 말하면 <b>feature <script type="math/tex">n</script>개로부터 직교하는 벡터들을 추출한 것</b>입니다.</li>
+<li>이들 중 첫 <script type="math/tex">d</script>개만 선택함으로써 데이터의 차원을 압축할 수 있습니다. </li>
+</ul>
+</li>
+</ul>
+<h2 id="2-주성분분석principal-component-analysis-PCA"><a href="#2-주성분분석principal-component-analysis-PCA" class="headerlink" title="2. 주성분분석principal component analysis(PCA)"></a>2. 주성분분석<code>principal component analysis</code>(PCA)</h2><ul>
+<li><script type="math/tex">n</script>개의 feature를 설명하기 위해 필요한 기저의 수는 더 적을 수 있습니다.<ul>
+<li><script type="math/tex">(1, 0.01), (-1.2, 0.1), (3, -0.03)</script>은 <script type="math/tex">(x, y)</script>라는 두 개의 feature가 있습니다.</li>
+<li>그러나 <script type="math/tex">x</script>방향에 비해 <script type="math/tex">y</script>방향의 분포가 적어 <script type="math/tex">y</script>방향을 무시해도 무리가 없습니다.</li>
+<li>이렇게 주성분(여기에선 <script type="math/tex">x</script>축)을 중심으로 분석하는 것을 주성분분석<code>principal component analysis</code>(PCA)라고 합니다.</li>
+<li>주성분을 통해 데이터의 특질에 접근할 수 있기 때문에 많은 것이 가능합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-PCA-방법"><a href="#2-1-PCA-방법" class="headerlink" title="2.1. PCA 방법"></a>2.1. PCA 방법</h3><ul>
+<li>PCA의 절차는 다음과 같습니다.<ul>
+<li><b>Step 1.</b> 데이터 <script type="math/tex">X</script>의 공분산<code>covariance</code>행렬 <script type="math/tex">C</script>을 구합니다.</li>
+<li><b>Step 2.</b> <script type="math/tex">C = P \Sigma P^{-1}</script>로 고유값분해를 합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>각 성분의 설명은 다음과 같습니다.  <ul>
+<li><script type="math/tex">\Sigma :</script> <script type="math/tex">\lambda</script> 크기순으로 정렬된 <script type="math/tex">n \times n</script> 대각행렬.</li>
+<li><script type="math/tex">P :</script>  <script type="math/tex">C</script>의 고유벡터 <script type="math/tex">e_i</script>를 열벡터로 가지는 직교행렬.</li>
+<li>가장 분산이 큰 방향이 <script type="math/tex">e_1</script>이며 <script type="math/tex">e_k</script>의 k가 증가할수록 분산이 줄어듭니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>고유벡터의 수 = <script type="math/tex">n</script> = 데이터 feature의 수 <ul>
+<li>고유벡터를 전부 사용하면 PCA의 의미가 없습니다.</li>
+<li>가장 주요한 고유벡터 <script type="math/tex">d</script>개만을 선별하여 사용합니다. </li>
+<li>선별될 <script type="math/tex">d</script>의 수는 시각화(2 or 3), 해석력 확보(ex. &gt;95%)에 따라 다릅니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-PCA-활용-sklearn"><a href="#2-2-PCA-활용-sklearn" class="headerlink" title="2.2. PCA 활용: sklearn"></a>2.2. PCA 활용: sklearn</h3><ul>
+<li>scikit-learn에서는 <code>sklearn.decomposition</code>을 통해 PCA를 제공합니다.</li>
+<li>상세한 내용은 <a href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb" target="_blank" rel="noopener">핸즈온 머신러닝: 8장-차원 축소</a>를 참고바랍니다.</li>
+<li><p>MNIST 데이터에 PCA를 적용하면 다음과 같습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MNIST data load</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line">mnist = fetch_openml(<span class="string">"mnist_784"</span>, version=<span class="number">1</span>)</span><br><span class="line">mnist.target = mnist.target.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># X(feature) and y(target) split</span></span><br><span class="line">X = mnist[<span class="string">"data"</span>]</span><br><span class="line">y = mnist[<span class="string">"target"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># apply PCA</span></span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components=<span class="number">0.95</span>) <span class="comment"># secure 95% of data variance</span></span><br><span class="line">X_reduced = pca.fit_transform(X)</span><br><span class="line">X_recovered = pca.inverse_transform(X_reduced)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>데이터의 설명력을 95% 확보하도록 고유벡터의 숫자를 설정합니다.</p>
+<ul>
+<li><code>print(pca.n_components_)</code>로 확인하면 154개를 이용했음을 알 수 있습니다.</li>
+<li>MNIST 데이터의 인자 수 = <script type="math/tex">28 \times 28 = 784</script>이므로, 20%가 안되는 분량입니다.</li>
+<li>그럼에도 불구하고 배경이 흐려진 것 외에는 숫자가 거의 그대로 잘 보입니다.<br><br><img src="21_pca_1.png" alt=""><br></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-PCA-응용-eigenface"><a href="#2-3-PCA-응용-eigenface" class="headerlink" title="2.3. PCA 응용: eigenface"></a>2.3. PCA 응용: eigenface</h3><ul>
+<li>숫자가 아닌 얼굴에 PCA를 적용하면 재미있는 일을 할 수 있습니다.</li>
+<li>상세한 내용은 <a href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/" target="_blank" rel="noopener">데이터 사이언스 스쿨: 3.5 PCA</a>를 참고바랍니다.</li>
+<li><p>올리베티 얼굴 데이터의 20번째 얼굴을 불러오면 다음과 같습니다.<br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_olivetti_faces</span><br><span class="line"></span><br><span class="line">faces_all = fetch_olivetti_faces()</span><br><span class="line">K = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">faces = faces_all.images[faces_all.target == K]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">5</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">axes = ax.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> face, axi <span class="keyword">in</span> zip(faces, axes):</span><br><span class="line">    axi.imshow(face, cmap=plt.cm.bone)</span><br><span class="line">    axi.grid(<span class="literal">False</span>)</span><br><span class="line">    axi.xaxis.set_ticks([])</span><br><span class="line">    axi.yaxis.set_ticks([])</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(top=<span class="number">1</span>, bottom=<span class="number">0</span>, hspace=<span class="number">0</span>, wspace=<span class="number">0.05</span>)</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="21_pca_2.png" alt=""><br></p>
+</li>
+<li><p>2개의 인자만 이용해서 PCA 변환과 역변환을 적용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pca_oli = PCA(n_components=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">faces_ori = faces_all.data[faces_all.target==K]</span><br><span class="line">faces_reduced = pca_oli.fit_transform(faces_ori)</span><br><span class="line">faces_recovered = pca_oli.inverse_transform(faces_reduced)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>역변환 결과물을 원본과의 재구성오차<code>reconstruction error</code>와 함께 그립니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">5</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">axes = ax.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> face_ori, face_recovered, axi <span class="keyword">in</span> zip(faces_ori, faces_recovered, axes):</span><br><span class="line">    mse = mean_squared_error(face_ori, face_recovered)</span><br><span class="line">    </span><br><span class="line">    axi.imshow(face_recovered.reshape(<span class="number">64</span>,<span class="number">64</span>), cmap=plt.cm.bone)</span><br><span class="line">    axi.set_title(<span class="string">f"mse=<span class="subst">&#123;mse:<span class="number">1.2</span>e&#125;</span>"</span>)</span><br><span class="line">    axi.grid(<span class="literal">False</span>)</span><br><span class="line">    axi.xaxis.set_ticks([])</span><br><span class="line">    axi.yaxis.set_ticks([])</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(top=<span class="number">1</span>, bottom=<span class="number">0</span>, hspace=<span class="number">0</span>, wspace=<span class="number">0.05</span>)</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="21_pca_3.png" alt=""><br></p>
+</li>
+<li><p>데이터의 평균과 주성분1<code>PC1</code>, 주성분2<code>PC2</code>을 확인합니다.</p>
+</li>
+<li>주성분도 <script type="math/tex">n = 64 \times 64 =4096</script>개의 데이터를 가진 이미지입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">face_mean = pca_oli.mean_.reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p1 = pca_oli.components_[<span class="number">0</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p2 = pca_oli.components_[<span class="number">1</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br></pre></td></tr></table></figure>
+<img src="21_pca_4.png" alt=""><br></li>
+</ul>
+<ul>
+<li><p>평균 얼굴에 PC1의 가중치를 달리해서 더하면, 얼굴 방향이 바뀝니다.<br><br><img src="21_pca_5.png" alt=""><br></p>
+</li>
+<li><p>평균 얼굴에 PC2의 가중치를 달리해서 더하면, 웃는 정도가 바뀝니다.<br><br><img src="21_pca_6.png" alt=""><br></p>
+</li>
+</ul>
+<h3 id="2-4-PCA-응용-2D-원자-찾기"><a href="#2-4-PCA-응용-2D-원자-찾기" class="headerlink" title="2.4. PCA 응용: 2D 원자 찾기"></a>2.4. PCA 응용: 2D 원자 찾기</h3><ul>
+<li><p>PCA가 데이터가 주로 분산된 방향을 찾는다는 점에 착안하여 소재 문제를 풀기도 합니다.</p>
+<ul>
+<li>물질을 이루는 원자들은 선형<code>1D</code>, 판상형<code>2D</code>, 입체형<code>3D</code>으로 배열됩니다.</li>
+<li>이 중 graphene과 같이 2D로 배열된 원자들은 독특한 성질이 있습니다.</li>
+<li>그러나 국부적으로 2D로 배열된 원자만 골라내는 것은 쉬운 일이 아닙니다.</li>
+<li>3D 공간상에 면처럼 위치한 점들<code>manifold</code>이기 때문입니다.<br><br><img src="21_pca_7.png" alt=""><br></li>
+</ul>
+</li>
+<li><p>고체를 이루는 원자들은 구조상 주기를 가지는 것을 이용합니다.</p>
+<ul>
+<li>푸리에 변환을 적용해 <script type="math/tex">x</script>, <script type="math/tex">y</script>, <script type="math/tex">z</script> 세 방향으로의 주기성을 구합니다.</li>
+<li>주기성을 바탕으로 구 형태의 공간을 설정, 이 안에 들어오는 원자들만 분류합니다.</li>
+<li>이 원자들의 좌표에 PCA를 적용해 국부적으로 2D 배열된 원자를 구분합니다.<br><br><img src="21_pca_8.png" alt="graphene의 불룩한 부분을 제외한 나머지를 2D로 탐지했습니다."><br></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-비선형-데이터"><a href="#3-비선형-데이터" class="headerlink" title="3. 비선형 데이터"></a>3. 비선형 데이터</h2><ul>
+<li>PCA는 비선형 데이터에는 취약합니다.<ul>
+<li>PCA의 기반이 선형 행렬 연산이기 때문입니다.</li>
+<li>상세한 내용은 <a href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb" target="_blank" rel="noopener">핸즈온 머신러닝: 8장-차원 축소</a>를 참고바랍니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-kernel-PCA"><a href="#3-1-kernel-PCA" class="headerlink" title="3.1. kernel PCA"></a>3.1. kernel PCA</h3><ul>
+<li>PCA 연산 전 커널을 씌움으로써 이를 극복합니다.<ul>
+<li>커널은 데이터를 매우 높은 고차원 특성 공간<code>feature space</code>로 매핑합니다.</li>
+<li>만병통치약은 아닙니다만 커널 PCA는 커널이 씌워진 상태에서 PCA를 수행하기 때문에 선형 공간의 한계를 상당히 극복할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Swiss-roll 데이터에 kernel PCA를 적용해 봅시다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_swiss_roll</span><br><span class="line">X, t = make_swiss_roll(n_samples=<span class="number">1000</span>, noise=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>kernel PCA 또한 <code>sklearn.decomposition</code>에 <code>KernelPCA</code>로 탑재되어 있습니다.</p>
+</li>
+<li><p>3가지 kernel을 씌워보겠습니다: <code>linear</code>, <code>rbf</code>, <code>sigmoid</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lin_pca = KernelPCA(n_components=<span class="number">2</span>, kernel=<span class="string">"linear"</span>, fit_inverse_transform=<span class="literal">True</span>)</span><br><span class="line">rbf_pca = KernelPCA(n_components=<span class="number">2</span>, kernel=<span class="string">"rbf"</span>, gamma=<span class="number">0.0433</span>, fit_inverse_transform=<span class="literal">True</span>)</span><br><span class="line">sig_pca = KernelPCA(n_components=<span class="number">2</span>, kernel=<span class="string">"sigmoid"</span>, gamma=<span class="number">0.001</span>, coef0=<span class="number">1</span>, fit_inverse_transform=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="21_pca_9.png" alt=""><br></p>
+</li>
+<li><p>커널마다 다른 모양이 출력됩니다.</p>
+<ul>
+<li>Linear Kernel은 일반 PCA와 동일합니다.</li>
+<li>RBF와 Sigmoid는 형상이 원본 데이터(맨 왼쪽)와 크게 다릅니다.</li>
+<li>파라미터를 바꿔가며 어떻게 변하는지 한번 보겠습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><code>poly</code> kernel<br><img src="kernelpca_poly_plt.png" alt=""><br></p>
+</li>
+<li><p><code>rbf</code> kernel<br><img src="kernelpca_rbf_plt.png" alt=""><br></p>
+</li>
+<li><p><code>sigmoid</code> kernel<br><img src="kernelpca_sigmoid_plt.png" alt=""><br></p>
+</li>
+<li><p><code>cosine</code> kernel<br><img src="21_pca_10.png" alt="cosine 커널은 인자가 없습니다"><br></p>
+</li>
+<li><p>재구성원상<code>pre-image</code>과의 오차를 줄이는 방법을 찾아야 합니다.</p>
+<ul>
+<li>커널의 종류와 파라미터를 대상으로 <code>GridSearchCV</code>를 수행하기도 합니다.</li>
+<li>PCA는 전처리 과정이므로, 머신러닝 기법과 궁합이 맞는 조건을 찾기 위해 <code>Pipeline</code>을 구성하기도 합니다.</li>
+</ul>
+</li>
+<li><p>LogisticRegression과의 결합 예시입니다.  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"></span><br><span class="line">clf = Pipeline([(<span class="string">"kpca"</span>, KernelPCA(n_components=<span class="number">2</span>)),</span><br><span class="line">                (<span class="string">"log_reg"</span>, LogisticRegression())</span><br><span class="line">			   ])</span><br><span class="line">			   </span><br><span class="line">param_grid = [&#123;<span class="string">"kpca_gamma"</span>: np.linspace(<span class="number">0.03</span>, <span class="number">0.05</span>, <span class="number">10</span>),</span><br><span class="line">               <span class="string">"kpca_kernel"</span>: [<span class="string">"rbf"</span>, <span class="string">"sigmoid"</span>]</span><br><span class="line">              &#125;]				</span><br><span class="line">               </span><br><span class="line">grid_search = GridSearchCV(clf, param_grid, cv=<span class="number">3</span>)</span><br><span class="line">grid_search.fit(X, y)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-2-다른-방법들"><a href="#3-2-다른-방법들" class="headerlink" title="3.2. 다른 방법들"></a>3.2. 다른 방법들</h3><ul>
+<li>매니폴드 문제를 해결하기 위해 PCA와 근본적으로 다른 방법을 사용할 수도 있습니다.</li>
+</ul>
+<h4 id="3-2-1-LLE"><a href="#3-2-1-LLE" class="headerlink" title="3.2.1. LLE"></a>3.2.1. LLE</h4><ul>
+<li>지역 선형 임베딩<code>Locally Linear Embedding</code>은 투영에 의존하지 않습니다.<ul>
+<li>각 훈련 데이터가 가장 가까운 이웃<code>closest neighbor</code>에 얼마나 선형적으로 연관되어 있는지를 찾습니다.</li>
+<li>그 다음, 국부적인 관계가 가장 잘 보존되는 훈련 세트의 저차원 표현을 찾습니다.</li>
+<li>잡음이 너무 많지 않은, 꼬인 매니폴드를 펼치는데 잘 작동합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Swiss Roll을 LLE로 푼 예시입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> LocallyLinearEmbedding</span><br><span class="line"></span><br><span class="line">lle = LocallyLinearEmbedding(n_components=<span class="number">2</span>, n_neighbors=<span class="number">10</span>)</span><br><span class="line">X, t = make_swiss_roll(n_samples=<span class="number">1000</span>, noise=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">X_reduced = lle.fit_transform(X)</span><br></pre></td></tr></table></figure>
+<img src="21_pca_11.png" alt=""><br></li>
+</ul>
+<h4 id="3-2-2-MDS"><a href="#3-2-2-MDS" class="headerlink" title="3.2.2. MDS"></a>3.2.2. MDS</h4><ul>
+<li>데이터간 거리를 보존하면서 차원을 축소합니다.</li>
+</ul>
+<h4 id="3-2-3-Isomap"><a href="#3-2-3-Isomap" class="headerlink" title="3.2.3. Isomap"></a>3.2.3. Isomap</h4><ul>
+<li>각 데이터를 가장 가까운 이웃과 연결해서 그래프를 만듭니다.</li>
+<li>샘플간 지오데식 거리<code>geodesic distance</code>(두 노드 사이의 최단 경로를 이루는 노드의 수)를 유지하며 차원을 축소합니다.</li>
+</ul>
+<h4 id="3-2-4-t-SNE"><a href="#3-2-4-t-SNE" class="headerlink" title="3.2.4. t-SNE"></a>3.2.4. t-SNE</h4><ul>
+<li>비슷한 데이터를 가까이, 비슷하지 않은 샘플은 멀리 유지하며 차원을 축솧바니다.</li>
+<li>고차원 데이터의 군집을 시각화할 때 주로 사용됩니다.</li>
+</ul>
+<ul>
+<li>위 세 알고리즘을 통해 Swiss-roll을 변형하면 다음과 같습니다.<br><img src="21_pca_12.png" alt=""><br></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/" data-id="ckcw18nn2001a4cuj66cp9wna" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "PCA; Dimension Reduction + $\alpha$",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png",
+        "keywords": "",
+        "genre": "Python Data Science",
+        "datePublished": "2020-07-21",
+        "dateCreated": "2020-07-21",
+        "dateModified": "2020-07-21",
+        "url": "https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/",
+        "description": "
+다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMs
+
+1. PCA 이해를 위한 간단한 선형대수학
+머신러닝, 딥러닝 공부 블로",
+        "wordCount": 1748
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/07/14/Python-DS-20-envelope/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Envelope for Least Square Filtering and Smoothing</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/21/Python-DS-21-PCA/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/21_pca_0.png)" alt="PCA; Dimension Reduction + $\alpha$" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/21/Python-DS-21-PCA/" class="title">PCA; Dimension Reduction + $\alpha$</a></p>
+                            <p class="item-date"><time datetime="2020-07-21T07:59:00.000Z" itemprop="datePublished">2020-07-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/14/Python-DS-20-envelope/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/20_env_0.png)" alt="Envelope for Least Square Filtering and Smoothing" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/14/Python-DS-20-envelope/" class="title">Envelope for Least Square Filtering and Smoothing</a></p>
+                            <p class="item-date"><time datetime="2020-07-13T22:32:00.000Z" itemprop="datePublished">2020-07-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/08/Python-DS-19-vs_color/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/19_vs_01.png)" alt="Visualizing Science; How Color Determines What we see" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/08/Python-DS-19-vs_color/" class="title">Visualizing Science; How Color Determines What we see</a></p>
+                            <p class="item-date"><time datetime="2020-07-08T06:03:00.000Z" itemprop="datePublished">2020-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/02/Python-DS-18-pv_bond/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/18_pv_01.png)" alt="Connecting Points in Paraview" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/02/Python-DS-18-pv_bond/" class="title">Connecting Points in Paraview</a></p>
+                            <p class="item-date"><time datetime="2020-07-02T03:00:00.000Z" itemprop="datePublished">2020-07-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/30/Python-DS-17-papermining/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/17_pm_01.png)" alt="Words Co-occurence in Academic Literatures" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/06/30/Python-DS-17-papermining/" class="title">Words Co-occurence in Academic Literatures</a></p>
+                            <p class="item-date"><time datetime="2020-06-30T07:31:00.000Z" itemprop="datePublished">2020-06-30</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
