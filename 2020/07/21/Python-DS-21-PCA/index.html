@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
 <meta property="article:published_time" content="2020-07-21T07:59:00.000Z">
-<meta property="article:modified_time" content="2020-07-21T22:50:55.164Z">
+<meta property="article:modified_time" content="2020-07-25T06:44:21.076Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
@@ -387,7 +387,8 @@ Cov &= \frac{1}{n-1} X^T X = \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U 
 </li>
 <li><p>데이터의 평균과 주성분1<code>PC1</code>, 주성분2<code>PC2</code>을 확인합니다.</p>
 </li>
-<li>주성분도 <script type="math/tex">n = 64 \times 64 =4096</script>개의 데이터를 가진 이미지입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">face_mean = pca_oli.mean_.reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p1 = pca_oli.components_[<span class="number">0</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p2 = pca_oli.components_[<span class="number">1</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br></pre></td></tr></table></figure>
+<li>주성분도 <script type="math/tex">n = 64 \times 64 =4096</script>개의 데이터를 가진 이미지입니다.</li>
+<li>그래서 고유얼굴이라는 의미로 <b>eigenface</b>라고 부릅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">face_mean = pca_oli.mean_.reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p1 = pca_oli.components_[<span class="number">0</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p2 = pca_oli.components_[<span class="number">1</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br></pre></td></tr></table></figure>
 <img src="21_pca_4.png" alt=""><br></li>
 </ul>
 <ul>
@@ -500,7 +501,7 @@ Cov &= \frac{1}{n-1} X^T X = \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U 
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/" data-id="ckcw23wgo001cdcuj0whj6du6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/" data-id="ckd1aghk3002nzcuj89oiakmc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -576,11 +577,11 @@ Cov &= \frac{1}{n-1} X^T X = \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U 
         "genre": "Python Data Science",
         "datePublished": "2020-07-21",
         "dateCreated": "2020-07-21",
-        "dateModified": "2020-07-22",
+        "dateModified": "2020-07-25",
         "url": "https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/",
         "description": "
 다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강",
-        "wordCount": 1957
+        "wordCount": 1961
     }
 </script>
 
@@ -867,21 +868,5 @@ Cov &= \frac{1}{n-1} X^T X = \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U 
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
