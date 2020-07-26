@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Pit Stop for Software Maintenance | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="Formula One pit stop: How does the crew work and what are the roles to ensure Sebastian Vettel and Co can return to the track in a matter of seconds?Jupyter NotebookJupyter Lab  Pit Stop: Lightspeed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pit Stop for Software Maintenance">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="Formula One pit stop: How does the crew work and what are the roles to ensure Sebastian Vettel and Co can return to the track in a matter of seconds?Jupyter NotebookJupyter Lab  Pit Stop: Lightspeed">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/6_pitstop_01.png">
+<meta property="article:published_time" content="2020-07-25T22:10:00.000Z">
+<meta property="article:modified_time" content="2020-07-26T00:41:24.906Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/6_pitstop_01.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/07/26/python-general-6_pitstop/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/General/">General</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-General-6_pitstop" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Pit Stop for Software Maintenance
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/07/26/Python-General-6_pitstop/" class="article-date">
+         <time datetime="2020-07-25T22:10:00.000Z" itemprop="datePublished">2020-07-26</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p><a href="https://www.dailymail.co.uk/sport/formulaone/article-4401632/Formula-One-pit-stop-does-crew-work.html" target="_blank" rel="noopener">Formula One pit stop: How does the crew work and what are the roles to ensure Sebastian Vettel and Co can return to the track in a matter of seconds?</a><br><a href="https://jupyter.org/" target="_blank" rel="noopener">Jupyter Notebook</a><br><a href="https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html" target="_blank" rel="noopener">Jupyter Lab</a></p>
+</blockquote>
+<h2 id="Pit-Stop-Lightspeed-Maintenance"><a href="#Pit-Stop-Lightspeed-Maintenance" class="headerlink" title="Pit Stop: Lightspeed Maintenance"></a>Pit Stop: Lightspeed Maintenance</h2><p><img src="6_pitstop_01.jpg" alt="image: Dailymail"></p>
+<ul>
+<li>F1은 트랙을 먼저 도는 차의 순위를 겨루는 레이싱 경기입니다.<ul>
+<li>동체시력과 판단력, 반사신경에서 인간의 한계를 보여주는 레이서도 멋지지만,  </li>
+<li>차가 경기 도중 정해진 위치에 서자마자 사방에서 대기하고 있던 엔지니어들이 달라붙어 고속주행에 마모된 타이어를 순식간에 교체하는 Pit Stop은 그 자체로 한계에 대한 도전입니다. </li>
+<li>2016년 1.92초 만에 이루어진 타이어 교체는 보면서도 믿기지 않습니다.<br></li>
+</ul>
+</li>
+</ul>
+<iframe width="812" height="457" src="https://www.youtube.com/embed/7VCYBtx6h4g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<ul>
+<li>2년 전 만든 코드에 가끔 수정 요청이 들어옵니다.<ul>
+<li>처음에는 기억을 더듬어 수정했지만 <b>점점 코드를 다시 읽고 해석하는 시간이 길어집니다.</b></li>
+<li><b>배포를 위한 추가 작업이 매번 일어납니다.</b></li>
+<li>수정을 마치면 플랫폼에 올리기 위해 파일 입력을 고치고, 그림 출력을 삭제해야 합니다.</li>
+<li>갑작스런 유지보수가 길어지면 기존 일정이 꼬여버립니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>업무 방식을 근본적으로 개선하고자 했습니다.<ul>
+<li>개발자 선배들이 쌓아놓은 더 좋은 방법이 있을 것 같은데, 공부할 시간이 없었습니다.</li>
+<li>제 코드가 달리는 트랙은 F1이 아니고, 제 코드도 페라리는 아닙니다.</li>
+<li>그러나 간혹 들어오는 유지보수는 빠르게 끝내고 싶습니다.</li>
+<li>급하게 떠올린 아이디어를 적용했습니다. 더 좋은 방법을 알게 되면 좋겠습니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="As-Was-Manual-Modification"><a href="#As-Was-Manual-Modification" class="headerlink" title="As Was: Manual Modification"></a>As Was: Manual Modification</h2><ul>
+<li>개발버전과 배포버전은 데이터 처리만 동일합니다.</li>
+<li><p>이런 변화를 반영하기 위해 플랫폼 탑재용 버전으로 수정을 거쳤습니다.<br><br><img src="6_pitstop_02.png" alt=""><br></p>
+</li>
+<li><p>제 경우 유지보수는 대개 새로운 input에 대한 대응력이 부족해서 발생합니다.</p>
+<ul>
+<li>사용자 입장에서는 <b>bug</b>로 인식됩니다.</li>
+<li>대응력을 확장하려고 코드를 뜯어보다 보면 결함들이 발견됩니다.</li>
+<li>드러나지 않은 진짜 bug들이 숨어있는 것입니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>이 과정에서 debugging code가 들어갑니다.<ul>
+<li>특정 지점의 데이터를 골라서 <code>print()</code>로 뽑아봅니다.</li>
+<li>특정 데이터를 지정해서 시각화를 합니다.</li>
+<li>이 코드들이 deploy할 때 comment out되었습니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Pit-Stop-for-Software-Development"><a href="#Pit-Stop-for-Software-Development" class="headerlink" title="Pit Stop for Software Development"></a>Pit Stop for Software Development</h2><h3 id="1-Car-Tuning"><a href="#1-Car-Tuning" class="headerlink" title="(1) Car Tuning"></a>(1) Car Tuning</h3><ul>
+<li>Pit stop에서 빠른 조치가 되려면 차도 거기에 맞게 준비가 되어야 합니다.</li>
+<li>코드의 각 부분을 모드(test, debugging, deploy)에 따라 나누었습니다.<ul>
+<li><b>test:</b> 프로세싱 중심 본연의 기능</li>
+<li><b>debugging:</b> 디버깅에 활용하는 data tracking, 시각화</li>
+<li><b>deploy:</b> 웹 플랫폼 탑재시 변경되는 부분<br></li>
+</ul>
+</li>
+</ul>
+<p><img src="6_pitstop_03.png" alt=""><br></p>
+<ul>
+<li>개발 집중을 위해 test와 debugging을 분리했습니다.<ul>
+<li>기능을 추가하면 수십가지 input을 batch로 넣어서 이상은 없는지 테스트합니다.</li>
+<li>이 과정에서 일일이 상세한 데이터와 그림이 뽑혀나오면 방해입니다.</li>
+<li>test 모드에서는 최소한의 출력만을 얻어냅니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>코드 내부에 각 모드별 기능과 스위치를 탑재합니다.<ul>
+<li>코드 첫 부분에 스위치를 넣어서 모드를 선택하도록 합니다.</li>
+<li>모드별로 적용될 변수를 <code>class</code> 등으로 모아둡니다.</li>
+<li>디버깅하다가 주요 변수가 꼬여버리는 것을 막는 안전장치도 됩니다.<br><br><img src="6_pitstop_04.png" alt=""><br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>시각화 등 모드별로 작동할 기능을 <code>if</code> 문으로 제어합니다.<ul>
+<li>tracking data가 있다면 <code>class</code> 안에 데이터를 담아줍니다.</li>
+<li><code>class</code> 내에 시각화 종류별 스위치를 탑재하면 통제하기 좋습니다.<br><br><img src="6_pitstop_05.png" alt=""><br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>기능별 변수와 <code>if</code>문 탑재 정도의 일입니다.<ul>
+<li>기존 코드의 주요 부분을 건드리지 않아 오래 걸리지 않았습니다.</li>
+<li>특히 <b>삭제나 변경이 없다는 점</b>에서 오류를 발생시키지 않습니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Pit-Construction"><a href="#2-Pit-Construction" class="headerlink" title="(2) Pit Construction"></a>(2) Pit Construction</h3><ul>
+<li>이제 코드를 수리할 Pit를 만들 차례입니다.</li>
+<li><p><b>결과를 실시간으로 보며 interactive하게 조작하기 좋아야 합니다.</b></p>
+<ul>
+<li>이런 작업은 <a href="https://jupyter.org/" target="_blank" rel="noopener"><code>Jupyter Notebook</code></a>이 좋습니다.</li>
+<li>저는 <a href="https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html" target="_blank" rel="noopener"><code>Jupyter Lab</code></a>을 사용했습니다.</li>
+<li>메인 코드를 복사해 넣을 Cell을 가운데 놓고, 위와 아래에 데이터 분석을 위한 코드를 놓습니다.<br><br><img src="6_pitstop_06.png" alt=""><br></li>
+</ul>
+</li>
+<li><p>data analysis용 코드</p>
+<ul>
+<li>데이터를 그림으로 시각화해주는 코드가 여기에 올 수 있습니다.</li>
+<li>메인 코드에 넣을 수도 있겠지만, 메인 코드의 분량을 최대한 줄여서 본연의 기능에만 집중시키고자 했습니다. 그래야 디버깅이나 기능 추가가 덜 힘드니까요.</li>
+<li>제 경우 eigenvector와 데이터를 함께 시각화하는 코드를 여기 넣었습니다.<br><br><img src="6_pitstop_07.png" alt=""><br></li>
+</ul>
+</li>
+<li><p>data analysis 결과  </p>
+<ul>
+<li>메인 코드에서 뱉어주는 최소한의 text output엔 핵심적인 결과가 있습니다.</li>
+<li>debugging 모드라면 몇 가지 시각화가 추가적으로 나올 것입니다.</li>
+<li>이 결과와 함께 보기 위해서 결과 부분을 메인 코드 하단에 위치시켰습니다.<br><br><img src="6_pitstop_08.png" alt="debug mode의 histogram출력(위), eigenvector 추가 분석 시각화(아래)"><br></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Pit-Operation"><a href="#3-Pit-Operation" class="headerlink" title="(3) Pit Operation"></a>(3) Pit Operation</h3><ul>
+<li><b>Step 1. 유지보수 요청이 들어온 코드를 주피터 노트북에 붙여넣고 실행합니다.</b><ul>
+<li>메인 코드의 첫 부분에 있는 <code>debugmode = 1</code>로 디버깅 모드를 설정하고,</li>
+<li>셀을 실행해서 기존의 결과물을 얻어냅니다.</li>
+<li>풍부해진 시각화와 추가 분석을 통해 들여다봄으로써 오류의 원인을 파악합니다.</li>
+<li>시행착오를 거치며 메인 코드를 수정하고, 버그를 수정합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><b>Step 2. 원 코드를 버그 수정본으로 교체합니다.</b></p>
+<ul>
+<li>Ctrl+C/V로 가능합니다.</li>
+<li><code>debugmode == 0</code>으로 세팅해서 테스트 모드로 변경합니다.</li>
+<li>다양한 input을 대상으로 batch test를 진행, 디버깅 성공 여부를 판단합니다.</li>
+<li>작성하기에 따라 Pit 자체를 디버깅 보고서로 제출할 수도 있습니다.<br><br><img src="6_pitstop_09.png" alt="엑셀로 정리한 batch test 결과"><br></li>
+</ul>
+</li>
+<li><p><b>Step 3. deploymode로 배포합니다.</b></p>
+<ul>
+<li>디버깅이 흡족하다면, <code>deploymode = 1</code>로 변경 후 코드를 배포합니다.</li>
+<li>파일 입출력에 관련된 많은 설정이 자동으로 변경됩니다<br></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/" data-id="ckd2cyla0002bqkujdomsfbc0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Pit Stop for Software Maintenance",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-General/6_pitstop_01.png",
+        "keywords": "",
+        "genre": "Python General",
+        "datePublished": "2020-07-26",
+        "dateCreated": "2020-07-26",
+        "dateModified": "2020-07-26",
+        "url": "https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/",
+        "description": "
+Formula One pit stop: How does the crew work and what are the roles to ensure Sebastian Vettel and Co can return to the track in a matter of seconds?Jupyter NotebookJupyter Lab
+
+Pit Stop: Lightspeed ",
+        "wordCount": 620
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/07/26/Python-DS-22-pv_vesta/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Paraview looks like VESTA</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/26/Python-General-6_pitstop/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/6_pitstop_01.png)" alt="Pit Stop for Software Maintenance" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2020/07/26/Python-General-6_pitstop/" class="title">Pit Stop for Software Maintenance</a></p>
+                            <p class="item-date"><time datetime="2020-07-25T22:10:00.000Z" itemprop="datePublished">2020-07-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/26/Python-DS-22-pv_vesta/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/22_pv_vesta_0.png)" alt="Paraview looks like VESTA" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/26/Python-DS-22-pv_vesta/" class="title">Paraview looks like VESTA</a></p>
+                            <p class="item-date"><time datetime="2020-07-25T19:55:00.000Z" itemprop="datePublished">2020-07-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/21/Python-DS-21-PCA/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/21_pca_0.png)" alt="PCA; Dimension Reduction + $\alpha$" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/21/Python-DS-21-PCA/" class="title">PCA; Dimension Reduction + $\alpha$</a></p>
+                            <p class="item-date"><time datetime="2020-07-21T07:59:00.000Z" itemprop="datePublished">2020-07-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/14/Python-DS-20-envelope/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/20_env_0.png)" alt="Envelope for Least Square Filtering and Smoothing" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/14/Python-DS-20-envelope/" class="title">Envelope for Least Square Filtering and Smoothing</a></p>
+                            <p class="item-date"><time datetime="2020-07-13T22:32:00.000Z" itemprop="datePublished">2020-07-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/08/Python-DS-19-vs_color/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/19_vs_01.png)" alt="Visualizing Science; How Color Determines What we see" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/07/08/Python-DS-19-vs_color/" class="title">Visualizing Science; How Color Determines What we see</a></p>
+                            <p class="item-date"><time datetime="2020-07-08T06:03:00.000Z" itemprop="datePublished">2020-07-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
