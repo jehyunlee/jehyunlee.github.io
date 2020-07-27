@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/6_pitstop_01.png">
 <meta property="article:published_time" content="2020-07-25T22:10:00.000Z">
-<meta property="article:modified_time" content="2020-07-26T00:44:05.003Z">
+<meta property="article:modified_time" content="2020-07-27T00:56:32.264Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/6_pitstop_01.png">
@@ -243,27 +243,40 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h2 id="As-Was-Manual-Modification"><a href="#As-Was-Manual-Modification" class="headerlink" title="As Was: Manual Modification"></a>As Was: Manual Modification</h2><ul>
+<li><p><b>Problem 1: 두 개의 버전</b></p>
+<ul>
 <li>개발버전과 배포버전은 데이터 처리만 동일합니다.</li>
-<li><p>이런 변화를 반영하기 위해 플랫폼 탑재용 버전으로 수정을 거쳤습니다.<br><br><img src="6_pitstop_02.png" alt=""><br></p>
+<li>개발버전에서 디버깅과 테스트를 실시한 후 배포버전에서 input과 output을 교체했습니다.</li>
+<li>교체 방식도 초보스러워서, 개발버전의 것을 comment out 처리하고 배포버전의 해당 부분을 살리는 식이었습니다.<br><br><img src="6_pitstop_02.png" alt=""><br></li>
+</ul>
 </li>
-<li><p>제 경우 유지보수는 대개 새로운 input에 대한 대응력이 부족해서 발생합니다.</p>
+<li><p><b>Problem 2: 유지보수 요청 원인</b></p>
 <ul>
-<li>사용자 입장에서는 <b>bug</b>로 인식됩니다.</li>
-<li>대응력을 확장하려고 코드를 뜯어보다 보면 결함들이 발견됩니다.</li>
-<li>드러나지 않은 진짜 bug들이 숨어있는 것입니다.</li>
+<li>제 경우 대개 새로운 input에 대한 대응력이 부족해서 발생합니다.</li>
+<li>제 입장에서는 <b>“처음부터 이런 경우도 있다고 이야기를 해주시던가”</b> 싶습니다.</li>
+<li>그러나 사용자 입장에서는 <b>bug</b>로 인식됩니다.</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>이 과정에서 debugging code가 들어갑니다.<ul>
+<li><b>Problem 3: 디버깅 방식</b><ul>
 <li>특정 지점의 데이터를 골라서 <code>print()</code>로 뽑아봅니다.</li>
 <li>특정 데이터를 지정해서 시각화를 합니다.</li>
-<li>이 코드들이 deploy할 때 comment out되었습니다.</li>
+<li>그리고 이 코드들은 deploy할 때 comment out됩니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>마치 동네 카센터 느낌입니다.<ul>
+<li>차가 들어오면 증상을 차주에게 물어보고, </li>
+<li>차를 들어올리고, 문제 부위 위주로 살피다가,</li>
+<li>필요한 부품이 없다면 그제서야 주문하는 듯한 모습입니다.</li>
+<li>몇분 내 pit out이 가능할 리가 없습니다.</li>
 </ul>
 </li>
 </ul>
 <h2 id="Pit-Stop-for-Software-Development"><a href="#Pit-Stop-for-Software-Development" class="headerlink" title="Pit Stop for Software Development"></a>Pit Stop for Software Development</h2><h3 id="1-Car-Tuning"><a href="#1-Car-Tuning" class="headerlink" title="(1) Car Tuning"></a>(1) Car Tuning</h3><ul>
-<li>Pit stop에서 빠른 조치가 되려면 차도 거기에 맞게 준비가 되어야 합니다.</li>
+<li>Pit stop에서 빠른 조치가 되려면 차부터 여기에 맞게 준비가 되어야 합니다.</li>
 <li>코드의 각 부분을 모드(test, debugging, deploy)에 따라 나누었습니다.<ul>
 <li><b>test:</b> 프로세싱 중심 본연의 기능</li>
 <li><b>debugging:</b> 디버깅에 활용하는 data tracking, 시각화</li>
@@ -273,10 +286,21 @@ ga('send', 'pageview');
 </ul>
 <p><img src="6_pitstop_03.png" alt=""><br></p>
 <ul>
-<li>개발 집중을 위해 test와 debugging을 분리했습니다.<ul>
-<li>기능을 추가하면 수십가지 input을 batch로 넣어서 이상은 없는지 테스트합니다.</li>
-<li>이 과정에서 일일이 상세한 데이터와 그림이 뽑혀나오면 방해입니다.</li>
+<li>집중을 위해 개발 모드를 test와 debugging을 분리했습니다.</li>
+</ul>
+<ul>
+<li><b>test 모드는 플랫폼상 동작을 최대한 모사한 환경입니다.</b><ul>
+<li>input 수십가지를 자동으로 넣는 batch 수행방식이라는 것이 유일한 차이입니다.</li>
 <li>test 모드에서는 최소한의 출력만을 얻어냅니다.</li>
+<li>이 과정에서 상세 데이터 등이 줄줄이 뽑혀나오면 방해이기 때문입니다.  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>debugging 모드는 문제의 원인을 찾고 수정시 변화를 찾는 환경입니다.</b><ul>
+<li>특정 데이터를 tracking하는 코드가 필요하고,</li>
+<li>이해를 돕기 위한 시각화 코드도 함께 필요합니다.</li>
+<li>통상적이라면 필요없을 상세한 출력문도 필요합니다.</li>
 </ul>
 </li>
 </ul>
@@ -296,8 +320,9 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li>기능별 변수와 <code>if</code>문 탑재 정도의 일입니다.<ul>
-<li>기존 코드의 주요 부분을 건드리지 않아 오래 걸리지 않았습니다.</li>
+<li><b>기존 코드를 별로 건드리지 않습니다</b><ul>
+<li>기능별 변수와 <code>if</code>문 탑재 정도의 일입니다.</li>
+<li>기존 코드의 주요 부분을 수정하지 않는 단순작업입니다.</li>
 <li>특히 <b>삭제나 변경이 없다는 점</b>에서 오류를 발생시키지 않습니다.</li>
 </ul>
 </li>
@@ -358,7 +383,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/" data-id="ckd2d0wfm002bicuj0hyt1biy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/" data-id="ckd3sxe4z00281suj3dtacaka" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -434,13 +459,13 @@ ga('send', 'pageview');
         "genre": "Python General",
         "datePublished": "2020-07-26",
         "dateCreated": "2020-07-26",
-        "dateModified": "2020-07-26",
+        "dateModified": "2020-07-27",
         "url": "https://jehyunlee.github.io/2020/07/26/Python-General-6_pitstop/",
         "description": "
 Formula One pit stop: How does the crew work and what are the roles to ensure Sebastian Vettel and Co can return to the track in a matter of seconds?Jupyter NotebookJupyter Lab
 
 Pit Stop: Lightspeed ",
-        "wordCount": 619
+        "wordCount": 695
     }
 </script>
 
