@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png">
 <meta property="article:published_time" content="2020-08-11T00:28:00.000Z">
-<meta property="article:modified_time" content="2020-08-11T13:15:56.835Z">
+<meta property="article:modified_time" content="2020-08-11T13:36:41.028Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png">
@@ -256,7 +256,7 @@ ga('send', 'pageview');
 <li>지구는 구형이고 한반도는 북반구에 위치하고 있습니다.</li>
 <li>따라서 북쪽으로 갈수록 단위 경도의 길이가 짧아져야 합니다.</li>
 <li>그러나 좌측처럼 위도와 경도로 그리면 이 전제에 위배되어 <b>지도를 그림처럼 왜곡시킵니다.</b></li>
-<li>우측과 비교하면 좌측에서 북쪽으로 갈수록 점점 넓어지고 있습니다.</li>
+<li>좌측 그림을 보면 북쪽으로 갈수록 점점 넓어지고 있습니다.</li>
 </ul>
 </li>
 </ul>
@@ -264,7 +264,7 @@ ga('send', 'pageview');
 <p><a href="https://matplotlib.org/3.2.1/gallery/subplots_axes_and_figures/axis_equal_demo.html" target="_blank" rel="noopener">matplotlib: Axis Equal Demo</a><br><a href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.axis.html?highlight=axis#matplotlib.axes.Axes.axis" target="_blank" rel="noopener">matplotlib.axes.Axes.axis</a><br><a href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_aspect.html?highlight=set_aspect#matplotlib.axes.Axes.set_aspect" target="_blank" rel="noopener">matplotlib.axes.Axes.set_aspect</a></p>
 </blockquote>
 <ul>
-<li>UTM 좌표계에도 왜곡이 존재합니다.  </li>
+<li>UTM 좌표계를 적용해도 matplotlib에서 왜곡이 발생합니다.</li>
 <li><p>그림 크기가 적절치 않았던 탓에 가로가 세로보다 더 깁니다.<br><br><img src="26_ccmap_code2_03.png" alt=""><br></p>
 </li>
 <li><p><code>matplotlib</code>엔 그림의 종횡비를 데이터에 맞춰주는 명령이 있습니다.</p>
@@ -309,8 +309,8 @@ ga('send', 'pageview');
 <li>컬러맵이 적절치 않으면 <b>데이터 독해력이 떨어집니다.</b><ul>
 <li><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에서 여러가지 컬러맵을 적용한 경우를 보았습니다.</li>
 <li>효과적인 데이터 전달을 위해 데이터를 꾸미기 전에 <b>색각이상자<code>Color Vision Deficiency</code></b>들 입장에서 컬러맵이 어떻게 보일지 간접적으로나마 경험해 봅시다.</li>
-<li>색각이상은 남성에게 특히 심한데, <b>국내 남성의 6%</b>, 전 세계 <b>남성의 8%</b>, 특히 코카서스인(백인)의 &lt;/b&gt;11%&lt;/b&gt;가 색각이상자라고 합니다. </li>
-<li>여성 중 색각이상자 비중은 0.5%로 남성에 비해 낮습니ㅏㄷ.</li>
+<li>색각이상은 남성에게 특히 심한데, <b>국내 남성의 6%</b>, 전 세계 <b>남성의 8%</b>, 특히 코카서스인(백인)의 <b>11%</b>가 색각이상자라고 합니다. </li>
+<li>여성 중 색각이상자 비중은 0.5%로 남성에 비해 낮습니다.</li>
 <li>내 주위에 남성 50명이 있다면 그 중 3~4명은 색각이상을 겪고 있을 수 있습니다.</li>
 </ul>
 </li>
@@ -371,7 +371,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li>경계구간 명암 차이로 <b>시인성</b>이 달라집니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 위 풍속 시각화 코드에 컬러맵만 다르게 적용합니다.</span></span><br><span class="line">cmap = Greens_Blues_1</span><br><span class="line">cmap.set_over(<span class="string">"magenta"</span>)</span><br></pre></td></tr></table></figure>
+<li>경계구간 명암 차이로 <b>구간 시인성</b>이 달라집니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 위 풍속 시각화 코드에 컬러맵만 다르게 적용합니다.</span></span><br><span class="line">cmap = Greens_Blues_1</span><br><span class="line">cmap.set_over(<span class="string">"magenta"</span>)</span><br></pre></td></tr></table></figure>
 <img src="26_ccmap_code2_10.png" alt=""><br><br><img src="26_ccmap_code2_11.png" alt=""><br> </li>
 </ul>
 <ul>
@@ -399,7 +399,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/" data-id="ckdpyx9la001h14ujcr2k8bdc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/" data-id="ckdpzo3l7001hzcuja3oz2yec" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -488,7 +488,7 @@ Matplotlib Custom Colormap
 지난 글에는 크게 두 가지 그림이 등장합니다.
 
 하나는 val",
-        "wordCount": 1614
+        "wordCount": 1615
     }
 </script>
 
