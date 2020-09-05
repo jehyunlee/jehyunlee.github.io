@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/28_mpl_spines_0.png">
 <meta property="article:published_time" content="2020-08-26T22:38:00.000Z">
-<meta property="article:modified_time" content="2020-08-29T00:38:24.738Z">
+<meta property="article:modified_time" content="2020-09-05T14:34:46.892Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/28_mpl_spines_0.png">
@@ -387,7 +387,8 @@ ga('send', 'pageview');
 </ul>
 <h4 id="3-2-major-grid-only"><a href="#3-2-major-grid-only" class="headerlink" title="3.2. major grid only"></a>3.2. major grid only</h4><ul>
 <li>major와 minor ticks가 구분되면, 한쪽을 선택해서 그릴 수 있습니다.</li>
-<li>major와 minor grid를 구분해서 지정할 수 있기 때문에 색상이나 선 스타일 등도 변화를 줄 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i], zorder=<span class="number">2</span>) <span class="comment"># zorder: bar를 grid 앞으로.</span></span><br><span class="line">    ax[i].spines[<span class="string">"top"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">"right"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">"left"</span>].set_position((<span class="string">"outward"</span>, <span class="number">10</span>))</span><br><span class="line">    ax[i].yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line">    ax[i].yaxis.set_major_formatter(<span class="string">'&#123;x:0.2f&#125;'</span>)</span><br><span class="line">    ax[i].yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : major, minor 둘 다</span></span><br><span class="line">ax[<span class="number">0</span>].grid(axis=<span class="string">"y"</span>, which=<span class="string">"both"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : major만</span></span><br><span class="line">ax[<span class="number">1</span>].grid(axis=<span class="string">"y"</span>, which=<span class="string">"major"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : major만 + 여러 옵션</span></span><br><span class="line">ax[<span class="number">2</span>].grid(axis=<span class="string">"y"</span>, which=<span class="string">"major"</span>, color=<span class="string">"r"</span>, ls=<span class="string">":"</span>, lw=<span class="number">0.5</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<li>major와 minor grid를 구분해서 지정할 수 있습니다.</li>
+<li>따라서, 색상이나 선 스타일 등을 구분해서 변화시키기 좋습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i], zorder=<span class="number">2</span>) <span class="comment"># zorder: bar를 grid 앞으로.</span></span><br><span class="line">    ax[i].spines[<span class="string">"top"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">"right"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">"left"</span>].set_position((<span class="string">"outward"</span>, <span class="number">10</span>))</span><br><span class="line">    ax[i].yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line">    ax[i].yaxis.set_major_formatter(<span class="string">'&#123;x:0.2f&#125;'</span>)</span><br><span class="line">    ax[i].yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : major, minor 둘 다</span></span><br><span class="line">ax[<span class="number">0</span>].grid(axis=<span class="string">"y"</span>, which=<span class="string">"both"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : major만</span></span><br><span class="line">ax[<span class="number">1</span>].grid(axis=<span class="string">"y"</span>, which=<span class="string">"major"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : major만 + 여러 옵션</span></span><br><span class="line">ax[<span class="number">2</span>].grid(axis=<span class="string">"y"</span>, which=<span class="string">"major"</span>, color=<span class="string">"r"</span>, ls=<span class="string">":"</span>, lw=<span class="number">0.5</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <img src="28_mpl_spines_13.png" alt=""> </li>
 </ul>
 <ul>
@@ -403,7 +404,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/" data-id="ckejui3bc001p9ouj0z2b04sa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/" data-id="ckeprr070001w4sujepzw67gd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -479,7 +480,7 @@ ga('send', 'pageview');
         "genre": "Python Data Science",
         "datePublished": "2020-08-27",
         "dateCreated": "2020-08-27",
-        "dateModified": "2020-08-29",
+        "dateModified": "2020-09-05",
         "url": "https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/",
         "description": "
 착시를 줄여주는 축과 격자를 설정하는 방법입니다.
@@ -487,7 +488,7 @@ matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.
 
 
 Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What ",
-        "wordCount": 1882
+        "wordCount": 1880
     }
 </script>
 
