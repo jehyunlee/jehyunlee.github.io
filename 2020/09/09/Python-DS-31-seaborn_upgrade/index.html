@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/31-seaborn_upgrade_0.png">
 <meta property="article:published_time" content="2020-09-09T10:45:00.000Z">
-<meta property="article:modified_time" content="2020-09-09T13:38:18.161Z">
+<meta property="article:modified_time" content="2020-09-09T13:52:35.895Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/31-seaborn_upgrade_0.png">
@@ -278,14 +278,14 @@ ga('send', 'pageview');
 <ul>
 <li><p><b>seaborn</b>의 <b>그려라</b> 명령은 명령어마다 다릅니다.</p>
 <ul>
-<li>어떤 명령어는 <code>figure</code>와 유사한 <b><code>FacetGrid</code></b>를 출력합니다: <b><code>relplot()</code>, <code>displot()</code>, <code>catplot()</code></b><br>이런 명령어는 <b>출력 결과에 <code>.fig</code>나 <code>.axes</code>를 붙임</b>으로써 matplotlib 속성에 접근할 수 있습니다.</li>
-<li>어떤 명령어는 <b><code>axes</code></b>를 출력합니다: <b><code>kdeplot()</code>, <code>violinplot()</code></b> 등등.<br>이런 명령어의 출력 결과는 matplotlib <b><code>subplots</code>에 끼워 넣기 좋습니다.</b><br>그러나 seaborn에서 곧장 <b>저장이 안됩니다.</b> <code>axes</code> 객체는 <code>savefig</code> 메소드가 없기 때문입니다.<br><br><img src="31-seaborn_upgrade_5.png" alt="저장하려면 에러가 납니다."><br><br><img src="31-seaborn_upgrade_6.png" alt=".get_figure()를 해줘야 저장이 됩니다."><br></li>
+<li>어떤 명령어는 <code>figure</code>와 유사한 <b><code>FacetGrid</code></b>를 출력합니다: <b><code>relplot()</code>, <code>displot()</code>, <code>catplot()</code></b><br>이런 명령어는 <b>출력 결과에 <code>.fig</code>나 <code>.axes</code>를 붙임</b>으로써 속성에 접근할 수 있습니다.</li>
+<li>어떤 명령어는 <b><code>axes</code></b>를 출력합니다: <b><code>kdeplot()</code>, <code>violinplot()</code></b> 등등.<br>이런 명령어의 출력 결과는 matplotlib <b><code>subplots</code>에 끼워 넣기 좋습니다.</b><br>그러나 곧장 <b>저장이 안됩니다.</b> <code>axes</code> 객체는 <code>savefig</code> 메소드가 없기 때문입니다.<br><br><img src="31-seaborn_upgrade_5.png" alt="저장하려면 에러가 납니다."><br><br><img src="31-seaborn_upgrade_6.png" alt=".get_figure()를 해줘야 저장이 됩니다."><br></li>
 </ul>
 </li>
 <li><p><b>이럴 때는 matploltib이 차라리 쉽습니다</b></p>
 <ul>
 <li>기존 버전에도 있던, seaborn의 근본적인 문제입니다.</li>
-<li>이번 0.11 버전에서 <b>공식문서가 대폭 강화</b>되어 오류의 원인과 해결책을 알기 쉽게 되었습니다.</li>
+<li>이번 0.11 버전에서 <b>공식문서가 강화</b>되어 오류의 원인과 해결책을 알기 쉽게 되었습니다.</li>
 <li>seaborn plot을 제어할 때는 <b>기본 속성</b>을 알아야 혼동이 없습니다.</li>
 </ul>
 </li>
@@ -478,7 +478,7 @@ seaborn
 seaborn: introductory notes
 
 1.1. m",
-        "wordCount": 558
+        "wordCount": 555
     }
 </script>
 
@@ -765,21 +765,5 @@ seaborn: introductory notes
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
