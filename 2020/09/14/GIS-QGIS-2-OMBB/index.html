@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Minimum Oriented Rectangle | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.  References  QGISQGIS: Oriented minimum bounding boxQGIS: 최소 경계 도형QGIS: 중심QGIS: 도형">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Minimum Oriented Rectangle">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.  References  QGISQGIS: Oriented minimum bounding boxQGIS: 최소 경계 도형QGIS: 중심QGIS: 도형">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/2_ombb_0.png">
+<meta property="article:published_time" content="2020-09-13T22:23:00.000Z">
+<meta property="article:modified_time" content="2020-09-14T01:37:48.911Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/2_ombb_0.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/09/14/gis-qgis-2-ombb/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/GIS/QGIS/">QGIS</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-GIS-QGIS-2-OMBB" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Minimum Oriented Rectangle
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="article-date">
+         <time datetime="2020-09-13T22:23:00.000Z" itemprop="datePublished">2020-09-14</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다.</li>
+<li>사용한 QGIS의 버전은 <code>3.10.9-A Coruña</code> 입니다.</li>
+</ul>
+<p><b>References</b></p>
+<blockquote>
+<p><a href="https://qgis.org/ko/site/" target="_blank" rel="noopener">QGIS</a><br><a href="https://docs.qgis.org/2.18/en/docs/user_manual/processing_algs/qgis/vector_general_tools.html#id73" target="_blank" rel="noopener">QGIS: Oriented minimum bounding box</a><br><a href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#minimum-bounding-geometry" target="_blank" rel="noopener">QGIS: 최소 경계 도형</a><br><a href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#centroids" target="_blank" rel="noopener">QGIS: 중심</a><br><a href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#add-geometry-attributes" target="_blank" rel="noopener">QGIS: 도형 속성 추가</a></p>
+</blockquote>
+<h3 id="1-shapefile-읽기"><a href="#1-shapefile-읽기" class="headerlink" title="1. shapefile 읽기"></a>1. shapefile 읽기</h3><ul>
+<li>QGIS에서 <b>shapefile</b>을 읽어옵니다.</li>
+<li>건물 형상이 반영되어 곳곳이 울퉁불퉁합니다.<br><br><img src="2_ombb_1.png" alt=""><br></li>
+</ul>
+<h3 id="2-대상-도형-선택"><a href="#2-대상-도형-선택" class="headerlink" title="2. 대상 도형 선택"></a>2. 대상 도형 선택</h3><ul>
+<li>형상을 단순화 할 <b>대상들을 선택</b>합니다.</li>
+<li>전체 도형을 대상으로 할 것이므로 전체를 선택합니다.<br><br><img src="2_ombb_2.png" alt=""><br></li>
+</ul>
+<h3 id="3-최소경계도형-옵션-선택"><a href="#3-최소경계도형-옵션-선택" class="headerlink" title="3. 최소경계도형 옵션 선택"></a>3. 최소경계도형 옵션 선택</h3><ul>
+<li><p><b>공간 처리<code>Processing</code> &gt; 툴박스<code>Toolbox</code> &gt; 최소 경계 도형<code>Minimum Bounding Geometry</code></b>을 실행합니다.<br><br><img src="2_ombb_3.png" alt=""><br></p>
+</li>
+<li><p><b>[선택한 객체만]</b>을 선택합니다.</p>
+</li>
+<li><p><b>[필드]</b>에서 개체식별자를 선택합니다.</p>
+<ul>
+<li>개별 건물을 구분하는 <code>BD_MGT_SN</code>을 선택합니다.</li>
+<li>선택이 되지 않을 경우 전체를 뭉뚱그리는 도형이 생성됩니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><b>[도형 유형]</b>을 선택합니다.<br><br><img src="2_ombb_6.png" alt=""><br></p>
+</li>
+<li><p><b>[실행]</b>을 선택하여 최소경계도형을 생성합니다.<br></p>
+</li>
+</ul>
+<h3 id="4-최소경계도형-중심점-추출"><a href="#4-최소경계도형-중심점-추출" class="headerlink" title="4. 최소경계도형 중심점 추출"></a>4. 최소경계도형 중심점 추출</h3><ul>
+<li><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 중심점<code>Polygon Centroid</code></b>을 실행합니다.</li>
+<li><p><b>[각각의 파트별로 중심점 생성]</b>을 체크합니다.<br><br><img src="2_ombb_4.png" alt=""><br></p>
+</li>
+<li><p><b>[실행]</b>을 선택하여 최소경계도형에서 중심점을 추출합니다.<br></p>
+</li>
+</ul>
+<h3 id="5-최소경계도형-중심점-속성-추가"><a href="#5-최소경계도형-중심점-속성-추가" class="headerlink" title="5. 최소경계도형 + 중심점 속성 추가"></a>5. 최소경계도형 + 중심점 속성 추가</h3><ul>
+<li>활용을 위해 최소경계도형에 중심점을 추가해야 합니다.</li>
+<li><p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 도형 속성 추가<code>Expand/Add Geometry</code></b>를 실행합니다.<br><br><img src="2_ombb_5.png" alt=""><br></p>
+</li>
+<li><p>중심점 좌표가 <code>xcoord</code>, <code>ycoord</code>로 붙어 있습니다.</p>
+</li>
+</ul>
+<h3 id="6-파일로-저장"><a href="#6-파일로-저장" class="headerlink" title="6. 파일로 저장"></a>6. 파일로 저장</h3><ul>
+<li><p><b>레이어<code>Layer</code> &gt; 다른 이름으로 저장<code>Save As...</code><b>에서 저장합니다.<br><img src="2_ombb_7.png" alt=""><br></p>
+</li>
+<li><p><b>shapefile : <code>ESRI shapefile</code></b></p>
+</li>
+<li><b>csvfile : <code>쉼표로 구분된 값 [CSV]</code></b></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/" data-id="ckf1uysvg0002pgujh78yhf9i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Minimum Oriented Rectangle",
+        "image": "https://jehyunlee.github.io/thumbnails/GIS-QGIS/2_ombb_0.png",
+        "keywords": "",
+        "genre": "GIS QGIS",
+        "datePublished": "2020-09-14",
+        "dateCreated": "2020-09-14",
+        "dateModified": "2020-09-14",
+        "url": "https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/",
+        "description": "
+QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다.
+사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.
+
+References
+
+QGISQGIS: Oriented minimum bounding boxQGIS: 최소 경계 도형QGIS: 중심QGIS: 도형 ",
+        "wordCount": 214
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Seaborn 0.11 Quick Review</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-QGIS/2_ombb_0.png)" alt="Minimum Oriented Rectangle" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/QGIS/">QGIS</a></p>
+                            <p class="item-title"><a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="title">Minimum Oriented Rectangle</a></p>
+                            <p class="item-date"><time datetime="2020-09-13T22:23:00.000Z" itemprop="datePublished">2020-09-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/31-seaborn_upgrade_0.png)" alt="Seaborn 0.11 Quick Review" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" class="title">Seaborn 0.11 Quick Review</a></p>
+                            <p class="item-date"><time datetime="2020-09-09T10:45:00.000Z" itemprop="datePublished">2020-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/07/Python-DS-30-mpl_dists/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/30-mpl_dists_0.png)" alt="Ridgeline Plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/07/Python-DS-30-mpl_dists/" class="title">Ridgeline Plot</a></p>
+                            <p class="item-date"><time datetime="2020-09-07T00:40:00.000Z" itemprop="datePublished">2020-09-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/01/Python-DS-29-dld_pyvis/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/29-dld_pyvis.png)" alt="Python Visualization for Me" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/01/Python-DS-29-dld_pyvis/" class="title">Python Visualization for Me</a></p>
+                            <p class="item-date"><time datetime="2020-09-01T10:53:00.000Z" itemprop="datePublished">2020-09-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/27/Python-DS-28-mpl_spines_grids/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/28_mpl_spines_0.png)" alt="Spines &amp; Grids" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/08/27/Python-DS-28-mpl_spines_grids/" class="title">Spines &amp; Grids</a></p>
+                            <p class="item-date"><time datetime="2020-08-26T22:38:00.000Z" itemprop="datePublished">2020-08-27</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
