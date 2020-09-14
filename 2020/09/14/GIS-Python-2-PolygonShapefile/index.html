@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Create Shapefile from Polygon Dots | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다. shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다. shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.  References  shapelyfionageopandas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Create Shapefile from Polygon Dots">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다. shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다. shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.  References  shapelyfionageopandas">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/2_polygonshp_1.png">
+<meta property="article:published_time" content="2020-09-14T04:11:00.000Z">
+<meta property="article:modified_time" content="2020-09-14T06:17:53.077Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/2_polygonshp_1.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/09/14/gis-python-2-polygonshapefile/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/GIS/Python/">Python</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-GIS-Python-2-PolygonShapefile" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Create Shapefile from Polygon Dots
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" class="article-date">
+         <time datetime="2020-09-14T04:11:00.000Z" itemprop="datePublished">2020-09-14</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다.</li>
+<li><code>shapely</code>와 <code>fiona</code>를 사용했으며, <code>geopandas 0.8</code>을 설치할 때 함께 설치되는 버전을 사용했습니다.</li>
+<li><code>shapely</code> 버전은 1.7, <code>fiona</code> 버전은 1.8.13.post1 입니다.</li>
+</ul>
+<p><b>References</b></p>
+<blockquote>
+<p><a href="https://shapely.readthedocs.io/en/latest/" target="_blank" rel="noopener">shapely</a><br><a href="https://github.com/Toblerity/Fiona" target="_blank" rel="noopener">fiona</a><br><a href="https://geopandas.org/" target="_blank" rel="noopener">geopandas</a></p>
+</blockquote>
+<h3 id="1-csv-읽기"><a href="#1-csv-읽기" class="headerlink" title="1. csv 읽기"></a>1. csv 읽기</h3><ul>
+<li><code>.csv</code> 파일에서 건물 정보를 읽어옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_ombb0914 = pd.read_csv(<span class="string">'./data/ombb_200914.csv'</span>)</span><br><span class="line">df_ombb0914.head()</span><br></pre></td></tr></table></figure>
+<img src="2_polygonshp_2.png" alt=""><br></li>
+</ul>
+<ul>
+<li>데이터 컬럼은 다음과 같습니다.<ul>
+<li><b><code>BD_MGT_SN</code> : </b>건물관리번호 (건물 고유 번호)</li>
+<li><b><code>width</code> <script type="math/tex">w</script> : </b>최소경계도형 폭 (<script type="math/tex">m</script>)</li>
+<li><b><code>height</code> <script type="math/tex">h</script> : </b>최소경계도형 높이 (<script type="math/tex">m</script>)</li>
+<li><b><code>angle</code> <script type="math/tex">\theta</script> : </b>최소경계도형 회전각. 정북 기준 시계방향 (<script type="math/tex">\text{deg.}</script>)</li>
+<li><b><code>area</code> : </b>최소경계도형 넓이 (<script type="math/tex">m^2</script>)</li>
+<li><b><code>perimeter</code> : </b>최소경계도형 둘레 (<script type="math/tex">m</script>)</li>
+<li><b><code>xcoord</code> : </b>최소경계도형 중심점 x좌표 (ESPG:5186)</li>
+<li><b><code>ycoord</code> : </b>최소경계도형 중심점 y좌표 (ESPG:5186)</li>
+</ul>
+</li>
+</ul>
+<p><img src="2_polygonshp_3.png" alt=""><br></p>
+<h3 id="2-polygon-변환"><a href="#2-polygon-변환" class="headerlink" title="2. polygon 변환"></a>2. polygon 변환</h3><ul>
+<li>행 하나가 건물 하나에 해당합니다.</li>
+<li>행 하나마다 정보를 좌표로 변환해서 <code>shapefile</code>로 저장합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> mapping, Polygon</span><br><span class="line"><span class="keyword">import</span> fiona</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_polygons</span><span class="params">(x, y, width, height, angle, filename)</span>:</span></span><br><span class="line">    h_half = height/<span class="number">2</span> </span><br><span class="line">    w_half = width/<span class="number">2</span></span><br><span class="line">    a_rad = np.deg2rad(angle)</span><br><span class="line">    </span><br><span class="line">	<span class="comment"># 꼭지점 좌표 생성</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_coord</span><span class="params">(x, y, h_half, w_half, a_rad)</span>:</span></span><br><span class="line">        X = x + h_half * np.sin(a_rad) - w_half * np.cos(a_rad)</span><br><span class="line">        Y = y + h_half * np.cos(a_rad) + w_half * np.sin(a_rad)</span><br><span class="line">        <span class="keyword">return</span> (X, Y)</span><br><span class="line">    </span><br><span class="line">	<span class="comment"># shapefile schema 지정</span></span><br><span class="line">    schema = &#123;<span class="string">"geometry"</span>: <span class="string">"Polygon"</span>, <span class="string">"properties"</span>: &#123;<span class="string">"id"</span>: <span class="string">"int"</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="comment"># 행 수만큼 반복</span></span><br><span class="line">    n_polygon = len(x)</span><br><span class="line">    <span class="keyword">with</span> fiona.open(<span class="string">f"<span class="subst">&#123;filename&#125;</span>"</span>, <span class="string">"w"</span>, <span class="string">"ESRI Shapefile"</span>, schema) <span class="keyword">as</span> c:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n_polygon):</span><br><span class="line">            p_x, p_y = x.iloc[i], y.iloc[i]</span><br><span class="line">            p_h, p_w, p_r = h_half.iloc[i], w_half.iloc[i], a_rad.iloc[i]</span><br><span class="line">			</span><br><span class="line">			<span class="comment"># closed loop을 이루도록 point 지정.</span></span><br><span class="line">            points = [get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      ]</span><br><span class="line">            </span><br><span class="line">			<span class="comment"># shapefile 작성</span></span><br><span class="line">            c.write(&#123;</span><br><span class="line">                <span class="string">"geometry"</span>: mapping(Polygon(points)),</span><br><span class="line">                <span class="string">"properties"</span>: &#123;<span class="string">"id"</span>: <span class="number">1</span>&#125;</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-QGIS에서-확인"><a href="#3-QGIS에서-확인" class="headerlink" title="3. QGIS에서 확인"></a>3. QGIS에서 확인</h3><ul>
+<li>QGIS에서 읽어서 잘 보이는지 확인합니다.<ul>
+<li>.csv를 출력한 원본(노랑)과 생성된 shapefile(파랑) 비교 결과 완벽히 일치합니다.</li>
+<li>최소경계도형(보라)과 비교해봐도 잘 복원되었습니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="2_polygonshp_4.png" alt=""><br></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/" data-id="ckf24gwur0000n0uj8eb158mu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Create Shapefile from Polygon Dots",
+        "image": "https://jehyunlee.github.io/thumbnails/GIS-Python/2_polygonshp_1.png",
+        "keywords": "",
+        "genre": "GIS Python",
+        "datePublished": "2020-09-14",
+        "dateCreated": "2020-09-14",
+        "dateModified": "2020-09-14",
+        "url": "https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/",
+        "description": "
+csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다.
+shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다.
+shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.
+
+References
+
+shapelyfionageopandas
+",
+        "wordCount": 676
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/09/14/GIS-QGIS-2-OMBB/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Minimum Oriented Rectangle</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-Python/2_polygonshp_1.png)" alt="Create Shapefile from Polygon Dots" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/Python/">Python</a></p>
+                            <p class="item-title"><a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" class="title">Create Shapefile from Polygon Dots</a></p>
+                            <p class="item-date"><time datetime="2020-09-14T04:11:00.000Z" itemprop="datePublished">2020-09-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-QGIS/2_ombb_0.png)" alt="Minimum Oriented Rectangle" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/QGIS/">QGIS</a></p>
+                            <p class="item-title"><a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="title">Minimum Oriented Rectangle</a></p>
+                            <p class="item-date"><time datetime="2020-09-13T22:23:00.000Z" itemprop="datePublished">2020-09-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/31-seaborn_upgrade_0.png)" alt="Seaborn 0.11 Quick Review" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" class="title">Seaborn 0.11 Quick Review</a></p>
+                            <p class="item-date"><time datetime="2020-09-09T10:45:00.000Z" itemprop="datePublished">2020-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/07/Python-DS-30-mpl_dists/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/30-mpl_dists_0.png)" alt="Ridgeline Plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/07/Python-DS-30-mpl_dists/" class="title">Ridgeline Plot</a></p>
+                            <p class="item-date"><time datetime="2020-09-07T00:40:00.000Z" itemprop="datePublished">2020-09-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/01/Python-DS-29-dld_pyvis/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/29-dld_pyvis.png)" alt="Python Visualization for Me" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/01/Python-DS-29-dld_pyvis/" class="title">Python Visualization for Me</a></p>
+                            <p class="item-date"><time datetime="2020-09-01T10:53:00.000Z" itemprop="datePublished">2020-09-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
