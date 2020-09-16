@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Seaborn Distribution Plot | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다. distplot()이 없어진 대신 displot()이 들어왔습니다. matplotlib이 만든 틀 안에서 사용해봅니다.  1. displot() seaborn.displot    displot()은 histplot(), kdeplot(), ecdfplot(), rugplo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seaborn Distribution Plot">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다. distplot()이 없어진 대신 displot()이 들어왔습니다. matplotlib이 만든 틀 안에서 사용해봅니다.  1. displot() seaborn.displot    displot()은 histplot(), kdeplot(), ecdfplot(), rugplo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/32_displots_0.png">
+<meta property="article:published_time" content="2020-09-16T00:58:00.000Z">
+<meta property="article:modified_time" content="2020-09-16T02:23:00.248Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/32_displots_0.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/09/16/python-ds-32-seaborn_displot/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-32-seaborn_displot" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Seaborn Distribution Plot
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/09/16/Python-DS-32-seaborn_displot/" class="article-date">
+         <time datetime="2020-09-16T00:58:00.000Z" itemprop="datePublished">2020-09-16</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다.</li>
+<li>distplot()이 없어진 대신 displot()이 들어왔습니다.</li>
+<li>matplotlib이 만든 틀 안에서 사용해봅니다.</li>
+</ul>
+<h2 id="1-displot"><a href="#1-displot" class="headerlink" title="1. displot()"></a>1. <code>displot()</code></h2><blockquote>
+<p><a href="https://seaborn.pydata.org/generated/seaborn.displot.html#seaborn.displot" target="_blank" rel="noopener">seaborn.displot</a></p>
+</blockquote>
+<p><img src="32_displots_7.png" alt=""></p>
+<ul>
+<li><b><code>displot()</code></b>은 <code>histplot()</code>, <code>kdeplot()</code>, <code>ecdfplot()</code>, <code>rugplot()</code>을 편하게 그리는 방법입니다<ul>
+<li><b>편하게</b>라는 말은 하나의 명령어(<code>displot()</code>)로 여러 형태를 그릴 수 있다는 뜻입니다.</li>
+<li>장점은 <b>하나의 인자 <code>kind</code> 를 바꿔주는 것 만</b>으로 그래프의 형태를 바꿀 수 있다는 것.</li>
+<li>단점은 그림의 인자들이 그래프 종류마다 다르다는 점입니다. </li>
+<li>그 바람에 <code>kind</code> 외에도 <b>다른 인자들을 많이 바꾸게 된다는 것</b>입니다.</li>
+<li>모순이지만 저는 저렇게 느껴집니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><code>displot()</code>을 알아보는 과정은 세부 기능들을 알아보는 기능과 거의 동일합니다.</li>
+<li>세부 기능들을 먼저 알아보겠습니다.</li>
+</ul>
+<h2 id="2-histplot-kdeplot-ecdfplot"><a href="#2-histplot-kdeplot-ecdfplot" class="headerlink" title="2. histplot(), kdeplot(), ecdfplot()"></a>2. <code>histplot()</code>, <code>kdeplot()</code>, <code>ecdfplot()</code></h2><blockquote>
+<p><a href="https://seaborn.pydata.org/generated/seaborn.histplot.html?highlight=histplot#seaborn.histplot" target="_blank" rel="noopener">seaborn.histplot</a><br><a href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot" target="_blank" rel="noopener">seaborn.kdeplot</a><br><a href="https://seaborn.pydata.org/generated/seaborn.ecdfplot.html?highlight=ecdfplot#seaborn.ecdfplot" target="_blank" rel="noopener">seaborn.ecdfplot</a><br><a href="https://seaborn.pydata.org/generated/seaborn.rugplot.html?highlight=rugplot#seaborn.rugplot" target="_blank" rel="noopener">seaborn.rugplot</a></p>
+</blockquote>
+<h3 id="2-1-plots"><a href="#2-1-plots" class="headerlink" title="2.1. plots"></a>2.1. plots</h3><ul>
+<li><b><code>rugplot()</code></b>은 단독으로 사용하기 어렵습니다.</li>
+<li>다른 세 plot을 하나의 figure에 담아보겠습니다.<ul>
+<li><code>plt.subplots()</code>명령으로 <code>Figure</code>와 <code>Axes</code>를 생성하고,</li>
+<li>seaborn plot 함수에 <code>ax=</code> 인자를 삽입하여 그려질 <code>axes</code>를 지정합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>동일 x값을 쌓아주도록 <code>multiple=&quot;stack&quot;</code>을 지정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load the diamonds dataset</span></span><br><span class="line">diamonds = sns.load_dataset(<span class="string">"diamonds"</span>)</span><br><span class="line">diamonds.head()</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot</span></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line">sns.histplot(data=diamonds, x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>, multiple=<span class="string">"stack"</span>, ax=axes[<span class="number">0</span>], legend=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=diamonds, x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>, multiple=<span class="string">"stack"</span>, ax=axes[<span class="number">1</span>], legend=<span class="literal">True</span>)</span><br><span class="line">sns.ecdfplot(data=diamonds, x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>, ax=axes[<span class="number">2</span>], legend=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">"histplot"</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">"kdeplot"</span>)</span><br><span class="line">axes[<span class="number">2</span>].set_title(<span class="string">"ecdfplot"</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="32_displots_1.png" alt=""></li>
+</ul>
+<h3 id="2-2-proportion"><a href="#2-2-proportion" class="headerlink" title="2.2. proportion"></a>2.2. proportion</h3><ul>
+<li>별도의 설정을 하지 않았는데도 <b>y축 label이 그래프마다 다릅니다</b>.<ul>
+<li><b><code>histplot()</code></b>은 <code>Count</code></li>
+<li><b><code>kdeplot()</code></b>은 <code>Density</code></li>
+<li><b><code>ecdfplot()</code></b>은 <code>Proportion</code>으로 되어 있습니다.</li>
+<li><code>ecdfplot()</code>의 뜻은 empirical cumulative distribution functions 입니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>위 코드에서 <code>multiple</code> 부분을 <code>&quot;fill&quot;</code>로 변경하면 비율을 그립니다.</li>
+<li>그러나 <b>y축 label은 변하지 않았습니다.</b> 주의해야 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line">sns.histplot(data=diamonds, x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>, multiple=<span class="string">"fill"</span>, ax=axes[<span class="number">0</span>], legend=<span class="literal">False</span>)</span><br><span class="line">sns.kdeplot(data=diamonds, x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>, multiple=<span class="string">"fill"</span>, ax=axes[<span class="number">1</span>], legend=<span class="literal">False</span>)</span><br><span class="line">sns.ecdfplot(data=diamonds, x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>, ax=axes[<span class="number">2</span>], legend=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">"histplot"</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">"kdeplot"</span>)</span><br><span class="line">axes[<span class="number">2</span>].set_title(<span class="string">"ecdfplot"</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="32_displots_2.png" alt=""></li>
+</ul>
+<h3 id="2-3-bivariate-distribution"><a href="#2-3-bivariate-distribution" class="headerlink" title="2.3. bivariate distribution"></a>2.3. bivariate distribution</h3><ul>
+<li>x와 y축에 다른 변수를 지정하면 <b>2변수 분포도</b>를 그릴 수 있습니다.</li>
+<li><code>ecdfplot()</code>에는 적용되지 않습니다.</li>
+<li>범주형(categorical) 변수에는 적용되지 않으니 주의합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Load the penguins dataset</span></span><br><span class="line">penguins = sns.load_dataset(<span class="string">"penguins"</span>)</span><br><span class="line">penguins.head()</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line">sns.histplot(data=penguins, x=<span class="string">"bill_depth_mm"</span>, y=<span class="string">"body_mass_g"</span>, hue=<span class="string">"species"</span>, </span><br><span class="line">             bins=<span class="number">20</span>, ax=axes[<span class="number">0</span>], legend=<span class="literal">False</span>)</span><br><span class="line">sns.kdeplot(data=penguins, x=<span class="string">"bill_depth_mm"</span>, y=<span class="string">"body_mass_g"</span>, hue=<span class="string">"species"</span>, </span><br><span class="line">            fill=<span class="literal">True</span>, levels=<span class="number">5</span>, alpha=<span class="number">0.5</span>,</span><br><span class="line">            ax=axes[<span class="number">1</span>], legend=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">"histplot"</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">"kdeplot"</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="32_displots_6.png" alt=""></li>
+</ul>
+<h2 id="3-displot-vs-kdeplot"><a href="#3-displot-vs-kdeplot" class="headerlink" title="3. displot() vs kdeplot()"></a>3. <code>displot()</code> vs <code>kdeplot()</code></h2><blockquote>
+<p><a href="https://seaborn.pydata.org/examples/multiple_conditional_kde.html" target="_blank" rel="noopener">seaborn Gallery</a><br><a href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" target="_blank" rel="noopener">seaborn.FacetGrid</a></p>
+</blockquote>
+<ul>
+<li>diamond 데이터셋을 <code>displot()</code>과 <code>kdeplot()</code>으로 그려 비교해 보겠습니다.</li>
+<li><code>displot()</code>은 <b><code>FacetGrid</code>를 생성</b>합니다.<ul>
+<li>matplotlib이 생성하는 <code>Figure</code>와 <code>Axes</code>를 포함하는 객체입니다.</li>
+<li>따라서 matplot이 <code>subplot</code>으로 생성하는 <b><code>Axes</code>에 담길 수 없습니다</b>.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><code>displot()</code>은 matplotlib의 <code>pyplot</code>방식으로 사용해야 합니다.</li>
+<li>그림 크기는 <code>height</code>와 <code>aspect</code>로 제어합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sns.displot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>,</span><br><span class="line">    kind=<span class="string">"kde"</span>, </span><br><span class="line">    multiple=<span class="string">"fill"</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">"ch:rot=-.25,hue=1,light=.75"</span>,</span><br><span class="line">    height=<span class="number">5</span>, aspect=<span class="number">2</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<img src="32_displots_3.png" alt=""></li>
+</ul>
+<ul>
+<li>반면 <code>kdeplot()</code>은 <code>Axes</code>를 생성합니다.</li>
+<li><code>ax</code> 인자를 사용해 <code>subplot</code>으로 미리 생성한 <code>Axes</code>에 담을 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">sns.kdeplot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>,</span><br><span class="line">    multiple=<span class="string">"fill"</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">"ch:rot=-.25,hue=1,light=.75"</span>,</span><br><span class="line">    ax=ax</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<img src="32_displots_4.png" alt=""></li>
+</ul>
+<ul>
+<li>두 그림의 legend가 묘하게 다릅니다.<ul>
+<li><code>displot()</code>은 옆으로 밀려있고,</li>
+<li><code>kdeplot()</code>은 <code>axes</code> 안에 담겨 있습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>그런데 <b>문제</b>가 있습니다.<ul>
+<li>legend를 옮기려면 <code>axes.legend()</code>로 제어해야 합니다.</li>
+<li>그리고 <code>legend(handles, labels)</code>형태로 데이터를 넣어야 하는데, </li>
+<li>handles와 labels를 추출하는 <code>axes.get_legend_handles_labels()</code>가 작동하지 않습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>handles, labels를 출력시켜도 모두 []로만 나옵니다.</li>
+<li><b>legend는 텅 비어 있습니다.</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># object oriented interface</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">sns.kdeplot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>,</span><br><span class="line">    multiple=<span class="string">"fill"</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">"ch:rot=-.25,hue=1,light=.75"</span>,</span><br><span class="line"><span class="comment">#     height=5, aspect=2</span></span><br><span class="line">    ax=ax</span><br><span class="line">)</span><br><span class="line">h, l = ax.get_legend_handles_labels()</span><br><span class="line">print(<span class="string">f"handles=<span class="subst">&#123;h&#125;</span>\nlables=<span class="subst">&#123;l&#125;</span>\n"</span>)</span><br><span class="line">ax.legend(h, l, bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">0.9</span>))</span><br></pre></td></tr></table></figure>
+<img src="32_displots_5.png" alt=""></li>
+</ul>
+<ul>
+<li>강제로 labels를 인가하면 legend를 제어할 수 있습니다.</li>
+<li>그러나 <b>순서가 반대</b>이고, 반대로 넣으면 <b>언제나 색상과 맞는지</b> 확신이 없습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">sns.kdeplot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">"carat"</span>, hue=<span class="string">"cut"</span>,</span><br><span class="line">    multiple=<span class="string">"fill"</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">"ch:rot=-.25,hue=1,light=.75"</span>,</span><br><span class="line"><span class="comment">#     height=5, aspect=2</span></span><br><span class="line">    ax=ax</span><br><span class="line">)</span><br><span class="line">ax.legend(diamonds[<span class="string">"cut"</span>].unique()[::<span class="number">-1</span>], bbox_to_anchor=(<span class="number">1.2</span>,<span class="number">0.9</span>))</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="32_displots_8.png" alt=""></li>
+</ul>
+<ul>
+<li>아쉽게도 seaborn <b>공식문서</b>에도 설명이 제대로 나오지 않았네요.<ul>
+<li>본 방법은 <b>임시변통</b>으로만 알고 정석을 찾아야 할 것 같습니다.</li>
+<li>혹시 이 글을 보시는 분께서 방법을 알고 계시면, 제보 부탁드리겠습니다.</li>
+<li><a href="mailto:jehyun.lee@gmail.com">jehyun.lee@gmail.com</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/" data-id="ckf4rgh36001x0sujfyqnepek" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Seaborn Distribution Plot",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/32_displots_0.png",
+        "keywords": "",
+        "genre": "Python Data Science",
+        "datePublished": "2020-09-16",
+        "dateCreated": "2020-09-16",
+        "dateModified": "2020-09-16",
+        "url": "https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/",
+        "description": "
+seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다.
+distplot()이 없어진 대신 displot()이 들어왔습니다.
+matplotlib이 만든 틀 안에서 사용해봅니다.
+
+1. displot()
+seaborn.displot
+
+
+
+displot()은 histplot(), kdeplot(), ecdfplot(), rugplo",
+        "wordCount": 895
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Create Shapefile from Polygon Dots</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/16/Python-DS-32-seaborn_displot/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/32_displots_0.png)" alt="Seaborn Distribution Plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/16/Python-DS-32-seaborn_displot/" class="title">Seaborn Distribution Plot</a></p>
+                            <p class="item-date"><time datetime="2020-09-16T00:58:00.000Z" itemprop="datePublished">2020-09-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-Python/2_polygonshp_1.png)" alt="Create Shapefile from Polygon Dots" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/Python/">Python</a></p>
+                            <p class="item-title"><a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" class="title">Create Shapefile from Polygon Dots</a></p>
+                            <p class="item-date"><time datetime="2020-09-14T04:11:00.000Z" itemprop="datePublished">2020-09-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-QGIS/2_ombb_0.png)" alt="Minimum Oriented Rectangle" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/QGIS/">QGIS</a></p>
+                            <p class="item-title"><a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="title">Minimum Oriented Rectangle</a></p>
+                            <p class="item-date"><time datetime="2020-09-13T22:23:00.000Z" itemprop="datePublished">2020-09-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/31-seaborn_upgrade_0.png)" alt="Seaborn 0.11 Quick Review" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/09/Python-DS-31-seaborn_upgrade/" class="title">Seaborn 0.11 Quick Review</a></p>
+                            <p class="item-date"><time datetime="2020-09-09T10:45:00.000Z" itemprop="datePublished">2020-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/07/Python-DS-30-mpl_dists/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/30-mpl_dists_0.png)" alt="Ridgeline Plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/07/Python-DS-30-mpl_dists/" class="title">Ridgeline Plot</a></p>
+                            <p class="item-date"><time datetime="2020-09-07T00:40:00.000Z" itemprop="datePublished">2020-09-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">32</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
