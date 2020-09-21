@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/3_rasterpoly_0.png">
 <meta property="article:published_time" content="2020-09-21T00:46:00.000Z">
-<meta property="article:modified_time" content="2020-09-21T03:16:36.128Z">
+<meta property="article:modified_time" content="2020-09-21T04:19:50.126Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/3_rasterpoly_0.png">
@@ -294,7 +294,7 @@ Projection is PROJCS[“Korea 2000 / Central Belt 2010”,GEOGCS[“Korea 2000�
 </ul>
 <ul>
 <li>이제 raster data를 화면에 그려봅시다.</li>
-<li><code>matplotlib</code>의 <code>extent</code>는 가로세로축에 실제 데이터값을 찍어줍니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">20</span>))</span><br><span class="line">ax.imshow(elevation, cmap=<span class="string">"gist_gray"</span>, extent=[x0, x1, y1, y0])</span><br><span class="line">ax.set_aspect(<span class="string">"equal"</span>, <span class="string">"box"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<li><code>matplotlib</code>의 <code>extent</code>는 가로세로축에 실제 데이터값을 찍어줍니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">20</span>))</span><br><span class="line">ax.imshow(irrad, cmap=<span class="string">"gist_gray"</span>, extent=[x0, x1, y1, y0])</span><br><span class="line">ax.set_aspect(<span class="string">"equal"</span>, <span class="string">"box"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <img src="3_rasterpoly_3.png" alt=""></li>
 </ul>
 <ul>
@@ -307,7 +307,7 @@ Projection is PROJCS[“Korea 2000 / Central Belt 2010”,GEOGCS[“Korea 2000�
 <ul>
 <li>살펴볼 지점을 확대해서 그립니다.</li>
 <li>건물들 데이터가 담긴 데이터로부터 목표 건물의 좌표를 추출하고,</li>
-<li>이 건물을 중심으로 가로세로 100 pixel 범위의 그림을 그립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">idx_range = <span class="number">100</span> <span class="comment">#pixel</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">ax.imshow(elevation[Y_idx-idx_range: Y_idx+idx_range, X_idx-idx_range:X_idx+idx_range], </span><br><span class="line">          cmap=<span class="string">"gist_gray"</span>, </span><br><span class="line">          extent=[idx_x-idx_range, idx_x+idx_range, idx_y-idx_range, idx_y+idx_range])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<li>이 건물을 중심으로 가로세로 100 pixel 범위의 그림을 그립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">idx_range = <span class="number">100</span> <span class="comment">#pixel</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">ax.imshow(irrad[Y_idx-idx_range: Y_idx+idx_range, X_idx-idx_range:X_idx+idx_range], </span><br><span class="line">          cmap=<span class="string">"gist_gray"</span>, </span><br><span class="line">          extent=[idx_x-idx_range, idx_x+idx_range, idx_y-idx_range, idx_y+idx_range])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <img src="3_rasterpoly_5.png" alt=""></li>
 </ul>
 <ul>
