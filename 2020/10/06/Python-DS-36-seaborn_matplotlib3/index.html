@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Seaborn with Matplotlib (3) | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="" />
+    
+    <meta name="description" content="3. seaborn figure-level function seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다. 4부 중 세 번째 시간입니다. matplotlib으로는 매우 수고스러울 일을 줄여줍니다. 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.   seaborn APIseaborn tutorialseaborn with matpl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seaborn with Matplotlib (3)">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="3. seaborn figure-level function seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다. 4부 중 세 번째 시간입니다. matplotlib으로는 매우 수고스러울 일을 줄여줍니다. 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.   seaborn APIseaborn tutorialseaborn with matpl">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png">
+<meta property="article:published_time" content="2020-10-06T04:28:00.000Z">
+<meta property="article:modified_time" content="2020-10-06T07:51:24.059Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png">
+    
+    <link rel="canonical" href="https://jehyunlee.github.io/2020/10/06/python-ds-36-seaborn_matplotlib3/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-155262264-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+    <meta name="naver-site-verification" content="abe0705532bd2a51a8507b12ede48265363723be" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">a space for development</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-36-seaborn_matplotlib3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Seaborn with Matplotlib (3)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+      <i class="fa fa-calendar"></i>
+      <a href="/2020/10/06/Python-DS-36-seaborn_matplotlib3/" class="article-date">
+         <time datetime="2020-10-06T04:28:00.000Z" itemprop="datePublished">2020-10-06</time>
+      </a>
+    </div>
+
+
+                
+
+                
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="3-seaborn-figure-level-function"><a href="#3-seaborn-figure-level-function" class="headerlink" title="3. seaborn figure-level function"></a>3. seaborn <code>figure-level</code> function</h2><ul>
+<li>seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다.</li>
+<li>4부 중 세 번째 시간입니다.</li>
+<li>matplotlib으로는 매우 수고스러울 일을 줄여줍니다.</li>
+<li>그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.</li>
+</ul>
+<blockquote>
+<p><a href="https://seaborn.pydata.org/api.html" target="_blank" rel="noopener">seaborn API</a><br><a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener">seaborn tutorial</a><br><a href="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/">seaborn with matplotlib (1)</a></p>
+</blockquote>
+<ul>
+<li><a href="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/">지난 글</a>에서 matplotlib과 섞기 좋은 함수를 알아봤습니다.<ul>
+<li>이런 axex 반환 함수를 <b><code>axes-level</code> 함수</b>라고 하고,</li>
+<li>반대로 axes를 <b><code>figure-level</code> 함수</b>라고 합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>아래 그림에서 노랗게 칠해진 것들이 <b><code>figure-level</code></b> 함수입니다.<br><br><img src="36_s2m3_3.png" alt="노랑색: figure-level functions"></li>
+</ul>
+<ul>
+<li>반환 형식<code>return type</code>이 왜 이렇게 깔끔하지 않은지는 뒤에 보겠습니다.</li>
+<li><code>figure-level</code> 함수는 복잡한 그림을 <b>한 번에 편하게</b> 그려줍니다.</li>
+</ul>
+<h3 id="3-1-figure-level-편리함-맛보기-FacetGrid"><a href="#3-1-figure-level-편리함-맛보기-FacetGrid" class="headerlink" title="3.1. figure-level 편리함 맛보기: FacetGrid()"></a>3.1. <code>figure-level</code> 편리함 맛보기: <code>FacetGrid()</code></h3><ul>
+<li>seaborn에 내장된 penguins dataset에는 이런 데이터가 있습니다.<ul>
+<li>bill_length_mm : 부리 길이</li>
+<li>bill_depth_mm : 부리 위아래 두께</li>
+<li>species : 펭귄 종</li>
+<li>sex : 성별</li>
+<li>island : 서식지</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>이 데이터를 산점도로 한번에 나타내고자 합니다.<ul>
+<li>X축 : bill_length_mm</li>
+<li>Y축 : bill_depth_mm</li>
+<li>색상 : species</li>
+<li>X방향 axes : island</li>
+<li>Y방향 axes : sex</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>matplotlib 코드는 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">8</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인자별 데이터 종 수 세기</span></span><br><span class="line">sex = penguins[<span class="string">"sex"</span>].dropna().unique()</span><br><span class="line">island = penguins[<span class="string">"island"</span>].dropna().unique()</span><br><span class="line">species = penguins[<span class="string">"species"</span>].dropna().unique()</span><br><span class="line"></span><br><span class="line"><span class="comment"># X방향 axes: sex</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(sex)): </span><br><span class="line">    <span class="comment"># Y방향 axes: island</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(island)):</span><br><span class="line">	    <span class="comment"># 색상 : species</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(species)):</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                axes[i][j].scatter(penguins.loc[penguins[<span class="string">"sex"</span>] == sex[i]].loc[penguins[<span class="string">"island"</span>] == island[j]].loc[penguins[<span class="string">"species"</span>] == species[k]][<span class="string">"bill_length_mm"</span>], </span><br><span class="line">                                   penguins.loc[penguins[<span class="string">"sex"</span>] == sex[i]].loc[penguins[<span class="string">"island"</span>] == island[j]].loc[penguins[<span class="string">"species"</span>] == species[k]][<span class="string">"bill_depth_mm"</span>])</span><br><span class="line">                axes[i][j].set_title(<span class="string">f"sex = <span class="subst">&#123;sex[i]&#125;</span> | island = <span class="subst">&#123;island[j]&#125;</span>"</span>)</span><br><span class="line">            <span class="keyword">except</span>:  <span class="comment"># 결측치 예외처리</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment"># 맨 아래줄에만 xlabel 추가</span></span><br><span class="line">        axes[len(sex)<span class="number">-1</span>, j].set_xlabel(<span class="string">"bill_length_mm"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 맨 왼쪽에만 ylabel 추가</span></span><br><span class="line">    axes[i, <span class="number">0</span>].set_ylabel(<span class="string">"bill_depth_mm"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그래프 우측에 범례 표시</span></span><br><span class="line">fig.legend(species,  title=<span class="string">"species"</span>, bbox_to_anchor=(<span class="number">0.95</span>, <span class="number">0.5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그래프 간격 조정</span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.85</span>,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<img src="36_s2m3_8.png" alt=""></li>
+</ul>
+<ul>
+<li>따로 꾸민 것도 없는데 매우 번잡합니다.<ol>
+<li><b>인자별로 몇가지인지</b>를 알아내야 합니다.</li>
+<li><b>결측치 처리</b>가 필요합니다. 안하면 에러납니다.</li>
+<li><b>색상별로 따로</b> 그려야 합니다.</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>그런데 seaborn을 사용하면 <b>세 줄</b> 만에 끝납니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.scatterplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<img src="36_s2m3_5.png" alt=""></li>
+</ul>
+<ul>
+<li><code>FacetGrid()</code>로 <b>공간</b>을 만들고 <code>.map()</code>으로 <b>채웁니다.</b><ul>
+<li>데이터셋 이름, 변수 이름, 그리는 방식 외에 다른 내용이 없습니다.</li>
+<li>인자가 여럿인 관계를 보기에 아주 좋습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>밀도 함수<code>density plot</code></b>로 바꿔보는 것도 아주 간단합니다.</li>
+<li>위 코드에서 <code>sns.scatterplot</code>만 <code>sns.kdeplot</code>으로 넣으면 됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<img src="36_s2m3_9.png" alt=""></li>
+</ul>
+<ul>
+<li><code>figure-level</code> 함수는 <b>복잡한 그림을 간단히 그릴 때</b> 매우 강력합니다.<br><br><img src="36_s2m3_7.png" alt="이런 그림이 두 세 줄로 나옵니다."><br></li>
+<li>이 그림들을 matplotlib으로 그리려면 얼마나 막막할까요.</li>
+</ul>
+<h3 id="3-2-figure-level-꾸미기-FacetGrid"><a href="#3-2-figure-level-꾸미기-FacetGrid" class="headerlink" title="3.2. figure-level 꾸미기: FacetGrid()"></a>3.2. <code>figure-level</code> 꾸미기: <code>FacetGrid()</code></h3><blockquote>
+<p><a href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html" target="_blank" rel="noopener">seaborn.FacetGrid</a><br><a href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot" target="_blank" rel="noopener">seaborn.kdeplot</a><br><a href="https://seaborn.pydata.org/generated/seaborn.regplot.html" target="_blank" rel="noopener">seaborn.regplot</a></p>
+</blockquote>
+<ul>
+<li><b>이번엔 <code>figure-level</code> 그림을 꾸며 보겠습니다.</b><ol>
+<li><code>kdeplot</code>위에 <b>추세선</b>을 겹쳐 그립니다.<ul>
+<li>그런데 추세선이 중간에 끊기지 않으면 좋겠습니다.</li>
+<li>신뢰구간은 80% 수준으로 그리고 싶습니다.</li>
+</ul>
+</li>
+<li><b>xlabel</b>을 “Bill Length (mm)”로 바꾸고</li>
+<li><b>ylabel</b>을 “Bill Depth (mm)”로 바꿉니다.</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>공식 홈페이지의 설명에 힘입어 해냈습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<img src="36_s2m3_10.png" alt=""></li>
+</ul>
+<ul>
+<li><b>한 단계 더 꾸며보도록 합시다.</b><ol>
+<li>xlabel, ylabel <b>글자를 키우고 싶습니다.</b></li>
+<li>추세선의 신뢰구간 80%를 <b>어딘가 적어두고</b> 싶습니다.</li>
+<li>axes마다 붙어 있는 <b>title을 정리</b>하고 싶습니다.</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>첫 단계에서 막혔습니다.<br><br><img src="36_s2m3_11.png" alt="검색 결과가 안나옵니다"></li>
+</ul>
+<ul>
+<li>xlabel, ylabel을 수정할 때 <code>set_axis_labels()</code>를 사용했습니다.<ul>
+<li>공식 홈페이지의 <code>FacetGrid()</code>부분 가이드를 따른 것입니다.</li>
+<li>그런데 <code>set_axis_labels()</code>에 대한 <b>설명이 더 이상 없습니다.</b></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>혹시나, matplotlib 명령어를 넣어봅니다.</li>
+<li><p><code>fontdict=</code>를 적용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>, </span><br><span class="line">                  fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<p><img src="36_s2m3_12.png" alt="적용되었습니다"></p>
+</li>
+<li><p><b><code>figure-level</code> 그림의 세부 설정은 도움말 찾기도 어렵습니다.</b></p>
+</li>
+<li>매뉴얼에 없는 내용을 상상해서 넣어야 합니다.<ul>
+<li>아직은 공식 홈페이지가 충만하지 않습니다.</li>
+<li>소스코드를 뜯어봐서 기능을 확인하거나</li>
+<li><b>matplotlib 명령어를 숙지하고</b> 대응시켜 시도해야 합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-figure-level의-장단점"><a href="#3-3-figure-level의-장단점" class="headerlink" title="3.3. figure-level의 장단점"></a>3.3. <code>figure-level</code>의 장단점</h3><ul>
+<li><a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener">공식 튜토리얼</a>에 정리된 장단점은 이렇습니다.<br><br><img src="36_s2m3_6.png" alt="figure-level function의 장단점"></li>
+</ul>
+<ul>
+<li>하나씩 짚어보겠습니다.<br></li>
+</ul>
+<ul>
+<li><b>(1) 데이터 변수에 따른 축공간 생성</b><ul>
+<li>matplotlib에서 변수 갯수를 세어야 했던 것에 비해서 편리합니다.</li>
+<li>seaborn에 구현된 그림을 제어하는 인자 수가 확실히 적습니다.</li>
+<li>번거롭더라도 axes에 직접 접근해서 matplotlib 명령을 쓰는 게 낫습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>(2) 그림 밖 범례 생성</b><ul>
+<li>그림 밖에 붙는 것은 다행입니다.</li>
+<li>그러나 통제가 안되어 가끔 심각한 갈증을 유발합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>(3) figure-level 수정</b> &amp; <b>(4) figure size를 조정하는 인자가 다름</b><ul>
+<li>장점보다 단점이 크다고 생각됩니다.</li>
+<li>더 쉬운 명령어를 제공한다고 해도 결국은 또 다른 문법입니다.</li>
+<li>matplotlib 명령어만 해도 정신이 없는데 말이죠.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>지금까지의 경험으로 이런 결론이 나옵니다.<ul>
+<li><b>“figure-level의 가성비는 그리자마자, 손을 더 대기 전이 가장 높다.”</b></li>
+<li>새로운 명령어는 새로운 혼돈입니다.</li>
+<li>시각화만 붙잡고 있을 게 아니라 통계분석, 머신러닝도 해야 하거든요.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-figure-level그림이-손대기-어려운-이유"><a href="#3-4-figure-level그림이-손대기-어려운-이유" class="headerlink" title="3.4. figure-level그림이 손대기 어려운 이유"></a>3.4. <code>figure-level</code>그림이 손대기 어려운 이유</h3><blockquote>
+<p><a href="https://github.com/mwaskom/seaborn" target="_blank" rel="noopener">github: seaborn source code</a></p>
+</blockquote>
+<ul>
+<li>seaborn 코드를 뜯어보면 클래스 구조는 이렇습니다.<br><br><img src="36_s2m3_2.png" alt="simplified UML of seaborn"></li>
+</ul>
+<ul>
+<li>multi-plot grids는 Grid 클래스를 상속받는 가족입니다.<ul>
+<li><code>FacetGrid()</code>, <code>PairGrid()</code>, <code>ClusterGrid</code> 입니다.</li>
+<li>의외로 <code>JointGrid()</code>는 Grid를 상속받지 않습니다.</li>
+<li>Grid로 만든 공간에 목적에 맞는 그림을 채웁니다.</li>
+<li><code>relplot()</code>, <code>displot()</code>, <code>catplot()</code>, <code>lmplot()</code>은 1x1 <code>FacetGrid()</code>로 출력됩니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>그리고 <b>Grid 클래스는 <code>figure</code>의 wrapper입니다.</b><ul>
+<li>정확히는 <code>matplotlib.pyplot.subplots()</code>의 wrapper입니다.</li>
+<li>따라서 <code>figure</code>, <code>axes</code>에 적용되는 matplotlib 명령이 안통합니다.</li>
+<li>그래서 <code>set_axis_labels</code>같은 자체 명령어를 탑재하고 있습니다.</li>
+<li>하지만 보셨다시피 도움말이 충분치 않습니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-figure-level-그림을-꾸미는-방법"><a href="#3-5-figure-level-그림을-꾸미는-방법" class="headerlink" title="3.5. figure-level 그림을 꾸미는 방법"></a>3.5. <code>figure-level</code> 그림을 꾸미는 방법</h3><blockquote>
+<p><a href="http://blog.wellcomelibrary.org/2015/09/doctor-the-hearts-stopped/" target="_blank" rel="noopener">Doctor! The heart’s stopped!</a></p>
+</blockquote>
+<ul>
+<li>한마디로, <b>seaborn 제공 함수는 한계가 큽니다.</b><ul>
+<li>기능 자체도 많이 빠져있고</li>
+<li>있는 기능도 문서화가 덜 됐습니다.</li>
+<li>이걸 믿고 쓰긴 어렵습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>하지만 대안이 있습니다. <ul>
+<li>seaborn 그림을 matplotlib 그림으로 간주합니다.</li>
+<li><code>figure-level</code> 객체 안으로 <b>한 걸음 들어갑니다.</b></li>
+<li>그리고 <b><code>figure</code>와 <code>axes</code>를 직접 건드립니다.</b></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>가슴을 열고 직접 심장을 마사지하는 장면을 상상하시면 됩니다.<br><br><img src="open-chest.jpg" alt="이미지 = Treatment of Cardiac Arrest"></li>
+</ul>
+<ul>
+<li>그러면, 풀지 못했던 난제도 이렇게 풀립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>, margin_titles=<span class="literal">True</span>, despine=<span class="literal">False</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line">g.add_legend()</span><br><span class="line"></span><br><span class="line"><span class="comment"># xlabel, ylabel 수정</span></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>, </span><br><span class="line">                  fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes 직접 접근, 1차원 행렬로 표현</span></span><br><span class="line">axs = g.axes.ravel()</span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(axs):</span><br><span class="line">    <span class="comment"># 열 title 수정</span></span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">3</span>:</span><br><span class="line">        ax.set_title(ax.get_title(), fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"x-large"</span>, <span class="string">"color"</span>:<span class="string">"k"</span>&#125;, pad=<span class="number">12</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 행 title 수정</span></span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">2</span>:</span><br><span class="line">        sex = <span class="string">"Male"</span> <span class="keyword">if</span> i == <span class="number">2</span> <span class="keyword">else</span> <span class="string">"Female"</span></span><br><span class="line">        ax.texts.clear()</span><br><span class="line">        text = ax.annotate(<span class="string">f"sex = <span class="subst">&#123;sex&#125;</span>"</span>, xy=(<span class="number">1.02</span>, <span class="number">.5</span>), xycoords=<span class="string">"axes fraction"</span>, rotation=<span class="number">270</span>, </span><br><span class="line">                           ha=<span class="string">"left"</span>, va=<span class="string">"center"</span>, fontsize=<span class="string">"x-large"</span>, color=<span class="string">"k"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># suptitle 추가</span></span><br><span class="line">g.fig.suptitle(<span class="string">"Penguins dataset summary (ci = 80%)        "</span>, </span><br><span class="line">               fontsize=<span class="string">"xx-large"</span>, fontweight=<span class="string">"bold"</span>, color=<span class="string">"indigo"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전반적 크기 조정			   </span></span><br><span class="line">g.fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.88</span>,<span class="number">0.97</span>])</span><br></pre></td></tr></table></figure>
+<img src="36_s2m3_13.png" alt=""></li>
+</ul>
+<ul>
+<li><b>외웁시다.</b><ol>
+<li><code>figure-level</code> 함수는 <b>matplotlib과 못 섞는다.</b></li>
+<li><code>figure-level</code> 함수는 <code>figure</code>와 <code>axes</code>를 한번 더 감싸고 있다.</li>
+<li><code>figure-level</code> 함수를 수정하려면 <b>후벼 파는</b> 과정이 필요하다.</li>
+</ol>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/" data-id="ckfxnzzj5002kowuj8qa5ebp5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Seaborn with Matplotlib (3)",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png",
+        "keywords": "",
+        "genre": "Python Data Science",
+        "datePublished": "2020-10-06",
+        "dateCreated": "2020-10-06",
+        "dateModified": "2020-10-06",
+        "url": "https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/",
+        "description": "3. seaborn figure-level function
+seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다.
+4부 중 세 번째 시간입니다.
+matplotlib으로는 매우 수고스러울 일을 줄여줍니다.
+그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.
+
+
+seaborn APIseaborn tutorialseaborn with matpl",
+        "wordCount": 1428
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/10/03/Python-DS-35-seaborn_matplotlib2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Seaborn with Matplotlib (2)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/10/06/Python-DS-36-seaborn_matplotlib3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/36_s2m3_7.png)" alt="Seaborn with Matplotlib (3)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/10/06/Python-DS-36-seaborn_matplotlib3/" class="title">Seaborn with Matplotlib (3)</a></p>
+                            <p class="item-date"><time datetime="2020-10-06T04:28:00.000Z" itemprop="datePublished">2020-10-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/10/03/Python-DS-35-seaborn_matplotlib2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/35_s2m2_0.png)" alt="Seaborn with Matplotlib (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/10/03/Python-DS-35-seaborn_matplotlib2/" class="title">Seaborn with Matplotlib (2)</a></p>
+                            <p class="item-date"><time datetime="2020-10-03T04:02:00.000Z" itemprop="datePublished">2020-10-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/30/Python-DS-34-seaborn_matplotlib/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/34_s2m_0.png)" alt="Seaborn with Matplotlib (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/30/Python-DS-34-seaborn_matplotlib/" class="title">Seaborn with Matplotlib (1)</a></p>
+                            <p class="item-date"><time datetime="2020-09-30T11:58:00.000Z" itemprop="datePublished">2020-09-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/21/GIS-Python-3-raster_and_polygon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/GIS-Python/3_rasterpoly_0.png)" alt="Mapping Shapefile on Raster Map" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GIS/">GIS</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GIS/Python/">Python</a></p>
+                            <p class="item-title"><a href="/2020/09/21/GIS-Python-3-raster_and_polygon/" class="title">Mapping Shapefile on Raster Map</a></p>
+                            <p class="item-date"><time datetime="2020-09-21T00:46:00.000Z" itemprop="datePublished">2020-09-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/09/16/Python-DS-32-seaborn_displot/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/32_displots_0.png)" alt="Seaborn Distribution Plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2020/09/16/Python-DS-32-seaborn_displot/" class="title">Seaborn Distribution Plot</a></p>
+                            <p class="item-date"><time datetime="2020-09-16T00:58:00.000Z" itemprop="datePublished">2020-09-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">42</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">6</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
+</html>
