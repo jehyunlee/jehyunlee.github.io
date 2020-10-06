@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png">
 <meta property="article:published_time" content="2020-10-06T04:28:00.000Z">
-<meta property="article:modified_time" content="2020-10-06T07:51:24.059Z">
+<meta property="article:modified_time" content="2020-10-06T07:57:22.242Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png">
@@ -281,8 +281,8 @@ ga('send', 'pageview');
 <img src="36_s2m3_9.png" alt=""></li>
 </ul>
 <ul>
-<li><code>figure-level</code> 함수는 <b>복잡한 그림을 간단히 그릴 때</b> 매우 강력합니다.<br><br><img src="36_s2m3_7.png" alt="이런 그림이 두 세 줄로 나옵니다."><br></li>
-<li>이 그림들을 matplotlib으로 그리려면 얼마나 막막할까요.</li>
+<li><code>figure-level</code> 함수는 <b>복잡한 그림을 간단히 그릴 때</b> 매우 강력합니다.<br></li>
+<li>이 그림들을 matplotlib으로 그리려면 얼마나 막막할까요.<br><img src="36_s2m3_7.png" alt="이런 그림이 두 세 줄로 나옵니다."><br></li>
 </ul>
 <h3 id="3-2-figure-level-꾸미기-FacetGrid"><a href="#3-2-figure-level-꾸미기-FacetGrid" class="headerlink" title="3.2. figure-level 꾸미기: FacetGrid()"></a>3.2. <code>figure-level</code> 꾸미기: <code>FacetGrid()</code></h3><blockquote>
 <p><a href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html" target="_blank" rel="noopener">seaborn.FacetGrid</a><br><a href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot" target="_blank" rel="noopener">seaborn.kdeplot</a><br><a href="https://seaborn.pydata.org/generated/seaborn.regplot.html" target="_blank" rel="noopener">seaborn.regplot</a></p>
@@ -323,12 +323,11 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>혹시나, matplotlib 명령어를 넣어봅니다.</li>
-<li><p><code>fontdict=</code>를 적용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>, </span><br><span class="line">                  fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
-<p><img src="36_s2m3_12.png" alt="적용되었습니다"></p>
-</li>
-<li><p><b><code>figure-level</code> 그림의 세부 설정은 도움말 찾기도 어렵습니다.</b></p>
-</li>
+<li><code>fontdict=</code>를 적용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>, </span><br><span class="line">                  fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<img src="36_s2m3_12.png" alt="적용되었습니다"></li>
+</ul>
+<ul>
+<li><b><code>figure-level</code> 그림의 세부 설정은 도움말 찾기도 어렵습니다.</b></li>
 <li>매뉴얼에 없는 내용을 상상해서 넣어야 합니다.<ul>
 <li>아직은 공식 홈페이지가 충만하지 않습니다.</li>
 <li>소스코드를 뜯어봐서 기능을 확인하거나</li>
