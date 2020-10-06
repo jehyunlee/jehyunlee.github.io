@@ -12,16 +12,16 @@
     
     <meta name="keywords" content="" />
     
-    <meta name="description" content="3. seaborn figure-level function seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다. 4부 중 세 번째 시간입니다. matplotlib으로는 매우 수고스러울 일을 줄여줍니다. 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.   seaborn APIseaborn tutorialseaborn with matpl">
+    <meta name="description" content="3. seaborn figure-level function seaborn의 핵심기능, 강력한 명령입니다. 4부 중 세 번째 시간입니다. matplotlib으로는 매우 수고스러울 일을 줄여줍니다. 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.   seaborn APIseaborn tutorialseaborn with matplotlib (1)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Seaborn with Matplotlib (3)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="3. seaborn figure-level function seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다. 4부 중 세 번째 시간입니다. matplotlib으로는 매우 수고스러울 일을 줄여줍니다. 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.   seaborn APIseaborn tutorialseaborn with matpl">
+<meta property="og:description" content="3. seaborn figure-level function seaborn의 핵심기능, 강력한 명령입니다. 4부 중 세 번째 시간입니다. matplotlib으로는 매우 수고스러울 일을 줄여줍니다. 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.   seaborn APIseaborn tutorialseaborn with matplotlib (1)">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png">
 <meta property="article:published_time" content="2020-10-06T04:28:00.000Z">
-<meta property="article:modified_time" content="2020-10-06T07:57:22.242Z">
+<meta property="article:modified_time" content="2020-10-06T08:50:54.500Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/36_s2m3_7.png">
@@ -210,7 +210,7 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <h2 id="3-seaborn-figure-level-function"><a href="#3-seaborn-figure-level-function" class="headerlink" title="3. seaborn figure-level function"></a>3. seaborn <code>figure-level</code> function</h2><ul>
-<li>seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다.</li>
+<li>seaborn의 핵심기능, 강력한 명령입니다.</li>
 <li>4부 중 세 번째 시간입니다.</li>
 <li>matplotlib으로는 매우 수고스러울 일을 줄여줍니다.</li>
 <li>그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.</li>
@@ -219,14 +219,14 @@ ga('send', 'pageview');
 <p><a href="https://seaborn.pydata.org/api.html" target="_blank" rel="noopener">seaborn API</a><br><a href="https://seaborn.pydata.org/tutorial.html" target="_blank" rel="noopener">seaborn tutorial</a><br><a href="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/">seaborn with matplotlib (1)</a></p>
 </blockquote>
 <ul>
-<li><a href="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/">지난 글</a>에서 matplotlib과 섞기 좋은 함수를 알아봤습니다.<ul>
-<li>이런 axex 반환 함수를 <b><code>axes-level</code> 함수</b>라고 하고,</li>
-<li>반대로 axes를 <b><code>figure-level</code> 함수</b>라고 합니다.</li>
+<li><a href="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/">지난 글</a>에서 matplotlib과 친한 함수를 알아봤습니다.<ul>
+<li>이런 axex 반환 함수를 <b><code>axes-level</code> 함수</b>,</li>
+<li>반대로 그림 전체를 반환하는 함수를 <b><code>figure-level</code> 함수</b>라고 합니다.</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>아래 그림에서 노랗게 칠해진 것들이 <b><code>figure-level</code></b> 함수입니다.<br><br><img src="36_s2m3_3.png" alt="노랑색: figure-level functions"></li>
+<li>아래 노란 부분이 <b><code>figure-level</code></b> 함수입니다.<br><br><img src="36_s2m3_3.png" alt="노랑색: figure-level functions"></li>
 </ul>
 <ul>
 <li>반환 형식<code>return type</code>이 왜 이렇게 깔끔하지 않은지는 뒤에 보겠습니다.</li>
@@ -253,7 +253,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li>matplotlib 코드는 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">8</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인자별 데이터 종 수 세기</span></span><br><span class="line">sex = penguins[<span class="string">"sex"</span>].dropna().unique()</span><br><span class="line">island = penguins[<span class="string">"island"</span>].dropna().unique()</span><br><span class="line">species = penguins[<span class="string">"species"</span>].dropna().unique()</span><br><span class="line"></span><br><span class="line"><span class="comment"># X방향 axes: sex</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(sex)): </span><br><span class="line">    <span class="comment"># Y방향 axes: island</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(island)):</span><br><span class="line">	    <span class="comment"># 색상 : species</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(species)):</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                axes[i][j].scatter(penguins.loc[penguins[<span class="string">"sex"</span>] == sex[i]].loc[penguins[<span class="string">"island"</span>] == island[j]].loc[penguins[<span class="string">"species"</span>] == species[k]][<span class="string">"bill_length_mm"</span>], </span><br><span class="line">                                   penguins.loc[penguins[<span class="string">"sex"</span>] == sex[i]].loc[penguins[<span class="string">"island"</span>] == island[j]].loc[penguins[<span class="string">"species"</span>] == species[k]][<span class="string">"bill_depth_mm"</span>])</span><br><span class="line">                axes[i][j].set_title(<span class="string">f"sex = <span class="subst">&#123;sex[i]&#125;</span> | island = <span class="subst">&#123;island[j]&#125;</span>"</span>)</span><br><span class="line">            <span class="keyword">except</span>:  <span class="comment"># 결측치 예외처리</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment"># 맨 아래줄에만 xlabel 추가</span></span><br><span class="line">        axes[len(sex)<span class="number">-1</span>, j].set_xlabel(<span class="string">"bill_length_mm"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 맨 왼쪽에만 ylabel 추가</span></span><br><span class="line">    axes[i, <span class="number">0</span>].set_ylabel(<span class="string">"bill_depth_mm"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그래프 우측에 범례 표시</span></span><br><span class="line">fig.legend(species,  title=<span class="string">"species"</span>, bbox_to_anchor=(<span class="number">0.95</span>, <span class="number">0.5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그래프 간격 조정</span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.85</span>,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<li>matplotlib 코드는 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">8</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인자별 데이터 종 수 세기</span></span><br><span class="line">sex = penguins[<span class="string">"sex"</span>].dropna().unique()</span><br><span class="line">island = penguins[<span class="string">"island"</span>].dropna().unique()</span><br><span class="line">species = penguins[<span class="string">"species"</span>].dropna().unique()</span><br><span class="line"></span><br><span class="line"><span class="comment"># X방향 axes: sex</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(sex)): </span><br><span class="line">    <span class="comment"># Y방향 axes: island</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(island)):</span><br><span class="line">        <span class="comment"># 색상 : species</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(species)):</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                axes[i][j].scatter(penguins.loc[penguins[<span class="string">"sex"</span>] == sex[i]].loc[penguins[<span class="string">"island"</span>] == island[j]].loc[penguins[<span class="string">"species"</span>] == species[k]][<span class="string">"bill_length_mm"</span>], </span><br><span class="line">                                   penguins.loc[penguins[<span class="string">"sex"</span>] == sex[i]].loc[penguins[<span class="string">"island"</span>] == island[j]].loc[penguins[<span class="string">"species"</span>] == species[k]][<span class="string">"bill_depth_mm"</span>])</span><br><span class="line">                axes[i][j].set_title(<span class="string">f"sex = <span class="subst">&#123;sex[i]&#125;</span> | island = <span class="subst">&#123;island[j]&#125;</span>"</span>)</span><br><span class="line">            <span class="keyword">except</span>:  <span class="comment"># 결측치 예외처리</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">		</span><br><span class="line">        <span class="comment"># 맨 아래줄에만 xlabel 추가</span></span><br><span class="line">        axes[len(sex)<span class="number">-1</span>, j].set_xlabel(<span class="string">"bill_length_mm"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 맨 왼쪽에만 ylabel 추가</span></span><br><span class="line">    axes[i, <span class="number">0</span>].set_ylabel(<span class="string">"bill_depth_mm"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그래프 우측에 범례 표시</span></span><br><span class="line">fig.legend(species,  title=<span class="string">"species"</span>, bbox_to_anchor=(<span class="number">0.95</span>, <span class="number">0.5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그래프 간격 조정</span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.85</span>,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
 <img src="36_s2m3_8.png" alt=""></li>
 </ul>
 <ul>
@@ -269,14 +269,14 @@ ga('send', 'pageview');
 <img src="36_s2m3_5.png" alt=""></li>
 </ul>
 <ul>
-<li><code>FacetGrid()</code>로 <b>공간</b>을 만들고 <code>.map()</code>으로 <b>채웁니다.</b><ul>
+<li><code>FacetGrid()</code>로 만든 <b>공간</b>을 <code>.map()</code>으로 <b>채웁니다.</b><ul>
 <li>데이터셋 이름, 변수 이름, 그리는 방식 외에 다른 내용이 없습니다.</li>
 <li>인자가 여럿인 관계를 보기에 아주 좋습니다.</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><b>밀도 함수<code>density plot</code></b>로 바꿔보는 것도 아주 간단합니다.</li>
+<li><b>밀도 함수<code>density plot</code></b>로 바꾸는 것도 간단합니다.</li>
 <li>위 코드에서 <code>sns.scatterplot</code>만 <code>sns.kdeplot</code>으로 넣으면 됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>)</span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
 <img src="36_s2m3_9.png" alt=""></li>
 </ul>
@@ -290,7 +290,7 @@ ga('send', 'pageview');
 <ul>
 <li><b>이번엔 <code>figure-level</code> 그림을 꾸며 보겠습니다.</b><ol>
 <li><code>kdeplot</code>위에 <b>추세선</b>을 겹쳐 그립니다.<ul>
-<li>그런데 추세선이 중간에 끊기지 않으면 좋겠습니다.</li>
+<li>추세선이 중간에 안끊기면 좋겠습니다.</li>
 <li>신뢰구간은 80% 수준으로 그리고 싶습니다.</li>
 </ul>
 </li>
@@ -306,7 +306,7 @@ ga('send', 'pageview');
 <ul>
 <li><b>한 단계 더 꾸며보도록 합시다.</b><ol>
 <li>xlabel, ylabel <b>글자를 키우고 싶습니다.</b></li>
-<li>추세선의 신뢰구간 80%를 <b>어딘가 적어두고</b> 싶습니다.</li>
+<li>추세선의 <b>신뢰구간 80%를 적어두고</b> 싶습니다.</li>
 <li>axes마다 붙어 있는 <b>title을 정리</b>하고 싶습니다.</li>
 </ol>
 </li>
@@ -352,7 +352,7 @@ ga('send', 'pageview');
 <ul>
 <li><b>(2) 그림 밖 범례 생성</b><ul>
 <li>그림 밖에 붙는 것은 다행입니다.</li>
-<li>그러나 통제가 안되어 가끔 심각한 갈증을 유발합니다.</li>
+<li>그러나 통제가 안되어 심각한 갈증을 유발합니다.</li>
 </ul>
 </li>
 </ul>
@@ -381,7 +381,7 @@ ga('send', 'pageview');
 <ul>
 <li>multi-plot grids는 Grid 클래스를 상속받는 가족입니다.<ul>
 <li><code>FacetGrid()</code>, <code>PairGrid()</code>, <code>ClusterGrid</code> 입니다.</li>
-<li>의외로 <code>JointGrid()</code>는 Grid를 상속받지 않습니다.</li>
+<li><code>JointGrid()</code>는 Grid를 상속받지 않습니다.</li>
 <li>Grid로 만든 공간에 목적에 맞는 그림을 채웁니다.</li>
 <li><code>relplot()</code>, <code>displot()</code>, <code>catplot()</code>, <code>lmplot()</code>은 1x1 <code>FacetGrid()</code>로 출력됩니다.</li>
 </ul>
@@ -416,10 +416,11 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li>가슴을 열고 직접 심장을 마사지하는 장면을 상상하시면 됩니다.<br><br><img src="open-chest.jpg" alt="이미지 = Treatment of Cardiac Arrest"></li>
+<li>개흉 심장마사지를 상상하시면 됩니다.</li>
+<li>가슴을 열고 직접 심장을 마사지하는 겁니다.<br><br><img src="open-chest.jpg" alt="이미지 = Treatment of Cardiac Arrest"></li>
 </ul>
 <ul>
-<li>그러면, 풀지 못했던 난제도 이렇게 풀립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>, margin_titles=<span class="literal">True</span>, despine=<span class="literal">False</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line">g.add_legend()</span><br><span class="line"></span><br><span class="line"><span class="comment"># xlabel, ylabel 수정</span></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>, </span><br><span class="line">                  fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes 직접 접근, 1차원 행렬로 표현</span></span><br><span class="line">axs = g.axes.ravel()</span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(axs):</span><br><span class="line">    <span class="comment"># 열 title 수정</span></span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">3</span>:</span><br><span class="line">        ax.set_title(ax.get_title(), fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"x-large"</span>, <span class="string">"color"</span>:<span class="string">"k"</span>&#125;, pad=<span class="number">12</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># 행 title 수정</span></span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">2</span>:</span><br><span class="line">        sex = <span class="string">"Male"</span> <span class="keyword">if</span> i == <span class="number">2</span> <span class="keyword">else</span> <span class="string">"Female"</span></span><br><span class="line">        ax.texts.clear()</span><br><span class="line">        text = ax.annotate(<span class="string">f"sex = <span class="subst">&#123;sex&#125;</span>"</span>, xy=(<span class="number">1.02</span>, <span class="number">.5</span>), xycoords=<span class="string">"axes fraction"</span>, rotation=<span class="number">270</span>, </span><br><span class="line">                           ha=<span class="string">"left"</span>, va=<span class="string">"center"</span>, fontsize=<span class="string">"x-large"</span>, color=<span class="string">"k"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># suptitle 추가</span></span><br><span class="line">g.fig.suptitle(<span class="string">"Penguins dataset summary (ci = 80%)        "</span>, </span><br><span class="line">               fontsize=<span class="string">"xx-large"</span>, fontweight=<span class="string">"bold"</span>, color=<span class="string">"indigo"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전반적 크기 조정			   </span></span><br><span class="line">g.fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.88</span>,<span class="number">0.97</span>])</span><br></pre></td></tr></table></figure>
+<li>그러면, 풀지 못했던 난제도 이렇게 풀립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">g = sns.FacetGrid(penguins, row=<span class="string">"sex"</span>, col=<span class="string">"island"</span>, hue=<span class="string">"species"</span>, margin_titles=<span class="literal">True</span>, despine=<span class="literal">False</span>)</span><br><span class="line">g.map(sns.kdeplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">g.map(sns.regplot, <span class="string">"bill_length_mm"</span>, <span class="string">"bill_depth_mm"</span>, truncate=<span class="literal">False</span>, ci=<span class="number">80</span>, scatter=<span class="literal">False</span>)</span><br><span class="line">g.add_legend()</span><br><span class="line"></span><br><span class="line"><span class="comment"># xlabel, ylabel 수정</span></span><br><span class="line">g.set_axis_labels(<span class="string">"Bill Length (mm)"</span>, <span class="string">"Bill Depth (mm)"</span>, </span><br><span class="line">                  fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes 직접 접근, 1차원 행렬로 표현</span></span><br><span class="line">axs = g.axes.ravel()</span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(axs):</span><br><span class="line">    <span class="comment"># 열 title 수정</span></span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">3</span>:</span><br><span class="line">        ax.set_title(ax.get_title(), fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"x-large"</span>, <span class="string">"color"</span>:<span class="string">"k"</span>&#125;, pad=<span class="number">12</span>)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 행 title 수정</span></span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">2</span>:</span><br><span class="line">        sex = <span class="string">"Male"</span> <span class="keyword">if</span> i == <span class="number">2</span> <span class="keyword">else</span> <span class="string">"Female"</span></span><br><span class="line">        ax.texts.clear()</span><br><span class="line">        text = ax.annotate(<span class="string">f"sex = <span class="subst">&#123;sex&#125;</span>"</span>, xy=(<span class="number">1.02</span>, <span class="number">.5</span>), xycoords=<span class="string">"axes fraction"</span>, rotation=<span class="number">270</span>, </span><br><span class="line">                           ha=<span class="string">"left"</span>, va=<span class="string">"center"</span>, fontsize=<span class="string">"x-large"</span>, color=<span class="string">"k"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># suptitle 추가</span></span><br><span class="line">g.fig.suptitle(<span class="string">"Penguins dataset summary (ci = 80%)        "</span>, </span><br><span class="line">               fontsize=<span class="string">"xx-large"</span>, fontweight=<span class="string">"bold"</span>, color=<span class="string">"indigo"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전반적 크기 조정			   </span></span><br><span class="line">g.fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.88</span>,<span class="number">0.97</span>])</span><br></pre></td></tr></table></figure>
 <img src="36_s2m3_13.png" alt=""></li>
 </ul>
 <ul>
@@ -437,7 +438,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/" data-id="ckfxocmn50029xgujgog67fkx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/" data-id="ckfxq4cco002x24uj0g75bfpq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -516,14 +517,14 @@ ga('send', 'pageview');
         "dateModified": "2020-10-06",
         "url": "https://jehyunlee.github.io/2020/10/06/Python-DS-36-seaborn_matplotlib3/",
         "description": "3. seaborn figure-level function
-seaborn의 핵심기능이라고 볼 수 있는 강력한 명령입니다.
+seaborn의 핵심기능, 강력한 명령입니다.
 4부 중 세 번째 시간입니다.
 matplotlib으로는 매우 수고스러울 일을 줄여줍니다.
 그러나 손대기 어렵기도 합니다. 이유와 해결방법을 알아봅시다.
 
 
-seaborn APIseaborn tutorialseaborn with matpl",
-        "wordCount": 1428
+seaborn APIseaborn tutorialseaborn with matplotlib (1)",
+        "wordCount": 1439
     }
 </script>
 
