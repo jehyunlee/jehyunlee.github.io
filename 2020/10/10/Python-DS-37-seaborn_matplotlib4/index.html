@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/37_s2m3_0.png">
 <meta property="article:published_time" content="2020-10-09T20:12:00.000Z">
-<meta property="article:modified_time" content="2020-10-10T00:21:01.715Z">
+<meta property="article:modified_time" content="2020-10-10T00:29:02.376Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/37_s2m3_0.png">
@@ -421,6 +421,10 @@ ga('send', 'pageview');
 <li>그림 바탕색을 칠합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.fig.set_facecolor(<span class="string">"whitesmoke"</span>)</span><br></pre></td></tr></table></figure>
 <img src="37_s2m4_15.png" alt=""></li>
 </ul>
+<h4 id="4-3-3-최종"><a href="#4-3-3-최종" class="headerlink" title="4.3.3. 최종"></a>4.3.3. 최종</h4><ul>
+<li>x, ylabel까지 정리하면 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">"species"</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    g.axes[i][i].spines[<span class="string">"left"</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">"top"</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">"right"</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">"w"</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = g._legend_data.values()</span><br><span class="line">labels = g._legend_data.keys()</span><br><span class="line">g.fig.legend(handles=handles, labels=labels,</span><br><span class="line">             bbox_to_anchor=(<span class="number">0.75</span>, <span class="number">0.75</span>),</span><br><span class="line">             fontsize=<span class="string">"large"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y labels</span></span><br><span class="line">labels = [<span class="string">"Sepal Length"</span>, <span class="string">"Sepal Width"</span>, <span class="string">"Petal Length"</span>, <span class="string">"Petal Width"</span>]</span><br><span class="line">font_labels = &#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>, <span class="string">"color"</span>:<span class="string">"gray"</span>, <span class="string">"fontweight"</span>:<span class="string">"bold"</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    g.axes[<span class="number">3</span>, i].set_xlabel(labels[i], fontdict=font_labels)</span><br><span class="line">    g.axes[i, <span class="number">0</span>].set_ylabel(labels[i], fontdict=font_labels)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ylabel alignment</span></span><br><span class="line">g.fig.align_ylabels(g.axes[:,<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># suptitle</span></span><br><span class="line">g.fig.suptitle(<span class="string">"iris dataset"</span>, y=<span class="number">1.01</span>,</span><br><span class="line">               weight=<span class="string">"bold"</span>, fontsize=<span class="string">"x-large"</span></span><br><span class="line">              )</span><br><span class="line">g.fig.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># facecolor</span></span><br><span class="line">g.fig.set_facecolor(<span class="string">"whitesmoke"</span>)</span><br></pre></td></tr></table></figure>
+<img src="37_s2m4_17.png" alt=""></li>
+</ul>
 <h2 id="5-결론"><a href="#5-결론" class="headerlink" title="5. 결론"></a>5. 결론</h2><ul>
 <li>네 편의 글에 걸쳐 matplotlib + seaborn 연계기를 정리했습니다.<ul>
 <li>개별적인 코드와 기술보다는 <b>본질</b>에 집중합시다.</li>
@@ -443,7 +447,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/10/10/Python-DS-37-seaborn_matplotlib4/" data-id="ckg2xmyt3002aucuj0eoj5d4f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/10/10/Python-DS-37-seaborn_matplotlib4/" data-id="ckg2xy7fb002go4uj6yj9b23u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -531,7 +535,7 @@ figure-level 그림을 그리고 다듬어 봅니다.
 seaborn APIseaborn tutorialseaborn with matplotlib (3)
 
 4.1. fi",
-        "wordCount": 1128
+        "wordCount": 1404
     }
 </script>
 
@@ -818,5 +822,21 @@ seaborn APIseaborn tutorialseaborn with matplotlib (3)
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
