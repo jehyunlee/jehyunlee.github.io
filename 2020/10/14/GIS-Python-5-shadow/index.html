@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/5_shadow_0.png">
 <meta property="article:published_time" content="2020-10-14T01:43:00.000Z">
-<meta property="article:modified_time" content="2020-10-14T05:32:27.396Z">
+<meta property="article:modified_time" content="2020-10-14T05:52:02.008Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/5_shadow_0.png">
@@ -293,8 +293,8 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>결과를 dataframe으로 정리합니다.</li>
-<li><code>datetime.strftime()</code>을 사용해 시각과 분을 추출하고</li>
-<li>고도를 이용해 그림자 끝점을 추출합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df_solars = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, lat <span class="keyword">in</span> enumerate(lats):</span><br><span class="line">    df_solar = pd.DataFrame(&#123;<span class="string">"hh"</span>:[date_hr_lat[i][j].strftime(<span class="string">"%H"</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">48</span>)],</span><br><span class="line">                             <span class="string">"mm"</span>:[date_hr_lat[i][j].strftime(<span class="string">"%M"</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">48</span>)],</span><br><span class="line">                             <span class="string">"azimuth"</span>: azis_lat[i],</span><br><span class="line">                             <span class="string">"altitude"</span>: alts_lat[i],</span><br><span class="line">                             <span class="string">"projection"</span>: np.sin(np.deg2rad(alts_lat[i]))</span><br><span class="line">                            &#125;)</span><br><span class="line">    df_solar[<span class="string">"shadow_len"</span>] = df_solar[<span class="string">"altitude"</span>].apply(<span class="keyword">lambda</span> x: <span class="number">1</span>/np.tan(np.deg2rad(x)) <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> np.nan)</span><br><span class="line">    df_solar[<span class="string">"shadow_dx"</span>] = -df_solar[<span class="string">"shadow_len"</span>] * np.sin(np.deg2rad(df_solar[<span class="string">"azimuth"</span>]))</span><br><span class="line">    df_solar[<span class="string">"shadow_dy"</span>] = -df_solar[<span class="string">"shadow_len"</span>] * np.cos(np.deg2rad(df_solar[<span class="string">"azimuth"</span>]))</span><br><span class="line">    </span><br><span class="line">    df_solars[i] = df_solar</span><br></pre></td></tr></table></figure>
+<li><code>datetime.strftime()</code>을 사용해 <b>시각</b>과 <b>분</b>을 추출하고</li>
+<li>방위각과 고도를 이용해 <b>그림자 끝점</b>을 추출합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df_solars = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, lat <span class="keyword">in</span> enumerate(lats):</span><br><span class="line">    df_solar = pd.DataFrame(&#123;<span class="string">"hh"</span>:[date_hr_lat[i][j].strftime(<span class="string">"%H"</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">48</span>)],</span><br><span class="line">                             <span class="string">"mm"</span>:[date_hr_lat[i][j].strftime(<span class="string">"%M"</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">48</span>)],</span><br><span class="line">                             <span class="string">"azimuth"</span>: azis_lat[i],</span><br><span class="line">                             <span class="string">"altitude"</span>: alts_lat[i],</span><br><span class="line">                             <span class="string">"projection"</span>: np.sin(np.deg2rad(alts_lat[i]))</span><br><span class="line">                            &#125;)</span><br><span class="line">    df_solar[<span class="string">"shadow_len"</span>] = df_solar[<span class="string">"altitude"</span>].apply(<span class="keyword">lambda</span> x: <span class="number">1</span>/np.tan(np.deg2rad(x)) <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> np.nan)</span><br><span class="line">    df_solar[<span class="string">"shadow_dx"</span>] = -df_solar[<span class="string">"shadow_len"</span>] * np.sin(np.deg2rad(df_solar[<span class="string">"azimuth"</span>]))</span><br><span class="line">    df_solar[<span class="string">"shadow_dy"</span>] = -df_solar[<span class="string">"shadow_len"</span>] * np.cos(np.deg2rad(df_solar[<span class="string">"azimuth"</span>]))</span><br><span class="line">    </span><br><span class="line">    df_solars[i] = df_solar</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
@@ -306,8 +306,8 @@ ga('send', 'pageview');
 </blockquote>
 <ul>
 <li>상자 모양 건물의 그림자를 그립니다.<ul>
-<li>네 꼭지점에서 각기 그림자 포인트를 찾고</li>
-<li>건물 밑의 네 꼭지점을 연결합니다.</li>
+<li>네 꼭지점에서 각기 <b>그림자 포인트</b>를 찾고</li>
+<li>건물 밑의 <b>네 꼭지점</b>을 연결합니다.</li>
 </ul>
 </li>
 </ul>
@@ -438,7 +438,7 @@ pysolar를 이용해 태양의 운동을 계산하고, geopandas를 이용해 �
 
 1. 논문 간단 요약
 R. Soler-Bientz et al., “Developing a computational tool to assess shadow pattern on a horizo",
-        "wordCount": 3052
+        "wordCount": 3053
     }
 </script>
 
