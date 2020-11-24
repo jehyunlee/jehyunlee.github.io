@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/44_watermark_0.png">
 <meta property="article:published_time" content="2020-11-24T01:34:00.000Z">
-<meta property="article:modified_time" content="2020-11-24T02:43:25.420Z">
+<meta property="article:modified_time" content="2020-11-24T02:49:49.719Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -282,7 +282,7 @@ ga('send', 'pageview');
 </ul>
 <h3 id="3-3-ax-add-artist"><a href="#3-3-ax-add-artist" class="headerlink" title="3.3. ax.add_artist()"></a>3.3. <code>ax.add_artist()</code></h3><ul>
 <li>이미지 객체를 <b>갖다 붙이는 방식</b>입니다.</li>
-<li>이렇게 설명하면 가장 직관적인데,<br><b>(1)이미지를 지정하고</b> <code>OffsetImage</code>,<br><b>(2) 위치를 지정하고</b> <code>AnnotationBbox</code>,<br><b>(3) 붙이는</b> <code>add_artist()</code> 과정이 번거로운 것도 사실입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> OffsetImage, AnnotationBbox</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">"viridis"</span>, ec=<span class="string">"k"</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">"viridis"</span>, ec=<span class="string">"k"</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">"sepal length vs width"</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">"petal length vs width"</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">6</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">4</span>, <span class="number">1.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<li>이렇게 설명하면 가장 직관적인데,<br><b>(1) 이미지를 지정하고</b> <code>OffsetImage</code>,<br><b>(2) 위치를 지정하고</b> <code>AnnotationBbox</code>,<br><b>(3) 붙이는</b> <code>add_artist()</code> 과정이 번거로운 것도 사실입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> OffsetImage, AnnotationBbox</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">"viridis"</span>, ec=<span class="string">"k"</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">"viridis"</span>, ec=<span class="string">"k"</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">"sepal length vs width"</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">"petal length vs width"</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">6</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">4</span>, <span class="number">1.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
 <img src="44_watermark_6.png" alt=""><br></li>
 </ul>
 <ul>
@@ -306,7 +306,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/24/Python-DS-44-watermark/" data-id="ckhvd3isf0046wgujck3vhxfm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/24/Python-DS-44-watermark/" data-id="ckhvdt8920041g4uj9eyf7j29" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -394,7 +394,7 @@ watermark를 박는 4가지 방법을 소개합니다.
 
 
 최근 제 블로그의 그림이 다른 데서 보이는 일을 겪",
-        "wordCount": 962
+        "wordCount": 963
     }
 </script>
 
@@ -691,5 +691,21 @@ watermark를 박는 4가지 방법을 소개합니다.
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
