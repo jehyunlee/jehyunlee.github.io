@@ -10,22 +10,22 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="python,visualization,matplotlib,seaborn,image" />
+    <meta name="keywords" content="python,matplotlib,visualization,seaborn,image" />
     
-    <meta name="description" content="tight_layout()으로 axes 사이 간격을 적절하게 조정할 수 있습니다. subplots, legend와 함께 사용하는 방법을 알아봅시다. 간혹 tight_layout()이 잘 안될 때 해결하는 방법도 알아봅시다.  Contributor  데이터짱님  1. 최종적으로 그릴 그림 이번 글에서, 우리는 이 그림을 그릴겁니다.  포인트는 다음과 같습니">
+    <meta name="description" content="tight_layout()으로 axes 사이 간격을 적절하게 조정할 수 있습니다. subplots, legend와 함께 사용하는 방법을 알아봅시다. 간혹 tight_layout()이 잘 안될 때 해결하는 방법도 알아봅시다.  Contributor  데이터짱님, 안수빈님  1. 최종적으로 그릴 그림 이번 글에서, 우리는 이 그림을 그릴겁니다.  포인트는 다">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tight Layout">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/11/26/Python-DS-45-tightlayout/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="tight_layout()으로 axes 사이 간격을 적절하게 조정할 수 있습니다. subplots, legend와 함께 사용하는 방법을 알아봅시다. 간혹 tight_layout()이 잘 안될 때 해결하는 방법도 알아봅시다.  Contributor  데이터짱님  1. 최종적으로 그릴 그림 이번 글에서, 우리는 이 그림을 그릴겁니다.  포인트는 다음과 같습니">
+<meta property="og:description" content="tight_layout()으로 axes 사이 간격을 적절하게 조정할 수 있습니다. subplots, legend와 함께 사용하는 방법을 알아봅시다. 간혹 tight_layout()이 잘 안될 때 해결하는 방법도 알아봅시다.  Contributor  데이터짱님, 안수빈님  1. 최종적으로 그릴 그림 이번 글에서, 우리는 이 그림을 그릴겁니다.  포인트는 다">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/45_tightlayout_0.png">
 <meta property="article:published_time" content="2020-11-26T01:13:00.000Z">
-<meta property="article:modified_time" content="2020-11-26T04:52:56.773Z">
+<meta property="article:modified_time" content="2020-11-26T06:43:45.897Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="seaborn">
 <meta property="article:tag" content="image">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@ ga('send', 'pageview');
 </ul>
 <p><b>Contributor</b></p>
 <blockquote>
-<p>데이터짱님</p>
+<p>데이터짱님, <a href="https://subinium.github.io/" target="_blank" rel="noopener">안수빈</a>님</p>
 </blockquote>
 <h3 id="1-최종적으로-그릴-그림"><a href="#1-최종적으로-그릴-그림" class="headerlink" title="1. 최종적으로 그릴 그림"></a>1. 최종적으로 그릴 그림</h3><ul>
 <li><p>이번 글에서, 우리는 이 그림을 그릴겁니다.<br><br><img src="45_tightlayout_10.png" alt="우리의 목표"><br></p>
@@ -265,8 +265,8 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li><code>fig.set_facecolor()</code>는 figure의 색상을 지정하는 명령입니다.<ul>
-<li>axes가 차지하는 공간을 잘 보여주기 위해 색을 칠했습니다.</li>
+<li><code>fig.set_facecolor()</code>는 figure 색상 지정 명령입니다.<ul>
+<li>axes가 차지하는 공간을 보여주려고 색을 칠했습니다.</li>
 </ul>
 </li>
 </ul>
@@ -314,8 +314,14 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>legend 이동은 <b><code>loc</code></b>와 <b><code>bbox_to_anchor</code></b> 두 인자의 조합으로 이루어집니다.<ul>
-<li>legend에서 <b>loc가 가리키는 곳</b>(“upper left” = 왼쪽 위 귀퉁이)<b>을</b></li>
-<li>figure의 <b>어떤 지점</b>(bbox_to_anchor=(1,0.95))<b>에 갖다 붙여라</b><br>라는 의미입니다.</li>
+<li>legend에서 <b>loc가 가리키는 곳</b>을<ul>
+<li>여기서는 “upper left” = 왼쪽 위 귀퉁이</li>
+</ul>
+</li>
+<li>figure의 <b>어떤 지점</b>에 갖다 붙이라는 의미입니다.<ul>
+<li>bbox_to_anchor=(1,0.95) = 오른쪽 위 끄트머리</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -382,8 +388,8 @@ ga('send', 'pageview');
 <ul>
 <li>아까 tight_layout은 <b>ticklabels</b>, <b>axis labels</b>, <b>title</b>를 본다고 했습니다.</li>
 <li>constrained_layout은 <b>legend</b>, <b>colorbar</b>까지 함께 봅니다.<ul>
-<li>matplotlib 내부 연산을 거치기 때문에 살짝 딜레이가 있습니다.</li>
-<li>따라서 interactive visualization serving에는 적합하지 않을 수 있습니다.</li>
+<li>matplotlib 내부 연산을 거쳐 딜레이가 있습니다.</li>
+<li>따라서 real-time visualization에는 적합치 않을 수 있습니다.</li>
 </ul>
 </li>
 </ul>
@@ -410,8 +416,8 @@ ga('send', 'pageview');
 <li>우리가 만난 문제를 정리해봅시다.<br>(1) <b>axes 바깥쪽</b>에 범례를 달고 싶음.<br>(2) 그런데 <b>figure의 범위가 제한되어 있음.</b><br>(3) constrained_layout은 <b>웬만한 axes 구성 요소에 맞춰줌</b><br>(4) constrained_layout은 figure 구성 요소를 <b>축소하지 못함</b></li>
 </ul>
 <ul>
-<li>어려워 보이지만 해결책이 숨어있습니다.<ul>
-<li>constrained_layout은 <b>figure가 만드는 범례엔 못맞춥니다.</b></li>
+<li>어려워 보이지만 해결책이 숨어 있습니다.<ul>
+<li>constrained_layout은 <b>figure 범례엔 못 맞춥니다.</b></li>
 <li>하지만 <b>ax가 만드는 범례에는 맞춰줍니다</b></li>
 <li>따라서, <b>범례를 axes에 달면 됩니다.</b></li>
 </ul>
@@ -424,8 +430,8 @@ ga('send', 'pageview');
 <img src="45_tightlayout_10.png" alt="Jupyter Notebook과 파일 출력이 일치합니다."><br></li>
 </ul>
 <ul>
-<li>handles와 labels를 따로 만들어 사용하는 점이 복잡해 보일 수 있습니다.</li>
-<li>상당히 많은 matplotlib 유발 감정 소모를 해소할 수 있는 기능입니다.</li>
+<li>handles와 labels를 따로 만들어 사용하는 점이 복잡해 보이지만,</li>
+<li>상당한 matplotlib 유발 감정을 해소할 수 있는 기능입니다.</li>
 <li>조금은 익숙해져 봅시다. :)</li>
 </ul>
 <p><p></p>
@@ -444,7 +450,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/26/Python-DS-45-tightlayout/" data-id="ckhyd2kdv0044gwujdq9bggzj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/26/Python-DS-45-tightlayout/" data-id="ckhyh1f2a0047g4uj89aa9k1l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -516,7 +522,7 @@ ga('send', 'pageview');
         },
         "headline": "Tight Layout",
         "image": "https://jehyunlee.github.io/thumbnails/Python-DS/45_tightlayout_0.png",
-        "keywords": "python visualization matplotlib seaborn image",
+        "keywords": "python matplotlib visualization seaborn image",
         "genre": "Python Data Science",
         "datePublished": "2020-11-26",
         "dateCreated": "2020-11-26",
@@ -529,13 +535,13 @@ subplots, legend와 함께 사용하는 방법을 알아봅시다.
 
 Contributor
 
-데이터짱님
+데이터짱님, 안수빈님
 
 1. 최종적으로 그릴 그림
 이번 글에서, 우리는 이 그림을 그릴겁니다.
 
-포인트는 다음과 같습니",
-        "wordCount": 2009
+포인트는 다",
+        "wordCount": 2010
     }
 </script>
 
@@ -832,21 +838,5 @@ Contributor
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
