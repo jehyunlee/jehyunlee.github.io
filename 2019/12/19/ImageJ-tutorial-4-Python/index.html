@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/4_python_1.PNG">
 <meta property="article:published_time" content="2019-12-19T02:59:13.000Z">
-<meta property="article:modified_time" content="2020-11-08T02:16:21.556Z">
+<meta property="article:modified_time" content="2020-11-26T07:32:12.913Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="imagej">
@@ -605,14 +605,23 @@ ga('send', 'pageview');
 <p>  <img src="4_python_5.PNG" alt=" "></p>
 <h4 id="4-8-3-reduce-떠-있는-이미지의-넓이-계산"><a href="#4-8-3-reduce-떠-있는-이미지의-넓이-계산" class="headerlink" title="4.8.3. reduce: 떠 있는 이미지의 넓이 계산"></a>4.8.3. <code>reduce</code>: 떠 있는 이미지의 넓이 계산</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reduce</span></span><br><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> WindowManager <span class="keyword">as</span> WM</span><br><span class="line"></span><br><span class="line"><span class="comment"># 떠 있는 모든 이미지의 파일명 수집</span></span><br><span class="line">imps = map(WM.getImage, WM.getIDList())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">area</span><span class="params">(imp)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> imp.width * imp.height</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 'for' loop</span></span><br><span class="line">largest = <span class="literal">None</span></span><br><span class="line">largestArea = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> imp <span class="keyword">in</span> imps:</span><br><span class="line">    a = area(imp)</span><br><span class="line">    <span class="keyword">if</span> largest <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        largest = imp</span><br><span class="line">        largestArea = a</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> a &gt; largestArea:</span><br><span class="line">            largest = imp</span><br><span class="line">            largestArea = a           </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 'reduce'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">largestImage</span><span class="params">(imp1, imp2)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> imp1 <span class="keyword">if</span> area(imp1) &gt; area(imp2) <span class="keyword">else</span> imp2</span><br><span class="line"></span><br><span class="line">largest = reduce(largestImage, imps)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Largest image="</span>, largest.title</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Largest area="</span>, largestArea </span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행 결과</span></span><br><span class="line"><span class="comment"># Largest image= embryos.jpg</span></span><br><span class="line"><span class="comment"># Largest area= 1920000</span></span><br></pre></td></tr></table></figure>
 <p>  <img src="4_python_6.PNG" alt=" "></p>
-
+<p><p></p>
+<div style="text-align:center; margin:20px 0px 20px 0px">
+  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
+    <img
+     src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
+     alt="도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
+     style="height:70px !important;width: 200px !important;"
+     />
+ </a>
+</div>
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/" data-id="ckhyh1ey8001ag4uj9p274yiw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/" data-id="ckhyj420r000wwsuj2bu7fa5i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -688,12 +697,12 @@ ga('send', 'pageview');
         "genre": "ImageJ Tutorial",
         "datePublished": "2019-12-19",
         "dateCreated": "2019-12-19",
-        "dateModified": "2020-11-08",
+        "dateModified": "2020-11-26",
         "url": "https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/",
         "description": "4.1. Python 문법을 공부하는 이유
 ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python을 구현한 것입니다.
 주로 web 환경에 많이 사용되는 JVM과 python의 연동이 자유로워 Java Class와 .jar 파일을 아무런 변환이나 노력 없이 그대로 끌어다 사용할 수 있다는 장점이 있습니다. ",
-        "wordCount": 5082
+        "wordCount": 5125
     }
 </script>
 
@@ -1000,5 +1009,21 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
