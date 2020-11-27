@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/30-mpl_dists_0.png">
 <meta property="article:published_time" content="2020-09-07T00:40:00.000Z">
-<meta property="article:modified_time" content="2020-11-26T07:37:43.070Z">
+<meta property="article:modified_time" content="2020-11-27T00:44:52.317Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -418,23 +418,24 @@ ga('send', 'pageview');
 <li>이 부분을 포함한 전체 코드와 결과는 다음과 같습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">12</span>, figsize=(<span class="number">10</span>,<span class="number">7</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">fig.set_alpha(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(axes, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(df_2016.query(<span class="string">f"month==<span class="subst">&#123;i&#125;</span>"</span>)[<span class="string">"meantempm"</span>], </span><br><span class="line">                shade=<span class="literal">True</span>, color=<span class="string">"w"</span>, facecolor=<span class="string">"cornflowerblue"</span>, alpha=<span class="number">1</span>,</span><br><span class="line">                legend=<span class="literal">False</span>, ax=ax)</span><br><span class="line">    ax.set_xlim(<span class="number">-29</span>, <span class="number">40</span>)    </span><br><span class="line">    ax.text(<span class="number">-29</span>, <span class="number">0.01</span>, calendar.month_name[i], fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>&#125;) </span><br><span class="line">    </span><br><span class="line">    ax.spines[<span class="string">"left"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">"right"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">"top"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">"bottom"</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">12</span>:</span><br><span class="line">        ax.tick_params(axis=<span class="string">"x"</span>, length=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ax.tick_params(axis=<span class="string">"x"</span>, direction=<span class="string">"inout"</span>, color=<span class="string">"lightgray"</span>, </span><br><span class="line">                       length=<span class="number">5</span>, width=<span class="number">2</span>, labelsize=<span class="string">"large"</span>)</span><br><span class="line">        ax.set_xlabel(<span class="string">"Mean Temperature (℃)"</span>, fontdict=&#123;<span class="string">"fontsize"</span>:<span class="string">"large"</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    ax.set_yticks([])    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#     ax.grid(axis="x")</span></span><br><span class="line">    xticks = ax.get_xticks()</span><br><span class="line">    <span class="keyword">for</span> xtick <span class="keyword">in</span> xticks:</span><br><span class="line">        ax.plot([xtick, xtick], [<span class="number">0</span>, <span class="number">0.065</span>], color=<span class="string">'lightgray'</span>, zorder=<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    ax.axhline(<span class="number">0</span>, color=<span class="string">"lightgray"</span>)</span><br><span class="line">    ax.patch.set_alpha(<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">fig.subplots_adjust(hspace=<span class="number">-0.5</span>)</span><br></pre></td></tr></table></figure>
 <img src="30-mpl_dists_18.png" alt=""></li>
 </ul>
-<p><p></p>
-<div style="text-align:center; margin:20px 0px 20px 0px">
-  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
-    <img
-     src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
-     alt="도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
-     style="height:70px !important;width: 200px !important;"
-     />
- </a>
-</div>
+
         </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
+			<img
+			 src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
+			 style="height:70px !important;width: 200px !important;"
+			 />
+		 </a><br>
+		 "도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
+		</div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/" data-id="ckhyj424g0034wsuj4fci6ld4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/" data-id="ckhzjpnu700341guj8tiwhg1w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -510,7 +511,7 @@ ga('send', 'pageview');
         "genre": "Python Data Science",
         "datePublished": "2020-09-07",
         "dateCreated": "2020-09-07",
-        "dateModified": "2020-11-26",
+        "dateModified": "2020-11-27",
         "url": "https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/",
         "description": "
 시간의 흐름에 따른 분포 추세 변화를 보여줍니다.
@@ -519,7 +520,7 @@ pandas의 도움을 받을 수도 있습니다.
 
 
 Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Vi",
-        "wordCount": 2188
+        "wordCount": 2145
     }
 </script>
 

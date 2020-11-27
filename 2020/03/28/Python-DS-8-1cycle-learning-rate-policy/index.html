@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/8_foc_1.png">
 <meta property="article:published_time" content="2020-03-27T17:24:00.000Z">
-<meta property="article:modified_time" content="2020-11-26T07:34:28.127Z">
+<meta property="article:modified_time" content="2020-11-27T00:43:55.081Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="fast.ai">
 <meta property="article:tag" content="learning rate">
@@ -272,23 +272,24 @@ ga('send', 'pageview');
 <h3 id="Fastai에는-1주기-정책이-이렇게-이식되어-있습니다"><a href="#Fastai에는-1주기-정책이-이렇게-이식되어-있습니다" class="headerlink" title="Fastai에는 1주기 정책이 이렇게 이식되어 있습니다."></a>Fastai에는 1주기 정책이 이렇게 이식되어 있습니다.</h3><p>Fastai는 1주기 정책의 상세 부분을 모두 추상화하여 <code>fit_one_cycle()</code> 형태의 직관적인 인터페이스를 제공합니다.<br>내부적으로 <code>fit()</code> 함수를 <code>OneCycleScheduler</code> callback 과 함께 호출하는 방식입니다.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit_one_cycle</span><span class="params">(learn:Learner, cyc_len:int,</span></span></span><br><span class="line"><span class="function"><span class="params">    max_lr:Union[Floats,slice]=defaults.lr, moms:Tuple[float,float]=<span class="params">(<span class="number">0.95</span>,<span class="number">0.85</span>)</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    div_factor:float=<span class="number">25.</span>, pct_start:float=<span class="number">0.3</span>, wd:float=None,</span></span></span><br><span class="line"><span class="function"><span class="params">    callbacks:Optional[CallbackList]=None, tot_epochs:int=None,</span></span></span><br><span class="line"><span class="function"><span class="params">    start_epoch:int=<span class="number">1</span>)</span>-&gt;<span class="keyword">None</span>:</span></span><br><span class="line">    <span class="string">"Fit a model following the 1cycle policy."</span></span><br><span class="line"></span><br><span class="line">    max_lr = learn.lr_range(max_lr)</span><br><span class="line">    callbacks = listify(callbacks)</span><br><span class="line">    callbacks.append(OneCycleScheduler(learn, max_lr, moms=moms,</span><br><span class="line">      div_factor=div_factor, pct_start=pct_start,</span><br><span class="line">      tot_epochs=tot_epochs,start_epoch=start_epoch))</span><br><span class="line">    </span><br><span class="line">    learn.fit(cyc_len, max_lr, wd=wd, callbacks=callbacks)</span><br></pre></td></tr></table></figure></p>
 <p><code>fit_one_cycle()</code> 함수를 몇 개의 기본적인 인자와 함께 호출함으로써 1주기 정책의 장점을 누리기 바랍니다.</p>
 <p><a href='https://twitter.com/mavropalias' target="_blank" rel="noopener">원저자의 Twitter를 Follow하시려면 클릭하세요</a></p>
-<p><p></p>
-<div style="text-align:center; margin:20px 0px 20px 0px">
-  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
-    <img
-     src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
-     alt="도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
-     style="height:70px !important;width: 200px !important;"
-     />
- </a>
-</div>
+
         </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
+			<img
+			 src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
+			 style="height:70px !important;width: 200px !important;"
+			 />
+		 </a><br>
+		 "도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
+		</div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/" data-id="ckhyj427l004kwsujgk45650h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/" data-id="ckhzjpnut004k1guj29b58z97" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -364,7 +365,7 @@ ga('send', 'pageview');
         "genre": "Python Data Science",
         "datePublished": "2020-03-28",
         "dateCreated": "2020-03-28",
-        "dateModified": "2020-11-26",
+        "dateModified": "2020-11-27",
         "url": "https://jehyunlee.github.io/2020/03/28/Python-DS-8-1cycle-learning-rate-policy/",
         "description": "
 본 글은 번역글입니다.
@@ -375,7 +376,7 @@ ga('send', 'pageview');
 
 한 줄 요약
 fit",
-        "wordCount": 1151
+        "wordCount": 1108
     }
 </script>
 
