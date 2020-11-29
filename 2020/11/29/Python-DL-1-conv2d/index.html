@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/1-conv2d_0.png">
 <meta property="article:published_time" content="2020-11-28T20:21:00.000Z">
-<meta property="article:modified_time" content="2020-11-28T21:02:33.580Z">
+<meta property="article:modified_time" content="2020-11-29T01:32:16.950Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="tensorflow">
 <meta property="article:tag" content="keras">
@@ -311,7 +311,7 @@ ga('send', 'pageview');
 <h3 id="2-3-Conv2D-적용-3-16-filter"><a href="#2-3-Conv2D-적용-3-16-filter" class="headerlink" title="2.3. Conv2D 적용 (3) 16 filter"></a>2.3. Conv2D 적용 (3) 16 filter</h3><ul>
 <li>필터의 수를 지정하면 반복된 결과물이 channel로 쌓입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conv_16 = layers.Conv2D(<span class="number">16</span>, <span class="number">3</span>, padding=<span class="string">"same"</span>)(img_tf)</span><br><span class="line">print(type(conv_16))</span><br><span class="line">print(conv_16.shape)</span><br><span class="line">print(conv_16.dtype)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과 : 16 channel이 출력됩니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conv_16 = layers.Conv2D(16, 3, padding=<span class="string">"same"</span>)(img_tf)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(conv_16))</span><br><span class="line"><span class="built_in">print</span>(conv_16.shape)</span><br><span class="line"><span class="built_in">print</span>(conv_16.dtype)</span><br></pre></td></tr></table></figure>
+<li>실행결과 : 16 channel이 출력됩니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">'tensorflow.python.framework.ops.EagerTensor'</span>&gt;</span><br><span class="line">(1, 1080, 1080, 16)</span><br><span class="line">&lt;dtype: <span class="string">'float32'</span>&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -343,7 +343,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/29/Python-DL-1-conv2d/" data-id="cki25sh1a0000jkuj116ih7fh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/29/Python-DL-1-conv2d/" data-id="cki2g862g001ca8uje6q95w5v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -431,7 +431,7 @@ pyimagesearch: Keras Conv2D and Convolutional Layers
 
 
 convolution, 또는 합성곱 연산은 CNN(Convolut",
-        "wordCount": 672
+        "wordCount": 668
     }
 </script>
 
@@ -728,5 +728,21 @@ convolution, 또는 합성곱 연산은 CNN(Convolut",
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
