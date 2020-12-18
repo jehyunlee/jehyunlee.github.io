@@ -10,7 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="python,pandas,visualization,matplotlib" />
+    <meta name="keywords" content="python,pandas,matplotlib,visualization" />
     
     <meta name="description" content="대학수학능력시험은 94학번 이후 대학 진학을 결정하는 시험입니다. 얼마 전에 끝난 2021학년도 수능을 포함해 29회의 수능이 있었습니다. 근 30년간 응시생과 점수에 대한 트렌드를 확인해 보겠습니다.  1. 데이터1.1. 데이터 확보 한국교육과정평가원 대학수학능력시험 정보   수학능력시험 관련 데이터는 공공데이터 포털에서 다운받을 수 있습니다. 여러">
 <meta property="og:type" content="article">
@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/48_sn_0.png">
 <meta property="article:published_time" content="2020-12-16T21:50:00.000Z">
-<meta property="article:modified_time" content="2020-12-17T08:16:52.853Z">
+<meta property="article:modified_time" content="2020-12-18T00:07:05.663Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="pandas">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/48_sn_0.png">
     
@@ -230,7 +230,7 @@ ga('send', 'pageview');
 <ul>
 <li>수학능력시험 관련 데이터는 <a href="https://www.data.go.kr/data/15001549/fileData.do" target="_blank" rel="noopener">공공데이터 포털</a>에서 다운받을 수 있습니다.</li>
 <li>여러 데이터가 hwp와 csv 형태로 주어집니다.</li>
-<li>이를 정리하고, 파이썬에서 활용하기 쉽도록 컬럼명을 영문으로 바꿉니다. [<a href="sn_apply.csv">파일 다운로드</a>]<br><ul>
+<li>이를 정리하고, 파이썬에서 활용하기 쉽도록 컬럼명을 영문으로 바꿉니다.<br>[<b><a href="sn_apply.csv">파일 다운로드</a></b>]<br><ul>
 <li><b>학년도 :</b> year</li>
 <li><b>지원자 수 :</b> num_total</li>
 <li><b>남성 지원자 수 :</b> num_M</li>
@@ -262,7 +262,10 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>점수 데이터 부분에 결측치가 상당합니다.<ul>
-<li><b>재학생과 졸업생의 상위 50% 점수는 단 두 건</b>입니다 - 이건 그리지 맙시다.</li>
+<li><b>재학생과 졸업생의 상위 50% 점수는 단 두 건</b>입니다 <ul>
+<li>이건 그리지 맙시다.</li>
+</ul>
+</li>
 <li><b>29번의 수능 중 9번만 점수 데이터가 있습니다.</b></li>
 <li>2002학년도부터 총점을 공개하지 않고 표준점수 등으로 변환해서 공개한 결과입니다.</li>
 <li>동일 기준으로 분석하기 어려워 <b>점수 분석은 94~01까지만</b> 합니다.</li>
@@ -308,7 +311,7 @@ ga('send', 'pageview');
 <li>얼마나 적게 보는지 확인해 봅시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 지원자 수 </span></span><br><span class="line">ax.plot(df_sn[<span class="string">"year"</span>], df_sn[<span class="string">"num_total"</span>], color=color_total, label=<span class="string">"지원자 수"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 응시자 수</span></span><br><span class="line">ax.plot(df_sn[<span class="string">"year"</span>], df_sn[<span class="string">"num_test"</span>], color=color_test, label=<span class="string">"응시자 수"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 범례 추가</span></span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
 <img src="48_sn_7.png" alt=""><br></li>
 </ul>
-<h3 id="2-4-plot-모양-변경"><a href="#2-4-plot-모양-변경" class="headerlink" title="2.4. plot 모양 변경"></a>2.4. plot 모양 변경</h3><ul>
+<h3 id="2-4-y축-범위-plot-모양-변경"><a href="#2-4-y축-범위-plot-모양-변경" class="headerlink" title="2.4. y축 범위, plot 모양 변경"></a>2.4. y축 범위, plot 모양 변경</h3><ul>
 <li>응시자 수가 바닥으로 처박힙니다.</li>
 <li>내년부턴 당장 수능이 없어질 것 같습니다.</li>
 <li><b>y축이 0부터 시작</b>해야 올바른 비교가 가능합니다.</li>
@@ -322,11 +325,14 @@ ga('send', 'pageview');
 <h3 id="2-5-1-실패-yticklabels"><a href="#2-5-1-실패-yticklabels" class="headerlink" title="2.5.1. 실패: yticklabels"></a>2.5.1. 실패: yticklabels</h3><ul>
 <li>y축 숫자는 yticklabels로 제어합니다.</li>
 <li><code>.get_yticklabels()</code>로 받아서 <code>.set_yticklabels()</code>로 바꿔넣으면 될 것 같습니다.</li>
-<li><p>내친 김에 수능을 두 번 보는 바람에 꺾인 1994년 데이터 하나를 빼고 그립니다.</p>
+<li><p>내친 김에 수능을 두 번 보는 바람에 꺾인 <b>1994년 데이터 하나를 빼고</b> 그립니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line">ax.plot(df_sn.loc[<span class="number">1</span>:, <span class="string">"year"</span>], df_sn.loc[<span class="number">1</span>:, <span class="string">"num_total"</span>], <span class="string">'o-'</span>, color=color_total, label=<span class="string">"지원자 수"</span>)</span><br><span class="line">ax.plot(df_sn.loc[<span class="number">1</span>:, <span class="string">"year"</span>], df_sn.loc[<span class="number">1</span>:, <span class="string">"num_test"</span>], <span class="string">'o:'</span>, color=color_test, label=<span class="string">"응시자 수"</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">1000000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># yticklabel 표현 수정</span></span><br><span class="line">yticks = ax.get_yticks()</span><br><span class="line">ax.set_yticks(yticks)</span><br><span class="line">yticklabels = ax.get_yticklabels()</span><br><span class="line">ax.set_yticklabels([y <span class="keyword">for</span> y <span class="keyword">in</span> yticklabels]) <span class="comment"># yticklabels 사용</span></span><br><span class="line"></span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
 <p><img src="48_sn_9.png" alt=""><br></p>
 </li>
-<li><p><b>숫자가 사라져버립니다!</b> 왜 그런 걸까요?</p>
+<li><p>나는 숫자를 더 좋게 표현하고 싶었을 뿐입니다.</p>
+</li>
+<li>그런데 <b>숫자가 사라져버립니다!</b> </li>
+<li><p>왜 그런 걸까요?</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(yticklabels)</span><br></pre></td></tr></table></figure>
 <p><img src="48_sn_26.png" alt=""><br></p>
 </li>
@@ -348,12 +354,12 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>그러나 같이 사용해야 합니다.</li>
-<li>문법상 <code>.set_yticklabels()</code>는 <code>.set_yticks()</code> 뒤에 와야 하기 때문입니다.</li>
+<li><b>문법상 <code>.set_yticklabels()</code>는 <code>.set_yticks()</code> 뒤에 와야 하기 때문입니다.</b></li>
 </ul>
 <h3 id="2-6-남녀-수험생-수-함께-그리기"><a href="#2-6-남녀-수험생-수-함께-그리기" class="headerlink" title="2.6. 남녀 수험생 수 함께 그리기"></a>2.6. 남녀 수험생 수 함께 그리기</h3><ul>
 <li>총 수를 그렸으니, 이번엔 남녀 수를 따로 그려봅니다.</li>
 <li>남성과 여성이 나란하게 있는 bar plot을 사용합시다.</li>
-<li><p>matplotlib으로도 가능하지만 이런 표현은 pandas가 더 편리합니다.</p>
+<li><p>matplotlib으로도 가능하지만 이런 표현은 <b>pandas가 더 편리합니다.</b></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># pandas bar plot</span></span><br><span class="line">ax = df_sn[[<span class="string">"num_M"</span>, <span class="string">"num_F"</span>]].plot.bar(ax=ax)</span><br><span class="line"></span><br><span class="line">ax.plot(df_sn.loc[<span class="number">1</span>:, <span class="string">"year"</span>], df_sn.loc[<span class="number">1</span>:, <span class="string">"num_total"</span>], <span class="string">'o-'</span>, color=color_total, label=<span class="string">"지원자 수"</span>)</span><br><span class="line">ax.plot(df_sn.loc[<span class="number">1</span>:, <span class="string">"year"</span>], df_sn.loc[<span class="number">1</span>:, <span class="string">"num_test"</span>], <span class="string">'o:'</span>, color=color_test, label=<span class="string">"응시자 수"</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">1000000</span>)</span><br><span class="line"></span><br><span class="line">yticks = ax.get_yticks()</span><br><span class="line">ax.set_yticks(yticks)</span><br><span class="line">yticklabels = ax.get_yticklabels()</span><br><span class="line">ax.set_yticklabels([<span class="string">f"<span class="subst">&#123;y//<span class="number">10000</span>:<span class="number">.0</span>f&#125;</span>만 명"</span> <span class="keyword">for</span> y <span class="keyword">in</span> yticks])</span><br><span class="line"></span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
 <p><img src="48_sn_11.png" alt=""><br></p>
 </li>
@@ -375,6 +381,7 @@ ga('send', 'pageview');
 <li><p>문제의 원인을 알았습니다.</p>
 </li>
 <li><b>하나는 0~28, 하나는 1990~2025</b>에서 그리고 있었던 겁니다.</li>
+<li>bar plot을 그릴 때 x 범위를 지정하지 않았기 때문에 벌어진 일입니다.</li>
 </ul>
 <h4 id="2-6-3-쪼개서-원인-분석-2"><a href="#2-6-3-쪼개서-원인-분석-2" class="headerlink" title="2.6.3. 쪼개서 원인 분석 (2)"></a>2.6.3. 쪼개서 원인 분석 (2)</h4><ul>
 <li>그럼, pandas로 그리는 bar plot에 x축 데이터를 넣어줍시다.</li>
@@ -390,6 +397,7 @@ ga('send', 'pageview');
 </li>
 <li><p>아까랑 똑같습니다.</p>
 </li>
+<li>왜냐면, pandas가 그리는 bar plot은 <b>index를 x축으로</b> 사용합니다.</li>
 <li><b>pandas에 x를 넣어도 xticklabels만 고치는 겁니다.</b></li>
 </ul>
 <h4 id="2-6-3-쪼개서-원인-분석-3"><a href="#2-6-3-쪼개서-원인-분석-3" class="headerlink" title="2.6.3. 쪼개서 원인 분석 (3)"></a>2.6.3. 쪼개서 원인 분석 (3)</h4><ul>
@@ -406,9 +414,13 @@ ga('send', 'pageview');
 </li>
 <li><p>느낌이 좋습니다.</p>
 </li>
-<li>이제 둘을 같이 그려봅니다.</li>
-<li>아까 생략했던 1994년 여름 수능 데이터도 다시 살립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">df_sn[[<span class="string">"year"</span>, <span class="string">"num_M"</span>, <span class="string">"num_F"</span>]].plot.bar(x=<span class="string">"year"</span>, y=[<span class="string">"num_M"</span>, <span class="string">"num_F"</span>], ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x 데이터 범위 수정</span></span><br><span class="line">ax.plot(df_sn[<span class="string">"num_total"</span>], <span class="string">'o-'</span>, color=color_total, label=<span class="string">"지원자 수"</span>)</span><br><span class="line">ax.plot(df_sn[<span class="string">"num_test"</span>], <span class="string">'o:'</span>, color=color_test, label=<span class="string">"응시자 수"</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">1000000</span>)</span><br><span class="line"></span><br><span class="line">yticks = ax.get_yticks()</span><br><span class="line">ax.set_yticks(yticks)</span><br><span class="line">yticklabels = ax.get_yticklabels()</span><br><span class="line">ax.set_yticklabels([<span class="string">f"<span class="subst">&#123;y//<span class="number">10000</span>:<span class="number">.0</span>f&#125;</span>만 명"</span> <span class="keyword">for</span> y <span class="keyword">in</span> yticks])</span><br><span class="line"></span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
-<img src="48_sn_15.png" alt=""><br></li>
+<li><p>이제 둘을 같이 그려봅니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">df_sn[[<span class="string">"year"</span>, <span class="string">"num_M"</span>, <span class="string">"num_F"</span>]].plot.bar(x=<span class="string">"year"</span>, y=[<span class="string">"num_M"</span>, <span class="string">"num_F"</span>], ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x 데이터 범위 수정</span></span><br><span class="line">ax.plot(df_sn[<span class="string">"num_total"</span>], <span class="string">'o-'</span>, color=color_total, label=<span class="string">"지원자 수"</span>)</span><br><span class="line">ax.plot(df_sn[<span class="string">"num_test"</span>], <span class="string">'o:'</span>, color=color_test, label=<span class="string">"응시자 수"</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">1000000</span>)</span><br><span class="line"></span><br><span class="line">yticks = ax.get_yticks()</span><br><span class="line">ax.set_yticks(yticks)</span><br><span class="line">yticklabels = ax.get_yticklabels()</span><br><span class="line">ax.set_yticklabels([<span class="string">f"<span class="subst">&#123;y//<span class="number">10000</span>:<span class="number">.0</span>f&#125;</span>만 명"</span> <span class="keyword">for</span> y <span class="keyword">in</span> yticks])</span><br><span class="line"></span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
+<p><img src="48_sn_15.png" alt=""><br></p>
+</li>
+<li><p>아까 생략했던 1994년 여름 수능 데이터도 다시 살립니다.</p>
+</li>
+<li>년도의 숫자가 아니라 <b>index가 기준</b>이기 때문에 <b>같은 값이 여럿 있어도 겹치지 않습니다.</b></li>
 </ul>
 <h4 id="2-6-4-성공"><a href="#2-6-4-성공" class="headerlink" title="2.6.4. 성공"></a>2.6.4. 성공</h4><ul>
 <li>그림이 잘 나오는 것을 확인했습니다.</li>
@@ -445,7 +457,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/12/17/Python-DS-48-suneung/" data-id="ckisklzmz004ot8uj9f0s3bzm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/12/17/Python-DS-48-suneung/" data-id="ckiustro400f2a8uj9nfy6qee" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -517,11 +529,11 @@ ga('send', 'pageview');
         },
         "headline": "수능 Trend Visualization (1)",
         "image": "https://jehyunlee.github.io/thumbnails/Python-DS/48_sn_0.png",
-        "keywords": "python pandas visualization matplotlib",
+        "keywords": "python pandas matplotlib visualization",
         "genre": "Python Data Science",
         "datePublished": "2020-12-17",
         "dateCreated": "2020-12-17",
-        "dateModified": "2020-12-17",
+        "dateModified": "2020-12-18",
         "url": "https://jehyunlee.github.io/2020/12/17/Python-DS-48-suneung/",
         "description": "
 
@@ -535,7 +547,7 @@ ga('send', 'pageview');
 
 수학능력시험 관련 데이터는 공공데이터 포털에서 다운받을 수 있습니다.
 여러 ",
-        "wordCount": 2382
+        "wordCount": 2419
     }
 </script>
 
