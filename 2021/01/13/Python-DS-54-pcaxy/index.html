@@ -10,7 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="python,visualization,matplotlib,PCA,3D" />
+    <meta name="keywords" content="python,matplotlib,visualization,PCA,3D" />
     
     <meta name="description" content="PCA는 데이터의 숨겨진 패턴을 드러내줍니다. Feature Space의 데이터 분포 중 가장 넓게 분포한 것부터 찾아주기 때문에 X Feature들만으로는 보기 어려운 패턴을 찾을 수 있습니다. X 인자들의 분포 패턴에 Y feature를 얹어서 그려봅시다. Feature engineering을 위한 실마리를 찾고자 합니다.  1. 데이터 이번 예시는">
 <meta property="og:type" content="article">
@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/54_pcaxy_0.png">
 <meta property="article:published_time" content="2021-01-12T22:41:00.000Z">
-<meta property="article:modified_time" content="2021-01-13T07:50:05.669Z">
+<meta property="article:modified_time" content="2021-01-13T19:47:47.479Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="PCA">
 <meta property="article:tag" content="3D">
 <meta name="twitter:card" content="summary">
@@ -254,15 +254,16 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li><p>데이터의 극단으로부터 1% 이상과 0.1% 이상을 제거합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">X_cut2 = X.apply(<span class="keyword">lambda</span> x: cut_quantile(x, <span class="number">0.01</span>, <span class="number">0.99</span>), axis=<span class="number">0</span>)</span><br><span class="line">X_cut2.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X_cut3 = X.apply(<span class="keyword">lambda</span> x: cut_quantile(x, <span class="number">0.001</span>, <span class="number">0.999</span>), axis=<span class="number">0</span>)</span><br><span class="line">X_cut3.dropna(inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1% 제거</span></span><br><span class="line">X_cut2 = X.apply(<span class="keyword">lambda</span> x: cut_quantile(x, <span class="number">0.01</span>, <span class="number">0.99</span>), axis=<span class="number">0</span>)</span><br><span class="line">X_cut2.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 0.1% 제거</span></span><br><span class="line">X_cut3 = X.apply(<span class="keyword">lambda</span> x: cut_quantile(x, <span class="number">0.001</span>, <span class="number">0.999</span>), axis=<span class="number">0</span>)</span><br><span class="line">X_cut3.dropna(inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>확인 결과, <b>1% 제거시 전체의 16% 제거</b>, <b>0.1%는 전체의 2.1%를 제거</b>합니다.</p>
 </li>
-<li>의도와 달리 너무 많이 제거됩니다. 모든 인자가 극단에 있는 인자가 드물다는 의미입니다.</li>
-<li>X를 날린 후의 분포를 확인합니다. 시각화 코드는 생략합니다.<br><br><img src="hist_post.png" alt=""><br></li>
+<li>의도와 달리 너무 많이 제거됩니다. </li>
+<li>모든 인자가 극단에 있는 데이터가 드물다는 의미입니다.</li>
+<li>X 이상치를 날린 후의 분포를 확인합니다. 시각화 코드는 생략합니다.<br><br><img src="hist_post.png" alt=""><br></li>
 </ul>
 <ul>
-<li>Y 인자는 무사한지 걱정이 됩니다.</li>
+<li><b>Y 인자는 무사한지 걱정이 됩니다.</b></li>
 <li>X 이상치 제거로 Y 인자의 분포가 어떻게 변했는지 확인합니다.</li>
 <li><p>히스토그램을 얻어서 구간별 데이터를 저장한 뒤 이상치 제거 전과의 차이를 봅니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_hist_delta</span><span class="params">(y1, y2, filename=None, bins=<span class="number">20</span>)</span>:</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">    counts_y1, bins_y1 = np.histogram(y1, bins=bins)</span><br><span class="line">    counts_y2, bins_y2 = np.histogram(y2, bins=bins)</span><br><span class="line"></span><br><span class="line">    axs[<span class="number">0</span>].bar(bins_y1[:<span class="number">-1</span>]+<span class="number">0.5</span>*(bins_y1[<span class="number">1</span>]-bins_y1[<span class="number">0</span>]), counts_y1, width=(bins_y1[<span class="number">1</span>]-bins_y1[<span class="number">0</span>]))</span><br><span class="line">    axs[<span class="number">0</span>].bar(bins_y2[:<span class="number">-1</span>]+<span class="number">0.5</span>*(bins_y2[<span class="number">1</span>]-bins_y2[<span class="number">0</span>]), counts_y2, width=(bins_y2[<span class="number">1</span>]-bins_y2[<span class="number">0</span>]))</span><br><span class="line">    axs[<span class="number">0</span>].set_yscale(<span class="string">"log"</span>)</span><br><span class="line">    axs[<span class="number">0</span>].set_xlabel(<span class="string">"Y"</span>)</span><br><span class="line">    axs[<span class="number">0</span>].set_ylabel(<span class="string">"counts (log)"</span>)</span><br><span class="line"></span><br><span class="line">    axs[<span class="number">1</span>].bar(bins_y2[:<span class="number">-1</span>]+<span class="number">0.5</span>*(bins_y2[<span class="number">1</span>]-bins_y2[<span class="number">0</span>]), </span><br><span class="line">               <span class="number">1</span> - counts_y2/counts_y1, </span><br><span class="line">               width=(bins_y2[<span class="number">1</span>]-bins_y2[<span class="number">0</span>]),</span><br><span class="line">               fc=<span class="string">"C2"</span>)</span><br><span class="line">    </span><br><span class="line">    axs[<span class="number">1</span>].set_ylim(<span class="number">0</span>, <span class="number">1.20</span>)</span><br><span class="line">    axs[<span class="number">1</span>].set_yticks(axs[<span class="number">1</span>].get_yticks())</span><br><span class="line">    axs[<span class="number">1</span>].set_yticklabels([<span class="string">f"<span class="subst">&#123;int(y*<span class="number">100</span>)&#125;</span>%"</span> <span class="keyword">for</span> y <span class="keyword">in</span> axs[<span class="number">1</span>].get_yticks()])</span><br><span class="line">    axs[<span class="number">1</span>].grid(axis=<span class="string">"y"</span>)</span><br><span class="line">    </span><br><span class="line">    axs[<span class="number">1</span>].set_xlabel(<span class="string">"Y"</span>)</span><br><span class="line">    axs[<span class="number">1</span>].set_ylabel(<span class="string">"$\Delta$ counts (log)"</span>)</span><br><span class="line"></span><br><span class="line">    fig.suptitle(filename)</span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.savefig(<span class="string">f"./images/<span class="subst">&#123;filename&#125;</span>_post.png"</span>)</span><br></pre></td></tr></table></figure>
@@ -273,19 +274,19 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li><b>0.1% 제거시:</b> 조금 낫지만 귀한 y ~ 1에서 손실률이 더 큽니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_hist_delta(Y, Y_cut2, <span class="string">"hist_0.001_0.999"</span>)</span><br></pre></td></tr></table></figure>
+<li><b>0.1% 제거시:</b> 조금 낫지만 귀한 y &gt; 0.5에서 손실률이 더 큽니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_hist_delta(Y, Y_cut2, <span class="string">"hist_0.001_0.999"</span>)</span><br></pre></td></tr></table></figure>
 <img src="hist_0.001_0.999_post.png" alt=""></li>
 </ul>
 <h3 id="2-2-scaling"><a href="#2-2-scaling" class="headerlink" title="2.2. scaling"></a>2.2. scaling</h3><ul>
 <li>PCA는 feature space의 분포를 기준으로 주성분을 결정합니다.</li>
-<li>따라서 인자간 scaling이 매우 중요하며, 이것이 잘못되면 올바르지 못한 결론이 유도됩니다.</li>
+<li>따라서 인자간 scaling이 매우 중요하며, 잘못되면 틀린 결론이 유도됩니다.</li>
 <li>양 끝점을 0~1로 지정하는 MinMaxScaling을 수행합니다.</li>
 <li>시험삼아 Std. Scaling을 섞어봤는데 무의미한 결과가 얻어지더군요.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"></span><br><span class="line">min_max_scaler = preprocessing.MinMaxScaler()</span><br><span class="line">X_scaled_mm = pd.DataFrame(min_max_scaler.fit_transform(X))</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="3-PCA"><a href="#3-PCA" class="headerlink" title="3. PCA"></a>3. PCA</h2><h3 id="3-1-explained-variance-ratio"><a href="#3-1-explained-variance-ratio" class="headerlink" title="3.1. explained variance ratio"></a>3.1. explained variance ratio</h3><ul>
 <li>이번 작업의 목적이 차원 축소는 아닙니다.</li>
-<li>그러나 PCA가 얼만큼 효율적으로 진행되었는지 확인하기 위해 분산설명력을 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_evr</span><span class="params">(pca, filename=None)</span>:</span></span><br><span class="line">    <span class="comment"># 1. explained variance ratio</span></span><br><span class="line">    pca_evr = pca.explained_variance_ratio_</span><br><span class="line">    print(<span class="string">f"# top 10 PCA explained ratio: <span class="subst">&#123;pca_evr[:<span class="number">10</span>]&#125;</span>"</span>)</span><br><span class="line">    <span class="comment"># 2. cumulative explained variance ratio    </span></span><br><span class="line">    pca_cevr = np.array([<span class="number">0</span>]+[pca_evr[:i].sum() <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(pca_evr))])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. plot cumulative explained variance ratio</span></span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">    ax.plot(np.arange(len(pca_cevr)), pca_cevr, drawstyle=<span class="string">"steps-post"</span>, c=<span class="string">"b"</span>, marker=<span class="string">"o"</span>, ms=<span class="number">7</span>, mfc=<span class="string">"w"</span>, mew=<span class="number">2</span>, zorder=<span class="number">2</span>)</span><br><span class="line">    ax.bar(np.arange(len(pca_cevr)+<span class="number">1</span>), [<span class="number">0</span>] + list(pca_evr), fc=<span class="string">"gray"</span>, zorder=<span class="number">1</span>)</span><br><span class="line">    xticks = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>]</span><br><span class="line">    xticklabels = [<span class="string">f"<span class="subst">&#123;int(x)&#125;</span>"</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks]</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels(xticklabels)</span><br><span class="line">    ax.set_xlabel(<span class="string">"Principle Component No."</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">"explained variance ratio"</span>)</span><br><span class="line"></span><br><span class="line">    ax.axhline(<span class="number">0.98</span>, ls=<span class="string">":"</span>, c=<span class="string">"gray"</span>)</span><br><span class="line">    ax.set_xlim(<span class="number">0.3</span>,)</span><br><span class="line">    ax.set_ylim(<span class="number">0</span>,)</span><br><span class="line">    ax.text(len(pca_cevr)<span class="number">-1</span>, <span class="number">0.85</span>, <span class="string">"0.98"</span>, ha=<span class="string">"right"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.tight_layout()</span><br><span class="line">        filename_cevr = <span class="string">f"./images/PCA_normal_cevr_<span class="subst">&#123;filename&#125;</span>.png"</span></span><br><span class="line">        fig.savefig(filename_cevr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pca_evr, pca_cevr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca = PCA()</span><br><span class="line">X_pca = pca.fit_transform(X_scaled_mm)</span><br><span class="line">pca_evr, pca_cevr = calc_evr(pca, filename=<span class="string">"mm"</span>)</span><br></pre></td></tr></table></figure>
+<li>그러나 PCA가 효율적으로 수행되었는지 확인하기 위해 분산설명력을 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_evr</span><span class="params">(pca, filename=None)</span>:</span></span><br><span class="line">    <span class="comment"># 1. explained variance ratio</span></span><br><span class="line">    pca_evr = pca.explained_variance_ratio_</span><br><span class="line">    print(<span class="string">f"# top 10 PCA explained ratio: <span class="subst">&#123;pca_evr[:<span class="number">10</span>]&#125;</span>"</span>)</span><br><span class="line">    <span class="comment"># 2. cumulative explained variance ratio    </span></span><br><span class="line">    pca_cevr = np.array([<span class="number">0</span>]+[pca_evr[:i].sum() <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(pca_evr))])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. plot cumulative explained variance ratio</span></span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">    ax.plot(np.arange(len(pca_cevr)), pca_cevr, drawstyle=<span class="string">"steps-post"</span>, c=<span class="string">"b"</span>, marker=<span class="string">"o"</span>, ms=<span class="number">7</span>, mfc=<span class="string">"w"</span>, mew=<span class="number">2</span>, zorder=<span class="number">2</span>)</span><br><span class="line">    ax.bar(np.arange(len(pca_cevr)+<span class="number">1</span>), [<span class="number">0</span>] + list(pca_evr), fc=<span class="string">"gray"</span>, zorder=<span class="number">1</span>)</span><br><span class="line">    xticks = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>]</span><br><span class="line">    xticklabels = [<span class="string">f"<span class="subst">&#123;int(x)&#125;</span>"</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks]</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels(xticklabels)</span><br><span class="line">    ax.set_xlabel(<span class="string">"Principle Component No."</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">"explained variance ratio"</span>)</span><br><span class="line"></span><br><span class="line">    ax.axhline(<span class="number">0.98</span>, ls=<span class="string">":"</span>, c=<span class="string">"gray"</span>)</span><br><span class="line">    ax.set_xlim(<span class="number">0.3</span>,)</span><br><span class="line">    ax.set_ylim(<span class="number">0</span>,)</span><br><span class="line">    ax.text(len(pca_cevr)<span class="number">-1</span>, <span class="number">0.85</span>, <span class="string">"0.98"</span>, ha=<span class="string">"right"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.tight_layout()</span><br><span class="line">        filename_cevr = <span class="string">f"./images/PCA_normal_cevr_<span class="subst">&#123;filename&#125;</span>.png"</span></span><br><span class="line">        fig.savefig(filename_cevr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pca_evr, pca_cevr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca = PCA()</span><br><span class="line">X_pca = pca.fit_transform(X_scaled_mm)</span><br><span class="line">pca_evr, pca_cevr = calc_evr(pca, filename=<span class="string">"mm"</span>)</span><br></pre></td></tr></table></figure>
 <img src="PCA_normal_cevr_mm.png" alt=""></li>
 </ul>
 <ul>
@@ -365,7 +366,8 @@ ga('send', 'pageview');
 <h2 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h2><ul>
 <li>PCA 결과를 가능한 그림으로 표현했습니다.</li>
 <li>X인자로 수행한 PCA의 <b>데이터 분포를 파악</b>하고, <b>Y값과의 연관성을 파악했습니다.</b></li>
-<li>데이터를 추가로 분석할 아이디어가 조금 생겼습니다. 좋은 결과로 이어지면 좋겠습니다.</li>
+<li>데이터를 추가로 분석할 아이디어가 조금 생겼습니다. </li>
+<li>좋은 결과로 이어지면 좋겠습니다.</li>
 </ul>
 
         </div>
@@ -384,7 +386,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/13/Python-DS-54-pcaxy/" data-id="ckjv4jadp005a3guj4uzzhh2v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/13/Python-DS-54-pcaxy/" data-id="ckjvu6dvu005b4cujflk61jvv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -456,11 +458,11 @@ ga('send', 'pageview');
         },
         "headline": "PCA of X features with Y",
         "image": "https://jehyunlee.github.io/thumbnails/Python-DS/54_pcaxy_0.png",
-        "keywords": "python visualization matplotlib PCA 3D",
+        "keywords": "python matplotlib visualization PCA 3D",
         "genre": "Python Data Science",
         "datePublished": "2021-01-13",
         "dateCreated": "2021-01-13",
-        "dateModified": "2021-01-13",
+        "dateModified": "2021-01-14",
         "url": "https://jehyunlee.github.io/2021/01/13/Python-DS-54-pcaxy/",
         "description": "
 PCA는 데이터의 숨겨진 패턴을 드러내줍니다.
@@ -470,7 +472,7 @@ Feature engineering을 위한 실마리를 찾고자 합니다.
 
 1. 데이터
 이번 예시는 ",
-        "wordCount": 3448
+        "wordCount": 3454
     }
 </script>
 
@@ -767,5 +769,21 @@ Feature engineering을 위한 실마리를 찾고자 합니다.
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
