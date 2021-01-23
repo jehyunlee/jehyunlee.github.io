@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/58_income2_0.png">
 <meta property="article:published_time" content="2021-01-23T20:35:00.000Z">
-<meta property="article:modified_time" content="2021-01-23T22:44:36.405Z">
+<meta property="article:modified_time" content="2021-01-23T22:46:23.562Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="pandas">
@@ -454,8 +454,8 @@ ga('send', 'pageview');
 <li><p>이제 통장에 건당 1천만원을 넣어줍니다.</p>
 </li>
 <li>기본급과 출장비는 항목 옆에 숫자가 붙어있었지만, <b>성과급은 그냥 “성과급”만</b> 찍힙니다.</li>
-<li><p>코드를 예외처리 해야 합니다. d</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># version 2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put_income</span><span class="params">(df, idx_pay, pay, label, number=True)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, idx <span class="keyword">in</span> enumerate(idx_pay):</span><br><span class="line">        <span class="keyword">if</span> df[<span class="string">"입금액"</span>].isnull()[idx]:</span><br><span class="line">            df.loc[idx, <span class="string">"입금액"</span>] = pay[i]</span><br><span class="line">            </span><br><span class="line">			<span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">				</span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = label_note</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            income = df.loc[idx, <span class="string">"입금액"</span>]</span><br><span class="line">            note = df.loc[idx, <span class="string">"적요"</span>]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> isinstance(income, list):</span><br><span class="line">                income = [income]</span><br><span class="line">                note = [note]</span><br><span class="line">            df.at[idx, <span class="string">"입금액"</span>] = income + [pay[i]]</span><br><span class="line">            </span><br><span class="line">			<span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">				</span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = note + [label_note]</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> df</span><br></pre></td></tr></table></figure>
+<li><p>코드를 예외처리 해야 합니다. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># version 2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put_income</span><span class="params">(df, idx_pay, pay, label, number=True)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, idx <span class="keyword">in</span> enumerate(idx_pay):</span><br><span class="line">        <span class="keyword">if</span> df[<span class="string">"입금액"</span>].isnull()[idx]:</span><br><span class="line">            df.loc[idx, <span class="string">"입금액"</span>] = pay[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">				</span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = label_note</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            income = df.loc[idx, <span class="string">"입금액"</span>]</span><br><span class="line">            note = df.loc[idx, <span class="string">"적요"</span>]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> isinstance(income, list):</span><br><span class="line">                income = [income]</span><br><span class="line">                note = [note]</span><br><span class="line">            df.at[idx, <span class="string">"입금액"</span>] = income + [pay[i]]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">				</span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = note + [label_note]</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> df</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>성과급 입금일이 출장이나 월급날과 겹친 날이 있는지 확인합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(set(idx_biztrip) &amp; set(idx_success))</span><br><span class="line">print(set(idx_salary) &amp; set(idx_success))</span><br></pre></td></tr></table></figure>
@@ -473,7 +473,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h3 id="3-1-4-회사-입금액"><a href="#3-1-4-회사-입금액" class="headerlink" title="3.1.4. 회사 입금액"></a>3.1.4. 회사 입금액</h3><ul>
-<li>이 시점에서 잘 들어가 있는지 한번 확인해봅니다.</li>
+<li>회사로부터의 입금액들이 잘 들어가 있는지 한번 확인해봅니다.</li>
 <li>데이터가 들어가 있지 않은 날은 빼고 한번 봅시다.</li>
 <li><code>dropna()</code>로 결측치가 있는 날들을 모두 제외하고 <code>.head(10)</code>으로 처음 10줄만 봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y2020.dropna().head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <img src="58_income2_06.png" alt=""><br></li>
@@ -615,7 +615,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/24/Python-DS-58-income2/" data-id="ckkaaw65n005licujdg2d74oa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/24/Python-DS-58-income2/" data-id="ckkaayiz4005l5wujhqol9n16" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -704,7 +704,7 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
 코드가 거칠더라도 양해바랍니다.
 
 1. ",
-        "wordCount": 3955
+        "wordCount": 3979
     }
 </script>
 
@@ -1001,21 +1001,5 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
