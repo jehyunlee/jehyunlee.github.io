@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/58_income2_0.png">
 <meta property="article:published_time" content="2021-01-23T20:35:00.000Z">
-<meta property="article:modified_time" content="2021-01-23T22:46:23.562Z">
+<meta property="article:modified_time" content="2021-01-23T22:50:04.269Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="pandas">
@@ -521,7 +521,7 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>행운의 컨텐츠를 꼽아봅니다.</li>
-<li><p>이번에도 <code>numpy.random.choice</code>로 확률을 조정합니다.</p>
+<li><p>이번에도 <code>numpy.random.choice()</code>로 확률을 조정합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2차 창작물 뽑기</span></span><br><span class="line">idx_2nd_ = np.random.choice([<span class="number">0</span>, <span class="number">1</span>], size=num_twojob, p=[<span class="number">0.99</span>, <span class="number">0.01</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2차 창작물 index</span></span><br><span class="line">idx_2nd = np.where(idx_2nd_==<span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line">print(idx_2nd)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2차 창작물 입금일 index</span></span><br><span class="line">idx_2nd += <span class="number">7</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과: 1%의 확률을 뚫고 <b>총 168건 중 3건</b>이나 뽑혔습니다!<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">60</span> <span class="number">70</span> <span class="number">93</span>]</span><br></pre></td></tr></table></figure>
@@ -575,12 +575,11 @@ ga('send', 'pageview');
 <ul>
 <li>같은 날짜에 여러 건이 있는 날이 많습니다.</li>
 <li>실제 통장에서는 <b>한 줄에 한 건</b>만 나와있습니다. 이렇게 만듭니다.</li>
-<li><p>열마다 <code>pandas.DataFrame.explode()</code>list마다 다른 행으로 만들고 <code>pandas.concat()</code>으로 결합합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y2020 = pd.concat([y2020[[<span class="string">"거래일자"</span>, <span class="string">"입금액"</span>]].explode(<span class="string">"입금액"</span>), y2020[<span class="string">"적요"</span>].explode()], axis=<span class="number">1</span>).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">y2020</span><br></pre></td></tr></table></figure>
-<p><img src="58_income2_11.png" alt=""></p>
-</li>
-<li><p>총 입금액은 얼마일까요?</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y2020[<span class="string">"입금액"</span>] = y2020[<span class="string">"입금액"</span>].astype(int)</span><br><span class="line">print(<span class="string">"총 입금액 ="</span>, format(y2020[<span class="string">'입금액'</span>].sum(), <span class="string">','</span>))</span><br></pre></td></tr></table></figure>
+<li><code>pandas.DataFrame.explode()</code>를 사용해서 list마다 다른 행으로 만들고 <code>pandas.concat()</code>으로 결합합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y2020 = pd.concat([y2020[[<span class="string">"거래일자"</span>, <span class="string">"입금액"</span>]].explode(<span class="string">"입금액"</span>), y2020[<span class="string">"적요"</span>].explode()], axis=<span class="number">1</span>).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">y2020</span><br></pre></td></tr></table></figure>
+<img src="58_income2_11.png" alt=""><br></li>
+</ul>
+<ul>
+<li>총 입금액은 얼마일까요?<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y2020[<span class="string">"입금액"</span>] = y2020[<span class="string">"입금액"</span>].astype(int)</span><br><span class="line">print(<span class="string">"총 입금액 ="</span>, format(y2020[<span class="string">'입금액'</span>].sum(), <span class="string">','</span>))</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과: 8천 7백만원이 넘었습니다!<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">총 입금액 = 87,112,099</span><br></pre></td></tr></table></figure>
 </li>
@@ -615,7 +614,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/24/Python-DS-58-income2/" data-id="ckkaayiz4005l5wujhqol9n16" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/24/Python-DS-58-income2/" data-id="ckkab3qlc005lckujgsmrdz4h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -704,7 +703,7 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
 코드가 거칠더라도 양해바랍니다.
 
 1. ",
-        "wordCount": 3979
+        "wordCount": 3980
     }
 </script>
 
