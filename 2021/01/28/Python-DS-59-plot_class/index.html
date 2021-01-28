@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/59_plot_class_0.png">
 <meta property="article:published_time" content="2021-01-27T23:18:00.000Z">
-<meta property="article:modified_time" content="2021-01-27T23:47:34.807Z">
+<meta property="article:modified_time" content="2021-01-28T00:01:26.904Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -268,8 +268,12 @@ ga('send', 'pageview');
 </li>
 <li><p>클래스를 사용해 같은 그림을 그려봅시다.</p>
 </li>
-<li>색깔만 바꾸어 그립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># class</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">9</span>, <span class="number">6</span>), sharey=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X <span class="keyword">in</span> zip(axs, Xs):</span><br><span class="line">    ax.hist(X.data, facecolor=<span class="string">"orange"</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">f"<span class="subst">&#123;X.name&#125;</span> [<span class="subst">&#123;X.unit&#125;</span>]"</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="59_hist1D.png" alt=""><br></li>
+<li><p>색깔만 바꾸어 그립니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># class</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">9</span>, <span class="number">6</span>), sharey=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X <span class="keyword">in</span> zip(axs, Xs):</span><br><span class="line">    ax.hist(X.data, facecolor=<span class="string">"orange"</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">f"<span class="subst">&#123;X.name&#125;</span> [<span class="subst">&#123;X.unit&#125;</span>]"</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="59_hist1D.png" alt=""><br></p>
+</li>
+<li><p>섞여있던 데이터프레임과 units, names 리스트가 <b>Feature class X를 중심으로 정리되었습니다.</b></p>
+</li>
 </ul>
 <h1 id="3-클래스-활용-데이터-전처리"><a href="#3-클래스-활용-데이터-전처리" class="headerlink" title="3. 클래스 활용 데이터 전처리"></a>3. 클래스 활용 데이터 전처리</h1><ul>
 <li>클래스 안에서 함수를 사용할 수 있습니다.</li>
@@ -321,7 +325,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/28/Python-DS-59-plot_class/" data-id="ckkg2wzng005lzsuj379l47nv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/28/Python-DS-59-plot_class/" data-id="ckkg3edou005yd0ujccndhuen" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -409,7 +413,7 @@ ga('send', 'pageview');
 10만개 정도의 상자 데이터가 있습니다.
 길이(length), 너비(width), 높이(height)가 있고,
 여기로부터 입체 ",
-        "wordCount": 1428
+        "wordCount": 1437
     }
 </script>
 
@@ -706,21 +710,5 @@ ga('send', 'pageview');
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
