@@ -10,7 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="python,matplotlib,visualization,colormap,seaborn,ridgeplot" />
+    <meta name="keywords" content="python,visualization,matplotlib,colormap,seaborn,ridgeplot" />
     
     <meta name="description" content="시각화는 데이터를 그림으로 표현하는 작업입니다. 그런데 한번 그림이 되면 진짜 그림처럼 취급할 수 있습니다. 밀도함수에 컬러맵을 입혀봅시다.  1. Imitating Ridge Plot by R Gallery of ggridges examplesPega Devlog: Ridgeline Plot   인터넷을 다니다가 R로 그려진 멋진 그림을 봤습니다.">
 <meta property="og:type" content="article">
@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/61_mpl_colormapkde_0.png">
 <meta property="article:published_time" content="2021-02-11T07:11:00.000Z">
-<meta property="article:modified_time" content="2021-02-11T08:41:24.280Z">
+<meta property="article:modified_time" content="2021-02-11T22:08:47.936Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
 <meta property="article:tag" content="visualization">
+<meta property="article:tag" content="matplotlib">
 <meta property="article:tag" content="colormap">
 <meta property="article:tag" content="seaborn">
 <meta property="article:tag" content="ridgeplot">
@@ -280,7 +280,7 @@ ga('send', 'pageview');
 </li>
 <li>첫번째는 path의 꼭지점들(vertices) 좌표이고, 두번째는 꼭지점들의 속성입니다.</li>
 <li>자세한 사항은 <a href="https://matplotlib.org/3.3.3/tutorials/advanced/path_tutorial.html" target="_blank" rel="noopener">Path Tutorial</a>에서 볼 수 있습니다. 지금은 넘어갑니다.</li>
-<li>꼭지점만 받아서 그리을 그려도 밀도함수의 윤곽선이 나옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vertices = ax.collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>].vertices.T</span><br><span class="line"></span><br><span class="line">plt.plot(*vertices)</span><br></pre></td></tr></table></figure>
+<li>꼭지점만 받아서 그림을 그려도 밀도함수의 윤곽선이 나옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vertices = ax.collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>].vertices.T</span><br><span class="line"></span><br><span class="line">plt.plot(*vertices)</span><br></pre></td></tr></table></figure>
 <img src="61_mpl_colormapkde_04.png" alt=""><br></li>
 </ul>
 <h3 id="2-5-컬러맵을-밀도함수-모양에-맞게-자르기"><a href="#2-5-컬러맵을-밀도함수-모양에-맞게-자르기" class="headerlink" title="2.5. 컬러맵을 밀도함수 모양에 맞게 자르기"></a>2.5. 컬러맵을 밀도함수 모양에 맞게 자르기</h3><ul>
@@ -316,7 +316,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/02/11/Python-DS-61-mpl_colormapkde/" data-id="ckl0m56q7006354uj59dh4a1a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/02/11/Python-DS-61-mpl_colormapkde/" data-id="ckl1ezhj9005wb4uje8re7wcb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -388,11 +388,11 @@ ga('send', 'pageview');
         },
         "headline": "Density Plot with Colormap",
         "image": "https://jehyunlee.github.io/thumbnails/Python-DS/61_mpl_colormapkde_0.png",
-        "keywords": "python matplotlib visualization colormap seaborn ridgeplot",
+        "keywords": "python visualization matplotlib colormap seaborn ridgeplot",
         "genre": "Python Data Science",
         "datePublished": "2021-02-11",
         "dateCreated": "2021-02-11",
-        "dateModified": "2021-02-11",
+        "dateModified": "2021-02-12",
         "url": "https://jehyunlee.github.io/2021/02/11/Python-DS-61-mpl_colormapkde/",
         "description": "
 시각화는 데이터를 그림으로 표현하는 작업입니다.
@@ -704,5 +704,21 @@ Gallery of ggridges examplesPega Devlog: Ridgeline Plot
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
