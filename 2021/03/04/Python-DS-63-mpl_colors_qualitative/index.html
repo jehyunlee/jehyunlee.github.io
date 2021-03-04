@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/63_mpl_0.png">
 <meta property="article:published_time" content="2021-03-04T08:51:00.000Z">
-<meta property="article:modified_time" content="2021-03-04T12:02:14.884Z">
+<meta property="article:modified_time" content="2021-03-04T22:52:05.062Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -402,6 +402,10 @@ ga('send', 'pageview');
 <ul>
 <li>비슷한 무지개 계열임에도 <b>gluplot</b>은 순서를 바꿔서 <b>밝기가 순차적으로 증가</b>합니다.</li>
 </ul>
+<ul>
+<li>전체적으로 <b>상대 휘도</b>, <b>밝기</b>는 값이 유사하지만, <b>value(정도)</b>와는 상당히 다릅니다.</li>
+<li>많은 문서에서 value를 명도라고 번역하는 바람에 <b>lightness(밝기)</b>, <b>brightness(명도)</b>와 혼동되지만 이렇게 그려놓고 보니 <b>절대 혼용하면 안 되는 개념</b>이라는 생각이 듭니다.</li>
+</ul>
 <h1 id="3-Matplotlib-구현"><a href="#3-Matplotlib-구현" class="headerlink" title="3. Matplotlib 구현"></a>3. Matplotlib 구현</h1><ul>
 <li>앞에 나열된 그림들을 그리는 코드를 설명합니다.<ul>
 <li><b>V(value: 정도)</b>, <b>rL(relative luminance: 상대 휘도)</b>, <b>$L^*$(lightness: 밝기)</b>를 중심으로,</li>
@@ -415,7 +419,7 @@ ga('send', 'pageview');
 <li>컬러맵의 색상들을 좌측 상단에 나열하고,</li>
 <li>각 색상에 대응되는 H, S, V, rL, $L^*$를 바로 아래에 line plot으로 그립니다.</li>
 <li>그리고 속성들의 분포를 우측 하단에 violin plot으로 그립니다.</li>
-<li>우측 상단은 비웁니다. 단, 우측 하단의 xticklabel 대신 우측 상단 공간을 활용해 놓습니다.<br><br><img src="63_mpl_01.png" alt=""><br></li>
+<li>우측 상단은 비웁니다. 단, 우측 하단의 xticklabel 대신 우측 상단 공간을 활용하겠습니다.<br><br><img src="63_mpl_01.png" alt=""><br></li>
 </ul>
 </li>
 <li><p>위 그림을 그린 코드는 이렇습니다.</p>
@@ -455,7 +459,7 @@ ga('send', 'pageview');
 <h3 id="3-2-3-컬러맵-색상-칠하기"><a href="#3-2-3-컬러맵-색상-칠하기" class="headerlink" title="3.2.3. 컬러맵 색상 칠하기"></a>3.2.3. 컬러맵 색상 칠하기</h3><ul>
 <li>컬러맵 색상을 하나씩 넣습니다.<ul>
 <li>색상에서 RGB를 추출해 글자로 넣습니다.</li>
-<li>컬러맵에 정수 i를 넣으면 거기에 해당하는 색이 추출됩니다.<br><br><img src="63_mpl_03.png" alt=""></li>
+<li>컬러맵에 정수 i를 넣거나 0~1 사이의 값을 넣으면 이에 해당하는 색이 추출됩니다.<br><br><img src="63_mpl_03.png" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -506,7 +510,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h3 id="3-3-4-컬러맵별-속성-분포"><a href="#3-3-4-컬러맵별-속성-분포" class="headerlink" title="3.3.4. 컬러맵별 속성 분포"></a>3.3.4. 컬러맵별 속성 분포</h3><ul>
-<li>데이터가 여섯 개나 되고, 뭐가 뭔지 알아보기 힘듭니다.</li>
+<li>데이터가 다섯 개나 되고, 뭐가 뭔지 알아보기 힘듭니다.</li>
 <li>violin plot으로 분포를 확인합니다.<ul>
 <li><code>.get_children()</code>으로 violin plot을 하나씩 지정하고,</li>
 <li><code>.set_facecolor()</code>로 violin plot의 색상을 데이터 종류에 맞추어 지정합니다.</li>
@@ -544,7 +548,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/03/04/Python-DS-63-mpl_colors_qualitative/" data-id="cklutkh3o00612guj2dpy3fnc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/03/04/Python-DS-63-mpl_colors_qualitative/" data-id="cklvgw7t40062kcuj6xo93m89" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -620,7 +624,7 @@ ga('send', 'pageview');
         "genre": "Python Data Science matplotlib visualization",
         "datePublished": "2021-03-04",
         "dateCreated": "2021-03-04",
-        "dateModified": "2021-03-04",
+        "dateModified": "2021-03-05",
         "url": "https://jehyunlee.github.io/2021/03/04/Python-DS-63-mpl_colors_qualitative/",
         "description": "
 contributor : Jerry Kim
@@ -632,7 +636,7 @@ contributor : Jerry Kim
 
 1. 용어 정리
 Gilchrist, “",
-        "wordCount": 5409
+        "wordCount": 5438
     }
 </script>
 
@@ -929,21 +933,5 @@ Gilchrist, “",
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
