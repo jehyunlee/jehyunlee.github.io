@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/68_vcv3_0.png">
 <meta property="article:published_time" content="2021-04-09T07:04:00.000Z">
-<meta property="article:modified_time" content="2021-04-09T11:22:50.457Z">
+<meta property="article:modified_time" content="2021-04-09T11:28:19.893Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -438,12 +438,11 @@ ga('send', 'pageview');
 </ul>
 <ul>
 <li>사용할 때는 위의 space, objective와 함께 세트로 사용합니다.</li>
-<li><p>@<b>use_named_args(space)</b> 데커레이터로 인해 space를 먼저 정의해야 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#space</span></span><br><span class="line">space = [Integer(<span class="number">1</span>, <span class="number">2</span>, name=<span class="string">"preprocessor__num__polynomial__degree"</span>),</span><br><span class="line">         Categorical([<span class="string">"rbf"</span>], name=<span class="string">"svr__kernel"</span>),</span><br><span class="line">         Real(<span class="number">0.001</span>, <span class="number">1000</span>, <span class="string">"log-uniform"</span>, name=<span class="string">"svr__C"</span>),</span><br><span class="line">         Real(<span class="number">1e-3</span>, <span class="number">10</span>, <span class="string">"log-uniform"</span>, name=<span class="string">"svr__gamma"</span>),</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line"><span class="comment">#objective</span></span><br><span class="line"><span class="meta">@use_named_args(space)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">objective</span><span class="params">(**params)</span>:</span></span><br><span class="line">    model = get_model(method=<span class="string">"svr"</span>, param=params)</span><br><span class="line">    model.fit(X_train, y_train)</span><br><span class="line">    y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> -r2_val		</span><br><span class="line">	</span><br><span class="line"><span class="comment"># optimize</span></span><br><span class="line">best_svr_rbf, best_params = run_skopt(objective, space, n_calls=<span class="number">50</span>, </span><br><span class="line">                                      filename_conv=<span class="string">"68_vcv_8.png"</span>, </span><br><span class="line">                                      filename_parity=<span class="string">"SVR_rbf_opt"</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="68_vcv_8.png" alt=""><br><img src="SVR_rbf_opt.png" alt=""></p>
-</li>
-<li><p>이제 마음껏 실전에 투입합니다. :)</p>
-</li>
+<li>@<b>use_named_args(space)</b> 데커레이터로 인해 space를 먼저 정의해야 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#space</span></span><br><span class="line">space = [Integer(<span class="number">1</span>, <span class="number">2</span>, name=<span class="string">"preprocessor__num__polynomial__degree"</span>),</span><br><span class="line">         Categorical([<span class="string">"rbf"</span>], name=<span class="string">"svr__kernel"</span>),</span><br><span class="line">         Real(<span class="number">0.001</span>, <span class="number">1000</span>, <span class="string">"log-uniform"</span>, name=<span class="string">"svr__C"</span>),</span><br><span class="line">         Real(<span class="number">1e-3</span>, <span class="number">10</span>, <span class="string">"log-uniform"</span>, name=<span class="string">"svr__gamma"</span>),</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line"><span class="comment">#objective</span></span><br><span class="line"><span class="meta">@use_named_args(space)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">objective</span><span class="params">(**params)</span>:</span></span><br><span class="line">    model = get_model(method=<span class="string">"svr"</span>, param=params)</span><br><span class="line">    model.fit(X_train, y_train)</span><br><span class="line">    y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> -r2_val		</span><br><span class="line">	</span><br><span class="line"><span class="comment"># optimize</span></span><br><span class="line">best_svr_rbf, best_params = run_skopt(objective, space, n_calls=<span class="number">50</span>, </span><br><span class="line">                                      filename_conv=<span class="string">"68_vcv_8.png"</span>, </span><br><span class="line">                                      filename_parity=<span class="string">"SVR_rbf_opt"</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+<img src="68_vcv_8.png" alt=""><br><img src="SVR_rbf_opt.png" alt=""><br></li>
+</ul>
+<ul>
+<li>이제 마음껏 실전에 투입합니다. :)</li>
 </ul>
 
         </div>
@@ -844,5 +843,21 @@ hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
