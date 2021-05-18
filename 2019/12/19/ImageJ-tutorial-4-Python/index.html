@@ -490,10 +490,10 @@ ga('send', 'pageview');
 <li><p>“열 번 찍어 안 넘어가는 나무 없다”는 속담을 <code>for</code>문과 <code>while</code>문으로 만들면 다음과 같습니다.</p>
 <ul>
 <li><p><code>for</code>: <code>treehit</code>에 0부터 9까지 차례로 대입하면서 실행합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> treehit <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Tree hit by %d times."</span> % (treehit + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Tree fall!"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> treehit <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"Tree hit by %d times."</span> % (treehit + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Tree fall!"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>while</code>: <code>treehit</code>을 1씩 수동으로 증가시켜줘야 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">treehit = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> treehit &lt; <span class="number">10</span>:</span><br><span class="line">	treehit = treehit + <span class="number">1</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Tree hit by %d times."</span> % treehit</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Tree fall!"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">treehit = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> treehit &lt; <span class="number">10</span>:</span><br><span class="line">    treehit = treehit + <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"Tree hit by %d times."</span> % treehit</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Tree fall!"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>위의 두 코드는 모두 동작을 하고 동일한 결과를 출력합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># Tree hit by 1 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 2 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 3 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 4 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 5 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 6 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 7 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 8 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 9 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 10 times.</span></span><br><span class="line"><span class="comment"># Tree fall!</span></span><br></pre></td></tr></table></figure>
@@ -522,7 +522,7 @@ ga('send', 'pageview');
 <h5 id="4-6-2-3-while-continue-while문의-맨-처음으로-돌아가기"><a href="#4-6-2-3-while-continue-while문의-맨-처음으로-돌아가기" class="headerlink" title="4.6.2.3. while + continue: while문의 맨 처음으로 돌아가기"></a>4.6.2.3. <code>while</code> + <code>continue</code>: <code>while</code>문의 맨 처음으로 돌아가기</h5><ul>
 <li><code>continue</code>는 <code>for</code>문에 사용되었을 때와 마찬가지로 <code>while</code>문에 사용되었을 때도 맨 처음 부분으로 돌아갑니다.</li>
 <li>사용 방법은 <code>for</code>문과 함께 사용할 때와 동일합니다.</li>
-<li>1부터 10까지의 숫자 중에서 홀수만 출력하는 것을 <code>while</code>과 <code>continue</code>로 구현한 예제입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> a &lt; <span class="number">10</span>:</span><br><span class="line">    a = a + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> a % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">print</span> a</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과        </span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 5</span></span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line"><span class="comment"># 9</span></span><br></pre></td></tr></table></figure>
+<li>1부터 10까지의 숫자 중에서 홀수만 출력하는 것을 <code>while</code>과 <code>continue</code>로 구현한 예제입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> a &lt; <span class="number">10</span>:</span><br><span class="line">    a = a + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> a % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">print</span> a</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과        </span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 5</span></span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line"><span class="comment"># 9</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>a % 2</code>는 a를 2로 나누었을 때의 나머지를 구하는 명령입니다. <code>a % 2 == 0</code>으로 짝수인 a를 찾고, 이 때 <code>continue</code>명령으로 다시 while문의 시작으로 돌아가 <code>print a</code>가 실행되지 않습니다.</li>
 </ul>
@@ -622,7 +622,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/" data-id="cko9edkjd000vtwuj7a4487s8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-4-Python/" data-id="ckotwn4oh0016ccuj2mci203u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -703,7 +703,7 @@ ga('send', 'pageview');
         "description": "4.1. Python 문법을 공부하는 이유
 ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python을 구현한 것입니다.
 주로 web 환경에 많이 사용되는 JVM과 python의 연동이 자유로워 Java Class와 .jar 파일을 아무런 변환이나 노력 없이 그대로 끌어다 사용할 수 있다는 장점이 있습니다. ",
-        "wordCount": 5082
+        "wordCount": 5102
     }
 </script>
 
@@ -780,6 +780,26 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/05/18/Python-DS-73-mplfunc/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/69_gs_0.png)" alt="Python Visualization Function" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/05/18/Python-DS-73-mplfunc/" class="title">Python Visualization Function</a></p>
+                            <p class="item-date"><time datetime="2021-05-18T05:18:00.000Z" itemprop="datePublished">2021-05-18</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -861,26 +881,6 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2021/04/09/Python-DS-68-visualcv3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/68_vcv3_0.png)" alt="Validation with Visualization (3)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2021/04/09/Python-DS-68-visualcv3/" class="title">Validation with Visualization (3)</a></p>
-                            <p class="item-date"><time datetime="2021-04-09T07:04:00.000Z" itemprop="datePublished">2021-04-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -890,7 +890,7 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">83</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">70</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">84</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">71</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1010,5 +1010,21 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

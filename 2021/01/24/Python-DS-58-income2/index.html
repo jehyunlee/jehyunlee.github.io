@@ -455,7 +455,7 @@ ga('send', 'pageview');
 </li>
 <li>기본급과 출장비는 항목 옆에 숫자가 붙어있었지만, <b>성과급은 그냥 “성과급”만</b> 찍힙니다.</li>
 <li><p>코드를 예외처리 해야 합니다. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># version 2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put_income</span><span class="params">(df, idx_pay, pay, label, number=True)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, idx <span class="keyword">in</span> enumerate(idx_pay):</span><br><span class="line">        <span class="keyword">if</span> df[<span class="string">"입금액"</span>].isnull()[idx]:</span><br><span class="line">            df.loc[idx, <span class="string">"입금액"</span>] = pay[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">				</span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = label_note</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            income = df.loc[idx, <span class="string">"입금액"</span>]</span><br><span class="line">            note = df.loc[idx, <span class="string">"적요"</span>]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> isinstance(income, list):</span><br><span class="line">                income = [income]</span><br><span class="line">                note = [note]</span><br><span class="line">            df.at[idx, <span class="string">"입금액"</span>] = income + [pay[i]]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">				</span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = note + [label_note]</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> df</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># version 2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put_income</span><span class="params">(df, idx_pay, pay, label, number=True)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, idx <span class="keyword">in</span> enumerate(idx_pay):</span><br><span class="line">        <span class="keyword">if</span> df[<span class="string">"입금액"</span>].isnull()[idx]:</span><br><span class="line">            df.loc[idx, <span class="string">"입금액"</span>] = pay[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">                </span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = label_note</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            income = df.loc[idx, <span class="string">"입금액"</span>]</span><br><span class="line">            note = df.loc[idx, <span class="string">"적요"</span>]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> isinstance(income, list):</span><br><span class="line">                income = [income]</span><br><span class="line">                note = [note]</span><br><span class="line">            df.at[idx, <span class="string">"입금액"</span>] = income + [pay[i]]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 일련번호가 붙을 때를 따로 구분해줍니다.</span></span><br><span class="line">            label_note = <span class="string">f"<span class="subst">&#123;label&#125;</span>"</span></span><br><span class="line">            <span class="keyword">if</span> number:</span><br><span class="line">                label_note += <span class="string">f"_<span class="subst">&#123;(i+<span class="number">1</span>):<span class="number">03</span>d&#125;</span>"</span></span><br><span class="line">                </span><br><span class="line">            df.at[idx, <span class="string">"적요"</span>] = note + [label_note]</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> df</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>성과급 입금일이 출장이나 월급날과 겹친 날이 있는지 확인합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(set(idx_biztrip) &amp; set(idx_success))</span><br><span class="line">print(set(idx_salary) &amp; set(idx_success))</span><br></pre></td></tr></table></figure>
@@ -614,7 +614,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/24/Python-DS-58-income2/" data-id="cko9edkld005mtwujgwap5l6k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/24/Python-DS-58-income2/" data-id="ckotwn57s00d8ccuj0xtgexgt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -703,7 +703,7 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
 코드가 거칠더라도 양해바랍니다.
 
 1. ",
-        "wordCount": 3980
+        "wordCount": 4012
     }
 </script>
 
@@ -780,6 +780,26 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/05/18/Python-DS-73-mplfunc/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/69_gs_0.png)" alt="Python Visualization Function" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/05/18/Python-DS-73-mplfunc/" class="title">Python Visualization Function</a></p>
+                            <p class="item-date"><time datetime="2021-05-18T05:18:00.000Z" itemprop="datePublished">2021-05-18</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -861,26 +881,6 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2021/04/09/Python-DS-68-visualcv3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/68_vcv3_0.png)" alt="Validation with Visualization (3)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2021/04/09/Python-DS-68-visualcv3/" class="title">Validation with Visualization (3)</a></p>
-                            <p class="item-date"><time datetime="2021-04-09T07:04:00.000Z" itemprop="datePublished">2021-04-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -890,7 +890,7 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">83</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">70</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">84</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">71</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1010,5 +1010,21 @@ numpy.random, datetime을 pandas.DataFrame에 적용한 결과입니다.
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

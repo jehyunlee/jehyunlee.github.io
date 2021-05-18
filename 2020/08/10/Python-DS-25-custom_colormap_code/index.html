@@ -409,7 +409,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <ul>
-<li>최종 코드와 결과물입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_L</span><span class="params">(cmaps, titles=None, filename=None)</span>:</span></span><br><span class="line">    N = len(cmaps)</span><br><span class="line">    <span class="keyword">assert</span> N &gt; <span class="number">0</span>  <span class="comment"># 최소한 1개의 컬러맵이 있어야 함.</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> titles==<span class="literal">None</span>:  <span class="comment"># titles 입력이 없으면 cmap 이름을 title로 사용</span></span><br><span class="line">        titles = [str(cmap) <span class="keyword">for</span> cmap <span class="keyword">in</span> cmaps]  <span class="comment"># string이 아닐 경우를 대비해 string으로 변환</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> filename==<span class="literal">None</span>: <span class="comment"># filename 입력이 없으면 cmap 명단을 이름으로 사용</span></span><br><span class="line">        filename = <span class="string">"L_"</span> + <span class="string">"_"</span>.join(titles) + <span class="string">".png"</span></span><br><span class="line"></span><br><span class="line">    x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) </span><br><span class="line">    </span><br><span class="line">    fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, (ax, cmap, title) <span class="keyword">in</span> enumerate(zip(axes, cmaps, titles)):  </span><br><span class="line">        rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">        lab = cspace_converter(<span class="string">"sRGB1"</span>, <span class="string">"CAM02-UCS"</span>)(rgb)</span><br><span class="line">        y = lab[:, <span class="number">0</span>]                                    </span><br><span class="line">        ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>, zorder=<span class="number">3</span>)  <span class="comment"># Data</span></span><br><span class="line">        ax.scatter(x, y, c=<span class="string">"k"</span>, s=<span class="number">550</span>, zorder=<span class="number">2</span>)           <span class="comment"># outline</span></span><br><span class="line">        ax.plot(x, y, c=<span class="string">"k"</span>, zorder=<span class="number">4</span>)                     <span class="comment"># center line</span></span><br><span class="line"></span><br><span class="line">        ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.set_title(title, fontdict=&#123;<span class="string">"fontsize"</span>:<span class="number">24</span>&#125;, pad=<span class="number">24</span>)</span><br><span class="line">        ax.spines[<span class="string">'top'</span>].set_visible(<span class="literal">False</span>)    </span><br><span class="line">        ax.spines[<span class="string">'right'</span>].set_visible(<span class="literal">False</span>)  </span><br><span class="line">        ax.spines[<span class="string">'bottom'</span>].set_position((<span class="string">'outward'</span>, <span class="number">10</span>)) </span><br><span class="line">        ax.grid(<span class="string">"on"</span>)                          </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            ax.set_ylabel(<span class="string">"Lightness $L^*$"</span>, fontdict=&#123;<span class="string">"fontsize"</span>:<span class="number">24</span>&#125;)</span><br><span class="line">            ax.spines[<span class="string">'left'</span>].set_position((<span class="string">'outward'</span>, <span class="number">10</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ax.spines[<span class="string">'left'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    plt.tight_layout()  </span><br><span class="line">    plt.savefig(filename, dpi=<span class="number">150</span>)  <span class="comment"># 고해상도 저장</span></span><br><span class="line">    plt.show()</span><br><span class="line">	</span><br><span class="line">plot_L([<span class="string">'gist_gray'</span>, <span class="string">'bone'</span>, <span class="string">'Blues_r'</span>, <span class="string">'Greens_r'</span>, <span class="string">'Oranges_r'</span>])</span><br></pre></td></tr></table></figure>
+<li>최종 코드와 결과물입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_L</span><span class="params">(cmaps, titles=None, filename=None)</span>:</span></span><br><span class="line">    N = len(cmaps)</span><br><span class="line">    <span class="keyword">assert</span> N &gt; <span class="number">0</span>  <span class="comment"># 최소한 1개의 컬러맵이 있어야 함.</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> titles==<span class="literal">None</span>:  <span class="comment"># titles 입력이 없으면 cmap 이름을 title로 사용</span></span><br><span class="line">        titles = [str(cmap) <span class="keyword">for</span> cmap <span class="keyword">in</span> cmaps]  <span class="comment"># string이 아닐 경우를 대비해 string으로 변환</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> filename==<span class="literal">None</span>: <span class="comment"># filename 입력이 없으면 cmap 명단을 이름으로 사용</span></span><br><span class="line">        filename = <span class="string">"L_"</span> + <span class="string">"_"</span>.join(titles) + <span class="string">".png"</span></span><br><span class="line"></span><br><span class="line">    x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) </span><br><span class="line">    </span><br><span class="line">    fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, (ax, cmap, title) <span class="keyword">in</span> enumerate(zip(axes, cmaps, titles)):  </span><br><span class="line">        rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">        lab = cspace_converter(<span class="string">"sRGB1"</span>, <span class="string">"CAM02-UCS"</span>)(rgb)</span><br><span class="line">        y = lab[:, <span class="number">0</span>]                                    </span><br><span class="line">        ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>, zorder=<span class="number">3</span>)  <span class="comment"># Data</span></span><br><span class="line">        ax.scatter(x, y, c=<span class="string">"k"</span>, s=<span class="number">550</span>, zorder=<span class="number">2</span>)           <span class="comment"># outline</span></span><br><span class="line">        ax.plot(x, y, c=<span class="string">"k"</span>, zorder=<span class="number">4</span>)                     <span class="comment"># center line</span></span><br><span class="line"></span><br><span class="line">        ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.set_title(title, fontdict=&#123;<span class="string">"fontsize"</span>:<span class="number">24</span>&#125;, pad=<span class="number">24</span>)</span><br><span class="line">        ax.spines[<span class="string">'top'</span>].set_visible(<span class="literal">False</span>)    </span><br><span class="line">        ax.spines[<span class="string">'right'</span>].set_visible(<span class="literal">False</span>)  </span><br><span class="line">        ax.spines[<span class="string">'bottom'</span>].set_position((<span class="string">'outward'</span>, <span class="number">10</span>)) </span><br><span class="line">        ax.grid(<span class="string">"on"</span>)                          </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            ax.set_ylabel(<span class="string">"Lightness $L^*$"</span>, fontdict=&#123;<span class="string">"fontsize"</span>:<span class="number">24</span>&#125;)</span><br><span class="line">            ax.spines[<span class="string">'left'</span>].set_position((<span class="string">'outward'</span>, <span class="number">10</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ax.spines[<span class="string">'left'</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    plt.tight_layout()  </span><br><span class="line">    plt.savefig(filename, dpi=<span class="number">150</span>)  <span class="comment"># 고해상도 저장</span></span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">plot_L([<span class="string">'gist_gray'</span>, <span class="string">'bone'</span>, <span class="string">'Blues_r'</span>, <span class="string">'Greens_r'</span>, <span class="string">'Oranges_r'</span>])</span><br></pre></td></tr></table></figure>
 <img src="L_gist_gray_bone_Blues_r_Greens_r_Oranges_r.png" alt=""><br></li>
 </ul>
 <ul>
@@ -436,7 +436,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/" data-id="cko9edkk5002ytwuja3ny1a2o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/" data-id="ckotwn552009vccuj11gv8r77" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -525,7 +525,7 @@ Matplotlib Custom Colormap
 지난 글에는 크게 두 가지 그림이 등장합니다.
 
 하나는 val",
-        "wordCount": 2954
+        "wordCount": 2958
     }
 </script>
 
@@ -602,6 +602,26 @@ Matplotlib Custom Colormap
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/05/18/Python-DS-73-mplfunc/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/69_gs_0.png)" alt="Python Visualization Function" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/05/18/Python-DS-73-mplfunc/" class="title">Python Visualization Function</a></p>
+                            <p class="item-date"><time datetime="2021-05-18T05:18:00.000Z" itemprop="datePublished">2021-05-18</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -683,26 +703,6 @@ Matplotlib Custom Colormap
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2021/04/09/Python-DS-68-visualcv3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/68_vcv3_0.png)" alt="Validation with Visualization (3)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2021/04/09/Python-DS-68-visualcv3/" class="title">Validation with Visualization (3)</a></p>
-                            <p class="item-date"><time datetime="2021-04-09T07:04:00.000Z" itemprop="datePublished">2021-04-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -712,7 +712,7 @@ Matplotlib Custom Colormap
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">83</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">70</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">84</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">71</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -832,5 +832,21 @@ Matplotlib Custom Colormap
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>

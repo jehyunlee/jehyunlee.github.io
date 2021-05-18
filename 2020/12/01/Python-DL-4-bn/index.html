@@ -247,13 +247,13 @@ ga('send', 'pageview');
 <ul>
 <li>이미지를 눈으로 확인합니다.</li>
 <li>앞으로 자주 사용할 기능이니 figure를 리턴하는 함수로 만듭니다.</li>
-<li>연산을 거친 이미지가 <b>그림으로 출력되기 어려운 범위로 환산될 것을 대비</b>하여 이미지 minmax scaling을 미리 수행합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_img</span><span class="params">(imgs)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 이미지 minmax scaling</span></span><br><span class="line">    <span class="keyword">if</span> imgs.min() &lt; <span class="number">0</span>:</span><br><span class="line">        imgs = imgs - imgs.min()</span><br><span class="line">    <span class="keyword">if</span> imgs.max() &gt; <span class="number">1</span>:</span><br><span class="line">        imgs = imgs/imgs.max()</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 시각화</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=len(imgs), figsize=(<span class="number">3</span>*len(imgs), <span class="number">3</span>))</span><br><span class="line">    <span class="keyword">for</span> img, ax <span class="keyword">in</span> zip(imgs, axs):</span><br><span class="line">        ax.imshow(img)</span><br><span class="line"></span><br><span class="line">    fig.tight_layout()    </span><br><span class="line">    <span class="keyword">return</span> fig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 시각화</span></span><br><span class="line">fig = plot_img(imgs)</span><br></pre></td></tr></table></figure>
+<li>연산을 거친 이미지가 <b>그림으로 출력되기 어려운 범위로 환산될 것을 대비</b>하여 이미지 minmax scaling을 미리 수행합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_img</span><span class="params">(imgs)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 이미지 minmax scaling</span></span><br><span class="line">    <span class="keyword">if</span> imgs.min() &lt; <span class="number">0</span>:</span><br><span class="line">        imgs = imgs - imgs.min()</span><br><span class="line">    <span class="keyword">if</span> imgs.max() &gt; <span class="number">1</span>:</span><br><span class="line">        imgs = imgs/imgs.max()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 시각화</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=len(imgs), figsize=(<span class="number">3</span>*len(imgs), <span class="number">3</span>))</span><br><span class="line">    <span class="keyword">for</span> img, ax <span class="keyword">in</span> zip(imgs, axs):</span><br><span class="line">        ax.imshow(img)</span><br><span class="line"></span><br><span class="line">    fig.tight_layout()    </span><br><span class="line">    <span class="keyword">return</span> fig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 시각화</span></span><br><span class="line">fig = plot_img(imgs)</span><br></pre></td></tr></table></figure>
 <img src="4-bn_3.png" alt=""><br></li>
 </ul>
 <h3 id="2-데이터-분포-확인하기"><a href="#2-데이터-분포-확인하기" class="headerlink" title="2. 데이터 분포 확인하기"></a>2. 데이터 분포 확인하기</h3><ul>
 <li>데이터의 분포를 그림으로 그려서 확인합니다.</li>
 <li>컬러 이미지이므로 <b>R, G, B</b> 세 개의 채널이 있습니다.</li>
-<li>세 채널을 각기 <b>빨강, 녹색, 파랑</b>의 밀도함수로 표현합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_kde</span><span class="params">(imgs, symmetry=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 시각화</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=len(imgs), figsize=(<span class="number">3</span>*len(imgs), <span class="number">3</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> img, ax <span class="keyword">in</span> zip(imgs, axs):</span><br><span class="line">        channel = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">        color = [<span class="string">"r"</span>, <span class="string">"g"</span>, <span class="string">"b"</span>]</span><br><span class="line">        <span class="comment"># R, G, B 채널 분포 시각화. </span></span><br><span class="line">        <span class="comment"># 오해가 발생하지 않도록 실제 데이터 범위에만 분포 시각화</span></span><br><span class="line">        [sns.kdeplot(img[:,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, ax=ax, cut=<span class="number">0</span>) <span class="keyword">for</span> ch, c <span class="keyword">in</span> zip(channel, color)]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x축 범위 설정. </span></span><br><span class="line">    <span class="comment"># 필요시 x축을 0 중심으로 대칭이 되도록 설정할 수 있도록.</span></span><br><span class="line">    xlim = ax.get_xlim()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> symmetry==<span class="literal">True</span>:</span><br><span class="line">        xlim = [-max(abs(xlim)), max(abs(xlim))]</span><br><span class="line">        axs[<span class="number">0</span>].set_xlim(xlim)</span><br><span class="line">    </span><br><span class="line">    fig.tight_layout()</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 나중에 분포를 겹쳐 그리기 위해 fig 외에도 axes를 함께 리턴합니다.</span></span><br><span class="line">    <span class="keyword">return</span> fig, axs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 분포 시각화</span></span><br><span class="line">fig, axs = plot_kde(imgs)</span><br></pre></td></tr></table></figure>
+<li>세 채널을 각기 <b>빨강, 녹색, 파랑</b>의 밀도함수로 표현합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_kde</span><span class="params">(imgs, symmetry=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 시각화</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=len(imgs), figsize=(<span class="number">3</span>*len(imgs), <span class="number">3</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> img, ax <span class="keyword">in</span> zip(imgs, axs):</span><br><span class="line">        channel = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">        color = [<span class="string">"r"</span>, <span class="string">"g"</span>, <span class="string">"b"</span>]</span><br><span class="line">        <span class="comment"># R, G, B 채널 분포 시각화. </span></span><br><span class="line">        <span class="comment"># 오해가 발생하지 않도록 실제 데이터 범위에만 분포 시각화</span></span><br><span class="line">        [sns.kdeplot(img[:,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, ax=ax, cut=<span class="number">0</span>) <span class="keyword">for</span> ch, c <span class="keyword">in</span> zip(channel, color)]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x축 범위 설정. </span></span><br><span class="line">    <span class="comment"># 필요시 x축을 0 중심으로 대칭이 되도록 설정할 수 있도록.</span></span><br><span class="line">    xlim = ax.get_xlim()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> symmetry==<span class="literal">True</span>:</span><br><span class="line">        xlim = [-max(abs(xlim)), max(abs(xlim))]</span><br><span class="line">        axs[<span class="number">0</span>].set_xlim(xlim)</span><br><span class="line">    </span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 나중에 분포를 겹쳐 그리기 위해 fig 외에도 axes를 함께 리턴합니다.</span></span><br><span class="line">    <span class="keyword">return</span> fig, axs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 분포 시각화</span></span><br><span class="line">fig, axs = plot_kde(imgs)</span><br></pre></td></tr></table></figure>
 <img src="4-bn_4.png" alt=""><br></li>
 </ul>
 <h3 id="3-Batch-Normalization-적용-1-직접"><a href="#3-Batch-Normalization-적용-1-직접" class="headerlink" title="3. Batch Normalization 적용 (1) 직접"></a>3. Batch Normalization 적용 (1) 직접</h3><ul>
@@ -370,7 +370,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/" data-id="cko9edkjp001ptwuj743j2c22" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/" data-id="ckotwn4p9001jccujd12b4hlg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -456,7 +456,7 @@ ga('send', 'pageview');
 CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
 배치 정규화batch normalization는 그레이디언트 소실gradient vanishing과 폭주exploding 문제를 해결하기 위해 제안되었습니다.
 본 글에서는 배치 정규화의 이론적 내용을",
-        "wordCount": 1398
+        "wordCount": 1406
     }
 </script>
 
@@ -533,6 +533,26 @@ CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/05/18/Python-DS-73-mplfunc/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/69_gs_0.png)" alt="Python Visualization Function" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/05/18/Python-DS-73-mplfunc/" class="title">Python Visualization Function</a></p>
+                            <p class="item-date"><time datetime="2021-05-18T05:18:00.000Z" itemprop="datePublished">2021-05-18</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -614,26 +634,6 @@ CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2021/04/09/Python-DS-68-visualcv3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/Python-DS/68_vcv3_0.png)" alt="Validation with Visualization (3)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
-                            <p class="item-title"><a href="/2021/04/09/Python-DS-68-visualcv3/" class="title">Validation with Visualization (3)</a></p>
-                            <p class="item-date"><time datetime="2021-04-09T07:04:00.000Z" itemprop="datePublished">2021-04-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -643,7 +643,7 @@ CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">83</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">70</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">84</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">71</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">8</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -763,5 +763,21 @@ CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
