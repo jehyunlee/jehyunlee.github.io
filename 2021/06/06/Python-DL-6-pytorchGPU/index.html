@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/6-pytorchGPU_0.png">
 <meta property="article:published_time" content="2021-06-06T03:01:00.000Z">
-<meta property="article:modified_time" content="2021-06-06T03:32:32.900Z">
+<meta property="article:modified_time" content="2021-06-06T03:39:31.514Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="pytorch">
 <meta property="article:tag" content="GPU">
@@ -231,7 +231,7 @@ ga('send', 'pageview');
 </ul>
 <h1 id="2-GPU-현황-확인"><a href="#2-GPU-현황-확인" class="headerlink" title="2. GPU 현황 확인"></a>2. GPU 현황 확인</h1><ul>
 <li>GPU가 사용 가능한지 확인합니다.</li>
-<li>사용 가능하다면, 메모리 점유 현황을 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(torch.cuda.device_count()):</span><br><span class="line">        print(<span class="string">f"# DEVICE <span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;torch.cuda.get_device_name(i)&#125;</span>"</span>)</span><br><span class="line">        print(<span class="string">"- Memory Usage:"</span>)</span><br><span class="line">        print(<span class="string">f"  Allocated: <span class="subst">&#123;round(torch.cuda.memory_allocated(GPU_NUM)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB"</span>)</span><br><span class="line">        print(<span class="string">f"  Cached:    <span class="subst">&#123;round(torch.cuda.memory_cached(GPU_NUM)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB\n"</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"# GPU is not available"</span>)</span><br></pre></td></tr></table></figure>
+<li>사용 가능하다면, 메모리 점유 현황을 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(torch.cuda.device_count()):</span><br><span class="line">        print(<span class="string">f"# DEVICE <span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;torch.cuda.get_device_name(i)&#125;</span>"</span>)</span><br><span class="line">        print(<span class="string">"- Memory Usage:"</span>)</span><br><span class="line">        print(<span class="string">f"  Allocated: <span class="subst">&#123;round(torch.cuda.memory_allocated(i)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB"</span>)</span><br><span class="line">        print(<span class="string">f"  Cached:    <span class="subst">&#123;round(torch.cuda.memory_cached(i)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB\n"</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"# GPU is not available"</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DEVICE 0: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEVICE 1: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEVICE 2: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br></pre></td></tr></table></figure>
 </li>
@@ -295,7 +295,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/06/06/Python-DL-6-pytorchGPU/" data-id="ckpkmr32d0000b4ujet47bkwb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/06/06/Python-DL-6-pytorchGPU/" data-id="ckpkmzt3a001qt8ujcens38py" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -677,21 +677,5 @@ GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고,
 
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
