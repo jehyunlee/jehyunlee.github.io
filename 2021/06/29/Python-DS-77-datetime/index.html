@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/77_datetime00.png">
 <meta property="article:published_time" content="2021-06-28T22:57:00.000Z">
-<meta property="article:modified_time" content="2021-06-29T05:31:38.438Z">
+<meta property="article:modified_time" content="2021-06-29T06:01:23.639Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="pandas">
@@ -320,6 +320,7 @@ ga('send', 'pageview');
 <li>데이터 중첩 문제는 x축 범위 설정에서 똑같이 등장합니다.</li>
 <li><p>다른 방식의 범위를 비슷하게 맞춰봅니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(nrows=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">7</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].plot(df[<span class="string">"y"</span>], <span class="string">"mo-"</span>, ms=<span class="number">15</span>)                   <span class="comment"># y data만 plot</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(<span class="number">0.8</span>, <span class="number">2.2</span>)                            <span class="comment"># x 범위: index 기준</span></span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].plot(df[<span class="string">"date_dt"</span>], df[<span class="string">"y"</span>], <span class="string">"mo-"</span>, ms=<span class="number">15</span>)    <span class="comment"># x data : datetime</span></span><br><span class="line">axs[<span class="number">1</span>].set_xlim(datetime.date(<span class="number">2021</span>,<span class="number">1</span>,<span class="number">26</span>),            <span class="comment"># x 범위: datetime 기준</span></span><br><span class="line">                datetime.date(<span class="number">2021</span>,<span class="number">3</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">2</span>].plot(df[<span class="string">"date_str"</span>], df[<span class="string">"y"</span>], <span class="string">"mo-"</span>, ms=<span class="number">15</span>)   <span class="comment"># x data : string</span></span><br><span class="line">axs[<span class="number">2</span>].set_xlim(<span class="number">0.8</span>, <span class="number">2.2</span>)                            <span class="comment"># x 범위: index 기준</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, text <span class="keyword">in</span> zip(axs, [<span class="string">"plot(y)"</span>, <span class="string">"plot(datetime, y)"</span>, <span class="string">"plot(str, y)"</span>]):</span><br><span class="line">    ax.set_ylim(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">    ax.text(<span class="number">0.03</span>, <span class="number">0.7</span>, text, </span><br><span class="line">            fontsize=<span class="string">"x-large"</span>, color=<span class="string">"b"</span>, transform=ax.transAxes)</span><br></pre></td></tr></table></figure>
+<p><img src="datetime03.png" alt=""><br></p>
 </li>
 <li><p>xticks의 종류에 따라 처방이 다릅니다.</p>
 </li>
@@ -342,7 +343,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/06/29/Python-DS-77-datetime/" data-id="ckqhm4jxb00783guj0kuk00hx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/06/29/Python-DS-77-datetime/" data-id="ckqhn6pd3007ancujh8yuatqc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -427,7 +428,7 @@ x축 데이터는 datetime 객체일 수도 있고, 그냥 string일 수도 있�
 
 1. 예제 데이터
 라이브러리 호출12345678%matplotlib inline# 라이브러리 호출import numpy as npimpo",
-        "wordCount": 1389
+        "wordCount": 1391
     }
 </script>
 
@@ -724,5 +725,21 @@ x축 데이터는 datetime 객체일 수도 있고, 그냥 string일 수도 있�
 
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 </body>
 </html>
