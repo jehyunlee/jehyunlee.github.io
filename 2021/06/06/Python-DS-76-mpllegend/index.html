@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Legend Control | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,visualization,seaborn,legend" />
+    
+    <meta name="description" content="Legend(범례)는 데이터의 의미 파악을 도와주는 도구입니다. 그러나 그림이 여럿 있을 때 각각 붙은 Legend는 방해가 되기도 합니다. Legend를 한데 모아 그리는 방법을 알아봅니다.  1. Sample Data 먼저 필요한 라이브러리들을 불러오고,12345678%matplotlib inlineimport numpy as npimport pand">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Legend Control">
+<meta property="og:url" content="https://jehyunlee.github.io/2021/06/06/Python-DS-76-mpllegend/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="Legend(범례)는 데이터의 의미 파악을 도와주는 도구입니다. 그러나 그림이 여럿 있을 때 각각 붙은 Legend는 방해가 되기도 합니다. Legend를 한데 모아 그리는 방법을 알아봅니다.  1. Sample Data 먼저 필요한 라이브러리들을 불러오고,12345678%matplotlib inlineimport numpy as npimport pand">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/76_mpllegend_0.png">
+<meta property="article:published_time" content="2021-06-05T20:54:00.000Z">
+<meta property="article:modified_time" content="2021-06-06T00:04:18.475Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="legend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/76_mpllegend_0.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2021/06/06/python-ds-76-mpllegend/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-76-mpllegend" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Legend Control
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/06/06/Python-DS-76-mpllegend/" class="article-date">
+       <time datetime="2021-06-05T20:54:00.000Z" itemprop="datePublished">2021-06-06</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/06/06/Python-DS-76-mpllegend/" class="article-date">
+     <time datetime="2021-06-06T00:04:18.475Z" itemprop="dateModified">2021-06-06</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/legend/" rel="tag">legend</a>, <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/seaborn/" rel="tag">seaborn</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>Legend(범례)는 데이터의 의미 파악을 도와주는 도구입니다.</li>
+<li>그러나 그림이 여럿 있을 때 각각 붙은 Legend는 방해가 되기도 합니다.</li>
+<li>Legend를 한데 모아 그리는 방법을 알아봅니다.<br></li>
+</ul>
+<h1 id="1-Sample-Data"><a href="#1-Sample-Data" class="headerlink" title="1. Sample Data"></a>1. Sample Data</h1><ul>
+<li>먼저 필요한 라이브러리들을 불러오고,<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;whitegrid&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>우리의 펭귄을 소환합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_p = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">df_p.head()</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_12.png"><br></li>
+</ul>
+<h1 id="2-기본-그림"><a href="#2-기본-그림" class="headerlink" title="2. 기본 그림"></a>2. 기본 그림</h1><ul>
+<li><p>legend를 붙일 그림을 먼저 그립니다.</p>
+</li>
+<li><p>seaborn의 <code>regplot</code>을 사용해서 부리 길이, 폭, 날개 길이를 그립니다.</p>
+</li>
+<li><p>scatter_kws와 line_kws로 시각화 요소들의 색상, 크기 등을 설정합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=<span class="string">&quot;bill_length_mm&quot;</span>, data=df_p, </span><br><span class="line">            ax=axs[<span class="number">0</span>], label=<span class="string">&quot;Bill Length&quot;</span>, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;C1&quot;</span>&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_p, </span><br><span class="line">            ax=axs[<span class="number">1</span>], label=<span class="string">&quot;Bill Depth&quot;</span>, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;C2&quot;</span>&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=<span class="string">&quot;flipper_length_mm&quot;</span>, data=df_p, </span><br><span class="line">            ax=axs[<span class="number">2</span>], label=<span class="string">&quot;Flipper Length&quot;</span>, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;C3&quot;</span>&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="76_mpllegend_01.png"><br></p>
+</li>
+<li><p><code>sns.regplot()</code>함수가 데이터 수만큼 반복되고 있습니다.</p>
+</li>
+<li><p>데이터 수가 10개라면 코드가 그만큼 더 길어질 것입니다.</p>
+</li>
+<li><p>for loop과 zip을 사용해서 효율적으로 바꿉니다. 조금 짧아지고 유지보수가 편해집니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="76_mpllegend_01_for.png"><br></p>
+</li>
+<li><p><code>ax.set_ylabel(&quot;&quot;)</code>로 ylabel을 지웠습니다.</p>
+</li>
+<li><p>y 인자 이름을 축 레이블 대신 legend 형태로 표현하기 위해서입니다.</p>
+</li>
+</ul>
+<h1 id="3-Legend-하나씩"><a href="#3-Legend-하나씩" class="headerlink" title="3. Legend 하나씩"></a>3. Legend 하나씩</h1><h2 id="3-1-Axes별-Legend"><a href="#3-1-Axes별-Legend" class="headerlink" title="3.1. Axes별 Legend"></a>3.1. Axes별 Legend</h2><ul>
+<li>가장 기본적인 형태입니다.</li>
+<li>Axes 하나마다 <code>ax.legend()</code>를 실행합니다.</li>
+<li>markerscale은 데이터를 의미하는 마커를 3배 크게 그리라는 의미입니다.</li>
+<li>잘 보이게 하고 데이터와 혼동되지 않게 하려는 의도입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ax.legend(markerscale=<span class="number">3</span>) <span class="comment"># Axes별 Legend</span></span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_02.png"><br></li>
+</ul>
+<h2 id="3-2-Axes-공간-전체-사용"><a href="#3-2-Axes-공간-전체-사용" class="headerlink" title="3.2. Axes 공간 전체 사용"></a>3.2. Axes 공간 전체 사용</h2><ul>
+<li>Axes마다 붙긴 했는데 깔끔하지 않습니다. 좀 지저분합니다.</li>
+<li>Axes마다 Legend가 귀퉁이에 쭈그리고 있어서 그런가 싶습니다.</li>
+<li><code>mode=&quot;extend&quot;</code>로 전체 공간을 다 사용하도록 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    ax.legend(mode=<span class="string">&quot;expand&quot;</span>, markerscale=<span class="number">3</span>) <span class="comment"># Axes별 Legend, 넓게</span></span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_03.png"><br></li>
+</ul>
+<h2 id="3-3-Axes-위에-Legend"><a href="#3-3-Axes-위에-Legend" class="headerlink" title="3.3. Axes 위에 Legend"></a>3.3. Axes 위에 Legend</h2><ul>
+<li>scatter plot은 점 하나하나가 데이터입니다.</li>
+<li>시각화 요소들에 의해 가려지면 그만큼 데이터 전달력이 손실됩니다.</li>
+<li>Axes 위로 Legend를 올려서 데이터를 잘 보이게 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Axes별 Legend, 위치 지정</span></span><br><span class="line">    ax.legend(loc=<span class="string">&quot;lower center&quot;</span>, bbox_to_anchor=[<span class="number">0.5</span>, <span class="number">1.03</span>], markerscale=<span class="number">3</span>) </span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_04.png"><br></li>
+</ul>
+<ul>
+<li>그런데 여기서 전체 범위를 사용하겠다고 <code>mode=&quot;extend&quot;</code>를 사용하면 오류가 납니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.legend(loc=<span class="string">&quot;lower center&quot;</span>, bbox_to_anchor=[<span class="number">0</span>, <span class="number">1.03</span>], mode=<span class="string">&quot;expand&quot;</span>, markerscale=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_05.png"><br></li>
+</ul>
+<ul>
+<li>매개변수에서 bbox_to_anchor를 제거하고 사용하면 잘 됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.legend(loc=[<span class="number">0</span>, <span class="number">1.03</span>], mode=<span class="string">&quot;expand&quot;</span>, borderaxespad=<span class="number">0</span>, markerscale=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_06.png"><br></li>
+</ul>
+<h1 id="4-Legend-모아-붙이기"><a href="#4-Legend-모아-붙이기" class="headerlink" title="4. Legend 모아 붙이기"></a>4. Legend 모아 붙이기</h1><ul>
+<li>Axes별로 Legend를 출력하지 않고 한데 모으면 더 깔끔합니다.</li>
+<li>이를 가능하게 하려면 handle과 label이라는 개념을 파악할 필요가 있습니다.</li>
+<li>legend는 의미가 담긴 label과 label이 지칭하는 대상이 있습니다. 이 대상이 handle입니다.</li>
+</ul>
+<ul>
+<li><code>ax.get_legend_handles_labels</code> 명령으로 확인하고 가져올 수 있습니다.</li>
+<li>위 그림의 첫번째 Axes에 담긴 handle과 label은 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handle, label = axs[<span class="number">0</span>].get_legend_handles_labels()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;handle= <span class="subst">&#123;handle&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;label = <span class="subst">&#123;label&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 시각화를 하나밖에 안했으므로 handle과 label이 하나씩입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">handle= [&lt;matplotlib.collections.PathCollection <span class="built_in">object</span> at <span class="number">0x7f95fa482e90</span>&gt;]</span><br><span class="line">label = [<span class="string">&#x27;Bill Length&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-Axes에-붙이기"><a href="#4-1-Axes에-붙이기" class="headerlink" title="4.1. Axes에 붙이기"></a>4.1. Axes에 붙이기</h2><ul>
+<li>빈 list를 만들고, 그림을 그릴 때마다 handle과 label을 가져와 모읍니다.</li>
+<li>그림을 모두 다 그린 후, 맨 마지막 Axes 오른쪽에 붙입니다.</li>
+<li>추가 공간이 필요하니 그림 가로 폭을 10에서 14로 넓혀줍니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">14</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">handles = []</span><br><span class="line">labels = []</span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># handles, labels 모으기</span></span><br><span class="line">    handle, label = ax.get_legend_handles_labels()</span><br><span class="line">    handles.append(*handle)</span><br><span class="line">    labels.append(*label)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 맨 오른쪽 Axes에 붙이기</span></span><br><span class="line">axs[-<span class="number">1</span>].legend(handles=handles, labels=labels, markerscale=<span class="number">3</span>,</span><br><span class="line">               loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=[<span class="number">1.1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_07.png"><br></li>
+</ul>
+<h2 id="4-2-Figure에-붙이기"><a href="#4-2-Figure에-붙이기" class="headerlink" title="4.2. Figure에 붙이기"></a>4.2. Figure에 붙이기</h2><ul>
+<li>특정 Axes에 속하지 않도록 전체 그림이 담긴 Figure에 붙일 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">14</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">handles = []</span><br><span class="line">labels = []</span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># handles, labels 모으기</span></span><br><span class="line">    handle, label = ax.get_legend_handles_labels()</span><br><span class="line">    handles.append(*handle)</span><br><span class="line">    labels.append(*label)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Figure에 붙이기</span></span><br><span class="line">fig.legend(handles=handles, labels=labels, markerscale=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_08.png"><br></li>
+</ul>
+<h2 id="4-2-Figure의-Axes-옆자리에-붙이기"><a href="#4-2-Figure의-Axes-옆자리에-붙이기" class="headerlink" title="4.2. Figure의 Axes 옆자리에 붙이기"></a>4.2. Figure의 Axes 옆자리에 붙이기</h2><ul>
+<li>Axes를 그대로 놔두고 붙였더니 맨 우측 Axes에 겹쳐 그려졌습니다.</li>
+<li>Axes 옆에 놓기 위해 legend의 위치를 섬세하게 지정합니다.</li>
+</ul>
+<ul>
+<li>loc와 bbox_to_anchor 매개변수는 이런 역할을 합니다.</li>
+<li>loc만 단독으로 사용하면 붙이는 대상에 따라 Figure나 Axes의 지정된 위치에 놓입니다</li>
+<li>loc와 bbox_to_anchor를 함께 사용하면 loc는 legend의 지점이 되고 bbox_to_anchor는 legend가 놓일 위치가 됩니다.</li>
+<li>bbox_to_ancher에 매개변수가 둘 들어가면 위치만, 넷 들어가면 위치와 가로세로 크기입니다.<br><br><img src="76_mpllegend_14.png"><br></li>
+</ul>
+<ul>
+<li><p>맨 우측 Axes 오른쪽 상단에 붙도록 값을 지정합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">14</span>, <span class="number">4</span>), </span><br><span class="line">                        sharex=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">handles = []</span><br><span class="line">labels = []</span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># handles, labels 모으기</span></span><br><span class="line">    handle, label = ax.get_legend_handles_labels()</span><br><span class="line">    handles.append(*handle)</span><br><span class="line">    labels.append(*label)</span><br><span class="line"></span><br><span class="line"><span class="comment"># figure 옆에 legend 붙이기: 화면엔 정상, 파일은 실패    </span></span><br><span class="line">fig.legend(handles=handles, labels=labels, markerscale=<span class="number">3</span>,</span><br><span class="line">          loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=[<span class="number">1</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="76_mpllegend_13.png"><br></p>
+</li>
+<li><p>화면에는 정상으로 나오지만 파일을 저장하면 그렇지 않습니다.<br><br><img src="76_mpllegend_09.png"><br></p>
+</li>
+<li><p>legend가 전혀 보이지 않습니다.</p>
+</li>
+<li><p>bbox_to_anchor에서 지정한 x 위치가 Figure의 우측 한계선(1)을 넘었기 때문입니다.</p>
+</li>
+</ul>
+<ul>
+<li>파일 출력을 하려면 legend 전체가 Figure 범위 안에 들어와야 합니다.</li>
+<li>그러려면 Axes를 좌측으로 압축시킬 필요가 있습니다.</li>
+<li><code>fig.tight_layout()</code>에 rect 매개변수를 넣으면 됩니다. </li>
+<li>충돌 방지를 위해 비슷한 기능을 하는 constrained_layout은 figure 생성 명령에서 삭제합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">14</span>, <span class="number">4</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">handles = []</span><br><span class="line">labels = []</span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># handles, labels 모으기</span></span><br><span class="line">    handle, label = ax.get_legend_handles_labels()</span><br><span class="line">    handles.append(*handle)</span><br><span class="line">    labels.append(*label)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Figure 옆에 legend 붙이기. x 좌표 = 0.8</span></span><br><span class="line">fig.legend(handles=handles, labels=labels, markerscale=<span class="number">3</span>,</span><br><span class="line">          loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=[<span class="number">0.8</span>, <span class="number">0.95</span>])</span><br><span class="line"><span class="comment"># Axes들 0.8 안쪽으로 압축</span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.8</span>,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_10.png"><br></li>
+</ul>
+<h2 id="4-3-Figure의-Axes-위에-붙이기"><a href="#4-3-Figure의-Axes-위에-붙이기" class="headerlink" title="4.3. Figure의 Axes 위에 붙이기"></a>4.3. Figure의 Axes 위에 붙이기</h2><ul>
+<li>같은 요령으로 legend를 Axes 위에 모아서 붙일 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">14</span>, <span class="number">4</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">handles = []</span><br><span class="line">labels = []</span><br><span class="line"><span class="keyword">for</span> ax, c, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;C1&quot;</span>, <span class="string">&quot;C2&quot;</span>, <span class="string">&quot;C3&quot;</span>], [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]):</span><br><span class="line">    label = <span class="string">&quot; &quot;</span>.join([w[<span class="number">0</span>].upper()+w[<span class="number">1</span>:] <span class="keyword">for</span> w <span class="keyword">in</span> y.split(<span class="string">&quot;_&quot;</span>)[:-<span class="number">1</span>]])</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;body_mass_g&quot;</span>, y=y, data=df_p, </span><br><span class="line">                ax=ax, label=label, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:c&#125;, line_kws=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;Body Mass&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># handles, labels 모으기</span></span><br><span class="line">    handle, label = ax.get_legend_handles_labels()</span><br><span class="line">    handles.append(*handle)</span><br><span class="line">    labels.append(*label)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Figure 위에 legend 붙이기. y 좌표 = 0.9    </span></span><br><span class="line">fig.legend(handles=handles, labels=labels, markerscale=<span class="number">3</span>, ncol=<span class="number">3</span>,</span><br><span class="line">          loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=[<span class="number">0.045</span>, <span class="number">0.9</span>, <span class="number">1</span>, <span class="number">0.1</span>])</span><br><span class="line"><span class="comment"># Axes들 y = 0.9 안쪽으로 압축</span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.9</span>])</span><br></pre></td></tr></table></figure>
+<img src="76_mpllegend_11.png"><br></li>
+</ul>
+<h1 id="5-정리"><a href="#5-정리" class="headerlink" title="5. 정리"></a>5. 정리</h1><ul>
+<li>legend는 여러 데이터를 명확히 구분해주는, 반드시 필요한 요소입니다.</li>
+<li>그러나 Axes가 많아지고 데이터 인자가 많아질수록 혼돈의 원인이 되기도 합니다.</li>
+<li>적절한 위치에 적절한 형식으로 배치해서 인지능력 향상에 도움이 되면 좋겠습니다.</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2021/06/06/Python-DS-76-mpllegend/" data-id="ckvt2pluw004z6wtqd3lsa312" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Legend Control",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/76_mpllegend_0.png",
+        "keywords": "python matplotlib visualization seaborn legend",
+        "genre": "Python Data Science",
+        "datePublished": "2021-06-06",
+        "dateCreated": "2021-06-06",
+        "dateModified": "2021-06-06",
+        "url": "https://jehyunlee.github.io/2021/06/06/Python-DS-76-mpllegend/",
+        "description": "
+Legend(범례)는 데이터의 의미 파악을 도와주는 도구입니다.
+그러나 그림이 여럿 있을 때 각각 붙은 Legend는 방해가 되기도 합니다.
+Legend를 한데 모아 그리는 방법을 알아봅니다.
+
+1. Sample Data
+먼저 필요한 라이브러리들을 불러오고,12345678%matplotlib inlineimport numpy as npimport pand",
+        "wordCount": 2473
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2021/06/06/Python-DL-6-pytorchGPU/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            PyTorch GPU setting
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2021/05/30/Python-DS-75-googlesurvey/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Lecture Survey Summary (Google Forms)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/26/Python-General-9-fullmoon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/9_fullmoon_0.png)" alt="Full moon" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2021/09/26/Python-General-9-fullmoon/" class="title">Full moon</a></p>
+                            <p class="item-date"><time datetime="2021-09-25T23:52:00.000Z" itemprop="datePublished">2021-09-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/07/10/Python-DS-80-mpl3d2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/80_mpl3d2_00.png)" alt="Matplotlib 3D Plots (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/07/10/Python-DS-80-mpl3d2/" class="title">Matplotlib 3D Plots (2)</a></p>
+                            <p class="item-date"><time datetime="2021-07-10T08:09:00.000Z" itemprop="datePublished">2021-07-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/07/09/Python-DS-79-mpl3d/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/79_mpl3d_00.png)" alt="Matplotlib 3D Plots (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/07/09/Python-DS-79-mpl3d/" class="title">Matplotlib 3D Plots (1)</a></p>
+                            <p class="item-date"><time datetime="2021-07-09T02:17:00.000Z" itemprop="datePublished">2021-07-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/07/01/Python-DS-78-heatmapcolorbar/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/78_heatmapcolorbar_0.png)" alt="Seaborn Heatmap &amp; Colorbar Control" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/07/01/Python-DS-78-heatmapcolorbar/" class="title">Seaborn Heatmap &amp; Colorbar Control</a></p>
+                            <p class="item-date"><time datetime="2021-07-01T01:55:00.000Z" itemprop="datePublished">2021-07-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">94</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">78</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 11.33px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 10px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.67px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.67px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.67px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.67px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.33px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.67px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14.67px;">colormap</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.67px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.67px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.67px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.33px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.67px;">font</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.67px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.67px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.67px;">jython</a> <a href="/tags/keras/" style="font-size: 10.67px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.33px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 12.67px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.67px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.67px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10.67px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.33px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.67px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.33px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.33px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.67px;">probability</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.67px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.67px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.67px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.67px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.67px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 18px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.67px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.33px;">statistics</a> <a href="/tags/subplots/" style="font-size: 10.67px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.33px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.67px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.33px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.33px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2021/06/06/Python-DS-76-mpllegend/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
