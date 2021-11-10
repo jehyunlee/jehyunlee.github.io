@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Matplotlib Colormap Customization (3) | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,visualization,color,colormap,colorbar" />
+    
+    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다. 하나는 valu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matplotlib Colormap Customization (3)">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다. 하나는 valu">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png">
+<meta property="article:published_time" content="2020-08-11T00:28:00.000Z">
+<meta property="article:modified_time" content="2020-11-27T00:44:39.442Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="color">
+<meta property="article:tag" content="colormap">
+<meta property="article:tag" content="colorbar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2020/08/11/python-ds-26-custom_colormap_code2/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-26-custom_colormap_code2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Matplotlib Colormap Customization (3)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/08/11/Python-DS-26-custom_colormap_code2/" class="article-date">
+       <time datetime="2020-08-11T00:28:00.000Z" itemprop="datePublished">2020-08-11</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2020/08/11/Python-DS-26-custom_colormap_code2/" class="article-date">
+     <time datetime="2020-11-27T00:44:39.442Z" itemprop="dateModified">2020-11-27</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/color/" rel="tag">color</a>, <a class="tag-link-link" href="/tags/colorbar/" rel="tag">colorbar</a>, <a class="tag-link-link" href="/tags/colormap/" rel="tag">colormap</a>, <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>matplotlib에서 custom colormap을 만들고 적용하는 방법입니다.</li>
+<li>3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html">Creating Colormaps in Matplotlib</a></p>
+</blockquote>
+<h2 id="Matplotlib-Custom-Colormap"><a href="#Matplotlib-Custom-Colormap" class="headerlink" title="Matplotlib Custom Colormap"></a>Matplotlib Custom Colormap</h2><ul>
+<li><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에는 크게 두 가지 그림이 등장합니다.<ul>
+<li>하나는 value에 따른 컬러맵 명도<br><br><img src="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png"><br></li>
+<li>또 하나는 여러 컬러맵이 적용된 한반도의 풍속 분포 그림입니다.<br><br><img src="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/25_ccmap_code_01.png"><br></li>
+</ul>
+</li>
+<li>이번 글에서는 이 그림들 중 두 번째 그림이 그려진 과정을 코드로 살펴보겠습니다.</li>
+</ul>
+<h3 id="2-Wind-Visualization"><a href="#2-Wind-Visualization" class="headerlink" title="2. Wind Visualization"></a>2. Wind Visualization</h3><ul>
+<li><p>한반도 풍속 데이터를 가져옵니다.</p>
+<ul>
+<li>아쉽게도 본 데이터는 공유가 어렵습니다.</li>
+<li>데이터보다 시각화 코드에 집중해주시면 좋겠습니다.</li>
+</ul>
+</li>
+<li><p><code>pandas DataFrame</code>으로 읽어옵니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">df_wind = pd.read_csv(<span class="string">&quot;wind.csv&quot;</span>)</span><br><span class="line">df_wind.head()</span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_01.png"><br></p>
+</li>
+</ul>
+<h4 id="2-1-Distortion-Spherical-vs-Projection"><a href="#2-1-Distortion-Spherical-vs-Projection" class="headerlink" title="2.1. Distortion: Spherical vs Projection"></a>2.1. Distortion: Spherical vs Projection</h4><ul>
+<li>X와 Y축으로 사용할 데이터가 두 가지 있습니다.<ul>
+<li>하나는 <b>위도<code>LAT: latitude</code></b>와 <b>경도<code>LON: longitude</code></b>,</li>
+<li>하나는 <b>X좌표<code>UTM_X</code></b>와 <b>Y좌표<code>UTM_Y</code></b> 입니다.</li>
+<li>결론부터 말씀드리면 위도와 경도는 지구의 곡면에서 사용하는 좌표계입니다. </li>
+<li>곡면을 2D에 그대로 그리면 왜곡이 발생하기 때문에 왜곡을 최소화해서 투영시킨 <b>UTM : Universal Transverse Mercator</b> 좌표계를 사용해야 합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>두 좌표계를 사용해 그린 한반도 모습을 보면 이해가 빠를 것입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">20</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">Xs = [<span class="string">&quot;LON&quot;</span>, <span class="string">&quot;UTM_X&quot;</span>]</span><br><span class="line">Ys = [<span class="string">&quot;LAT&quot;</span>, <span class="string">&quot;UTM_Y&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X, Y <span class="keyword">in</span> <span class="built_in">zip</span>(axes, Xs, Ys):</span><br><span class="line">    ax.scatter(df_wind[X], df_wind[Y], s=<span class="number">1</span>, c=df_wind[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;X&#125;</span> and <span class="subst">&#123;Y&#125;</span>&quot;</span>, fontsize=<span class="number">24</span>)</span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)  </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_02.png"><br></p>
+</li>
+<li><p>컬러맵으로 도시된 풍속은 차치하고, <b>먼저 격자무늬를 봅시다.</b></p>
+<ul>
+<li>지구는 구형이고 한반도는 북반구에 위치하고 있습니다.</li>
+<li>따라서 북쪽으로 갈수록 단위 경도의 길이가 짧아져야 합니다.</li>
+<li>그러나 좌측처럼 위도와 경도로 그리면 이 전제에 위배되어 <b>지도를 그림처럼 왜곡시킵니다.</b></li>
+<li>좌측 그림을 보면 북쪽으로 갈수록 점점 넓어지고 있습니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-Distortion-Aspect-Ratio"><a href="#2-2-Distortion-Aspect-Ratio" class="headerlink" title="2.2. Distortion: Aspect Ratio"></a>2.2. Distortion: Aspect Ratio</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/gallery/subplots_axes_and_figures/axis_equal_demo.html">matplotlib: Axis Equal Demo</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.axis.html?highlight=axis#matplotlib.axes.Axes.axis">matplotlib.axes.Axes.axis</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_aspect.html?highlight=set_aspect#matplotlib.axes.Axes.set_aspect">matplotlib.axes.Axes.set_aspect</a></p>
+</blockquote>
+<ul>
+<li><p>UTM 좌표계를 적용해도 matplotlib에서 왜곡이 발생합니다.</p>
+</li>
+<li><p>그림 크기가 적절치 않았던 탓에 가로가 세로보다 더 깁니다.<br><br><img src="26_ccmap_code2_03.png"><br></p>
+</li>
+<li><p><code>matplotlib</code>에는 그림의 종횡비를 데이터에 맞춰주는 명령이 있습니다.</p>
+<ul>
+<li><code>ax.axis(&quot;equal&quot;)</code> : 종횡비만 맞춰줍니다.</li>
+<li><code>ax.axis(&quot;scaled&quot;)</code> : 종횡비를 맞추고 데이터에 맞게 축공간을 조정합니다.</li>
+<li><code>ax.set_aspect(&quot;equal&quot;, &quot;box&quot;)</code> : 종횡비를 맞추고 데이터에 맞게 축공간을 조정합니다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>아래 예시를 통해 확인하겠습니다.<br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 예제 원 데이터 (반지름=3)</span></span><br><span class="line">an = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">X, Y = <span class="number">3</span>*np.cos(an), <span class="number">3</span>*np.sin(an)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">titles = [<span class="string">&quot;default&quot;</span>, <span class="string">&quot;axis(&#x27;equal&#x27;)&quot;</span>, <span class="string">&quot;axis(&#x27;scaled&#x27;)&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, title) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, titles)):</span><br><span class="line">    ax.plot(X, Y)</span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">    ticklabels = ax.get_xticks()</span><br><span class="line">    ax.set_yticks(ticklabels)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        ax.axis(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">2</span>:</span><br><span class="line">        ax.axis(<span class="string">&quot;scaled&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()        </span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_04.png"><br>  </p>
+</li>
+<li><p><code>set_aspect()</code>를 사용하면 종횡비 수치 조정이 가능합니다.<br><img src="26_ccmap_code2_05.png"><br>  </p>
+</li>
+<li><p>적절한 데이터 표현을 위해 <code>set_aspect(&quot;equal&quot;, &quot;box&quot;)</code>를 적용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 무의미한 여백을 피하기 위한 데이터 범위 다듬기</span></span><br><span class="line">df_trim = df_wind.loc[df_wind[<span class="string">&quot;UTM_X&quot;</span>] &lt; <span class="number">700000</span>].loc[df_wind[<span class="string">&quot;UTM_X&quot;</span>] &gt; -<span class="number">80000</span>].loc[df_wind[<span class="string">&quot;UTM_Y&quot;</span>] &lt; <span class="number">4800000</span>].loc[df_wind[<span class="string">&quot;UTM_Y&quot;</span>] &gt; <span class="number">3620000</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 지도 그리기</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(df_wind[<span class="string">&quot;UTM_X&quot;</span>], df_wind[<span class="string">&quot;UTM_Y&quot;</span>], s=<span class="number">1</span>, c=df_wind[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.grid(<span class="string">&quot;on&quot;</span>)  <span class="comment"># 종횡비 설정 확인</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_06.png"><br>  </p>
+</li>
+</ul>
+<h4 id="2-3-Axes-Aesthetics"><a href="#2-3-Axes-Aesthetics" class="headerlink" title="2.3. Axes Aesthetics"></a>2.3. Axes Aesthetics</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.pyplot.colorbar.html">matplotlib.pyplot.colorbar</a></p>
+</blockquote>
+<ul>
+<li>데이터를 왜곡 없이 표현했으므로 축을 보기 좋게 조정해줍니다.<ul>
+<li>grid가 데이터를 가립니다 → <b>지웁시다</b></li>
+<li>윤곽선이 무의미합니다 → <b>지웁시다</b></li>
+<li>데이터의 의미를 알 수 없습니다 → <b>colorbar를 추가합니다.</b></li>
+</ul>
+</li>
+<li>위 사항들을 반영합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">im = ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>], df_trim[<span class="string">&quot;UTM_Y&quot;</span>], s=<span class="number">1</span>, c=df_trim[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)  <span class="comment"># 윤곽선 삭제</span></span><br><span class="line">ax.grid(<span class="string">&quot;off&quot;</span>)  <span class="comment"># grid 삭제</span></span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, ax=ax)                            <span class="comment"># colorbar 추가 </span></span><br><span class="line">cbar.set_label(<span class="string">&quot;wind speed (m/s)&quot;</span>, fontsize=<span class="number">24</span>)           <span class="comment"># colorbar label</span></span><br><span class="line">cbar.ax.tick_params(labelsize=<span class="number">20</span>)                         <span class="comment"># colorbar 숫자 fontsize</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="26_ccmap_code2_07.png"><br>  </li>
+</ul>
+<h4 id="2-4-Data-Vision-Deficiency"><a href="#2-4-Data-Vision-Deficiency" class="headerlink" title="2.4. Data Vision Deficiency"></a>2.4. Data Vision Deficiency</h4><blockquote>
+<p><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">Matplotlib Colormap Customization (1)</a><br><a target="_blank" rel="noopener" href="https://nuli.navercorp.com/community/article/1132656?email=true">Naver: 널리 알리는 기술소식. 색각이상자를 위한 웹 접근성 가이드라인</a><br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/nocoffee/jjeeggmbnhckmgdhmgdckeigabjfbddl">NoCoffee Vision Simulator</a><br><a target="_blank" rel="noopener" href="https://asada.website/webCVS/">Chromatic Vision Simulator</a></p>
+</blockquote>
+<ul>
+<li>컬러맵이 적절치 않으면 <b>데이터 독해력이 떨어집니다.</b><ul>
+<li><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에서 여러가지 컬러맵을 적용한 경우를 보았습니다.</li>
+<li>효과적인 데이터 전달을 위해 데이터를 꾸미기 전에 <b>색각이상자<code>Color Vision Deficiency</code></b>들 입장에서 컬러맵이 어떻게 보일지 간접적으로나마 경험해 봅시다.</li>
+<li>색각이상은 남성에게 특히 심한데, <b>국내 남성의 6%</b>, 전 세계 <b>남성의 8%</b>, 특히 코카서스인(백인)의 <b>11%</b>가 색각이상자라고 합니다. </li>
+<li>여성 중 색각이상자 비중은 0.5%로 남성에 비해 낮습니다.</li>
+<li>내 주위에 남성 50명이 있다면 그 중 3~4명은 색각이상을 겪고 있을 수 있습니다.</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://asada.website/webCVS/">Chromatic Vision Simulator</a>를 통해 색각이상자들의 시야를 엿볼 수 있습니다.</li>
+</ul>
+<p><img src="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png" alt="정상시각자"><br><img src="protanopia.jpg" alt="제일색맹(적색맹. protanopia)"><br><img src="deuteranopia.jpg" alt="제이색맹(녹색맹. deuteranopia)"><br><img src="tritanopia.jpg" alt="제삼색맹(청색맹. tritanopia)"></p>
+<ul>
+<li><b>데이터와 명도간 상관관계</b>가 강한 cubehelix는 데이터 전달에 지장이 적습니다.<ul>
+<li>하지만 데이터를 주로 색채로 전달하는 다른 컬러맵은 구분이 어렵습니다.</li>
+<li>사실상 두 개의 색만으로 정보를 전달해야 하므로 데이터 인지가 힘들어집니다.</li>
+<li><b>근본적으로 명도에 기반한 정보 전달</b>이 필요한 이유입니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-5-Data-Aesthetics"><a href="#2-5-Data-Aesthetics" class="headerlink" title="2.5. Data Aesthetics"></a>2.5. Data Aesthetics</h4><h5 id="2-5-1-Efficient-Color-Space"><a href="#2-5-1-Efficient-Color-Space" class="headerlink" title="2.5.1 Efficient Color Space"></a>2.5.1 Efficient Color Space</h5><ul>
+<li><p>색공간을 효율적으로 사용합시다.</p>
+</li>
+<li><p>histogram으로 데이터 분포를 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">ax[<span class="number">0</span>].hist(df_trim[<span class="string">&quot;wind&quot;</span>], bins=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].hist(df_trim[<span class="string">&quot;wind&quot;</span>], bins=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_yscale(<span class="string">&quot;log&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&quot;histogram(normal)&quot;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&quot;histogram(log)&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">&quot;26_ccmap_code2_08.png&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_08.png"><br>  </p>
+</li>
+<li><p>9 m/s 기준으로 데이터를 제한하기로 합니다.</p>
+</li>
+<li><p>그 이상은 일종의 outlier로 간주하여 별도 표시를 합니다.</p>
+</li>
+<li><p>바다도 <b>gist_gray</b>를 적용해서 흑백처리를 합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">cmap_ = <span class="string">&quot;viridis&quot;</span></span><br><span class="line">cmap = cm.get_cmap(cmap_)</span><br><span class="line">cmap.set_over(<span class="string">&quot;magenta&quot;</span>)  <span class="comment"># over 색상 지정</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 육지 : viridis</span></span><br><span class="line">im = ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], </span><br><span class="line">                df_trim[<span class="string">&quot;UTM_Y&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], s=<span class="number">1</span>, </span><br><span class="line">                c=df_trim[<span class="string">&quot;wind&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], cmap=cmap, vmax=<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 바다 : gist_gray</span></span><br><span class="line">ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], </span><br><span class="line">           df_trim[<span class="string">&quot;UTM_Y&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], s=<span class="number">1</span>, </span><br><span class="line">           c=df_trim[<span class="string">&quot;wind&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], cmap=<span class="string">&quot;gist_gray&quot;</span>, vmax=<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)  <span class="comment"># 윤곽선 삭제</span></span><br><span class="line">ax.grid(<span class="string">&quot;off&quot;</span>)  <span class="comment"># grid 삭제</span></span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, ax=ax, extend=<span class="string">&quot;max&quot;</span>)    <span class="comment"># extend=max 추가</span></span><br><span class="line">cbar.set_label(<span class="string">&quot;wind speed @land (m/s)&quot;</span>, fontsize=<span class="number">24</span>, labelpad=<span class="number">12</span>)           </span><br><span class="line">cbar.ax.tick_params(labelsize=<span class="number">20</span>)                         </span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_09.png"><br>  </p>
+</li>
+</ul>
+<h5 id="2-5-2-Colormap-Customization"><a href="#2-5-2-Colormap-Customization" class="headerlink" title="2.5.2. Colormap Customization"></a>2.5.2. Colormap Customization</h5><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html#sphx-glr-tutorials-colors-colormap-manipulation-py">Creating Colormaps in Matplotlib</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.ListedColormap.html">matplotlib.colors.ListedColormap</a></p>
+</blockquote>
+<ul>
+<li>기상청 풍속구간 기준에 맞추어 컬러맵의 색상을 변경합니다.<ul>
+<li>저풍속구간에 <b>Greens_r</b>, 고풍속구간에 <b>Blues_r</b>을 배치합니다.</li>
+<li>4 m/s 지점을 최대한 정확히 끊어야 합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b>Greens_r</b>과 <b>Blues_r</b>을 잘라서 붙입니다.<ul>
+<li>각기 0~1 사이를 256 단계로 쪼갠 후, 85 레벨을 기준으로 잘라서 붙입니다.</li>
+<li>그냥 붙인 것을 <b>Greens_Blues_1</b>, </li>
+<li>스케일을 줄여 이동한 것을 <b>Greens_Blues_2</b>라고 이름짓습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.ListedColormap.html">ListedColormap</a>은 <code>numpy.ndarray</code>를 colormap으로 변환합니다.</p>
+</li>
+<li><p>RGBA 4열을 담고 있는 행렬 만든 후 <b>ListedColormap</b>에 담아 새로운 컬러맵을 만들 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">Blues_r = cm.get_cmap(<span class="string">&quot;Blues_r&quot;</span>, <span class="number">256</span>)(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">256</span>))</span><br><span class="line">Greens_r = cm.get_cmap(<span class="string">&quot;Greens_r&quot;</span>, <span class="number">256</span>)(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">256</span>))</span><br><span class="line"></span><br><span class="line">boundary = <span class="number">85</span></span><br><span class="line">Greens_Blues_1_ = np.vstack((Greens_r[:boundary], Blues_r[boundary:]))</span><br><span class="line">Greens_Blues_1 = ListedColormap(Greens_Blues_1_)</span><br><span class="line"></span><br><span class="line">Blues_r_2 = deepcopy(Blues_r)</span><br><span class="line">Blues_r_2[:,:<span class="number">3</span>] = Blues_r_2[:,:<span class="number">3</span>]*<span class="number">0.8</span>+<span class="number">0.2</span> </span><br><span class="line">Greens_Blues_2_ = np.vstack((Greens_r[:boundary], Blues_r_2[boundary:]))</span><br><span class="line">Greens_Blues_2 = ListedColormap(Greens_Blues_2_)</span><br></pre></td></tr></table></figure>
+<p><img src="L_gist_gray_viridis_Greens_Blues_1_Greens_Blues_2.png"><br></p>
+</li>
+<li><p>Greens_Blues_1과 _2 생성시 스케일 적용 차이가 반영되었습니다.</p>
+<ul>
+<li>Greens_Blues_1은 <b>일부 명암 구간이 겹치고</b>,</li>
+<li>Greens_Blues_2는 <b>경계에서 명암이 점프하고 있습니다</b>.</li>
+</ul>
+</li>
+<li><p>경계구간 명암 차이로 <b>구간 시인성</b>이 달라집니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 위 풍속 시각화 코드에 컬러맵만 다르게 적용합니다.</span></span><br><span class="line">cmap = Greens_Blues_1</span><br><span class="line">cmap.set_over(<span class="string">&quot;magenta&quot;</span>) </span><br></pre></td></tr></table></figure>
+<p><img src="26_ccmap_code2_10.png"><br><br><img src="26_ccmap_code2_11.png"><br> </p>
+</li>
+</ul>
+<ul>
+<li>평균 풍속이 약한 구간(청색)과 약간 강한 구간(녹색)이 잘 구분됩니다.<ul>
+<li>데이터가 잘 구분되면 <b>시각적 에너지 소모가 적습니다.</b></li>
+<li>따라서 더 많은 에너지를 <b>정량적, 정성적 비교</b>에 투입하여</li>
+<li>추가 분석을 위한 <b>아이디어 발굴</b>, <b>인사이트 도출</b>에 집중할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>시각화는 집중력을 분배하는 과정입니다.<ul>
+<li>적절하고 빠른 시각화는 본질에 집중하게 해 주지만</li>
+<li>시각화 과정이 부적절하고 느리면 그 자체로 에너지 손실입니다.</li>
+</ul>
+</li>
+<li>본 글에 사용된 코드는 <a href="custom_colormap_map2.ipynb">이 곳에서 다운받을 수 있습니다</a>.</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/" data-id="ckvsyt45o000ym0tqdfc33lin" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Matplotlib Colormap Customization (3)",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png",
+        "keywords": "python matplotlib visualization color colormap colorbar",
+        "genre": "Python Data Science",
+        "datePublished": "2020-08-11",
+        "dateCreated": "2020-08-11",
+        "dateModified": "2020-11-27",
+        "url": "https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/",
+        "description": "
+matplotlib에서 custom colormap을 만들고 적용하는 방법입니다.
+3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.
+
+
+Creating Colormaps in Matplotlib
+
+Matplotlib Custom Colormap
+지난 글에는 크게 두 가지 그림이 등장합니다.
+하나는 valu",
+        "wordCount": 1589
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/08/26/Python-DS-27-mpl_focus/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Focusing on a Certain Data
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/08/10/Python-DS-25-custom_colormap_code/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Matplotlib Colormap Customization (2)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/09/Python-DS-88_gpd_mpl/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/88_gpd_mpl_00.png)" alt="solar radiation - time and space" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/11/09/Python-DS-88_gpd_mpl/" class="title">solar radiation - time and space</a></p>
+                            <p class="item-date"><time datetime="2021-11-09T10:38:00.000Z" itemprop="datePublished">2021-11-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/87_violinplotedit00.png)" alt="modifying seaborn violin plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/21/Python-DS-87_violinplotedit/" class="title">modifying seaborn violin plot</a></p>
+                            <p class="item-date"><time datetime="2021-10-21T00:11:00.000Z" itemprop="datePublished">2021-10-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/14/Python-DS-86-datadoubt/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/86_datadoubt.jpg)" alt="데이터 분석, 의심에서 전달까지" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/14/Python-DS-86-datadoubt/" class="title">데이터 분석, 의심에서 전달까지</a></p>
+                            <p class="item-date"><time datetime="2021-10-14T00:40:00.000Z" itemprop="datePublished">2021-10-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/05/Python-DS-85-popkr/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/85_popkr_0.png)" alt="Population by gender and age" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/05/Python-DS-85-popkr/" class="title">Population by gender and age</a></p>
+                            <p class="item-date"><time datetime="2021-10-05T04:31:00.000Z" itemprop="datePublished">2021-10-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">102</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">86</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.14px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 11.43px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.71px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10px;">NIA</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.71px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.71px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.71px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.71px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.43px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.71px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.86px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.71px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.71px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.71px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.43px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.71px;">font</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.29px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.14px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.43px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.71px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.86px;">jython</a> <a href="/tags/keras/" style="font-size: 10.71px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.43px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 12.86px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.57px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.71px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10.71px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.71px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.71px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.43px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.71px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.71px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.71px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.71px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.71px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.71px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.86px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.71px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.14px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12.14px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.57px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.71px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.43px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.71px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.43px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.29px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

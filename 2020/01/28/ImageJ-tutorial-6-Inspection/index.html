@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>6. Image Data 분석 | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="imagej,inspection,jython" />
+    
+    <meta name="description" content="6.1. ImagePlus: ImageJ의 이미지 instanceReference  TCP School 26) 클래스의 개념ImagePlus   지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다. instance란 것은 Class에 정의된 대로 만들어진 객체입니다.  자동차 설계도(Cla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6. Image Data 분석">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="6.1. ImagePlus: ImageJ의 이미지 instanceReference  TCP School 26) 클래스의 개념ImagePlus   지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다. instance란 것은 Class에 정의된 대로 만들어진 객체입니다.  자동차 설계도(Cla">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/6_insp_plot6.PNG">
+<meta property="article:published_time" content="2020-01-28T04:35:00.000Z">
+<meta property="article:modified_time" content="2020-11-27T00:43:18.365Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="imagej">
+<meta property="article:tag" content="inspection">
+<meta property="article:tag" content="jython">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/6_insp_plot6.PNG">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2020/01/28/imagej-tutorial-6-inspection/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/ImageJ/">ImageJ</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/ImageJ/Tutorial/">Tutorial</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ImageJ-tutorial-6-Inspection" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        6. Image Data 분석
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/01/28/ImageJ-tutorial-6-Inspection/" class="article-date">
+       <time datetime="2020-01-28T04:35:00.000Z" itemprop="datePublished">2020-01-28</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2020/01/28/ImageJ-tutorial-6-Inspection/" class="article-date">
+     <time datetime="2020-11-27T00:43:18.365Z" itemprop="dateModified">2020-11-27</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/imagej/" rel="tag">imagej</a>, <a class="tag-link-link" href="/tags/inspection/" rel="tag">inspection</a>, <a class="tag-link-link" href="/tags/jython/" rel="tag">jython</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h3 id="6-1-ImagePlus-ImageJ의-이미지-instance"><a href="#6-1-ImagePlus-ImageJ의-이미지-instance" class="headerlink" title="6.1. ImagePlus: ImageJ의 이미지 instance"></a>6.1. <code>ImagePlus</code>: <code>ImageJ</code>의 이미지 <code>instance</code></h3><p><strong>Reference</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://tcpschool.com/java/java_class_intro">TCP School 26) 클래스의 개념</a><br><a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html">ImagePlus</a></p>
+</blockquote>
+<ul>
+<li><a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-5-Script/">지난 글</a>에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.</li>
+<li><code>instance</code>란 것은 <code>Class</code>에 정의된 대로 만들어진 객체입니다. <ul>
+<li><p>자동차 설계도(<code>Class</code>)와 자동차(<code>instance</code>) 관계로 보시면 비슷합니다.</p>
+</li>
+<li><p><code>instance</code>는 <code>Class</code>에 선언된 <code>Field</code>와 <code>Method</code>를 가지고 있습니다.<br>(ex. 그랜저 <code>Class</code>로 만들어진 철수 차 <code>instance</code>의  후방카메라 옵션)</p>
+</li>
+<li><p>다른 <code>Class</code>로 만든 <code>instance</code>끼리는 당연히 다르고 (ex. 람보르기니 vs 그랜저)</p>
+</li>
+<li><p>같은 <code>Class</code>로 만든 <code>instance</code>라도 다른 존재입니다 (ex. 철수 차 vs 영희 차)</p>
+<br></li>
+</ul>
+</li>
+<li><code>ImageJ</code>에서 이미지를 읽어들이면 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html"><code>ImagePlus</code></a> instance가 됩니다.<ul>
+<li><a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html">공식 문서</a>를 클릭해보시면 자체적으로 <code>changes</code>부터 <code>win</code>까지, 그리고 상위 클래스인 <code>java.awt.image.ImageObserver</code>와 <code>ij.measure.Measurements</code>로부터 상속받은 <code>Field</code>가 추가로 상당히 많습니다.</li>
+<li>그랜저 <code>Class</code>는 자동차 <code>Class</code>에 포함되므로 내연기관, 바퀴, 헤드라이트 등 자동차의 속성을 물려받습니다. 이 것을 <code>상속(inheritance)</code>이라고 합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-이미지-분석"><a href="#6-2-이미지-분석" class="headerlink" title="6.2. 이미지 분석"></a>6.2. 이미지 분석</h3><p><strong>Reference</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.ini.uzh.ch/~acardona/fiji-tutorial/#s3">A Fiji Scripting Tutorial #3. Inspecting properties and pixels of an image</a><br><a target="_blank" rel="noopener" href="https://imagej.net/Jython_Scripting_Examples">Jython Scripting Examples</a><br><a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html">ImageStatistics</a><br><a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageProcessor.html">ImageProcessor</a><br><a target="_blank" rel="noopener" href="https://forum.image.sc/t/python-code-to-create-histogram-from-an-image/21747/11">image.sc Forum</a></p>
+</blockquote>
+<ul>
+<li><code>ImageJ</code>에서 이미지를 읽으면 <code>ImagePlus</code>형식으로 받아들인다고 했고,<br><code>ImagePlus</code>는 여러 정보(<code>Field</code>)를 담고 있다고 했습니다. </li>
+<li>그럼 이 정보를 어떻게 꺼내볼까요?</li>
+<li><code>Class</code> <code>instance</code>의 <code>Field</code>에 접근할 때는 <code>[Instance이름].[Field이름]</code>으로 접근합니다. <ul>
+<li>철수가 그랜저 (Class: <code>Grandeur</code>)를 새로 샀다고 합시다.</li>
+<li>철수네 자동차 (Instance: <code>CScar</code>)의 색상(Field: <code>color</code>)은 <code>CScar.color</code> 입니다.</li>
+<li>철수네 자동차 색상을 출력하라고 하려면, <code>print CScar.color</code>라고 하면 됩니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-2-1-이미지-기본-정보-분석"><a href="#6-2-1-이미지-기본-정보-분석" class="headerlink" title="6.2.1. 이미지 기본 정보 분석"></a>6.2.1. 이미지 기본 정보 분석</h4><ul>
+<li><p><a href="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/"><code>이미지 파일 구조</code></a> 글에서, 이미지는 x, y 2차원 공간에 놓인 픽셀들로 구성되며 이미지 파일에는 <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성이 있다고 말씀드렸습니다.</p>
+</li>
+<li><p>이 데이터들을 뽑아보겠습니다.</p>
+</li>
+<li><p><code>File &gt; Open Samples &gt; Boats.gif</code>로 배 이미지를 엽니다.</p>
+</li>
+<li><p>단축키 <code>[</code>를 눌러 아래 코드를 붙여넣고 실행합니다. <a target="_blank" rel="noopener" href="https://github.com/jehyunlee/image_processing/blob/master/imagej_script_python/sample_code/03_inspect_01imageplus.py">여기에서 다운로드</a>도 가능합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ, ImagePlus</span><br><span class="line"></span><br><span class="line"><span class="comment"># 떠 있는 이미지 캡처</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 이미지 정보 추출</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;title:&quot;</span>, imp.title</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;width:&quot;</span>, imp.width</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;height:&quot;</span>, imp.height  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;number of pixels:&quot;</span>, imp.width * imp.height  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;number of slices:&quot;</span>, imp.getNSlices()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;number of channels:&quot;</span>, imp.getNChannels()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;number of time frames:&quot;</span>, imp.getNFrames()  </span><br><span class="line"></span><br><span class="line">types = &#123;ImagePlus.COLOR_RGB : <span class="string">&quot;RGB&quot;</span>,  </span><br><span class="line">         ImagePlus.GRAY8 : <span class="string">&quot;8-bit&quot;</span>,  </span><br><span class="line">         ImagePlus.GRAY16 : <span class="string">&quot;16-bit&quot;</span>,  </span><br><span class="line">         ImagePlus.GRAY32 : <span class="string">&quot;32-bit&quot;</span>,  </span><br><span class="line">         ImagePlus.COLOR_256 : <span class="string">&quot;8-bit color&quot;</span>&#125;  </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;image type:&quot;</span>, types[imp.<span class="built_in">type</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p>위 코드를 실행하면 아래와 같이 출력됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line">title: boats.gif</span><br><span class="line">width: <span class="number">720</span></span><br><span class="line">height: <span class="number">576</span></span><br><span class="line">number of pixels: <span class="number">414720</span></span><br><span class="line">number of slices: <span class="number">1</span></span><br><span class="line">number of channels: <span class="number">1</span></span><br><span class="line">number of time frames: <span class="number">1</span></span><br><span class="line">image <span class="built_in">type</span>: <span class="number">8</span>-bit</span><br></pre></td></tr></table></figure>
+
+<p><img src="6_insp_1.PNG" alt=" "></p>
+<ul>
+<li><p>코드 맨 마지막 부분, <code>print &quot;image type:&quot;, types[imp.type]</code> 의 결과물로 <code>image type: 8-bit</code>이 출력되었습니다.  </p>
+</li>
+<li><p>읽어들인<code>boats.gif</code>의 type이 <code>ImagePlus</code>의  <code>GRAY8</code>형식이기 때문에 <code>imp.type</code>은 <code>ImagePlus.GRAY8</code>로 치환되었고, <code>python</code>의 데이터 타입 중 하나인 <code>dictionary</code> 호출에 따라 <code>types</code>에서 <code>ImagePlus.GRAY8</code>에 해당하는 값인 <code>8-bit</code>가 출력된 것입니다.</p>
+<br></li>
+<li><p><code>image type</code>은 이 이미지의 픽셀이 어떻게 구성되어 있는지를 보여줍니다.</p>
+<ul>
+<li>GRAY8 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^8 = 256 $개)의 정수값(0~255)을 가질 수 있습니다. </li>
+<li>GRAY16 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^{16} = 65536 $개)의 정수값(0~65535)을 가질 수 있습니다.</li>
+<li>GRAY32 : 흑백. 한 <code>pixel</code>은 32 bit의 소수(<code>float</code>)값을 가질 수 있습니다.</li>
+<li>COLOR_256: 컬러. 한 <code>pixel</code>은 3 개(Red, Green, Blue)의 8 bit 채널을 가집니다.</li>
+<li>COLOR_RGB: 컬러. 한 <code>pixel</code>은 3 개(Red, Green, Blue)의 32 bit 채널을 가집니다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h4 id="6-2-2-이미지-통계-정보-분석"><a href="#6-2-2-이미지-통계-정보-분석" class="headerlink" title="6.2.2. 이미지 통계 정보 분석"></a>6.2.2. 이미지 통계 정보 분석</h4><ul>
+<li><p>위에서 <code>boats.gif</code>는 width(가로) 720 x height(세로) 576 이므로 총 <code>pixel</code> 수는  414,720개입니다.</p>
+</li>
+<li><p>이미지 처리 중 많은 작업이 명도(<code>brightness</code>)와 대비(<code>contrast</code>) 조정입니다. </p>
+</li>
+<li><p>이미지를 조정하기에 앞서 현재 이미지의 상태를 파악해야 하는데, 작은 이미지라도 상당히 많은 수의 <code>pixel</code>로 이루어져 있기 때문에 전체적인 통계 데이터를 파악할 필요가 있습니다.</p>
+<br></li>
+</ul>
+<h5 id="6-2-2-1-ImagePlus로부터-통계-정보-분석"><a href="#6-2-2-1-ImagePlus로부터-통계-정보-분석" class="headerlink" title="6.2.2.1. ImagePlus로부터 통계 정보 분석"></a>6.2.2.1. <code>ImagePlus</code>로부터 통계 정보 분석</h5><ul>
+<li><p><code>ImageJ</code>에서 이미지 데이터를 다루는 <code>ImagePlus</code> 객체는 <code>getStatistics()</code>라는 <code>Method</code>를 가지고 있습니다.</p>
+</li>
+<li><p><code>ImagePlus</code>의 <code>getStatistics()</code>는 4가지 사용 방법이 있습니다.</p>
+<p><img src="6_insp_3.PNG" alt=" "></p>
+<ol>
+<li><b>인자 없이 실행:</b> Calibration을 반영한 통계결과 (histogram, area, mean, min, max, st.dev, mode)</li>
+<li><b>측정항목(<code>mOptions</code>)을 특정해서 실행:</b> 특정한 항목에 대해서만 결과를 출력합니다.</li>
+<li><b>측정항목과 구간 수 (<code>nBins</code>)를 특정해서 실행:</b> 2. + 지정된 히스토그램 bin count로 실행합니다.</li>
+<li><b>측정항목, 구간 수, 히스토그램 범위(<code>histMin</code>, <code>histMax</code>)를 특정해서 실행:</b> 3. + 히스토그램 범위를 지정하여 실행합니다.</li>
+</ol>
+</li>
+<li><p><code>Calibration</code>은 이미지의 1 픽셀이 실제 길이로 얼마에 해당하는지(spatial calibration), 이미지의 gray scale이 실제 데이터로 얼마에 해당하는지(density calibration) 등의 정보를 담고 있습니다.</p>
+<ul>
+<li><p>자세한 사항은 <a href="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/"><b>ImageJ &gt; Cookbook &gt; 2. Image Calibration</b></a>을 참고하시기 바랍니다.</p>
+<br></li>
+</ul>
+</li>
+<li><p><a href="6_insp_4.tif">예제 이미지를 여기에서 다운로드</a>하여 실습해봅시다.<br>0~255 Gray Scale 중 0을 -2에, 254를 45에 대응하여 Calibration한 이미지입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석</span></span><br><span class="line"><span class="comment"># 2-1. 인자 없이 실행</span></span><br><span class="line">stats1 = imp.getStatistics()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 분석 결과 출력</span></span><br><span class="line"><span class="comment"># 3-1. 통계 정보 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats1&quot;</span>, stats1          <span class="comment"># stats1에 저장되는 내용 확인 (여기 보이지 않는 것도 저장됨)</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats1.area      <span class="comment"># 면적</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats1.mean      <span class="comment"># 평균</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats1.<span class="built_in">min</span>        <span class="comment"># 최소값</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats1.<span class="built_in">max</span>        <span class="comment"># 최대값</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats1.stdDev  <span class="comment"># 표준편차</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mode:&quot;</span>, stats1.mode      <span class="comment"># 256 histogram의 mode</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats1.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot1.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot2.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>실행 결과, stats1로 저장한 통계 분석 결과의 각 항목들이 출력되었습니다.</li>
+</ul>
+<p><img src="6_insp_5.PNG" alt=" "></p>
+<ul>
+<li><p>histogram은 구간별 count array로 출력할 수도 있고 (<b># 3-2-1</b>),<br>plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>). </p>
+</li>
+<li><p>두 방식의 plot 출력은 디자인만 조금 다르고 본질적으로 같습니다. 원하는 것을 사용하면 됩니다.</p>
+</li>
+<li><p><code>getImagePlus()</code>와 <code>IJ.save()</code>를 활용하면 plot을 그림파일로 저장할 수 있습니다.<br>폴더(디렉토리)가 역슬래시(<code>\</code>)로 표시된 부분과 이중 슬래시(<code>//</code>)로 표시된 부분이 공존하는 것은 역슬래시 뒤에 숫자가 오면 <code>ImageJ</code>가 이상하게 인식하기 때문에 부분 변경한 것입니다.<br>폴더 이름이 숫자로 시작하지 않으면 되는 문제입니다.</p>
+<br></li>
+</ul>
+</li>
+</ul>
+<h5 id="6-2-2-2-ImageProcessor로부터-통계-정보-분석"><a href="#6-2-2-2-ImageProcessor로부터-통계-정보-분석" class="headerlink" title="6.2.2.2. ImageProcessor로부터 통계 정보 분석"></a>6.2.2.2. <code>ImageProcessor</code>로부터 통계 정보 분석</h5><ul>
+<li><p><code>ImageJ</code>는 이미지 통계 분석을 위해 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html"><code>ImageStatistics</code></a>라는 모듈을 제공합니다.</p>
+<ul>
+<li><p><b>6.2.2.1</b>에서 <code>imp.getStatistics()</code> 실행 결과로 얻어진 <code>stats1</code>도 <code>ImageStatistics</code> 클래스입니다.</p>
+</li>
+<li><p><code>ImageStatistics</code> 에서 사용하는 <code>getStatistics()</code>는 입력으로 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageProcessor.html"><code>ImageProcessor</code></a>를 읽어들이므로 이미지를 <code>ImagePlus</code> 형식에서 <code>ImageProcessor</code>형식으로 변환해줘야 합니다.</p>
+</li>
+<li><p><code>ImageProcessor</code>라는 이름만 보면 뭔가 계산을 대신 해줘야 할 것 같지만, 알고 보면 <code>ImageProcessor</code>는 <code>ImagePlus</code> 의 <code>Field</code> 중 하나로, <b>이미지의 2D데이터 + 통계데이터 + 조작을 위한 <code>Method</code></b>를 포함한 것이 <code>ImageProcessor</code> 입니다. </p>
+</li>
+<li><p>3D 이상이라 볼 수 있는 <code>stack</code> 관련한 데이터는 <code>ImageProcessor</code>에 포함되지 않았으며, 이 것은 <code>ImageStack</code>에 있습니다. </p>
+</li>
+<li><p><code>ImageProcessor</code>로 2D 정보만 추린 후, 여기에서 통계정보를 얻는 명령이 <code>getStatistics()</code>입니다. </p>
+<br></li>
+<li><p><code>getStatistics()</code> 명령을 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html"><code>ImageStatistics</code></a>에서 찾아보면, 아래와 같이 두 가지 사용법이 있습니다.</p>
+<p><img src="6_insp_2.PNG" alt=" "></p>
+<ol>
+<li><p><code>getStatistics(ImageProcessor ip)</code>: 인자로 <code>ImageProcessor</code> 객체만을 입력하고, <b><code>calibration</code>되지 않은</b> 상태의 이미지 데이터에 대한 통계를 출력합니다.</p>
+<p><code>ImagePlus</code>에서 사용하는 <code>getStatistics()</code>는 Calibration 된 이미지로, 헷갈리기 쉽습니다.</p>
+</li>
+<li><p><code>getStatistics(ImageProcessor ip, int mOptions, Calbiration cal)</code>: 추가 인자로  <code>mOptions</code>와 <code>Calibration</code> 인자 <code>cal</code>을 넣을 수 있습니다. 이 때 주어진 measurement option(<code>mOptions</code>)과 <b>calibration(<code>cal</code>)을 적용한</b> 통계결과를 출력합니다.</p>
+<br></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><code>ImagePlus</code>에서 데이터를 뽑는 <b>6.2.2.1</b> 방식이 덜 복잡하고 더 간결해 보입니다.<br>하지만 이런 방법도 있다는 차원에서 살펴보고 지나가겠습니다.</p>
+<br></li>
+<li><p><b>6.2.2.1</b> 과 동일한 작업을 <code>ImageStatistics(ip)</code>로 진행해 보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij.process <span class="keyword">import</span> ImageStatistics <span class="keyword">as</span> IS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석  </span></span><br><span class="line"><span class="comment"># 2-1. ImageProcessor 호출</span></span><br><span class="line">ip = imp.getProcessor()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2-2. 인자 없이 분석</span></span><br><span class="line">stats2 = IS.getStatistics(ip)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats2&quot;</span>, stats2</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats2.area</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats2.mean</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats2.<span class="built_in">min</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats2.<span class="built_in">max</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats2.stdDev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats2.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot3.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot4.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>실행 결과, <b>6.2.2.1</b> 과 동일한 형태로 다른 값들이 출력됩니다.</li>
+</ul>
+<p><img src="6_insp_6.PNG" alt=" "></p>
+<ul>
+<li><p>예를 들면 <code>max</code> 값이 45.185에서 255로 바뀌었는데, Calibration이 되지 않은 값이라 그렇습니다.</p>
+</li>
+<li><p>실제 실행시 <b># 3-2-2</b> 그래프는 위 그림과 달리 바닥에 납작 엎드린 히스토그램이 출력되지만, 마우스로 빨간 원 안에 해당하는 부분을 클릭해서 상한선을 낮춰주면 전체적으로 히스토그램이 높게 표현됩니다.</p>
+</li>
+</ul>
+</li>
+<li><p>이번에는 <code>ImageStatistics(ip, mOptions, cal)</code>로 진행해 보겠습니다.</p>
+<ul>
+<li>위 코드에서 세 줄만 바꿔주면 됩니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">options = IS.MEAN | IS.MEDIAN | IS.MIN_MAX  <span class="comment"># options에 뽑을 데이터를 정의하고</span></span><br><span class="line">stats3 = IS.getStatistics(ip, options, imp.getCalibration()) <span class="comment"># 함수에 인자를 넣습니다.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 그리고 아래 출력 부분에 이걸 추가해 줍시다.</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;median:&quot;</span>, stats3.median  <span class="comment">#중간값(median)을 뽑습니다.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>재미를 위해 여기서 하나만 더 바꿔봅시다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># IS.MIN_MAX 앞에 #을 붙여봅시다. </span></span><br><span class="line"><span class="comment"># 주석으로 처리해버리겠다(comment out) = 실행하지 않겠다는 뜻입니다.</span></span><br><span class="line">options = IS.MEAN | IS.MEDIAN <span class="comment">#| IS.MIN_MAX  </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이제 아래 코드가 되었습니다. </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij.process <span class="keyword">import</span> ImageStatistics <span class="keyword">as</span> IS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석  </span></span><br><span class="line"><span class="comment"># 2-1. ImageProcessor 호출</span></span><br><span class="line">ip = imp.getProcessor()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2-2. 항목 지정 분석</span></span><br><span class="line">options = IS.MEAN | IS.MEDIAN <span class="comment">#| IS.MIN_MAX  </span></span><br><span class="line">stats3 = IS.getStatistics(ip, options, imp.getCalibration())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats3&quot;</span>, stats3</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats3.area</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats3.mean</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;median:&quot;</span>, stats3.median</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats3.<span class="built_in">min</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats3.<span class="built_in">max</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats3.stdDev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats3.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot5.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot6.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>실행 결과를 <b>6.2.2.1</b> 과 비교해보면 몇몇 차이점들이 보입니다.<ol>
+<li><b><code>mean</code>값이 158.2 에서 27.27 로 바뀜 : </b> Calibration이 적용된 것입니다.</li>
+<li><b><code>min</code>과 <code>max</code>가 0 이 되어버림:</b> <code>IS.MIN_MAX</code>를 주석처리해서 데이터가 추출되지 않았습니다.</li>
+</ol>
+</li>
+</ul>
+<p><img src="6_insp_7.PNG" alt=" "></p>
+<br></li>
+<li><p><code>ImagePlus</code>상태에서 데이터를 분석하는 것이 더 편하고 직관적입니다.<br>특별한 이유가 없으면 <code>ImageStatistics</code>로 넘어가지 않는 것을 권장합니다.</p>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/" data-id="ckvsva7ve0043jwtqe1ug21j4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "6. Image Data 분석",
+        "image": "https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/6_insp_plot6.PNG",
+        "keywords": "imagej inspection jython",
+        "genre": "ImageJ Tutorial",
+        "datePublished": "2020-01-28",
+        "dateCreated": "2020-01-28",
+        "dateModified": "2020-11-27",
+        "url": "https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/",
+        "description": "6.1. ImagePlus: ImageJ의 이미지 instanceReference
+
+TCP School 26) 클래스의 개념ImagePlus
+
+
+지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.
+instance란 것은 Class에 정의된 대로 만들어진 객체입니다. 
+자동차 설계도(Cla",
+        "wordCount": 1822
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/01/31/ImageJ-tutorial-7-Batch/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            7. Batch Processing
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/01/18/ImageJ-cookbook-2-Calibration/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">2. Image Calibration</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/09/Python-DS-88_gpd_mpl/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/88_gpd_mpl_00.png)" alt="solar radiation - time and space" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/11/09/Python-DS-88_gpd_mpl/" class="title">solar radiation - time and space</a></p>
+                            <p class="item-date"><time datetime="2021-11-09T10:38:00.000Z" itemprop="datePublished">2021-11-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/87_violinplotedit00.png)" alt="modifying seaborn violin plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/21/Python-DS-87_violinplotedit/" class="title">modifying seaborn violin plot</a></p>
+                            <p class="item-date"><time datetime="2021-10-21T00:11:00.000Z" itemprop="datePublished">2021-10-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/14/Python-DS-86-datadoubt/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/86_datadoubt.jpg)" alt="데이터 분석, 의심에서 전달까지" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/14/Python-DS-86-datadoubt/" class="title">데이터 분석, 의심에서 전달까지</a></p>
+                            <p class="item-date"><time datetime="2021-10-14T00:40:00.000Z" itemprop="datePublished">2021-10-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/05/Python-DS-85-popkr/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/85_popkr_0.png)" alt="Population by gender and age" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/05/Python-DS-85-popkr/" class="title">Population by gender and age</a></p>
+                            <p class="item-date"><time datetime="2021-10-05T04:31:00.000Z" itemprop="datePublished">2021-10-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">102</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">86</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.14px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 11.43px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.71px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10px;">NIA</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.71px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.71px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.71px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.71px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.43px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.71px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.86px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.71px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.71px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.71px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.43px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.71px;">font</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.29px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.14px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.43px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.71px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.86px;">jython</a> <a href="/tags/keras/" style="font-size: 10.71px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.43px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 12.86px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.57px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.71px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10.71px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.71px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.71px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.43px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.71px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.71px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.71px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.71px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.71px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.71px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.86px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.71px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.14px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12.14px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.57px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.71px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.43px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.71px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.43px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.29px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
