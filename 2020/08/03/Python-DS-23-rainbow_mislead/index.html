@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>How The Rainbow Color Map Misleads | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="visualization,color,colormap,colorbar,translation" />
+    
+    <meta name="description" content="thumbnail image   Brown Kelly, “New Mexico, by way of asgard”   본 글은 번역글입니다.   원본 주소 : https:&#x2F;&#x2F;eagereyes.org&#x2F;basics&#x2F;rainbow-color-map번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급적 우리말 용어를 사용하고자 하며,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How The Rainbow Color Map Misleads">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/08/03/Python-DS-23-rainbow_mislead/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="thumbnail image   Brown Kelly, “New Mexico, by way of asgard”   본 글은 번역글입니다.   원본 주소 : https:&#x2F;&#x2F;eagereyes.org&#x2F;basics&#x2F;rainbow-color-map번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급적 우리말 용어를 사용하고자 하며,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/23_rainbow_0.png">
+<meta property="article:published_time" content="2020-08-02T21:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-27T00:44:31.244Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="color">
+<meta property="article:tag" content="colormap">
+<meta property="article:tag" content="colorbar">
+<meta property="article:tag" content="translation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/23_rainbow_0.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2020/08/03/python-ds-23-rainbow_mislead/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-23-rainbow_mislead" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        How The Rainbow Color Map Misleads
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/08/03/Python-DS-23-rainbow_mislead/" class="article-date">
+       <time datetime="2020-08-02T21:00:00.000Z" itemprop="datePublished">2020-08-03</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2020/08/03/Python-DS-23-rainbow_mislead/" class="article-date">
+     <time datetime="2020-11-27T00:44:31.244Z" itemprop="dateModified">2020-11-27</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/color/" rel="tag">color</a>, <a class="tag-link-link" href="/tags/colorbar/" rel="tag">colorbar</a>, <a class="tag-link-link" href="/tags/colormap/" rel="tag">colormap</a>, <a class="tag-link-link" href="/tags/translation/" rel="tag">translation</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>thumbnail image</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://talkingcomicbooks.com/2017/03/10/new-mexico-by-way-of-asgard/">Brown Kelly, “New Mexico, by way of asgard”</a></p>
+</blockquote>
+<ul>
+<li>본 글은 번역글입니다.</li>
+</ul>
+<blockquote>
+<p><b>원본 주소 :</b> <a target="_blank" rel="noopener" href="https://eagereyes.org/basics/rainbow-color-map">https://eagereyes.org/basics/rainbow-color-map</a><br><b>번역 철학 :</b> 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.<br><b>전문 용어 :</b> 가급적 <a target="_blank" rel="noopener" href='https://www.korean.go.kr/front/main.do'>우리말 용어</a>를 사용하고자 하며, 원어를 병기합니다.  </p>
+</blockquote>
+<p><img src="23_rainbow_1.jpg"><br><br><b>ROBERT KOSARA/ 2013년 7월 7일</b> </p>
+<h2 id="Rainbow-컬러맵은-우리를-어떻게-호도하는가"><a href="#Rainbow-컬러맵은-우리를-어떻게-호도하는가" class="headerlink" title="Rainbow 컬러맵은 우리를 어떻게 호도하는가"></a>Rainbow 컬러맵은 우리를 어떻게 호도하는가</h2><p>색깔은 시각화 특성중 부지불식간에 가장 많이 오용되는 인자일 것입니다. 변종들을 포함해 Rainbow 컬러맵은 가장 널리 쓰이는 색이지만, 동시에 가장 문제가 되고 오해를 불러일으키기도 합니다.<br></p>
+<p>Rainbow 컬러맵은 빛의 스펙트럼에 근간하여 때론 올바르게, 때론 잘못된 순서로 배열됩니다. 무지개색의 이름을 한번 봅시다. 벌써 여기에 문제의 일면이 있습니다. 이 색들이 일관되게 사용되었다고 해도, 아무도 올바른 순서를 알지 못할 것입니다. 여러분의 대뇌에 탑재된 그림을 한 장 보시겠습니다(<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rainbow">위키피디아 인용</a>)<br><br><img src="23_rainbow_2.png"><br></p>
+<p>이제 <a target="_blank" rel="noopener" href="http://onlinelibrary.wiley.com/doi/10.1111/jawr.12010/full">Journal of the American Water Resources Association에 실린 수자원에 대한 논문</a>에서 가져온 지도를 한 장 보시겠습니다. <a target="_blank" rel="noopener" href="http://cliffmass.blogspot.com/2013/06/evaporation-versus-precipitation-which.html">Cliff Mass의 멋진 날씨 블로그</a>에서 가져온 이 그림이 의미하는 바는 (알래스카와 하와이를 제외한, 북미 대륙의) 미국 48개 서로 인접한 주 카운티의 증발산량(증발로 인한 우수 손실)입니다.<br><br><img src="23_rainbow_3.jpg"><br></p>
+<p>나라가 동서로 갈라진 모습이 보이나요? 동쪽 절반은 모조리 어두운 녹색과 파란색인 반면 서쪽 절반은 죄다 밝은 녹색, 노랑, 주황색입니다. 물론 이 둘 사이에는 큰 차이가 있습니다.<br><br>하지만 범례를 조금 자세히 들여다봅시다.<br><br><img src="23_rainbow_4.jpg"><br><br>범례에 잘 드러나있듯 값은 부드럽게 바뀌지만 색은 그렇지 않습니다. 여기엔 문제점이 두 개 있습니다: 색의 밝기로 인식되는 휘도<code>luminance</code>가 급격히 변한다는 것, 그리고 색상<code>hue</code>이 동시에 변한다는 것입니다.<br></p>
+<h3 id="휘도Luminance"><a href="#휘도Luminance" class="headerlink" title="휘도Luminance"></a>휘도<code>Luminance</code></h3><p>휘도가 부드럽게 바뀌는 부분과 급격히 바뀌는 부분이 혼재되어 있으면 지도상에 명확히 다른 영역들이 있는 것처럼 보입니다. 범례에 색상을 제외하고 휘도만 나타내면 더 명백하게 드러납니다.<br><br><img src="23_rainbow_5.jpg"><br></p>
+<p>0.3-0.39 사이의 색은 주변보다 어둡고, 0.5-0.59, 0.6-0.69, 0.7-0.79는 거의 구분이 가지 않다가 0.8-0.89에서 갑자기 점프합니다. 데이터 측면에서의 구간 크기는 일정하므로 색 구성으로 인한 부작용일 따름입니다.<br></p>
+<h3 id="색상Hue"><a href="#색상Hue" class="headerlink" title="색상Hue"></a>색상<code>Hue</code></h3><p>그리고 무엇보다 색상이 변합니다. 앞서 설명했듯 <a target="_blank" rel="noopener" href="http://eagereyes.org/blog/2011/you-only-see-colors-you-can-name">색상은 우리의 색깔 인지에 상당한 영향을 미칩니다 (역자주: 사람들은 이름을 알고 있는 색상만을 인지한다고 합니다.)</a>. 범례 전체를 다시 보고 색상을 꼽아봅시다.<br><br><img src="23_rainbow_6.jpg"><br></p>
+<ul>
+<li><b>흰색<code>white</code></b> (0.0-0.09). 범례 시작으로 정말 잘못된 선택입니다. 지도의 배경이 흰색이기 때문이고, 흰색, 회색, 검정 같은 무채색은 결측치와 같은 특별한 경우에만 사용되어야 합니다. 이와 관련된 내용은 본 글의 범위를 벗어나므로 다루지 않겠습니다.</li>
+<li><b>핑크<code>pink</code></b> (0.1-0.19, 0.2-0.29). 이 둘만 놓고 보면 괜찮습니다.</li>
+<li><b>보라<code>purple</code></b> (0.3-0.39). 색이 바뀌었습니다. 훨씬 더 어둡습니다.</li>
+<li><b>파랑<code>blue</code></b> (0.4-0.49, 0.5-0.59). 또 다른 색이 등장했는데 명도의 방향이 핑크일 때와 반대로 갑니다. 여기에서는 더 밝은 색이 더 큰 값을 나타내고 있습니다.</li>
+<li><b>녹색<code>green</code></b> (0.6-0.69, 0.7-0.79). 또 다른 색이 나왔습니다.이 둘은 사실상 같은 색입니다.</li>
+<li><b>연두<code>greenish yellow</code></b> (0.8-0.89). 색상이 또 한번 바뀌었습니다. 이번엔 휘도가 갑자기 증가했는데 뚜렷한 이유는 없습니다.</li>
+<li><b>노랑<code>yellow</code></b> (0.9-0.99). 일곱번째 색상이지만 아직 끝난 것이 아닙니다.</li>
+<li><b>주황색, 갈색<code>orange and brown</code></b> (1.0 이상). 사람에 따라 다른 색으로 볼 수도 있겠지만 마지막에 있는 갈색과 노랑을 섞어 주황색을 만들 수 있습니다 (사실 갈색은 매우 어둡고 채도가 빠진 주황색이지만 독자적인 이름을 가지고 있습니다).<br></li>
+</ul>
+<p>결과적으로 여덟 가지 색상이 있는데, 휘도는 널뛰고 심지어 변하는 방향이 일정하지도 않습니다. 끔찍한 컬러맵의 아주 좋은 예이며, 동시에 과학 문헌에 몹시 빈번하게 등장합니다.<br><br>본명 하나 이상의 색상을 사용해야 할 때가 있습니다. 구분되어 논의되어야 할 의미있는 구간이 여럿 있는 경우, 또는 어는 점 이상/이하처럼 구분이 내재되어 있는 경우입니다. 하지만 위에서 살펴본 예는 여기에 해당하지 않습니다.<br></p>
+<h3 id="rainbow를-사용하는-이유"><a href="#rainbow를-사용하는-이유" class="headerlink" title="rainbow를 사용하는 이유?"></a>rainbow를 사용하는 이유?</h3><p>이런 논점들을 놓고 볼 때, 변종을 포함한 rainbow는 왜 이렇게 널리 쓰이는 걸까요? 제 생각에 답은 매우 간단합니다. 매력적이기 때문입니다. 데이터를 보이는 데 단일 색상을 사용하는 것이 논리적으로 효과적이지만 훨씬 심심합니다. 게다가 개별 값들을 읽고자 할 때 특정 색상이 드러나지 않는 단조변화는 사실 더 불리합니다. 비록 그 대가로 치르는 부작용이 크지만 말입니다.<br><br><img src="23_rainbow_6.jpg"><br><br>색상을 하나 또는 둘 사용해서 위 사례에서 드러난 문제점 없이 컬러맵을 구성할 수 있습니다. 첫 번째 방법은 휘도를 고정하거나 단조증가시키는 경우입니다 (휘도가 증가/감소하는 방향이 바뀌지 않는다는 뜻입니다). 휘도를 고정하면 색상이 지루해지는 경향이 있지만 휘도가 증가하도록 컬러맵을 잘 구성하면 제법 괜찮습니다. 이런 기능이 ColorBrewer에 구현되어 있습니다.<br></p>
+<h3 id="대안"><a href="#대안" class="headerlink" title="대안"></a>대안</h3><p>시각화를 하는 사람이라면 누구나, 누구나 <a target="_blank" rel="noopener" href="http://colorbrewer2.org/">ColorBrewer</a>를 알고 있습니다. 너무나 유명한 사이트이기 때문에 여기에 다시 링크를 걸 필요도 없지만 매우 부적절한 컬러맵을 사용하는 논문들은 여전히 매년 쏟아지고 있습니다.<br>ColorBrewer는 사용시 유의할 점이 있지만 좋은 컬러맵을 고를 수 있도록 설명글을 제공하고 있습니다. 대개 범주형 변수에만 적용된다는 제약이 있기는 하지만 ColorBrewer 색상은 D3와 같은 많은 시각화 패키지에서 사용 가능합니다.<br><br><a target="_blank" rel="noopener" href="https://kuler.adobe.com/">Adobe에서 제공하는 Kuler</a>에서도 컬러 팔레트를 디자인할 수 있지만 잘 사용하려면 어느 정도의 지식이 필요합니다. Kuler에 보기 좋은 컬러맵들이 많이 있지만 데이터 시각화용으로 설계된 것은 아닙니다.<br><br><a target="_blank" rel="noopener" href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=4118486">Borland와 Taylor의 “Rainbow Color Map (Still) Considered Harmful”</a>논문을 들어본 사람들은 많지만 정작 읽어본 사람은 얼마 없습니다. 이 논문에서는 가공 데이터를 이용해 문제를 드러내고 있으며 제가 이 글에서 말씀드린 것보다 훨씬 깊게 들어갑니다. 그러나 과학 학술지에 출간된 실제 예시를 활용하면 독자들이 더 절감할 것이라 생각합니다.<br></p>
+<p>연속된 값을 매핑할 때 단일 색상의 명도를 변화시키는 것은 언제나 안전합니다. 흥미를 유발하기엔 약하겠지만 적어도 데이터 관점에서는 올바르다고 볼 수 있습니다. 둘 이상의 색상을 사용할 때는 심미적인 목적 뿐 아니라 명확한 의도를 가져야 합니다.</p>
+<h3 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h3><p>인지적 관점에서 시각화의 중요성에도 불구하고 색에 대한 이해는 놀라울만큼 낮은 수준입니다. 사람들은 기본 색상에 안주하거나 그저 보기에 예쁜 색을 아무렇게나 고르는 듯 합니다. 그러나 충분한 고민 없이 색을 고르면, 여러분의 시각화 결과물에 상당한 피해를 입힐 수 있다는 것을 알아야 합니다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/08/03/Python-DS-23-rainbow_mislead/" data-id="ckvt2fwqd002hc0tq1gxb1sun" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "How The Rainbow Color Map Misleads",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/23_rainbow_0.png",
+        "keywords": "visualization color colormap colorbar translation",
+        "genre": "Python Data Science",
+        "datePublished": "2020-08-03",
+        "dateCreated": "2020-08-03",
+        "dateModified": "2020-11-27",
+        "url": "https://jehyunlee.github.io/2020/08/03/Python-DS-23-rainbow_mislead/",
+        "description": "
+thumbnail image
+
+
+Brown Kelly, “New Mexico, by way of asgard”
+
+
+본 글은 번역글입니다.
+
+
+원본 주소 : https://eagereyes.org/basics/rainbow-color-map번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급적 우리말 용어를 사용하고자 하며, ",
+        "wordCount": 787
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/08/06/Python-DS-24-custom_colormap/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Matplotlib Colormap Customization (1)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/07/26/Python-General-6_pitstop/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Pit Stop for Software Maintenance</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/26/Python-General-9-fullmoon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/9_fullmoon_0.png)" alt="Full moon" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2021/09/26/Python-General-9-fullmoon/" class="title">Full moon</a></p>
+                            <p class="item-date"><time datetime="2021-09-25T23:52:00.000Z" itemprop="datePublished">2021-09-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/6-pytorchGPU_0.png)" alt="PyTorch GPU setting" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="title">PyTorch GPU setting</a></p>
+                            <p class="item-date"><time datetime="2021-06-06T03:01:00.000Z" itemprop="datePublished">2021-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/12/24/Python-DL-5_kerasleraningday/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/5-keraslearningday_0.png)" alt="Keras Code Examples - Image segmentation with a U-Net-like architecture" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2020/12/24/Python-DL-5_kerasleraningday/" class="title">Keras Code Examples - Image segmentation with a U-Net-like architecture</a></p>
+                            <p class="item-date"><time datetime="2020-12-24T11:15:00.000Z" itemprop="datePublished">2020-12-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/12/01/Python-DL-4-bn/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/4-bn_0.png)" alt="keras BatchNormalization" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2020/12/01/Python-DL-4-bn/" class="title">keras BatchNormalization</a></p>
+                            <p class="item-date"><time datetime="2020-12-01T13:21:00.000Z" itemprop="datePublished">2020-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">54</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 10px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 11px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 11px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/cognitive-science/" style="font-size: 12px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16px;">color</a> <a href="/tags/colorbar/" style="font-size: 14px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 11px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 11px;">data sampling</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 11px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 14px;">jython</a> <a href="/tags/keras/" style="font-size: 11px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 10px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 11px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 11px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 13px;">pandas</a> <a href="/tags/paraview/" style="font-size: 11px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 12px;">polygon</a> <a href="/tags/presentation/" style="font-size: 14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 11px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 11px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 11px;">qgis</a> <a href="/tags/raster/" style="font-size: 11px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 15px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 11px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 13px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13px;">statistics</a> <a href="/tags/subplots/" style="font-size: 10px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11px;">text mining</a> <a href="/tags/translation/" style="font-size: 12px;">translation</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/08/03/Python-DS-23-rainbow_mislead/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

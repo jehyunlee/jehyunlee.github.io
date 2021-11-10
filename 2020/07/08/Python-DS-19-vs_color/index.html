@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Visualizing Science; How Color Determines What we see | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="visualization,color,colormap,colorbar,translation" />
+    
+    <meta name="description" content="본 글은 번역글입니다.   원본 주소 : https:&#x2F;&#x2F;eos.org&#x2F;features&#x2F;visualizing-science-how-color-determines-what-we-see번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급적 우리말 용어를 사용하고자 하며, 원어를 병기합니다.    과학 시각화: 색상은 우리가 무엇을">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Visualizing Science; How Color Determines What we see">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="본 글은 번역글입니다.   원본 주소 : https:&#x2F;&#x2F;eos.org&#x2F;features&#x2F;visualizing-science-how-color-determines-what-we-see번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급적 우리말 용어를 사용하고자 하며, 원어를 병기합니다.    과학 시각화: 색상은 우리가 무엇을">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/19_vs_01.png">
+<meta property="article:published_time" content="2020-07-08T06:03:00.000Z">
+<meta property="article:modified_time" content="2020-11-27T00:44:24.335Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="color">
+<meta property="article:tag" content="colormap">
+<meta property="article:tag" content="colorbar">
+<meta property="article:tag" content="translation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/19_vs_01.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2020/07/08/python-ds-19-vs_color/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-19-vs_color" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Visualizing Science; How Color Determines What we see
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/07/08/Python-DS-19-vs_color/" class="article-date">
+       <time datetime="2020-07-08T06:03:00.000Z" itemprop="datePublished">2020-07-08</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2020/07/08/Python-DS-19-vs_color/" class="article-date">
+     <time datetime="2020-11-27T00:44:24.335Z" itemprop="dateModified">2020-11-27</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/color/" rel="tag">color</a>, <a class="tag-link-link" href="/tags/colorbar/" rel="tag">colorbar</a>, <a class="tag-link-link" href="/tags/colormap/" rel="tag">colormap</a>, <a class="tag-link-link" href="/tags/translation/" rel="tag">translation</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>본 글은 번역글입니다.</li>
+</ul>
+<blockquote>
+<p><b>원본 주소 :</b> <a target="_blank" rel="noopener" href="https://eos.org/features/visualizing-science-how-color-determines-what-we-see">https://eos.org/features/visualizing-science-how-color-determines-what-we-see</a><br><b>번역 철학 :</b> 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.<br><b>전문 용어 :</b> 가급적 <a target="_blank" rel="noopener" href='https://www.korean.go.kr/front/main.do'>우리말 용어</a>를 사용하고자 하며, 원어를 병기합니다.  </p>
+</blockquote>
+<h2 id="과학-시각화-색상은-우리가-무엇을-볼지-어떻게-결정하는가"><a href="#과학-시각화-색상은-우리가-무엇을-볼지-어떻게-결정하는가" class="headerlink" title="과학 시각화: 색상은 우리가 무엇을 볼지 어떻게 결정하는가"></a>과학 시각화: 색상은 우리가 무엇을 볼지 어떻게 결정하는가</h2><blockquote>
+<p>Stephanie Zeller, David Rogers (2020. 05. 21.)</p>
+</blockquote>
+<p>과학적 정보를 분석하고 나눔에 있어 색상은 큰 비중을 차지합니다. 새로운 도구를 활용하여 데이터에 정확하고 효과적인 색상을 적용할 수 있습니다.<br><br><img src="19_vs_02.png" alt="과학자들은 데이터를 정량화하고, 해석하고, 평가하고 정보를 교환하기 위해 데이터를 시각화합니다. 최근 연구에 따르면, 사람들은 색상을 보고 해석하는 과정을 통해 시각적 데이터를 명확하고 정확하게 이해합니다. 위 이미지는 동일한 데이터에 흔한 rainbow colormap을 입힌 경우(왼쪽), cool-warm colormap을 입힌 경우(가운데), 그리고 wave colormap을 입힌 것(오른쪽)으로, 데이터에 다른 색이 입혀졌을 때 세부적으로 어떻게 변하는지를 보여주고 있습니다. Credit:  Francesca Samsel (그래픽 제작), M. Peterson (데이터 처리 및 제공), Los Alamos National Laboratory (LANL). MPAS-Ocean 사용"><br></p>
+<p>색상은 우리의 정보 인지에 강하게 영향을 끼칩니다. 특히 정보의 밀도가 높거나, 다차원이거나, 미묘할 때 그러는데 과학에서 다루는 데이터들이 대개 이렇습니다. 시각적으로 어떤 색상을 보일지 결정하는 일은 과학적인 결과를 정확하게 해석하고 효과적으로 표현하는 데 매우 중요합니다.<br><br><b>“언어는 본질적으로 편향되지만 시각화를 통해 우리는 데이터로 하여금 스스로 말하게 할 수 있습니다.”</b> Los Alamos National Laboratory의 지구계 모델러이자 전산유체역학 전문가<code>computational fluid dynamicist</code>인 <a target="_blank" rel="noopener" href="https://www.lanl.gov/expertise/profiles/view/phillip-wolfram">Phillip Wolfram</a>의 말입니다. Los Alamos에서는 사막을 수놓은 산쑥<code>sagebrush</code>처럼 데이터 시각화<code>data visualization</code>가 아주 흔합니다. 전문가 팀들은 매일 뭉텅이의 데이터를 어떻게 표현할지에 대해 연구실의 지구과학자들, 컴퓨터 과학자들과 함께 언쟁하고, 빚고, 색칠합니다. 데이터의 다양한 특성들을 표현하기 위해 색상을 선택하는 일은 고통스러운 데이터 수집에 이은 정성들인 분석과 발견 사이에 놓인 최후의 장벽이며 뒤늦게 떠오르는 설익은 생각들에 반복적으로 응대해야만 하는 작업입니다.<br><br>웬만한 시각화 소프트웨어들에 컬러맵이 <a target="_blank" rel="noopener" href="https://eos.org/science-updates/giovanni-the-bridge-between-data-and-science">탑재되고 있습니다</a>. 컬러맵이란 연구자들이 데이터를 뚝딱 색상으로 나타내어<code>color-encoding</code> 평가할 수 있도록 선별된 표준 그러데이션<code>gradation</code>입니다. 그러나 모든 데이터 시각화가 동일하게 이루어지고 있지 않습니다. 관습적인 rainbow colormap과 같은 표준 색상에 대한 무분별한 사용을 비난하는 논문(예: <a target="_blank" rel="noopener" href="https://doi.org/10.1109/MCG.2007.323435">Borland and Taylor, 2007</a>)이 급증하고 있음에도 불구하고, 기본 막대그래프부터 생물지구화학<code>biogeochemical</code> 데이터처럼 복잡한 양상까지 시각화가 넘쳐나고 있습니다.<br></p>
+<blockquote>
+<p>“다양한 데이터에 동일한 컬러맵을 적용하면 단조로울 뿐 아니라 혼란스럽다”</p>
+</blockquote>
+<p>지난 12월 캘리포니아 샌프란시스코에서 열렸던 2019 AGU Fall Meeting에서는 컨벤션 센터의 광활한 메인 홀이 줄줄이 걸린 포스터로 가득 찼는데, 포스터에 담긴 온도 스케일, 엽록소 농도, 지면의 표고 등 데이터의 종류가 다양함에도 불구하고 똑같은 밝기의 표준 컬러맵으로 도배돼 있었습니다.<br></p>
+<p><b>“다양한 데이터에 동일한 컬러맵을 적용하면 단조로울 뿐 아니라 혼란스럽다”</b>고 콜로라도 볼더 대학의 Cooperative Institute for Research in Environmental Sciences (CIRES) 소속 senior research scientist <a target="_blank" rel="noopener" href="https://cires.colorado.edu/researcher/rick-saltus">Rick Saltus</a>는 지적합니다. “여러분은 효과적이면서도 효율적으로 소통하고 싶어하지만, 다양한 개념을 같은 색으로 칠해놓으면 방해가 될 뿐입니다.”<br></p>
+<p>전 세계의 색상 연구자들과 시각과 전문가들은 이와 같은 현 상황을 바꾸고자 합니다. 일부에서는 과학자들이 맥락을 통해 <a target="_blank" rel="noopener" href="https://www.labnol.org/home/hue-saturation-luminosity/20104/">색상, 밝기, 채도</a>의 균형을 적절하게 잡아주어 점점 커져가는 데이터셋을 더 정확하고 직관적으로, 그러면서도 충실하게 다루도록 해주는 새로운 도구를 개발중입니다.<br></p>
+<h3 id="우리는-색을-어떻게-보는가"><a href="#우리는-색을-어떻게-보는가" class="headerlink" title="우리는 색을 어떻게 보는가"></a>우리는 색을 어떻게 보는가</h3><p>한 세기도 더 전에, Albert H. Munsell은 뉴턴과 괴테의 업적 위에서 우리가 현대에 쓰는 개념인 컬러 “매핑<code>mapping</code>“을 만들었습니다 [<a target="_blank" rel="noopener" href="https://books.google.com/books?id=7dtJrgEACAAJ">Munsell</a>, 2015]. Munsell의 연구는 정렬된 형태의 색공간 - 색채<code>hue</code>(색상<code>color</code>), 값<code>value</code>(명암<code>brightness or darkness</code>), 채도<code>chroma</code>(색상의 강도)를 표현하는 3차원 그림 - 을 처음으로 지각할 수 있도록 만든 것입니다 [<a target="_blank" rel="noopener" href="https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133">Moreland</a>, 2016].<br><br>비슷한 시기인 1900년대 초반 Hermann Grassman이 내놓은 선형대수 이론은 추상수학을 해독하여 고차원의 종이접기와 비슷한 특성을 밝혔습니다. 이로써 Grassmann은 벡터 공간이라는 개념을 창조했고, 지정된 영역 내부의 색상 인식을 근사 계산할 수 있게 되었습니다 [<a target="_blank" rel="noopener" href="http://archive.org/details/dielinealeausde00grasgoog">Grassmann</a>, 1844]. 색상에 대한 연구는 이내 근사의 한계를 벗어났습니다. 색상은 수치적으로 부호화되어 <a target="_blank" rel="noopener" href="https://www.pngwave.com/png-clip-art-doadh">포물선</a>을 따라 뿌려졌습니다. 색상 인식은 빛에 좌우되는 주관적인 경험이자 동시 대비<code>simultaneous contrast</code>(나란히 놓인 색상들이 서로의 인식에 영향을 주는 현상)이며, 보는 이의 눈 속에 있는 <a target="_blank" rel="noopener" href="https://www.cis.rit.edu/people/faculty/montag/vandplite/pages/chap_9/ch9p1.html">원추세포</a> 광수용체의 반응이기 때문에[Albers, 2006; Itten, 1970] 이 정도의 정확성 확보는 필수적입니다.<br><br><img src="19_vs_01.png" alt="Fig. 1. 남극 서부 Filchner-Ronne 지역과 Ross Ice Shelves 지역 사이의 세부 지형. 위 그림은 관습적으로 사용하는 rainbow colormap에서 발생하는 동시 대비 효과를 보여주고 있습니다(좌측). 채도를 줄인 그림에서 상세가 잘 살아나며(가운데), 심미적인 품질과 변별력을 높이기 위해 유사한 팔레트를 적용한 결과입니다(오른쪽). Credit: Francesca Samsel (그래픽 제작), E3SM (데이터 처리)"></p>
+<h3 id="주시자의-눈"><a href="#주시자의-눈" class="headerlink" title="주시자의 눈*"></a>주시자의 눈*</h3><p>(*역주: 인간의 시각이 아닌 절대자, 여기에선 수학의 시각으로 색상을 보는 것을 말합니다.)</p>
+<p>현대의 “색 공간<code>color palette</code>“ (Figure 2)은 두 가지, 절대<code>absolute</code>와 비절대<code>nonabsolute</code>로 나뉘어집니다. 절대 색 공간은 인간의 인식에 기반하여 색상을 정의합니다. 비절대 색공간이 우리에겐 더 친숙한데, red-green-blue (RGB)와 cyan-magenta-yellow-black (CMYK) 으로 색상을 정의하며 카메라와 같은 입력장치, 모니터 같은 출력장치에 의존적입니다.<br><br>흔히 사용되는 rainbow map은 비절대 색공간에서 정의됩니다. rainbow map의 그레이디언트<code>gradient</code>는 채도가 높은 공간을 절대 색 공간에서의 수학적 분리를 고려하지 않고 순회합니다.<br>이렇게 배열된 색상은 색상간에 극명한 대비를 갖게 되어 데이터셋의 다른 값들을 시각적으로 선명하게 표현하기 때문에 대부분의 과학자들이 rainbow map을 기본으로 사용하고 있습니다.<br><br><img src="19_vs_03.png" alt="Fig. 2. 국제 조명 위원회International Commission on Illumination (CIE)가 1931년 수립한 색 공간의 두 형태: 정육면체로 표현한 비절대 RGB 색공간(왼쪽), 가장 널리 사용되는 절대 색공간 중 하나인 CIELAB 색공간(오른쪽). CIELAB 색공간의 전체 포물선은 인간의 시각으로 인식 가능한 스펙트럼 영역 전체입니다. Adobe RGB 색공간에서 사용 가능한 색채가 포물선 안의 하얀 삼각형으로 표시되어 있습니다. (CIELAB은 3차원 공간이지만, 여기에서는 단순화하고자 2차원으로 도시하였습니다.) Credit: SharkD, CC BY-SA 4.0 (왼쪽), 공공 자료 (오른쪽)"><br></p>
+<p>그러나 최근 몇 년간 연구자들은 rainbow colormap의 지위와 흔히 그렇듯 별 고민 없이 적용됐을 때 데이터 표현에 미치는 영향에 도전하고 있습니다. Rainbow 매핑은 데이터의 바다를 눈부신 네온 그린<code>neon green</code>으로 씻어버리며 색상 해석, 집중 편향을 일으켜 그릇된 판단을 유도합니다 [<a target="_blank" rel="noopener" href="https://doi.org/10.1109/MCG.2007.323435">Borland and Taylor</a>, 2007; <a target="_blank" rel="noopener" href="https://doi.org/10.1145/3173574.3174172">Liu and Heer</a>, 2018; Ware et al., <a target="_blank" rel="noopener" href="https://doi.org/10.1109/TVCG.2018.2855742">2019</a>, <a target="_blank" rel="noopener" href="https://doi.org/10.2312/eurorv3.20171107">2017</a>]. 인지과학자들은 이 이슈를 “인지적으로 균일한 컬러맵<code>perceptually equalized colormaps</code>“, 즉 절대 색공간에서 균일하게 분포한 값들로 이루어진 컬러맵을 이용해 해결하려는 시도를 하고 있습니다. 그러나 이러한 컬러맵은 rainbow colormap이나 그 사촌들처럼 연구자들이 표현하고자 하는 데이터와 무관하게 만들어졌습니다. 이는 데이터의 독특한 특성과 수요를 고려해야 한다는 의미와 상반되게 범용으로만 만들어지고 있다는 의미입니다. 데이터가 점점 복잡해지고 급속도로 팽창하는 이 시대에 많은 시각화 전문가들은 이런 범용 컬러맵의 용처가 제한적이라는 데 동의합니다.<br></p>
+<h3 id="친숙함과-명확성-균형잡기"><a href="#친숙함과-명확성-균형잡기" class="headerlink" title="친숙함과 명확성 균형잡기"></a>친숙함과 명확성 균형잡기</h3><p>그럼에도 불구하고 과학자들과 시각화 전문가들은 rainbow, <a target="_blank" rel="noopener" href="https://www.thinkingondata.com/something-about-viridis-library/">viridis</a>, cool-warm <a target="_blank" rel="noopener" href="https://www.kennethmoreland.com/color-maps/">divergent</a>, <a target="_blank" rel="noopener" href="https://www.mathworks.com/help/matlab/ref/jet.html">jet</a>, <a target="_blank" rel="noopener" href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">turbo</a>(인기를 끌고 있는 구글의 차세대 rainbow) 데이터와 무관한 표준 맵의 틀을 깨려는 시도를 이어가고 있습니다. 편의성, 사용자 친화적 컬러 매핑 자원, 활용 가능한 전문 지식이나 가이드, 해당 분야에서의 선례, 그리고 연구자들 스스로 새로운 색상 규약에 익숙해질 시간이 모두 부족하여 적용이 잘 되지 않고 있습니다 [<a target="_blank" rel="noopener" href="https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133">Moreland</a>, 2016].<br><br>Wisconsin-Madison 대학과 Wisconsin Institute of Discovery의 심리학자 <a target="_blank" rel="noopener" href="https://wid.wisc.edu/people/karen-schloss/">Karen Schloss</a>는 이렇게 말합니다. “사람들이 시각화 결과물을 접할 때, 그림이 컨셉을 어떻게 반영할지에 대한 기대가 있습니다.” Schloss와 그의 팀은 새로운 컬러맵 구현 문제를 해결하려 노력하고 있으며, 한편으로 뿌리깊은 집단적 친숙함과 차세대 색상 도구 사이의 균형을 이해하고자 합니다.<br><br>“우리는 이런 기대를 추론 매핑<code>inferred mapping</code>이라고 부릅니다.” Schloss는 또 이렇게 말합니다. “만약 누군가가 평생 특정 분야에 종사했다면, 그 분은 자신이 표현하려는 데이터에 대한 색상, 즉 추론 매핑이 있을 것입니다. 우리는 이런 편향을 이해하는 한편 이런 전문가들로 하여금 그들의 규약을 완전히 포기하도록 조심스레 제안하려고 시도하고 있습니다. 균형점을 찾아내야 합니다.”<br><br>이런 균형점 탐색에 있어 시각화 전문가들은 과학자들이 그들의 데이터로부터 무엇을 필요로 하는지, 그리고 이러한 수요를 데이터가 갖고 있는 정보의 타협 없이 어떻게 전달할지에 집중하고 있습니다.<br></p>
+<h3 id="과학자들에겐-무엇이-필요한가"><a href="#과학자들에겐-무엇이-필요한가" class="headerlink" title="과학자들에겐 무엇이 필요한가?"></a>과학자들에겐 무엇이 필요한가?</h3><p><a target="_blank" rel="noopener" href="https://www.tacc.utexas.edu/about/directory/francesca-samsel">Francesca Samsel</a>은 University of Texas at Austin에 위치한 Texas Advanced Computing Center (TACC)의 연구원이며, 그의 팀은 과학자들의 수요를 데이터 시각화에 대한 세 개의 범주, 즉 인자 인식<code>feature identification</code>, 탐색<code>exploration</code>, 소통<code>communication</code>와 더불어 이상치 검출<code>pinpointing outlier</code>, 관계 설정<code>determining relationships</code> 같은 세부 범주로 묘사합니다. 큰 데이터를 해석할 때 과학자들은 특정 인자(예를 들면 해수의 유동 방향이나 특정 지점의 수온)를 알려진 데이터 범위에서 찾는 경향이 있습니다. 또는 전반적인 관찰을 위해 전체적으로 훑어보기도 하고, 대학, 동료, 또는 대중에게 알리기 위해 특정한 특성을 찾아봅니다. 때로는 이상치에만 관심이 있기도 하고 특정한 변수가 다른 변수에 어떻게 영향을 미치는지(예를 들면, 두 해류가 만날 때 수온은 어떻게 변하는지)에만 관심이 있기도 합니다.<br><br>Wolfram에 따르면 시각화는 과학자들끼리 정량적인 연구 결과물을 가지고 상호 작용하는 방법이며 그들이 데이터에 기반한 논쟁을 하는 방법입니다. 그는 Los Alamos에 있는 사무실에서 지구계와 기후 데이터를 들여다보며 (위성에서 찍은 것 같은) 오버헤드 플랏<code>overhead plot</code> 제작을 포함해 정기적으로 시각화 작업을 합니다. “제가 찾는 것은 과학적인 질문과 밀접하게 연관돼 있습니다.” “저는 보통 지리공간 관계<code>geospatial relationships</code>를 이해하고자 하는데, 특히 오버헤드 플랏에서 회오리<code>eddies</code>같은 표면 인자<code>surface feature</code>를 봅니다.” 선진 컬러 매핑 도구들은 Jet 같은 표준 맵과 달리 Wolfram이 분석하는 데이터 인자들의 세부를 크게 잃지 않도록 해줍니다 (Figure 3).<br><br><img src="19_vs_04.png" alt="Fig. 3. 동일한 데이터에 다른 컬러맵 적용 결과 비교. 상세 시각화를 위해 흔히 사용되는 desaturated rainbow colormap으로 표현한 것(위)과 이상치 데이터의 상세를 표현하기 위한 컬러맵을 적용한 것(아래). Rainbow colormap은 소용돌이를 특정하는데 그친 데 반해 특화 컬러맵은 인도양의 주류인 아굴라스 해류Agulhas Current에 발생한 소용돌이 내부의 운동에너지에 대한 세부 정보를 제공한다. Credit: Francesca Samsel(그래픽), M. Peterson, LANL(데이터 처리 및 제공), MPAS-Ocean 사용"><br><br>Samsel을 비롯한 일각에서는 데이터와 동떨어진 색상 매핑 전략은 색상이 가까운 순으로 정렬(예: 무지개)되지 않았거나 명도가 특별히 처리되지 않았다면, 또는 컬러맵에 내재된 복수의 그레이디언트가 특정 데이터셋을 위해 마련된 것이 않았다면, 이는 사실상 인지 편향이라고 주장합니다 [<a target="_blank" rel="noopener" href="https://doi.org/10.1109/MCG.2007.323435">Borland and Taylor</a>, 2007]. 연구 프로세스 전반에 걸친 시각화의 중요성을 생각하면 정보를 최대화하고 색상과 관련된 방해물을 최소화할 필요가 있습니다. Samsel, Schloss와 더불어 콜로라도 볼더 대학 <a target="_blank" rel="noopener" href="https://cmci.colorado.edu/visualab/">VisuaLab</a>을 이끄는 <a target="_blank" rel="noopener" href="https://www.colorado.edu/cmci/people/information-science/danielle-albers-szafir">Danielle Szafir</a> 교수 등은 직관적 조작이라는 목표를 유지하며 이러한 도구를 만들기 위한 구체적인 조치들을 수행해오고 있습니다.<br></p>
+<h3 id="새로운-색상-도구-세트"><a href="#새로운-색상-도구-세트" class="headerlink" title="새로운 색상 도구 세트"></a>새로운 색상 도구 세트</h3><p>데이터 시각화로 전업하기 전 25년간 예술가로 훈련받고 종사해 온 Samsel은 색채 이론에 대한 지식을 컬러맵의 도전적인 과제들을 수행하는 데 사용하고 있습니다. 과학자들이 본인 데이터가 요구하는 수준의 해상도를 제공하는 방법에 대해, “우리는 연구를 수행하던 중 인지적으로 균일한 컬러맵이 과학자들에게 항상 최고의 해법은 아니라는 것을 알았습니다.”라고 Samsel은 말합니다. 그의 설명에 따르면, 색상간 상호작용에는 미묘함과 복잡성이 있어 보는 이의 연관반응에 영향을 미치며, 데이터 내부의 다른 인자들의 상대적인 중요성을 이끌어내는데 영향을 미친다고 합니다.<br><br>Samsel의 <a target="_blank" rel="noopener" href="https://sciviscolor.org/wp-content/uploads/sites/14/2018/10/art-affect-color-opt.pdf">연구</a>는 다른 데이터셋마다의 수요에 맞게 컬러맵을 인터랙티브하게 미세조정할 수 있는 응용 프로그램인 <a target="_blank" rel="noopener" href="https://sciviscolor.org/home/colormoves/">ColorMoves</a>의 탄생에 박차를 가했습니다. ColorMoves의 온라인 인터페이스는 의미 연합<code>semantic association</code>이라 불리는, 자연 세계의 팔레트를 반영하면서도 분별력을 증대시킬 수 있는 컬러맵들을 제공합니다 [<a target="_blank" rel="noopener" href="https://doi.org/10.1109/TVCG.2018.2855742">Ware et al.</a>, 2019]. (*역주: ColorMoves에서 생성된 colormap은 Matlab과 Python Matplotlib에서 사용할 수 있도록 <a target="_blank" rel="noopener" href="https://sciviscolor.org/matlab-matplotlib-pv44/">스크립트</a>를 통해 변환할 수 있습니다)<br><br>1990년대 초 인지과학 연구자들은 Samsel과 동료들이 색채 이론을 통해 재확인했듯 사람의 눈이 밀집된 데이터에서 패턴을 분리할 때, 색상보다 명도의 차이를 더 민감하게 파악한다는 것을 알아냈습니다 [<a target="_blank" rel="noopener" href="https://doi.org/10.1109/TVCG.2018.2855742">Ware et al.</a> 2019; <a target="_blank" rel="noopener" href="https://doi.org/10.1117/12.2013502">Rogowitz</a>, 2013]. 이 정보를 색상과 채도의 그러데이션과 함께 사용하여, Samsel은 선형(단일 색상 그레이디언트), 발산(중앙에서 만나는 이중 색상 그레이디언트), 그리고 wave colormap이라 부르는, 많은 색상을 거치며 명도 분포를 보이는 순환 맵을 만들어 냈습니다 (Figure 4). “이렇게 하면 맵 전반에 걸쳐 대비<code>contrast</code>의 밀도를 크게 높일 수 있어요. 연속 데이터의 많은 인자들을 해석할 수 있죠.”<br><br><img src="19_vs_05.png" alt="Fig. 4. Francesca Samsel이 wave colormap을 적용해 제작한 영상. &quot;전경foreground&quot;에 해당하는 특정 데이터 범위를 고립시켜 시간에 따른 데이터 변화를 따라가기 쉽도록 선택적 채도가 적용되었다. 컬러맵에서 무채색상이 유채색 구간을 감싸서 맥락을 전달하는 동안 시선을 집중하도록 하였다. Credit: Francesca Samsel (그래픽), M. Peterson, LANL (데이터 처리 및 제공), MPAS-Ocean 사용"><br></p>
+<p>ColorMoves의 인터페이스는 사용자로 하여금 여러 컬러맵을 자신의 데이터에 뿌리고 결과를 실시간으로 보며 색상과 대비가 적절한지 보고 인터랙티브하게 조정할 수 있게 해줍니다 (Figure 5). “데이터 탐색을 위한 도구로 만들려던 것은 아니었지만, 과학자들은 이걸 우선으로 사용하더군요” 라고 Samsel이 말했듯, 탐색에 사용되고 있습니다.<br><br><img src="19_vs_06.png" alt="Fig. 5. 컬러매핑 도구인 ColorMoves는 여러 컬러맵을 본인의 데이터에 적용하고 결과 이미지의 변화를 인터랙티브하게 실시간으로 보게 해줍니다. 인터페이스는 다음과 같이 이루어져 있습니다. (a) 컬러 스케일 및 개별 색상 선택 메뉴; (b) 이미지 출력창; (c) 컬러맵 분할 도구, 컬러 스케일 삽입 기능, 되돌리기와 다시 실행을 포함한 제어판; (d) 데이터 분포 히스토그램"><br></p>
+<p>Wisconsin-Madison 대학에서 <a target="_blank" rel="noopener" href="https://schlosslab.discovery.wisc.edu/">Visual Reasoning Lab</a>을 이끄는 Schloss는 색상 인지를 통해 시각적 소통을 더 효율적이고 효과적으로 하는 데 집중하며, 고대비 색상과 심미주의의 균형을 잡는 것을 목표로 하고 있습니다. “사람들은 시각화 결과물을 만드는 것 만큼이나 커스터마이제이션을 큰 자산으로 생각합니다. 그리고 저는 커스터마이제이션을 쉽게 해서 사람들로 하여금 색상 인코딩과 자신의 데이터를 표현하는 데 더 집중하도록 하고 싶어요.”<br><br>시각화를 위해 컬러맵을 최적화하는 노력의 일환으로, Schloss와 동료들은 <a target="_blank" rel="noopener" href="http://vrl.cs.brown.edu/color">Colorgorical</a>이라는 도구를 만들었습니다. Colorgorical은 조정 가능한 슬라이더를 여러개 탑재하여 색상간의 인지 거리, 색상 이름간의 차이, 색상환에서의 색상간 거리를 지정할 수 있고, 특정한 색상명을 지정할 수 있습니다 (예: peacock, sapphire versus blue) [<a target="_blank" rel="noopener" href="http://vis.stanford.edu/papers/color-naming-models">Heer and Stone</a>, 2012]. 사용자들은 색상과 명도 범위를 원하는 커스텀 팔레트 범위 안에서 지정해서 “seed color”를 중심으로 색상 팔레트를 만들 수도 있습니다 (Figure 6). (* 역주: Colorgorical은 Python 2.7에서 동작하도록 제작되었습니다, <a target="_blank" rel="noopener" href="https://github.com/connorgr/colorgorical">github link</a>)<br><br><img src="19_vs_07.png" alt="Fig. 6. 온라인 도구인 Colorgorical은 사용자로 하여금 범주형 데이터를 표현하기 위한 여러 개의 특정 색상을 다른 많은 커스터마이제이션 옵션과 더불어 선택하게 해 줍니다. 사용자의 선택에 기반해서 팔레트를 만들어 주고, 이렇게 만들어진 팔레트는 다운받아 사용하거나 어떤 색 공간에도 적용할 수 있습니다."><br></p>
+<h3 id="상자-속의-디자이너"><a href="#상자-속의-디자이너" class="headerlink" title="상자 속의 디자이너"></a>상자 속의 디자이너</h3><p>Scholoss, Samsel, Szafir는 이 분야의 향후 연구 방향은 디자이너의 맞춤형 작업 기반, 과학자들이 사용하고 있는 시각화 소프트웨어에 탑재 가능한 컬러맵 자동 생성기 제작이라는 데 동의합니다. </p>
+<blockquote>
+<p>“어떻게 하면 디자이너의 실무 사례들을 일일이 캐묻지 않고 녹여낼 수 있을까요? 단순화 끝에 불완전해지는 일련의 규칙들 말고 다른 방식으로 말입니다.”</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.colorado.edu/atlas/">ATLAS Institute</a> 컴퓨터공학과에 있는 Szafir와 그의 팀은 이 비전을 실현하고 있습니다. “우리는 자신의 장소에서 일하고 있는 사용자들을 어떻게 만날지 생각하기 시작했습니다.”<br></p>
+<p>아쉽지만, 개별 디자이너들이 제공할 수 있는 세부에 대한 집중력과 창의성에는 한계가 있습니다. 따라서 Szafir의 팀은 실질적으로 “상자 속의 디자이너”같은 역할을 하는 제품을 만들 수 있을지 궁금해 했습니다. “어떻게 하면 디자이너의 실무 사례들을 일일이 캐묻지 않고 녹여낼 수 있을까요? 단순화 끝에 불완전해지는 일련의 규칙들 말고 다른 방식으로 말입니다.”<br></p>
+<p>Szafir와 동료들은 전문가가 디자인한 222개의 컬러 그레이디언트에 기반한 머신 러닝 모델을 만들고 디자이너의 작업물을 흉내내서 컬러맵을 생성하도록 했습니다. Szafir와 동료들이 최근 논문에 발표했듯, 자동적으로 생성된 최종 컬러맵은 “디자이너가 만든 것처럼 정확하고 심미적으로 만족스러운 시각화 결과물이었으며 (중략) 기존의 수학적 접근법을 능가했습니다.” [<a target="_blank" rel="noopener" href="https://doi.org/10.1109/TVCG.2019.2934284">Smart et al.</a>, 2020].<br></p>
+<p>팀의 성공에도 불구하고 완전 자동화는 단점이 있다고 Szafir는 지적합니다. 알고리즘이 <b>훈련</b>할 데이터가 필요하다는 점인데, 본문에서는 비슷한 형태를 가진 3차원 색 공간의 컬러맵 모음을 말하고 있습니다. 알고리즘은 훈련할 데이터를 바탕으로 일련의 규칙을 수립한 뒤 이 규칙에 기반해서 새로운 컬러맵을 생성합니다. 그러나, “예술 커뮤니티의 산출물들은 정말로 표현적이고, 창조적이며, 매력적인데 이는 이런 규칙들을 깨기 때문”이라고 합니다. “예술가는 이런 규칙의 어디를 언제 어떻게 깰 지를 알지만, 우리가 프로그램을 통해 이 정도 수준의 창조력을 발휘할 수 있을지는 알 수 없습니다.”<br></p>
+<p>Samsel과 Schloss는 가까운 미래에 그들의 다양한 전문 지식과 Szafir의 성과물을 합칠 곳을 찾는 한편 과학자들의 수요에 맞춘 데이터 시각화 성과물들을 지속적으로 쌓아올리고 있습니다. Samsel은 이렇게 말하고 있습니다. “우리는 미래를 봅니다. 그 미래에서 새로운 도구를 사용해 데이터의 공간 밀도를 측정하고, 내삽<code>interpolate</code>이나 정렬<code>align</code>같은 과정을 자동화하며, 이런 데이터에 맞는 컬러맵에 적절한 대비를 설정하고 있습니다.” 이런 프로그램은 데이터가 가장 밀집한 지점에 색상과 명도의 분산을 집중해서 과학자들에게 세부의 미묘한 차이를 보여줄 것입니다.<br></p>
+<h3 id="정확한-메시지-전달"><a href="#정확한-메시지-전달" class="headerlink" title="정확한 메시지 전달"></a>정확한 메시지 전달</h3><p>과학적 시각화는 정량화, 해석, 평가, 정보 소통이라는 여러 역할을 합니다. 데이터의 <a target="_blank" rel="noopener" href="https://eos.org/science-updates/interactive-online-maps-make-satellite-ocean-data-accessible">탐험과 발견</a>이라는 측면에서 매우 중요하며, 계산 역량의 증대와 함께 중요성이 점점 커지고 있으나 시각화에서 가장 중요한 기호, 즉 색상은 여전히 많은 부분이 미개척 상태로 남아있습니다. 기후 변화와 같은 이슈에 대한 대중의 인식을 무시함으로써 발생하는 거시적 영향은 아직 알려지지 않았지만, 많은 그룹들이 대중화를 염두에 두고 시각화를 디자인하는데 더 많은 자원을 투입하기 시작했습니다.<br></p>
+<blockquote>
+<p>“데이터 시각화는 언어입니다. 그러므로 근본적으로 여러분은 이야기를 들려주려고 하는 것입니다. 색은 이 이야기의 커다란 부분입니다.”</p>
+</blockquote>
+<p>다가오는 제 6회 Intergovernmental Panel on Climate Change(IPCC) <a target="_blank" rel="noopener" href="https://www.ipcc.ch/assessment-report/ar6/">report</a>의 주필이자 최근에 많이 회자되는 “<a target="_blank" rel="noopener" href="https://showyourstripes.info/">온난화 줄무늬<code>Warming Stripes</code></a>“를 만든 (<a target="_blank" rel="noopener" href="http://www.met.reading.ac.uk/~ed/home/index.php">Ed Hawkins</a>는 IPCC는 복잡한 시각화를 단순한 그림으로 바꾸는 그래픽 디자이너를 여럿 투입하고 있다고 합니다. “우리는 훨씬 많은 분들께 목소리를 들려드려야 합니다.” “일반적인 소통을 하기 위해서 뿐 아니라, 어떤 정책들이 채택되는지를 알려서 사람들로 하여금 그들의 삶을 위협하는 위험에 대비할 수 있도록 해야 합니다.” Hawkins 팀은 색맹 자체와 더불어 색상의 가독성 및 <a target="_blank" rel="noopener" href="https://www.fastcompany.com/3039018/the-semantics-of-color-visualized">의미론적 이해<code>semantic understanding</code></a>에 “매우 많은 시간”을 투자합니다.<br></p>
+<p>이렇게 출간된 보고서와 이런 보고서를 읽는 것의 차이를 명심해야 한다고 Simon Fraser University의 School of Interactive Art and Technology 교수이자 Vancouver Institute for Visual Analytics의 책임자인 <a target="_blank" rel="noopener" href="https://www.sfu.ca/siat/people/research-faculty/lyn-bartram.html">Lyn Bartram</a>는 말합니다. “우리는 사람들에게 빅데이터를 이해하는 경험을 선사하기보다 저 어딘가에 있는 사실들을 던져 버리고 손을 털 뿐입니다.” “데이터 시각화는 언어입니다. 그러므로 근본적으로 여러분은 이야기를 들려주려고 하는 것입니다. 색은 이 이야기의 커다란 부분입니다.”<br></p>
+<p>Bartram에 따르면, 연구원들이 자신의 청중들과 대화하듯 행동하지 않는다면 그들의 연구는 영향력이 미미할 것입니다. “데이터 시각화의 민주화가 의미하는 것은 데이터가 미디어가 되었다는 것입니다. 과학자들 선에서 끝나는 것이 아니라는 뜻입니다.” “시각화는 단순한 도구 이상이 되고 있습니다. 시각화는 오늘날 사회 전반에서 이루어지는 대화의 일부분이자 의사 결정의 일부분입니다.”</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a><b>References</b></h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mpas-dev.github.io/ocean/ocean.html">MPAS-Ocean</a><br>Albers, J. (2006), Interaction of Color, Yale Univ. Press, New Haven, Conn.</p>
+</blockquote>
+<blockquote>
+<p>Borland, D., and R. M. Taylor Ii (2007), Rainbow color map (still) considered harmful, IEEE Comput. Graphics Appl., 27(2), 14–17, <a target="_blank" rel="noopener" href="https://doi.org/10.1109/MCG.2007.323435">https://doi.org/10.1109/MCG.2007.323435</a>.</p>
+</blockquote>
+<blockquote>
+<p>Grassmann, H. (1844), Die Lineale Ausdehnungslehre ein neuer Zweig der Mathematik: Dargestellt und durch Anwendungen, Von Otto Wigand, Leipzig, Germany, <a target="_blank" rel="noopener" href="http://archive.org/details/dielinealeausde00grasgoog">http://archive.org/details/dielinealeausde00grasgoog</a>.</p>
+</blockquote>
+<blockquote>
+<p>Heer, J., and M. Stone (2012), Color naming models for color selection, image editing and palette design, in Conference Proceedings: The 30th ACM Conference on Human Factors in Computing Systems (CHI), p. 1007, Assoc. for Comput. Mach., New York, <a target="_blank" rel="noopener" href="http://vis.stanford.edu/papers/color-naming-models">http://vis.stanford.edu/papers/color-naming-models</a>.</p>
+</blockquote>
+<blockquote>
+<p>Itten, J. (1970), The Elements of Color: A Treatise on the Color System of Johannes Itten Based on His Book The Art of Color, edited by F. Birren, 96 pp., John Wiley, New York.</p>
+</blockquote>
+<blockquote>
+<p>Liu, Y., and J. Heer (2018), Somewhere over the rainbow: An empirical assessment of quantitative colormaps, in Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems, pp. 1–12, Assoc. for Comput. Mach., New York, <a target="_blank" rel="noopener" href="https://doi.org/10.1145/3173574.3174172">https://doi.org/10.1145/3173574.3174172</a>.</p>
+</blockquote>
+<blockquote>
+<p>Moreland, K. (2016), Why we use bad color maps and what you can do about it, Electron. Imaging, 16, 1–6, <a target="_blank" rel="noopener" href="https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133">https://doi.org/10.2352/ISSN.2470-1173.2016.16.HVEI-133</a>.</p>
+</blockquote>
+<blockquote>
+<p>Munsell, A. H. (2015), A Color Notation, Scholar’s Choice Edition, 98 pp., Creative Media Partners, <a target="_blank" rel="noopener" href="https://books.google.com/books?id=7dtJrgEACAAJ">https://books.google.com/books?id=7dtJrgEACAAJ</a>.</p>
+</blockquote>
+<blockquote>
+<p>Rogowitz, B. E. (2013), Perceptual approaches to finding features in data, Proc. SPIE Electron. Imaging, 8651, <a target="_blank" rel="noopener" href="https://doi.org/10.1117/12.2013502">https://doi.org/10.1117/12.2013502</a>.</p>
+</blockquote>
+<blockquote>
+<p>Samsel, F., S. Klaassen, and D. H. Rogers (2018), ColorMoves: Real-time interactive colormap construction for scientific visualization, IEEE Comput. Graphics Appl., 38(1), 20–29, <a target="_blank" rel="noopener" href="https://doi.org/10.1109/MCG.2018.011461525">https://doi.org/10.1109/MCG.2018.011461525</a>.</p>
+</blockquote>
+<blockquote>
+<p>Smart, S., K. Wu, and D. A. Szafir (2020), Color crafting: Automating the construction of designer quality color ramps, IEEE Trans. Visualization Comput. Graphics, 26(1), 1,215–1,225, <a target="_blank" rel="noopener" href="https://doi.org/10.1109/TVCG.2019.2934284">https://doi.org/10.1109/TVCG.2019.2934284</a>.</p>
+</blockquote>
+<blockquote>
+<p>Ware, C., et al. (2017), Evaluating the perceptual uniformity of color sequences for feature discrimination, in EuroVis Workshop on Reproducibility, Verification, and Validation in Visualization (Eur0RV3), Eurographics Assoc., <a target="_blank" rel="noopener" href="https://doi.org/10.2312/eurorv3.20171107">https://doi.org/10.2312/eurorv3.20171107</a>.</p>
+</blockquote>
+<blockquote>
+<p>Ware, C., et al. (2019), Measuring and modeling the feature detection threshold functions of colormaps, IEEE Trans. Visualization Comput. Graphics, 25(9), 2,777–2790, <a target="_blank" rel="noopener" href="https://doi.org/10.1109/TVCG.2018.2855742">https://doi.org/10.1109/TVCG.2018.2855742</a>.</p>
+</blockquote>
+<h2 id="Author-Information"><a href="#Author-Information" class="headerlink" title="Author Information"></a><b>Author Information</b></h2><p>Stephanie Zeller (<a href="stellerzeller@utexas.edu">stellerzeller@utexas.edu</a>), University of Texas at Austin; and David Rogers, Los Alamos National Laboratory, Los Alamos, N.M.</p>
+<p><b>Citation:</b> Zeller, S., and D. Rogers (2020), Visualizing science: How color determines what we see, Eos, 101, <a target="_blank" rel="noopener" href="https://doi.org/10.1029/2020EO144330">https://doi.org/10.1029/2020EO144330</a>. Published on 21 May 2020.</p>
+<p>Text © 2020. The authors. CC BY-NC-ND 3.0<br>Except where otherwise noted, images are subject to copyright. Any reuse without express permission from the copyright owner is prohibited.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/" data-id="ckvt2fwx600kgc0tq1zgga4fq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Visualizing Science; How Color Determines What we see",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/19_vs_01.png",
+        "keywords": "visualization color colormap colorbar translation",
+        "genre": "Python Data Science",
+        "datePublished": "2020-07-08",
+        "dateCreated": "2020-07-08",
+        "dateModified": "2020-11-27",
+        "url": "https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/",
+        "description": "
+본 글은 번역글입니다.
+
+
+원본 주소 : https://eos.org/features/visualizing-science-how-color-determines-what-we-see번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급적 우리말 용어를 사용하고자 하며, 원어를 병기합니다.  
+
+과학 시각화: 색상은 우리가 무엇을",
+        "wordCount": 2899
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/07/14/Python-DS-20-envelope/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Envelope for Least Square Filtering and Smoothing
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/07/02/Python-DS-18-pv_bond/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Connecting Points in Paraview</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/26/Python-General-9-fullmoon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/9_fullmoon_0.png)" alt="Full moon" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2021/09/26/Python-General-9-fullmoon/" class="title">Full moon</a></p>
+                            <p class="item-date"><time datetime="2021-09-25T23:52:00.000Z" itemprop="datePublished">2021-09-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/6-pytorchGPU_0.png)" alt="PyTorch GPU setting" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="title">PyTorch GPU setting</a></p>
+                            <p class="item-date"><time datetime="2021-06-06T03:01:00.000Z" itemprop="datePublished">2021-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/12/24/Python-DL-5_kerasleraningday/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/5-keraslearningday_0.png)" alt="Keras Code Examples - Image segmentation with a U-Net-like architecture" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2020/12/24/Python-DL-5_kerasleraningday/" class="title">Keras Code Examples - Image segmentation with a U-Net-like architecture</a></p>
+                            <p class="item-date"><time datetime="2020-12-24T11:15:00.000Z" itemprop="datePublished">2020-12-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/12/01/Python-DL-4-bn/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/4-bn_0.png)" alt="keras BatchNormalization" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2020/12/01/Python-DL-4-bn/" class="title">keras BatchNormalization</a></p>
+                            <p class="item-date"><time datetime="2020-12-01T13:21:00.000Z" itemprop="datePublished">2020-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">54</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 10px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 11px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 11px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/cognitive-science/" style="font-size: 12px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16px;">color</a> <a href="/tags/colorbar/" style="font-size: 14px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 11px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 11px;">data sampling</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 11px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 14px;">jython</a> <a href="/tags/keras/" style="font-size: 11px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 10px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 11px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 11px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 13px;">pandas</a> <a href="/tags/paraview/" style="font-size: 11px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 12px;">polygon</a> <a href="/tags/presentation/" style="font-size: 14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 11px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 11px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 11px;">qgis</a> <a href="/tags/raster/" style="font-size: 11px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 15px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 11px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 13px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13px;">statistics</a> <a href="/tags/subplots/" style="font-size: 10px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11px;">text mining</a> <a href="/tags/translation/" style="font-size: 12px;">translation</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

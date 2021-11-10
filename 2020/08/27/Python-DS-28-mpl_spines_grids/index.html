@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Spines &amp; Grids | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,visualization,cognitive science,spines,grid" />
+    
+    <meta name="description" content="착시를 줄여주는 축과 격자를 설정하는 방법입니다. matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spines &amp; Grids">
+<meta property="og:url" content="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="착시를 줄여주는 축과 격자를 설정하는 방법입니다. matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/28_mpl_spines_0.png">
+<meta property="article:published_time" content="2020-08-26T22:38:00.000Z">
+<meta property="article:modified_time" content="2020-11-27T00:44:47.498Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="cognitive science">
+<meta property="article:tag" content="spines">
+<meta property="article:tag" content="grid">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/28_mpl_spines_0.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2020/08/27/python-ds-28-mpl_spines_grids/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-28-mpl_spines_grids" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Spines &amp; Grids
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/08/27/Python-DS-28-mpl_spines_grids/" class="article-date">
+       <time datetime="2020-08-26T22:38:00.000Z" itemprop="datePublished">2020-08-27</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2020/08/27/Python-DS-28-mpl_spines_grids/" class="article-date">
+     <time datetime="2020-11-27T00:44:47.498Z" itemprop="dateModified">2020-11-27</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/cognitive-science/" rel="tag">cognitive science</a>, <a class="tag-link-link" href="/tags/grid/" rel="tag">grid</a>, <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/spines/" rel="tag">spines</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>착시를 줄여주는 축과 격자를 설정하는 방법입니다.</li>
+<li>matplotlib에서는 <code>Axes.spines</code>와 <code>Axes.grid</code> 객체를 통해 제어합니다.</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br><a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62616251">Colin Ware “데이터 시각화, 인지과학을 만나다”</a><br><a target="_blank" rel="noopener" href="https://www.fusioncharts.com/resources/whitepapers/principles-of-data-visualization">White Paper-Principles of Data Visualization-What we see in a Visual</a></p>
+</blockquote>
+<h3 id="1-착시"><a href="#1-착시" class="headerlink" title="1. 착시"></a>1. 착시</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Optical_illusion">wikipedia: optical illusion</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lateral_inhibition">wikipedia: Lateral inhibition</a></p>
+</blockquote>
+<ul>
+<li><b>우리 눈은 사물을 있는 그대로 보지 않습니다.</b><ul>
+<li>주변과 견주어보기도 하고, 우리가 알고 있는 지식에 비추어 보기도 합니다.</li>
+<li>이런 과정에서 있는 그대로 보지 못하는 착시가 발생합니다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>착시는 <b>생물학적 이유</b>로 발생하기도 하는데, 예로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Mach_bands">Mach Bands</a>가 있습니다.<ul>
+<li>선이 점점 두꺼워지다 다른 선과 닿는 순간 <b>경계 지점에 그림자</b>가 보입니다.</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lateral_inhibition"><b>측면 억제<code>lateral inhibition</code></b></a>라는 현상이 있습니다. 경계를 명확히 인지하기 위해 이렇게 진화한 것으로 생각되는데, 자극을 강하게 받은 신경 세포는 이웃한 신경세포에 억제성 신경전달 물질을 전달해서 활성화를 억제합니다.</li>
+<li>그렇기 때문에 같은 색이라고 해도 다른 색과 접한 부분은 다르게 인식됩니다.</li>
+<li>참고로, 이 현상을 밝힌 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ernst_Mach">마하<code>Ernst Mach</code></a>는 초음속에 대한 연구를 한 그 마하입니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="Mach_bands_-_animation.gif" alt="Mach Bands"></p>
+<ul>
+<li>한편으로 <b>인지 방식</b>에 의해 일어나기도 합니다.<ul>
+<li>우리는 배경에 비추어 물체를 인식하고 크기를 판단하기 때문입니다.</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ponzo_illusion"><b>폰조 착시<code>Ponzo Illusion</code></b></a>가 대표입니다.</li>
+<li>철길 그림 위의 두 막대기는 <b>멀리 있는 것이 길어보입니다</b>.</li>
+</ul>
+</li>
+</ul>
+<p><img src="Ponzo_illusion.gif" alt="Ponzo Illusion"></p>
+<ul>
+<li><p>착시는 누구나 겪는 일이지만, 간단히 벗어날 수 있습니다.</p>
+<ul>
+<li>이미 위 그림에서 선들이 닿기 전 <b>배경선이 보일 때</b>, </li>
+<li>그리고 철길 위에 빨간 <b>보조선</b>을 그었을 때</li>
+<li>우리는 착시에서 벗어나는 경험을 했습니다.</li>
+</ul>
+</li>
+<li><p>matplotlib에서는 <b><code>spines</code></b>와 <b><code>grid</code></b>의 도움을 받을 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="2-윤곽선-spines"><a href="#2-윤곽선-spines" class="headerlink" title="2. 윤곽선 spines"></a>2. 윤곽선 <code>spines</code></h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/spines_api.html">matplotlib: matplotlib.spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/_modules/matplotlib/spines.html">matplotlib: Source code for matplotlib.spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spines.html">matplotlib: Spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spines_dropped.html">matplotlib: Dropped spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spine_placement_demo.html">matplotlib: Spine Placement Demo</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/recipes/centered_spines_with_arrows.html">matplotlib: Centered spines with arrows</a></p>
+</blockquote>
+<ul>
+<li><p>matplotlib에서 부르는 이름은 조금 낯설지만 생각해보면 은근 직관적입니다.</p>
+<ul>
+<li>제가 <b>축공간</b>이라고 부르는, 그림이 그려지는 공간은 <b><code>axes</code></b>이고</li>
+<li>눈금이 붙는 부분의 이름은 <b><code>spines</code></b>입니다.</li>
+</ul>
+</li>
+<li><p><b>데이터 시각화 교과서</b>에는 spine에 대한 언급이 별로 없습니다.</p>
+<ul>
+<li>보여주고자 하는 데이터의 종류에 따라 다르고</li>
+<li>특히 그림의 종류에 따라 적절히 변형되어 사용되고 있습니다.</li>
+<li>원하는 형식으로 연출할 수 있도록 이번 글은 <b>기능 위주</b>로 작성하겠습니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="28_mpl_spines_1.png" alt="데이터 시각화 교과서에 수록된 그림들"></p>
+<ul>
+<li><p>matplotlib의 object oriented interface에서, spine은 <b><code>ax.spines</code></b>로 제어됩니다.</p>
+</li>
+<li><p><a href="https://jehyunlee.github.io/2020/08/26/Python-DS-27-mpl_focus/">지난 글</a>에 있는 코드를 그대로 활용하고, <code>ax.spines</code> 활용에 집중하기 위해 시각화 코드를 함수로 만들어 버립니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_example</span>(<span class="params">ax, zorder=<span class="number">0</span></span>):</span></span><br><span class="line">    ax.bar(tips_day[<span class="string">&quot;day&quot;</span>], tips_day[<span class="string">&quot;tip&quot;</span>], color=<span class="string">&quot;lightgray&quot;</span>, zorder=zorder)</span><br><span class="line">    ax.set_title(<span class="string">&quot;tip (mean)&quot;</span>, fontsize=<span class="number">16</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Values</span></span><br><span class="line">    h_pad = <span class="number">0.1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        fontweight = <span class="string">&quot;normal&quot;</span></span><br><span class="line">        color = <span class="string">&quot;k&quot;</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">3</span>:</span><br><span class="line">            fontweight = <span class="string">&quot;bold&quot;</span></span><br><span class="line">            color = <span class="string">&quot;darkred&quot;</span></span><br><span class="line"></span><br><span class="line">        ax.text(i, tips_day[<span class="string">&quot;tip&quot;</span>].loc[i] + h_pad, <span class="string">f&quot;<span class="subst">&#123;tips_day[<span class="string">&#x27;tip&#x27;</span>].loc[i]:<span class="number">0.2</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>, fontsize=<span class="number">12</span>, fontweight=fontweight, color=color)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Sunday</span></span><br><span class="line">    ax.patches[<span class="number">3</span>].set_facecolor(<span class="string">&quot;darkred&quot;</span>)</span><br><span class="line">    ax.patches[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># set_range</span></span><br><span class="line">    ax.set_ylim(<span class="number">0</span>, <span class="number">4</span>)</span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure></li>
+<li><p>object oriented 방식은 이런 식의 호출이 가능합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br></pre></td></tr></table></figure>
+<p><img src="27_mpl_focus_10.png"></p>
+</li>
+</ul>
+<ul>
+<li><code>spines</code>의 정체를 확인해봅시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>(ax.spines)</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_2.png"></li>
+</ul>
+<ul>
+<li><code>OrderedDict</code>객체입니다. <code>dictionary</code>의 일종이네요.</li>
+<li>그럼 key와 value는 어떤 것들일까요?<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> ax.spines.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;spines[<span class="subst">&#123;k&#125;</span>] = <span class="subst">&#123;v&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_3.png"></li>
+</ul>
+<ul>
+<li>key는 <code>&quot;left&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;top&quot;</code>이네요. <b>네 개의 테두리</b>입니다.</li>
+<li>value가 뭔지 잘 모르겠습니다. 다시 정체를 파악해봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.spines.values()</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_4.png"></li>
+</ul>
+<ul>
+<li><code>matplotlib.spines.Spine</code> 객체입니다.<ul>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/spines_api.html">공식문서</a>에 따르면 <code>Spine</code>은 <b><code>Patch</code>의 subclass</b>이고</li>
+<li><code>set_patch_circle</code>, <code>set_patch_arc</code>가 호출되면 <b>원이나 호</b>를 그리기도 한답니다.</li>
+<li>선을 그리는 <code>set_patch_line</code>이 기본값입니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-1-spine-숨기기-set-visible-False"><a href="#2-1-spine-숨기기-set-visible-False" class="headerlink" title="2.1. spine 숨기기 : .set_visible(False)"></a>2.1. spine 숨기기 : <code>.set_visible(False)</code></h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/axes_api.html">matplotlib.axes</a></p>
+</blockquote>
+<ul>
+<li>위 그림에서 맨 아래만 남기고 왼쪽, 위쪽, 오른쪽 spines를 지워보겠습니다.</li>
+<li><b><code>set_visible(False)</code></b> 명령을 사용하면 됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_5.png" alt="bottom spine만 남기기"></li>
+</ul>
+<ul>
+<li>사족을 하나 붙이면, <code>set_visible()</code>은 spine에만 적용되는 명령이 아닙니다.<ul>
+<li><b>General Artist Properties</b>라고 해서 <b>모든 객체</b>에 적용 가능한 명령입니다.</li>
+<li>위 예시에선 spine에 사용했을 뿐입니다.</li>
+<li><a href="https://jehyunlee.github.io/2020/08/26/Python-DS-27-mpl_focus/">이전 글</a>에서 설명했듯 bar 객체에도 적용 가능합니다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-spine-범위-지정하기-set-bounds-min-max"><a href="#2-2-spine-범위-지정하기-set-bounds-min-max" class="headerlink" title="2.2. spine 범위 지정하기 : .set_bounds(min, max)"></a>2.2. spine 범위 지정하기 : <code>.set_bounds(min, max)</code></h4><ul>
+<li>spine을 일부 영역만 보여주고 싶을 수 있습니다.</li>
+<li>왼쪽 spine을 안보이게 하는 대신 가운데만 그려봅시다.</li>
+<li><code>set_bounds(min, max)</code>를 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_bounds(<span class="number">1</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_6.png" alt="left spine 범위 지정하기"></li>
+</ul>
+<h4 id="2-3-spine-위치-지정하기-set-position-direction-distance"><a href="#2-3-spine-위치-지정하기-set-position-direction-distance" class="headerlink" title="2.3. spine 위치 지정하기 : .set_position((direction, distance))"></a>2.3. spine 위치 지정하기 : <code>.set_position((direction, distance))</code></h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/spines_api.html?highlight=set_position#matplotlib.spines.Spine.set_position">matplotlib.spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.axes.Axes.set_position.html#matplotlib.axes.Axes.set_position">matplotlib.axes.Axes.set_position</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spine_placement_demo.html">matplotlib: Spine placement demo</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/recipes/centered_spines_with_arrows.html">matplotlib: Centered spines with arrows</a></p>
+</blockquote>
+<ul>
+<li><a href="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/">지난번 글</a>에서 이런 그림을 그렸습니다.</li>
+<li>가로와 세로축을 원래 위치에서 밖으로 살짝 밀어서 <b>공간을 확보</b>하고 <b>여유를 연출</b>했습니다.<br><img src="L_rainbow.png"></li>
+</ul>
+<ul>
+<li><b><code>set_position((direction, distance))</code></b>을 사용해서 할 수 있습니다.</li>
+<li>먼저, <b><code>get_position()</code></b>을 사용해서 <code>spines[&quot;left&quot;]</code>가 어떻게 설정돼있나 보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].get_position()</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_7.png" alt="left spine 이동"></li>
+</ul>
+<ul>
+<li>밖으로(“outward”) 0만큼 나가있다고 합니다.</li>
+<li><b><code>set_position((&quot;outward&quot;, 10))</code></b>을 설정해서 조금 간격을 띄워보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_8.png"></li>
+</ul>
+<ul>
+<li>“outward”를 넣을 수 있으니 거꾸로 할 때는 “inward”를 쓰면 될 것 같습니다.</li>
+<li>그렇지 않습니다. 대신 <b>거리를 음수</b>로 넣으면 됩니다.</li>
+<li>“outward” 대신 <b>“axes”</b>, <b>“data”</b>를 넣을 수 있고, 의미는 다음과 같습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i])</span><br><span class="line">    ax[i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : spine을 data 영역에서 지정된 거리만큼 이동  </span></span><br><span class="line">ax[<span class="number">0</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, -<span class="number">50</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : spine을 axes의 지정된 위치에 설정</span></span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;axes&quot;</span>, <span class="number">0.3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : spine을 data의 지정된 위치에 설정</span></span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">2.5</span>))</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_9.png" alt="좌로부터 outward+음수, axes, data"></li>
+</ul>
+<ul>
+<li>“axes”와 “data”도 음수를 함께 사용할 수 있습니다.</li>
+<li>이 기능을 이용하면 <b>수학시간에 많이 보던 형태의 그래프</b>를 그릴 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## data</span></span><br><span class="line">x = np.linspace(-np.pi, np.pi, <span class="number">100</span>)</span><br><span class="line">y = <span class="number">2</span> * np.sin(x)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## normal plot</span></span><br><span class="line">ax[<span class="number">0</span>].plot(x, y)</span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&quot;normal plot&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## textbook (1)</span></span><br><span class="line">ax[<span class="number">1</span>].plot(x, y)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&quot;textbook (1)&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"><span class="comment"># top, right 는 안보이게</span></span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># left, bottom은 (0, 0)을 지나가게</span></span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;bottom&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## textbook (2)</span></span><br><span class="line">ax[<span class="number">2</span>].plot(x, y)</span><br><span class="line">ax[<span class="number">2</span>].set_title(<span class="string">&quot;textbook (2)&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"><span class="comment"># top, right 는 안보이게</span></span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># left, bottom은 (0, 0)을 지나가게</span></span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;bottom&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line"><span class="comment"># 화살표 추가</span></span><br><span class="line">ax[<span class="number">2</span>].plot(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;&gt;k&quot;</span>, transform=ax[<span class="number">2</span>].get_yaxis_transform(), clip_on=<span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(<span class="number">0</span>, <span class="number">1</span>, <span class="string">&quot;^k&quot;</span>, transform=ax[<span class="number">2</span>].get_xaxis_transform(), clip_on=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_10.png"></li>
+</ul>
+<ul>
+<li>자주 사용할 것들은 이렇게 간단히 사용할 수 있습니다.<ul>
+<li><b><code>set_position((&quot;axes&quot;, 0.5&quot;))</code></b> 대신 <b><code>set_position(&quot;center&quot;)</code></b></li>
+<li><b><code>set_position((&quot;data&quot;, 0.0&quot;))</code></b> 대신 <b><code>set_position(&quot;zero&quot;)</code></b></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-격자grid"><a href="#3-격자grid" class="headerlink" title="3. 격자grid"></a>3. 격자<code>grid</code></h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.grid.html">matplotlib.axes.Axes.grid</a></p>
+</blockquote>
+<ul>
+<li>spines를 적절히 잡아주면 데이터를 읽기 좋아집니다.</li>
+<li>그러나 데이터간 크기를 더 잘 비교하려면, 그림에 <b>grid</b>를 깔아주면 더 좋습니다.</li>
+</ul>
+<ul>
+<li><b><code>.grid(True)</code></b> 메소드로 격자를 그릴 수 있습니다.</li>
+<li><b>axis={“both”, “x”, “y”}</b> 인자로 방향을 지정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i])</span><br><span class="line">    ax[i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[<span class="number">0</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, <span class="number">10</span>))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : x, y 둘 다 </span></span><br><span class="line">ax[<span class="number">0</span>].grid(axis=<span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : x축에서만</span></span><br><span class="line">ax[<span class="number">1</span>].grid(axis=<span class="string">&quot;x&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : y축에서만</span></span><br><span class="line">ax[<span class="number">2</span>].grid(axis=<span class="string">&quot;y&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_11.png">  </li>
+</ul>
+<h4 id="3-1-major-and-minor-ticks"><a href="#3-1-major-and-minor-ticks" class="headerlink" title="3.1. major and minor ticks"></a>3.1. major and minor ticks</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/gallery/ticks_and_spines/major_minor_demo.html">matplotlib: major and minor ticks</a></p>
+</blockquote>
+<ul>
+<li>grid는 major와 minor tick을 구분하여 그릴 수 있습니다.</li>
+<li>먼저, major와 minor tick을 설정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> (MultipleLocator, AutoMinorLocator)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># top, right, left spines 안보이기</span></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y축 tick 설정</span></span><br><span class="line">ax.yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))    <span class="comment"># major tick을 1 단위로 설정</span></span><br><span class="line">ax.yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:0.2f&#125;&#x27;</span>)          <span class="comment"># major tick format 지정 (오류가 나면 matplotlib upgrade)</span></span><br><span class="line">ax.yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))  <span class="comment"># minor tick을 0.5 단위로 지정</span></span><br><span class="line"></span><br><span class="line">plt.plot()</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_12.png"> </li>
+</ul>
+<h4 id="3-2-major-grid-only"><a href="#3-2-major-grid-only" class="headerlink" title="3.2. major grid only"></a>3.2. major grid only</h4><ul>
+<li>major와 minor ticks가 구분되면, 한쪽을 선택해서 그릴 수 있습니다.</li>
+<li>major와 minor grid를 구분해서 지정할 수 있습니다.</li>
+<li>따라서, 색상이나 선 스타일 등을 구분해서 변화시키기 좋습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i], zorder=<span class="number">2</span>) <span class="comment"># zorder: bar를 grid 앞으로.</span></span><br><span class="line">    ax[i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, <span class="number">10</span>))</span><br><span class="line">    ax[i].yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line">    ax[i].yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:0.2f&#125;&#x27;</span>)</span><br><span class="line">    ax[i].yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : major, minor 둘 다</span></span><br><span class="line">ax[<span class="number">0</span>].grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : major만</span></span><br><span class="line">ax[<span class="number">1</span>].grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : major만 + 여러 옵션</span></span><br><span class="line">ax[<span class="number">2</span>].grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>, color=<span class="string">&quot;r&quot;</span>, ls=<span class="string">&quot;:&quot;</span>, lw=<span class="number">0.5</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_13.png"> </li>
+</ul>
+<ul>
+<li>최종적으로 다음과 같은 결과물을 얻을 수 있습니다.</li>
+<li>불필요한 spine을 제거해서 <b>시선 분산</b>을 막고, </li>
+<li>grid를 추가해서 데이터들을 <b>옆에 있는 숫자</b>들과 비교하기 좋게 했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    </span><br><span class="line">ax.yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line">ax.yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:0.2f&#125;&#x27;</span>)</span><br><span class="line">ax.yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))</span><br><span class="line"></span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>, color=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;minor&quot;</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="28_mpl_spines_0.png" alt="bar plot의 높이 차이가 잘 드러납니다."></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/" data-id="ckvt2fwqj002xc0tqba2zb05u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Spines &amp; Grids",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/28_mpl_spines_0.png",
+        "keywords": "python matplotlib visualization cognitive science spines grid",
+        "genre": "Python Data Science",
+        "datePublished": "2020-08-27",
+        "dateCreated": "2020-08-27",
+        "dateModified": "2020-11-27",
+        "url": "https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/",
+        "description": "
+착시를 줄여주는 축과 격자를 설정하는 방법입니다.
+matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.
+
+
+Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What ",
+        "wordCount": 1821
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/09/01/Python-DS-29-dld_pyvis/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Python Visualization for Me
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/08/26/Python-DS-27-mpl_focus/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Focusing on a Certain Data</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/26/Python-General-9-fullmoon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/9_fullmoon_0.png)" alt="Full moon" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2021/09/26/Python-General-9-fullmoon/" class="title">Full moon</a></p>
+                            <p class="item-date"><time datetime="2021-09-25T23:52:00.000Z" itemprop="datePublished">2021-09-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/6-pytorchGPU_0.png)" alt="PyTorch GPU setting" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="title">PyTorch GPU setting</a></p>
+                            <p class="item-date"><time datetime="2021-06-06T03:01:00.000Z" itemprop="datePublished">2021-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/12/24/Python-DL-5_kerasleraningday/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/5-keraslearningday_0.png)" alt="Keras Code Examples - Image segmentation with a U-Net-like architecture" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2020/12/24/Python-DL-5_kerasleraningday/" class="title">Keras Code Examples - Image segmentation with a U-Net-like architecture</a></p>
+                            <p class="item-date"><time datetime="2020-12-24T11:15:00.000Z" itemprop="datePublished">2020-12-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/12/01/Python-DL-4-bn/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/4-bn_0.png)" alt="keras BatchNormalization" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2020/12/01/Python-DL-4-bn/" class="title">keras BatchNormalization</a></p>
+                            <p class="item-date"><time datetime="2020-12-01T13:21:00.000Z" itemprop="datePublished">2020-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">54</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">38</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 10px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 11px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 11px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/cognitive-science/" style="font-size: 12px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16px;">color</a> <a href="/tags/colorbar/" style="font-size: 14px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 11px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 11px;">data sampling</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 11px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 14px;">jython</a> <a href="/tags/keras/" style="font-size: 11px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 10px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 11px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 11px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 13px;">pandas</a> <a href="/tags/paraview/" style="font-size: 11px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 12px;">polygon</a> <a href="/tags/presentation/" style="font-size: 14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 11px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 11px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 11px;">qgis</a> <a href="/tags/raster/" style="font-size: 11px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 15px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 11px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 13px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13px;">statistics</a> <a href="/tags/subplots/" style="font-size: 10px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11px;">text mining</a> <a href="/tags/translation/" style="font-size: 12px;">translation</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
