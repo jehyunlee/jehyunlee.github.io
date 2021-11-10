@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>modifying seaborn violin plot | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,seaborn" />
+    
+    <meta name="description" content="Seaborn violin plot은 아름답습니다. 매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다. color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다. 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.  1. 예제 데이터 seaborn의 tips 데이터셋을 사용합니다.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="modifying seaborn violin plot">
+<meta property="og:url" content="https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="Seaborn violin plot은 아름답습니다. 매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다. color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다. 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.  1. 예제 데이터 seaborn의 tips 데이터셋을 사용합니다.1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/87_violinplotedit00.png">
+<meta property="article:published_time" content="2021-10-21T00:11:00.000Z">
+<meta property="article:modified_time" content="2021-10-21T02:26:44.817Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="seaborn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/87_violinplotedit00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2021/10/21/python-ds-87_violinplotedit/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-87_violinplotedit" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        modifying seaborn violin plot
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="article-date">
+       <time datetime="2021-10-21T00:11:00.000Z" itemprop="datePublished">2021-10-21</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="article-date">
+     <time datetime="2021-10-21T02:26:44.817Z" itemprop="dateModified">2021-10-21</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/seaborn/" rel="tag">seaborn</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>Seaborn violin plot은 아름답습니다.</li>
+<li>매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다.</li>
+<li><code>color</code>와 <code>palette</code> 매개변수로 violin plot의 색을 지정할 수 있습니다.</li>
+<li>그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.</li>
+</ul>
+<h1 id="1-예제-데이터"><a href="#1-예제-데이터" class="headerlink" title="1. 예제 데이터"></a>1. 예제 데이터</h1><ul>
+<li>seaborn의 tips 데이터셋을 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 기본 시각화 설정</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터셋 불러오기</span></span><br><span class="line">df = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+<img src="violinplotedit01.png"><br></li>
+</ul>
+<h1 id="2-seaborn-violin-plot"><a href="#2-seaborn-violin-plot" class="headerlink" title="2. seaborn violin plot"></a>2. seaborn violin plot</h1><h2 id="2-1-기본-plot"><a href="#2-1-기본-plot" class="headerlink" title="2.1. 기본 plot"></a>2.1. 기본 plot</h2><ul>
+<li><p>요일별 팁 분포를 그려봅니다.</p>
+</li>
+<li><p><code>seaborn.violinplot()</code>을 사용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<p><img src="violinplotedit02.png"><br></p>
+</li>
+<li><p>기본 설정인 <code>tab10</code> palette에 따라 violin plot이 채색되었습니다.</p>
+</li>
+</ul>
+<h2 id="2-2-일괄-색-변경-color"><a href="#2-2-일괄-색-변경-color" class="headerlink" title="2.2. 일괄 색 변경: color"></a>2.2. 일괄 색 변경: <code>color</code></h2><ul>
+<li>color 매개변수를 사용하면 violin plot들의 face color를 일괄적으로 바꿀 수 있습니다.</li>
+<li><code>color=&quot;gold&quot;</code>를 적용한 결과입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, </span><br><span class="line">               color=<span class="string">&quot;gold&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<img src="violinplotedit07.png"><br></li>
+</ul>
+<h2 id="2-3-팔레트-변경-palette"><a href="#2-3-팔레트-변경-palette" class="headerlink" title="2.3. 팔레트 변경: palette"></a>2.3. 팔레트 변경: <code>palette</code></h2><ul>
+<li><p>color 대신 palette 매개변수를 사용하면 violin plot마다 다른 색이 적용됩니다.</p>
+</li>
+<li><p>기본값으로 <code>tab10</code>이 적용되어 있지만, 만약 <code>sns.set_palette()</code>명령으로 기본값을 바꾸었다면 다른 색들이 입혀집니다.</p>
+</li>
+<li><p>전체 palette를 바꾸지 않아도 <code>sns.violinplot()</code>안에 <code>palette</code>매개변수를 지정하면 해당 plot에 한해 palette가 바뀝니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, </span><br><span class="line">               palette=<span class="string">&quot;rainbow&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<p><img src="violinplotedit08.png"><br></p>
+</li>
+<li><p><code>color</code>매개변수나 <code>palette</code> 매개변수나 전체를 일괄적으로 바꾸는 것입니다.</p>
+</li>
+<li><p>만약 이 중에서 <b>일요일만 색을 바꾸고 싶다</b>면 옵션이 없습니다.</p>
+</li>
+</ul>
+<h1 id="3-Matplotlib-객체지향-적용"><a href="#3-Matplotlib-객체지향-적용" class="headerlink" title="3. Matplotlib 객체지향 적용"></a>3. Matplotlib 객체지향 적용</h1><h2 id="3-1-seaborn-violin-plot-해부"><a href="#3-1-seaborn-violin-plot-해부" class="headerlink" title="3.1. seaborn violin plot 해부"></a>3.1. seaborn violin plot 해부</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/artist_api.html">matplotlib.artist</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/intermediate/artists.html">matplotlib: Artist tutorial</a></p>
+</blockquote>
+<ul>
+<li>seaborn은 Matplotlib을 편하게 쓰기 위해 만든 라이브러리입니다.</li>
+<li>따라서 seaborn으로 그린 그림은 모두 Matplotlib 객체로 이루어져 있습니다.</li>
+<li>Figure와 Axes를 제외한 구성 요소는 Artist로 이루어져 있고, Artist엔 여러 분류가 있습니다.</li>
+</ul>
+<p><img src="violinplotedit10.png" alt="Artist class"><br></p>
+<ul>
+<li>이 수많은 것들 중 <b>Collection</b>에 주목합시다.</li>
+<li>낯설게 보일 지 모르지만 파워포인트에서 여러 도형을 그룹으로 묶어놓은 것이라고 생각할 수 있습니다.</li>
+<li>파워포인트에서 그룹에 속한 도형의 선이나 색을 일괄적으로 바꿀 수 있는 것처럼 Matplotlib의 Collection도 포함된 여러 객체의 속성을 한번에 바꿀 수 있습니다.</li>
+</ul>
+<ul>
+<li><p>violin plot으로 어떤 Collection들이 생성되었는지 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(ax.collections))</span><br><span class="line">ax.collections</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 8개의 collections가 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">[&lt;matplotlib.collections.PolyCollection at 0x7f61db670a50&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db719490&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db680ad0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db680550&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db68c9d0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db6e1cd0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db699ad0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db699510&gt;]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><b>PolyCollection</b>과 <b>PathCollection</b>이 번갈아 등장합니다.</p>
+</li>
+<li><p>PolyCollection은 간단히 <b>다각형 객체</b>입니다.</p>
+</li>
+<li><p>PathCollection은 간단히 <b>Matplotlib에서 사전 정의된 도형</b>입니다.</p>
+</li>
+<li><p>뭔지 잘 모르겠지만 일단 이렇게만 넘어갑시다. </p>
+</li>
+</ul>
+<ul>
+<li><p>이번에는 <b>Line2D</b>객체를 살펴봅니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(ax.lines))</span><br><span class="line">ax.lines</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 8개의 lines객체가 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">[&lt;matplotlib.lines.Line2D at 0x7f61db670f10&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db680290&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db680e90&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db68c2d0&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db68cdd0&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db699250&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db699e90&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db6a62d0&gt;]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>이들의 정체는 바로 이렇습니다.</p>
+<ul>
+<li><b>PolyCollection</b>은 <b>violin plot</b></li>
+<li><b>PathCollection</b>은 <b>median marker</b></li>
+<li>첫번째 <b>Line2D</b>는 <b>whisker</b></li>
+<li>두번째 <b>Line2D</b>는 <b>box</b>입니다.<details>
+<summary><b>시각화 코드 보기/접기</b></summary>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">df_sample = df.query(<span class="string">&quot;day == &#x27;Sun&#x27;&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">subfigs = fig.subfigures(<span class="number">1</span>, <span class="number">2</span>, width_ratios=[<span class="number">1</span>, <span class="number">4</span>])</span><br><span class="line">axs_all = subfigs[<span class="number">0</span>].subplots(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">sns.violinplot(data=df_sample, y=<span class="string">&quot;total_bill&quot;</span>, ax=axs_all)</span><br><span class="line">axs_all.set_yticks([])</span><br><span class="line">axs_all.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">subfigs[<span class="number">1</span>].set_facecolor(<span class="string">&quot;beige&quot;</span>)</span><br><span class="line">axs_parts = subfigs[<span class="number">1</span>].subplots(<span class="number">1</span>, <span class="number">4</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">titles = [<span class="string">&quot;violin plot\n\n&quot;</span>, <span class="string">&quot;median\n\n&quot;</span>, <span class="string">&quot;whisker\n\n&quot;</span>, <span class="string">&quot;box\n\n&quot;</span>]</span><br><span class="line">artists = [<span class="string">&quot;collections[0]\n&quot;</span>, <span class="string">&quot;collections[1]\n&quot;</span>, <span class="string">&quot;lines[0]\n&quot;</span>, <span class="string">&quot;lines[1]\n&quot;</span>]</span><br><span class="line">objects = [<span class="string">&quot;PolyCollection&quot;</span>, <span class="string">&quot;PathCollection&quot;</span>, <span class="string">&quot;Line2D&quot;</span>, <span class="string">&quot;Line2D&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i, (ax, title, artist, <span class="built_in">object</span>) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs_parts, titles, artists, objects)):</span><br><span class="line">    sns.violinplot(data=df_sample, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax)</span><br><span class="line">    parts = ax.collections + ax.lines</span><br><span class="line">    [p.remove() <span class="keyword">for</span> pi, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(parts) <span class="keyword">if</span> i != pi]</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;small&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">    ax.text(<span class="number">0.5</span>, <span class="number">1.05</span>, artist, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>, color=<span class="string">&quot;brown&quot;</span>, fontsize=<span class="string">&quot;x-small&quot;</span>)</span><br><span class="line">    ax.text(<span class="number">0.5</span>, <span class="number">1.05</span>, <span class="built_in">object</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, fontsize=<span class="string">&quot;x-small&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">subfigs[<span class="number">1</span>].suptitle(<span class="string">&quot;Anatomy of seaborn violin plot&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p><img src="violinplotedit11.png"><br></p>
+<ul>
+<li>whisker와 box는 box-whisker plot의 그것들이 맞습니다.</li>
+</ul>
+<h2 id="3-2-객체-제어"><a href="#3-2-객체-제어" class="headerlink" title="3.2. 객체 제어"></a>3.2. 객체 제어</h2><ul>
+<li>일단 객체로 분리되면 그 다음은 수월합니다.</li>
+<li><code>.get_속성()</code> 명령으로 속성을 가져오고 <code>.set_속성(속성값)</code> 명령으로 속성을 바꿀 수 있습니다.</li>
+</ul>
+<ul>
+<li><p>우리 목적은 <b>일요일 데이터 강조</b>입니다.</p>
+</li>
+<li><p><b>일요일</b> 데이터를 강조하기 위해 나머지 톤을 죽입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax,</span><br><span class="line">               color=<span class="string">&quot;lavender&quot;</span>, linewidth=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>매우 밋밋한 그림이 됩니다.</p>
+</li>
+<li><p>여기에 몇 가지 코드를 추가합니다.</p>
+</li>
+<li><p>먼저, <b>일요일 violin plot</b>의 facecolor와 edgecolor, linewidth를 바꿉니다.</p>
+</li>
+<li><p>하나 건너 하나 있는 <code>PolyCollection</code>을 가져오기 위해 <code>if i%2 == 0</code>을 사용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># violin plot: PolyCollection</span></span><br><span class="line">violins = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;k&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins]  <span class="comment"># 전체 violin edgecolor 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_facecolor(<span class="string">&quot;gold&quot;</span>)     <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin linewidth 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br></pre></td></tr></table></figure></li>
+<li><p>이번엔 <b>marker를 조금 크고 귀엽게</b> 만듭니다.</p>
+</li>
+<li><p>일요일 뿐 아니라 <b>전체 데이터</b>에 적용합니다.</p>
+</li>
+<li><p>PolyCollection 밑에 있는<code>PathCollection</code>을 가져오기 위해 <code>if i%2 == 1</code>을 사용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># median marker: PathCollection</span></span><br><span class="line">markers = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>]  </span><br><span class="line">markers[<span class="number">3</span>].set_facecolor(<span class="string">&quot;w&quot;</span>)         <span class="comment"># Sunday median facecolor 변경</span></span><br><span class="line">markers[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)         <span class="comment"># Sunday median edgecolor 변경</span></span><br><span class="line">[m.set_sizes([<span class="number">50</span>]) <span class="keyword">for</span> m <span class="keyword">in</span> markers]  <span class="comment"># 전체 median size 변경</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Line2D 객체들 차례입니다.</p>
+</li>
+<li><p><b>일요일 box plot 색을 검정</b>으로 만듭니다.</p>
+</li>
+<li><p><b>굵기 조정은 모두에게 적용</b>합니다.</p>
+</li>
+<li><p><code>i%2 == 0</code>과 <code>i%2 == 1</code>을 번갈아 사용해서 box와 whisker를 번갈아 선택합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># box-whisker: Line2D</span></span><br><span class="line">ls = [l <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.lines)]</span><br><span class="line">ls[-<span class="number">2</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday whisker 색상 변경</span></span><br><span class="line">ls[-<span class="number">1</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday box 색 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">5</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br></pre></td></tr></table></figure></li>
+<li><p>이 코드들을 더하면 이런 그림이 나옵니다.<br><img src="violinplotedit05.png"><br></p>
+</li>
+<li><p>마지막으로 불필요한 요소를 제거합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ax.set_ylim(<span class="number">0</span>, )</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;total bill ($)&quot;</span>)</span><br><span class="line">ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, lw=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="violinplotedit06.png"><br></p>
+</li>
+</ul>
+<h2 id="3-3-응용-hue-amp-split"><a href="#3-3-응용-hue-amp-split" class="headerlink" title="3.3. 응용: hue &amp; split"></a>3.3. 응용: hue &amp; split</h2><ul>
+<li>seaborn violin plot에 hue와 split을 적용하면 의미 전달도 좋고 그림도 제법 멋집니다.</li>
+<li>여기에도 위에서 사용한 기술을 똑같이 적용할 수 있지만, 주의사항이 하나 있습니다.</li>
+<li>반쪽짜리 violin plot 두 개와 center marker가 번갈아 나오기 때문에 list comprehension을 조금 바꿔야 합낟.</li>
+<li><code>i%3 == 0</code>은 Male violin plot, <code>i%3 == 1</code>은 Female violin plot, <code>i%3 == 2</code>는 center marker입니다. <details>
+  <summary><b>시각화 코드 보기/접기</b></summary>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax,</span><br><span class="line">               color=<span class="string">&quot;pink&quot;</span>, hue=<span class="string">&quot;sex&quot;</span>, split=<span class="literal">True</span>, linewidth=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">### violin plot: PolyCollection</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Male</span></span><br><span class="line">violins_M = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">0</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;gray&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_M]</span><br><span class="line">[v.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_M]</span><br><span class="line">violins_M[<span class="number">3</span>].set_facecolor(<span class="string">&quot;gold&quot;</span>)  <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_M[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_M[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Female</span></span><br><span class="line">violins_F = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">1</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;gray&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_F]</span><br><span class="line">[v.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_F]</span><br><span class="line">violins_F[<span class="number">3</span>].set_facecolor(<span class="string">&quot;orange&quot;</span>)  <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_F[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_F[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># median marker: PathCollection</span></span><br><span class="line">markers = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">2</span>]  </span><br><span class="line">markers[<span class="number">3</span>].set_facecolor(<span class="string">&quot;w&quot;</span>)         <span class="comment"># Sunday median facecolor 변경</span></span><br><span class="line">markers[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)         <span class="comment"># Sunday median edgecolor 변경</span></span><br><span class="line">[m.set_sizes([<span class="number">50</span>]) <span class="keyword">for</span> m <span class="keyword">in</span> markers]  <span class="comment"># 전체 median size 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # box-whisker: Line2D</span></span><br><span class="line">ls = [l <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.lines)]</span><br><span class="line">ls[-<span class="number">2</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday whisker 색상 변경</span></span><br><span class="line">ls[-<span class="number">1</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday box 색 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">5</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # spines 제거, grid 추가, xlabel 제거, ylabel 제거</span></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, )</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;total bill ($)&quot;</span>)</span><br><span class="line">ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, lw=<span class="number">1</span>)</span><br><span class="line">legend = ax.legend()</span><br><span class="line">legend.remove()</span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper right&quot;</span>, ncol=<span class="number">2</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="violinplotedit09.png"><br></p>
+<h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
+<li>seaborn violin plot도 결국 Matplotlib 객체 모음입니다.</li>
+<li>여러분의 아이디어를 객체 지향 방식에 마음껏 실어 나르기 바랍니다.</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/" data-id="ckvt2z132000g4otq1clrb5gb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "modifying seaborn violin plot",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/87_violinplotedit00.png",
+        "keywords": "python matplotlib seaborn",
+        "genre": "Python Data Science",
+        "datePublished": "2021-10-21",
+        "dateCreated": "2021-10-21",
+        "dateModified": "2021-10-21",
+        "url": "https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/",
+        "description": "
+Seaborn violin plot은 아름답습니다.
+매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다.
+color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다.
+그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.
+
+1. 예제 데이터
+seaborn의 tips 데이터셋을 사용합니다.1",
+        "wordCount": 1858
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/10/14/Python-DS-86-datadoubt/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">데이터 분석, 의심에서 전달까지</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/87_violinplotedit00.png)" alt="modifying seaborn violin plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/21/Python-DS-87_violinplotedit/" class="title">modifying seaborn violin plot</a></p>
+                            <p class="item-date"><time datetime="2021-10-21T00:11:00.000Z" itemprop="datePublished">2021-10-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/14/Python-DS-86-datadoubt/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/86_datadoubt.jpg)" alt="데이터 분석, 의심에서 전달까지" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/14/Python-DS-86-datadoubt/" class="title">데이터 분석, 의심에서 전달까지</a></p>
+                            <p class="item-date"><time datetime="2021-10-14T00:40:00.000Z" itemprop="datePublished">2021-10-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/05/Python-DS-85-popkr/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/85_popkr_0.png)" alt="Population by gender and age" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/05/Python-DS-85-popkr/" class="title">Population by gender and age</a></p>
+                            <p class="item-date"><time datetime="2021-10-05T04:31:00.000Z" itemprop="datePublished">2021-10-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/26/Python-General-9-fullmoon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/9_fullmoon_0.png)" alt="Full moon" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2021/09/26/Python-General-9-fullmoon/" class="title">Full moon</a></p>
+                            <p class="item-date"><time datetime="2021-09-25T23:52:00.000Z" itemprop="datePublished">2021-09-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">101</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">85</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.14px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 11.43px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.71px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10px;">NIA</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.71px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.71px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.71px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.71px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.43px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.71px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.86px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.71px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.71px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.71px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.43px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.71px;">font</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.29px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.14px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.43px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.71px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.86px;">jython</a> <a href="/tags/keras/" style="font-size: 10.71px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.43px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 12.86px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.57px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.71px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10.71px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.71px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.71px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.43px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.71px;">probability</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.71px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.71px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.71px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.71px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.71px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.86px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.71px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.14px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12.14px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.57px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.71px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.43px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.71px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.43px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.29px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

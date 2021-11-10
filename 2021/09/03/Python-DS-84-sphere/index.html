@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>3D curved surfaces | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,3D" />
+    
+    <meta name="description" content="자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다. 어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다. 저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다. 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.  1. 데이터 준비 wikipedia: Spherical co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D curved surfaces">
+<meta property="og:url" content="https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다. 어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다. 저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다. 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.  1. 데이터 준비 wikipedia: Spherical co">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/84_sphere_0.png">
+<meta property="article:published_time" content="2021-09-03T08:42:00.000Z">
+<meta property="article:modified_time" content="2021-09-25T23:48:19.231Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="3D">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/84_sphere_0.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2021/09/03/python-ds-84-sphere/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-84-sphere" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        3D curved surfaces
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/09/03/Python-DS-84-sphere/" class="article-date">
+       <time datetime="2021-09-03T08:42:00.000Z" itemprop="datePublished">2021-09-03</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2021/09/03/Python-DS-84-sphere/" class="article-date">
+     <time datetime="2021-09-25T23:48:19.231Z" itemprop="dateModified">2021-09-26</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/3D/" rel="tag">3D</a>, <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다.</li>
+<li>어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다.</li>
+<li>저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다.</li>
+<li>과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.</li>
+</ul>
+<h1 id="1-데이터-준비"><a href="#1-데이터-준비" class="headerlink" title="1. 데이터 준비"></a>1. 데이터 준비</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Spherical_coordinate_system">wikipedia: Spherical coordinate system</a></p>
+</blockquote>
+<p><img src="84_sphere_00.png" alt="wikipedia: 구면 좌표계"><br></p>
+<ul>
+<li>구나 반구를 그리려면 구면 좌표계로 정의된 데이터가 필요합니다.</li>
+<li>간단한 삼각함수를 사용해서 구면 데이터를 만듭니다.</li>
+<li><b>방위각</b>(azimuthal angle, $\theta$)과 <b>극고도각</b>(polar angle, $\varphi$)을 나열한 뒤 여기에 아래 수식을 적용합니다.</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>x &amp;= r \cos{\varphi} \sin{\theta}\\<br>y &amp;= r \sin{\varphi} \sin{\theta}\\<br>z &amp;= r \cos{\theta}<br>\end{aligned}$$</p>
+<ul>
+<li>코드로는 이렇게 정리됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># angles</span></span><br><span class="line">polars = np.linspace(<span class="number">0</span>, <span class="number">180</span>, <span class="number">19</span>)</span><br><span class="line">azimuths = np.linspace(<span class="number">0</span>, <span class="number">360</span>, <span class="number">37</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># points</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(product(polars, azimuths), columns=[<span class="string">&quot;azi&quot;</span>, <span class="string">&quot;polar&quot;</span>])</span><br><span class="line">df[<span class="string">&quot;x&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;y&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.sin(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;z&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<br><img src="84_sphere_05.png"><br></li>
+</ul>
+</li>
+</ul>
+<h1 id="2-3D-곡면-도형-그리기"><a href="#2-3D-곡면-도형-그리기" class="headerlink" title="2. 3D 곡면 도형 그리기"></a>2. 3D 곡면 도형 그리기</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/mplot3d/surface3d.html">matplotlib: 3D surface (colormap)</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html?highlight=plot_surface#mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface">matplotlib: mpl_toolkits.mplot3d.axes3d.Axes3D</a></p>
+</blockquote>
+<ul>
+<li>주어진 데이터로 만들어지는 3D 표면 형상을 만드는데는 <code>.plot_surface()</code>가 적격입니다.</li>
+<li>앞서 만든 데이터로 구(sphere)와 반구(hemisphere)를 만들어봅시다.</li>
+</ul>
+<h2 id="2-1-sphere"><a href="#2-1-sphere" class="headerlink" title="2.1. sphere"></a>2.1. sphere</h2><ul>
+<li><p>우리가 만든 좌표가 이미 구의 좌표입니다.</p>
+</li>
+<li><p>방위각 $\varphi$를 0도에서 360도, 극고도각 $\theta$를 0도에서 180도까지 변화시켰고, 이는 3차원 공간의 모든 방향에 해당되기 때문입니다.</p>
+</li>
+<li><p>그렇다면 남은 일은, DataFrame에 1차원으로 들어있는 각각의 좌표를 차원에 맞게 2차원으로 바꿔주는 것 뿐입니다.</p>
+</li>
+<li><p>극고도각과 방위각의 경우의 수가 각각 19가지, 37가지이므로 <code>.reshape((19, 37)</code>을 적용합니다.</p>
+</li>
+<li><p>matplotlib은 구면좌표계가 아니라 직교좌표계를 사용합니다. x, y, z로 변환합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_06.png"><br></p>
+</li>
+<li><p>구가 그려졌습니다.</p>
+</li>
+<li><p>그런데 z축 방향으로 조금 찌그러져서 납작한 느낌이 나네요.</p>
+</li>
+<li><p><b>aspect ratio를 1:1:1로 맞춰줍시다.</b></p>
+</li>
+<li><p>matplotlib 3차원 Axes(<code>Axes3D</code>)에서 aspect ratio를 지정하는 명령은 <code>.set_box_aspect()</code>입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_07.png"><br></p>
+</li>
+</ul>
+<h2 id="2-2-partial-sphere"><a href="#2-2-partial-sphere" class="headerlink" title="2.2. partial sphere"></a>2.2. partial sphere</h2><ul>
+<li>극좌표계를 사용해서 구의 일부를 쪼개볼 수도 있습니다.</li>
+<li><code>plot_surface()</code>안에 넣는 x, y, z에다 slicing을 추가하면 됩니다.</li>
+<li><b>극고도각은 전체 범위를 사용하고 방위각은 마지막 9개를 사용하지 않겠다</b>고 하면 이런 그림이 그려집니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<img src="84_sphere_08.png"><br></li>
+</ul>
+<h2 id="2-3-선-색깔-조정"><a href="#2-3-선-색깔-조정" class="headerlink" title="2.3. 선 색깔 조정"></a>2.3. 선 색깔 조정</h2><ul>
+<li><p>우리는 지금 <b>면</b>을 그리고 있습니다.</p>
+</li>
+<li><p>따라서 <b><code>edgecolor</code> (<code>ec</code>)</b>, <b><code>linestyle</code> (<code>ls</code>)</b>, <b><code>linewidth</code> (<code>lw</code>)</b>가 적용됩니다.</p>
+</li>
+<li><p>불필요한 axis도 지워버립시다. 명령은 똑같이 <code>ax.axis(False)</code>입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>, ls=<span class="string">&quot;:&quot;</span>,</span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_09.png"><br></p>
+</li>
+<li><p>아까보다 한결 깔끔해 보입니다.</p>
+</li>
+</ul>
+<h2 id="2-4-면-색깔-조정"><a href="#2-4-면-색깔-조정" class="headerlink" title="2.4. 면 색깔 조정"></a>2.4. 면 색깔 조정</h2><ul>
+<li><p>면 색깔을 지정하는 매개변수는 <code>color</code>입니다.</p>
+</li>
+<li><p><code>colors=&quot;g&quot;</code>처럼 색상을 의미하는 약어나 숫자를 넣으면 적용됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>, ls=<span class="string">&quot;:&quot;</span>,</span><br><span class="line">                color=<span class="string">&quot;g&quot;</span>,</span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_10.png"><br></p>
+</li>
+<li><p>조명 방향도 바꿀 수 있습니다.</p>
+</li>
+<li><p><code>matplotlib.colors</code>의 <code>LightSource</code> 클래스를 사용해 조명 방향을 지정합니다.</p>
+</li>
+<li><p>두 개의 인자로 방위각과 극고도각을 도(degree) 단위로 입력합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> LightSource</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>,</span><br><span class="line">                        figsize=(<span class="number">15</span>, <span class="number">5</span>), </span><br><span class="line">                        constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">lightsources = [LightSource(<span class="number">30</span>, <span class="number">30</span>), LightSource(-<span class="number">30</span>, <span class="number">60</span>), LightSource(<span class="number">0</span>, <span class="number">0</span>)]</span><br><span class="line">titles = [<span class="string">&quot;azi: 30, polar: 30&quot;</span>, <span class="string">&quot;azi: -30, polar: 60&quot;</span>, <span class="string">&quot;azi: 0, polar: 0&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, ls, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, lightsources, titles):</span><br><span class="line">    ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                    ec=<span class="string">&quot;none&quot;</span>, lw=<span class="number">0</span>, ls=<span class="string">&quot;-&quot;</span>,</span><br><span class="line">                    color=<span class="string">&quot;w&quot;</span>, lightsource=ls,</span><br><span class="line">                    alpha=<span class="number">1</span>)</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line">    ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_12.png"><br></p>
+</li>
+<li><p>멋진 그라데이션을 입히고 싶다면 <code>cmap</code> 매개변수를 사용할 수 있습니다.</p>
+</li>
+<li><p>z축 방향 값에 따른 그라데이션이 매겨집니다.</p>
+</li>
+<li><p>Matplotlib이 제공하는 gradation 이름을 집어넣습니다.</p>
+</li>
+<li><p>다만 <b><code>cmap</code></b>과 <b><code>lightsource</code></b>는 <b>함께 쓰일 수 없으니</b> 유의해야 합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>, ls=<span class="string">&quot;:&quot;</span>,</span><br><span class="line">                cmap=<span class="string">&quot;inferno&quot;</span>,</span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_11.png"><br></p>
+</li>
+</ul>
+<h1 id="3-응용"><a href="#3-응용" class="headerlink" title="3. 응용"></a>3. 응용</h1><h2 id="3-1-구와-반구"><a href="#3-1-구와-반구" class="headerlink" title="3.1. 구와 반구"></a>3.1. 구와 반구</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16488182/removing-axes-margins-in-3d-plot">stackoverflow: Axes3D 여백 없애기</a></p>
+</blockquote>
+<ul>
+<li><p>구와 반구를 동시에 그려봅니다.</p>
+</li>
+<li><p>구는 위에서 만든 코드를 그대로 사용하면 되고, </p>
+</li>
+<li><p>반구는 극고도각을 절반만 사용하면 됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, </span><br><span class="line">                        figsize=(<span class="number">10</span>, <span class="number">5</span>), </span><br><span class="line">                        constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sphere</span></span><br><span class="line">axs[<span class="number">0</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hemisphere</span></span><br><span class="line">axs[<span class="number">1</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.5</span>))</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;hemisphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;X&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;Y&quot;</span>)</span><br><span class="line">    ax.set_zlabel(<span class="string">&quot;Z&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_01.png"><br></p>
+</li>
+<li><p>X, Y, Z축 범위가 -1~1을 약간 벗어나 있습니다.</p>
+</li>
+<li><p>matplotlib 기본 설정 문제입니다.</p>
+</li>
+<li><p>이를 해결하려면 위 코드에서 fig, axs를 생성한 뒤에 짧은 코드를 추가합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d.axis3d <span class="keyword">import</span> Axis</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(Axis, <span class="string">&quot;_get_coord_info_old&quot;</span>):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_coord_info_new</span>(<span class="params">self, renderer</span>):</span></span><br><span class="line">        mins, maxs, centers, deltas, tc, highs = self._get_coord_info_old(renderer)</span><br><span class="line">        mins += deltas / <span class="number">4</span></span><br><span class="line">        maxs -= deltas / <span class="number">4</span></span><br><span class="line">        <span class="keyword">return</span> mins, maxs, centers, deltas, tc, highs</span><br><span class="line">    Axis._get_coord_info_old = Axis._get_coord_info  </span><br><span class="line">    Axis._get_coord_info = _get_coord_info_new</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_02.png"><br></p>
+</li>
+<li><p>동서남북, 그리고 상하를 잇는 수직선을 그립니다.</p>
+</li>
+<li><p>좌표 원점이라고 봐도 됩니다.</p>
+</li>
+<li><p>여기서 한 가지 주의할 점이 있습니다.</p>
+</li>
+<li><p><b>matplotlib이 3D 도형과 2D 도형의 위치관계를 깔끔하기 처리하지 못합니다.</b></p>
+</li>
+<li><p>3D 도형에 가려질 부분과 가려지지 않을 부분을 따로 그리고 표현해줘야 합니다.</p>
+</li>
+<li><p>동서남북을 나타내는 N, E, W, S도 적당한 위치에 넣어줍니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, </span><br><span class="line">                        figsize=(<span class="number">10</span>, <span class="number">5</span>), </span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Axes3D 딱 붙이기</span></span><br><span class="line"><span class="comment"># https://stackoverflow.com/questions/16488182/removing-axes-margins-in-3d-plot</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d.axis3d <span class="keyword">import</span> Axis</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(Axis, <span class="string">&quot;_get_coord_info_old&quot;</span>):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_coord_info_new</span>(<span class="params">self, renderer</span>):</span></span><br><span class="line">        mins, maxs, centers, deltas, tc, highs = self._get_coord_info_old(renderer)</span><br><span class="line">        mins += deltas / <span class="number">4</span></span><br><span class="line">        maxs -= deltas / <span class="number">4</span></span><br><span class="line">        <span class="keyword">return</span> mins, maxs, centers, deltas, tc, highs</span><br><span class="line">    Axis._get_coord_info_old = Axis._get_coord_info  </span><br><span class="line">    Axis._get_coord_info = _get_coord_info_new</span><br><span class="line"></span><br><span class="line"><span class="comment"># sphere</span></span><br><span class="line">axs[<span class="number">0</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.1</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hemisphere</span></span><br><span class="line">axs[<span class="number">1</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.1</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.5</span>))</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;hemisphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;X&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;Y&quot;</span>)</span><br><span class="line">    ax.set_zlabel(<span class="string">&quot;Z&quot;</span>)</span><br><span class="line">    ax.view_init(azim=<span class="number">235</span>)</span><br><span class="line">    <span class="comment"># make margins</span></span><br><span class="line">    ax.margins(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># center axis</span></span><br><span class="line">    zmin = -<span class="number">1</span> <span class="keyword">if</span> ax == axs[<span class="number">0</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    ax.plot([-<span class="number">1.1</span>, <span class="number">1.1</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.plot([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [-<span class="number">1.1</span>, <span class="number">1.1</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.plot([<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [zmin, <span class="number">1</span>], c=<span class="string">&quot;k&quot;</span>, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.plot([<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1.1</span>], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ax == axs[<span class="number">0</span>]:</span><br><span class="line">        ax.plot([-<span class="number">1</span>, -<span class="number">1.1</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">3</span>)</span><br><span class="line">        ax.plot([<span class="number">0</span>, <span class="number">0</span>], [-<span class="number">1</span>, -<span class="number">1.1</span>], [<span class="number">0</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">3</span>)</span><br><span class="line">     </span><br><span class="line">    <span class="comment"># 동서남북 표시</span></span><br><span class="line">    font_text = &#123;<span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="number">15</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;</span><br><span class="line">    ax.text(-<span class="number">1.4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;W&quot;</span>, transform=ax.transData, fontdict=font_text)</span><br><span class="line">    ax.text(<span class="number">1.4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;E&quot;</span>, transform=ax.transData, fontdict=font_text)</span><br><span class="line">    ax.text(<span class="number">0</span>, <span class="number">1.4</span>, <span class="number">0</span>, <span class="string">&quot;N&quot;</span>, transform=ax.transData, fontdict=font_text, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.text(<span class="number">0</span>, -<span class="number">1.4</span>, <span class="number">0</span>, <span class="string">&quot;S&quot;</span>, transform=ax.transData, fontdict=font_text)</span><br><span class="line">    ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_04.png"><br></p>
+</li>
+</ul>
+<h2 id="3-2-magnetocrystalline-anisotropy"><a href="#3-2-magnetocrystalline-anisotropy" class="headerlink" title="3.2. magnetocrystalline anisotropy"></a>3.2. magnetocrystalline anisotropy</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy">wikipedia: magnetocrystalline anisotropy</a></p>
+</blockquote>
+<ul>
+<li>결정자기이방성(magnetocrystalline anisotropy)이라는 말을 들어보신 분은 거의 없으실 겁니다.</li>
+<li>자성(magnetism)을 공부할 때 나오는 용어인데, <b>방위에 따라 다른 에너지</b>라고 대충 넘어가셔도 좋습니다.</li>
+<li>중요한 것은 이번엔 <b>구나 반구가 아니라 울퉁불퉁한 모양</b>을 만들 것이라는 점입니다.</li>
+</ul>
+<ul>
+<li>원리는 간단합니다.</li>
+<li>이 글의 처음에서 구면좌표계는 다음과 같은 식으로 표현된다고 했습니다.</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>x &amp;= r \cos{\varphi} \sin{\theta}\\<br>y &amp;= r \sin{\varphi} \sin{\theta}\\<br>z &amp;= r \cos{\theta}<br>\end{aligned}$$</p>
+<ul>
+<li>앞에서는 $r = 1$로 두었지만, 여기서는 $r = f(\varphi, \theta)$입니다.</li>
+<li>방위각과 극고도각을 이용해서 물질마다 다르게 r을 정의합니다.</li>
+<li>모양이 울퉁불퉁한만큼 아까 10도 단위로 쪼갠 공간을 이번엔 5도 단위로 쪼갭니다.</li>
+<li>자세한 설명은 생략하고 결과 그림과 코드만 간략히 보여드리겠습니다.</li>
+</ul>
+<ul>
+<li><p>5도 단위로 공간 분할</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># angles</span></span><br><span class="line">polars = np.linspace(<span class="number">0</span>, <span class="number">179</span>, <span class="number">37</span>)</span><br><span class="line">azimuths = np.linspace(<span class="number">0</span>, <span class="number">360</span>, <span class="number">73</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># points</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(product(polars, azimuths), columns=[<span class="string">&quot;azi&quot;</span>, <span class="string">&quot;polar&quot;</span>])</span><br><span class="line">df[<span class="string">&quot;x&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;y&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.sin(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;z&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>방향에 따른 $r$ 계산: 자기이방성 에너지</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 자기이방성 계수 K1, K2</span></span><br><span class="line">K1_Co = <span class="number">45</span></span><br><span class="line">K2_Co = <span class="number">15</span></span><br><span class="line"></span><br><span class="line">K1_Fe = <span class="number">4.8</span></span><br><span class="line">K2_Fe = <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">K1_Ni = -<span class="number">0.5</span> </span><br><span class="line">K2_Ni = -<span class="number">0.2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 방향에 따른 자기이방성 에너지 계산.</span></span><br><span class="line"><span class="comment"># 그림을 그리는 것이 목적이므로 보기 좋도록 적절히 스케일링</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_uni</span>(<span class="params">K1, K2, df</span>):</span></span><br><span class="line">    <span class="keyword">return</span> K1*(df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span> + df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_cubic</span>(<span class="params">K1, K2, df</span>):</span></span><br><span class="line">    <span class="keyword">return</span> K1*(df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span> + \</span><br><span class="line">               df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;z&quot;</span>]**<span class="number">2</span> + \</span><br><span class="line">               df[<span class="string">&quot;z&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span>) + \</span><br><span class="line">           K2*(df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;z&quot;</span>]**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;E_Co&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: calc_uni(K1_Co, K2_Co, x), axis=<span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">df[<span class="string">&quot;E_Fe&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: calc_cubic(K1_Fe, K2_Fe, x), axis=<span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">df[<span class="string">&quot;E_Ni&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: calc_cubic(K1_Ni, K2_Ni, x), axis=<span class="number">1</span>)*<span class="number">3</span> +<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 극좌표계를 직교좌표계로 변환</span></span><br><span class="line">df[<span class="string">&quot;x_Co&quot;</span>] = df[<span class="string">&quot;E_Co&quot;</span>] * df[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;y_Co&quot;</span>] = df[<span class="string">&quot;E_Co&quot;</span>] * df[<span class="string">&quot;y&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;z_Co&quot;</span>] = df[<span class="string">&quot;E_Co&quot;</span>] * df[<span class="string">&quot;z&quot;</span>]</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;x_Fe&quot;</span>] = df[<span class="string">&quot;E_Fe&quot;</span>] * df[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;y_Fe&quot;</span>] = df[<span class="string">&quot;E_Fe&quot;</span>] * df[<span class="string">&quot;y&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;z_Fe&quot;</span>] = df[<span class="string">&quot;E_Fe&quot;</span>] * df[<span class="string">&quot;z&quot;</span>]</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;x_Ni&quot;</span>] = df[<span class="string">&quot;E_Ni&quot;</span>] * df[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;y_Ni&quot;</span>] = df[<span class="string">&quot;E_Ni&quot;</span>] * df[<span class="string">&quot;y&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;z_Ni&quot;</span>] = df[<span class="string">&quot;E_Ni&quot;</span>] * df[<span class="string">&quot;z&quot;</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p>세 가지 물질(Co, Fe, Ni)의 자기이방성 에너지 시각화</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, </span><br><span class="line">                        figsize=(<span class="number">15</span>, <span class="number">6</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> ax, mat <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;Co&quot;</span>, <span class="string">&quot;Fe&quot;</span>, <span class="string">&quot;Ni&quot;</span>]):</span><br><span class="line">    ax.plot_surface(df[<span class="string">f&quot;x_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,:-<span class="number">19</span>], </span><br><span class="line">                    df[<span class="string">f&quot;y_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,:-<span class="number">19</span>], </span><br><span class="line">                    df[<span class="string">f&quot;z_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,:-<span class="number">19</span>], </span><br><span class="line">                    ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>,</span><br><span class="line">                    color=<span class="string">&quot;w&quot;</span>, lightsource=LightSource(<span class="number">0</span>, <span class="number">10</span>),</span><br><span class="line">                    alpha=<span class="number">1</span>)</span><br><span class="line">    ax.plot(df[<span class="string">f&quot;x_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,-<span class="number">20</span>], </span><br><span class="line">            df[<span class="string">f&quot;y_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,-<span class="number">20</span>], </span><br><span class="line">            df[<span class="string">f&quot;z_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,-<span class="number">20</span>], </span><br><span class="line">            c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">    ax.plot(df[<span class="string">f&quot;x_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,<span class="number">0</span>], </span><br><span class="line">            df[<span class="string">f&quot;y_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,<span class="number">0</span>], </span><br><span class="line">            df[<span class="string">f&quot;z_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,<span class="number">0</span>], </span><br><span class="line">            c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">    ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    ax.axis(<span class="literal">False</span>)</span><br><span class="line">    ax.set_title(mat, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br><span class="line">    </span><br><span class="line">fig.suptitle(<span class="string">&quot;crystalline anisotropy energy surface\n&quot;</span>, </span><br><span class="line">             color=<span class="string">&quot;blue&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="84_sphere_13.png"><br></p>
+</li>
+<li><p>제 박사학위 주제와 밀접한 그림입니다. </p>
+</li>
+<li><p>교과서 그림을 모방해 학위논문(2011)에도 같은 그림을 그려서 넣었습니다.</p>
+</li>
+<li><p>mathematica를 사용해서 그린 그림입니다.<br><br><img src="84_sphere_14.png"><br></p>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/" data-id="ckvt2z13d000k4otqhb99exfl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "3D curved surfaces",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/84_sphere_0.png",
+        "keywords": "python matplotlib 3D",
+        "genre": "Python Data Science",
+        "datePublished": "2021-09-03",
+        "dateCreated": "2021-09-03",
+        "dateModified": "2021-09-26",
+        "url": "https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/",
+        "description": "
+자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다.
+어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다.
+저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다.
+과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.
+
+1. 데이터 준비
+wikipedia: Spherical co",
+        "wordCount": 4037
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2021/09/26/Python-General-9-fullmoon/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Full moon
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2021/09/02/Python-DS-83-aifestival2021/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">머신러닝 모델링의 흔한 실수들 (2)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/87_violinplotedit00.png)" alt="modifying seaborn violin plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/21/Python-DS-87_violinplotedit/" class="title">modifying seaborn violin plot</a></p>
+                            <p class="item-date"><time datetime="2021-10-21T00:11:00.000Z" itemprop="datePublished">2021-10-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/14/Python-DS-86-datadoubt/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/86_datadoubt.jpg)" alt="데이터 분석, 의심에서 전달까지" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/14/Python-DS-86-datadoubt/" class="title">데이터 분석, 의심에서 전달까지</a></p>
+                            <p class="item-date"><time datetime="2021-10-14T00:40:00.000Z" itemprop="datePublished">2021-10-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/10/05/Python-DS-85-popkr/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/85_popkr_0.png)" alt="Population by gender and age" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/10/05/Python-DS-85-popkr/" class="title">Population by gender and age</a></p>
+                            <p class="item-date"><time datetime="2021-10-05T04:31:00.000Z" itemprop="datePublished">2021-10-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/7_skorch_pipeline_0.png)" alt="pytorch &amp; sklearn pipeline" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2021/09/29/Python-DL-7-skorch_pipeline/" class="title">pytorch &amp; sklearn pipeline</a></p>
+                            <p class="item-date"><time datetime="2021-09-29T02:57:00.000Z" itemprop="datePublished">2021-09-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/09/26/Python-General-9-fullmoon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/9_fullmoon_0.png)" alt="Full moon" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2021/09/26/Python-General-9-fullmoon/" class="title">Full moon</a></p>
+                            <p class="item-date"><time datetime="2021-09-25T23:52:00.000Z" itemprop="datePublished">2021-09-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">101</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">85</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.14px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 11.43px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.71px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10px;">NIA</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.71px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.71px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.71px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.71px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.43px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.71px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.86px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.71px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.71px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.71px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.43px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.71px;">font</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.29px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.14px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.43px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.71px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.86px;">jython</a> <a href="/tags/keras/" style="font-size: 10.71px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.43px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 12.86px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.57px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.71px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10.71px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.71px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.71px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.43px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.71px;">probability</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.71px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.71px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.71px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.71px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.71px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.86px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.71px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.14px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12.14px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.57px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.71px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.43px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.71px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.43px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.29px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2021 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
