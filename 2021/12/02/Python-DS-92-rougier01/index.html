@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/92_rougier01_00.png">
 <meta property="article:published_time" content="2021-12-02T00:50:00.000Z">
-<meta property="article:modified_time" content="2021-12-02T08:28:46.866Z">
+<meta property="article:modified_time" content="2021-12-02T21:09:42.844Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/12/02/Python-DS-92-rougier01/" class="article-date">
-     <time datetime="2021-12-02T08:28:46.866Z" itemprop="dateModified">2021-12-02</time>
+     <time datetime="2021-12-02T21:09:42.844Z" itemprop="dateModified">2021-12-03</time>
   </a>
 </div>
 
@@ -242,9 +242,9 @@
 <div class="en" bgcolor="#AAAAAA">
 <ul>
 <li> <b>Scientific Visualization: Python + Matplotlib</b> contains cutting-edge visualization skills and examples of Matplotlib and Python.  
-</li><li> Despite of its great contents, relatively short description of the book prevents beginners from understanding how it is possible.  
-</li><li> Under permission of the author, Dr. Nicolas P. Rougier, I'll try to put step-stones between them.  
-</li><li> This series will be posted in <b>English</b> as well as Korean, for foreign readers.  
+</li><li> Despite its high quality content, relatively short explanations in the book may prevent the readers from fully grasping all of its contents.  
+</li><li> With the permission of the author, Dr. Nicolas P. Rougier, I'll try to help the beginners understand the more complex concepts within the book by providing explanations and commentary where needed.  
+</li><li> This series will be posted in <b>English</b> as well as Korean, for international readers.  
 </ul>
 </div>
 
@@ -267,7 +267,7 @@
 </ul>
 <div class="en"><ul>
 <li> We are going to investigate a scatter plot with a histogram.</li>
-<li> The histogram is rotated and placed along PC1 axis, representing data distribution along PC2 direction.</li>
+<li> The histogram is rotated and placed along PC1 axis, representing data distribution along the PC2's direction.</li>
 </ul></div>
 
 <h1 id="2-Matplotlib-coding"><a href="#2-Matplotlib-coding" class="headerlink" title="2. Matplotlib coding"></a>2. Matplotlib coding</h1><ul>
@@ -276,7 +276,7 @@
 </ul>
 <div class="en"><ul>
 <li> The author created the figure with Matplotlib only.</li>
-<li> We'll see the author's code is working by following every simple step.</li>
+<li> We'll see the author's code is working by following every step.</li>
 </ul></div>
 
 
@@ -286,7 +286,7 @@
 <li>numpy random seed를 설정하여 재현성을 확보합니다.</li>
 </ul>
 <div class="en"><ul>
-<li> The code starts from importing libraries.</li>
+<li> We start by importing the libraries.</li>
 <li> Unlike "normal" visualizations, the modules named <code>Polygon</code>, <code>Affine2D</code>, <code>floating_axes</code> are imported.</li>
 <li> Reproducibality is secured by setting numpy random seed.</li>
 </ul></div>
@@ -304,7 +304,7 @@
 <div class="en"><ul>
 <li> An affine transformation is any transformation that preserves collinearity (i.e., all points lying on a line initially still lie on a line after transformation) and ratios of distances (e.g., the midpoint of a line segment remains the midpoint after transformation).</li>
 <li> Matplotlib provides <code>Affine2D</code> function in which 2-dimensional Affine transformation is implemented.</li>
-<li> Before diving into the original code, we need to check how to use <code>Affine2D</code>.</li>
+<li> Before diving into the original code, we need to learn how to use <code>Affine2D</code>.</li>
 </ul></div>
 
 <ul>
@@ -313,9 +313,9 @@
 <li><code>Affine2D().rotate_deg(30).transform(S0)</code> 명령으로 <b>S0</b>를 30도 회전해 <b>S1</b>을 얻습니다. 방향은 반시계 방향입니다.</li>
 </ul>
 <div class="en"><ul>
-<li> <b>S0</b>, sample data consisted of 7 points is prepared on cartesian coordinate system. Each point has x and y coordinate, therefore shape of S0 is (7, 2).</li>
-<li> <b>Sc</b>, a dataset with 7 values are prepared by <code>numpy.linspace()</code> to paint each point with differnt color.</li>
-<li> <b>S1</b> is obtained by rotating <b>S0</b> by 30 degree in counterclockwise by <code>Affine2D().rotate_deg(30).transform(S0)</code>.</li>
+<li> <b>S0</b>, sample data consisted of 7 points, is prepared on cartesian coordinate system. Each point has x and y coordinate, therefore shape of S0 is (7, 2).</li>
+<li> <b>Sc</b>, a dataset with 7 values are prepared by using <code>numpy.linspace()</code> to paint each point with a differnt color.</li>
+<li> <b>S1</b> is obtained by rotating <b>S0</b> by 30 degree in a counterclockwise direction by using <code>Affine2D().rotate_deg(30).transform(S0)</code>.</li>
 </ul></div>
 
 <ul>
@@ -332,8 +332,8 @@
 <li><b>Rt</b>라는 이름의 변환을 선언하고 <code>R0.set_transform(Rt)</code>를 적용하면 <b>R0</b>의 좌표가 바뀝니다.</li>
 </ul>
 <div class="en"><ul>
-<li> Transformation is achieved by another way. We will rotate <b>R0</b>, a Matplotlib Rectangle object.</li>
-<li> Declerating <b>Rt</b> and application on <b>R0</b> by <code>R0.set_transform(Rt)</code> changes the coordinates of itself.</li>
+<li> We can get the same result by using a different method. We will rotate <b>R0</b>, a Matplotlib Rectangle object.</li>
+<li> Declerating <b>Rt</b> as the designation and applying <code>R0.set_transform(Rt)</code> to <b>R0</b> changes the coordinates of itself.</li>
 </ul></div>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Rectangle</span><br><span class="line"></span><br><span class="line">R0 = Rectangle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax_s <span class="keyword">in</span> axs_s:</span><br><span class="line">    R0 = Rectangle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">3</span>, <span class="number">3</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;c&quot;</span>, zorder=-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> ax_s == axs_s[<span class="number">1</span>]:</span><br><span class="line">        Rt = Affine2D().rotate_deg(<span class="number">30</span>) + axs_s[<span class="number">1</span>].transData</span><br><span class="line">        R0.set_transform(Rt)</span><br><span class="line">    ax_s.add_patch(R0)</span><br><span class="line">    </span><br><span class="line">fig_s.tight_layout()</span><br><span class="line">display(fig_s)</span><br></pre></td></tr></table></figure>
@@ -341,11 +341,11 @@
 <p><img src="92_rougier01_03.png"><br></p>
 <ul>
 <li>(150, 2) 데이터 <b>Z0</b>를 생성하고 같은 방식으로 원본 데이터를 35도 회전해 <b>Z1</b>를 만듭니다.</li>
-<li><b>Z1</b>의 x, y 평균을 구해 <b>Zm</b>에 저장합니다.</li>
+<li><b>Z1</b>의 x, y 평균([ 0.13746892, -0.02793329])을 구해 <b>Zm</b>에 저장합니다.</li>
 </ul>
 <div class="en"><ul>
 <li> Create (150, 2) points data <b>Z0</b> then rotate 35 degree in the same manner to generate <b>Z1</b>.</li>
-<li> Calculate mean of <b>Z1</b> and store it as <b>Zm</b>.</li>
+<li> Calculate mean of <b>Z1</b> ([ 0.13746892, -0.02793329]) and store it as <b>Zm</b>.</li>
 </ul></div>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generate some data</span></span><br><span class="line">Z0 = np.random.normal(<span class="number">0</span>, (<span class="number">1.25</span>, <span class="number">0.75</span>), (<span class="number">150</span>, <span class="number">2</span>))  <span class="comment"># Z0: 2D random points array</span></span><br><span class="line">Z1 = Affine2D().rotate_deg(<span class="number">35</span>).transform(Z0)      <span class="comment"># Z1: rotated Z0</span></span><br><span class="line">Zm = Z1.mean(axis=<span class="number">0</span>)                              <span class="comment"># mean of Z1. Zm = np.array([ 0.13746892, -0.02793329])</span></span><br></pre></td></tr></table></figure>
@@ -357,7 +357,7 @@
 <li>eigenvalue <b>V</b>와 eigenvector <b>W</b>로부터 PC1과 PC2를 구하고 각각 <b>T</b>(PC1)와 <b>O</b>(PC1과 직각. PC2)으로 복사합니다. </li>
 </ul>
 <div class="en"><ul>
-<li> Perform PCA using <code>numpy.linalg.eig</code>.</li>
+<li> Perform PCA using <code>numpy.linalg.eig()</code>.</li>
 <li> Get PC1 and PC2 from the eigenvalue <b>V</b> and eigenvector <b>W</b>, and copy them as <b>T</b>(tangent to PC1) and <b>O</b>(orthogonal to PC1, equivalent to PC2).</li>
 </ul></div>
 
@@ -383,7 +383,7 @@
 </ul>
 <div class="en"><ul>
 <li> Finally data visualization is about to begin.</li>
-<li> Scatter plot and subsidiary x, y ticks and ticklabels are controlled.</li>
+<li> Draw a scatter plot; subsidiary x, y ticks and ticklabels are controlled.</li>
 <li> PC1 axis is marked as a dashed line.</li>
 </ul></div>
 
@@ -398,9 +398,9 @@
 </ul>
 <div class="en"><ul>
 <li> It's time to draw bounding box around the points.</li>
-<li> To get half of the box <b>d</b>, all data <b>Z1</b> is rotated by <b>rotation</b> and found maximum of the absolute <b>Z1</b>.</li>
+<li> Rotate the <b>Z1</b> along its X-axis, then find <b>d</b> which is half of the box's abolute y value.</li>
 <li> Get 4 points of the bounding box from <b>O</b>, <b>T</b> and <b>d</b>, store as <b>P2</b>.</li>
-<li> Finally, create Polygon object from <b>P2</b> and add using <code>ax1.add_patch()</code>. </li>
+<li> Finally, create Polygon object from <b>P2</b> and add it by using <code>ax1.add_patch()</code>. </li>
 </ul></div>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compute the width of the distribution along orthogonal direction to the PCA</span></span><br><span class="line"><span class="comment"># main axis. This is made by rotating points and taking max on the Y axis.</span></span><br><span class="line">transform = Affine2D().rotate_deg(-rotation)</span><br><span class="line">P1 = transform.transform(Z1 - Z1.mean(axis=<span class="number">0</span>))     <span class="comment"># P1 : rotated Z1, along x-axis</span></span><br><span class="line">d = np.<span class="built_in">abs</span>(P1[:, <span class="number">1</span>]).<span class="built_in">max</span>()                         <span class="comment"># d  : max. distance between P0 and Z1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Draw a rectangle surrounding the distribution &amp; oriented along PCA main axis</span></span><br><span class="line">P2 = np.vstack(                                    <span class="comment"># P2 : rectangle surrounding Z1</span></span><br><span class="line">    [</span><br><span class="line">        Zm - <span class="number">10</span> * T - d * O,</span><br><span class="line">        Zm + (<span class="number">6</span> - d) * T - d * O,</span><br><span class="line">        Zm + (<span class="number">6</span> - d) * T + d * O,</span><br><span class="line">        Zm - <span class="number">10</span> * T + d * O,</span><br><span class="line">    ]</span><br><span class="line">)</span><br><span class="line">ax1.add_patch(</span><br><span class="line">    Polygon(</span><br><span class="line">        P2,</span><br><span class="line">        closed=<span class="literal">True</span>,</span><br><span class="line">        fill=<span class="literal">True</span>,</span><br><span class="line">        edgecolor=<span class="string">&quot;None&quot;</span>,</span><br><span class="line">        facecolor=<span class="string">&quot;C0&quot;</span>,</span><br><span class="line">        alpha=<span class="number">0.1</span>,</span><br><span class="line">        zorder=-<span class="number">50</span>,</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
@@ -411,8 +411,8 @@
 <li><b>Zm</b>, <b>d</b>, <b>T</b>, <b>O</b>로부터 윤곽선 좌표 <b>P3</b>과 <b>P4</b>를 구해 <code>ax1.plot()</code>으로 조금 진한 윤곽선을 입힙니다.</li>
 </ul>
 <div class="en"><ul>
-<li> Boundary of the bounding box should be more clear, as well as the triangle markers denoting means <b>Zm</b> are to be placed on each axis.</li>
-<li> Coordinates of boundaries <b>P3</b> and <b>P4</b> are obtained from <b>Zm</b>, <b>d</b>, <b>T</b>, <b>O</b>, and slightly dark boundaries are drawn using <code>ax1.plot()</code>.</li>
+<li> Boundary of the bounding box should be more clear, and the triangle markers denoting means <b>Zm</b> should be visible on each axis.</li>
+<li> Get the coordinates of the outline, <b>P3</b> and <b>P4</b>, from <b>Zm</b>, <b>d</b>, <b>T</b> and <b>O</b>, then apply a slightly darker outline by using the command <code>ax1.plot()</code>.</li> 
 </ul></div>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># P3, P4 : edges of P2 parallel to PC1</span></span><br><span class="line">P3 = np.vstack([Zm - <span class="number">10</span> * T, Zm + (<span class="number">6</span> - d) * T]) - d * O  </span><br><span class="line">plt.plot(P3[:, <span class="number">0</span>], P3[:, <span class="number">1</span>], color=<span class="string">&quot;C0&quot;</span>, linestyle=<span class="string">&quot;-&quot;</span>, linewidth=<span class="number">0.75</span>, alpha=<span class="number">0.25</span>)</span><br><span class="line">P4 = np.vstack([Zm - <span class="number">10</span> * T, Zm + (<span class="number">6</span> - d) * T]) + d * O</span><br><span class="line">plt.plot(P4[:, <span class="number">0</span>], P4[:, <span class="number">1</span>], color=<span class="string">&quot;C0&quot;</span>, linestyle=<span class="string">&quot;-&quot;</span>, linewidth=<span class="number">0.75</span>, alpha=<span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Some markers on the axis to show the mean (we could compute exactly the delta</span></span><br><span class="line"><span class="comment"># for placing the marker but it is not the point of this example)</span></span><br><span class="line">ax1.scatter(Zm[<span class="number">0</span>], -<span class="number">2.85</span>, s=<span class="number">50</span>, color=<span class="string">&quot;black&quot;</span>, marker=<span class="string">&quot;v&quot;</span>, clip_on=<span class="literal">False</span>)</span><br><span class="line">ax1.scatter(-<span class="number">2.85</span>, Zm[<span class="number">1</span>], s=<span class="number">50</span>, color=<span class="string">&quot;black&quot;</span>, marker=<span class="string">&quot;&lt;&quot;</span>, clip_on=<span class="literal">False</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -424,9 +424,9 @@
 <li>이 Axes 위에 histogram을 회전시켜 붙여야 합니다.</li>
 </ul>
 <div class="en"><ul>
-<li> The next step is the highlight of this visualization, the rotated histogram.</li>
-<li> In order to add rotated histogram, new Axes should be formed at exact site with exact angle and size.</li>
-<li> And then histogram is added with rotation.</li>
+<li> The next step is the grand finale of this visualization, the rotated histogram.</li>
+<li> In order to add rotated histogram, new Axes should be formed at the exact site with the exact angle and size.</li>
+<li> And then histogram is added with the rotation.</li>
 </ul></div>
 
 
@@ -436,8 +436,8 @@
 <li>histogram이 놓일 공간의 중심 좌표 <b>C</b>를 구합니다.</li>
 </ul>
 <div class="en"><ul>
-<li> A square-shaped space is going to be formed on the extend of PC1.</li>
-<li> The height and width of the space is same to the height of Polygon based on <b>P2</b>.</li>
+<li> We are now going to form a square shaped space in the direction, and as an extension, of <b>PC1</b>.</li>
+<li> The height and width of the space is same as the height of Polygon based on <b>P2</b>.</li>
 <li> The center coordinate <b>C</b> of the histogram space is calculated.</li>
 </ul></div>
 
@@ -464,7 +464,7 @@
 <li>불규칙한 Axes를 만들 때 <code>floating_axes</code>를 사용합니다.</li>
 </ul>
 <div class="en"><ul>
-<li> Based on this dimensions Axes for histogram <b>ax2</b> is generated.</li>
+<li> Based on this dimensions Axes for histogram, <b>ax2</b> is generated.</li>
 <li> <code>floating_axes</code> is used for irregular Axes.</li>
 </ul></div>
 
@@ -477,9 +477,9 @@
 <li>PC2 방향의 histogram을 얻기 위해 <code>numpy.histogram(-Z @ PC1)</code>을 사용했습니다. <b>PC1에 수직 방향의 빈도를 구하라</b>는 뜻입니다.</li>
 </ul>
 <div class="en"><ul>
-<li> Since the new Axes is prepared, it is time to add histogram.</li>
-<li> To visualize data on rotated space, another Axes should be generated using <code>ax2.get_aux_axes(transform)</code>.</li>
-<li> <code>numpy.histogram(-Z1 @ PC1)</code> is used to obtain histogram along PC2 axis. The code means <b>return data frequences orthogonal to PC1 axis</b>.</li>
+<li> Since the new Axes is prepared, it is time to add the histogram.</li>
+<li> To visualize data on a rotated space, another Axes should be generated using <code>ax2.get_aux_axes(transform)</code>.</li>
+<li> <code>numpy.histogram(-Z1 @ PC1)</code> is used to obtain histogram along the PC2 axis. The code means <b>return data frequences orthogonal to PC1 axis</b>.</li>
 </ul></div>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5. Some decoration the secondary axis</span></span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticks.set_tick_out(<span class="literal">True</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.set_xticks([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.patch.set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. Display the histogram, taking care of the extents of the X axis</span></span><br><span class="line">counts, bins = np.histogram(-Z1 @ PC1, bins=<span class="number">12</span>)     <span class="comment"># histogram of -Z1 orthogonal to PC1 direction with 12 bins</span></span><br><span class="line">X0 = (bins - bins[<span class="number">0</span>]) / (bins[-<span class="number">1</span>] - bins[<span class="number">0</span>])        <span class="comment"># X0 : normalized bins range [0, 1]</span></span><br><span class="line">X1 = xmin + (xmax - xmin) * X0                      <span class="comment"># X1 : stretched bins range [xmin, xmax] = [-16, 16]</span></span><br><span class="line">Y = np.array(counts)</span><br><span class="line"></span><br><span class="line"><span class="comment"># This auxiliary axis is necessary to draw stuff (no real idea why)</span></span><br><span class="line">ax2_aux = ax2.get_aux_axes(transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plotting histogram </span></span><br><span class="line">ax2_aux.hist(X1[:-<span class="number">1</span>], X1, weights=Y, facecolor=<span class="string">&quot;C0&quot;</span>, edgecolor=<span class="string">&quot;white&quot;</span>, linewidth=<span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line">text_xy.remove()</span><br><span class="line">text_xyo.remove()</span><br><span class="line">text_hw.remove()</span><br><span class="line">line_hw.remove()</span><br><span class="line"></span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
@@ -502,10 +502,10 @@
 <li>여러분의 상상을 실현하는 데, Nicolas의 훌륭한 코드를 이해하는 데 도움이 되시길 바랍니다.</li>
 </ul>
 <div class="en"><ul>
-<li> In this article we divide the source code in many parts, and looked through how the final figure is created.</li>
-<li> A couple of changes are suggested as a form of Pull Request to correct small errors. This article is written based on the revised version of mine.</li>
+<li> In this article we divide the source code into many parts, and looked through how the final figure was created.</li>
+<li> A couple of changes were suggested as a form of Pull Request to correct small errors. This article is written based on the revised version of mine.</li>
 <li> Matplotlib is a library with a strong power of expression.</li>
-<li> I hope this article to be an assistant of your imagination, as well as understanding Nicolas's excellent code.</li>
+<li> I hope this article to be an assistant to realize your imagination, as well as help you understand Nicolas's excellent code.</li>
 </ul></div>
 
 
@@ -526,7 +526,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/" data-id="ckwop65rc00wxoctqhyjy44fn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/" data-id="ckwpgcd6l00wvw0tqdn3nbjxt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -602,7 +602,7 @@
         "genre": "Python Data Science",
         "datePublished": "2021-12-02",
         "dateCreated": "2021-12-02",
-        "dateModified": "2021-12-02",
+        "dateModified": "2021-12-03",
         "url": "https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/",
         "description": "
 Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각화 기술이 담겼습니다.
@@ -612,7 +612,7 @@ Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각�
 
 
     .e",
-        "wordCount": 3983
+        "wordCount": 4037
     }
 </script>
 
