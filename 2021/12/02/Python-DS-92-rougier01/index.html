@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/92_rougier01_00.png">
 <meta property="article:published_time" content="2021-12-02T00:50:00.000Z">
-<meta property="article:modified_time" content="2021-12-02T06:27:26.424Z">
+<meta property="article:modified_time" content="2021-12-02T06:34:05.281Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/12/02/Python-DS-92-rougier01/" class="article-date">
-     <time datetime="2021-12-02T06:27:26.424Z" itemprop="dateModified">2021-12-02</time>
+     <time datetime="2021-12-02T06:34:05.281Z" itemprop="dateModified">2021-12-02</time>
   </a>
 </div>
 
@@ -483,6 +483,14 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5. Some decoration the secondary axis</span></span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticks.set_tick_out(<span class="literal">True</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.set_xticks([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.patch.set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. Display the histogram, taking care of the extents of the X axis</span></span><br><span class="line">counts, bins = np.histogram(-Z @ PC1, bins=<span class="number">12</span>)</span><br><span class="line">X = (bins - bins[<span class="number">0</span>]) / (bins[-<span class="number">1</span>] - bins[<span class="number">0</span>])</span><br><span class="line">X = xmin + (xmax - xmin) * X</span><br><span class="line">Y = np.array(counts)</span><br><span class="line"></span><br><span class="line">ax2_aux = ax2.get_aux_axes(transform)</span><br><span class="line">ax2_aux.hist(X[:-<span class="number">1</span>], X, weights=Y, facecolor=<span class="string">&quot;C0&quot;</span>, edgecolor=<span class="string">&quot;white&quot;</span>, linewidth=<span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line">text_xy.remove()</span><br><span class="line">text_xyo.remove()</span><br><span class="line">text_hw.remove()</span><br><span class="line">line_hw.remove()</span><br><span class="line"></span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
 
 <p><img src="92_rougier01_11.png"><br></p>
+<ul>
+<li>마지막으로 히스토그램 숫자를 기입합니다.<div class="en"><ul>
+<li> At last, put numbers on top of the bars of histogram.</li>
+</ul></div></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 7. Adding some labels</span></span><br><span class="line">dx, dy = (X[<span class="number">1</span>] - X[<span class="number">0</span>]) / <span class="number">2</span>, <span class="number">0.75</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(X, Y):</span><br><span class="line">    ax2_aux.text(</span><br><span class="line">        x + dx,</span><br><span class="line">        y + dy,</span><br><span class="line">        <span class="string">&quot;%d&quot;</span> % y,</span><br><span class="line">        ha=<span class="string">&quot;center&quot;</span>,</span><br><span class="line">        va=<span class="string">&quot;center&quot;</span>,</span><br><span class="line">        size=<span class="number">8</span>,</span><br><span class="line">        rotation=-rotation,</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
+
+<p><img src="92_rougier01_12.png"><br></p>
 <h1 id="3-Conclusion"><a href="#3-Conclusion" class="headerlink" title="3. Conclusion"></a>3. Conclusion</h1><ul>
 <li>코드를 여러 부분으로 나누어 그림이 만들어지는 과정을 코드와 함께 살펴봤습니다.</li>
 <li>리뷰 과정에서 원본을 일부 수정하여 Pull Request를 드렸습니다. 이 글은 수정본을 기반으로 작성되었습니다.</li>
@@ -514,7 +522,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/" data-id="ckwoktf1l00wnv0tq9mvi2j9r" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/" data-id="ckwol234i00wkywtqd992cd16" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -600,7 +608,7 @@ Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각�
 
 
     .e",
-        "wordCount": 3709
+        "wordCount": 3860
     }
 </script>
 
