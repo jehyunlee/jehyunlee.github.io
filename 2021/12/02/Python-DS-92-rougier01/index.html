@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/92_rougier01_00.png">
 <meta property="article:published_time" content="2021-12-02T00:50:00.000Z">
-<meta property="article:modified_time" content="2021-12-02T07:22:03.235Z">
+<meta property="article:modified_time" content="2021-12-02T08:28:46.866Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/12/02/Python-DS-92-rougier01/" class="article-date">
-     <time datetime="2021-12-02T07:22:03.235Z" itemprop="dateModified">2021-12-02</time>
+     <time datetime="2021-12-02T08:28:46.866Z" itemprop="dateModified">2021-12-02</time>
   </a>
 </div>
 
@@ -248,15 +248,15 @@
 </ul>
 </div>
 
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/rougier/scientific-visualization-book">Scientific Visualization: Python + Matplotlib</a><br><a target="_blank" rel="noopener" href="https://github.com/rougier">github: Nicolas P. Rougier</a></p>
-</blockquote>
-<p><img src="92_rougier01_13.png"><br></p>
 <p>
 
 <blockquote>
 <p><b>영어 감수:</b> 한영회계법인 이지수 시니어</p>
 </blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/rougier/scientific-visualization-book">Scientific Visualization: Python + Matplotlib</a><br><a target="_blank" rel="noopener" href="https://github.com/rougier">github: Nicolas P. Rougier</a></p>
+</blockquote>
+<p><img src="92_rougier01_13.png"><br></p>
 <h1 id="1-Rotated-Histogram"><a href="#1-Rotated-Histogram" class="headerlink" title="1. Rotated Histogram"></a>1. Rotated Histogram</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/rougier/scientific-visualization-book/blob/master/code/coordinates/transforms-hist.py">transforms-hist.py</a></p>
 </blockquote>
@@ -474,13 +474,15 @@
 <h2 id="2-7-Add-Rotated-histogram-and-axis-settings"><a href="#2-7-Add-Rotated-histogram-and-axis-settings" class="headerlink" title="2.7. Add Rotated histogram and axis settings"></a>2.7. Add Rotated histogram and axis settings</h2><ul>
 <li>이제 공간이 마련되었으니 histogram을 붙일 차례입니다.</li>
 <li>회전된 공간에 데이터를 넣으려면 <code>ax2.get_aux_axes(transform)</code>을 사용해 별도의 Axes를 만들어야 합니다.</li>
+<li>PC2 방향의 histogram을 얻기 위해 <code>numpy.histogram(-Z @ PC1)</code>을 사용했습니다. <b>PC1에 수직 방향의 빈도를 구하라</b>는 뜻입니다.</li>
 </ul>
 <div class="en"><ul>
 <li> Since the new Axes is prepared, it is time to add histogram.</li>
 <li> To visualize data on rotated space, another Axes should be generated using <code>ax2.get_aux_axes(transform)</code>.</li>
+<li> <code>numpy.histogram(-Z1 @ PC1)</code> is used to obtain histogram along PC2 axis. The code means <b>return data frequences orthogonal to PC1 axis</b>.</li>
 </ul></div>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5. Some decoration the secondary axis</span></span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticks.set_tick_out(<span class="literal">True</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.set_xticks([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.patch.set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. Display the histogram, taking care of the extents of the X axis</span></span><br><span class="line">counts, bins = np.histogram(-Z @ PC1, bins=<span class="number">12</span>)</span><br><span class="line">X = (bins - bins[<span class="number">0</span>]) / (bins[-<span class="number">1</span>] - bins[<span class="number">0</span>])</span><br><span class="line">X = xmin + (xmax - xmin) * X</span><br><span class="line">Y = np.array(counts)</span><br><span class="line"></span><br><span class="line">ax2_aux = ax2.get_aux_axes(transform)</span><br><span class="line">ax2_aux.hist(X[:-<span class="number">1</span>], X, weights=Y, facecolor=<span class="string">&quot;C0&quot;</span>, edgecolor=<span class="string">&quot;white&quot;</span>, linewidth=<span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line">text_xy.remove()</span><br><span class="line">text_xyo.remove()</span><br><span class="line">text_hw.remove()</span><br><span class="line">line_hw.remove()</span><br><span class="line"></span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5. Some decoration the secondary axis</span></span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticklabels.set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;bottom&quot;</span>].major_ticks.set_tick_out(<span class="literal">True</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.axis[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax2.set_xticks([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">ax2.patch.set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. Display the histogram, taking care of the extents of the X axis</span></span><br><span class="line">counts, bins = np.histogram(-Z1 @ PC1, bins=<span class="number">12</span>)     <span class="comment"># histogram of -Z1 orthogonal to PC1 direction with 12 bins</span></span><br><span class="line">X0 = (bins - bins[<span class="number">0</span>]) / (bins[-<span class="number">1</span>] - bins[<span class="number">0</span>])        <span class="comment"># X0 : normalized bins range [0, 1]</span></span><br><span class="line">X1 = xmin + (xmax - xmin) * X0                      <span class="comment"># X1 : stretched bins range [xmin, xmax] = [-16, 16]</span></span><br><span class="line">Y = np.array(counts)</span><br><span class="line"></span><br><span class="line"><span class="comment"># This auxiliary axis is necessary to draw stuff (no real idea why)</span></span><br><span class="line">ax2_aux = ax2.get_aux_axes(transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plotting histogram </span></span><br><span class="line">ax2_aux.hist(X1[:-<span class="number">1</span>], X1, weights=Y, facecolor=<span class="string">&quot;C0&quot;</span>, edgecolor=<span class="string">&quot;white&quot;</span>, linewidth=<span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line">text_xy.remove()</span><br><span class="line">text_xyo.remove()</span><br><span class="line">text_hw.remove()</span><br><span class="line">line_hw.remove()</span><br><span class="line"></span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
 
 <p><img src="92_rougier01_11.png"><br></p>
 <ul>
@@ -490,7 +492,7 @@
 <li> At last, put numbers on top of the bars of histogram.</li>
 </ul></div>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 7. Adding some labels</span></span><br><span class="line">dx, dy = (X[<span class="number">1</span>] - X[<span class="number">0</span>]) / <span class="number">2</span>, <span class="number">0.75</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(X, Y):</span><br><span class="line">    ax2_aux.text(</span><br><span class="line">        x + dx,</span><br><span class="line">        y + dy,</span><br><span class="line">        <span class="string">&quot;%d&quot;</span> % y,</span><br><span class="line">        ha=<span class="string">&quot;center&quot;</span>,</span><br><span class="line">        va=<span class="string">&quot;center&quot;</span>,</span><br><span class="line">        size=<span class="number">8</span>,</span><br><span class="line">        rotation=-rotation,</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 7. Adding some labels</span></span><br><span class="line">dx, dy = (X1[<span class="number">1</span>] - X1[<span class="number">0</span>]) / <span class="number">2</span>, <span class="number">0.75</span></span><br><span class="line"><span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(X1, Y):</span><br><span class="line">    ax2_aux.text(</span><br><span class="line">        x + dx,</span><br><span class="line">        y + dy,</span><br><span class="line">        <span class="string">&quot;%d&quot;</span> % y,</span><br><span class="line">        ha=<span class="string">&quot;center&quot;</span>,</span><br><span class="line">        va=<span class="string">&quot;center&quot;</span>,</span><br><span class="line">        size=<span class="number">8</span>,</span><br><span class="line">        rotation=-rotation,</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
 
 <p><img src="92_rougier01_12.png"><br></p>
 <h1 id="3-Conclusion"><a href="#3-Conclusion" class="headerlink" title="3. Conclusion"></a>3. Conclusion</h1><ul>
@@ -524,7 +526,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/" data-id="ckwoms4nz00x1bktqacht6b4a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/12/02/Python-DS-92-rougier01/" data-id="ckwop65rc00wxoctqhyjy44fn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -610,7 +612,7 @@ Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각�
 
 
     .e",
-        "wordCount": 3860
+        "wordCount": 3983
     }
 </script>
 
