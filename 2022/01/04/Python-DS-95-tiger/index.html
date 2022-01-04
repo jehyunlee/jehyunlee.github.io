@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>colorsys - Conversions between Color Systems | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,colorsys" />
+    
+    <meta name="description" content="이미지를 처리하는 파이썬 라이브러리는 많습니다. 가장 잘 알려진 opencv와 pillow를 비롯해서 matplotlib도 이미지 처리를 합니다. colorsys라는 파이썬 기본 라이브러리가 있습니다. 색 공간을 변환하는 라이브러리인데, 이것만 잘 써도 할 수 있는 게 많습니다.  1. 예제 이미지 wikimedia commons: Siberischer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="colorsys - Conversions between Color Systems">
+<meta property="og:url" content="https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="이미지를 처리하는 파이썬 라이브러리는 많습니다. 가장 잘 알려진 opencv와 pillow를 비롯해서 matplotlib도 이미지 처리를 합니다. colorsys라는 파이썬 기본 라이브러리가 있습니다. 색 공간을 변환하는 라이브러리인데, 이것만 잘 써도 할 수 있는 게 많습니다.  1. 예제 이미지 wikimedia commons: Siberischer">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/95_tiger_00.png">
+<meta property="article:published_time" content="2022-01-03T22:25:00.000Z">
+<meta property="article:modified_time" content="2022-01-04T00:49:10.492Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="colorsys">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/95_tiger_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2022/01/04/python-ds-95-tiger/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-95-tiger" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        colorsys - Conversions between Color Systems
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/01/04/Python-DS-95-tiger/" class="article-date">
+       <time datetime="2022-01-03T22:25:00.000Z" itemprop="datePublished">2022-01-04</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/01/04/Python-DS-95-tiger/" class="article-date">
+     <time datetime="2022-01-04T00:49:10.492Z" itemprop="dateModified">2022-01-04</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/colorsys/" rel="tag">colorsys</a>, <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>이미지를 처리하는 파이썬 라이브러리는 많습니다.</li>
+<li>가장 잘 알려진 opencv와 pillow를 비롯해서 matplotlib도 이미지 처리를 합니다.</li>
+<li>colorsys라는 파이썬 기본 라이브러리가 있습니다.</li>
+<li>색 공간을 변환하는 라이브러리인데, 이것만 잘 써도 할 수 있는 게 많습니다.</li>
+</ul>
+<h1 id="1-예제-이미지"><a href="#1-예제-이미지" class="headerlink" title="1. 예제 이미지"></a>1. 예제 이미지</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:Siberischer_tiger_de_edit02.jpg">wikimedia commons: Siberischer tiger de dedit02.jpg</a></p>
+</blockquote>
+<ul>
+<li>예제로 사용할 이미지를 가져옵니다.</li>
+<li>호랑이 해이니 호랑이 사진을 사용해 보겠습니다.</li>
+<li>저작권 걱정이 없는 <a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:Siberischer_tiger_de_edit02.jpg">wikimedia</a>에서 사진을 내려받아 <code>tiger.jpg</code>라고 저장합니다.</li>
+</ul>
+<p><img src="tiger_8.png"><br></p>
+<h1 id="2-Python에서-읽기"><a href="#2-Python에서-읽기" class="headerlink" title="2. Python에서 읽기"></a>2. Python에서 읽기</h1><ul>
+<li><p>먼저 기본 라이브러리를 부르고</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure></li>
+<li><p>이미지를 불러옵니다.</p>
+</li>
+<li><p><code>plt.imread()</code>명령으로 읽은 이미지는 numpy array로 저장됩니다.</p>
+</li>
+<li><p><code>.shape</code>으로 dimension을 확인하면 1200 x 1600 x 3입니다.</p>
+</li>
+<li><p>세로 1200, 가로 1600의 3차원(RGB) 이미지입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img_org = plt.imread(<span class="string">&quot;tiger.jpg&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(img_org.shape)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_org)</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure></li>
+<li><p>실행 결과</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1200, 1600, 3)</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_1.png"><br></p>
+</li>
+</ul>
+<h1 id="3-CIELab-color-space"><a href="#3-CIELab-color-space" class="headerlink" title="3. CIELab color space"></a>3. CIELab color space</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://colorspacious.readthedocs.io/en/latest/">colorspacious</a><br><a href="https://jehyunlee.github.io/2021/03/22/Python-DS-63-mpl_colors_qualitative/">Pega Devlog: 색의 속성에 대한 단어들</a></p>
+</blockquote>
+<ul>
+<li><p>사람이 인지하는 밝은 정도, 즉 <b>휘도(luminance)</b>를 파악합니다.</p>
+</li>
+<li><p>그림을 구성하는 RGB를 [colorspacious] 라이브러리의 <code>cspace_converter</code>를 사용해 <b>CIELab 색공간으로 변환</b>합니다.</p>
+</li>
+<li><p>CIELab 색공간의 첫번째 채널이 <b>$L^*$</b>, 즉 휘도입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># convert to CIELab</span></span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">img_lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(img_org/<span class="number">255</span>)</span><br><span class="line"><span class="built_in">print</span>(img_lab.shape)</span><br><span class="line">img_L = img_lab[:,:,<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_L, cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure></li>
+<li><p>실행 결과</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1200, 1600, 3)</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_2.png"><br></p>
+</li>
+<li><p>흑백 사진으로 변환되었습니다.</p>
+</li>
+<li><p>여기 보이는 회색조가 우리 눈이 느끼는 밝기입니다.</p>
+</li>
+</ul>
+<h1 id="4-HLS-color-space"><a href="#4-HLS-color-space" class="headerlink" title="4. HLS color space"></a>4. HLS color space</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HSL_and_HSV">wikipedia: HSL and HSV</a><br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/colorsys.html">python colorsys</a></p>
+</blockquote>
+<ul>
+<li><p>HSV (hue, saturation, value) 색공간과 더불어 HSL, 또는 HLS 색 공간이 사용됩니다.</p>
+</li>
+<li><p>색상(hue)과 명도(lightness), 채도(saturation)를 따로 조정할 수 있다는 장점이 있습니다.<br><br><img src="tiger_9.png"><br></p>
+</li>
+<li><p>python에 기본으로 내장된 <b><code>colorsys</code> 라이브러리는 색 공간 변환에 충실합니다.</b></p>
+</li>
+<li><p>RGB, YIQ, HLS, HSV 공간을 오가는 기능을 간단하게 제공합니다.</p>
+</li>
+<li><p>호랑이 이미지를 HLS 공간으로 바꾸어 hue, lightness, saturation 분포를 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line">img_hls = np.array([colorsys.rgb_to_hls(*c) <span class="keyword">for</span> c <span class="keyword">in</span> (img_org/<span class="number">255</span>).reshape((<span class="number">1600</span>*<span class="number">1200</span>, <span class="number">3</span>))]).T</span><br><span class="line"><span class="built_in">print</span>(img_hls.shape)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (title, ax) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>([<span class="string">&quot;hue&quot;</span>, <span class="string">&quot;lightness&quot;</span>, <span class="string">&quot;saturation&quot;</span>], axs)):</span><br><span class="line">    sns.histplot(img_hls[i], kde=<span class="literal">True</span>, bins=np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">21</span>), ax=ax)</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_3.png"><br></p>
+</li>
+<li><p>lightness를 보면 어두운 부분이 많은 것 같고,</p>
+</li>
+<li><p>saturation을 보면 원색에 가까운 비중이 상당히 높습니다.</p>
+</li>
+<li><p><b>hue가 좀 독특한데, 왼쪽에 몰려 있습니다.</b></p>
+</li>
+<li><p>잘못 처리한 것이 아닌지, hue의 숫자가 의미하는 색을 출력합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hue check</span></span><br><span class="line">hues = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">21</span>)[:<span class="number">20</span>]</span><br><span class="line">rgbs = <span class="built_in">list</span>(<span class="built_in">map</span>(colorsys.hls_to_rgb, *np.array([[h, <span class="number">0.5</span>, <span class="number">1</span>] <span class="keyword">for</span> h <span class="keyword">in</span> hues]).T))</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">10</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> ax, rgb, hue <span class="keyword">in</span> <span class="built_in">zip</span>(axes.ravel(), rgbs, hues):</span><br><span class="line">    ax.set_facecolor(rgb)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_xlabel(<span class="string">f&quot;<span class="subst">&#123;hue:<span class="number">.2</span>f&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span>, labelpad=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_4.png"><br></p>
+</li>
+<li><p>히스토그램에서 hue가 몰려 있는 0.25 아래 부분은 빨강, 주황, 노랑, 연두입니다.</p>
+</li>
+<li><p><b>호랑이와 들판을 이루고 있는 색</b>입니다. 그럴 만 하네요. 정상입니다. :)</p>
+</li>
+<li><p>호랑이 그림에서 hue, lightness, saturation이 어떻게 분포하고 있는지를 봅니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (title, ax) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>([<span class="string">&quot;hue&quot;</span>, <span class="string">&quot;lightness&quot;</span>, <span class="string">&quot;saturation&quot;</span>], axs)):</span><br><span class="line">    vmax = <span class="number">0.3</span> <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line">    im = ax.imshow(img_hls[i].reshape(<span class="number">1200</span>, <span class="number">1600</span>), cmap=<span class="string">&quot;rainbow&quot;</span>, vmin=<span class="number">0</span>, vmax=vmax)</span><br><span class="line">    plt.colorbar(im, orientation=<span class="string">&quot;horizontal&quot;</span>, ax=ax)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_5.png"><br></p>
+</li>
+<li><p>hue만 범위를 0-0.3으로 그리고 나머지는 0-1로 그렸습니다.</p>
+</li>
+<li><p>범위를 쉽게 파악하고자 의도적으로 rainbow colormap을 사용했습니다.</p>
+</li>
+<li><p><b>배경과 호랑이는 hue와 lightness로 쉽게 구분됩니다.</b></p>
+</li>
+<li><p>배경 일부에 호랑이와 hue가 같은 구간이 있는데 <b>lightness를 섞으면 같이 구분할 수 있습니다.</b></p>
+</li>
+</ul>
+<ul>
+<li><p>lightness threshold를 0.4로 고정하고</p>
+</li>
+<li><p>hue threshold (<code>h_th</code>)를 0.1~0.3으로 바꾸면서 호랑이 선택 범위를 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tiger selection</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">img_hls_tiger = deepcopy(img_hls)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">h_ths = [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>]</span><br><span class="line"><span class="keyword">for</span> h_th, ax <span class="keyword">in</span> <span class="built_in">zip</span>(h_ths, axs):</span><br><span class="line">    chk_tiger = np.where((img_hls[<span class="number">0</span>] &lt; h_th) &amp; (img_hls[<span class="number">1</span>] &gt; <span class="number">0.4</span>), <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">    ax.imshow(chk_tiger.reshape(<span class="number">1200</span>, <span class="number">1600</span>), cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;h_th&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_6.png"><br></p>
+</li>
+<li><p>다른 데는 비슷한데 <b>호랑이 이마와 왼쪽 뺨</b>에서 차이가 보입니다.</p>
+</li>
+<li><p>0.3으로 올리면 얼굴은 검은 줄무늬를 제외하고 거의 선택이 되고 배경으로 넘어가지 않네요.</p>
+</li>
+<li><p>hue threshold를 0.3으로 설정합니다.</p>
+</li>
+</ul>
+<ul>
+<li><p>1600 x 1200개의 픽셀 중 hue는 0.3 미만, lightness는 0.4 초과하는 범위를 잡습니다.</p>
+</li>
+<li><p>호랑이 얼굴의 명도는 올리고 채도는 낮춰서 <b>하얀 장로 호랑이 느낌</b>이 들도록 바꿉니다.</p>
+</li>
+<li><p><del>사실 올해가 검은 호랑이 해라 검게 하고 싶었는데 어떻게 해도 안예쁘더군요.</del></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">idx_tiger = np.where((img_hls[<span class="number">0</span>] &lt; <span class="number">0.3</span>) &amp; (img_hls[<span class="number">1</span>] &gt; <span class="number">0.4</span>))[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> idx_tiger:</span><br><span class="line">    img_hls_tiger[<span class="number">1</span>, idx] = <span class="built_in">min</span>(img_hls_tiger[<span class="number">1</span>, idx]+<span class="number">0.6</span>, <span class="number">1</span>)</span><br><span class="line">    img_hls_tiger[<span class="number">2</span>, idx] = <span class="built_in">max</span>(img_hls_tiger[<span class="number">2</span>, idx]-<span class="number">0.6</span>, <span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">img_rgb_tiger = np.array([colorsys.hls_to_rgb(*c) <span class="keyword">for</span> c <span class="keyword">in</span> img_hls_tiger.T])</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_rgb_tiger.reshape(<span class="number">1200</span>, <span class="number">1600</span>, <span class="number">3</span>))</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure>
+<p><img src="tiger_7.png"><br></p>
+</li>
+<li><p><b>호랑이 해 모두 새해 복 많이 받으시기 바랍니다.</b></p>
+</li>
+</ul>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
+			<img
+			 src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
+			 style="height:70px !important;width: 200px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요?<p>카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/" data-id="ckxzea4n900sxectq0g3k7qjn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "colorsys - Conversions between Color Systems",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/95_tiger_00.png",
+        "keywords": "python matplotlib colorsys",
+        "genre": "Python Data Science",
+        "datePublished": "2022-01-04",
+        "dateCreated": "2022-01-04",
+        "dateModified": "2022-01-04",
+        "url": "https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/",
+        "description": "
+이미지를 처리하는 파이썬 라이브러리는 많습니다.
+가장 잘 알려진 opencv와 pillow를 비롯해서 matplotlib도 이미지 처리를 합니다.
+colorsys라는 파이썬 기본 라이브러리가 있습니다.
+색 공간을 변환하는 라이브러리인데, 이것만 잘 써도 할 수 있는 게 많습니다.
+
+1. 예제 이미지
+wikimedia commons: Siberischer ",
+        "wordCount": 986
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/12/28/Python-DS-94-rougier02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Sci Vis) 2. In a Far Distance Galaxy</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/01/04/Python-DS-95-tiger/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/95_tiger_00.png)" alt="colorsys - Conversions between Color Systems" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/01/04/Python-DS-95-tiger/" class="title">colorsys - Conversions between Color Systems</a></p>
+                            <p class="item-date"><time datetime="2022-01-03T22:25:00.000Z" itemprop="datePublished">2022-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/28/Python-DS-94-rougier02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/94_rougier02_00.png)" alt="Sci Vis) 2. In a Far Distance Galaxy" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/12/28/Python-DS-94-rougier02/" class="title">Sci Vis) 2. In a Far Distance Galaxy</a></p>
+                            <p class="item-date"><time datetime="2021-12-27T15:50:00.000Z" itemprop="datePublished">2021-12-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/04/Python-DS-93-nia_datavis_qa/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/93_nia_datavis_qa_00.png)" alt="사례로 들여다보는 데이터 시각화 Q&amp;A" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/12/04/Python-DS-93-nia_datavis_qa/" class="title">사례로 들여다보는 데이터 시각화 Q&amp;A</a></p>
+                            <p class="item-date"><time datetime="2021-12-04T06:07:00.000Z" itemprop="datePublished">2021-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/02/Python-DS-92-rougier01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/92_rougier01_00.png)" alt="Sci Vis) 1. Rotated histogram" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/12/02/Python-DS-92-rougier01/" class="title">Sci Vis) 1. Rotated histogram</a></p>
+                            <p class="item-date"><time datetime="2021-12-02T00:50:00.000Z" itemprop="datePublished">2021-12-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/11/29/Python-DS-91-movie01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/91_movie01_0.png)" alt="NIA Data Story - Movie) 0. intro" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/11/29/Python-DS-91-movie01/" class="title">NIA Data Story - Movie) 0. intro</a></p>
+                            <p class="item-date"><time datetime="2021-11-29T11:50:00.000Z" itemprop="datePublished">2021-11-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">109</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">93</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.14px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 11.43px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.71px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.71px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.71px;">Nicolas P. Rougier</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.71px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.71px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.71px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.71px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.43px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.71px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.86px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.71px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.71px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.71px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.43px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.71px;">font</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.29px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.14px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.43px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.71px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.86px;">jython</a> <a href="/tags/keras/" style="font-size: 10.71px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.43px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 12.86px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.57px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.71px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 10.71px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10px;">open API</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.71px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.71px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.43px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.14px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.71px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.71px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.71px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.71px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.71px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.71px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.86px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.71px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.14px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12.14px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.57px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.71px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.43px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.71px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.43px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.29px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
