@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>gravity | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,numpy" />
+    
+    <meta name="description" content="파이썬은 과학과 공학을 구현하기 좋습니다. 간단한 몇 개의 코드로 방정식을 구현하고, 시각화 기법을 사용해 우리 눈으로 봅니다.  1. 만유인력 wikipedia: gravity   질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다. 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다. 두 물체의 질량이 $m_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gravity">
+<meta property="og:url" content="https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="파이썬은 과학과 공학을 구현하기 좋습니다. 간단한 몇 개의 코드로 방정식을 구현하고, 시각화 기법을 사용해 우리 눈으로 봅니다.  1. 만유인력 wikipedia: gravity   질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다. 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다. 두 물체의 질량이 $m_">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-Physics/1_gravity_00.png">
+<meta property="article:published_time" content="2022-01-13T12:25:00.000Z">
+<meta property="article:modified_time" content="2022-01-13T07:18:33.590Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="numpy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-Physics/1_gravity_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2022/01/13/python-physics-1-gravity/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Physics/">Physics</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-Physics-1-gravity" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        gravity
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/01/13/Python-Physics-1-gravity/" class="article-date">
+       <time datetime="2022-01-13T12:25:00.000Z" itemprop="datePublished">2022-01-13</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/01/13/Python-Physics-1-gravity/" class="article-date">
+     <time datetime="2022-01-13T07:18:33.590Z" itemprop="dateModified">2022-01-13</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/numpy/" rel="tag">numpy</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li>파이썬은 과학과 공학을 구현하기 좋습니다.</li>
+<li>간단한 몇 개의 코드로 방정식을 구현하고,</li>
+<li>시각화 기법을 사용해 우리 눈으로 봅니다.</li>
+</ul>
+<h1 id="1-만유인력"><a href="#1-만유인력" class="headerlink" title="1. 만유인력"></a>1. 만유인력</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Gravity">wikipedia: gravity</a></p>
+</blockquote>
+<ul>
+<li>질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. <b>만유인력</b>이라고 합니다.</li>
+<li>뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다.</li>
+<li>두 물체의 질량이 $m_1$, $m_2$, 거리가 $r$일 때 다음과 같은 방정식으로 표현됩니다.</li>
+</ul>
+<p>$$F = G\frac{m_1 m_2}{r^2}$$</p>
+<ul>
+<li>$G$는 중력 상수라고 하며 값은 $6.67 \times 10^{-11} [\textrm{m} \cdot \textrm{kg}^{-1}\textrm{s}^{-2}]$ 입니다.</li>
+</ul>
+<h1 id="2-자유-낙하"><a href="#2-자유-낙하" class="headerlink" title="2. 자유 낙하"></a>2. 자유 낙하</h1><ul>
+<li>만유 인력을 일상의 물건들에서 느끼기엔 너무 미미하지만 지구나 태양이라면 이야기가 달라집니다.</li>
+<li>위 식의 $m_2$에 지구의 질량을 넣고 $r$에 지구 반지름을 넣으면 <b>지구의 중력</b>이 됩니다.</li>
+</ul>
+<p>$$F = mg$$ </p>
+<ul>
+<li>중학교때 배운 식으로 정리되며, <b>중력 가속도</b> $g = 9.8 [\textrm{m} \cdot \textrm{s}^{-2}]$ 입니다.</li>
+<li>간단히 물체의 자유 낙하를 시뮬레이션 합니다.</li>
+</ul>
+<h2 id="2-1-python-setting"><a href="#2-1-python-setting" class="headerlink" title="2.1. python setting"></a>2.1. python setting</h2><ul>
+<li>기본 라이브러리를 불러오고 물체의 질량 등을 설정합니다.</li>
+<li>연속적인 시간을 0.01초 단위로 끊어서 자유낙하를 모사하려고 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 기본 라이브러리</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 물체 </span></span><br><span class="line">mass = <span class="number">1</span>                     <span class="comment"># 질량 [kg] </span></span><br><span class="line">position = np.array([<span class="number">0</span>, <span class="number">10</span>]) <span class="comment"># x, y 위치 [m]</span></span><br><span class="line">v = np.array([<span class="number">0</span>, <span class="number">0</span>])         <span class="comment"># x, y 방향 초기 속도 [m/s]</span></span><br><span class="line">t = <span class="number">0</span>                        <span class="comment"># 초기 시간 [s]</span></span><br><span class="line">dt = <span class="number">0.01</span>                    <span class="comment"># 시간 단위 [s]</span></span><br><span class="line">g = np.array([<span class="number">0</span>, -<span class="number">9.8</span>])      <span class="comment"># 중력 가속도 [m/s]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-2-자유-낙하-시뮬레이션"><a href="#2-2-자유-낙하-시뮬레이션" class="headerlink" title="2.2. 자유 낙하 시뮬레이션"></a>2.2. 자유 낙하 시뮬레이션</h2><ul>
+<li>지상 높이 10미터에서 땅에 떨어지는 시간을 살펴봅니다.</li>
+<li>중학교에서 배우는 아래 공식에 $a$ 대신 $g$를 넣습니다.</li>
+</ul>
+<p>$$s = v_0 t + \frac{1}{2}at^2$$</p>
+<ul>
+<li><p>땅을 뚫고 들어가는 상황은 가정하지 않습니다.</p>
+</li>
+<li><p>초기 위치로 가정한 position의 y좌표 &gt; 0일 때만 계산합니다.</p>
+</li>
+<li><p>걸리는 <b>시간</b>은 <code>ts</code>리스트, 위치는 <code>positions</code>에 모읍니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 시뮬레이션</span></span><br><span class="line">ts = []</span><br><span class="line">positions = []</span><br><span class="line"><span class="keyword">while</span> position[<span class="number">1</span>] &gt;= <span class="number">0</span>:</span><br><span class="line">    ts.append(t)</span><br><span class="line">    positions.append(position)</span><br><span class="line"></span><br><span class="line">    position = position + v*t + <span class="number">0.5</span> * g * t**<span class="number">2</span></span><br><span class="line">    t += dt</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 시각화</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">directions = [<span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i, (ax, direction) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs, directions)):</span><br><span class="line">    ax.scatter(ts, np.array(positions)[:,i], alpha=<span class="number">0.3</span>, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;time (s)&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;direction&#125;</span> position (m)&quot;</span>, pad=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_01.png"><br></p>
+</li>
+<li><p>좌우로 흔들릴 일은 없으므로 x position은 그대로</p>
+</li>
+<li><p>중력에 의해 떨어지기만 하므로 y position만 변화합니다.</p>
+</li>
+</ul>
+<h2 id="2-3-자유-낙하-애니메이션"><a href="#2-3-자유-낙하-애니메이션" class="headerlink" title="2.3. 자유 낙하 애니메이션"></a>2.3. 자유 낙하 애니메이션</h2><ul>
+<li><p>좀 재밌게 만들어 봅시다.</p>
+</li>
+<li><p>matplotlib의 애니메이션 기능을 이용해서 만들 수 있습니다.</p>
+</li>
+<li><p>물체의 위치를 표현할 scatter plot과 시간을 표현할 text를 내용만 비우고 만든 뒤에,</p>
+</li>
+<li><p>time step마다 각각의 데이터만 업데이트하는 방식을 사용했습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">scatter, = ax.plot([], [], marker=<span class="string">&quot;o&quot;</span>, mfc=<span class="string">&quot;b&quot;</span>, mec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">time_text = ax.text(<span class="number">0.5</span>, <span class="number">0.9</span>, <span class="string">f&quot;&quot;</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updatefig</span>(<span class="params">i</span>):</span>       </span><br><span class="line">    scatter.set_data(positions[i][<span class="number">0</span>], positions[i][<span class="number">1</span>])</span><br><span class="line">    time_text.set_text(<span class="string">f&quot;t = <span class="subst">&#123;ts[i]:<span class="number">.03</span>f&#125;</span> sec.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ani = animation.FuncAnimation(fig, updatefig, interval=<span class="number">100</span>, blit=<span class="literal">True</span>, repeat=<span class="literal">False</span>, frames=<span class="built_in">len</span>(ts))</span><br><span class="line">ani.save(<span class="string">&quot;1_gravity_02.gif&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_02.gif"><br></p>
+</li>
+<li><p><code>ani.save()</code>명령으로 파일로 저장했습니다.</p>
+</li>
+<li><p>주피터 노트북이나 Google Colab에서 다음 코드를 사용하면 interactive animation을 얻을 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> HTML</span><br><span class="line">HTML(ani.to_jshtml())</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_11.gif"><br></p>
+</li>
+</ul>
+<h1 id="3-움직이는-두-개의-물체"><a href="#3-움직이는-두-개의-물체" class="headerlink" title="3. 움직이는 두 개의 물체"></a>3. 움직이는 두 개의 물체</h1><h2 id="3-1-class로-물체-생성"><a href="#3-1-class로-물체-생성" class="headerlink" title="3.1. class로 물체 생성"></a>3.1. class로 물체 생성</h2><ul>
+<li><p><b>지구 vs 물체</b> 대신 <b>물체 vs 물체</b> 구도가 되면 조금 복잡해집니다.</p>
+</li>
+<li><p>지구는 너무나 거대하기 때문에 상수로 놓을 수 있었지만 물체는 변수입니다.</p>
+</li>
+<li><p>서로 힘을 주고 받을 때 위치와 속도가 변합니다.</p>
+</li>
+<li><p>물체마다 받는 힘과 이로 인한 위치 변화 등을 계산합시다. <b>class</b>가 편합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Particle</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, mass, pos, v, fix=<span class="literal">False</span></span>):</span></span><br><span class="line">        self.mass = mass <span class="comment"># scalar  # 질량. scalar</span></span><br><span class="line">        self.pos = np.array(pos)   <span class="comment"># 위치 (x, y) 2D vector </span></span><br><span class="line">        self.v = np.array(v)       <span class="comment"># 속도 (x, y) 2D vector</span></span><br><span class="line">        self.a = np.array([<span class="number">0</span>,<span class="number">0</span>])   <span class="comment"># 가속도 (x, y) 2D vector</span></span><br><span class="line">        self.fix = fix             <span class="comment"># 고정 여부. True or False</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">self, force</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.fix:           <span class="comment"># 고정이 되어 있지 않을 때만 데이터 업데이트</span></span><br><span class="line">            self.a = force/self.mass</span><br><span class="line">            self.pos = self.pos + (self.v * dt) + (<span class="number">0.5</span>*self.a * dt**<span class="number">2</span>)</span><br><span class="line">            self.v = self.v + self.a * dt</span><br></pre></td></tr></table></figure></li>
+<li><p>이제 물체를 class로 정의할 준비가 되었습니다.</p>
+</li>
+<li><p>물체를 입자라는 뜻의 Particle로 부르겠습니다.</p>
+</li>
+<li><p>각각의 질량, 위치, 속도를 정하고 생성합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">P1_mass, P2_mass = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">P1_pos, P2_pos = [<span class="number">1</span>, <span class="number">1</span>], [-<span class="number">1</span>, -<span class="number">1</span>]</span><br><span class="line">P1_v, P2_v = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-2-중력-계산-함수"><a href="#3-2-중력-계산-함수" class="headerlink" title="3.2. 중력 계산 함수"></a>3.2. 중력 계산 함수</h2><ul>
+<li>물체들 간의 인력을 계산할 함수를 만듭니다.</li>
+<li>맨 위의 방정식을 옮깁니다.</li>
+<li>방정식에 따르면 거리가 너무 가까울 때 만유인력이 무한대로 증가하는 문제가 있습니다.</li>
+<li><b>특정 거리<code>dist_cr</code> 미만으로 오면 인력을 0으로 강제</b>해서 관성으로만 움직이게 합니다.</li>
+</ul>
+<ul>
+<li>만유인력 상수가 너무 작아서 임의로 크게 키웠습니다.</li>
+<li>여기에 걸맞게 질량이 아주 커다란 천체들의 움직임이라고 생각할 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_force</span>(<span class="params">P_self, P_other, k=<span class="number">1</span>, dist_cr = <span class="number">0.02</span></span>):</span></span><br><span class="line">    pos_self = P_self.pos</span><br><span class="line">    pos_other = P_other.pos</span><br><span class="line">    rel_vec = pos_other - pos_self</span><br><span class="line">    dist = np.linalg.norm(rel_vec)    </span><br><span class="line"></span><br><span class="line">    mass_self = P_self.mass</span><br><span class="line">    mass_other = P_other.mass</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> dist &lt; dist_cr:</span><br><span class="line">        force = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> rel_vec <span class="comment"># [0, 0]</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        force = k*mass_self*mass_other/ dist**<span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> force * rel_vec/dist</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-3-두-물체간의-만유인력"><a href="#3-3-두-물체간의-만유인력" class="headerlink" title="3.3. 두 물체간의 만유인력"></a>3.3. 두 물체간의 만유인력</h2><ul>
+<li><p>150번 iteration하면서 시간, 위치, 속도, 힘을 차례로 뽑아내며 업데이트합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">iter_max = <span class="number">150</span></span><br><span class="line"></span><br><span class="line">ts = []                  <span class="comment"># 시간</span></span><br><span class="line">P1_pos, P2_pos = [], []  <span class="comment"># 시간별 위치</span></span><br><span class="line">P1_v, P2_v = [], []      <span class="comment"># 시간별 속도</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iter_max):</span><br><span class="line">    <span class="comment"># time update</span></span><br><span class="line">    ts.append(i*dt)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># position update</span></span><br><span class="line">    P1_pos.append(P1.pos)</span><br><span class="line">    P2_pos.append(P2.pos)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># velocity update</span></span><br><span class="line">    P1_v.append(P1.v)</span><br><span class="line">    P2_v.append(P2.v)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># calculate force</span></span><br><span class="line">    P1_force = calc_force(P1, P2, k=<span class="number">10</span>)</span><br><span class="line">    P2_force = calc_force(P2, P1, k=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># update</span></span><br><span class="line">    P1.update(P1_force)</span><br><span class="line">    P2.update(P2_force)</span><br></pre></td></tr></table></figure></li>
+<li><p>어떻게 움직였나 한번 봅시다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">P1_pos = np.array(P1_pos)</span><br><span class="line">P2_pos = np.array(P2_pos)</span><br><span class="line"></span><br><span class="line">plt.plot(P1_pos[:, <span class="number">0</span>], P1_pos[:, <span class="number">1</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P1&quot;</span>)</span><br><span class="line">plt.plot(P2_pos[:, <span class="number">0</span>], P2_pos[:, <span class="number">1</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P2&quot;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;position&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_03.png"></p>
+</li>
+<li><p><b>뭔가 이상합니다.</b></p>
+</li>
+<li><p>시작점은 P1이 [1, 1], P2가 [-1, -1]이었습니다.</p>
+</li>
+<li><p>서로 끌어당기다가 한가운데인 [0, 0]에서 만나야 할 것 같은데 한참을 더 지나갑니다.</p>
+</li>
+<li><p>x방향 속도를 그려봅니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(np.array(P1_v)[:, <span class="number">0</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P1&quot;</span>)</span><br><span class="line">plt.plot(np.array(P2_v)[:, <span class="number">0</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P2&quot;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;x-directional velocity (m/s&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_04.png"></p>
+</li>
+<li><p>120번째 step 부근에서 속도가 크게 빨라졌다가 감소하지만 부호는 바뀌지 않습니다.</p>
+</li>
+<li><p>원점을 지나 힘이 거꾸로 작용해도 관성에 의해 서로를 지나쳤고, </p>
+</li>
+<li><p>이 때 작용하는 힘은 다시 불러오기엔 역부족인 듯 합니다.</p>
+</li>
+</ul>
+<h2 id="3-4-동영상-제작-함수"><a href="#3-4-동영상-제작-함수" class="headerlink" title="3.4. 동영상 제작 함수"></a>3.4. 동영상 제작 함수</h2><ul>
+<li><p>동영상으로 확실하게 살펴봅니다.</p>
+</li>
+<li><p>왠지 앞으로 동영상을 자주 만들 것 같습니다.</p>
+</li>
+<li><p>N개의 입자를 다룰 수 있도록 앞의 코드를 일반화합니다.</p>
+</li>
+<li><p><b>질량에 따라 입자의 크기와 색이 바뀌도록</b> 설정을 해두고,</p>
+</li>
+<li><p><b>컬러맵을 사용해서 입자마다 다른 색을 두르도록</b>합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">cmap = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_animation</span>(<span class="params">Ps, Ps_pos, ts, title, legend=<span class="literal">True</span></span>):</span></span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    mfcs = [<span class="string">&quot;k&quot;</span> <span class="keyword">if</span> P.mass &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;w&quot;</span> <span class="keyword">for</span> P <span class="keyword">in</span> Ps]</span><br><span class="line">    mss = [<span class="number">12</span>*np.sqrt(<span class="built_in">abs</span>(P.mass)) <span class="keyword">for</span> P <span class="keyword">in</span> Ps]</span><br><span class="line">    plots = [ax.plot([], [], marker=<span class="string">&quot;o&quot;</span>, mfc=mfc, mec=cmap(j/<span class="number">10</span>), mew=<span class="number">3</span>, ms=ms, label=<span class="string">f&quot;P<span class="subst">&#123;j+<span class="number">1</span>&#125;</span>&quot;</span>) </span><br><span class="line">             <span class="keyword">for</span> j, (P_pos, mfc, ms) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(Ps_pos, mfcs, mss))]</span><br><span class="line">    time_text = ax.text(<span class="number">0.5</span>, <span class="number">0.9</span>, <span class="string">f&quot;&quot;</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">    title = ax.set_title(title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    ax.set_xlim(-<span class="number">1.1</span>, <span class="number">1.1</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.1</span>, <span class="number">1.1</span>)</span><br><span class="line">    <span class="keyword">if</span> legend:</span><br><span class="line">        ax.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">updatefig</span>(<span class="params">i</span>):</span></span><br><span class="line">        [plot[<span class="number">0</span>].set_data(P_pos[i][<span class="number">0</span>], P_pos[i][<span class="number">1</span>]) <span class="keyword">for</span> plot, P_pos <span class="keyword">in</span> <span class="built_in">zip</span>(plots, Ps_pos)]       </span><br><span class="line">        time_text.set_text(<span class="string">f&quot;t = <span class="subst">&#123;ts[i]:<span class="number">.03</span>f&#125;</span> sec.&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ani = animation.FuncAnimation(fig, updatefig, interval=<span class="number">100</span>, blit=<span class="literal">True</span>, repeat=<span class="literal">False</span>, frames=<span class="built_in">len</span>(ts))</span><br><span class="line">    <span class="keyword">return</span> ani</span><br></pre></td></tr></table></figure></li>
+<li><p>아까 데이터를 다시 넣어 애니메이션을 만듭니다.</p>
+</li>
+<li><p><b>서로를 지나쳐간 뒤에 속도가 줄어드는 모습</b>이 관찰됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ani = gen_animation([P1, P2], [P1_pos, P2_pos], ts, <span class="string">&quot;position in xy coordinate&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_05.gif"><br></p>
+</li>
+</ul>
+<h1 id="4-고정된-물체와-움직이는-물체"><a href="#4-고정된-물체와-움직이는-물체" class="headerlink" title="4. 고정된 물체와 움직이는 물체"></a>4. 고정된 물체와 움직이는 물체</h1><h2 id="4-1-N개의-물체-사이-만유인력"><a href="#4-1-N개의-물체-사이-만유인력" class="headerlink" title="4.1. N개의 물체 사이 만유인력"></a>4.1. N개의 물체 사이 만유인력</h2><ul>
+<li>이제 우리는 만유인력을 계산하고 그릴 수 있습니다.</li>
+<li>N개의 물체를 그리는 함수를 만들었으니, <b>N개의 물체 사이 힘을 계산하는 함수</b>도 만듭시다.</li>
+<li>2중 for loop을 사용해서 모든 입자간의 인력을 계산하여 총 합을 구합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_force</span>(<span class="params">Ps, k=<span class="number">10</span>, iter_max=<span class="number">150</span></span>):</span></span><br><span class="line">    Ps_pos = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> Ps:</span><br><span class="line">        Ps_pos.append([])</span><br><span class="line"></span><br><span class="line">    ts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iter_max):</span><br><span class="line">        <span class="comment"># time update</span></span><br><span class="line">        ts.append(i*dt)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># position update</span></span><br><span class="line">        <span class="keyword">for</span> P, P_pos <span class="keyword">in</span> <span class="built_in">zip</span>(Ps, Ps_pos):</span><br><span class="line">            P_pos.append(P.pos)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># calculate force</span></span><br><span class="line">        P_splits = [[P, <span class="built_in">list</span>(<span class="built_in">set</span>(Ps) - <span class="built_in">set</span>([P]))] <span class="keyword">for</span> P <span class="keyword">in</span> Ps]</span><br><span class="line">        <span class="keyword">for</span> j, (P_self, P_others) <span class="keyword">in</span> <span class="built_in">enumerate</span>(P_splits):</span><br><span class="line">            P_self_force = np.array([<span class="number">0.0</span>, <span class="number">0.0</span>])</span><br><span class="line">            <span class="keyword">for</span> P_other <span class="keyword">in</span> P_others:</span><br><span class="line">                P_self_force += calc_force(P_self, P_other, k=k)</span><br><span class="line">            <span class="comment"># update force</span></span><br><span class="line">            P_self.update(P_self_force)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Ps, Ps_pos, ts</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-2-고정된-물체와-던져진-물체"><a href="#4-2-고정된-물체와-던져진-물체" class="headerlink" title="4.2. 고정된 물체와 던져진 물체"></a>4.2. 고정된 물체와 던져진 물체</h2><ul>
+<li><p>1번 물체 P1은 원점 [0,0]에 고정하고</p>
+</li>
+<li><p>2번 물체 P2는 [0, 0.7]에서 $-x$방향으로 던집니다.</p>
+</li>
+<li><p><b>P2의 속도에 따른 궤적 변화</b>를 살펴봅니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 물체 정의</span></span><br><span class="line">P1_mass, P2_mass = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">P1_pos, P2_pos = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.7</span>]</span><br><span class="line">P1_v, P2_v = [<span class="number">0</span>, <span class="number">0</span>], [-<span class="number">2</span>, <span class="number">0</span>]</span><br><span class="line">P1_fix, P2_fix = <span class="literal">True</span>, <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v, P1_fix)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v, P2_fix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 만유인력 계산, 시각화</span></span><br><span class="line">Ps = [P1, P2]</span><br><span class="line">Ps, Ps_pos, ts = run_force(Ps, k=<span class="number">10</span>, iter_max=<span class="number">150</span>)</span><br><span class="line">ani = gen_animation(Ps, Ps_pos, ts, <span class="string">&quot;position in xy coordinate&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_06.gif"><br></p>
+</li>
+<li><p><b>SF영화에서 많이 본 듯한 모습</b>이 관찰됩니다.</p>
+</li>
+<li><p>중앙의 P1을 축으로 빙 돌아 자신이 온 방향으로 나갑니다.</p>
+</li>
+</ul>
+<ul>
+<li>이번엔 P2를 조금 빠르게 던집니다.</li>
+<li>나머진 가만히 두고 position 초기화, velocity 재설정만 추가합니다.</li>
+<li>만유인력과 원심력이 같아지는 속도에서는 물체가 지표면에서 추락하지 않고 궤도를 그립니다.</li>
+<li>우리가 사용한 질량 등을 넣으면 다음과 같이 정리됩니다.</li>
+</ul>
+<p>$$ v = \sqrt{\frac{km_1}{r}} = 3.8 [\textrm{m}/\textrm{s}]</p>
+<ul>
+<li><p>이를 <b>제1 우주 속도</b>라고 합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 시작점과 속도 재설정</span></span><br><span class="line">P1_pos, P2_pos = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.7</span>]</span><br><span class="line">P1_v, P2_v = [<span class="number">0</span>, <span class="number">0</span>], [-<span class="number">3.8</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v, P1_fix)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v, P2_fix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 만유인력 계산, 시각화</span></span><br><span class="line">Ps = [P1, P2]</span><br><span class="line">Ps, Ps_pos, ts = run_force(Ps, k=<span class="number">10</span>, iter_max=<span class="number">150</span>)</span><br><span class="line">ani = gen_animation(Ps, Ps_pos, ts, <span class="string">&quot;position in xy coordinate&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_07.gif"><br></p>
+</li>
+<li><p>쪼개진 시간과 유효숫자 등의 차이로 원궤도에서는 다소 어긋났습니다.</p>
+</li>
+<li><p>하지만 <b>전반적으로 원을 그리며 제 자리로 옵니다.</b></p>
+</li>
+</ul>
+<ul>
+<li><b>더 빠르면?</b> 말할 것도 없습니다.</li>
+<li>도망가 버립니다.</li>
+<li>속도를 $5 [\textrm{m}/\textrm{s}]$로 빠르게 했을 때 그림입니다.<br><br><img src="1_gravity_08.gif"><br></li>
+</ul>
+<h1 id="5-마이너스-질량"><a href="#5-마이너스-질량" class="headerlink" title="5. 마이너스 질량"></a>5. 마이너스 질량</h1><ul>
+<li><p>실제로는 존제할 수 없지만 코드에는 마이너스 질량을 넣을 수 있습니다.</p>
+</li>
+<li><p><b>10배 무거운 마이너스 질량의 벽</b>을 뚫을 수 있나 봅시다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">P0_mass, P1_mass, P2_mass, P3_mass, P4_mass = <span class="number">1</span>, -<span class="number">10</span>, -<span class="number">10</span>, -<span class="number">10</span>, -<span class="number">10</span></span><br><span class="line">P0_pos, P1_pos, P2_pos, P3_pos, P4_pos = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0.7</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.7</span>], [-<span class="number">0.7</span>, <span class="number">0</span>], [<span class="number">0</span>, -<span class="number">0.7</span>]</span><br><span class="line">P0_v, P1_v, P2_v, P3_v, P4_v = [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">P0_fix, P1_fix, P2_fix, P3_fix, P4_fix = <span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">P0 = Particle(P0_mass, P0_pos, P0_v, P0_fix)</span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v, P1_fix)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v, P2_fix)</span><br><span class="line">P3 = Particle(P3_mass, P3_pos, P3_v, P3_fix)</span><br><span class="line">P4 = Particle(P4_mass, P4_pos, P4_v, P4_fix)</span><br><span class="line"></span><br><span class="line">Ps = [P0, P1, P2, P3, P4]</span><br><span class="line">Ps, Ps_pos, ts = run_force(Ps, k=<span class="number">10</span>, iter_max=<span class="number">50</span>)</span><br><span class="line">ani = gen_animation(Ps, Ps_pos, ts, <span class="string">&quot;position in xy coordinate&quot;</span>, legend=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="1_gravity_09.gif"><br></p>
+</li>
+<li><p>$(3, 1) [\textrm{m}/\textrm{s}]$로는 부족합니다. 못 나갑니다.</p>
+</li>
+<li><p>$(5, 2) [\textrm{m}/\textrm{s}]$는 어떨까요?<br><br><img src="1_gravity_10.gif"><br></p>
+</li>
+<li><p>몸부림 끝에 탈출에 성공합니다.</p>
+</li>
+</ul>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
+			<img
+			 src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
+			 style="height:70px !important;width: 200px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요?<p>카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/" data-id="ckycn5dj300uxectq93qo4q80" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "gravity",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-Physics/1_gravity_00.png",
+        "keywords": "python matplotlib numpy",
+        "genre": "Python Physics",
+        "datePublished": "2022-01-13",
+        "dateCreated": "2022-01-13",
+        "dateModified": "2022-01-13",
+        "url": "https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/",
+        "description": "
+파이썬은 과학과 공학을 구현하기 좋습니다.
+간단한 몇 개의 코드로 방정식을 구현하고,
+시각화 기법을 사용해 우리 눈으로 봅니다.
+
+1. 만유인력
+wikipedia: gravity
+
+
+질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다.
+뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다.
+두 물체의 질량이 $m_",
+        "wordCount": 2813
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/01/04/Python-DS-95-tiger/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">colorsys - Conversions between Color Systems</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/01/13/Python-Physics-1-gravity/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-Physics/1_gravity_00.png)" alt="gravity" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Physics/">Physics</a></p>
+                            <p class="item-title"><a href="/2022/01/13/Python-Physics-1-gravity/" class="title">gravity</a></p>
+                            <p class="item-date"><time datetime="2022-01-13T12:25:00.000Z" itemprop="datePublished">2022-01-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/01/04/Python-DS-95-tiger/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/95_tiger_00.png)" alt="colorsys - Conversions between Color Systems" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/01/04/Python-DS-95-tiger/" class="title">colorsys - Conversions between Color Systems</a></p>
+                            <p class="item-date"><time datetime="2022-01-03T22:25:00.000Z" itemprop="datePublished">2022-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/28/Python-DS-94-rougier02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/94_rougier02_00.png)" alt="Sci Vis) 2. In a Far Distance Galaxy" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/12/28/Python-DS-94-rougier02/" class="title">Sci Vis) 2. In a Far Distance Galaxy</a></p>
+                            <p class="item-date"><time datetime="2021-12-27T15:50:00.000Z" itemprop="datePublished">2021-12-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/04/Python-DS-93-nia_datavis_qa/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/93_nia_datavis_qa_00.png)" alt="사례로 들여다보는 데이터 시각화 Q&amp;A" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/12/04/Python-DS-93-nia_datavis_qa/" class="title">사례로 들여다보는 데이터 시각화 Q&amp;A</a></p>
+                            <p class="item-date"><time datetime="2021-12-04T06:07:00.000Z" itemprop="datePublished">2021-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/02/Python-DS-92-rougier01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/92_rougier01_00.png)" alt="Sci Vis) 1. Rotated histogram" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2021/12/02/Python-DS-92-rougier01/" class="title">Sci Vis) 1. Rotated histogram</a></p>
+                            <p class="item-date"><time datetime="2021-12-02T00:50:00.000Z" itemprop="datePublished">2021-12-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">110</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">93</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.31px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 11.54px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.77px;">AI festival</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 10px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.77px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.77px;">Nicolas P. Rougier</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.77px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.77px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.77px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.77px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.54px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.15px;">color</a> <a href="/tags/colorbar/" style="font-size: 13.08px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15.38px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.77px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.77px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.77px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.54px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.77px;">font</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.62px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.31px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.92px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.77px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 13.08px;">jython</a> <a href="/tags/keras/" style="font-size: 10.77px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.54px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 13.08px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.23px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.77px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 10px;">neural network</a> <a href="/tags/numpy/" style="font-size: 11.54px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10px;">open API</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 16.15px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.77px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 10px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.54px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.69px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.77px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.77px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10.77px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.77px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.77px;">raster</a> <a href="/tags/ridgeplot/" style="font-size: 10.77px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 18.46px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.77px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.31px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 12.31px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.85px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.77px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.54px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.77px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.54px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.23px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
