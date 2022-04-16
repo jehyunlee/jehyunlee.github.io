@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/98_ridgemap_00.png">
 <meta property="article:published_time" content="2022-04-16T20:12:00.000Z">
-<meta property="article:modified_time" content="2022-04-16T21:50:51.608Z">
+<meta property="article:modified_time" content="2022-04-16T21:56:40.411Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="gis">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/04/17/Python-DS-98-ridgemap/" class="article-date">
-     <time datetime="2022-04-16T21:50:51.608Z" itemprop="dateModified">2022-04-17</time>
+     <time datetime="2022-04-16T21:56:40.411Z" itemprop="dateModified">2022-04-17</time>
   </a>
 </div>
 
@@ -308,6 +308,14 @@
 <li>적절한 글꼴을 골라 경로를 지정하고, <code>Ridgemap()</code>에 <code>font=font.prop</code>을 추가합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ridge_map <span class="keyword">import</span> FontManager</span><br><span class="line">font = FontManager(<span class="string">&#x27;https://github.com/google/fonts/blob/main/ofl/arsenal/Arsenal-Bold.ttf?raw=true&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">seoul = (<span class="number">126.8403339</span>, <span class="number">37.4157432</span>, <span class="number">127.1661446</span>, <span class="number">37.7104195</span>)</span><br><span class="line">daejeon = (<span class="number">127.2614837</span>, <span class="number">36.2194529</span>, <span class="number">127.6025534</span>, <span class="number">36.5002879</span>)</span><br><span class="line">mokpo = (<span class="number">126.3071108</span>, <span class="number">34.6873927</span>, <span class="number">126.5647852</span>, <span class="number">34.9315327</span>)</span><br><span class="line">jeju = (<span class="number">126.1623888</span>, <span class="number">33.1179613</span>, <span class="number">126.9962384</span>, <span class="number">33.7520832</span>)</span><br><span class="line"></span><br><span class="line">places = [seoul, daejeon, mokpo, jeju]</span><br><span class="line">names = [<span class="string">&quot;Seoul&quot;</span>, <span class="string">&quot;Daejeon&quot;</span>, <span class="string">&quot;Mokpo&quot;</span>, <span class="string">&quot;Jeju&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> place, name, ax <span class="keyword">in</span> <span class="built_in">zip</span>(places, names, axes.ravel()):</span><br><span class="line">    rm = RidgeMap(place, font=font.prop)</span><br><span class="line">    values = rm.get_elevation_data(num_lines=<span class="number">150</span>)</span><br><span class="line">    values=rm.preprocess(</span><br><span class="line">        values=values,</span><br><span class="line">        lake_flatness=<span class="number">2</span>,</span><br><span class="line">        water_ntile=<span class="number">10</span>,</span><br><span class="line">        vertical_ratio=<span class="number">100</span>)</span><br><span class="line">    rm.plot_map(values=values,</span><br><span class="line">                label=<span class="string">f&#x27;<span class="subst">&#123;name&#125;</span>, Korea&#x27;</span>,</span><br><span class="line">                label_y=<span class="number">0.1</span>,</span><br><span class="line">                label_x=<span class="number">0.45</span>,</span><br><span class="line">                label_size=<span class="number">20</span>,</span><br><span class="line">                linewidth=<span class="number">1.2</span>,</span><br><span class="line">                background_color=<span class="string">&quot;w&quot;</span>,</span><br><span class="line">                kind=<span class="string">&quot;elevation&quot;</span>,</span><br><span class="line">                line_color=plt.get_cmap(<span class="string">&#x27;gist_earth&#x27;</span>),</span><br><span class="line">                ax=ax)</span><br><span class="line">    </span><br><span class="line">fig = ax.figure</span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;98_ridgemap_05.png&quot;</span>)</span><br></pre></td></tr></table></figure>
 <img src="98_ridgemap_05.png"><br></li>
 </ul>
+<h1 id="4-데이터"><a href="#4-데이터" class="headerlink" title="4. 데이터"></a>4. 데이터</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www2.jpl.nasa.gov/srtm/">NASA: Shuttle Radar Topography Mision (SRTM)</a></p>
+</blockquote>
+<ul>
+<li>해발고도 데이터는 2000년에 수집된 NASA의 SRTM을 사용합니다.</li>
+<li>1 arc-second 단위로, 약 30m 수준의 해상도를 보유하고 있습니다.</li>
+<li>단 북위 60도와 남위 60도를 넘어서는 지역은 데이터가 없습니다.<br><br><img src="98_ridgemap_06.gif"><br></li>
+</ul>
 
         </div>
 		
@@ -316,7 +324,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/04/17/Python-DS-98-ridgemap/" data-id="cl22ebgi40073rotqgrtkhgty" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/04/17/Python-DS-98-ridgemap/" data-id="cl22eh2eu006x44tqcoim8r2f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -408,7 +416,7 @@ pypi: ridge-map/
 
 
 아름다운 산악 지형의 풍경이 고전적인 느낌으로 그려져 있습",
-        "wordCount": 928
+        "wordCount": 963
     }
 </script>
 
