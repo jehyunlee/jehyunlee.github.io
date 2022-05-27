@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/102_kdeplot_00.png">
 <meta property="article:published_time" content="2022-05-26T23:51:00.000Z">
-<meta property="article:modified_time" content="2022-05-27T05:07:43.255Z">
+<meta property="article:modified_time" content="2022-05-27T06:03:18.966Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="visualization">
 <meta property="article:tag" content="seaborn">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/05/27/Python-DS-102-kdeplot/" class="article-date">
-     <time datetime="2022-05-27T05:07:43.255Z" itemprop="dateModified">2022-05-27</time>
+     <time datetime="2022-05-27T06:03:18.966Z" itemprop="dateModified">2022-05-27</time>
   </a>
 </div>
 
@@ -307,7 +307,7 @@
 </ul>
 <h2 id="3-3-KDE-plot-기본"><a href="#3-3-KDE-plot-기본" class="headerlink" title="3.3. KDE plot 기본"></a>3.3. KDE plot 기본</h2><ul>
 <li>KDE plot의 특징을 조금 더 알아보겠습니다. </li>
-<li>먼저, <b>밀도 분포</b>라는 개념을 사용하기 때문에 전체 넓이는 1로 조정됩니다. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    area = Polygon(axs[<span class="number">0</span>].collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot at axs[<span class="subst">&#123;i&#125;</span>] = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<li>먼저, <b>밀도 분포</b>라는 개념을 사용하기 때문에 <b>전체 넓이는 1로 조정됩니다.</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    area = Polygon(axs[<span class="number">0</span>].collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot at axs[<span class="subst">&#123;i&#125;</span>] = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot at axs[0]= 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot at axs[1]= 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot at axs[2]= 1.000</span></span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -324,11 +324,11 @@
 </li>
 <li><p>세 종이 다른 분포를 보이며 겹쳐 그려져 있습니다.</p>
 </li>
-<li><p><b>Adelie 펭귄의 분포 일부가 전체 평균보다 높게 그려져 있습니다.</b></p>
+<li><p><b>Adelie 펭귄의 분포 일부가 전체의 합보다 높게 그려져 있습니다.</b></p>
 </li>
 <li><p>여기에서도 <b>KDE plot이 정량적으로 부정확할 수 있음을 알 수 있습니다.</b></p>
 </li>
-<li><p>이 때는 각각의 넓이가 데이터 비율만큼 표현됩니다.</p>
+<li><p>이렇게 나누어 그리면 각각의 넓이가 데이터 비율만큼 표현됩니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">areas = []</span><br><span class="line"><span class="keyword">for</span> i, (p, label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(ax.get_children()[:<span class="number">4</span>], labels)):</span><br><span class="line">    area = Polygon(p.get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    areas.append(area)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot: <span class="subst">&#123;label&#125;</span> = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot: all species = 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot: Adelie = 0.360</span></span><br><span class="line"><span class="comment"># area of KDE plot: Chinstrap = 0.199</span></span><br><span class="line"><span class="comment"># area of KDE plot: Gentoo = 0.441</span></span><br></pre></td></tr></table></figure></li>
@@ -342,9 +342,9 @@
 <img src="102_kdeplot_04.png"><br></li>
 </ul>
 <h2 id="3-5-가능한-데이터-범위-밖-잘라내기"><a href="#3-5-가능한-데이터-범위-밖-잘라내기" class="headerlink" title="3.5. 가능한 데이터 범위 밖 잘라내기"></a>3.5. 가능한 데이터 범위 밖 잘라내기</h2><ul>
-<li>수집된 데이터가 가능한 데이터의 일부임인 경우가 많습니다.</li>
+<li>수집된 데이터가 가능한 데이터의 일부인 경우가 많습니다.</li>
 <li>이 때 데이터 값으로 끊으면 이 또한 왜곡이 될 수 있기 때문에, 특정 범위를 지정할 수 있습니다.</li>
-<li><code>clip</code>이라는 이름의 매개변수를 사용합니다. 여기서는 2500 ~ 6500 범위로 잘랐습니다. </li>
+<li><code>clip</code>이라는 이름의 매개변수를 사용합니다. 여기서는 <b>2500 ~ 6500 범위</b>로 잘랐습니다. </li>
 <li><code>cut</code>에 비해 덜 잘렸고, 이 범위 안에 있는 Chinstrap과 Gentoo의 오른쪽, 그리고 Adelie의 왼쪽은 전혀 잘리지 않았습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, clip=(<span class="number">2500</span>, <span class="number">6500</span>))</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax, clip=(<span class="number">2500</span>, <span class="number">6500</span>))</span><br><span class="line"></span><br><span class="line">ax.set_xlim(xmin, xmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
 <img src="102_kdeplot_09.png"><br></li>
 </ul>
@@ -387,7 +387,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/05/27/Python-DS-102-kdeplot/" data-id="cl3nzgofa001zyktqgqu980ii" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/05/27/Python-DS-102-kdeplot/" data-id="cl3o1g058001vm8tq1nbfexfu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
