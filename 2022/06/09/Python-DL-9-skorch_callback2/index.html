@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>skorch callbacks (2) sklearn preprocesing + PyTorch neural network | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="pytorch,sklearn,pipeline,neural network,callback,visualization" />
+    
+    <meta name="description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다. 학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다. skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다. skorch도 PyTorch callback을 이용할 수 있습니다.   글이 길어 세 개로 나눕니다.  두 번째로, s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="skorch callbacks (2) sklearn preprocesing + PyTorch neural network">
+<meta property="og:url" content="https://jehyunlee.github.io/2022/06/09/Python-DL-9-skorch_callback2/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다. 학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다. skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다. skorch도 PyTorch callback을 이용할 수 있습니다.   글이 길어 세 개로 나눕니다.  두 번째로, s">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/9_sc_00.png">
+<meta property="article:published_time" content="2022-06-09T01:28:00.000Z">
+<meta property="article:modified_time" content="2022-06-09T02:57:42.973Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="sklearn">
+<meta property="article:tag" content="pipeline">
+<meta property="article:tag" content="neural network">
+<meta property="article:tag" content="callback">
+<meta property="article:tag" content="visualization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/9_sc_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2022/06/09/python-dl-9-skorch_callback2/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Deep-Learning/">Deep Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DL-9-skorch_callback2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        skorch callbacks (2) sklearn preprocesing + PyTorch neural network
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/06/09/Python-DL-9-skorch_callback2/" class="article-date">
+       <time datetime="2022-06-09T01:28:00.000Z" itemprop="datePublished">2022-06-09</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/06/09/Python-DL-9-skorch_callback2/" class="article-date">
+     <time datetime="2022-06-09T02:57:42.973Z" itemprop="dateModified">2022-06-09</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/callback/" rel="tag">callback</a>, <a class="tag-link-link" href="/tags/neural-network/" rel="tag">neural network</a>, <a class="tag-link-link" href="/tags/pipeline/" rel="tag">pipeline</a>, <a class="tag-link-link" href="/tags/pytorch/" rel="tag">pytorch</a>, <a class="tag-link-link" href="/tags/sklearn/" rel="tag">sklearn</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.</li>
+<li>학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.</li>
+<li>skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.</li>
+<li>skorch도 PyTorch callback을 이용할 수 있습니다.</li>
+</ul>
+<ul>
+<li>글이 길어 세 개로 나눕니다. </li>
+<li>두 번째로, scikit-learn을 사용해 전처리 파이프라인을 구성하고</li>
+<li>PyTorch neural network를 만들어 여기에서 나온 결과물을 학습시킵니다.</li>
+</ul>
+<h1 id="3-Neural-Network"><a href="#3-Neural-Network" class="headerlink" title="3. Neural Network"></a>3. Neural Network</h1><h2 id="3-1-PyTorch"><a href="#3-1-PyTorch" class="headerlink" title="3.1. PyTorch"></a>3.1. PyTorch</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Colab code: skorch callbacks</a></p>
+</blockquote>
+<h3 id="3-1-1-network-and-loss"><a href="#3-1-1-network-and-loss" class="headerlink" title="3.1.1. network and loss"></a>3.1.1. network and loss</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="http://alexlenail.me/NN-SVG/index.html">NN-SVG</a></p>
+</blockquote>
+<ul>
+<li>skorch는 scikit-learn Pipeline 안에 PyTorch Neural Network를 담을 수 있게 해줍니다.</li>
+<li>input node 수를 가변적으로 입력받을 수 있는, input-16-16-12-8-1 구조를 설계합니다.</li>
+<li>loss function은 RMSE를 만들어 사용합니다.</li>
+<li>PyTorch에서 MSE를 제공하긴 하지만, 오차의 범위가 직관적으로 보이는 RMSE를 더 선호합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># neural network: ninput(12)-16-16-12-8-1</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, ninput=<span class="number">12</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.layer0 = nn.Linear(ninput, <span class="number">16</span>)</span><br><span class="line">        self.layer1 = nn.Linear(<span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">        self.layer2 = nn.Linear(<span class="number">16</span>, <span class="number">12</span>)</span><br><span class="line">        self.layer3 = nn.Linear(<span class="number">12</span>, <span class="number">8</span>)</span><br><span class="line">        self.layer4 = nn.Linear(<span class="number">8</span>, <span class="number">1</span>)</span><br><span class="line">        self.activation = nn.ReLU()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        x = self.activation(self.layer0(x))</span><br><span class="line">        x = self.activation(self.layer1(x))</span><br><span class="line">        x = self.activation(self.layer2(x))</span><br><span class="line">        x = self.activation(self.layer3(x))</span><br><span class="line">        x = self.layer4(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss: RMSE</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RMSELoss</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, eps=<span class="number">1e-6</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.mse = nn.MSELoss()</span><br><span class="line">        self.eps = eps</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, true, pred</span>):</span></span><br><span class="line">        loss = torch.sqrt(self.mse(true, pred) + self.eps)</span><br><span class="line">        <span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
+<img src="9_sc_01.png" alt="이런 신경망을 만들 준비가 됐습니다. 그림은 NN-SVG로 그렸습니다."></li>
+</ul>
+<h3 id="3-1-2-preprocessor-using-Pipeline"><a href="#3-1-2-preprocessor-using-Pipeline" class="headerlink" title="3.1.2. preprocessor using Pipeline"></a>3.1.2. preprocessor using Pipeline</h3><blockquote>
+<p><a href="https://jehyunlee.github.io/2021/09/29/Python-DL-7-skorch_pipeline/">Pega Devlog: pytorch &amp; sklearn pipeline</a><br><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html">scikit-learn: sklearn.preprocessing.OneHotEncoder</a><br><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">scikit-learn: sklearn.preprocessing.PolynomialFeatures</a><br><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html">scikit-learn: sklearn.compose.ColumnTransformer</a></p>
+</blockquote>
+<ul>
+<li>펭귄 데이터셋에는 <b>categorical feature</b>가 세 개나 있습니다.</li>
+<li><code>species</code>, <code>island</code>, <code>sex</code>에는 숫자가 아닌 문자가 들어있기 때문에 신경망에 투입될 수 없습니다.</li>
+<li>여러 방법을 사용해 숫자로 바꿔주어야 합니다. 여기서는 one-hot-encoder를 사용하기로 합니다.</li>
+</ul>
+<ul>
+<li>한편 <b>numerical feature</b>는 scaling이 필요합니다. </li>
+<li>신경망의 weight를 수렴시키는 gradient descent를 안정적으로 만들기 위해서입니다.</li>
+<li>관련해서는 <a href="https://jehyunlee.github.io/2021/09/29/Python-DL-7-skorch_pipeline/">지난 글</a>에서 언급한 적이 있으니 여기서는 생략합니다.</li>
+<li>다만, <b><a href="https://jehyunlee.github.io/2021/09/29/Python-DL-7-skorch_pipeline/">지난 글</a>보다 파이프라인을 분할해서 구성합니다.</b></li>
+<li>부품이 잘 준비돼있으면 활용성이 높아지기 때문입니다.</li>
+</ul>
+<ul>
+<li><p>categorical feature와 numerical feature에 각기 one-hot-encoding과 scaling을 적용해 합칩니다.</p>
+</li>
+<li><p>numerical feature에는 polymomial feature 생성기를 붙여 교호작용을 고려할 수 있는 장치를 만듭니다.</p>
+</li>
+<li><p>feature 유형에 따라 다른 길을 타고 들어간 데이터는 <code>ColumnTransformer</code>로 결합됩니다.</p>
+</li>
+<li><p>마지막으로, float64 데이터 타입으로 float32로 변환하는 <code>FloatTransformer</code>를 추가합니다.</p>
+</li>
+<li><p><code>OneHotEncoder</code>등에서 생성되는 데이터 타입이 float64인데, PyTorch은 float32만 입력받기 때문입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># preprocessors</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> FunctionTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</span><br><span class="line"></span><br><span class="line"><span class="comment"># pipeline</span></span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> BaseEstimator, TransformerMixin</span><br><span class="line"></span><br><span class="line"><span class="comment"># Preprocessings for Categorical and Numerical features</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_concat</span>(<span class="params">cols_cat=cols_cat, cols_num=cols_num, degree=<span class="number">1</span></span>):</span></span><br><span class="line">    <span class="comment"># categorical features: one-hot encoding</span></span><br><span class="line">    cat_features = cols_cat</span><br><span class="line">    cat_transformer = OneHotEncoder(sparse=<span class="literal">False</span>, handle_unknown=<span class="string">&quot;ignore&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># numerical features: standard scaling &amp; polynomial features</span></span><br><span class="line">    num_features = cols_num</span><br><span class="line">    num_transformer = Pipeline(steps=[(<span class="string">&quot;polynomial&quot;</span>, PolynomialFeatures(degree=degree)),</span><br><span class="line">                                      (<span class="string">&quot;scaler&quot;</span>, StandardScaler())])</span><br><span class="line">    </span><br><span class="line">    numcat = ColumnTransformer(transformers=[(<span class="string">&quot;categorical&quot;</span>, cat_transformer, cat_features),</span><br><span class="line">                                          (<span class="string">&quot;numerical&quot;</span>, num_transformer, num_features)])</span><br><span class="line">    <span class="keyword">return</span> numcat</span><br><span class="line"></span><br><span class="line"><span class="comment"># Float64 to Float32 for PyTorch</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FloatTransformer</span>(<span class="params">BaseEstimator, TransformerMixin</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, X, y=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span>(<span class="params">self, X</span>):</span></span><br><span class="line">        <span class="keyword">return</span> np.array(X, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># preprocessing Pipeline</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_preprocessor</span>(<span class="params">cols_cat=cols_cat, cols_num=cols_num, degree=<span class="number">1</span></span>):</span></span><br><span class="line">    concat = get_concat(cols_cat=cols_cat, cols_num=cols_num, degree=degree)</span><br><span class="line">    ft = FloatTransformer()</span><br><span class="line"></span><br><span class="line">    pipeline= Pipeline(steps=[(<span class="string">&quot;concat&quot;</span>, concat), </span><br><span class="line">                              (<span class="string">&quot;float64to32&quot;</span>, ft)])</span><br><span class="line">    <span class="keyword">return</span> pipeline</span><br></pre></td></tr></table></figure></li>
+<li><p>작성한 전처리 파이프라인을 그림으로 출력해 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> set_config</span><br><span class="line">set_config(display=<span class="string">&#x27;diagram&#x27;</span>)</span><br><span class="line"></span><br><span class="line">preprocessor = get_preprocessor()</span><br><span class="line">preprocessor</span><br></pre></td></tr></table></figure>
+<p><img src="9_sc_02.png"><br></p>
+</li>
+<li><p>preprocessor에 train, validation, test용으로 준비한 X 데이터를 투입합니다.</p>
+</li>
+<li><p>preprocessor를 통한 데이터는 <code>numpy.ndarray</code>로 변합니다.</p>
+</li>
+<li><p>PyTorch에 넣기 위해 <code>torch.Tensor</code>로 한번 더 바꿔줍니다.</p>
+</li>
+<li><p>y 데이터는 preprocessor에 넣을 필요가 없으니 <code>torch.Tensor()</code>에만 통과시킵니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Xs</span></span><br><span class="line">X_train_np = preprocessor.fit_transform(X_train)</span><br><span class="line">X_val_np = preprocessor.transform(X_val)</span><br><span class="line">X_test_np = preprocessor.transform(X_test)</span><br><span class="line"></span><br><span class="line">X_train_tensor = torch.Tensor(X_train_np).to(device)</span><br><span class="line">X_val_tensor = torch.Tensor(X_val_np).to(device)</span><br><span class="line">X_test_tensor = torch.Tensor(X_test_np).to(device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ys</span></span><br><span class="line">y_train_tensor = torch.Tensor(y_train.values).to(device)</span><br><span class="line">y_val_tensor = torch.Tensor(y_val.values).to(device)</span><br><span class="line">y_test_tensor = torch.Tensor(y_test.values).to(device)</span><br></pre></td></tr></table></figure></li>
+<li><p>변환된 데이터의 타입을 확인합니다.</p>
+</li>
+<li><p>preprocessing후, 그리고 <code>torch.Tensor()</code>를 거치며 변하는 모습이 관찰됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Xs</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# dtype of X_train:\t\t<span class="subst">&#123;X_train.dtypes.values&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# dtype of X_train_np:\t\t<span class="subst">&#123;X_train_np.dtype&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# dtype of X_train_tensor:\t<span class="subst">&#123;X_train_tensor.dtype&#125;</span>\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ys</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# dtype of y_train:\t\t<span class="subst">&#123;y_train.dtype&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# dtype of y_train_tensor:\t<span class="subst">&#123;y_train_tensor.dtype&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dtype of X_train:			[dtype(&#x27;O&#x27;) dtype(&#x27;O&#x27;) dtype(&#x27;float64&#x27;) dtype(&#x27;float64&#x27;) dtype(&#x27;float64&#x27;) dtype(&#x27;O&#x27;)]</span></span><br><span class="line"><span class="comment"># dtype of X_train_np:		float32</span></span><br><span class="line"><span class="comment"># dtype of X_train_tensor:	torch.float32</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dtype of y_train:			float64</span></span><br><span class="line"><span class="comment"># dtype of y_train_tensor:	torch.float32</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-3-training-amp-validation"><a href="#3-1-3-training-amp-validation" class="headerlink" title="3.1.3. training &amp; validation"></a>3.1.3. training &amp; validation</h3><ul>
+<li>neural network와 preprocessor가 준비됐습니다.</li>
+<li>loss_function, optimizer, 최대 epochs를 지정하고,</li>
+<li>한편으로 leanring rate scheduler와 early stopping도 동원합니다.</li>
+<li>train과 validation 함수와 함께 epoch에 따른 loss를 시각화하는 함수도 준비합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.optim.lr_scheduler <span class="keyword">import</span> OneCycleLR</span><br><span class="line"></span><br><span class="line">net = Net().to(device)                      <span class="comment"># Neural Network 생성</span></span><br><span class="line">loss_fn = RMSELoss()                        <span class="comment"># loss function 지정</span></span><br><span class="line">optimizer = optim.Adam(net.parameters(), </span><br><span class="line">                       lr=<span class="number">1e-3</span>)             <span class="comment"># learning rate = 0.001</span></span><br><span class="line">epochs = <span class="number">1000</span>                               <span class="comment"># number of max. epochs</span></span><br><span class="line">onecycle = OneCycleLR(optimizer,            <span class="comment"># learning rate scheduler</span></span><br><span class="line">                     max_lr=<span class="number">0.1</span>, total_steps=epochs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">device, model, epochs, loss_fn, optimizer, X_train, y_train, X_val=<span class="literal">None</span>, y_val=<span class="literal">None</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">          lr_scheduler=<span class="literal">None</span>, early_stopping=<span class="number">1</span>, patience=<span class="number">3</span>, plot=<span class="literal">True</span></span>):</span></span><br><span class="line">    loss_trains = []                            <span class="comment"># train loss </span></span><br><span class="line">    loss_vals = []                              <span class="comment"># validation loss</span></span><br><span class="line">    loss_last = np.inf</span><br><span class="line">    patience_ = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    val = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> X_val != <span class="literal">None</span> <span class="keyword">and</span> y_val != <span class="literal">None</span>:</span><br><span class="line">        val = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(epochs)):</span><br><span class="line">        model.train()                           <span class="comment"># sets the model in training mode</span></span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()                   <span class="comment"># gradient reset</span></span><br><span class="line">        y_pred = model.forward(X_train_tensor)  <span class="comment"># forward propagation</span></span><br><span class="line">        loss_ = loss_fn(y_pred, y_train_tensor.view(-<span class="number">1</span>, <span class="number">1</span>)) <span class="comment"># loss 계산</span></span><br><span class="line">        loss_.backward()                        <span class="comment"># back propagation</span></span><br><span class="line">        optimizer.step()                        <span class="comment"># weight update</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> lr_scheduler:</span><br><span class="line">            lr_scheduler.step()                 <span class="comment"># learning rate scheduler</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        loss = loss_.item()</span><br><span class="line">        loss_trains.append(loss)                <span class="comment"># collect train loss</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># progress message</span></span><br><span class="line">        prog_msg = <span class="string">f&quot;[<span class="subst">&#123;epoch&#125;</span>/<span class="subst">&#123;epochs&#125;</span>] train_loss: <span class="subst">&#123;loss&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># validation</span></span><br><span class="line">        <span class="keyword">if</span> val == <span class="literal">True</span>:</span><br><span class="line">            loss = validate(device, model, loss_fn, X_val, y_val)</span><br><span class="line">            loss_vals.append(loss)          <span class="comment"># collect validation loss</span></span><br><span class="line">            prog_msg += <span class="string">f&quot;,  valid_loss: <span class="subst">&#123;loss&#125;</span>&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> epoch % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(prog_msg)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># early stopping : patience회 이상 loss_val이 감소하지 않을 때</span></span><br><span class="line">        <span class="keyword">if</span> early_stopping &gt; <span class="number">0</span> <span class="keyword">and</span> (loss &gt; loss_last):</span><br><span class="line">            patience_ += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> patience_ &gt;= patience:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;early stopping: <span class="subst">&#123;loss_last&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        loss_last = loss</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> plot:</span><br><span class="line">        <span class="keyword">if</span> val:</span><br><span class="line">            plot_epoch(loss_trains, loss_vals)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            plot_epoch(loss_trains)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validate</span>(<span class="params">device, model, loss_fn, X_val, y_val</span>):</span></span><br><span class="line">    model.<span class="built_in">eval</span>()                            <span class="comment"># sets the model in evaluating mode</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():                   <span class="comment"># gradient 계산 없이 진행</span></span><br><span class="line">        y_pred = net.forward(X_val)         <span class="comment"># forward propagation</span></span><br><span class="line">        loss = loss_fn(y_pred, y_val.view(-<span class="number">1</span>, <span class="number">1</span>))       <span class="comment"># loss 계산</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> loss.item()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_epoch</span>(<span class="params">loss_trains, loss_vals=<span class="literal">None</span></span>):</span></span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">    ax.plot(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(loss_trains)+<span class="number">1</span>)), loss_trains, c=c_train, label=<span class="string">&quot;train&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> loss_vals != <span class="literal">None</span>:</span><br><span class="line">        ax.plot(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(loss_vals)+<span class="number">1</span>)), loss_vals, c=c_val, label=<span class="string">&quot;valid&quot;</span>)</span><br><span class="line">    ax.grid(axis=<span class="string">&quot;y&quot;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;epochs&quot;</span>, fontdict=font_label)</span><br><span class="line">    ax.legend()</span><br><span class="line"></span><br><span class="line">net = train(device, net, epochs, loss_fn, optimizer, X_train_tensor, y_train_tensor, X_val_tensor, y_val_tensor,</span><br><span class="line">            lr_scheduler=<span class="literal">None</span>, early_stopping=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">100% ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 1000/1000 [00:04&lt;00:00, 222.90it/s]</span><br><span class="line">[0/1000] train_loss: 4303.2822265625,  valid_loss: 4250.70068359375</span><br><span class="line">[100/1000] train_loss: 3756.332763671875,  valid_loss: 3660.7578125</span><br><span class="line">[200/1000] train_loss: 361.5039367675781,  valid_loss: 295.07098388671875</span><br><span class="line">[300/1000] train_loss: 289.6954650878906,  valid_loss: 275.11474609375</span><br><span class="line">[400/1000] train_loss: 282.8603210449219,  valid_loss: 271.21929931640625</span><br><span class="line">[500/1000] train_loss: 280.0774230957031,  valid_loss: 271.82470703125</span><br><span class="line">[600/1000] train_loss: 278.8686828613281,  valid_loss: 272.6382141113281</span><br><span class="line">[700/1000] train_loss: 278.05108642578125,  valid_loss: 273.4883728027344</span><br><span class="line">[800/1000] train_loss: 276.9803466796875,  valid_loss: 275.0303039550781</span><br><span class="line">[900/1000] train_loss: 276.1494140625,  valid_loss: 275.9771728515625</span><br></pre></td></tr></table></figure>
+<img src="9_sc_03.png"><br></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-4-parity-plot"><a href="#3-1-4-parity-plot" class="headerlink" title="3.1.4. parity plot"></a>3.1.4. parity plot</h3><ul>
+<li>training, valiation, testing set의 학습 결과를 비교하는 함수를 만듭니다.</li>
+<li>참값(<code>true</code>)과 예측값(<code>pred</code>)을 scatter plot으로 그립니다.</li>
+<li>여기에 MAE, RMSE, R2를 동시에 출력하는 함수를 만듭니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> colors</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_metrics</span>(<span class="params">true, pred</span>):</span></span><br><span class="line">    mae = mean_absolute_error(true, pred)</span><br><span class="line">    rmse = mean_squared_error(true, pred, squared=<span class="literal">False</span>)</span><br><span class="line">    r2 = r2_score(true, pred)</span><br><span class="line">    <span class="keyword">return</span> mae, rmse, r2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_parity</span>(<span class="params">true, pred, kind=<span class="string">&quot;scatter&quot;</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">                xlabel=<span class="string">&quot;true&quot;</span>, ylabel=<span class="string">&quot;predict&quot;</span>, title=<span class="string">&quot;&quot;</span>, </span></span></span><br><span class="line"><span class="params"><span class="function">                hist2d_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span>, kde_kws=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                equal=<span class="literal">True</span>, metrics=<span class="literal">True</span>, metrics_position=<span class="string">&quot;lower right&quot;</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                figsize=(<span class="params"><span class="number">5</span>, <span class="number">5</span></span>), ax=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span></span><br><span class="line">    </span><br><span class="line">    fig = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig, ax = plt.subplots(figsize=figsize, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># data range</span></span><br><span class="line">    val_min = <span class="built_in">min</span>(true.<span class="built_in">min</span>(), pred.<span class="built_in">min</span>())</span><br><span class="line">    val_max = <span class="built_in">max</span>(true.<span class="built_in">max</span>(), pred.<span class="built_in">max</span>())</span><br><span class="line">    data_range = val_max - val_min</span><br><span class="line"></span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> scatter_kws:</span><br><span class="line">            scatter_kws=&#123;<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;alpha&#x27;</span>:<span class="number">0.5</span>&#125;</span><br><span class="line">        ax.scatter(true, pred, **scatter_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;hist2d&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hist2d_kws:</span><br><span class="line">            hist2d_kws=&#123;<span class="string">&#x27;cmap&#x27;</span>:<span class="string">&#x27;Greens&#x27;</span>, <span class="string">&#x27;vmin&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;bins&#x27;</span>:<span class="number">30</span>&#125;</span><br><span class="line">        ax.hist2d(true, pred, **hist2d_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;kde&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> kde_kws:</span><br><span class="line">            kde_kws=&#123;<span class="string">&#x27;cmap&#x27;</span>:<span class="string">&#x27;viridis&#x27;</span>, <span class="string">&#x27;levels&#x27;</span>:<span class="number">5</span>&#125;</span><br><span class="line">        sns.kdeplot(x=true, y=pred, **kde_kws, ax=ax)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x, y bounds</span></span><br><span class="line">    bounds = (val_min - data_range*<span class="number">0.1</span>, val_max + data_range*<span class="number">0.1</span>)</span><br><span class="line">    ax.set_xlim(bounds)</span><br><span class="line">    ax.set_ylim(bounds)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x, y ticks, ticklabels</span></span><br><span class="line">    ticks = [<span class="built_in">int</span>(y) <span class="keyword">for</span> y <span class="keyword">in</span> ax.get_yticks() <span class="keyword">if</span> ((<span class="number">100</span>*y)%<span class="number">100</span> == <span class="number">0</span>) <span class="keyword">and</span> (val_min &lt;= y &lt;= val_max)]</span><br><span class="line">    ax.set_xticks(ticks, ticks)</span><br><span class="line">    ax.set_yticks(ticks, ticks)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># grid</span></span><br><span class="line">    ax.grid(<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 기준선</span></span><br><span class="line">    ax.plot(bounds, bounds, c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x, y label</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">12</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># metrics</span></span><br><span class="line">    <span class="keyword">if</span> metrics:</span><br><span class="line">        rmse = mean_squared_error(true, pred, squared=<span class="literal">False</span>)</span><br><span class="line">        mae = mean_absolute_error(true, pred)</span><br><span class="line">        r2 = r2_score(true, pred)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> metrics_position == <span class="string">&quot;lower right&quot;</span>:</span><br><span class="line">            text_pos_x = <span class="number">0.98</span></span><br><span class="line">            text_pos_y = <span class="number">0.3</span></span><br><span class="line">            ha = <span class="string">&quot;right&quot;</span></span><br><span class="line">        <span class="keyword">elif</span> metrics_position == <span class="string">&quot;upper left&quot;</span>:</span><br><span class="line">            text_pos_x = <span class="number">0.1</span></span><br><span class="line">            text_pos_y = <span class="number">0.9</span></span><br><span class="line">            ha = <span class="string">&quot;left&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            text_pos_x, text_pos_y = metrics_position</span><br><span class="line">            ha = <span class="string">&quot;left&quot;</span></span><br><span class="line"></span><br><span class="line">        ax.text(text_pos_x, text_pos_y, <span class="string">f&quot;RMSE = <span class="subst">&#123;rmse:<span class="number">.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontdict=font_metrics, ha=ha)</span><br><span class="line">        ax.text(text_pos_x, text_pos_y-<span class="number">0.1</span>, <span class="string">f&quot;MAE = <span class="subst">&#123;mae:<span class="number">.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontdict=font_metrics, ha=ha)</span><br><span class="line">        ax.text(text_pos_x, text_pos_y-<span class="number">0.2</span>, <span class="string">f&quot;R2 = <span class="subst">&#123;r2:<span class="number">.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontdict=font_metrics, ha=ha)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 파일로 저장</span></span><br><span class="line">    <span class="keyword">if</span> fig <span class="keyword">and</span> filename:</span><br><span class="line">            fig.savefig(filename)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-1-5-testing"><a href="#3-1-5-testing" class="headerlink" title="3.1.5. testing"></a>3.1.5. testing</h3><ul>
+<li><p>training set으로 신경망을 학습시키고,</p>
+</li>
+<li><p>validation set으로 학습 현황을 모니터링하며</p>
+</li>
+<li><p>validation set의 성능이 마음에 들지 않을 경우 신경망의 구조나 learning rate와 같은 hyperparameter를 수정하여 성능을 높입니다.</p>
+</li>
+<li><p>이 과정을 거쳤다고 치고, training + validataion set으로 재학습을 시킨 후 testing data로 최종 결과를 얻습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># evaluate training and validataion set</span></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    y_pred_train = net.forward(X_train_tensor).cpu().numpy().flatten()</span><br><span class="line">    y_pred_val = net.forward(X_val_tensor).cpu().numpy().flatten()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># hyperparameter 업데이트 했다고 치고, training + validataion set으로 refit</span></span><br><span class="line">X_Train_pp = preprocessor.fit_transform(X_Train)</span><br><span class="line">X_Train_tensor = torch.Tensor(X_Train_pp).to(device)</span><br><span class="line">y_Train_tensor = torch.Tensor(y_Train).to(device)</span><br><span class="line"></span><br><span class="line">net = Net().to(device)</span><br><span class="line">loss_fn = RMSELoss()                        <span class="comment"># loss function 지정</span></span><br><span class="line">optimizer = optim.Adam(net.parameters(), </span><br><span class="line">                       lr=<span class="number">1e-3</span>)             <span class="comment"># learning rate = 0.001</span></span><br><span class="line">epochs = <span class="number">1000</span></span><br><span class="line">net = train(device, net, epochs, loss_fn, optimizer, X_Train_tensor, y_Train_tensor, X_val_tensor, y_val_tensor, early_stopping=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">100% ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 1000/1000 [00:04&lt;00:00, 270.43it/s]</span><br><span class="line">[0/1000] train_loss: 4303.0849609375,  valid_loss: 4250.50732421875</span><br><span class="line">[100/1000] train_loss: 4298.97021484375,  valid_loss: 4246.09326171875</span><br><span class="line">[200/1000] train_loss: 3950.37841796875,  valid_loss: 3884.753173828125</span><br><span class="line">[300/1000] train_loss: 606.517822265625,  valid_loss: 669.4122924804688</span><br><span class="line">[400/1000] train_loss: 320.8173828125,  valid_loss: 296.9498291015625</span><br><span class="line">[500/1000] train_loss: 306.0234069824219,  valid_loss: 281.5106506347656</span><br><span class="line">[600/1000] train_loss: 299.0507507324219,  valid_loss: 276.0859375</span><br><span class="line">[700/1000] train_loss: 294.1066589355469,  valid_loss: 272.7406921386719</span><br><span class="line">[800/1000] train_loss: 290.13287353515625,  valid_loss: 270.5881652832031</span><br><span class="line">[900/1000] train_loss: 287.00494384765625,  valid_loss: 269.0577697753906</span><br></pre></td></tr></table></figure>
+<img src="9_sc_04.png"><br></li>
+</ul>
+</li>
+<li><p>testing 결과까지 얻은 후, 최종적으로 parity plot 세 개를 같이 그립니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># evaluate testing set</span></span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    y_pred_test = net.forward(X_test_tensor).cpu().numpy().flatten()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># parity plots</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">trues = [y_train, y_val, y_test]</span><br><span class="line">preds = [y_pred_train, y_pred_val, y_pred_test]</span><br><span class="line">colors = [c_train, c_val, c_test]</span><br><span class="line">titles = [<span class="string">&quot;train&quot;</span>, <span class="string">&quot;validation&quot;</span>, <span class="string">&quot;test&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, true, pred, c, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, trues, preds, colors, titles):</span><br><span class="line">    plot_parity(true, pred, ax=ax, scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:c, <span class="string">&quot;ec&quot;</span>:c, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;, title=title)</span><br><span class="line">    <span class="keyword">if</span> ax != axs[<span class="number">0</span>]:</span><br><span class="line">        ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="9_sc_05.png"><br></p>
+</li>
+<li><p>펭귄 체중이 제법 괜찮게 예측되고 있습니다.</p>
+</li>
+<li><p>scikit-learn Pipeline으로 categorical feature와 numerial feature에 적절한 처리를 마친 후, </p>
+</li>
+<li><p>PyTorch로 딥러닝 학습을 잘 시킨 것입니다.</p>
+</li>
+</ul>
+<ul>
+<li>Pipeline으로 전처리 과정을 모두 묶었고, PyTorch 딥러닝을 함수화 했습니다.</li>
+<li>하지만 PyTorch로 따로 넘어가는 과정이 따로 노는 느낌이 듭니다.</li>
+<li>이제 하나로 묶어볼 차례입니다.</li>
+</ul>
+
+        </div>
+		
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2022/06/09/Python-DL-9-skorch_callback2/" data-id="cl46fk55r00yfjktqhp8dftdj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "skorch callbacks (2) sklearn preprocesing + PyTorch neural network",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DL/9_sc_00.png",
+        "keywords": "pytorch sklearn pipeline neural network callback visualization",
+        "genre": "Python Deep Learning",
+        "datePublished": "2022-06-09",
+        "dateCreated": "2022-06-09",
+        "dateModified": "2022-06-09",
+        "url": "https://jehyunlee.github.io/2022/06/09/Python-DL-9-skorch_callback2/",
+        "description": "
+PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.
+학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.
+skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.
+skorch도 PyTorch callback을 이용할 수 있습니다.
+
+
+글이 길어 세 개로 나눕니다. 
+두 번째로, s",
+        "wordCount": 4278
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/06/09/Python-DL-8-skorch_callback/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">skorch callbacks (1) dataset preparation</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/09/Python-DL-9-skorch_callback2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/9_sc_00.png)" alt="skorch callbacks (2) sklearn preprocesing + PyTorch neural network" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2022/06/09/Python-DL-9-skorch_callback2/" class="title">skorch callbacks (2) sklearn preprocesing + PyTorch neural network</a></p>
+                            <p class="item-date"><time datetime="2022-06-09T01:28:00.000Z" itemprop="datePublished">2022-06-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/09/Python-DL-8-skorch_callback/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DL/8_sc_00.png)" alt="skorch callbacks (1) dataset preparation" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2022/06/09/Python-DL-8-skorch_callback/" class="title">skorch callbacks (1) dataset preparation</a></p>
+                            <p class="item-date"><time datetime="2022-06-08T21:16:00.000Z" itemprop="datePublished">2022-06-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/06/06/Python-DS-103-snsreglmplot/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/103_snsreglmplot_00.png)" alt="seaborn regplot vs lmplot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/06/06/Python-DS-103-snsreglmplot/" class="title">seaborn regplot vs lmplot</a></p>
+                            <p class="item-date"><time datetime="2022-06-06T09:51:00.000Z" itemprop="datePublished">2022-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/27/Python-DS-102-kdeplot/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/102_kdeplot_00.png)" alt="short discussions on KDE plot" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/05/27/Python-DS-102-kdeplot/" class="title">short discussions on KDE plot</a></p>
+                            <p class="item-date"><time datetime="2022-05-26T23:51:00.000Z" itemprop="datePublished">2022-05-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/24/Python-DS-101-kierlecture2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/101_kierlecture2_00.PNG)" alt="머신 러닝 파이프라인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/05/24/Python-DS-101-kierlecture2/" class="title">머신 러닝 파이프라인</a></p>
+                            <p class="item-date"><time datetime="2022-05-24T09:20:00.000Z" itemprop="datePublished">2022-05-24</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">120</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">101</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.14px;">3D</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 12.14px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 10.71px;">AI festival</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 11.43px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.71px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.71px;">Nicolas P. Rougier</a> <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.71px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.71px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.71px;">batch normalization</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.71px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 10.71px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.43px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.43px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.86px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15.71px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.71px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.71px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.71px;">data sampling</a> <a href="/tags/datetime/" style="font-size: 11.43px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.71px;">font</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/image/" style="font-size: 12.14px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17.14px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.71px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.86px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.71px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.43px;">legend</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 14.29px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 18.57px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.71px;">natural language</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.43px;">neural network</a> <a href="/tags/numpy/" style="font-size: 11.43px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10px;">open API</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 16.43px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.71px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pipeline/" style="font-size: 12.14px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.43px;">polygon</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.86px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.71px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.71px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.14px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.71px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.71px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.71px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.86px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.71px;">shapefile</a> <a href="/tags/signal-processing/" style="font-size: 12.14px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13.57px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 14.29px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.71px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.43px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 10.71px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.43px;">translation</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.29px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2022/06/09/Python-DL-9-skorch_callback2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
