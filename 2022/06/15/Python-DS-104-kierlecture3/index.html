@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/104_kierlecture3_00.png">
 <meta property="article:published_time" content="2022-06-15T00:46:00.000Z">
-<meta property="article:modified_time" content="2022-06-15T00:53:16.458Z">
+<meta property="article:modified_time" content="2022-06-15T05:25:11.293Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="presentation">
 <meta property="article:tag" content="machine learning">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/06/15/Python-DS-104-kierlecture3/" class="article-date">
-     <time datetime="2022-06-15T00:53:16.458Z" itemprop="dateModified">2022-06-15</time>
+     <time datetime="2022-06-15T05:25:11.293Z" itemprop="dateModified">2022-06-15</time>
   </a>
 </div>
 
@@ -246,6 +246,25 @@
 </ul>
 <div class="video-container"><iframe src="https://www.youtube.com/embed/JX6tSOaUKuI" frameborder="0" loading="lazy" allowfullscreen></iframe></div> 
 
+
+<h3 id="Cross-Validation-set-generator"><a href="#Cross-Validation-set-generator" class="headerlink" title="Cross Validation set generator"></a>Cross Validation set generator</h3><ul>
+<li><p><code>cross_val_score</code>와 <code>cross_val_predict</code>에 사전에 만든 dataset을 넣을 수 있습니다.</p>
+</li>
+<li><p>training set과 validation set의 index를 출력하는 generator를 사용하면 됩니다.</p>
+</li>
+<li><p>발표 영상에는 없지만 해당 코드를 추가합니다.</p>
+</li>
+<li><p>먼저, <code>cross_val_score</code>예시입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 사전에 분할한 cross validation set 사용</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_train_valid</span>(<span class="params">idx_trains, idx_vals</span>):</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(idx_trains) == <span class="built_in">len</span>(idx_vals) <span class="comment"># train data index와 validation data index가 다르면 중단</span></span><br><span class="line"></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> count &lt; <span class="built_in">len</span>(idx_trains):</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> idx_trains[count-<span class="number">1</span>], idx_vals[count-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">idx_cv = generate_train_valid(idx_trains, idx_vals) <span class="comment"># CV set generator</span></span><br><span class="line">-cross_val_score(model1, X, y, cv=idx_cv, scoring=<span class="string">&quot;neg_root_mean_squared_error&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>실행 결과</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([290.47491999, 332.31676581, 268.35748775, 304.48637819,</span><br><span class="line">       262.42934634])</span><br></pre></td></tr></table></figure></li>
+<li><p><code>cross_val_predict</code>예시입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_predict</span><br><span class="line"></span><br><span class="line"><span class="comment"># y_pred_cv = cross_val_predict(model1, X, y, cv=5)</span></span><br><span class="line">idx_cv = generate_train_valid(idx_trains, idx_vals)  <span class="comment"># CV set generator</span></span><br><span class="line">y_pred_cv = cross_val_predict(model1, X, y, cv=idx_cv)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization and print</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.scatter(y, y_pred_cv, c=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;true&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;predict&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">mean_squared_error(y, y_pred_cv, squared=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>실행 결과</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">292.76401468664585</span><br></pre></td></tr></table></figure>
+<p><img src="104_kierlecture3_01.png"><br></p>
+</li>
+</ul>
 <p>
 * 바쁜 연구원 일정 속에 변동이 있겠지만, 최대한 일정을 지켜보고자 합니다.
 
@@ -346,7 +365,7 @@ scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified 
 
 
 발표 영상 : (Y",
-        "wordCount": 60
+        "wordCount": 314
     }
 </script>
 
