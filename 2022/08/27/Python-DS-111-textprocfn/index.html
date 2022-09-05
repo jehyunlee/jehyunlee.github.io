@@ -21,7 +21,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/111_textprocfn_00.png">
 <meta property="article:published_time" content="2022-08-27T06:59:00.000Z">
-<meta property="article:modified_time" content="2022-08-29T05:21:49.829Z">
+<meta property="article:modified_time" content="2022-09-05T09:32:03.466Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="text mining">
@@ -200,7 +200,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/08/27/Python-DS-111-textprocfn/" class="article-date">
-     <time datetime="2022-08-29T05:21:49.829Z" itemprop="dateModified">2022-08-29</time>
+     <time datetime="2022-09-05T09:32:03.466Z" itemprop="dateModified">2022-09-05</time>
   </a>
 </div>
 
@@ -461,7 +461,7 @@
 <li><p>외국어나 dash, hypen 등 <b>unicode 251종을 유사한 일반 글자로 변환하는 사전</b>입니다. (<a href="unicode_dict.zip">링크</a>)<br><br><img src="111_textprocfn_07.png" alt="어떤 심정으로 만든 사전일까요?"><br></p>
 </li>
 <li><p>이 사전을 사용해서 text에 있는 unicode를 일반 글자로 변환합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;./dicts/unicode_dict.json&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    dict_unicode = json.load(f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># unicode filtering</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ufiltered</span>(<span class="params">text</span>):</span></span><br><span class="line">    text_ = deepcopy(text)</span><br><span class="line">    text_ufiltered = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(text_):</span><br><span class="line">        <span class="keyword">if</span> dict_unicode.get(c):</span><br><span class="line">            ufiltered = dict_unicode[c]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ufiltered = c</span><br><span class="line">        text_ufiltered = text_ufiltered + ufiltered</span><br><span class="line">    <span class="keyword">return</span> text_ufiltered</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 함수 실행</span></span><br><span class="line">summary_ufiltered = get_ufiltered(summary)</span><br><span class="line">summary_ufiltered</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;./dicts/unicode_dict.json&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    dict_unicode = json.load(f)</span><br><span class="line">ukeys = dict_unicode.keys()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># unicode filtering</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ufiltered</span>(<span class="params">text</span>):</span></span><br><span class="line">    text_ = deepcopy(text)</span><br><span class="line">    text_ufiltered = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(text_):</span><br><span class="line">        <span class="keyword">for</span> ukey <span class="keyword">in</span> ukeys:</span><br><span class="line">            <span class="keyword">if</span> ukey <span class="keyword">in</span> c:</span><br><span class="line">                ufiltered = c.replace(ukey, dict_unicode.get(ukey))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ufiltered = c</span><br><span class="line">            </span><br><span class="line">        text_ufiltered = text_ufiltered + ufiltered</span><br><span class="line">    <span class="keyword">return</span> text_ufiltered</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 함수 실행</span></span><br><span class="line">summary_ufiltered = get_ufiltered(summary)</span><br><span class="line">summary_ufiltered</span><br></pre></td></tr></table></figure></li>
 <li><p>실행 결과</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27; A hybrid renewable energy systems (HRESs) comprises of photovoltaic (PV), and self-charging fuel cells (SCFC) is designed for securing electrical energy required to operate brackish water pumping (BWP) and reverse osmosis desalination (RO) plant of 150 m3 d-1 for irrigation purposes in remote areas. The study opens the way for using a fuel cell as an effective method for solving the energy intermittence/storage problems of renewable energy sources.&#x27;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -515,7 +515,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/08/27/Python-DS-111-textprocfn/" data-id="cl7og3vbx0120cwtqdb6gbf2y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/08/27/Python-DS-111-textprocfn/" data-id="cl7okdt6u011wu8tqbr34dtwi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -591,7 +591,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-08-27",
         "dateCreated": "2022-08-27",
-        "dateModified": "2022-08-29",
+        "dateModified": "2022-09-05",
         "url": "https://jehyunlee.github.io/2022/08/27/Python-DS-111-textprocfn/",
         "description": "
 자연어 처리는 품이 많이 듭니다.
@@ -605,7 +605,7 @@ Pega Devlog: Open API를 이용한 고속 논문 분석
 우연히 시작한 문헌 분석 일이 형태를 갖춰 갑니다. 
 주먹구구로 시작했던 일을 체계적으로 정리하고자 합니다.
 무엇보다",
-        "wordCount": 5242
+        "wordCount": 5314
     }
 </script>
 
