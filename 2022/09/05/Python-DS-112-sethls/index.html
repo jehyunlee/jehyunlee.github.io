@@ -19,9 +19,9 @@
 <meta property="og:site_name" content="Pega Devlog">
 <meta property="og:description" content="시각화에서 색은 매우 중요한 요소입니다. 중요 데이터를 강조하기 위해 특정 영역의 색을 다르게 지정하기도 합니다. HLS 색공간을 사용해 특정 데이터만 강조합니다.  1. 중요 데이터 강조 Claus Wikle, “데이터 시각화 교과서”   아래 그림은 데이터 시각화 교과서에 수록된 데이터 강조 사례입니다.  여러 항공사 중 Delta와 American만">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/111_textprocfn_00.png">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/112_sethls_00.png">
 <meta property="article:published_time" content="2022-09-05T05:04:00.000Z">
-<meta property="article:modified_time" content="2022-09-05T07:14:19.372Z">
+<meta property="article:modified_time" content="2022-09-05T07:32:12.158Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="seaborn">
@@ -29,7 +29,7 @@
 <meta property="article:tag" content="visualziation">
 <meta property="article:tag" content="color">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/111_textprocfn_00.png">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/112_sethls_00.png">
     
 	<link rel="canonical" href="https://jehyunlee.github.io/2022/09/05/python-ds-112-sethls/"/>
 
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/09/05/Python-DS-112-sethls/" class="article-date">
-     <time datetime="2022-09-05T07:14:19.372Z" itemprop="dateModified">2022-09-05</time>
+     <time datetime="2022-09-05T07:32:12.158Z" itemprop="dateModified">2022-09-05</time>
   </a>
 </div>
 
@@ -259,17 +259,24 @@
 <li>조금 더 정확히 말하면, 채도가 0이 되어 색상이 드러나지 않으면 무채색이 됩니다.</li>
 <li>채도를 아주 살짝 남기면 색상만 약하게 전달할 수 있습니다.<br><br><img src="112_sethls_02.png"><br></li>
 </ul>
-<h2 id="2-2-set-hls"><a href="#2-2-set-hls" class="headerlink" title="2.2. set_hls()"></a>2.2. <code>set_hls()</code></h2><ul>
-<li>색 데이터와 함께 HLS 공간에서의 수정 내역을 입력받아 바뀐 색을 출력하는 함수를 만듭니다.</li>
-<li>색을 제어하는 <code>matplotlib.colors</code>모듈과 함께 python 기본 라이브러리 <code>colorsys</code>를 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_hls</span>(<span class="params">c, dh=<span class="number">0</span>, dl=<span class="number">0</span>, ds=<span class="number">0</span>, dalpha=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    c : (array -like, str) color in RGB space</span></span><br><span class="line"><span class="string">    dh : (float) change in Hue</span></span><br><span class="line"><span class="string">        default = 0</span></span><br><span class="line"><span class="string">    dl : (float) change in Lightness</span></span><br><span class="line"><span class="string">        default = 0</span></span><br><span class="line"><span class="string">    ds : (float) change in Saturation</span></span><br><span class="line"><span class="string">        default = 0</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 입력된 color를 RGBA numpy array로 변환</span></span><br><span class="line">    c_rgba = mcolors.to_rgba(c)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># RGB와 alpha 분리</span></span><br><span class="line">    c_rgb = c_rgba[:<span class="number">3</span>]</span><br><span class="line">    alpha = c_rgba[<span class="number">3</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># RGB 색공간을 HLS 색공간으로 변환 후 입력된 변화 적용</span></span><br><span class="line">    c_hls = colorsys.rgb_to_hls(*c_rgb)</span><br><span class="line">    h = c_hls[<span class="number">0</span>] + dh</span><br><span class="line">    l = <span class="built_in">max</span>(<span class="built_in">min</span>(c_hls[<span class="number">1</span>] + dl, <span class="number">1</span>), <span class="number">0</span>)     <span class="comment"># 0~1 범위를 넘지 않도록 제어</span></span><br><span class="line">    s = <span class="built_in">max</span>(<span class="built_in">min</span>(c_hls[<span class="number">2</span>] + ds, <span class="number">1</span>), <span class="number">0</span>)     <span class="comment"># 0~1 범위를 넘지 않도록 제어</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># HLS 색공간에서 변경된 색을 RGB 색공간으로 변환</span></span><br><span class="line">    c_rgb_new = colorsys.hls_to_rgb(h, l, s)</span><br><span class="line">    alpha = <span class="built_in">max</span>(<span class="built_in">min</span>(alpha+dalpha, <span class="number">1</span>), <span class="number">0</span>)  <span class="comment"># 0~1 범위를 넘지 않도록 제어</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> np.append(c_rgb_new, alpha) <span class="comment"># alpha 추가하여 return</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+<h2 id="2-2-set-hls"><a href="#2-2-set-hls" class="headerlink" title="2.2. set_hls()"></a>2.2. <code>set_hls()</code></h2><p><img src="112_sethls_11.png"><br></p>
 <ul>
-<li>구성은 간단합니다. </li>
-<li>RGB 색공간에서 정의된 색을 색상, 명도, 채도 변화량과 함께 입력받고,</li>
-<li>HLS 공간으로 변환해서 원하는 변화를 적용하고, 다시 RGB 색공간으로 변환시켜 <code>return</code>합니다.</li>
-<li><b><code>mcolors.to_rgba()</code></b>명령으로 색 이름을 처리했기 때문에 <b>array-like</b>, <b>string</b>, <b>hex code</b>를 모두 인식합니다.</li>
-<li>Hue는 무한 순환하지만 Lightness와 Saturation은 그렇지 않습니다. 범위를 넘지 않도록 제어합니다.</li>
-<li>만약 입력 색에 alpha 채널이 있어 불투명도가 지정되어 있다면, 이를 따로 떼었다가 마지막에 다시 붙입니다.<br><br><img src="bobross.jpg" alt="어때요, 참 쉽죠?"><br></li>
+<li><p>색 데이터와 함께 HLS 공간에서의 수정 내역을 입력받아 바뀐 색을 출력하는 함수를 만듭니다.</p>
+</li>
+<li><p>색을 제어하는 <code>matplotlib.colors</code>모듈과 함께 python 기본 라이브러리 <code>colorsys</code>를 사용합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_hls</span>(<span class="params">c, dh=<span class="number">0</span>, dl=<span class="number">0</span>, ds=<span class="number">0</span>, dalpha=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    c : (array -like, str) color in RGB space</span></span><br><span class="line"><span class="string">    dh : (float) change in Hue</span></span><br><span class="line"><span class="string">        default = 0</span></span><br><span class="line"><span class="string">    dl : (float) change in Lightness</span></span><br><span class="line"><span class="string">        default = 0</span></span><br><span class="line"><span class="string">    ds : (float) change in Saturation</span></span><br><span class="line"><span class="string">        default = 0</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 입력된 color를 RGBA numpy array로 변환</span></span><br><span class="line">    c_rgba = mcolors.to_rgba(c)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># RGB와 alpha 분리</span></span><br><span class="line">    c_rgb = c_rgba[:<span class="number">3</span>]</span><br><span class="line">    alpha = c_rgba[<span class="number">3</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># RGB 색공간을 HLS 색공간으로 변환 후 입력된 변화 적용</span></span><br><span class="line">    c_hls = colorsys.rgb_to_hls(*c_rgb)</span><br><span class="line">    h = c_hls[<span class="number">0</span>] + dh</span><br><span class="line">    l = <span class="built_in">max</span>(<span class="built_in">min</span>(c_hls[<span class="number">1</span>] + dl, <span class="number">1</span>), <span class="number">0</span>)     <span class="comment"># 0~1 범위를 넘지 않도록 제어</span></span><br><span class="line">    s = <span class="built_in">max</span>(<span class="built_in">min</span>(c_hls[<span class="number">2</span>] + ds, <span class="number">1</span>), <span class="number">0</span>)     <span class="comment"># 0~1 범위를 넘지 않도록 제어</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># HLS 색공간에서 변경된 색을 RGB 색공간으로 변환</span></span><br><span class="line">    c_rgb_new = colorsys.hls_to_rgb(h, l, s)</span><br><span class="line">    alpha = <span class="built_in">max</span>(<span class="built_in">min</span>(alpha+dalpha, <span class="number">1</span>), <span class="number">0</span>)  <span class="comment"># 0~1 범위를 넘지 않도록 제어</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> np.append(c_rgb_new, alpha) <span class="comment"># alpha 추가하여 return</span></span><br></pre></td></tr></table></figure></li>
+<li><p>구성은 간단합니다. </p>
+</li>
+<li><p>RGB 색공간에서 정의된 색을 색상, 명도, 채도 변화량과 함께 입력받고,</p>
+</li>
+<li><p>HLS 공간으로 변환해서 원하는 변화를 적용하고, 다시 RGB 색공간으로 변환시켜 <code>return</code>합니다.</p>
+</li>
+<li><p><b><code>mcolors.to_rgba()</code></b>명령으로 색 이름을 처리했기 때문에 <b>array-like</b>, <b>string</b>, <b>hex code</b>를 모두 인식합니다.</p>
+</li>
+<li><p>Hue는 무한 순환하지만 Lightness와 Saturation은 그렇지 않습니다. 범위를 넘지 않도록 제어합니다.</p>
+</li>
+<li><p>만약 입력 색에 alpha 채널이 있어 불투명도가 지정되어 있다면, 이를 따로 떼었다가 마지막에 다시 붙입니다.<br><br><img src="bobross.jpg" alt="어때요, 참 쉽죠?"><br></p>
+</li>
 </ul>
 <h2 id="2-3-bar-plot-적용"><a href="#2-3-bar-plot-적용" class="headerlink" title="2.3. bar plot 적용"></a>2.3. bar plot 적용</h2><ul>
 <li><p>펭귄 데이터셋을 예제로 bar plot을 이렇게 강조해 봅니다.</p>
@@ -360,7 +367,7 @@
 <li><p><code>dh</code>로 색상을 바꾸고 <code>ds</code>로 채도를 낮춥니다.</p>
 </li>
 <li><p>handles 변경 후에는 legend도 새로 만듭니다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 성별 밀도 함수 객체 색상 변경</span><br><span class="line">sexs = [axs[0].collections[0], axs[1].collections[0]]</span><br><span class="line">for p in sexs:</span><br><span class="line">    fc = p.get_facecolor()</span><br><span class="line">    p.set_facecolor(set_hls(fc, dh=0.8, ds=-0.3))</span><br><span class="line"></span><br><span class="line"># handles 변경을 legend에 반영    </span><br><span class="line">handles = [axs[0].collections[1], axs[0].collections[0], axs[1].collections[0]]</span><br><span class="line">labels = [&quot;all sexs&quot;, &quot;males&quot;, &quot;females&quot;]</span><br><span class="line">axs[1].legend(handles=handles, labels=labels, loc=&quot;upper right&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 성별 밀도 함수 객체 색상 변경</span></span><br><span class="line">sexs = [axs[<span class="number">0</span>].collections[<span class="number">0</span>], axs[<span class="number">1</span>].collections[<span class="number">0</span>]]</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> sexs:</span><br><span class="line">    fc = p.get_facecolor()</span><br><span class="line">    p.set_facecolor(set_hls(fc, dh=<span class="number">0.8</span>, ds=-<span class="number">0.3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># handles 변경을 legend에 반영    </span></span><br><span class="line">handles = [axs[<span class="number">0</span>].collections[<span class="number">1</span>], axs[<span class="number">0</span>].collections[<span class="number">0</span>], axs[<span class="number">1</span>].collections[<span class="number">0</span>]]</span><br><span class="line">labels = [<span class="string">&quot;all sexs&quot;</span>, <span class="string">&quot;males&quot;</span>, <span class="string">&quot;females&quot;</span>]</span><br><span class="line">axs[<span class="number">1</span>].legend(handles=handles, labels=labels, loc=<span class="string">&quot;upper right&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p><img src="112_sethls_10.png"><br></p>
 </li>
 </ul>
@@ -381,7 +388,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/09/05/Python-DS-112-sethls/" data-id="cl7ofi1lo002rxctqcz6lcl1z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/09/05/Python-DS-112-sethls/" data-id="cl7og3v4w002pcwtq127m6qac" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -452,7 +459,7 @@
             "name": "Jehyun Lee"
         },
         "headline": "Emphasis on main data",
-        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/111_textprocfn_00.png",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/112_sethls_00.png",
         "keywords": "python seaborn matplotlib visualziation color",
         "genre": "Python Data Science",
         "datePublished": "2022-09-05",
@@ -471,7 +478,7 @@ Claus Wikle, “데이터 시각화 교과서”
 아래 그림은 데이터 시각화 교과서에 수록된 데이터 강조 사례입니다.
 
 여러 항공사 중 Delta와 American만",
-        "wordCount": 1490
+        "wordCount": 1512
     }
 </script>
 
@@ -545,7 +552,7 @@ Claus Wikle, “데이터 시각화 교과서”
                             <a href="/2022/09/05/Python-DS-112-sethls/" class="thumbnail">
     
     
-        <span style="background-image:url(/thumbnails/Python-DS/111_textprocfn_00.png)" alt="Emphasis on main data" class="thumbnail-image"></span>
+        <span style="background-image:url(/thumbnails/Python-DS/112_sethls_00.png)" alt="Emphasis on main data" class="thumbnail-image"></span>
     
     
 </a>
