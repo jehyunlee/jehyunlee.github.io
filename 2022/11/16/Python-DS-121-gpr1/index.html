@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Gaussian Process Practice (1) 1D | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,matplotlib,gaussian process,bayesian,scikit-learn" />
+    
+    <meta name="description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 오차가 없을 때와 있을 때를 비교합니다.  1. Data Preparation scikit-learn: Gaussian Process Regression: basic introductory example  1.1. example data Gaussia">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gaussian Process Practice (1) 1D">
+<meta property="og:url" content="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 오차가 없을 때와 있을 때를 비교합니다.  1. Data Preparation scikit-learn: Gaussian Process Regression: basic introductory example  1.1. example data Gaussia">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png">
+<meta property="article:published_time" content="2022-11-16T12:38:00.000Z">
+<meta property="article:modified_time" content="2022-11-16T15:44:49.642Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="gaussian process">
+<meta property="article:tag" content="bayesian">
+<meta property="article:tag" content="scikit-learn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2022/11/16/python-ds-121-gpr1/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-121-gpr1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Gaussian Process Practice (1) 1D
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/11/16/Python-DS-121-gpr1/" class="article-date">
+       <time datetime="2022-11-16T12:38:00.000Z" itemprop="datePublished">2022-11-16</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/11/16/Python-DS-121-gpr1/" class="article-date">
+     <time datetime="2022-11-16T15:44:49.642Z" itemprop="dateModified">2022-11-17</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/bayesian/" rel="tag">bayesian</a>, <a class="tag-link-link" href="/tags/gaussian-process/" rel="tag">gaussian process</a>, <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/scikit-learn/" rel="tag">scikit-learn</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>Gaussian Process 연습입니다.</li>
+<li>scikit-learn을 비롯한 예제를 재구성하여 연습합니다.</li>
+<li>오차가 없을 때와 있을 때를 비교합니다.</li>
+</ul>
+<h1 id="1-Data-Preparation"><a href="#1-Data-Preparation" class="headerlink" title="1. Data Preparation"></a>1. Data Preparation</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/auto_examples/gaussian_process/plot_gpr_noisy_targets.html#sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-targets-py">scikit-learn: Gaussian Process Regression: basic introductory example</a></p>
+</blockquote>
+<h2 id="1-1-example-data"><a href="#1-1-example-data" class="headerlink" title="1.1. example data"></a>1.1. example data</h2><ul>
+<li><p>Gaussian Process 연습을 위한 데이터를 준비합니다.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/auto_examples/gaussian_process/plot_gpr_noisy_targets.html#sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-targets-py">scikit-learn의 예제</a>를 일부 변형합니다.</p>
+</li>
+<li><p>1000개로 이루어진 매끈한 곡선을 만듭니다. </p>
+</li>
+<li><p>이번 글에서는 랜덤 함수를 많이 사용합니다. <b>random number generator</b>를 정의해 재현성을 확보합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 라이브러리 및 random number generator</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">rng = np.random.RandomState(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># example data visualization</span></span><br><span class="line">X = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1000</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">y = np.squeeze(X*np.sin(X))</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>))</span><br><span class="line">ax.plot(X, y)</span><br></pre></td></tr></table></figure>
+<p><img src="121_gpr1_1.png"><br></p>
+</li>
+<li><p>지금 그린 그래프는 우리가 Gaussian Process로 찾아야 할 참값입니다.</p>
+</li>
+</ul>
+<h2 id="1-2-6-training-points"><a href="#1-2-6-training-points" class="headerlink" title="1.2. 6 training points"></a>1.2. 6 training points</h2><ul>
+<li>임의의 x 좌표 6개를 골라 예제 데이터를 뽑습니다. <b>측정값(evidence)</b>이라 볼 수 있습니다.</li>
+<li>두 가지 상황을 가정해 이 지점들로 참값 곡선을 찾아갈 것입니다.</li>
+<li><b>① 측정을 하면 정확한 값을 찾아내는 경우:</b> 딱 6개만 뽑으면 됩니다.</li>
+<li><b>② 측정이 불확실성을 안고 있는 경우: </b> x 하나당 10번씩 측정했다고 하겠습니다. 표준 편차 = 1입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">training_indices = rng.choice(np.arange(y.size), size=<span class="number">6</span>, replace=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ① exact observation</span></span><br><span class="line">X_train = X[training_indices]</span><br><span class="line">y_train = y[training_indices]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ② noisy situation</span></span><br><span class="line">noise_std = <span class="number">1</span></span><br><span class="line">X_train_noisy = np.array(X[training_indices].tolist()*<span class="number">10</span>)</span><br><span class="line">y_train_noisy = np.array(<span class="built_in">list</span>(y[training_indices])*<span class="number">10</span>) + rng.normal(<span class="number">0</span>, noise_std, size=y_train.shape[<span class="number">0</span>]*<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>))</span><br><span class="line">ax.plot(X, y, c=<span class="string">&quot;lightgray&quot;</span>, label=<span class="string">&quot;true&quot;</span>)</span><br><span class="line">ax.scatter(X_train, y_train, label=<span class="string">&quot;sample without noise&quot;</span>)</span><br><span class="line">ax.scatter(X_train_noisy, y_train_noisy, label=<span class="string">&quot;sample with noise&quot;</span>, s=<span class="number">5</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
+<img src="121_gpr1_2.png"><br></li>
+</ul>
+<h1 id="2-Gaussian-Process"><a href="#2-Gaussian-Process" class="headerlink" title="2. Gaussian Process"></a>2. Gaussian Process</h1><h2 id="2-1-Without-Noise"><a href="#2-1-Without-Noise" class="headerlink" title="2.1. Without Noise"></a>2.1. Without Noise</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RBF.html">scikit-learn: Radial basis function kernel</a><br><a target="_blank" rel="noopener" href="https://thegradient.pub/gaussian-process-not-quite-for-dummies/">The Gradient: Gaussian Process, not quite for dummies</a></p>
+</blockquote>
+<ul>
+<li><p>evidence가 참값인 경우의 Gaussian Process를 실행합니다.</p>
+</li>
+<li><p>커널에는 Radial Bassis Function 커널을 사용합니다.</p>
+</li>
+<li><p>length_scale 초기값은 1, 범위는 0.01부터 100 안에서 fitting합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process <span class="keyword">import</span> GaussianProcessRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> RBF</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>)</span><br><span class="line">gpr.fit(X_train, y_train)</span><br><span class="line"><span class="built_in">print</span>(gpr.kernel_)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.02**2 * RBF(length_scale=1.43)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>fitting 결과 1로 지정했던 계수와 <code>length_scale</code>이 변경되었습니다.</p>
+</li>
+<li><p>계수는 신뢰구간의 폭, <code>length_scale</code>은 곡선의 매끈함(smoothness)에 해당합니다.<br><br><img src="121_gpr1_10.png" alt="The Gradient"><br><br><img src="121_gpr1_11.png" alt="The Gradient"><br></p>
+</li>
+<li><p>다음 명령으로 추가 정보를 얻을 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpr.kernel_.theta</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([3.22768806, 0.36021977])</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>gpr.kernel_theta</code>는 <code>(flattened, log-transformed) non-fixed hyperparameters</code>입니다.</p>
+</li>
+<li><p>전체 X를 넣고 Gaussian Process 결과를 그림으로 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prediction</span></span><br><span class="line">y_pred_mean, y_pred_std = gpr.predict(X, return_std=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="121_gpr1_3.png"><br></p>
+</li>
+<li><p>확대를 해도 측정값은 신뢰구간의 폭이 0임을 확인할 수 있습니다.</p>
+</li>
+<li><p>측정된 데이터를 참값으로 가정했으므로 측정값의 분산은 0입니다.</p>
+</li>
+</ul>
+<h2 id="2-2-With-Noise"><a href="#2-2-With-Noise" class="headerlink" title="2.2. With Noise"></a>2.2. With Noise</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor">scikit-learn: GaussianProcessRegressor</a></p>
+</blockquote>
+<ul>
+<li>이번에는 측정 데이터에 오차가 포함된 경우를 살펴봅니다.</li>
+<li>오차가 있는 데이터는 <code>GaussianProcessRegressor()</code>에 측정 오차를 의미하는 매개변수 <code>alpha</code>를 추가해야 합니다.</li>
+<li>수식에서는 커널 행렬의 대각 요소에 추가되는 값으로 fitting시 발생하는 numerical issue를 예방합니다. </li>
+</ul>
+<h3 id="2-2-1-오차-데이터-직접-입력"><a href="#2-2-1-오차-데이터-직접-입력" class="headerlink" title="2.2.1. 오차 데이터 직접 입력"></a>2.2.1. 오차 데이터 직접 입력</h3><ul>
+<li><p>아까와 동일하게 Gaussian Process fitting을 수행합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">gpr.fit(X_train_noisy, y_train_noisy)</span><br><span class="line"><span class="built_in">print</span>(gpr.kernel_)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.92**2 * RBF(length_scale=1.37)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>아까와는 다른 값으로 수렴했습니다.</p>
+</li>
+<li><p>다시 전체 X를 넣고 예측 결과를 확인합니다.</p>
+</li>
+<li><p>참값은 입력하지 않았지만 대조를 위해 함께 도시합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prediction</span></span><br><span class="line">y_pred_mean, y_pred_std = gpr.predict(X, return_std=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="121_gpr1_4.png"><br></p>
+</li>
+<li><p>데이터를 확보한 곳에서도 불확실성에 의해 신뢰구간이 한 점으로 수렴하지 않습니다.</p>
+</li>
+<li><p>아울러 전체의 평균값도 참값에서 조금씩 어긋나 있음을 확인할 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="2-2-2-오차-분산-입력"><a href="#2-2-2-오차-분산-입력" class="headerlink" title="2.2.2. 오차 분산 입력"></a>2.2.2. 오차 분산 입력</h3><ul>
+<li>이번에는 모든 데이터를 입력하는 대신 <b>참값</b>데이터와 함께 <b>분산</b>을 입력합니다.</li>
+<li>앞서 noise를 만들 때 표준 편차 = 1을 입력했는데 정말 그런지 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df_noisy = pd.DataFrame(&#123;<span class="string">&quot;X_noisy&quot;</span>:X_train_noisy.ravel(), <span class="string">&quot;y_noisy&quot;</span>:y_train_noisy&#125;)</span><br><span class="line">dfg_noisy = df_noisy.groupby(<span class="string">&quot;X_noisy&quot;</span>).std()</span><br><span class="line">std = dfg_noisy.mean().values[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(std)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.0616168585081918</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>의도한 바와 같이 데이터의 평균 분산은 1과 유사한 값으로 나왔습니다.</li>
+<li>애초에 의도한 값 1을 제곱하여 <code>alpha</code>에 입력하고 Gaussian Process를 진행합니다.</li>
+<li>계수가 아까보다 작게 나왔습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, alpha=<span class="number">1</span>**<span class="number">2</span>)</span><br><span class="line">gpr.fit(X_train, y_train)</span><br><span class="line"><span class="built_in">print</span>(gpr.kernel_)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.39**2 * RBF(length_scale=1.16)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>같은 코드로 그림을 그려 확인합니다.</li>
+<li>줄어든 계수가 무색하게 전체적으로 신뢰구간이 더 넓은 듯한 느낌입니다.<br><img src="121_gpr1_5.png"><br></li>
+</ul>
+<h3 id="2-2-3-커널-parameter-범위에-따른-결과"><a href="#2-2-3-커널-parameter-범위에-따른-결과" class="headerlink" title="2.2.3. 커널 parameter 범위에 따른 결과"></a>2.2.3. 커널 parameter 범위에 따른 결과</h3><ul>
+<li><p>앞서 kernel을 다음과 같이 정의했습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>RBF kernel의 length scale이 가질 수 있는 범위를 0.01 ~ 100으로 지정한 것입니다.</p>
+</li>
+<li><p>그리고 결과적으로 입력된 데이터에 의해 <code>length scale = 1.16</code>로 결정되었습니다.</p>
+</li>
+<li><p>그런데 초기값의 범위가 이 밖에 있으면 전혀 다른 결과가 얻어집니다.</p>
+</li>
+<li><p>먼저, length scale이 너무 클 때입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">100</span>, length_scale_bounds=(<span class="number">10</span>, <span class="number">1e3</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>초기값을 100, 범위를 10~1000으로 잡으면 결과적으로 <code>316**2 * RBF(length_scale=10)</code>에 수렴합니다.</p>
+</li>
+<li><p>이 때 결과는 다음과 같습니다.</p>
+</li>
+<li><p>지나친 과소적합(underfitting)으로 인해 x=0 부근에서 참값을 따라가지 못하고 평균값이 40 가까이 발산해 버렸습니다.<br><img src="121_gpr1_6.png"><br></p>
+</li>
+</ul>
+<ul>
+<li><p>이번에는 거꾸로 kernel의 length_scale이 너무 작은 경우입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">0.01</span>, length_scale_bounds=(<span class="number">1e-4</span>, <span class="number">1e-1</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>학습 결과 kernel이 <code>4.16**2 * RBF(length_scale=0.01)</code>로, length scale이 입력된 범위의 최대값에 닿았습니다.</p>
+</li>
+<li><p>결과적으로 과대적합(overfitting)이라고 불러야 할지 애매하지만 측정값 외에는 미동도 하지 않았습니다.<br><img src="121_gpr1_7.png"><br></p>
+</li>
+</ul>
+<h1 id="3-결론"><a href="#3-결론" class="headerlink" title="3. 결론"></a>3. 결론</h1><ul>
+<li>Gaussian Process는 적은 데이터로 오차를 포함한 결과를 효과적으로 추론합니다.</li>
+<li>그러나 커널의 제약에 민감하기 때문에 주의깊게 살펴볼 필요가 있습니다.</li>
+</ul>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://www.buymeacoffee.com/jehyunlee" target="_blank">
+			<img
+			 src="https://jehyunlee.github.io/about/src/images/coffee.png"
+			 style="height:74px !important;width: 363px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/" data-id="clajtfgcs003iy8tq7ct222zw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Gaussian Process Practice (1) 1D",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png",
+        "keywords": "python matplotlib gaussian process bayesian scikit-learn",
+        "genre": "Python Data Science",
+        "datePublished": "2022-11-16",
+        "dateCreated": "2022-11-16",
+        "dateModified": "2022-11-17",
+        "url": "https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/",
+        "description": "
+Gaussian Process 연습입니다.
+scikit-learn을 비롯한 예제를 재구성하여 연습합니다.
+오차가 없을 때와 있을 때를 비교합니다.
+
+1. Data Preparation
+scikit-learn: Gaussian Process Regression: basic introductory example
+
+1.1. example data
+Gaussia",
+        "wordCount": 926
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="book" href="https://jehyunlee.tistory.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-book"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bookmark" href="https://blog.naver.com/vinci109" target="_blank" rel="noopener">
+                        <i class="icon fa fa-bookmark"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/11/11/Python-DS-120-eost2022/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">딥러닝 공개 모델 활용 정보 수집 효율화</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/16/Python-DS-121-gpr1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/121-gpr1_00.png)" alt="Gaussian Process Practice (1) 1D" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/11/16/Python-DS-121-gpr1/" class="title">Gaussian Process Practice (1) 1D</a></p>
+                            <p class="item-date"><time datetime="2022-11-16T12:38:00.000Z" itemprop="datePublished">2022-11-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/11/Python-DS-120-eost2022/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/120_eost2022_00.png)" alt="딥러닝 공개 모델 활용 정보 수집 효율화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/11/11/Python-DS-120-eost2022/" class="title">딥러닝 공개 모델 활용 정보 수집 효율화</a></p>
+                            <p class="item-date"><time datetime="2022-11-11T13:13:00.000Z" itemprop="datePublished">2022-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/04/Python-DS-119-kierlecture7/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/119-kierlecture7_00.png)" alt="gaussian process" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/11/04/Python-DS-119-kierlecture7/" class="title">gaussian process</a></p>
+                            <p class="item-date"><time datetime="2022-11-04T07:18:00.000Z" itemprop="datePublished">2022-11-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/10/29/Python-DS-118-autocontrast/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/118_autocontrast_00.png)" alt="Auto Contrast on SEM image" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/10/29/Python-DS-118-autocontrast/" class="title">Auto Contrast on SEM image</a></p>
+                            <p class="item-date"><time datetime="2022-10-28T19:58:00.000Z" itemprop="datePublished">2022-10-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/10/16/Python-DS-117-pycon2022/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/117-pycon2022_00.png)" alt="혼란한 Matplotlib에서 질서 찾기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/10/16/Python-DS-117-pycon2022/" class="title">혼란한 Matplotlib에서 질서 찾기</a></p>
+                            <p class="item-date"><time datetime="2022-10-16T12:49:00.000Z" itemprop="datePublished">2022-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">143</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">119</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 13.33px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 12.67px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11.33px;">AI festival</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/EOST/" style="font-size: 10px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 14.67px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.67px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.67px;">Nicolas P. Rougier</a> <a href="/tags/PCA/" style="font-size: 10.67px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.67px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.67px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.67px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 10.67px;">bayesian</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.67px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11.33px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.33px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.67px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.67px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15.33px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.67px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.67px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.67px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 10.67px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11.33px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.67px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 10.67px;">gaussian process</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.67px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/image/" style="font-size: 12.67px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17.33px;">imagej</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.67px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.67px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.67px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.33px;">legend</a> <a href="/tags/life/" style="font-size: 10.67px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16.67px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.33px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.67px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 12px;">neural network</a> <a href="/tags/numpy/" style="font-size: 11.33px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.67px;">open API</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 16px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.67px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12.67px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.33px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 18.67px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.67px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.67px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.67px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.67px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.67px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.67px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.67px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 10px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 18px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.67px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 12px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 14px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 14.67px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.67px;">subplots</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.33px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 12px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.33px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19.33px;">visualization</a> <a href="/tags/visualziation/" style="font-size: 10.67px;">visualziation</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+	
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
