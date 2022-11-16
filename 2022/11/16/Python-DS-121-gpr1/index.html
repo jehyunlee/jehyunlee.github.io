@@ -19,9 +19,9 @@
 <meta property="og:site_name" content="Pega Devlog">
 <meta property="og:description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 오차가 없을 때와 있을 때를 비교합니다.  1. Data Preparation scikit-learn: Gaussian Process Regression: basic introductory example  1.1. example data Gaussia">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png+">
 <meta property="article:published_time" content="2022-11-16T12:38:00.000Z">
-<meta property="article:modified_time" content="2022-11-16T15:44:49.642Z">
+<meta property="article:modified_time" content="2022-11-16T23:07:01.478Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
@@ -29,7 +29,7 @@
 <meta property="article:tag" content="bayesian">
 <meta property="article:tag" content="scikit-learn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png+">
     
 	<link rel="canonical" href="https://jehyunlee.github.io/2022/11/16/python-ds-121-gpr1/"/>
 
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/11/16/Python-DS-121-gpr1/" class="article-date">
-     <time datetime="2022-11-16T15:44:49.642Z" itemprop="dateModified">2022-11-17</time>
+     <time datetime="2022-11-16T23:07:01.478Z" itemprop="dateModified">2022-11-17</time>
   </a>
 </div>
 
@@ -339,7 +339,21 @@
 <li>같은 코드로 그림을 그려 확인합니다.</li>
 <li>줄어든 계수가 무색하게 전체적으로 신뢰구간이 더 넓은 듯한 느낌입니다.<br><img src="121_gpr1_5.png"><br></li>
 </ul>
-<h3 id="2-2-3-커널-parameter-범위에-따른-결과"><a href="#2-2-3-커널-parameter-범위에-따른-결과" class="headerlink" title="2.2.3. 커널 parameter 범위에 따른 결과"></a>2.2.3. 커널 parameter 범위에 따른 결과</h3><ul>
+<h3 id="2-2-3-alpha가-같을-때-데이터-수에-따른-비교"><a href="#2-2-3-alpha가-같을-때-데이터-수에-따른-비교" class="headerlink" title="2.2.3. alpha가 같을 때 데이터 수에 따른 비교"></a>2.2.3. alpha가 같을 때 데이터 수에 따른 비교</h3><ul>
+<li><p>noisy data를 직접 입력했을 때와 모양이 달라진 것이 데이터에 무관한, alpha에 따른 차이가 아닐까 의구심이 듭니다.</p>
+</li>
+<li><p><code>alpha=1</code>로 설정하고 noisy data로 학습시킨 후 양상을 확인합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, alpha=<span class="number">1</span>)</span><br><span class="line">gpr.fit(X_train_noisy, y_train_noisy)</span><br><span class="line"><span class="built_in">print</span>(gpr.kernel_)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.84**2 * RBF(length_scale=1.34)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>값이 조금 다르기는 하지만 noisy data를 입력했을 때에 가깝습니다.</p>
+</li>
+<li><p>그래프 모양을 보면 더 확연하게 드러납니다.<br><img src="121_gpr1_8.png"><br></p>
+</li>
+</ul>
+<h3 id="2-2-4-커널-parameter-범위에-따른-결과"><a href="#2-2-4-커널-parameter-범위에-따른-결과" class="headerlink" title="2.2.4. 커널 parameter 범위에 따른 결과"></a>2.2.4. 커널 parameter 범위에 따른 결과</h3><ul>
 <li><p>앞서 kernel을 다음과 같이 정의했습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br></pre></td></tr></table></figure></li>
 <li><p>RBF kernel의 length scale이 가질 수 있는 범위를 0.01 ~ 100으로 지정한 것입니다.</p>
@@ -396,7 +410,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/" data-id="clajtfgcs003iy8tq7ct222zw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/" data-id="clak97i5b003epctqb25hcqvl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -467,7 +481,7 @@
             "name": "Jehyun Lee"
         },
         "headline": "Gaussian Process Practice (1) 1D",
-        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/121-gpr1_00.png+",
         "keywords": "python matplotlib gaussian process bayesian scikit-learn",
         "genre": "Python Data Science",
         "datePublished": "2022-11-16",
@@ -484,7 +498,7 @@ scikit-learn: Gaussian Process Regression: basic introductory example
 
 1.1. example data
 Gaussia",
-        "wordCount": 926
+        "wordCount": 1017
     }
 </script>
 
@@ -584,7 +598,7 @@ Gaussia",
                             <a href="/2022/11/16/Python-DS-121-gpr1/" class="thumbnail">
     
     
-        <span style="background-image:url(/thumbnails/Python-DS/121-gpr1_00.png)" alt="Gaussian Process Practice (1) 1D" class="thumbnail-image"></span>
+        <span style="background-image:url(/thumbnails/Python-DS/121-gpr1_00.png+)" alt="Gaussian Process Practice (1) 1D" class="thumbnail-image"></span>
     
     
 </a>
