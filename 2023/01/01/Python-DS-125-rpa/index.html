@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Impact of RPA | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,visualization,seaborn,matplotlib" />
+    
+    <meta name="description" content="RPA(Robotic Process Automation: 업무 자동화) 과제를 하려고 합니다. RPA를 적용하면 효용이 얼마나 좋은지를 설득하기 위한 그림을 그립니다. RPA 도입 전과 후를 비교하는 그림을 그려서 보여줍시다.  1. 행정 업무  어떤 가상의 데이터 관련 행정 업무가 있다고 합시다.  현재는 총 2천만원의 용역비를 포함해 12주가 걸립니다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Impact of RPA">
+<meta property="og:url" content="https://jehyunlee.github.io/2023/01/01/Python-DS-125-rpa/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="RPA(Robotic Process Automation: 업무 자동화) 과제를 하려고 합니다. RPA를 적용하면 효용이 얼마나 좋은지를 설득하기 위한 그림을 그립니다. RPA 도입 전과 후를 비교하는 그림을 그려서 보여줍시다.  1. 행정 업무  어떤 가상의 데이터 관련 행정 업무가 있다고 합시다.  현재는 총 2천만원의 용역비를 포함해 12주가 걸립니다">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/123_gpr3_00.png">
+<meta property="article:published_time" content="2023-01-01T07:02:00.000Z">
+<meta property="article:modified_time" content="2023-01-01T08:26:23.103Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="matplotlib">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/123_gpr3_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2023/01/01/python-ds-125-rpa/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-125-rpa" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Impact of RPA
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/01/01/Python-DS-125-rpa/" class="article-date">
+       <time datetime="2023-01-01T07:02:00.000Z" itemprop="datePublished">2023-01-01</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/01/01/Python-DS-125-rpa/" class="article-date">
+     <time datetime="2023-01-01T08:26:23.103Z" itemprop="dateModified">2023-01-01</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/seaborn/" rel="tag">seaborn</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>RPA(Robotic Process Automation: 업무 자동화) 과제를 하려고 합니다.</li>
+<li>RPA를 적용하면 효용이 얼마나 좋은지를 설득하기 위한 그림을 그립니다.</li>
+<li>RPA 도입 전과 후를 비교하는 그림을 그려서 보여줍시다.</li>
+</ul>
+<h1 id="1-행정-업무"><a href="#1-행정-업무" class="headerlink" title="1. 행정 업무"></a>1. 행정 업무</h1><p><img src="125_rpa_01.png"></p>
+<ul>
+<li><p>어떤 가상의 데이터 관련 행정 업무가 있다고 합시다.</p>
+</li>
+<li><p>현재는 <b>총 2천만원의 용역비</b>를 포함해 <b>12주</b>가 걸립니다. <b>수작업</b>이기 때문입니다.</p>
+</li>
+<li><p>여기에 RPA를 적용하면, <b>용역비가 없어지고</b> 이어지는 작업도 훨씬 짧게 걸립니다.</p>
+</li>
+<li><p>서류 작업과 취합 작업도 단순 반복 작업에서 <b>검증으로 업무 성격이 바뀝니다.</b><br></p>
+</li>
+<li><p><b>보고서</b>나 <b>기획서</b>등에서 이 훌륭한 업무를 어필하고 싶습니다.</p>
+</li>
+<li><p>일단 <a href="RPA_comparison.xlsx">엑셀로 정리</a>해보니 이렇습니다. 전달은 되는데 아쉽습니다.<br><br><img src="125_rpa_02.png"><br></p>
+</li>
+</ul>
+<h1 id="2-시각화"><a href="#2-시각화" class="headerlink" title="2. 시각화"></a>2. 시각화</h1><h2 id="2-1-용역-비용-amp-인력"><a href="#2-1-용역-비용-amp-인력" class="headerlink" title="2.1. 용역 비용 &amp; 인력"></a>2.1. 용역 비용 &amp; 인력</h2><ul>
+<li>RPA 효과는 크게 두 가지입니다. 하나는 <b>용역 비용</b>, 하나는 <b>인력</b></li>
+<li>인력도 man-week (MW)으로 정리했기 때문에 담당자의 연봉을 적용하면 비용 산정이 됩니다.</li>
+<li>하지만 여기선 용역은 용역, 인력은 인력으로 나누어 그리기로 합니다.</li>
+<li>항목 수에 따라 용역 비용과 인력이 그려질 공간을 1:3의 비율로 분할합니다.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), gridspec_kw=&#123;<span class="string">&quot;width_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">3</span>]&#125;)</span><br></pre></td></tr></table></figure>
+<img src="125_rpa_03.png"><br></li>
+</ul>
+<h2 id="2-2-용역-비용"><a href="#2-2-용역-비용" class="headerlink" title="2.2. 용역 비용"></a>2.2. 용역 비용</h2><ul>
+<li>왼쪽 공간에 RPA 적용 전 2천만원이 들어간 용역 비용과 적용 후 0원이 된 것을 비교하여 그립니다.</li>
+<li>이럴 때는 grouped bar plot이 제격입니다.</li>
+<li>용역 비용 뿐 아니라 다른 모든 항목을 비교할 것이기 때문에 <b>RPA 전</b>과 <b>RPA 후</b> 비교에 일관성이 필요합니다.</li>
+<li>적용 전과 후를 <b>“brown”</b>과 <b>“royalblue”</b>로 표기합니다.</li>
+</ul>
+<ul>
+<li>또한, <b>grouped bar plot</b>은 <b>pandas가 더 편합니다.</b></li>
+<li>pandas DataFrame에서 그림을 그릴 부분만 <code>.loc[]</code>를 사용해 데이터를 한정하고,</li>
+<li><code>.plot.bar()</code>를 사용해 groupled bar plot을 그립니다.</li>
+<li><code>cs = [&quot;brown&quot;, &quot;royalblue&quot;]</code>과 <code>color=cs</code>를 입력하면 적용 전과 후 색이 차례로 입혀집니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># data 읽기</span></span><br><span class="line">rpa = pd.read_excel(<span class="string">&quot;RPA_comparison.xlsx&quot;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), gridspec_kw=&#123;<span class="string">&quot;width_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">3</span>]&#125;, constrained_layout=<span class="literal">True</span>)</span><br><span class="line">cs = [<span class="string">&quot;brown&quot;</span>, <span class="string">&quot;royalblue&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 용역 비용</span></span><br><span class="line">rpa.loc[[<span class="number">0</span>]].plot.bar(ax=axs[<span class="number">0</span>], lw=<span class="number">1</span>, ec=<span class="string">&quot;w&quot;</span>, legend=<span class="literal">False</span>, color=cs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인력</span></span><br><span class="line">rpa.loc[<span class="number">1</span>:].plot.bar(ax=axs[<span class="number">1</span>], lw=<span class="number">1</span>, ec=<span class="string">&quot;w&quot;</span>, legend=<span class="literal">False</span>, color=cs)</span><br></pre></td></tr></table></figure>
+<img src="125_rpa_04.png"><br></li>
+</ul>
+<h2 id="2-3-Annotation"><a href="#2-3-Annotation" class="headerlink" title="2.3. Annotation"></a>2.3. Annotation</h2><ul>
+<li><p>가장 중요한 틀이 갖춰졌습니다.</p>
+</li>
+<li><p>이제 ticks, ticklabels 등을 다듬으면 쓸만한 그래프가 될겁니다.</p>
+</li>
+<li><p>하지만 그 전에, <b>데이터를 직설적으로 알려주는 장치를 하려고 합니다.</b></p>
+</li>
+<li><p>위 코드 아래에 코드를 덧붙여 bar 위에 데이터를 출력합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 용역 비용</span></span><br><span class="line">xs, ws, hs = [], [], []</span><br><span class="line"><span class="keyword">for</span> p, c <span class="keyword">in</span> <span class="built_in">zip</span>(axs[<span class="number">0</span>].patches, cs):</span><br><span class="line">    x, w, h = p.get_x(), p.get_width(), p.get_height()</span><br><span class="line">    xs.append(x)</span><br><span class="line">    ws.append(w)</span><br><span class="line">    hs.append(h)</span><br><span class="line">    cost = <span class="built_in">format</span>(<span class="built_in">int</span>(h), <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> h &gt; <span class="number">0</span>:</span><br><span class="line">        cost = <span class="string">f&quot;<span class="subst">&#123;cost&#125;</span> 천원&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        cost = <span class="string">f&quot;<span class="subst">&#123;cost&#125;</span> 원&quot;</span></span><br><span class="line">    axs[<span class="number">0</span>].text(x+w/<span class="number">2</span>, h+<span class="number">1000</span>, cost, ha=<span class="string">&quot;center&quot;</span>, fontsize=<span class="string">&quot;small&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, color=c, zorder=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="125_rpa_05.png"><br></p>
+</li>
+<li><p>왼쪽 Axes를 구성하는 두 막대의 위치, 너비, 높이를 뽑아내 글자를 입혔습니다.</p>
+</li>
+<li><p>일반적으로 금액을 <b>천원</b>단위로 표현하기 때문에 일부러 엑셀 파일부터 천원으로 끊었습니다.</p>
+</li>
+</ul>
+<h2 id="2-4-Spines-and-Ticks"><a href="#2-4-Spines-and-Ticks" class="headerlink" title="2.4. Spines and Ticks"></a>2.4. Spines and Ticks</h2><ul>
+<li>이제 y축이 없어도 데이터가 잘 전달됩니다.</li>
+<li>y축과 함께 네모난 테두리(spines)를 없애버립시다.</li>
+<li>x축 눈금은 <code>tick_params()</code>를 사용해 폭을 0으로(<code>width=0</code>) 만듭니다.</li>
+<li>그런데 xticklabel은 여기 말고도 오른쪽 Axes에도 세 개나 더 적용해야 됩니다.</li>
+<li><code>font_label</code>이라는 이름의 dictionary type 매개변수를 만들어 적용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Spines and Ticks</span></span><br><span class="line">axs[<span class="number">0</span>].spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_yticks([])</span><br><span class="line">font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">axs[<span class="number">0</span>].tick_params(axis=<span class="string">&quot;x&quot;</span>, width=<span class="number">0</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_xticklabels([<span class="string">&quot;용역 비용&quot;</span>], **font_label, rotation=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<img src="125_rpa_06.png"><br></li>
+</ul>
+<h2 id="2-5-Arrow"><a href="#2-5-Arrow" class="headerlink" title="2.5. Arrow"></a>2.5. Arrow</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/userdemo/connectionstyle_demo.html">matplotlib: Connection styles for annotations</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/text_labels_and_annotations/fancyarrow_demo.html">matplotlib: Annotation arrow style reference</a></p>
+</blockquote>
+<ul>
+<li>RPA 적용 전후는 나왔는데 그림에서 알아보기 어렵습니다.</li>
+<li><b>RPA를 적용했더니 확 비용이 확 떨어진다</b>는 느낌의 화살표가 있으면 좋을 것 같습니다.</li>
+<li>Matplotlib에서 멋진 화살표를 만들기에는 <code>Axes.annotate()</code>가 가장 좋습니다.</li>
+<li><b>“arrowstyle”:”fancy”</b>와 <b>“connectionstyle”</b>을 이용해 다이나믹한 화살표를 그립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arrow</span></span><br><span class="line">axs[<span class="number">0</span>].annotate(<span class="string">&quot;&quot;</span>, xy=(xs[<span class="number">1</span>]+w/<span class="number">2</span>, hs[<span class="number">1</span>]+w/<span class="number">2</span>), xytext=(xs[<span class="number">0</span>]+w/<span class="number">2</span>, hs[<span class="number">0</span>]+w/<span class="number">2</span>),</span><br><span class="line">            arrowprops=&#123;<span class="string">&quot;arrowstyle&quot;</span>:<span class="string">&quot;fancy&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;fc&quot;</span>:<span class="string">&quot;cornflowerblue&quot;</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>,</span><br><span class="line">                        <span class="string">&quot;connectionstyle&quot;</span>:<span class="string">&quot;arc3,rad=-0.3&quot;</span>, <span class="string">&quot;mutation_scale&quot;</span>:<span class="number">100</span>&#125;)</span><br></pre></td></tr></table></figure>
+<img src="125_rpa_07.png"><br></li>
+</ul>
+<h2 id="2-6-인력에도-동일하게"><a href="#2-6-인력에도-동일하게" class="headerlink" title="2.6. 인력에도 동일하게"></a>2.6. 인력에도 동일하게</h2><ul>
+<li>용역 비용에 적용한 사항들을 인력에도 동일하게 적용합니다.</li>
+<li>아까 왼쪽 Axes의 xticklabel에 넣었던 <b>용역 비용</b>은 title이 더 잘 어울리는 것 같습니다.</li>
+<li>내용을 올리고, xticklabel은 새롭게 <b>분석 용역</b>이라고 넣습니다.</li>
+<li>오른쪽에도 여기에 대응되도록 <b>용역 검증</b>, <b>서류 작업</b>, <b>취합 작업</b>을 넣습니다.<br><br><img src="125_rpa_08.png"><br></li>
+</ul>
+<h2 id="2-7-비용과-기간-사이-칸막이"><a href="#2-7-비용과-기간-사이-칸막이" class="headerlink" title="2.7. 비용과 기간 사이 칸막이"></a>2.7. 비용과 기간 사이 칸막이</h2><ul>
+<li>마지막 작업입니다.</li>
+<li>왼쪽과 오른쪽 구간을 나누는 막대를 하나 넣습니다.</li>
+<li><code>matplotlib.lines.Line2D</code>객체를 사용해 선을 그립니다. </li>
+<li>양 끝점의 좌표를 입력해야 하는데 Figure 전체의 상대 좌표를 사용해 <code>[0.255, 0.255], [0.15, 0.85]</code>를 입력합니다.</li>
+<li>양 끝을 둥글게 만들고자 <code>solid_capstyle = &quot;round&quot;</code>를 입력했습니다.</li>
+<li>두 Axes 사이 공간에 그려야 하는 그림이기 때문에 <code>fig.add_artist()</code>로 추가합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.lines <span class="keyword">import</span> Line2D</span><br><span class="line"></span><br><span class="line">line = Line2D([<span class="number">0.255</span>, <span class="number">0.255</span>], [<span class="number">0.15</span>, <span class="number">0.85</span>], linewidth=<span class="number">5</span>, solid_capstyle=<span class="string">&quot;round&quot;</span>, color=<span class="string">&quot;0.6&quot;</span>)</span><br><span class="line">fig.add_artist(line)</span><br></pre></td></tr></table></figure>
+<img src="125_rpa_09.png"><br></li>
+</ul>
+<h1 id="3-활용"><a href="#3-활용" class="headerlink" title="3. 활용"></a>3. 활용</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://m.etnews.com/20221228000275">관련기사: 전자신문- NST, 출연연 연구행정혁신 성과확산 공모전 시상식 개최</a></p>
+</blockquote>
+<ul>
+<li><p>이렇게 정리된 그림은 <b>적절한 표</b>, <b>근거 자료</b>와 함께 <b>보고서</b>와 <b>ppt</b>에 삽입하면 좋습니다.</p>
+</li>
+<li><p>위 그림은 실제로 최근 있었던 한 공모전에서 서류 작성과 발표 자료에 사용했습니다.</p>
+</li>
+<li><p>데이터는 제가 접한 실제 사례와 다르게 바꾸었습니다만, 전반적인 틀은 살렸습니다.<br><br><img src="125_rpa_10.png" alt="혹시나 싶은 마음에 내용은 흐리게 가렸습니다."><br></p>
+</li>
+<li><p>전체 코드는 아래와 여기에서 확인할 수 있습니다: <a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1RLo4aTtP_sM9EoxWyfkvR5hetGNmvVZH?usp=share_link">Colab 링크</a></p>
+</li>
+<li><p>여러분께도 좋은 결과가 있기를 바랍니다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> matplotlib.lines <span class="keyword">import</span> Line2D</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">plt.rcParams[<span class="string">&quot;font.family&quot;</span>] = <span class="string">&quot;NanumGothic&quot;</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;axes.unicode_minus&quot;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># data 읽기</span></span><br><span class="line">rpa = pd.read_excel(<span class="string">&quot;RPA_comparison.xlsx&quot;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), gridspec_kw=&#123;<span class="string">&quot;width_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">3</span>]&#125;, constrained_layout=<span class="literal">True</span>)</span><br><span class="line">cs = [<span class="string">&quot;brown&quot;</span>, <span class="string">&quot;royalblue&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 용역 비용</span></span><br><span class="line">rpa.loc[[<span class="number">0</span>]].plot.bar(ax=axs[<span class="number">0</span>], lw=<span class="number">1</span>, ec=<span class="string">&quot;w&quot;</span>, legend=<span class="literal">False</span>, color=cs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인력</span></span><br><span class="line">rpa.loc[<span class="number">1</span>:].plot.bar(ax=axs[<span class="number">1</span>], lw=<span class="number">1</span>, ec=<span class="string">&quot;w&quot;</span>, legend=<span class="literal">False</span>, color=cs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 용역 비용</span></span><br><span class="line">xs, ws, hs = [], [], []</span><br><span class="line"><span class="keyword">for</span> p, c <span class="keyword">in</span> <span class="built_in">zip</span>(axs[<span class="number">0</span>].patches, cs):</span><br><span class="line">    x, w, h = p.get_x(), p.get_width(), p.get_height()</span><br><span class="line">    xs.append(x)</span><br><span class="line">    ws.append(w)</span><br><span class="line">    hs.append(h)</span><br><span class="line">    cost = <span class="built_in">format</span>(<span class="built_in">int</span>(h), <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> h &gt; <span class="number">0</span>:</span><br><span class="line">        cost = <span class="string">f&quot;<span class="subst">&#123;cost&#125;</span> 천원&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        cost = <span class="string">f&quot;<span class="subst">&#123;cost&#125;</span> 원&quot;</span></span><br><span class="line">    axs[<span class="number">0</span>].text(x+w/<span class="number">2</span>, h+<span class="number">1000</span>, cost, ha=<span class="string">&quot;center&quot;</span>, fontsize=<span class="string">&quot;small&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, color=c, zorder=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Spines and Ticks</span></span><br><span class="line">font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;용역 비용\n&quot;</span>, <span class="string">&quot;업무 기간\n&quot;</span>]):</span><br><span class="line">    ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.tick_params(axis=<span class="string">&quot;x&quot;</span>, width=<span class="number">0</span>)</span><br><span class="line">    ax.set_title(title, **font_label)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_xticklabels([<span class="string">&quot;분석 용역&quot;</span>], rotation=<span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xticklabels([<span class="string">&quot;용역 검증&quot;</span>, <span class="string">&quot;서류 작업&quot;</span>, <span class="string">&quot;취합 작업&quot;</span>], </span><br><span class="line">                       rotation=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Arrow</span></span><br><span class="line">axs[<span class="number">0</span>].annotate(<span class="string">&quot;&quot;</span>, xy=(xs[<span class="number">1</span>]+w/<span class="number">2</span>, hs[<span class="number">1</span>]+w/<span class="number">2</span>), xytext=(xs[<span class="number">0</span>]+w/<span class="number">2</span>, hs[<span class="number">0</span>]+w/<span class="number">2</span>),</span><br><span class="line">            arrowprops=&#123;<span class="string">&quot;arrowstyle&quot;</span>:<span class="string">&quot;fancy&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;fc&quot;</span>:<span class="string">&quot;cornflowerblue&quot;</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>,</span><br><span class="line">                        <span class="string">&quot;connectionstyle&quot;</span>:<span class="string">&quot;arc3,rad=-0.3&quot;</span>, <span class="string">&quot;mutation_scale&quot;</span>:<span class="number">100</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인력 감축</span></span><br><span class="line">xs, ws, hs = [], [], []</span><br><span class="line"><span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs[<span class="number">1</span>].patches):</span><br><span class="line">    x, w, h = p.get_x(), p.get_width(), p.get_height()</span><br><span class="line">    xs.append(x)</span><br><span class="line">    ws.append(w)</span><br><span class="line">    hs.append(h)</span><br><span class="line">    person = <span class="built_in">format</span>(<span class="built_in">int</span>(h), <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> h &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> h%<span class="number">1</span>:</span><br><span class="line">            h = <span class="built_in">int</span>(h)</span><br><span class="line">        day = <span class="string">f&quot;<span class="subst">&#123;h&#125;</span> 주&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">3</span>:</span><br><span class="line">        c = cs[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        c = cs[<span class="number">1</span>]</span><br><span class="line">    p.set_fc(c)</span><br><span class="line">    axs[<span class="number">1</span>].text(x+w/<span class="number">2</span>, h+<span class="number">0.3</span>, day, ha=<span class="string">&quot;center&quot;</span>, fontsize=<span class="string">&quot;small&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, color=c, zorder=<span class="number">13</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    axs[<span class="number">1</span>].annotate(<span class="string">&quot;&quot;</span>, xy=(xs[i+<span class="number">3</span>]+w/<span class="number">2</span>, hs[i+<span class="number">3</span>]+w/<span class="number">2</span>), xytext=(xs[i]+w/<span class="number">2</span>, hs[i]+w/<span class="number">2</span>),</span><br><span class="line">            arrowprops=&#123;<span class="string">&quot;arrowstyle&quot;</span>:<span class="string">&quot;fancy&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;skyblue&quot;</span>, <span class="string">&quot;fc&quot;</span>:<span class="string">&quot;skyblue&quot;</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.8</span>,</span><br><span class="line">                        <span class="string">&quot;connectionstyle&quot;</span>:<span class="string">&quot;arc3,rad=-0.3&quot;</span>, <span class="string">&quot;mutation_scale&quot;</span>:<span class="number">40</span>&#125;)</span><br><span class="line"></span><br><span class="line">line = Line2D([<span class="number">0.255</span>, <span class="number">0.255</span>], [<span class="number">0.15</span>, <span class="number">0.85</span>], linewidth=<span class="number">5</span>, solid_capstyle=<span class="string">&quot;round&quot;</span>, color=<span class="string">&quot;0.6&quot;</span>)</span><br><span class="line">fig.add_artist(line)</span><br></pre></td></tr></table></figure>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://www.buymeacoffee.com/jehyunlee" target="_blank">
+			<img
+			 src="https://jehyunlee.github.io/about/src/images/coffee.png"
+			 style="height:74px !important;width: 363px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2023/01/01/Python-DS-125-rpa/" data-id="clcd41gk8003q7wtqb4t9gcag" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Impact of RPA",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/123_gpr3_00.png",
+        "keywords": "python visualization seaborn matplotlib",
+        "genre": "Python Data Science",
+        "datePublished": "2023-01-01",
+        "dateCreated": "2023-01-01",
+        "dateModified": "2023-01-01",
+        "url": "https://jehyunlee.github.io/2023/01/01/Python-DS-125-rpa/",
+        "description": "
+RPA(Robotic Process Automation: 업무 자동화) 과제를 하려고 합니다.
+RPA를 적용하면 효용이 얼마나 좋은지를 설득하기 위한 그림을 그립니다.
+RPA 도입 전과 후를 비교하는 그림을 그려서 보여줍시다.
+
+1. 행정 업무
+
+어떤 가상의 데이터 관련 행정 업무가 있다고 합시다.
+
+현재는 총 2천만원의 용역비를 포함해 12주가 걸립니다",
+        "wordCount": 1681
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="book" href="https://jehyunlee.tistory.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-book"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bookmark" href="https://blog.naver.com/vinci109" target="_blank" rel="noopener">
+                        <i class="icon fa fa-bookmark"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/12/26/Python-General-14_santa/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">산타 방문 증빙 feat. DALL.E</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/01/01/Python-DS-125-rpa/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/123_gpr3_00.png)" alt="Impact of RPA" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/01/01/Python-DS-125-rpa/" class="title">Impact of RPA</a></p>
+                            <p class="item-date"><time datetime="2023-01-01T07:02:00.000Z" itemprop="datePublished">2023-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/12/26/Python-General-14_santa/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/14_santa_00.png)" alt="산타 방문 증빙 feat. DALL.E" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2022/12/26/Python-General-14_santa/" class="title">산타 방문 증빙 feat. DALL.E</a></p>
+                            <p class="item-date"><time datetime="2022-12-26T07:30:00.000Z" itemprop="datePublished">2022-12-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/29/Python-DS-124-kierlecture8/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/124_kierlecture8_00.png)" alt="Deep Learning by Open API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/11/29/Python-DS-124-kierlecture8/" class="title">Deep Learning by Open API</a></p>
+                            <p class="item-date"><time datetime="2022-11-28T17:02:00.000Z" itemprop="datePublished">2022-11-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/19/Python-DS-123-gpr3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/123_gpr3_00.png)" alt="Gaussian Process Practice (3) Beware Boundaries" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/11/19/Python-DS-123-gpr3/" class="title">Gaussian Process Practice (3) Beware Boundaries</a></p>
+                            <p class="item-date"><time datetime="2022-11-19T08:35:00.000Z" itemprop="datePublished">2022-11-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/17/Python-DS-122-gpr2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/122_gpr2_00.png)" alt="Gaussian Process Practice (2) Kernels" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2022/11/17/Python-DS-122-gpr2/" class="title">Gaussian Process Practice (2) Kernels</a></p>
+                            <p class="item-date"><time datetime="2022-11-17T10:22:00.000Z" itemprop="datePublished">2022-11-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">148</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">123</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 13.13px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 12.5px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11.25px;">AI festival</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/DALL-E/" style="font-size: 10px;">DALL.E</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/EOST/" style="font-size: 10px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.63px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.63px;">Nicolas P. Rougier</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.63px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.63px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.63px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.63px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.88px;">bayesian</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.63px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11.25px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.25px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.25px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.5px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 15px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.63px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 10px;">dall.e</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.63px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.63px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 10.63px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11.25px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.63px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.88px;">gaussian process</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.38px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/image/" style="font-size: 12.5px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.88px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.63px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.5px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.63px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.25px;">legend</a> <a href="/tags/life/" style="font-size: 10.63px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16.88px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.38px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.63px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.88px;">neural network</a> <a href="/tags/numpy/" style="font-size: 11.25px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.63px;">open API</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.63px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.63px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12.5px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.25px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 18.13px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.63px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.63px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.63px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.5px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.63px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.63px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.63px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.25px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.5px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.63px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.88px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13.75px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 14.38px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.63px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.25px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.88px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.25px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 18.75px;">visualization</a> <a href="/tags/visualziation/" style="font-size: 10.63px;">visualziation</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+	
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2023/01/01/Python-DS-125-rpa/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
