@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>KDE + threshold | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="python,visualization,seaborn,matplotlib" />
+    
+    <meta name="description" content="밀도 함수는 데이터 분포를 볼 때 가장 많이 그리는 그림 중 하나입니다. 특정 값을 기준으로 Pass와 Fail을 정한다고 할 때, 전체의 비율도 중요합니다. seaborn kdeplot을 살짝 다듬어서 쪼개고 비율을 계산합니다.  1. 오늘의 목표 오늘 우리는 데이터를 선별하는 데 쓰는, 이런 그림을 그릴 겁니다. 특정 값을 기준으로 왼쪽은 Fail,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KDE + threshold">
+<meta property="og:url" content="https://jehyunlee.github.io/2023/02/12/Python-DS-127_kdeth/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="밀도 함수는 데이터 분포를 볼 때 가장 많이 그리는 그림 중 하나입니다. 특정 값을 기준으로 Pass와 Fail을 정한다고 할 때, 전체의 비율도 중요합니다. seaborn kdeplot을 살짝 다듬어서 쪼개고 비율을 계산합니다.  1. 오늘의 목표 오늘 우리는 데이터를 선별하는 데 쓰는, 이런 그림을 그릴 겁니다. 특정 값을 기준으로 왼쪽은 Fail,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/127_kdeth_00.png">
+<meta property="article:published_time" content="2023-02-12T08:20:00.000Z">
+<meta property="article:modified_time" content="2023-02-12T09:24:45.862Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="matplotlib">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/127_kdeth_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2023/02/12/python-ds-127_kdeth/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Data-Science/">Data Science</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Python-DS-127_kdeth" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        KDE + threshold
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/02/12/Python-DS-127_kdeth/" class="article-date">
+       <time datetime="2023-02-12T08:20:00.000Z" itemprop="datePublished">2023-02-12</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/02/12/Python-DS-127_kdeth/" class="article-date">
+     <time datetime="2023-02-12T09:24:45.862Z" itemprop="dateModified">2023-02-12</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/matplotlib/" rel="tag">matplotlib</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/seaborn/" rel="tag">seaborn</a>, <a class="tag-link-link" href="/tags/visualization/" rel="tag">visualization</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>밀도 함수는 데이터 분포를 볼 때 가장 많이 그리는 그림 중 하나입니다.</li>
+<li>특정 값을 기준으로 Pass와 Fail을 정한다고 할 때, 전체의 비율도 중요합니다.</li>
+<li>seaborn kdeplot을 살짝 다듬어서 쪼개고 비율을 계산합니다.</li>
+</ul>
+<h1 id="1-오늘의-목표"><a href="#1-오늘의-목표" class="headerlink" title="1. 오늘의 목표"></a>1. 오늘의 목표</h1><ul>
+<li>오늘 우리는 데이터를 선별하는 데 쓰는, 이런 그림을 그릴 겁니다.</li>
+<li>특정 값을 기준으로 왼쪽은 Fail, 오른쪽은 Pass입니다.</li>
+<li>공장에서 발생하는 양품과 불량품으로 생각을 해도 좋고, 학생들 시험 결과의 분포로 봐도 좋습니다.</li>
+<li>중요한 것은 <b>특정 지점을 기준으로 KDE plot을 자르고</b>, <b>좌우를 다른 색으로 칠하는 것</b>입니다.<br><br><img src="127_kdeth_8.png"><br></li>
+</ul>
+<h1 id="2-데이터-→-밀도-함수"><a href="#2-데이터-→-밀도-함수" class="headerlink" title="2. 데이터 → 밀도 함수"></a>2. 데이터 → 밀도 함수</h1><ul>
+<li><p><code>numpy</code>를 사용해서 정규분포에 가까운 데이터를 만듭니다.</p>
+</li>
+<li><p><code>np.random.normal()</code>을 사용하면 뚝딱 만들어집니다.</p>
+</li>
+<li><p><code>loc</code>, <code>scale</code>을 사용해서 평균과 표준편차를 지정하고, <code>size</code>에는 10만을 넣습니다.</p>
+</li>
+<li><p>이렇게 얻은 결과를 <code>seaborn.kdeplot()</code>으로 밀도함수로 표현합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예제 데이터 생성</span></span><br><span class="line">set0 = np.random.normal(loc=<span class="number">3</span>, scale=<span class="number">1</span>, size=<span class="number">100_000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 분포 밀도함수 시각화</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(set0, fill=<span class="literal">True</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<p><img src="127_kdeth_0.png"><br></p>
+</li>
+<li><p>매끈한 밀도함수가 얻어졌습니다.</p>
+</li>
+<li><p>이토록 데이터 분포가 매끈해보이는 것은 <code>seaborn.kdeplot()</code>에 숨겨진 <code>gridsize=200</code>이라는 매개변수 덕분입니다.</p>
+</li>
+<li><p>데이터가 쪼개지는 지점을 눈에 잘 띄게 하겠습니다. <code>gridsize=20</code>을 입력해서 같은 데이터를 거칠게 표현합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(set0, fill=<span class="literal">True</span>, gridsize=<span class="number">20</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<p><img src="127_kdeth_1.png"><br></p>
+</li>
+</ul>
+<h1 id="3-밀도-함수-절단"><a href="#3-밀도-함수-절단" class="headerlink" title="3. 밀도 함수 절단"></a>3. 밀도 함수 절단</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/path_api.html">matplotlib.org matplotlib.path</a></p>
+</blockquote>
+<ul>
+<li>똑같은 데이터인데 전혀 매끈하지 않습니다.</li>
+<li>한 눈에 봐도 꼭지점과 선분으로 이루어진 다각형이라는 것을 알 수 있습니다.</li>
+<li><b>$x = 2$</b></li>
+<li>꼭지점 중 <b>$x &gt; 2$만 남겨서 이것들로 다각형을 새로 만들면 되지 않을까요?</b></li>
+</ul>
+<ul>
+<li><p>KDE plot을 구성하는 다각형은 <code>ax.collections</code>로 추출할 수 있습니다.</p>
+</li>
+<li><p>이 중에서도 윤곽선은 <code>.get_path()[0]</code>명령으로 뽑아낼 수 있고,</p>
+</li>
+<li><p>꼭지점은 여기에 <code>.vertices</code>, 꼭지점의 특성은 <code>.codes</code> 속성을 보면 됩니다.</p>
+</li>
+<li><p>한번 추출해 봅니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vertices</span></span><br><span class="line">path = ax.collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>]</span><br><span class="line">vertices = path.vertices</span><br><span class="line">codes = path.codes</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# vertices = <span class="subst">&#123;vertices&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;#    codes = <span class="subst">&#123;codes&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vertices = [[-1.68144422e+00  4.44446302e-07]</span></span><br><span class="line">[-1.68144422e+00  0.00000000e+00]</span><br><span class="line">[-1.20843724e+00  0.00000000e+00]</span><br><span class="line">[-7.35430261e-01  0.00000000e+00]</span><br><span class="line">[-2.62423283e-01  0.00000000e+00]</span><br><span class="line"> </span><br><span class="line">              (중략)</span><br><span class="line">        </span><br><span class="line">[-1.68144422e+00  4.44446302e-07]</span><br><span class="line">[-1.68144422e+00  4.44446302e-07]]</span><br><span class="line"><span class="comment">#    codes = [ 1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2</span></span><br><span class="line"> 2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2 79]				</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><b>vertices</b>에는 수많은 점의 $(x, y)$ 좌표가 나열되어 있습니다. </p>
+</li>
+<li><p>이 데이터를 기준으로 threshold를 적용하면 될 것 같습니다.</p>
+</li>
+<li><p>해당 데이터의 index를 추출합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x &gt; 2 인 꼭지점 추출</span></span><br><span class="line">idx_th = np.where(vertices[:, <span class="number">0</span>] &gt; <span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">idx_th</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,</span><br><span class="line">     26, 27, 28, 29, 30, 31, 32, 33])</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><b>codes</b>가 <a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/path_api.html">중요한 정보</a>를 담고 있습니다.</p>
+</li>
+<li><p><b>1은 시작점</b>, <b>2는 연결점</b>, <b>79는 polygon close</b>입니다.</p>
+</li>
+<li><p><b>$ x &gt; 2 $</b>인 점들의 index를 추출하다 보면 code가 규칙에서 어긋날 수 있습니다.</p>
+</li>
+<li><p>그렇기 때문에, 첫 점과 마지막 점의 code에 강제로 1과 79를 할당합니다.</p>
+</li>
+<li><p>이렇게 추출된 vertices와 codes를 다시 윤곽선을 의미하는 path에 할당하고 그림을 그리면 변화가 관찰됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vertices_th = vertices[idx_th]</span><br><span class="line">codes_th = codes[idx_th]</span><br><span class="line"></span><br><span class="line">path.vertices = vertices_th</span><br><span class="line">path.codes = codes_th</span><br><span class="line">path.codes[<span class="number">0</span>] = <span class="number">1</span>    <span class="comment"># 시작점 (MOVETE)</span></span><br><span class="line">path.codes[-<span class="number">1</span>] = <span class="number">79</span>  <span class="comment"># 닫는 점 (CLOSEPOLY)</span></span><br><span class="line"></span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="4-부가-요소-활용"><a href="#4-부가-요소-활용" class="headerlink" title="4. 부가 요소 활용"></a>4. 부가 요소 활용</h1><ul>
+<li><p>전체 코드를 한 번 정리합니다.</p>
+</li>
+<li><p><code>gridsize</code>를 기본값으로 복구시켜 매끈한 곡선을 얻고,</p>
+</li>
+<li><p>밀도 함수를 절단한 뒤 다시 전체 밀도 함수를 선으로만 그려 부분과 전체를 동시에 표시합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. threshold 적용 KDE plot</span></span><br><span class="line">sns.kdeplot(set0, fill=<span class="literal">True</span>, ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># vertices</span></span><br><span class="line">path = ax.collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>]</span><br><span class="line">vertices = path.vertices</span><br><span class="line">codes = path.codes</span><br><span class="line"></span><br><span class="line"><span class="comment"># threshold</span></span><br><span class="line">idx_th = np.where(vertices[:, <span class="number">0</span>] &gt; <span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">vertices_th = vertices[idx_th]</span><br><span class="line">codes_th = codes[idx_th]</span><br><span class="line">path.vertices = vertices_th</span><br><span class="line">path.codes = codes_th</span><br><span class="line">path.codes[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">path.codes[-<span class="number">1</span>] = <span class="number">79</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. threshold 미적용 KDE plot</span></span><br><span class="line">sns.kdeplot(set0, fill=<span class="literal">False</span>, color=<span class="string">&quot;k&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<p><img src="127_kdeth_3.png"></p>
+</li>
+<li><p>이제 저 영역이 Pass라는 것을 문자를 사용해 명시합니다.</p>
+</li>
+<li><p>색도 기본색보다 조금은 의지를 반영해 특정 색을 지정합니다. 파랑으로 갑시다.</p>
+</li>
+<li><p>기준점이 되는 <b>$x = 2$</b>에 기준 막대도 우뚝 세워줍니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. threshold 적용 KDE plot</span></span><br><span class="line">sns.kdeplot(set0, color=<span class="string">&quot;b&quot;</span>, gridsize=<span class="number">500</span>, fill=<span class="literal">True</span>, ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># vertices</span></span><br><span class="line">path = ax.collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>]</span><br><span class="line">vertices = path.vertices</span><br><span class="line">codes = path.codes</span><br><span class="line"></span><br><span class="line"><span class="comment"># threshold</span></span><br><span class="line">idx_th = np.where(vertices[:, <span class="number">0</span>] &gt; <span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">vertices_th = vertices[idx_th]</span><br><span class="line">codes_th = codes[idx_th]</span><br><span class="line">path.vertices = vertices_th</span><br><span class="line">path.codes = codes_th</span><br><span class="line">path.codes[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">path.codes[-<span class="number">1</span>] = <span class="number">79</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. threshold 미적용 KDE plot</span></span><br><span class="line">sns.kdeplot(set0, fill=<span class="literal">False</span>, color=<span class="string">&quot;k&quot;</span>, ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. additional information</span></span><br><span class="line">ax.collections[<span class="number">0</span>].set_lw(<span class="number">0</span>)     <span class="comment"># threshold 적용 KDE plot의 윤곽선 제거</span></span><br><span class="line">ax.axvline(<span class="number">2</span>, c=<span class="string">&quot;k&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>) <span class="comment"># threshold line</span></span><br><span class="line">ax.text(<span class="number">3.2</span>, <span class="number">0.15</span>, <span class="string">&quot;PASS&quot;</span>, color=<span class="string">&quot;b&quot;</span>, ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;center&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="127_kdeth_4.png"></p>
+</li>
+</ul>
+<ul>
+<li>같은 요령으로, 왼쪽에 FAIL이라고 명시할 수 있습니다.</li>
+<li>동일한 작업을 threshold 방향만 바꾸어 반복하면 됩니다.<details>
+  <summary><b>코드 보기/접기</b></summary>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PASS and FAIL</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. threshold 적용 KDE plot</span></span><br><span class="line">sns.kdeplot(set0, color=<span class="string">&quot;b&quot;</span>, gridsize=<span class="number">500</span>, fill=<span class="literal">True</span>, ax=ax)  <span class="comment"># Pass</span></span><br><span class="line">sns.kdeplot(set0, color=<span class="string">&quot;r&quot;</span>, gridsize=<span class="number">500</span>, fill=<span class="literal">True</span>, ax=ax)  <span class="comment"># Fail</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## PASS</span></span><br><span class="line"><span class="comment"># vertices</span></span><br><span class="line">path_p = ax.collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>]</span><br><span class="line">vertices_p = path_p.vertices</span><br><span class="line">codes_p = path_p.codes</span><br><span class="line"></span><br><span class="line"><span class="comment"># threshold</span></span><br><span class="line">idx_th_p = np.where(vertices_p[:, <span class="number">0</span>] &gt; <span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">vertices_th_p = vertices_p[idx_th_p]</span><br><span class="line">codes_th_p = codes_p[idx_th_p]</span><br><span class="line">path_p.vertices = vertices_th_p</span><br><span class="line">path_p.codes = codes_th_p</span><br><span class="line">path_p.codes[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">path_p.codes[-<span class="number">1</span>] = codes[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">## FAIL</span></span><br><span class="line"><span class="comment"># vertices</span></span><br><span class="line">path_f = ax.collections[<span class="number">1</span>].get_paths()[<span class="number">0</span>]</span><br><span class="line">vertices_f = path_f.vertices</span><br><span class="line">codes_f = path_f.codes</span><br><span class="line"></span><br><span class="line"><span class="comment"># threshold</span></span><br><span class="line">idx_th_f = np.where(vertices_p[:, <span class="number">0</span>] &lt;= <span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">vertices_th_f = vertices_p[idx_th_f]</span><br><span class="line">codes_th_f = codes_p[idx_th_f]</span><br><span class="line">path_f.vertices = vertices_th_f</span><br><span class="line">path_f.codes = codes_th_f</span><br><span class="line">path_f.codes[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">path_f.codes[-<span class="number">1</span>] = <span class="number">79</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. threshold 미적용 KDE plot</span></span><br><span class="line">sns.kdeplot(set0, fill=<span class="literal">False</span>, color=<span class="string">&quot;k&quot;</span>, ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. additional information</span></span><br><span class="line">ax.collections[<span class="number">0</span>].set_lw(<span class="number">0</span>)     <span class="comment"># PASS KDE plot의 윤곽선 제거</span></span><br><span class="line">ax.collections[<span class="number">1</span>].set_lw(<span class="number">0</span>)     <span class="comment"># FAIL KDE plot의 윤곽선 제거</span></span><br><span class="line">ax.axvline(<span class="number">2</span>, c=<span class="string">&quot;k&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>) <span class="comment"># threshold line</span></span><br><span class="line">ax.text(<span class="number">3.2</span>, <span class="number">0.15</span>, <span class="string">&quot;PASS&quot;</span>, color=<span class="string">&quot;b&quot;</span>, ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">ax.text(<span class="number">0.5</span>, <span class="number">0.15</span>, <span class="string">&quot;FAIL&quot;</span>, color=<span class="string">&quot;r&quot;</span>, ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;center&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="127_kdeth_5.png"></p>
+<h1 id="5-넓이-계산"><a href="#5-넓이-계산" class="headerlink" title="5. 넓이 계산"></a>5. 넓이 계산</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://shapely.readthedocs.io/en/stable/manual.html#polygons">shapely.geometry.Polygon</a></p>
+</blockquote>
+<ul>
+<li>이런 시각화는 그림 뿐 아니라 숫자도 중요합니다.</li>
+<li>기준선을 넘은 데이터가 전체의 몇 %인지, 넘지 못한 것은 얼마인지 알아야 합니다.</li>
+<li>밀도 함수의 전체 넓이는 1이라는 사실은 널리 알려져 있지만 이렇게 자르면 계산이 어렵습니다.</li>
+</ul>
+<ul>
+<li><p><b><code>shapely</code> 라이브러리가 이런 도형 계산에 편리합니다.</b></p>
+</li>
+<li><p><code>shapely.geometry.Polygon()</code>에 vertices를 넣은 뒤 <code>.area</code>속성을 출력하면 넓이가 나옵니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> Polygon</span><br><span class="line"></span><br><span class="line">poly_p = Polygon(vertices_th_p)</span><br><span class="line">poly_f = Polygon(vertices_th_f)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# PASS: <span class="subst">&#123;poly_p.area*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span> %&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# FAIL: <span class="subst">&#123;poly_f.area*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span> %&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# PASS + FAIL: <span class="subst">&#123;(poly_p.area + poly_f.area)*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span> %&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PASS: 83.87 %</span></span><br><span class="line"><span class="comment"># FAIL: 15.70 %</span></span><br><span class="line"><span class="comment"># PASS + FAIL: 99.57 %</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>더해서 100%가 되어야 하는데, 0.5%가량 부족하지만 전체적으로 얼추 맞습니다.</p>
+</li>
+<li><p>대략 84%는 Pass, 16%는 Fail로 볼 수 있을 듯 합니다.</p>
+</li>
+<li><p>실제 앞에서 만든 우리 데이터셋으로 확인하면 84.25% vs 15.75%라고 합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# PASS (Ground Truth): <span class="subst">&#123;<span class="built_in">len</span>(set0[set0 &gt; <span class="number">2</span>])/<span class="number">1e5</span> * <span class="number">100</span>:<span class="number">.2</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# FAIL (Ground Truth): <span class="subst">&#123;<span class="built_in">len</span>(set0[set0 &lt;= <span class="number">2</span>])/<span class="number">1e5</span> * <span class="number">100</span>:<span class="number">.2</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PASS (Ground Truth): 84.25</span></span><br><span class="line"><span class="comment"># FAIL (Ground Truth): 15.75</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h1 id="6-함수-제작"><a href="#6-함수-제작" class="headerlink" title="6. 함수 제작"></a>6. 함수 제작</h1><ul>
+<li><p>자, 이제 함수를 만들어 사용합시다.</p>
+</li>
+<li><p>data와 threshold를 필수로 입력하게 하고, pass와 fail의 색, 그리고 gridsize를 보조 입력으로 받습니다.</p>
+</li>
+<li><p>제가 만드는 다른 함수들처럼 활용성을 위해 Axes를 입력받을 수 있는, Axes를 출력하는 함수로 만듭니다.</p>
+</li>
+<li><p>이러면 다른 큰 그림의 일부로 활용하기 좋습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 함수 정의</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_passfail</span>(<span class="params">data, threshold, color_pass=<span class="string">&quot;b&quot;</span>, color_fail=<span class="string">&quot;r&quot;</span>, gridsize=<span class="number">500</span>, ax=<span class="literal">None</span></span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:    <span class="comment"># 입력 Axes가 없을 때, 생성</span></span><br><span class="line">        fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1. threshold 적용 KDE plot</span></span><br><span class="line">    sns.kdeplot(x=data, color=color_pass, gridsize=gridsize, fill=<span class="literal">True</span>, ax=ax)  <span class="comment"># Pass</span></span><br><span class="line">    sns.kdeplot(x=data, color=color_fail, gridsize=gridsize, fill=<span class="literal">True</span>, ax=ax)  <span class="comment"># Fail</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. pass, fail thrsholding &amp; coloring</span></span><br><span class="line">    labels = []</span><br><span class="line">    <span class="keyword">for</span> i, (part, color_pf, label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(ax.collections, [color_pass, color_fail], [<span class="string">&quot;PASS&quot;</span>, <span class="string">&quot;FAIL&quot;</span>])):</span><br><span class="line">        part.set_lw(<span class="number">0</span>)</span><br><span class="line">        path = part.get_paths()[<span class="number">0</span>]</span><br><span class="line">        vertices = path.vertices</span><br><span class="line">        codes = path.codes</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>: <span class="comment"># pass</span></span><br><span class="line">            idx_th = np.where(vertices[:, <span class="number">0</span>] &gt; threshold)[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            idx_th = np.where(vertices[:, <span class="number">0</span>] &lt;= threshold)[<span class="number">0</span>]</span><br><span class="line">            </span><br><span class="line">        vertices_th = vertices[idx_th]</span><br><span class="line">        codes_th = codes_p[idx_th]</span><br><span class="line">        path.vertices = vertices_th</span><br><span class="line">        path.codes = codes_th</span><br><span class="line">        path.codes[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        path.codes[-<span class="number">1</span>] = <span class="number">79</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># calculate area</span></span><br><span class="line">        poly = Polygon(vertices_th)</span><br><span class="line">        labels.append(<span class="string">f&quot;<span class="subst">&#123;label&#125;</span>: <span class="subst">&#123;poly.area*<span class="number">100</span>:<span class="number">.1</span>f&#125;</span> %&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. threshold 미적용 KDE plot</span></span><br><span class="line">    sns.kdeplot(data, fill=<span class="literal">False</span>, color=<span class="string">&quot;k&quot;</span>, ax=ax)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4. additional information</span></span><br><span class="line">    ax.axvline(threshold, c=<span class="string">&quot;k&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>) <span class="comment"># threshold line</span></span><br><span class="line">    ax.legend(handles=ax.collections, labels=labels, loc=<span class="string">&quot;upper right&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 5. auxiliaries</span></span><br><span class="line">    ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ax</span><br><span class="line"></span><br><span class="line"><span class="comment"># 함수 실행	</span></span><br><span class="line">ax = plot_passfail(set0, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="127_kdeth_6.png"><br></p>
+</li>
+<li><p>Pass와 Fail 비율은 범례로 출력하게 만들었습니다.</p>
+</li>
+<li><p>실제 활용시 다른 그래프와 중첩될 수 있고, 그래프 모양이 데이터에 따라 달라지기 때문에</p>
+</li>
+<li><p>아까처럼 그래프 위에 글자를 놓으려면 고칠 일이 더 많아질 수 있기 때문입니다.</p>
+</li>
+<li><p>이제 한 줄로 threshold가 반영된 밀도 함수를 그릴 수 있게 되었습니다.</p>
+</li>
+</ul>
+<h1 id="7-함수-수정"><a href="#7-함수-수정" class="headerlink" title="7. 함수 수정"></a>7. 함수 수정</h1><ul>
+<li>이렇게 만들어진 그래프는 객체 제어를 통해 색을 비롯한 여러 요소를 마음껏 제어할 수 있습니다.</li>
+<li>Pass를 green, Fail을 orange로 바꾸고 legend까지 반영합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">labels = []</span><br><span class="line"><span class="keyword">for</span> part, fc, label <span class="keyword">in</span> <span class="built_in">zip</span>(ax.collections, [<span class="string">&quot;green&quot;</span>, <span class="string">&quot;orange&quot;</span>], [<span class="string">&quot;PASS&quot;</span>, <span class="string">&quot;FAIL&quot;</span>]):</span><br><span class="line">    part.set_fc(fc)</span><br><span class="line">    part.set_alpha(<span class="number">0.5</span>)</span><br><span class="line">    vertices = part.get_paths()[<span class="number">0</span>].vertices</span><br><span class="line">    labels.append(<span class="string">f&quot;<span class="subst">&#123;label&#125;</span>: <span class="subst">&#123;Polygon(vertices).area*<span class="number">100</span>:<span class="number">.1</span>f&#125;</span> %&quot;</span>)</span><br><span class="line">    </span><br><span class="line">ax.legend(ax.collections, labels, loc=<span class="string">&quot;upper right&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">1</span>, <span class="number">8</span>)</span><br><span class="line">display(ax.figure)</span><br></pre></td></tr></table></figure>
+<img src="127_kdeth_7.png"><br></li>
+</ul>
+<h1 id="8-활용-펭귄-데이터셋"><a href="#8-활용-펭귄-데이터셋" class="headerlink" title="8. 활용 - 펭귄 데이터셋"></a>8. 활용 - 펭귄 데이터셋</h1><ul>
+<li>펭귄 데이터셋의 세 수치형 데이터, bill_length, bill_depth, flipper_length에 이 함수를 적용합니다.</li>
+<li><code>plt.subplots(ncols=3)</code>으로 틀을 잡아 놓고 Axes마다 데이터를 threshold와 함께 넣었습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터셋 읽어오기</span></span><br><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전체 Figure 설정</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Axes마다 함수 적용</span></span><br><span class="line">plot_passfail(df_peng[<span class="string">&quot;bill_length_mm&quot;</span>], <span class="number">40</span>, ax=axs[<span class="number">0</span>], color_pass=<span class="string">&quot;b&quot;</span>, color_fail=<span class="string">&quot;r&quot;</span>)</span><br><span class="line">plot_passfail(df_peng[<span class="string">&quot;bill_depth_mm&quot;</span>], <span class="number">15</span>, ax=axs[<span class="number">1</span>], color_pass=<span class="string">&quot;g&quot;</span>, color_fail=<span class="string">&quot;orange&quot;</span>)</span><br><span class="line">plot_passfail(df_peng[<span class="string">&quot;flipper_length_mm&quot;</span>], <span class="number">180</span>, ax=axs[<span class="number">2</span>], color_pass=<span class="string">&quot;c&quot;</span>, color_fail=<span class="string">&quot;m&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Axes마다 y 범위 설정</span></span><br><span class="line">axs[<span class="number">0</span>].set_ylim(<span class="number">0</span>, <span class="number">0.1</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_ylim(<span class="number">0</span>, <span class="number">0.4</span>)</span><br><span class="line">axs[<span class="number">2</span>].set_ylim(<span class="number">0</span>, <span class="number">0.06</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전체 title 설정</span></span><br><span class="line">fig.suptitle(<span class="string">&quot;penguins dataset feature distribution with threshold\n&quot;</span>, color=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;127_kdeth_8.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="127_kdeth_8.png"><br></li>
+</ul>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://www.buymeacoffee.com/jehyunlee" target="_blank">
+			<img
+			 src="https://jehyunlee.github.io/about/src/images/coffee.png"
+			 style="height:74px !important;width: 363px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2023/02/12/Python-DS-127_kdeth/" data-id="cle14lhul0000q8tqfguc0j7x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "KDE + threshold",
+        "image": "https://jehyunlee.github.io/thumbnails/Python-DS/127_kdeth_00.png",
+        "keywords": "python visualization seaborn matplotlib",
+        "genre": "Python Data Science",
+        "datePublished": "2023-02-12",
+        "dateCreated": "2023-02-12",
+        "dateModified": "2023-02-12",
+        "url": "https://jehyunlee.github.io/2023/02/12/Python-DS-127_kdeth/",
+        "description": "
+밀도 함수는 데이터 분포를 볼 때 가장 많이 그리는 그림 중 하나입니다.
+특정 값을 기준으로 Pass와 Fail을 정한다고 할 때, 전체의 비율도 중요합니다.
+seaborn kdeplot을 살짝 다듬어서 쪼개고 비율을 계산합니다.
+
+1. 오늘의 목표
+오늘 우리는 데이터를 선별하는 데 쓰는, 이런 그림을 그릴 겁니다.
+특정 값을 기준으로 왼쪽은 Fail, ",
+        "wordCount": 2434
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="book" href="https://jehyunlee.tistory.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-book"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bookmark" href="https://blog.naver.com/vinci109" target="_blank" rel="noopener">
+                        <i class="icon fa fa-bookmark"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2023/02/02/Python-General-15-scs_issue/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">신천식의 이슈토론 - 과학자 그들은 누구인가? 과학자가 행복한 도시는?</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/02/12/Python-DS-127_kdeth/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/127_kdeth_00.png)" alt="KDE + threshold" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/02/12/Python-DS-127_kdeth/" class="title">KDE + threshold</a></p>
+                            <p class="item-date"><time datetime="2023-02-12T08:20:00.000Z" itemprop="datePublished">2023-02-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/02/02/Python-General-15-scs_issue/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/15_scs_issue_00.png)" alt="신천식의 이슈토론 - 과학자 그들은 누구인가? 과학자가 행복한 도시는?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2023/02/02/Python-General-15-scs_issue/" class="title">신천식의 이슈토론 - 과학자 그들은 누구인가? 과학자가 행복한 도시는?</a></p>
+                            <p class="item-date"><time datetime="2023-02-01T20:11:00.000Z" itemprop="datePublished">2023-02-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/01/09/Python-DS-126-labnlp/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/126_labnlp_00.png)" alt="연구소의 문헌분석 기술 활용" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/01/09/Python-DS-126-labnlp/" class="title">연구소의 문헌분석 기술 활용</a></p>
+                            <p class="item-date"><time datetime="2023-01-09T02:21:00.000Z" itemprop="datePublished">2023-01-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/01/01/Python-DS-125-rpa/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/125_rpa_00.png)" alt="Impact of RPA" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/01/01/Python-DS-125-rpa/" class="title">Impact of RPA</a></p>
+                            <p class="item-date"><time datetime="2023-01-01T07:02:00.000Z" itemprop="datePublished">2023-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/12/26/Python-General-14_santa/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-General/14_santa_00.png)" alt="산타 방문 증빙 feat. DALL.E" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/General/">General</a></p>
+                            <p class="item-title"><a href="/2022/12/26/Python-General-14_santa/" class="title">산타 방문 증빙 feat. DALL.E</a></p>
+                            <p class="item-date"><time datetime="2022-12-26T07:30:00.000Z" itemprop="datePublished">2022-12-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">125</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.94px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 12.35px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11.18px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.59px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/DALL-E/" style="font-size: 10px;">DALL.E</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/EOST/" style="font-size: 10px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15.29px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.59px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.59px;">Nicolas P. Rougier</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.59px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/VOSviewer/" style="font-size: 10.59px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.59px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.59px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.76px;">bayesian</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/calendar/" style="font-size: 10.59px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11.18px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.18px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.47px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.35px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14.71px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.59px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 10px;">dall.e</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.59px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.59px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 10.59px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11.18px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.59px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.76px;">gaussian process</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.12px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/image/" style="font-size: 12.35px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17.06px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.59px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.35px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.59px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.18px;">legend</a> <a href="/tags/life/" style="font-size: 10.59px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 17.06px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.41px;">matplotlib</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.59px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.76px;">neural network</a> <a href="/tags/numpy/" style="font-size: 11.18px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.59px;">open API</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.88px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.59px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12.35px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.18px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 18.24px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.59px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.59px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.59px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.35px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.59px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.59px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.59px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.18px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 10px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.65px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.59px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.76px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13.53px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 14.12px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.59px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.18px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.76px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.18px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 18.82px;">visualization</a> <a href="/tags/visualziation/" style="font-size: 10.59px;">visualziation</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10px;">youtube</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+	
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2023/02/12/Python-DS-127_kdeth/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
