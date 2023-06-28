@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>Bing Image Creator (2) 사진 배율과 효과 | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="openai,microsoft,dalle,bingimagecreator" />
+    
+    <meta name="description" content="Contributor: 조남경님Bing Image Creator   이미지 생성 AI를 이용해 가상의 사진을 찍는 효과를 얻을 수 있습니다. 인물, 동물, 사물, 풍경 등을 찍을 때 가능한 효과를 알아봅니다. 본 글에는 모든 사례를 담을 수 없습니다. 예시로 생각해주시고 무한한 가능성을 누벼주시기 바랍니다. 대개 이거 될까? 싶으면 거의 됩니다.  1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bing Image Creator (2) 사진 배율과 효과">
+<meta property="og:url" content="https://jehyunlee.github.io/2023/06/29/General-24-BingImageCreator2/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="Contributor: 조남경님Bing Image Creator   이미지 생성 AI를 이용해 가상의 사진을 찍는 효과를 얻을 수 있습니다. 인물, 동물, 사물, 풍경 등을 찍을 때 가능한 효과를 알아봅니다. 본 글에는 모든 사례를 담을 수 없습니다. 예시로 생각해주시고 무한한 가능성을 누벼주시기 바랍니다. 대개 이거 될까? 싶으면 거의 됩니다.  1.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/General/24_bic2_00.png">
+<meta property="article:published_time" content="2023-06-28T19:33:00.000Z">
+<meta property="article:modified_time" content="2023-06-28T20:21:14.287Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="openai">
+<meta property="article:tag" content="microsoft">
+<meta property="article:tag" content="dalle">
+<meta property="article:tag" content="bingimagecreator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/General/24_bic2_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2023/06/29/general-24-bingimagecreator2/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/General/">General</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-General-24-BingImageCreator2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Bing Image Creator (2) 사진 배율과 효과
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/06/29/General-24-BingImageCreator2/" class="article-date">
+       <time datetime="2023-06-28T19:33:00.000Z" itemprop="datePublished">2023-06-29</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/06/29/General-24-BingImageCreator2/" class="article-date">
+     <time datetime="2023-06-28T20:21:14.287Z" itemprop="dateModified">2023-06-29</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/bingimagecreator/" rel="tag">bingimagecreator</a>, <a class="tag-link-link" href="/tags/dalle/" rel="tag">dalle</a>, <a class="tag-link-link" href="/tags/microsoft/" rel="tag">microsoft</a>, <a class="tag-link-link" href="/tags/openai/" rel="tag">openai</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <blockquote>
+<p><b>Contributor:</b> 조남경님<br><a target="_blank" rel="noopener" href="https://www.bing.com/create">Bing Image Creator</a></p>
+</blockquote>
+<ul>
+<li>이미지 생성 AI를 이용해 가상의 사진을 찍는 효과를 얻을 수 있습니다.</li>
+<li>인물, 동물, 사물, 풍경 등을 찍을 때 가능한 효과를 알아봅니다.</li>
+<li><b>본 글에는 모든 사례를 담을 수 없습니다.</b> 예시로 생각해주시고 <b>무한한 가능성을 누벼주시기 바랍니다.</b></li>
+<li>대개 <b>이거 될까?</b> 싶으면 <b>거의 됩니다.</b></li>
+</ul>
+<h1 id="1-인물-Camera-shots"><a href="#1-인물-Camera-shots" class="headerlink" title="1. 인물 Camera shots"></a>1. 인물 Camera shots</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots">Studio Binder: Ultimate Guide to Camera Shots</a></p>
+</blockquote>
+<ul>
+<li>이미지 생성 AI는 사람이 그림을 보고 설명하듯 prompt를 작성하면 이에 맞는 이미지가 생성됩니다.</li>
+<li>생성 모델이 학습했을 수많은 이미지-Text 쌍을 생각해 봅시다.</li>
+<li>각종 사진 밑에 달린 촬영 기법에 대한 주석을 떠올릴 수 있을 것입니다.<br></li>
+</ul>
+<h2 id="1-1-by-Reference"><a href="#1-1-by-Reference" class="headerlink" title="1.1. by Reference"></a>1.1. by Reference</h2><p><img src="24_bic2_08.png"><br></p>
+<ul>
+<li>인물 사진을 찍을 때 이와 같이 다양한 범위를 적용할 수 있습니다.</li>
+<li>그렇다면 <a target="_blank" rel="noopener" href="https://www.bing.com/create">Bing Image Creator</a>를 비롯한 이미지 생성 AI에서도 가능할 것 같습니다.</li>
+<li>성별 이슈를 피하기 위해 성별이 없는 마네킹을 세워놓고 카메라 샷만 바꿔가며 촬영합니다.</li>
+<li>최근 자주 보이는 생성 이미지의 질적 향상이 반가운 반면 <b>굳이 헐벗은 어린 여자들을 그려야 하는지</b>는 의문입니다.</li>
+</ul>
+<blockquote>
+<p>manikin {gender: neutral}, front view, grayscale, [camera shot]</p>
+</blockquote>
+<ul>
+<li>구도는 정면, 색은 회색조(grayscale)로 지정하고 <code>[camera shot]</code> 부분에 위 예시들을 번갈아가며 넣습니다.</li>
+<li>결과는 다음과 같습니다.<br></li>
+</ul>
+<p><img src="24_bic2_01.png" alt="Various camera shots. 클릭하면 커집니다."><br></p>
+<ul>
+<li>full shot은 전신이, extreme close up은 얼굴만 나왔습니다.</li>
+<li>전반적으로 배율을 높여가는 경향은 관찰되지만 위 예제와는 많이 다릅니다.</li>
+<li><b>full shot부터 medium close up까지 구분도 잘 되지 않고, close up은 그림마다 제각각입니다.</b></li>
+<li>믿고 사용하기에는 많이 부족합니다.</li>
+</ul>
+<h2 id="1-2-by-anatomy"><a href="#1-2-by-anatomy" class="headerlink" title="1.2. by anatomy"></a>1.2. by anatomy</h2><ul>
+<li><p>집중하고자 하는 신체 부위를 명시하는 방식으로 카메라 배율을 조정해 봅니다.</p>
+</li>
+<li><p>손, 눈 등 신체 부위의 이름을 지정하면 훨씬 직관적일 듯 합니다.</p>
+</li>
+<li><p>full body를 시작으로 upper body(상체), lower body(하체)를 나누고 배율을 높여갑니다.<br><br><img src="24_bic2_02.png" alt="Various camera shots. 클릭하면 커집니다."><br></p>
+</li>
+<li><p><b>full body</b>는 성공적입니다. </p>
+</li>
+<li><p><b>upper body</b>와 <b>torso</b>도 괜찮습니다 - 사실 torso는 허리부터 목까지 나오기를 기대했습니다.</p>
+</li>
+<li><p>아쉽지만 일관성은 있으니 넘어갑니다.</p>
+</li>
+<li><p><b>head</b>와 <b>nose</b>도 의도에 충실한 결과가 나왔습니다.<br></p>
+</li>
+</ul>
+<ul>
+<li>그러나 하반신에서 문제가 발견됩니다.</li>
+<li><b>lower body</b>는 제대로 그려지지 않고</li>
+<li><b>legs</b>는 <b>유해 컨텐츠 경고</b>가 뜹니다 - 사람이 아니라 마네킹인데도 이러네요.</li>
+<li><b>feet</b>은 문제가 없습니다.</li>
+</ul>
+<ul>
+<li>한편, 같은 내용이라도 프롬프트 사용 방식에 따라 다른 결과가 나옵니다.</li>
+<li><b>남성의 torso</b> 사진을 제작했습니다.</li>
+<li>한 번은 <b>a man, front view, grayscale, torso</b>로 제작했고</li>
+<li>다음에는 <b>torso of a man, front view, grayscale</b>로 제작했습니다.</li>
+<li>의미상으로는 완전히 동일한 것으로 생각되나 결과물은 다음과 같습니다.<br><br><img src="24_bic2_03.png" alt="torso의 prompt별 비교. 클릭하면 커집니다."><br></li>
+</ul>
+<h1 id="2-건물-동물-사물"><a href="#2-건물-동물-사물" class="headerlink" title="2. 건물, 동물, 사물"></a>2. 건물, 동물, 사물</h1><ul>
+<li>그렇다면 신체 부위가 없는 건물, 동물, 사물은 어떨까요?</li>
+<li>동물이라면 head, feet 등을 그대로 사용할 수 있겠지만 건물과 사물은 그럴 수 없습니다.</li>
+<li>게다가, 경험적으로 피사체의 크기가 달라지면 같은 효과도 결과가 달라짐을 알고 있습니다.</li>
+</ul>
+<h2 id="2-1-건물"><a href="#2-1-건물" class="headerlink" title="2.1. 건물"></a>2.1. 건물</h2><blockquote>
+<p>buildings in a city, [camera setting]</p>
+</blockquote>
+<ul>
+<li><p>프롬프트를 위와 같이 고정하고 <code>[camera setting]</code>만 변화를 줍니다.</p>
+</li>
+<li><p><b>None</b>은 아무런 입력을 하지 않은 결과입니다.<br><br><img src="24_bic2_04.png" alt="도시 전경의 prompt별 비교. 클릭하면 커집니다."><br></p>
+</li>
+<li><p><b>None</b>의 일상적인 풍경이 설정에 따라 완전히 바뀝니다.</p>
+</li>
+<li><p><b>fisheye</b>(어안렌즈)와 <b>wide angle</b>(광각)은 비슷한 듯 다릅니다.</p>
+</li>
+<li><p><b>wide angle</b>과 <b>wide view</b>는 시점이 다릅니다.</p>
+</li>
+<li><p><b>35 mm</b>는 눈 앞에서 보는 것 같고 <b>telephoto</b>는 줌을 당긴 듯 합니다.</p>
+</li>
+<li><p><b>bokeh</b>와 <b>lomo</b>가 독특한데, 초점이 맞지 않은 듯 필름에 빛이 들어간 듯 합니다.</p>
+</li>
+</ul>
+<h2 id="2-2-동물"><a href="#2-2-동물" class="headerlink" title="2.2. 동물"></a>2.2. 동물</h2><blockquote>
+<p>white cat, [camera setting]</p>
+</blockquote>
+<p><img src="24_bic2_05.png" alt="고양이 사진의 prompt별 비교. 클릭하면 커집니다."><br></p>
+<ul>
+<li>지난 글의 하얀 고양이를 다시 사용합니다.</li>
+<li><b>fisheye와 wide angle</b>이 비슷해 보이지만 fisheye가 카메라를 들여다보는 느낌이 더 강합니다.</li>
+<li><b>wide view</b>는 <b>None</b>, <b>35 mm</b>, <b>telephoto</b>와 차이를 느끼기 어렵습니다.</li>
+<li><b>bokeh</b>가 진가를 발휘합니다. 고양이 주변으로 이슬이 아롱거리는 듯 합니다.</li>
+<li><b>lomo</b>의 효과는 시크한 표정과 잘 어우러집니다.</li>
+</ul>
+<h2 id="2-3-사물"><a href="#2-3-사물" class="headerlink" title="2.3. 사물"></a>2.3. 사물</h2><blockquote>
+<p>water droplet, [camera setting]</p>
+</blockquote>
+<p><img src="24_bic2_06.png" alt="물방울 사진의 prompt별 비교. 클릭하면 커집니다."><br></p>
+<ul>
+<li>가장 작은 물체 중 하나인 물방울을 그렸습니다.</li>
+<li>전체적으로 <b>fisheye</b>를 제외하면 화면의 변화를 알아채기가 어렵습니다.</li>
+<li><b>bokeh</b>와 <b>lomo</b>가 독특한 효과를 줄 뿐입니다.</li>
+</ul>
+<h1 id="3-색의-3요소-제어-채도-명도-색상"><a href="#3-색의-3요소-제어-채도-명도-색상" class="headerlink" title="3. 색의 3요소 제어 - 채도, 명도, 색상"></a>3. 색의 3요소 제어 - 채도, 명도, 색상</h1><blockquote>
+<p>rainbow, [color setting]</p>
+</blockquote>
+<ul>
+<li>온라인에서 볼 수 있는 생성 이미지의 공통점 중 하나는 <b>색상이 화려하다</b>는 점입니다.</li>
+<li>의도적인 설정인지는 모르겠으나 전반적으로 대비가 강하고 현란한 색의 그림이 많습니다.</li>
+<li>실제로 동물이나 인물 위주로 생성시키면 왠지 그런 그림들이 많이 그려집니다.</li>
+</ul>
+<h2 id="3-1-전반적-제어"><a href="#3-1-전반적-제어" class="headerlink" title="3.1. 전반적 제어"></a>3.1. 전반적 제어</h2><ul>
+<li><p>그러나 색의 3요소 - 채도, 명도, 색상을 전반적으로 조정하면 다채로운 연출을 할 수 있습니다.</p>
+</li>
+<li><p>무지개를 다양한 효과와 함께 그린 예시입니다.<br><br><img src="24_bic2_09.png" alt="무지개 사진의 prompt별 비교. 클릭하면 커집니다."><br></p>
+</li>
+<li><p>같은 무지개라도 <b>밝고</b>, <b>어둡고</b>, <b>선명하고</b>, <b>흐리고</b>, <b>흑백</b>으로 표현할 수 있습니다.</p>
+</li>
+<li><p>특정 색상을 지정하여 <b>붉은 느낌이 강하게</b> 할 수도 있으며,</p>
+</li>
+<li><p>심지어 <b>은색이 강하게</b> 처럼 존재하지 않는 색을 지정할 수도 있습니다.</p>
+</li>
+</ul>
+<h2 id="3-2-부분적-제어"><a href="#3-2-부분적-제어" class="headerlink" title="3.2. 부분적 제어"></a>3.2. 부분적 제어</h2><ul>
+<li>색 요소 지정을 부분적으로 적용할 수도 있습니다.</li>
+<li><a href="https://jehyunlee.github.io/2023/06/25/General-23-BingImageCreator1/">지난 시간</a>에 익혔던 중괄호 <code>&#123; &#125;</code>를 사용하면 편리합니다.</li>
+<li>전반적인 느낌을 지정한 후 특정 부분에만 다른 속성을 인가하는 식입니다.</li>
+</ul>
+<blockquote>
+<p>a basket of tropical fruits {grayscale}, a banana at center {yellow}, top view</p>
+</blockquote>
+<p><img src="24_bic2_10.png" alt="전체 흑백, 가운데 바나나만 노랑. 클릭하면 커집니다."><br></p>
+<h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
+<li>사진 용어를 사용한 배율 제어에 한계가 있는 것은 아쉽지만 다른 방식으로 강조 부위에 집중할 수 있습니다.</li>
+<li>torso 예시에서 보았듯 같은 의도도 표현에 따라 결과물이 다르기 때문에 다양한 시도를 통한 학습이 필요합니다.</li>
+<li>여러 방법을 조합하여 원하는 결과물을 연출하시기 바랍니다.</li>
+</ul>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://www.buymeacoffee.com/jehyunlee" target="_blank">
+			<img
+			 src="https://jehyunlee.github.io/about/src/images/coffee.png"
+			 style="height:74px !important;width: 363px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2023/06/29/General-24-BingImageCreator2/" data-id="cljg5y9rw001r68tqe6v8d1rk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "Bing Image Creator (2) 사진 배율과 효과",
+        "image": "https://jehyunlee.github.io/thumbnails/General/24_bic2_00.png",
+        "keywords": "openai microsoft dalle bingimagecreator",
+        "genre": "General",
+        "datePublished": "2023-06-29",
+        "dateCreated": "2023-06-29",
+        "dateModified": "2023-06-29",
+        "url": "https://jehyunlee.github.io/2023/06/29/General-24-BingImageCreator2/",
+        "description": "
+Contributor: 조남경님Bing Image Creator
+
+
+이미지 생성 AI를 이용해 가상의 사진을 찍는 효과를 얻을 수 있습니다.
+인물, 동물, 사물, 풍경 등을 찍을 때 가능한 효과를 알아봅니다.
+본 글에는 모든 사례를 담을 수 없습니다. 예시로 생각해주시고 무한한 가능성을 누벼주시기 바랍니다.
+대개 이거 될까? 싶으면 거의 됩니다.
+
+1. ",
+        "wordCount": 714
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="book" href="https://jehyunlee.tistory.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-book"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bookmark" href="https://blog.naver.com/vinci109" target="_blank" rel="noopener">
+                        <i class="icon fa fa-bookmark"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2023/06/25/General-23-BingImageCreator1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Bing Image Creator (1) 시작</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/06/29/General-24-BingImageCreator2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/24_bic2_00.png)" alt="Bing Image Creator (2) 사진 배율과 효과" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2023/06/29/General-24-BingImageCreator2/" class="title">Bing Image Creator (2) 사진 배율과 효과</a></p>
+                            <p class="item-date"><time datetime="2023-06-28T19:33:00.000Z" itemprop="datePublished">2023-06-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/06/25/General-23-BingImageCreator1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/23_bic1_00.png)" alt="Bing Image Creator (1) 시작" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2023/06/25/General-23-BingImageCreator1/" class="title">Bing Image Creator (1) 시작</a></p>
+                            <p class="item-date"><time datetime="2023-06-24T15:40:00.000Z" itemprop="datePublished">2023-06-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/06/20/Python-DS-131-kierlecture202302/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/131-kierlecture202302_00.png)" alt="SciPy Smoothing" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/06/20/Python-DS-131-kierlecture202302/" class="title">SciPy Smoothing</a></p>
+                            <p class="item-date"><time datetime="2023-06-20T13:20:00.000Z" itemprop="datePublished">2023-06-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/05/19/Python-DS-130-kierlecture202301/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/130-kierlecture202301_00.png)" alt="SciPy 소개 + curve fitting" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/05/19/Python-DS-130-kierlecture202301/" class="title">SciPy 소개 + curve fitting</a></p>
+                            <p class="item-date"><time datetime="2023-05-19T08:13:00.000Z" itemprop="datePublished">2023-05-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/04/28/Python-DS-129-azurethon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/129-azurethon_00.png)" alt="챗GPT 러닝데이 &amp; MS 애저톤 - Open API를 활용한 연구원의 업무 효율화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/04/28/Python-DS-129-azurethon/" class="title">챗GPT 러닝데이 &amp; MS 애저톤 - Open API를 활용한 연구원의 업무 효율화</a></p>
+                            <p class="item-date"><time datetime="2023-04-27T21:54:00.000Z" itemprop="datePublished">2023-04-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">149</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">129</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.94px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.59px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 12.35px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11.18px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.59px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/DALL-E/" style="font-size: 10.59px;">DALL.E</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/EOST/" style="font-size: 10px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15.29px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.59px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.59px;">Nicolas P. Rougier</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.59px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/VOSviewer/" style="font-size: 10.59px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.59px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.59px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.76px;">bayesian</a> <a href="/tags/bingimagecreator/" style="font-size: 10.59px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.59px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11.18px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 13.53px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.18px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.47px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.35px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14.71px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.59px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 10px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 10.59px;">dalle</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.59px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.59px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 10.59px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11.18px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 10px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.59px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.76px;">gaussian process</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 14.12px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/image/" style="font-size: 12.35px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 17.06px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.59px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.35px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.59px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.18px;">legend</a> <a href="/tags/life/" style="font-size: 10.59px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 17.06px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.41px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 11.18px;">microsoft</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.59px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.76px;">neural network</a> <a href="/tags/numpy/" style="font-size: 12.35px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.59px;">open API</a> <a href="/tags/openai/" style="font-size: 14.71px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.88px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.59px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12.35px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.18px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 18.24px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.59px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.59px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.59px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.35px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.59px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.59px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.59px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.18px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11.18px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.65px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 10px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.59px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.76px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13.53px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 14.12px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.59px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.18px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.76px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.76px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 18.82px;">visualization</a> <a href="/tags/visualziation/" style="font-size: 10.59px;">visualziation</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10px;">youtube</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+	
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2023/06/29/General-24-BingImageCreator2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
