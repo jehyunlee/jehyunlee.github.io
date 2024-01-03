@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>DALL.E 대비가 강한 그림 그리기 | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="openai,chatgpt,dalle" />
+    
+    <meta name="description" content="이탈리아의 화가 Caravaggio의 그림을 좋아합니다. 실제 성격도 괴팍하고 공격적이었다고 알려져 있습니다만 강한 대비와 역동적인 구도에서 오는 그의 그림에는 다른 그림에 없는 에너지가 느껴집니다.  1. DALL.E의 그림 DALL.E는 그림을 잘 그립니다. 몇 줄의 프롬프트, 심지어 문장 하나만으로도 사진같은 그림, 화가가 그린 것 같은 그림을 그립">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DALL.E 대비가 강한 그림 그리기">
+<meta property="og:url" content="https://jehyunlee.github.io/2023/12/26/General-34-dalle_centaur/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="이탈리아의 화가 Caravaggio의 그림을 좋아합니다. 실제 성격도 괴팍하고 공격적이었다고 알려져 있습니다만 강한 대비와 역동적인 구도에서 오는 그의 그림에는 다른 그림에 없는 에너지가 느껴집니다.  1. DALL.E의 그림 DALL.E는 그림을 잘 그립니다. 몇 줄의 프롬프트, 심지어 문장 하나만으로도 사진같은 그림, 화가가 그린 것 같은 그림을 그립">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/General/34_dalle_centaur_00.png">
+<meta property="article:published_time" content="2023-12-26T02:30:00.000Z">
+<meta property="article:modified_time" content="2023-12-26T02:41:40.000Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="openai">
+<meta property="article:tag" content="chatgpt">
+<meta property="article:tag" content="dalle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/General/34_dalle_centaur_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2023/12/26/general-34-dalle_centaur/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/General/">General</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-General-34-dalle_centaur" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        DALL.E 대비가 강한 그림 그리기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/12/26/General-34-dalle_centaur/" class="article-date">
+       <time datetime="2023-12-26T02:30:00.000Z" itemprop="datePublished">2023-12-26</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/12/26/General-34-dalle_centaur/" class="article-date">
+     <time datetime="2023-12-26T02:41:40.000Z" itemprop="dateModified">2023-12-26</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/chatgpt/" rel="tag">chatgpt</a>, <a class="tag-link-link" href="/tags/dalle/" rel="tag">dalle</a>, <a class="tag-link-link" href="/tags/openai/" rel="tag">openai</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>이탈리아의 화가 Caravaggio의 그림을 좋아합니다.</li>
+<li>실제 성격도 괴팍하고 공격적이었다고 알려져 있습니다만</li>
+<li>강한 대비와 역동적인 구도에서 오는 그의 그림에는 다른 그림에 없는 에너지가 느껴집니다.</li>
+</ul>
+<h1 id="1-DALL-E의-그림"><a href="#1-DALL-E의-그림" class="headerlink" title="1. DALL.E의 그림"></a>1. DALL.E의 그림</h1><ul>
+<li><b>DALL.E는 그림을 잘 그립니다.</b></li>
+<li>몇 줄의 프롬프트, 심지어 문장 하나만으로도 사진같은 그림, 화가가 그린 것 같은 그림을 그립니다.</li>
+<li>하지만 아쉬움이 있습니다. <b>특색을 담기가 은근히 어렵습니다.</b></li>
+<li>독창적인 주제와 화면 구성을 하면 조금 낫지만, <b>인터넷에 떠도는 그림들이 다 비슷비슷해 보입니다.</b></li>
+</ul>
+<ul>
+<li><b>그림을 배울 때, 기존 화가의 그림을 따라서 그립니다.</b> </li>
+<li>서예도 비슷합니다. 그림을 따라 그리면 임화(臨畵), 글씨를 따라 쓰면 임서(臨書)라고 합니다.</li>
+<li>단순히 베끼는 과정이 아니라 선배들이 어떤 생각과 느낌으로 그렸는지를 체득하는 과정입니다.</li>
+</ul>
+<ul>
+<li>DALL.E의 그림이 밋밋해보이는 또 다른 이유는 색 사용이 왠지 반복되는 느낌입니다.</li>
+<li>구체적으로 예를 들어 말하기는 어려우나 청백색의 느낌이 자주 느껴집니다.</li>
+<li>사람의 살색도 비슷비슷하고 얼굴 유형도 단조롭습니다. </li>
+<li>학습 기반 모델의 한계일지도 모르고 학습한 데이터의 한계일지도 모르겠습니다.</li>
+</ul>
+<h1 id="2-까라바조-스타일-그림-그리기"><a href="#2-까라바조-스타일-그림-그리기" class="headerlink" title="2. 까라바조 스타일 그림 그리기"></a>2. 까라바조 스타일 그림 그리기</h1><p><img src="34_dalle_centaur_01.jpg" alt="골리앗의 머리를 든 다윗. 캔버스에 유채. 보르게세 미술관 소장"></p>
+<ul>
+<li>제가 가장 좋아하는 그림 중 하나입니다.</li>
+<li>과감하게 배경을 어둡게 처리함으로써 골리앗의 잘린 머리, 다윗의 얼굴과 앳된 소년의 몸, 그리고 번쩍이는 칼날에 시선이 집중됩니다.</li>
+<li>다윗의 얼굴과 골리앗 얼굴 절반, 그리고 머리카락까지 모두 배경에 묻어버렸습니다.</li>
+<li><b>DALL.E에서는 이 정도로 과감한 표현이 잘 되지 않습니다.</b></li>
+</ul>
+<ul>
+<li>이런 느낌으로 <b>눈밭에서 무리를 이끄는 켄타우루스 족장</b>을 그려보고 싶었습니다.</li>
+<li>주제를 선정한 이유는 몇 가지가 있지만 여기서는 생략합니다.</li>
+</ul>
+<h2 id="2-1-Explore-gt-DALL-E-선택"><a href="#2-1-Explore-gt-DALL-E-선택" class="headerlink" title="2.1. Explore &gt; DALL.E 선택"></a>2.1. Explore &gt; DALL.E 선택</h2><ul>
+<li>전문적으로 그림을 그리는 것이 목적이라면, ChatGPT4보다 좋은 선택이 있습니다.</li>
+<li>좌측의 <b>Explore</b>에서 <b>DALL.E</b>를 선택하는 것입니다.</li>
+<li>ChatGPT4가 그림을 한 장씩 주는 반면에 DALL.E는 두 장씩 줍니다.</li>
+<li>랜덤에 상당 부분 의존할 수 밖에 없는 환경에서 선택지가 많은 것이 좋습니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_02.png"></p>
+<h2 id="2-2-프롬프트-작성"><a href="#2-2-프롬프트-작성" class="headerlink" title="2.2. 프롬프트 작성"></a>2.2. 프롬프트 작성</h2><ul>
+<li>ChatGPT에서 DALL.E를 쓸 때 다음과 같은 과정을 거칩니다.<br>① 사용자가 프롬프트를 입력하면 (input prompt)<br>② ChatGPT가 DALL.E와 함께 나머지 부분을 상상합니다. 이 때 프롬프트가 변경됩니다. (ChatGPT prompt)<br>③ DALL.E가 이를 받아 그림으로 표현합니다.<br>이 때 image seed layer가 랜덤으로 할당되는데, 같은 프롬프트라도 이미지가 다르게 생성됩니다.</li>
+</ul>
+<ul>
+<li>머리 속에 구체적인 그림이 없다면 ②에서 ChatGPT의 도움을 받을 수 있습니다.</li>
+<li>그러나 지금의 저는 <b>머리 속에 그림이 있는 만큼, 프롬프트를 최대한 자세히 작성합니다.</b></li>
+<li>프롬프트를 자세히 작성하지 않으면 ChatGPT가 끼어들어 의도를 뒤틀 수 있기 때문입니다.</li>
+</ul>
+<blockquote>
+<p>input prompt: “A centaur holding a torch standing on a big rock of snow-covered forest at night and other centaurs gathered around nearby. The centaurs have a human upper body and a horse lower body, glancing far away among tall trees. The forest is full of various pine trees and tall trees without leaves but snow on them. stars are clearly seen above sky, creating a magical, enchanted unrealistic atmosphere. The scene captures the wisdom of the centaur as a leader of a company. cinematic view. sharp contrast with low brightness, like Caravaggio style. almost entire image is dark as black, but some highlights in limited region where the torch light is shed are bright with white, yellow and orange. oil on canvas with thick brush. landscape view”</p>
+</blockquote>
+<p><img src="34_dalle_centaur_03.png"></p>
+<ul>
+<li><b>&lt;16/16&gt;</b>이라는 표식이 있습니다. 원하는 그림을 찾아 16번 반복 실행했다는 뜻입니다.</li>
+<li>반인반마여야 할 켄타우루스를 사람이 말을 타고 있는 모습으로 그리기도 하고, 말 머리 사람으로 그려서입니다.</li>
+<li>현재는 결과가 마음에 들지 않으면 원하는 결과가 나올때까지 반복하는 수밖에 없습니다.</li>
+<li>원하는 이미지에 가까운 오른쪽 그림은 다음과 같습니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_04.png"></p>
+<ul>
+<li>ChatGPT가 수정한 프롬프트를 확인하면 다음과 같습니다.</li>
+</ul>
+<blockquote>
+<p>ChatGPT prompt: “A scene depicting a centaur holding a torch, standing on a large rock in a snow-covered forest at night. This centaur, exuding wisdom as a leader, is surrounded by other centaurs with a human upper body and horse lower body. They are all glancing into the distance among tall pine trees and leafless trees draped in snow. Above, the stars in the sky create a magical, enchanted atmosphere. The setting is cinematic, with a Caravaggio-like sharp contrast, low brightness, and an almost entirely dark background. The limited regions illuminated by the torch light are bright with white, yellow, and orange, resembling an oil painting on canvas with thick brushstrokes. The overall composition is in landscape view.”</p>
+</blockquote>
+<ul>
+<li>내용은 바뀐 것이 없이 문장만 일부 수정된 정도입니다. 그나마도 거의 같습니다.</li>
+<li>만약 입력을 대충 했다면 생각지도 않은 디테일이 마구 첨가되었을 것입니다.</li>
+</ul>
+<h2 id="2-3-명도는-낮추고-대비는-올리고"><a href="#2-3-명도는-낮추고-대비는-올리고" class="headerlink" title="2.3. 명도는 낮추고 대비는 올리고"></a>2.3. 명도는 낮추고 대비는 올리고</h2><ul>
+<li>까라바조 그림의 특징을 살려 명도를 낮추고 대비를 높입니다.</li>
+<li>생성된 이미지의 전반적인 모습을 유지하려면 <b>image seed number를 유지</b>하면 됩니다.</li>
+<li>현재는 image seed number를 직접 입력할 수는 없으나 생성된 이미지의 값을 유지하는 것은 가능합니다.</li>
+<li>프롬프트에 <b>“이미지 시드 넘버를 유지해줘.”</b>나 <b>“keep the image seed number”</b>를 입력하면 됩니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_05.png"></p>
+<ul>
+<li>시드 넘버를 유지했지만 디테일이 조금씩 변합니다. 어쩔 수 없는 현재의 한계입니다.</li>
+<li>이미지가 점점 어두워집니다. 하지만 아직 부족한 느낌입니다.</li>
+<li>더 어둡게 하라고 지시를 하자 <b>“이미지 퀄리티와 세부 유지가 안된다. 괜찮은가?”</b>라고 묻습니다.</li>
+<li>과감하게 <b>“디테일을 희생하라”</b>는 추가 프롬프트를 제공하고, 결과물을 확인합니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_06.png"></p>
+<ul>
+<li>비로소 마음에 듭니다. 확대해서 확인합니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_07.png"></p>
+<ul>
+<li>주변부가 좀 바뀌기는 했지만 허용 범위 이내입니다. 오히려 좋은 면도 있습니다.</li>
+</ul>
+<h1 id="3-까라바조-그림과-명도-분포-비교"><a href="#3-까라바조-그림과-명도-분포-비교" class="headerlink" title="3. 까라바조 그림과 명도 분포 비교"></a>3. 까라바조 그림과 명도 분포 비교</h1><ul>
+<li>눈으로 보기에는 제법 괜찮은데, 데이터도 그런지 확인합니다.</li>
+<li><b>ChatGPT4</b> 또는 <b>Data Analysis</b>를 선택해서 새 창을 열고 그림을 올립니다.</li>
+<li><b>“명도 분포를 커널밀도추정(KDE) plot으로 시각화하라”</b>는 프롬프트를 입력하면, 그림이 나옵니다.</li>
+<li>눈으로 보는 바와 같이 상당히 낮은 값에 몰려 있습니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_08.png"></p>
+<ul>
+<li>처음의 &lt;골리앗의 머리를 든 다윗&gt; 이미지를 올리고 <b>“같은 작업을 반복하되, KDE plot을 겹쳐 그려라”</b>는 명령을 입력합니다.</li>
+<li>한 차례 오류가 났습니다. 그림이 커서 처리에 1분을 초과했기 때문에 중단된 것입니다.</li>
+<li>그러나 <b>Data Analysis는 웬만한 오류를 스스로 해결합니다.</b> </li>
+<li>재작업 후 그려진 그림에서, 전반적인 분포가 매우 유사함을 확인할 수 있습니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_09.png"></p>
+<ul>
+<li><b>“이만하면 된 것 같다”</b>는 느낌이 사실로 증명되었습니다. :)</li>
+</ul>
+<ul>
+<li>제가 DALL.E로 그린 그림의 부분입니다.</li>
+<li>저런 지도자를 만나고 싶기도 하고 저런 지도자로 성장하고 싶기도 합니다.</li>
+</ul>
+<p><img src="34_dalle_centaur_10.png"></p>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://www.buymeacoffee.com/jehyunlee" target="_blank">
+			<img
+			 src="https://jehyunlee.github.io/about/src/images/coffee.png"
+			 style="height:74px !important;width: 363px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2023/12/26/General-34-dalle_centaur/" data-id="clqxwyjtb002sf0xthtsea76x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "DALL.E 대비가 강한 그림 그리기",
+        "image": "https://jehyunlee.github.io/thumbnails/General/34_dalle_centaur_00.png",
+        "keywords": "openai chatgpt dalle",
+        "genre": "General",
+        "datePublished": "2023-12-26",
+        "dateCreated": "2023-12-26",
+        "dateModified": "2023-12-26",
+        "url": "https://jehyunlee.github.io/2023/12/26/General-34-dalle_centaur/",
+        "description": "
+이탈리아의 화가 Caravaggio의 그림을 좋아합니다.
+실제 성격도 괴팍하고 공격적이었다고 알려져 있습니다만
+강한 대비와 역동적인 구도에서 오는 그의 그림에는 다른 그림에 없는 에너지가 느껴집니다.
+
+1. DALL.E의 그림
+DALL.E는 그림을 잘 그립니다.
+몇 줄의 프롬프트, 심지어 문장 하나만으로도 사진같은 그림, 화가가 그린 것 같은 그림을 그립",
+        "wordCount": 843
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="book" href="https://jehyunlee.tistory.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-book"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bookmark" href="https://blog.naver.com/vinci109" target="_blank" rel="noopener">
+                        <i class="icon fa fa-bookmark"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2024/01/01/General-35-genAIdraw/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            AI 그림 vs 손그림
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/12/25/General-33-ChatGPT_DataAnalysis/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">ChatGPT로 한글과 한자가 적힌 카드 만들기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/01/01/General-35-genAIdraw/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/35_genAIdraw_00.png)" alt="AI 그림 vs 손그림" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2024/01/01/General-35-genAIdraw/" class="title">AI 그림 vs 손그림</a></p>
+                            <p class="item-date"><time datetime="2024-01-01T11:19:00.000Z" itemprop="datePublished">2024-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/12/26/General-34-dalle_centaur/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/34_dalle_centaur_00.png)" alt="DALL.E 대비가 강한 그림 그리기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2023/12/26/General-34-dalle_centaur/" class="title">DALL.E 대비가 강한 그림 그리기</a></p>
+                            <p class="item-date"><time datetime="2023-12-26T02:30:00.000Z" itemprop="datePublished">2023-12-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/12/25/General-33-ChatGPT_DataAnalysis/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/33_chatgpt_da_00.png)" alt="ChatGPT로 한글과 한자가 적힌 카드 만들기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2023/12/25/General-33-ChatGPT_DataAnalysis/" class="title">ChatGPT로 한글과 한자가 적힌 카드 만들기</a></p>
+                            <p class="item-date"><time datetime="2023-12-25T06:33:00.000Z" itemprop="datePublished">2023-12-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/11/10/Python-DS-133-afore2023/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Python-DS/133-afore2023_00.png)" alt="ChatGPT-3.5(free) + Colab" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Python/Data-Science/">Data Science</a></p>
+                            <p class="item-title"><a href="/2023/11/10/Python-DS-133-afore2023/" class="title">ChatGPT-3.5(free) + Colab</a></p>
+                            <p class="item-date"><time datetime="2023-11-10T04:15:00.000Z" itemprop="datePublished">2023-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/10/23/General-32-eost2023_talk/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/32_eost2023_talk_00.png)" alt="EOST2023 - 오픈소스가 만드는 LLM의 미래" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2023/10/23/General-32-eost2023_talk/" class="title">EOST2023 - 오픈소스가 만드는 LLM의 미래</a></p>
+                            <p class="item-date"><time datetime="2023-10-23T10:33:00.000Z" itemprop="datePublished">2023-10-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">131</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.63px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.53px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 13.16px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11.05px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.53px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/DALL-E/" style="font-size: 10.53px;">DALL.E</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/EOST/" style="font-size: 11.05px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 14.74px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.53px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.53px;">Nicolas P. Rougier</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.53px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/UST/" style="font-size: 10px;">UST</a> <a href="/tags/VOSviewer/" style="font-size: 10.53px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.53px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.53px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.58px;">bayesian</a> <a href="/tags/bingchat/" style="font-size: 11.05px;">bingchat</a> <a href="/tags/bingimagecreator/" style="font-size: 13.68px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.53px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11.05px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 16.84px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.05px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.79px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.11px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14.21px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.53px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 10px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 13.16px;">dalle</a> <a href="/tags/data-analysis/" style="font-size: 10px;">data analysis</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.53px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.53px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 10.53px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11.05px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 10.53px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.53px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.58px;">gaussian process</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 13.68px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/ideogram/" style="font-size: 10px;">ideogram</a> <a href="/tags/image/" style="font-size: 12.11px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.32px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.53px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.11px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.53px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.05px;">legend</a> <a href="/tags/life/" style="font-size: 10.53px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16.32px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.47px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 14.21px;">microsoft</a> <a href="/tags/midjourney/" style="font-size: 10px;">midjourney</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.53px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.58px;">neural network</a> <a href="/tags/nst/" style="font-size: 11.05px;">nst</a> <a href="/tags/numpy/" style="font-size: 12.63px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.53px;">open API</a> <a href="/tags/openai/" style="font-size: 17.37px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.26px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.53px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/photovoltaics/" style="font-size: 10px;">photovoltaics</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12.11px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.05px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 18.42px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.53px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.53px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.53px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.11px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.53px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.53px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.53px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.58px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11.05px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.89px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 10.53px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.53px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.58px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13.16px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.68px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.53px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.05px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.58px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.58px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 18.95px;">visualization</a> <a href="/tags/visualziation/" style="font-size: 10.53px;">visualziation</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10px;">youtube</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+	
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2023/12/26/General-34-dalle_centaur/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
