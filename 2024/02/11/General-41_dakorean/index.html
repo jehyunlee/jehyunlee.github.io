@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>ChatGPT Data Analysis 시각화 한글 사용 | Pega Devlog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="openai,chatgpt,data analysis" />
+    
+    <meta name="description" content="ChatGPT에는 Data Analysis가 탑재되어 있습니다. Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다. ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.  1. ChatGPT에서 데이터 불러오기 seaborn: penguins dataset   Chat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChatGPT Data Analysis 시각화 한글 사용">
+<meta property="og:url" content="https://jehyunlee.github.io/2024/02/11/General-41_dakorean/index.html">
+<meta property="og:site_name" content="Pega Devlog">
+<meta property="og:description" content="ChatGPT에는 Data Analysis가 탑재되어 있습니다. Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다. ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.  1. ChatGPT에서 데이터 불러오기 seaborn: penguins dataset   Chat">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jehyunlee.github.io/thumbnails/General/41_dakorean_00.png">
+<meta property="article:published_time" content="2024-02-10T16:43:00.000Z">
+<meta property="article:modified_time" content="2024-02-10T18:01:30.082Z">
+<meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="openai">
+<meta property="article:tag" content="chatgpt">
+<meta property="article:tag" content="data analysis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/General/41_dakorean_00.png">
+    
+	<link rel="canonical" href="https://jehyunlee.github.io/2024/02/11/general-41_dakorean/"/>
+
+    
+        <link rel="alternate" href="https://jehyunlee.github.io/rss2.xml" title="Pega Devlog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon-32x32.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155262264-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155262264-1');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/">GIS</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/Python/">Python</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GIS/QGIS/">QGIS</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/">ImageJ</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Data-Science/">Data Science</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/General/">General</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Physics/">Physics</a></li></ul></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/General/">General</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-General-41_dakorean" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ChatGPT Data Analysis 시각화 한글 사용
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2024/02/11/General-41_dakorean/" class="article-date">
+       <time datetime="2024-02-10T16:43:00.000Z" itemprop="datePublished">2024-02-11</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2024/02/11/General-41_dakorean/" class="article-date">
+     <time datetime="2024-02-10T18:01:30.082Z" itemprop="dateModified">2024-02-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/chatgpt/" rel="tag">chatgpt</a>, <a class="tag-link-link" href="/tags/data-analysis/" rel="tag">data analysis</a>, <a class="tag-link-link" href="/tags/openai/" rel="tag">openai</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li>ChatGPT에는 Data Analysis가 탑재되어 있습니다.</li>
+<li>Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다.</li>
+<li>ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.</li>
+</ul>
+<h1 id="1-ChatGPT에서-데이터-불러오기"><a href="#1-ChatGPT에서-데이터-불러오기" class="headerlink" title="1. ChatGPT에서 데이터 불러오기"></a>1. ChatGPT에서 데이터 불러오기</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/mwaskom/seaborn-data/blob/master/penguins.csv">seaborn: penguins dataset</a></p>
+</blockquote>
+<ul>
+<li>ChatGPT는 웹 검색을 할 수 있습니다.</li>
+<li>가장 보편적인 데이터 분석용 예제 중 하나인 펭귄 데이터셋을 가져오라고 합니다.</li>
+<li>Data Analysis가 자동으로 실행됩니다.</li>
+</ul>
+<p><img src="41_dakorean_01.png"></p>
+<ul>
+<li>왜인지 실패합니다.</li>
+<li><b>현재 환경으로는 외부 URL에 접속할 수 없다</b>고 하네요.<br>(I’m unable to access external URLs directly from my current environment)</li>
+<li>이유를 알아보기 위해 ChatGPT의 동작을 제어하는 <b>system prompt</b>를 확인합니다.</li>
+</ul>
+<p><img src="41_dakorean_02.png"></p>
+<ul>
+<li>몇 가지 중요 정보가 있습니다.</li>
+<li><b>Jupyter Notebook 환경에서 실행된다</b>는 것,</li>
+<li><b>60.0초 뒤에 time out된다는 것</b>,</li>
+<li>그리고 <b>Data Analysis에서는 Internet Access가 막혀있다는 점</b>입니다.</li>
+<li>따라서 파일 다운로드를 포함한 <b>외부 web request도 막혀있고 API call도 안 됩니다.</b> </li>
+</ul>
+<ul>
+<li>이번에는 <b>Web Browsing</b>을 이용해서 펭귄 데이터셋을 가져오라고 시켜 봅니다.</li>
+</ul>
+<p><img src="41_dakorean_03.png"></p>
+<ul>
+<li>역시 못한다고 합니다.</li>
+<li>대신 파일 링크를 주며 <b>다운받아 올려달라</b>고 하네요.</li>
+<li>기꺼이 다운받아 올려줍니다.</li>
+</ul>
+<ul>
+<li>파일을 올리고 세 가지 일을 함께 시킵니다.<br><b>1. 파일 내용을 보여주고 df_penguins라는 이름의 pandas DataFrame으로 저장</b><br><b>2. 데이터셋의 다섯 줄을 보여달라</b><br><b>3. 데이터 요약 내용을 보여달라.</b></li>
+</ul>
+<p><img src="41_dakorean_04.png"></p>
+<h1 id="2-ChatGPT에서-데이터-시각화하기"><a href="#2-ChatGPT에서-데이터-시각화하기" class="headerlink" title="2. ChatGPT에서 데이터 시각화하기"></a>2. ChatGPT에서 데이터 시각화하기</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/koreanize-matplotlib/">pypi: koreanize-matplotlib</a></p>
+</blockquote>
+<ul>
+<li><b>데이터 중 <code>body_mass_g</code> 분포를 히스토그램으로 표현하라고 지시합니다.</b></li>
+<li>그림 크기도 4 x 3 inch로 지정합니다. </li>
+</ul>
+<p><img src="41_dakorean_05.png"></p>
+<ul>
+<li>기대대로 그림이 출력되었습니다.</li>
+<li>그런데 당연하게도 영문으로 출력되었습니다.</li>
+<li>제목을 한글로 바꿔봅시다.</li>
+<li><b>펭귄 체중 분포</b>로 바꿔달라고 했는데 글자가 깨져버립니다.</li>
+</ul>
+<p><img src="41_dakorean_06.png"></p>
+<ul>
+<li>너무나 당연하지만 한글 글꼴이 설치되지 않았기 때문입니다.</li>
+<li><b>글꼴을 업로드하고 사용하라고 할 수 있지만 연달아 제대로 동작하지 않습니다.</b></li>
+<li>일회성으로 <a href="https://jehyunlee.github.io/2024/01/24/General-39_signature/">폰트를 업로드해 그림에 한글을 삽입할 때</a>와는 다른 상황입니다.</li>
+</ul>
+<ul>
+<li>Python의 가장 기본격인 시각화 라이브러리는 Matplotlib이며 Data Analysis도 이를 사용합니다.</li>
+<li>안정적으로 Matplotlib을 한글화하는 <b><a target="_blank" rel="noopener" href="https://pypi.org/project/koreanize-matplotlib/">koreanize-matplotlib</a></b>을 사용합니다.</li>
+</ul>
+<p><img src="41_dakorean_07.png"></p>
+<ul>
+<li><b><a target="_blank" rel="noopener" href="https://files.pythonhosted.org/packages/ef/91/93f56a4526d2dbead44250d9166d97568c2ce051c90eaa4be36788d59131/koreanize_matplotlib-0.1.1-py3-none-any.whl">.whl file</a></b>을 다운받아 대화창에 올리고 환경 설정을 지시합니다.</li>
+<li>글꼴을 개별적으로 올렸을 때 발생할 수 있는 <b>오류가 예방</b>됩니다.</li>
+</ul>
+<p><img src="41_dakorean_08.png"></p>
+<h1 id="3-ChatGPT에서-데이터-시각화-수정하기"><a href="#3-ChatGPT에서-데이터-시각화-수정하기" class="headerlink" title="3. ChatGPT에서 데이터 시각화 수정하기"></a>3. ChatGPT에서 데이터 시각화 수정하기</h1><blockquote>
+<p><a href="https://jehyunlee.github.io/2022/10/16/Python-DS-117-pycon2022/">PyCon Korea 2022: 혼란한 Matplotlib에서 질서 찾기</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/showcase/anatomy.html">Matplotlib: Anatomy of a figure</a></p>
+</blockquote>
+<ul>
+<li>데이터 시각화는 기본값으로 실행한 초안으로 끝나지 않습니다.</li>
+<li>적절한 요소를 더하고 빼면서 수정해야 합니다.</li>
+<li>먼저 크게 두 가지만 수정합시다.</li>
+</ul>
+<p><b>1. 모든 글꼴 크기를 절반으로 줄이고</b><br><b>2. 히스토그램 색을 오렌지색으로 변경합니다.</b></p>
+<ul>
+<li>해당 명령을 위처럼 간단히 내리지 못하고 복잡하게 내려야만 했습니다.</li>
+<li><b>title, xlabel, ylabel, xtick label, ytick label, edgewidth, facecolor</b>라는 용어를 사용합니다.</li>
+</ul>
+<p><img src="41_dakorean_09.png"></p>
+<ul>
+<li>그래프가 Matplotlib으로 그려졌기 때문에 Matplotlib에서 사용하는 요소명으로 지시하는 것입니다.</li>
+<li><a href="https://jehyunlee.github.io/2022/10/16/Python-DS-117-pycon2022/">PyCon Korea 2022: 혼란한 Matplotlib에서 질서 찾기</a>에서 말씀드린 내용 그대로입니다.</li>
+<li>각 부위의 이름은 <a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/showcase/anatomy.html">Anatomy of a figure</a>에서 참고할 수 있습니다.</li>
+</ul>
+<p><img src="41_dakorean_09.webp"></p>
+<ul>
+<li>내친 김에 그림을 조금 더 바꿔봅니다.</li>
+<li><b>모든 테두리를 보이도록 하고, grid를 가리고, 눈금의 방향을 밖으로 향하게 합니다.</b></li>
+<li>ChatGPT의 답변 맨 아래에 있는 링크를 클릭하면 최종 코드를 볼 수 있습니다.</li>
+</ul>
+<p><img src="41_dakorean_10.png"></p>
+
+        </div>
+		<p>
+		<div style="text-align:center; margin:20px 0px 20px 0px">
+		  <a href="https://www.buymeacoffee.com/jehyunlee" target="_blank">
+			<img
+			 src="https://jehyunlee.github.io/about/src/images/coffee.png"
+			 style="height:74px !important;width: 363px !important;"
+			 />
+		 </a><br>
+		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jehyunlee.github.io/2024/02/11/General-41_dakorean/" data-id="clsgdvg6f0035agxt0o5g8nts" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jehyun Lee"
+        },
+        "headline": "ChatGPT Data Analysis 시각화 한글 사용",
+        "image": "https://jehyunlee.github.io/thumbnails/General/41_dakorean_00.png",
+        "keywords": "openai chatgpt data analysis",
+        "genre": "General",
+        "datePublished": "2024-02-11",
+        "dateCreated": "2024-02-11",
+        "dateModified": "2024-02-11",
+        "url": "https://jehyunlee.github.io/2024/02/11/General-41_dakorean/",
+        "description": "
+ChatGPT에는 Data Analysis가 탑재되어 있습니다.
+Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다.
+ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.
+
+1. ChatGPT에서 데이터 불러오기
+seaborn: penguins dataset
+
+
+Chat",
+        "wordCount": 371
+    }
+</script>
+
+</article>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="book" href="https://jehyunlee.tistory.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-book"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="bookmark" href="https://blog.naver.com/vinci109" target="_blank" rel="noopener">
+                        <i class="icon fa fa-bookmark"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jehyunlee" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="https://jehyunlee.github.io/rss2.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/jehyunlee20/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2024/02/07/General-40-krictinsight2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">KRICT Insight - 현재와 미래 연구 현장의 인공지능</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 광고 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2487538550660613"
+     data-ad-slot="1111111111"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/02/11/General-41_dakorean/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/41_dakorean_00.png)" alt="ChatGPT Data Analysis 시각화 한글 사용" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2024/02/11/General-41_dakorean/" class="title">ChatGPT Data Analysis 시각화 한글 사용</a></p>
+                            <p class="item-date"><time datetime="2024-02-10T16:43:00.000Z" itemprop="datePublished">2024-02-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/02/07/General-40-krictinsight2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/40_krictinsight2_00.png)" alt="KRICT Insight - 현재와 미래 연구 현장의 인공지능" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2024/02/07/General-40-krictinsight2/" class="title">KRICT Insight - 현재와 미래 연구 현장의 인공지능</a></p>
+                            <p class="item-date"><time datetime="2024-02-06T19:59:00.000Z" itemprop="datePublished">2024-02-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/01/24/General-39_signature/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/39_signature_00.png)" alt="DALL.E, Watermark &amp; Signature" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2024/01/24/General-39_signature/" class="title">DALL.E, Watermark &amp; Signature</a></p>
+                            <p class="item-date"><time datetime="2024-01-24T14:26:00.000Z" itemprop="datePublished">2024-01-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/01/22/General-38-mya/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/38_mya_00.png)" alt="먀스터피스" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2024/01/22/General-38-mya/" class="title">먀스터피스</a></p>
+                            <p class="item-date"><time datetime="2024-01-22T12:38:00.000Z" itemprop="datePublished">2024-01-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/01/14/General-37-medievalsoldier/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/37_medieval_00.png)" alt="DALL.E, 중세 병사 이야기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2024/01/14/General-37-medievalsoldier/" class="title">DALL.E, 중세 병사 이야기</a></p>
+                            <p class="item-date"><time datetime="2024-01-13T19:26:00.000Z" itemprop="datePublished">2024-01-14</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">32</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">131</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.78px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.56px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 13.33px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11.11px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.56px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/DALL-E/" style="font-size: 10.56px;">DALL.E</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/EOST/" style="font-size: 11.11px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15px;">KIER</a> <a href="/tags/NIA/" style="font-size: 10.56px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.56px;">Nicolas P. Rougier</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.56px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/UST/" style="font-size: 10px;">UST</a> <a href="/tags/VOSviewer/" style="font-size: 10.56px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.56px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.56px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.67px;">bayesian</a> <a href="/tags/bingchat/" style="font-size: 11.11px;">bingchat</a> <a href="/tags/bingimagecreator/" style="font-size: 13.89px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.56px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11.11px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 17.22px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11.11px;">cognitive science</a> <a href="/tags/color/" style="font-size: 16.11px;">color</a> <a href="/tags/colorbar/" style="font-size: 12.22px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14.44px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.56px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 10px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 15.56px;">dalle</a> <a href="/tags/data-analysis/" style="font-size: 10.56px;">data analysis</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.56px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.56px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 10.56px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11.11px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 10.56px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/escher/" style="font-size: 10px;">escher</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/font/" style="font-size: 10.56px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.67px;">gaussian process</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 13.89px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/ideogram/" style="font-size: 10px;">ideogram</a> <a href="/tags/image/" style="font-size: 12.22px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16.67px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.56px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12.22px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.56px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11.11px;">legend</a> <a href="/tags/life/" style="font-size: 10.56px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16.67px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.44px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 15px;">microsoft</a> <a href="/tags/midjourney/" style="font-size: 10px;">midjourney</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/natural-language/" style="font-size: 10.56px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.67px;">neural network</a> <a href="/tags/nst/" style="font-size: 11.11px;">nst</a> <a href="/tags/numpy/" style="font-size: 12.78px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.56px;">open API</a> <a href="/tags/openai/" style="font-size: 17.78px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15.56px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.56px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/photovoltaics/" style="font-size: 10px;">photovoltaics</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12.22px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11.11px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 18.33px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.56px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.56px;">pycon</a> <a href="/tags/pysolar/" style="font-size: 10.56px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.22px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.56px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.56px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.56px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.67px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11.11px;">scipy</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17.22px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 10.56px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.56px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.67px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13.33px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.89px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.56px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11.11px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.67px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.67px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 18.89px;">visualization</a> <a href="/tags/visualziation/" style="font-size: 10.56px;">visualziation</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10px;">youtube</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+	
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2024 Jehyun Lee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'https://jehyunlee.github.io/2024/02/11/General-41_dakorean/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
