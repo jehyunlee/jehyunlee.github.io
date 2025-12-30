@@ -12,21 +12,21 @@
     
     <meta name="keywords" content="python,matplotlib,joinstyle,capstyle" />
     
-    <meta name="description" content="오늘은 매우 사소한 글입니다. Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다. 사소하지만 신경을 거스르는 일을 해결합시다.  1. motivation: Pie chart 다른 그림에 비해 자주 그리는 그림은 아닙니다.  그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다.  아보카도, 바나나, 체리 판매량이 각기 40, 70, 1">
+    <meta name="description" content="오늘은 매우 사소한 글입니다. Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다. 사소하지만 신경을 거스르는 일을 해결합시다.  1. motivation: Pie chart 다른 그림에 비해 자주 그리는 그림은 아닙니다. 그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다. 아보카도, 바나나, 체리 판매량이 각기 40, 70, 10이">
 <meta property="og:type" content="article">
 <meta property="og:title" content="joinstyle &amp; capstyle">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/01/24/Python-DS-96-joinstyle/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="오늘은 매우 사소한 글입니다. Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다. 사소하지만 신경을 거스르는 일을 해결합시다.  1. motivation: Pie chart 다른 그림에 비해 자주 그리는 그림은 아닙니다.  그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다.  아보카도, 바나나, 체리 판매량이 각기 40, 70, 1">
+<meta property="og:description" content="오늘은 매우 사소한 글입니다. Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다. 사소하지만 신경을 거스르는 일을 해결합시다.  1. motivation: Pie chart 다른 그림에 비해 자주 그리는 그림은 아닙니다. 그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다. 아보카도, 바나나, 체리 판매량이 각기 40, 70, 10이">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/96_joinstyle_00.png">
 <meta property="article:published_time" content="2022-01-23T22:25:00.000Z">
-<meta property="article:modified_time" content="2022-01-24T01:46:51.722Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.625Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="joinstyle">
 <meta property="article:tag" content="capstyle">
+<meta property="article:tag" content="joinstyle">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/96_joinstyle_00.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/01/24/Python-DS-96-joinstyle/" class="article-date">
-     <time datetime="2022-01-24T01:46:51.722Z" itemprop="dateModified">2022-01-24</time>
+     <time datetime="2025-12-30T06:28:38.625Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -235,88 +235,89 @@
 <li>사소하지만 신경을 거스르는 일을 해결합시다.</li>
 </ul>
 <h1 id="1-motivation-Pie-chart"><a href="#1-motivation-Pie-chart" class="headerlink" title="1. motivation: Pie chart"></a>1. motivation: Pie chart</h1><ul>
-<li><p>다른 그림에 비해 자주 그리는 그림은 아닙니다.</p>
-</li>
-<li><p>그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다.</p>
-</li>
-<li><p>아보카도, 바나나, 체리 판매량이 각기 40, 70, 10이라고 하고,</p>
-</li>
-<li><p>상대적인 판매량을 그림으로 그린다고 칩시다.</p>
+<li>다른 그림에 비해 자주 그리는 그림은 아닙니다.</li>
+<li>그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다.</li>
+<li>아보카도, 바나나, 체리 판매량이 각기 40, 70, 10이라고 하고,</li>
+<li>상대적인 판매량을 그림으로 그린다고 칩시다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 판매량</span></span><br><span class="line">data = [<span class="number">40</span>, <span class="number">70</span>, <span class="number">10</span>]</span><br><span class="line"><span class="comment"># 레이블</span></span><br><span class="line">labels = [<span class="string">&quot;Abocado&quot;</span>, <span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Cherry&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (A) 색과 글자 설정</span></span><br><span class="line">axs[<span class="number">0</span>].pie(data, labels=labels, labeldistance=<span class="number">0.7</span>, </span><br><span class="line">           colors=[<span class="string">&quot;g&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;r&quot;</span>],</span><br><span class="line">           textprops=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;14&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (B) 부채꼴에 윤곽선 추가</span></span><br><span class="line">axs[<span class="number">1</span>].pie(data, labels=labels, labeldistance=<span class="number">0.7</span>, </span><br><span class="line">           colors=[<span class="string">&quot;g&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;r&quot;</span>], </span><br><span class="line">           textprops=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;14&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;,</span><br><span class="line">           wedgeprops=&#123;<span class="string">&quot;ec&quot;</span>:<span class="string">&quot;w&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (C) 부채꼴 윤곽선 두껍게</span></span><br><span class="line">axs[<span class="number">2</span>].pie(data, labels=labels, labeldistance=<span class="number">0.7</span>, </span><br><span class="line">           colors=[<span class="string">&quot;g&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;r&quot;</span>], </span><br><span class="line">           textprops=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;14&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;,</span><br><span class="line">           wedgeprops=&#123;<span class="string">&quot;ec&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;lw&quot;</span>:<span class="number">6</span>&#125;)</span><br><span class="line"></span><br><span class="line">titles = [<span class="string">&quot;(A)&quot;</span>, <span class="string">&quot;(B): (A) + wedgeprops&quot;</span>, <span class="string">&quot;(C): (B) + lw&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> title, ax <span class="keyword">in</span> <span class="built_in">zip</span>(titles, axs):</span><br><span class="line">    ax.set_title(title, fontsize=<span class="number">16</span>)</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)    </span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_01.png"><br></p>
-</li>
+<p><img src="/96_joinstyle_01.png"><br></p>
+<ul>
 <li><p><code>colors</code> 매개변수로 색을 조정하고 <code>textprops</code> 매개변수로 글꼴만 좀 조정한 것이 (A)입니다.</p>
 </li>
 <li><p>(B)는 부채꼴에 경계선을 넣어서 틈을 살짝 벌렸습니다. <code>wedgeprops</code>를 사용합니다.</p>
 </li>
 <li><p>만들고 보니 좀 두꺼우면 좋겠다는 생각이 듭니다. <code>wedgeprops</code>에 <code>lw</code>를 넣어 line width를 두껍게 했습니다.</p>
 </li>
-</ul>
-<ul>
-<li>그런데 <b>cherry가 banana를 찌르고 있습니다.</b></li>
-<li>사소하다면 사소한건데, 영 성가십니다. </li>
-<li><b>원인을 파악하고 제거합시다.</b></li>
+<li><p>그런데 <b>cherry가 banana를 찌르고 있습니다.</b></p>
+</li>
+<li><p>사소하다면 사소한건데, 영 성가십니다. </p>
+</li>
+<li><p><b>원인을 파악하고 제거합시다.</b></p>
+</li>
 </ul>
 <h1 id="2-별-그리기"><a href="#2-별-그리기" class="headerlink" title="2. 별 그리기"></a>2. 별 그리기</h1><ul>
 <li>문제를 일반화하기 위해 별을 그리고 이 그림을 바꿔봅니다.</li>
 <li><a href="https://jehyunlee.github.io/2021/12/28/Python-DS-94-rougier02/">지난 글</a>에서 다룬 <code>Path</code>와 <code>PathPatch</code>를 사용합니다.</li>
 </ul>
 <h2 id="2-1-별-만들기"><a href="#2-1-별-만들기" class="headerlink" title="2.1. 별 만들기"></a>2.1. 별 만들기</h2><ul>
-<li><p>오각형 기반으로 별을 만들겠습니다.</p>
-</li>
-<li><p>어릴 때부터 별을 그리라면 이렇게 그렸죠. :)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.path <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> PathPatch</span><br><span class="line"></span><br><span class="line">xs = [np.cos(<span class="number">2</span>*np.pi*x/<span class="number">5</span> + <span class="number">0.5</span>*np.pi) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line">ys = [np.sin(<span class="number">2</span>*np.pi*x/<span class="number">5</span> + <span class="number">0.5</span>*np.pi) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line">ps = np.array(<span class="built_in">list</span>(<span class="built_in">zip</span>(xs, ys)))    </span><br><span class="line">ps</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과: 다섯 지점의 좌표를 만들었습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array([[ 6.12323400e-17,  1.00000000e+00],</span><br><span class="line">       [-9.51056516e-01,  3.09016994e-01],</span><br><span class="line">       [-5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 9.51056516e-01,  3.09016994e-01]])</span><br></pre></td></tr></table></figure></li>
-<li><p>이제 점따라 이어서 별을 그립니다.</p>
-</li>
-<li><p>어릴 때 그리던 그 순서대로 점 번호를 찍습니다.</p>
-</li>
-<li><p>마지막에 원점으로 돌아가는 것까지 잊지 말아야 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps_star = ps[[<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>]]</span><br><span class="line">ps_star</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과: 순서대로 점이 배열됩니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">array([[ 6.12323400e-17,  1.00000000e+00],</span><br><span class="line">       [-5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 9.51056516e-01,  3.09016994e-01],</span><br><span class="line">       [-9.51056516e-01,  3.09016994e-01],</span><br><span class="line">       [ 5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 6.12323400e-17,  1.00000000e+00]])</span><br></pre></td></tr></table></figure></li>
-<li><p><code>Path</code>와 <code>PathPatch</code>를 차례대로 적용해서 별을 그립니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">path_star = Path(ps_star)</span><br><span class="line">patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(patch_star)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_02.png"><br></p>
-</li>
-<li><p>맘에 듭니다.</p>
-</li>
-<li><p>선을 굵게 합시다. PathPatch에 <code>lw</code> 매개변수를 추가합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">path_star = Path(ps_star)</span><br><span class="line">patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(patch_star)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_03.png"><br></p>
-</li>
-<li><p>시작점이자 끝점인 맨 위가 부러진 듯 보입니다.</p>
-</li>
-<li><p>끝점(caps)과 중간점(joints) 표현 방식이 달라서 그렇습니다.</p>
-</li>
-<li><p>일단 저 끝점을 중간점으로 만들어서 일관성을 줍시다.</p>
-</li>
-<li><p>한 포인트 더 붙이면 됩니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ps_star = ps[[<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">2</span>]]  <span class="comment"># 맨 마지막에 2 추가</span></span><br><span class="line">path_star = Path(ps_star)</span><br><span class="line">patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(patch_star)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_04.png"><br></p>
-</li>
+<li>오각형 기반으로 별을 만들겠습니다.</li>
+<li>어릴 때부터 별을 그리라면 이렇게 그렸죠. :)</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.path <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> PathPatch</span><br><span class="line"></span><br><span class="line">xs = [np.cos(<span class="number">2</span>*np.pi*x/<span class="number">5</span> + <span class="number">0.5</span>*np.pi) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line">ys = [np.sin(<span class="number">2</span>*np.pi*x/<span class="number">5</span> + <span class="number">0.5</span>*np.pi) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line">ps = np.array(<span class="built_in">list</span>(<span class="built_in">zip</span>(xs, ys)))    </span><br><span class="line">ps</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 다섯 지점의 좌표를 만들었습니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array([[ 6.12323400e-17,  1.00000000e+00],</span><br><span class="line">       [-9.51056516e-01,  3.09016994e-01],</span><br><span class="line">       [-5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 9.51056516e-01,  3.09016994e-01]])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이제 점따라 이어서 별을 그립니다.</li>
+<li>어릴 때 그리던 그 순서대로 점 번호를 찍습니다.</li>
+<li>마지막에 원점으로 돌아가는 것까지 잊지 말아야 합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps_star = ps[[<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>]]</span><br><span class="line">ps_star</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 순서대로 점이 배열됩니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">array([[ 6.12323400e-17,  1.00000000e+00],</span><br><span class="line">       [-5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 9.51056516e-01,  3.09016994e-01],</span><br><span class="line">       [-9.51056516e-01,  3.09016994e-01],</span><br><span class="line">       [ 5.87785252e-01, -8.09016994e-01],</span><br><span class="line">       [ 6.12323400e-17,  1.00000000e+00]])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Path</code>와 <code>PathPatch</code>를 차례대로 적용해서 별을 그립니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">path_star = Path(ps_star)</span><br><span class="line">patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(patch_star)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/96_joinstyle_02.png"><br></p>
+<ul>
+<li>맘에 듭니다.</li>
+<li>선을 굵게 합시다. PathPatch에 <code>lw</code> 매개변수를 추가합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">path_star = Path(ps_star)</span><br><span class="line">patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(patch_star)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/96_joinstyle_03.png"><br></p>
+<ul>
+<li>시작점이자 끝점인 맨 위가 부러진 듯 보입니다.</li>
+<li>끝점(caps)과 중간점(joints) 표현 방식이 달라서 그렇습니다.</li>
+<li>일단 저 끝점을 중간점으로 만들어서 일관성을 줍시다.</li>
+<li>한 포인트 더 붙이면 됩니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ps_star = ps[[<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">2</span>]]  <span class="comment"># 맨 마지막에 2 추가</span></span><br><span class="line">path_star = Path(ps_star)</span><br><span class="line">patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(patch_star)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/96_joinstyle_04.png"><br></p>
 <h2 id="2-2-joinstyle"><a href="#2-2-joinstyle" class="headerlink" title="2.2. joinstyle"></a>2.2. <code>joinstyle</code></h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_enums_api.html?highlight=joinstyle#matplotlib._enums.JoinStyle">matplotlib._enums.Joinstyle</a></p>
 </blockquote>
 <ul>
 <li><p>Matplotlib에서 꺾은선 그래프처럼 여러 선이 꺾이는 관절 표현은 <code>joinstyle</code> 매개변수로 결정합니다.</p>
 </li>
-<li><p><code>miter</code>, <code>round</code>, <code>bevel</code> 세 가지의 선택지가 있습니다.<br><br><img src="joinstyle.webp"><br></p>
+<li><p><code>miter</code>, <code>round</code>, <code>bevel</code> 세 가지의 선택지가 있습니다.<br><br><img src="/joinstyle.webp"><br></p>
 </li>
 <li><p>우리 별 그림에 이 셋을 적용합니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">joinstyles = [<span class="string">&quot;miter&quot;</span>, <span class="string">&quot;round&quot;</span>, <span class="string">&quot;bevel&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> js, ax <span class="keyword">in</span> <span class="built_in">zip</span>(joinstyles, axs):</span><br><span class="line">    patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>, joinstyle=js)</span><br><span class="line">    ax.add_artist(patch_star)</span><br><span class="line">    ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_05.png"><br></p>
-</li>
-<li><p>왼쪽부터 <b>뾰족</b>, <b>둥글</b>, <b>판판</b>입니다.</p>
-</li>
-<li><p>기본값은 뾰족한 <code>miter</code>로 각도가 작을수록 먼 곳까지 꼭지점이 연장된다는 특징이 있습니다.</p>
-</li>
-<li><p>맨 위 pie chart 예제에서도 체리 판매량이 다른 둘보다 적어 꼭지점이 바나나를 찔렀습니다.</p>
-</li>
-<li><p><b><code>round</code>나 <code>bevel</code>을 사용하면 그럴 일이 없을 겁니다.</b> </p>
-</li>
+<p><img src="/96_joinstyle_05.png"><br></p>
+<ul>
+<li>왼쪽부터 <b>뾰족</b>, <b>둥글</b>, <b>판판</b>입니다.</li>
+<li>기본값은 뾰족한 <code>miter</code>로 각도가 작을수록 먼 곳까지 꼭지점이 연장된다는 특징이 있습니다.</li>
+<li>맨 위 pie chart 예제에서도 체리 판매량이 다른 둘보다 적어 꼭지점이 바나나를 찔렀습니다.</li>
+<li><b><code>round</code>나 <code>bevel</code>을 사용하면 그럴 일이 없을 겁니다.</b></li>
 </ul>
 <h1 id="3-원-그리기"><a href="#3-원-그리기" class="headerlink" title="3. 원 그리기"></a>3. 원 그리기</h1><ul>
 <li>이번에는 조금 다른 예제를 확인합니다.</li>
@@ -324,48 +325,47 @@
 </ul>
 <h2 id="3-1-원-만들기"><a href="#3-1-원-만들기" class="headerlink" title="3.1. 원 만들기"></a>3.1. 원 만들기</h2><ul>
 <li>이번엔 <code>PathPatch</code>말고 <code>Circle</code>을 사용합니다.</li>
-<li><code>Circle</code>로 원을 만들고 <code>add_artist()</code>로 붙입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Circle</span><br><span class="line"></span><br><span class="line">circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(circle)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<img src="96_joinstyle_06.png"><br></li>
+<li><code>Circle</code>로 원을 만들고 <code>add_artist()</code>로 붙입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Circle</span><br><span class="line"></span><br><span class="line">circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.add_artist(circle)</span><br><span class="line">ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/96_joinstyle_06.png"><br></p>
 <h2 id="3-2-joinstyle-capstyle"><a href="#3-2-joinstyle-capstyle" class="headerlink" title="3.2. joinstyle? capstyle!"></a>3.2. <code>joinstyle</code>? <code>capstyle</code>!</h2><ul>
-<li><p>별 그림과 똑같이 joinstyle을 적용합니다.</p>
+<li>별 그림과 똑같이 joinstyle을 적용합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j, ax <span class="keyword">in</span> <span class="built_in">zip</span>(joinstyles, axs):</span><br><span class="line">    circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>, joinstyle=j)</span><br><span class="line">    ax.add_artist(circle)</span><br><span class="line">    ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_07.png"><br></p>
-</li>
+<p><img src="/96_joinstyle_07.png"><br></p>
+<ul>
 <li><p>별 그림과는 달리 변화가 없습니다.</p>
 </li>
 <li><p><b><code>joinstyle</code>은 선이 꺾이는 부분에 적용되는 매개변수</b>입니다.</p>
 </li>
 <li><p>원은 꺾이는 점이 없고 점선도 꺾인 곳이 없기에 아무런 변화가 없습니다.</p>
 </li>
-</ul>
-<ul>
 <li><p><b>선 끝에는 <code>capstyle</code>이 적용됩니다.</b></p>
 </li>
 <li><p>선택지는 <code>joinstyle</code>처럼 세 개지만 이름이 다릅니다.</p>
 </li>
-<li><p><code>butt</code>, <code>round</code>, <code>projecting</code>입니다.<br><br><img src="capstyle.webp"><br></p>
+<li><p><code>butt</code>, <code>round</code>, <code>projecting</code>입니다.<br><br><img src="/capstyle.webp"><br></p>
 </li>
 <li><p>확인합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">capstyles = [<span class="string">&quot;butt&quot;</span>, <span class="string">&quot;round&quot;</span>, <span class="string">&quot;projecting&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cs, ax <span class="keyword">in</span> <span class="built_in">zip</span>(capstyles, axs):</span><br><span class="line">    circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>, capstyle=cs)</span><br><span class="line">    ax.add_artist(circle)</span><br><span class="line">    ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_08.png"><br></p>
-</li>
-<li><p>이제 차이가 보입니다.</p>
-</li>
-<li><p>joinstyle과 capstyle을 함께 표현합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> js, cs, ax <span class="keyword">in</span> <span class="built_in">zip</span>(joinstyles, capstyles, axs):</span><br><span class="line">    circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>, capstyle=cs)</span><br><span class="line">    ax.add_artist(circle)</span><br><span class="line">    patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">10</span>, joinstyle=js)</span><br><span class="line">    ax.add_artist(patch_star)</span><br><span class="line">    ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;joinstyle= &#x27;<span class="subst">&#123;js&#125;</span>&#x27;\ncapstype= &#x27;<span class="subst">&#123;cs&#125;</span>&#x27;&quot;</span>, pad=<span class="number">12</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_09.png"><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">capstyles = [<span class="string">&quot;butt&quot;</span>, <span class="string">&quot;round&quot;</span>, <span class="string">&quot;projecting&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cs, ax <span class="keyword">in</span> <span class="built_in">zip</span>(capstyles, axs):</span><br><span class="line">    circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>, capstyle=cs)</span><br><span class="line">    ax.add_artist(circle)</span><br><span class="line">    ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/96_joinstyle_08.png"><br></p>
+<ul>
+<li>이제 차이가 보입니다.</li>
+<li>joinstyle과 capstyle을 함께 표현합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> js, cs, ax <span class="keyword">in</span> <span class="built_in">zip</span>(joinstyles, capstyles, axs):</span><br><span class="line">    circle = Circle((<span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, fc=<span class="string">&quot;beige&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">10</span>, capstyle=cs)</span><br><span class="line">    ax.add_artist(circle)</span><br><span class="line">    patch_star = PathPatch(path_star, fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">10</span>, joinstyle=js)</span><br><span class="line">    ax.add_artist(patch_star)</span><br><span class="line">    ax.set_xlim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.2</span>, <span class="number">1.2</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;joinstyle= &#x27;<span class="subst">&#123;js&#125;</span>&#x27;\ncapstype= &#x27;<span class="subst">&#123;cs&#125;</span>&#x27;&quot;</span>, pad=<span class="number">12</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/96_joinstyle_09.png"><br></p>
 <h1 id="4-다시-Pie-chart"><a href="#4-다시-Pie-chart" class="headerlink" title="4. 다시 Pie chart"></a>4. 다시 Pie chart</h1><ul>
-<li><p>애초 우리 목적은 Pie chart였습니다.</p>
-</li>
-<li><p>맨 위 코드에 <code>joinstyle</code>만 <code>round</code>로 적용합니다.</p>
+<li>애초 우리 목적은 Pie chart였습니다.</li>
+<li>맨 위 코드에 <code>joinstyle</code>만 <code>round</code>로 적용합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">40</span>, <span class="number">70</span>, <span class="number">10</span>]</span><br><span class="line">labels = [<span class="string">&quot;Abocado&quot;</span>, <span class="string">&quot;Banana&quot;</span>, <span class="string">&quot;Cherry&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.pie(data, labels=labels, labeldistance=<span class="number">0.7</span>, </span><br><span class="line">       colors=[<span class="string">&quot;g&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;r&quot;</span>], </span><br><span class="line">       textprops=&#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;14&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;,</span><br><span class="line">       wedgeprops=&#123;<span class="string">&quot;ec&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;lw&quot;</span>:<span class="number">6</span>, <span class="string">&quot;joinstyle&quot;</span>:<span class="string">&quot;round&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="96_joinstyle_10.png"><br></p>
-</li>
-<li><p><b>짜잔. 이제 깔끔합니다.</b></p>
-</li>
+<p><img src="/96_joinstyle_10.png"><br></p>
+<ul>
+<li><b>짜잔. 이제 깔끔합니다.</b></li>
 </ul>
 
         </div>
@@ -379,22 +379,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/01/24/Python-DS-96-joinstyle/" data-id="cmhueoy3700l94gxt9l8u6suy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/01/24/Python-DS-96-joinstyle/" data-id="cuidxC9hhO25Y4lx3v57k0EiH" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -470,7 +460,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-01-24",
         "dateCreated": "2022-01-24",
-        "dateModified": "2022-01-24",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/01/24/Python-DS-96-joinstyle/",
         "description": "
 오늘은 매우 사소한 글입니다.
@@ -479,11 +469,9 @@ Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다.
 
 1. motivation: Pie chart
 다른 그림에 비해 자주 그리는 그림은 아닙니다.
-
 그런 만큼 손에 익히기 쉽지 않은데, 정리를 한번 하겠습니다.
-
-아보카도, 바나나, 체리 판매량이 각기 40, 70, 1",
-        "wordCount": 1544
+아보카도, 바나나, 체리 판매량이 각기 40, 70, 10이",
+        "wordCount": 1543
     }
 </script>
 
@@ -565,16 +553,6 @@ Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -808,10 +786,6 @@ Matplotlib에서 그려지는 선의 꼭지점과 끝점 표현입니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

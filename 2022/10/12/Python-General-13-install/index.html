@@ -21,10 +21,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/13_install_00.png">
 <meta property="article:published_time" content="2022-10-11T21:34:00.000Z">
-<meta property="article:modified_time" content="2022-10-12T06:06:04.770Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.659Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="pip">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/13_install_00.png">
     
@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -200,7 +200,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/10/12/Python-General-13-install/" class="article-date">
-     <time datetime="2022-10-12T06:06:04.770Z" itemprop="dateModified">2022-10-12</time>
+     <time datetime="2025-12-30T06:28:38.659Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -235,23 +235,27 @@
 <h1 id="1-클라우드-환경"><a href="#1-클라우드-환경" class="headerlink" title="1. 클라우드 환경"></a>1. 클라우드 환경</h1><ul>
 <li>Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다.</li>
 <li>장점이 많지만 서버가 물리적으로 고정되어 있지 않다 보니 필요한 라이브러리가 없을 때가 많습니다.</li>
-<li>일일이 확인하면서 <code>!pip install &#123;library&#125;</code>를 실행하기가 번거롭습니다.</li>
+<li>일일이 확인하면서 <code>!pip install {library}</code>를 실행하기가 번거롭습니다.</li>
 <li>그렇다고 <code>requirements.txt</code>를 쓸 만큼 큰 일도 아닐 때 간단하게 처리하고 싶습니다.</li>
 </ul>
 <h1 id="2-import-pip"><a href="#2-import-pip" class="headerlink" title="2. import pip"></a>2. <code>import pip</code></h1><ul>
 <li>라이브러리 설치에 사용하는 <code>pip</code>는 import도 가능합니다.</li>
 <li>노트북 환경이건 모듈로 사용되는 .py 파일이건 무관합니다.</li>
 <li>프로그램 시작 부분에 아래 코드를 삽입해 import가 안 되어 있는 라이브러리를 설치할 수 있습니다.</li>
-<li>아래는 geopandas를 사용하고자 설치하는 코드입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pip</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">install</span>(<span class="params">package, upgrade=<span class="literal">True</span></span>):</span></span><br><span class="line">    <span class="comment"># package install with upgrade or not</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">hasattr</span>(pip, <span class="string">&#x27;main&#x27;</span>):</span><br><span class="line">        <span class="keyword">if</span> upgrade:</span><br><span class="line">            pip.main([<span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;--upgrade&#x27;</span>, package])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pip.main([<span class="string">&#x27;install&#x27;</span>, package])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> upgrade:</span><br><span class="line">            pip._internal.main([<span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;--upgrade&#x27;</span>, package])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pip._internal.main([<span class="string">&#x27;install&#x27;</span>, package])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># import package</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">eval</span>(<span class="string">f&quot;import <span class="subst">&#123;package&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> ModuleNotFoundError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;# Package name might be differnt. please check it again.&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure></li>
+<li>아래는 geopandas를 사용하고자 설치하는 코드입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pip</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">install</span>(<span class="params">package, upgrade=<span class="literal">True</span></span>):</span><br><span class="line">    <span class="comment"># package install with upgrade or not</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">hasattr</span>(pip, <span class="string">&#x27;main&#x27;</span>):</span><br><span class="line">        <span class="keyword">if</span> upgrade:</span><br><span class="line">            pip.main([<span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;--upgrade&#x27;</span>, package])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pip.main([<span class="string">&#x27;install&#x27;</span>, package])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> upgrade:</span><br><span class="line">            pip._internal.main([<span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;--upgrade&#x27;</span>, package])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pip._internal.main([<span class="string">&#x27;install&#x27;</span>, package])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># import package</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">eval</span>(<span class="string">f&quot;import <span class="subst">&#123;package&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> ModuleNotFoundError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;# Package name might be differnt. please check it again.&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+
+
 <h1 id="3-GeoPandas-예제-Choro-legends"><a href="#3-GeoPandas-예제-Choro-legends" class="headerlink" title="3. GeoPandas 예제: Choro legends"></a>3. GeoPandas 예제: Choro legends</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://geopandas.org/en/stable/gallery/choro_legends.html">GeoPandas Example Gallery: Choro legends</a></p>
 </blockquote>
 <ul>
 <li>같은 요령으로 Colab 기본 설치 라이브러리가 아닌 <code>mapclassify</code>와 <code>libpysal</code>을 설치합니다.</li>
-<li>이후 아래 코드를 실행하면 깔끔하게 실행됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> geopandas <span class="keyword">import</span> read_file</span><br><span class="line"></span><br><span class="line">_ = libpysal.examples.load_example(<span class="string">&#x27;South&#x27;</span>)</span><br><span class="line">pth = libpysal.examples.get_path(<span class="string">&#x27;south.shp&#x27;</span>)</span><br><span class="line">df = read_file(pth)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">df.plot(column=<span class="string">&#x27;HR60&#x27;</span>, scheme=<span class="string">&#x27;QUANTILES&#x27;</span>, k=<span class="number">4</span>, \</span><br><span class="line">             cmap=<span class="string">&#x27;BuPu&#x27;</span>, legend=<span class="literal">True</span>,</span><br><span class="line">             legend_kwds=&#123;<span class="string">&#x27;loc&#x27;</span>: <span class="string">&#x27;center left&#x27;</span>, <span class="string">&#x27;bbox_to_anchor&#x27;</span>:(<span class="number">1</span>,<span class="number">0.5</span>)&#125;,</span><br><span class="line">             ax=ax)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;13_install_01.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="13_install_01.png"><br></li>
+<li>이후 아래 코드를 실행하면 깔끔하게 실행됩니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> geopandas <span class="keyword">import</span> read_file</span><br><span class="line"></span><br><span class="line">_ = libpysal.examples.load_example(<span class="string">&#x27;South&#x27;</span>)</span><br><span class="line">pth = libpysal.examples.get_path(<span class="string">&#x27;south.shp&#x27;</span>)</span><br><span class="line">df = read_file(pth)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">df.plot(column=<span class="string">&#x27;HR60&#x27;</span>, scheme=<span class="string">&#x27;QUANTILES&#x27;</span>, k=<span class="number">4</span>, \</span><br><span class="line">             cmap=<span class="string">&#x27;BuPu&#x27;</span>, legend=<span class="literal">True</span>,</span><br><span class="line">             legend_kwds=&#123;<span class="string">&#x27;loc&#x27;</span>: <span class="string">&#x27;center left&#x27;</span>, <span class="string">&#x27;bbox_to_anchor&#x27;</span>:(<span class="number">1</span>,<span class="number">0.5</span>)&#125;,</span><br><span class="line">             ax=ax)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;13_install_01.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/13_install_01.png"><br></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1_oF9RkHi_XADp9m9UJMD4383YnDSosCF?usp=sharing">위 코드는 여기에서 확인 가능합니다 (링크)</a></li>
 </ul>
@@ -267,22 +271,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/10/12/Python-General-13-install/" data-id="cmhueoy3f00lj4gxtgs2z47v7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/10/12/Python-General-13-install/" data-id="cuidlvx9f6OHa0c0GkyhjyLx1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -358,7 +352,7 @@
         "genre": "Python General",
         "datePublished": "2022-10-12",
         "dateCreated": "2022-10-12",
-        "dateModified": "2022-10-12",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/10/12/Python-General-13-install/",
         "description": "
 Colab 같은 클라우드 환경 사용 비중이 늘어나고 있습니다.
@@ -450,16 +444,6 @@ Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 �
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -693,10 +677,6 @@ Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 �
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

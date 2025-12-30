@@ -21,13 +21,13 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/44_watermark_0.png">
 <meta property="article:published_time" content="2020-11-24T01:34:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:49:35.068Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.223Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
-<meta property="article:tag" content="seaborn">
 <meta property="article:tag" content="image">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/44_watermark_0.png">
     
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/11/24/Python-DS-44-watermark/" class="article-date">
-     <time datetime="2020-11-27T00:49:35.068Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:38.223Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,7 +239,7 @@
 <p><a href="44_watermark_9">매일경제: 월 100장씩 사라지던 사우나 수건… 도난 막는 방법은?</a></p>
 </blockquote>
 <ul>
-<li><p>최근 <a href="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/">제 블로그의 그림</a>이 다른 데서 보이는 일을 겪었습니다.<br><br><img src="44_watermark_8.png" alt="원본 vs 도용"><br></p>
+<li><p>최근 <a href="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/">제 블로그의 그림</a>이 다른 데서 보이는 일을 겪었습니다.<br><br><img src="/44_watermark_8.png" alt="원본 vs 도용"><br></p>
 </li>
 <li><p>다행히 제게 크리티컬한 이미지가 아니었습니다.</p>
 </li>
@@ -247,72 +247,79 @@
 </li>
 <li><p>그러나 그림을 재현한 제 그림을 가져갔다면 <b>출처는 표시하는 것이 예의일 것입니다.</b></p>
 </li>
+<li><p>다만 <b>데이터가 한반도 월별 기온분포로 둔갑한 건은 좀 많이 불편했습니다.</b></p>
+</li>
+<li><p>의도가 무엇이든 <b>데이터를 왜곡시켰다는 점</b> 때문입니다.</p>
+</li>
+<li><p>그러나 누군가에겐 크게 불편한 일이 될 수도 있는 일입니다.</p>
+</li>
+<li><p>이럴 때 사용하는 기법이 <b>워터마크</b>입니다.</p>
+</li>
+<li><p>퍼가지 못하게 할 수는 없지만, 퍼가더라도 무단 도용임을 알 수 있게 한 것이죠.</p>
+</li>
 </ul>
-<ul>
-<li>다만 <b>데이터가 한반도 월별 기온분포로 둔갑한 건은 좀 많이 불편했습니다.</b></li>
-<li>의도가 무엇이든 <b>데이터를 왜곡시켰다는 점</b> 때문입니다.</li>
-</ul>
-<ul>
-<li>그러나 누군가에겐 크게 불편한 일이 될 수도 있는 일입니다.</li>
-<li>이럴 때 사용하는 기법이 <b>워터마크</b>입니다.</li>
-<li>퍼가지 못하게 할 수는 없지만, 퍼가더라도 무단 도용임을 알 수 있게 한 것이죠.</li>
-</ul>
-<p><img src="44_watermark_9.jpg" alt="이런 겁니다. (출처=매일경제)"><br></p>
+<p><img src="/44_watermark_9.jpg" alt="이런 겁니다. (출처&#x3D;매일경제)"><br></p>
 <ul>
 <li>matplotlib을 이용해서 그림에 워터마크를 박아 봅시다.</li>
 </ul>
 <h2 id="2-실습-재료-준비"><a href="#2-실습-재료-준비" class="headerlink" title="2. 실습 재료 준비"></a>2. 실습 재료 준비</h2><h3 id="2-1-watermark-준비"><a href="#2-1-watermark-준비" class="headerlink" title="2.1. watermark 준비"></a>2.1. watermark 준비</h3><ul>
-<li>제 블로그의 파비콘을 워터마크로 사용합니다.<br>192 x 192 x 4 이미지입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># watermark image</span></span><br><span class="line"></span><br><span class="line">im_wm = plt.imread(<span class="string">&quot;./44_watermark_1.png&quot;</span>)</span><br><span class="line">plt.imshow(im_wm)</span><br><span class="line">plt.grid(<span class="literal">False</span>)</span><br><span class="line">plt.axis(<span class="literal">False</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="44_watermark_1.png"><br></li>
+<li>제 블로그의 파비콘을 워터마크로 사용합니다.<br>192 x 192 x 4 이미지입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># watermark image</span></span><br><span class="line"></span><br><span class="line">im_wm = plt.imread(<span class="string">&quot;./44_watermark_1.png&quot;</span>)</span><br><span class="line">plt.imshow(im_wm)</span><br><span class="line">plt.grid(<span class="literal">False</span>)</span><br><span class="line">plt.axis(<span class="literal">False</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_1.png"><br></p>
 <h3 id="2-2-예제-이미지-준비"><a href="#2-2-예제-이미지-준비" class="headerlink" title="2.2. 예제 이미지 준비"></a>2.2. 예제 이미지 준비</h3><ul>
-<li><p>iris dataset의 K-means 결과물을 준비합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"></span><br><span class="line"><span class="comment"># iris 데이터셋 읽기</span></span><br><span class="line">iris = load_iris()</span><br><span class="line">X = iris.data</span><br><span class="line"></span><br><span class="line"><span class="comment"># iris dataset clustering</span></span><br><span class="line">kmeans = KMeans(n_clusters=<span class="number">3</span>)</span><br><span class="line">cluster = kmeans.fit(X)</span><br></pre></td></tr></table></figure></li>
-<li><p>seaborn으로 간단하게 스타일링을 하고, 그림을 그립니다.</p>
-</li>
-<li><p>클러스터링 결과물을 꽃받침과 꽃잎의 분포에 따라 그립니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 시각화 스타일링</span></span><br><span class="line">sns.set_style(<span class="string">&quot;whitegrid&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 객체지향 baseline</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal width vs height&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal width vs height&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="44_watermark_2.png"><br></p>
-</li>
+<li>iris dataset의 K-means 결과물을 준비합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"></span><br><span class="line"><span class="comment"># iris 데이터셋 읽기</span></span><br><span class="line">iris = load_iris()</span><br><span class="line">X = iris.data</span><br><span class="line"></span><br><span class="line"><span class="comment"># iris dataset clustering</span></span><br><span class="line">kmeans = KMeans(n_clusters=<span class="number">3</span>)</span><br><span class="line">cluster = kmeans.fit(X)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>seaborn으로 간단하게 스타일링을 하고, 그림을 그립니다.</li>
+<li>클러스터링 결과물을 꽃받침과 꽃잎의 분포에 따라 그립니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 시각화 스타일링</span></span><br><span class="line">sns.set_style(<span class="string">&quot;whitegrid&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 객체지향 baseline</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal width vs height&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal width vs height&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_2.png"><br></p>
 <h2 id="3-이미지에-워터마크-박기"><a href="#3-이미지에-워터마크-박기" class="headerlink" title="3. 이미지에 워터마크 박기"></a>3. 이미지에 워터마크 박기</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/images_contours_and_fields/watermark_image.html?highlight=watermark">matplotlib contents: Watermark image</a></p>
 </blockquote>
 <h3 id="3-1-fig-figimage"><a href="#3-1-fig-figimage" class="headerlink" title="3.1. fig.figimage()"></a>3.1. <code>fig.figimage()</code></h3><ul>
 <li>figure에 이미지를 탑재하는 방법입니다.</li>
-<li>axes에 무관하게 <b>figure 전 영역을 사용</b>할 수 있어 가장 많이 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. figure watermark (default)</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">figimage = fig.figimage(im_wm, resize=<span class="literal">False</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="44_watermark_3.png"><br></li>
+<li>axes에 무관하게 <b>figure 전 영역을 사용</b>할 수 있어 가장 많이 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. figure watermark (default)</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">figimage = fig.figimage(im_wm, resize=<span class="literal">False</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_3.png"><br></p>
 <ul>
 <li>기본값으로 좌측 하단에 watermark를 생성합니다.</li>
-<li><code>xo=</code>, <code>yo=</code>인자로 offset을 설정해서 <b>그림 중앙으로 옮겨봅니다.</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. figure watermark (offset)</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 이동 삽입</span></span><br><span class="line">figimage = fig.figimage(im_wm, xo=<span class="number">250</span>, yo=<span class="number">80</span>, resize=<span class="literal">False</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="44_watermark_4.png"><br></li>
+<li><code>xo=</code>, <code>yo=</code>인자로 offset을 설정해서 <b>그림 중앙으로 옮겨봅니다.</b></li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. figure watermark (offset)</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 이동 삽입</span></span><br><span class="line">figimage = fig.figimage(im_wm, xo=<span class="number">250</span>, yo=<span class="number">80</span>, resize=<span class="literal">False</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_4.png"><br></p>
 <h3 id="3-2-ax-imshow"><a href="#3-2-ax-imshow" class="headerlink" title="3.2. ax.imshow()"></a>3.2. <code>ax.imshow()</code></h3><ul>
 <li>가상의 axes를 만들고 거기에 그림을 입히는 방식입니다.</li>
 <li>axes 크기로 그림 크기 조정이 가능하기 때문에 편리합니다.</li>
-<li><code>fig.figimage()</code>로 그림 크기를 조정하려면 다소 성가시기 때문입니다 (<a target="_blank" rel="noopener" href="https://scipy-cookbook.readthedocs.io/items/Matplotlib_AdjustingImageSize.html">방법</a>).<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2. axes watermark</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">ax_watermark = fig.add_axes([<span class="number">0.25</span>, <span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.5</span>])</span><br><span class="line">ax_watermark.imshow(im_wm, alpha=<span class="number">0.1</span>)</span><br><span class="line">ax_watermark.grid(<span class="literal">False</span>)</span><br><span class="line">ax_watermark.axis(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="44_watermark_5.png"><br></li>
+<li><code>fig.figimage()</code>로 그림 크기를 조정하려면 다소 성가시기 때문입니다 (<a target="_blank" rel="noopener" href="https://scipy-cookbook.readthedocs.io/items/Matplotlib_AdjustingImageSize.html">방법</a>).</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2. axes watermark</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">ax_watermark = fig.add_axes([<span class="number">0.25</span>, <span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.5</span>])</span><br><span class="line">ax_watermark.imshow(im_wm, alpha=<span class="number">0.1</span>)</span><br><span class="line">ax_watermark.grid(<span class="literal">False</span>)</span><br><span class="line">ax_watermark.axis(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_5.png"><br></p>
 <h3 id="3-3-ax-add-artist"><a href="#3-3-ax-add-artist" class="headerlink" title="3.3. ax.add_artist()"></a>3.3. <code>ax.add_artist()</code></h3><ul>
 <li>이미지 객체를 <b>갖다 붙이는 방식</b>입니다.</li>
-<li>이렇게 설명하면 가장 직관적인데,<br><b>(1) 이미지를 지정하고</b> <code>OffsetImage</code>,<br><b>(2) 위치를 지정하고</b> <code>AnnotationBbox</code>,<br><b>(3) 붙이는</b> <code>add_artist()</code> 과정이 번거로운 것도 사실입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> OffsetImage, AnnotationBbox</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">6</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">4</span>, <span class="number">1.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="44_watermark_6.png"><br></li>
+<li>이렇게 설명하면 가장 직관적인데,<br><b>(1) 이미지를 지정하고</b> <code>OffsetImage</code>,<br><b>(2) 위치를 지정하고</b> <code>AnnotationBbox</code>,<br><b>(3) 붙이는</b> <code>add_artist()</code> 과정이 번거로운 것도 사실입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> OffsetImage, AnnotationBbox</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].scatter(X[:,<span class="number">2</span>], X[:,<span class="number">3</span>], c=cluster.labels_, cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sepal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;petal length vs width&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 워터마크 삽입</span></span><br><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">6</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">4</span>, <span class="number">1.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_6.png"><br></p>
 <ul>
-<li><p>이 방식은 axes에 삽입하기 때문에, axes를 벗어나면 잘 안됩니다.</p>
-</li>
-<li><p>위 코드에서 워터마크 삽입 부분을 고치면 이렇게 됩니다.</p>
+<li>이 방식은 axes에 삽입하기 때문에, axes를 벗어나면 잘 안됩니다.</li>
+<li>위 코드에서 워터마크 삽입 부분을 고치면 이렇게 됩니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">8</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">1</span>, <span class="number">2.5</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br></pre></td></tr></table></figure>
-<p><img src="44_watermark_7.png"><br></p>
-</li>
+<p><img src="/44_watermark_7.png"><br></p>
+<ul>
 <li><p><b>순서상 왼쪽 axes 위에 오른쪽 axes가 있습니다.</b><br>왼쪽 워터마크가 오른쪽 axes에 가립니다.<br>오른쪽 워터마크는 왼쪽 axes를 덮을 수 있습니다.</p>
 </li>
 <li><p>좌표를 조금씩 옮기다 <b>워터마크가 사라지기도 합니다.</b></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">8.2</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">0.6</span>, <span class="number">2.5</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br></pre></td></tr></table></figure>
-<p><img src="44_watermark_10.png"><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oi = OffsetImage(im_wm, zoom = <span class="number">1</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">8.2</span>, <span class="number">3.25</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">0</span>].add_artist(box0)</span><br><span class="line"></span><br><span class="line">box1 = AnnotationBbox(oi, (<span class="number">0.6</span>, <span class="number">2.5</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">axs[<span class="number">1</span>].add_artist(box1)</span><br></pre></td></tr></table></figure>
+<p><img src="/44_watermark_10.png"><br></p>
 <p><b>※ 보호받고 싶은 이미지가 있을 때 적절히 사용하시기 바랍니다.</b></p>
 
         </div>
@@ -326,22 +333,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/24/Python-DS-44-watermark/" data-id="cmhueoy0l00gv4gxt52zf0pf2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/24/Python-DS-44-watermark/" data-id="cuidcsM_BZfL4UJMCORAywrWn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -417,7 +414,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-11-24",
         "dateCreated": "2020-11-24",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/11/24/Python-DS-44-watermark/",
         "description": "
 이미지 도용을 방지할 수 있는 watermark를 만들어 봅시다.
@@ -511,16 +508,6 @@ watermark를 박는 4가지 방법을 소개합니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -754,10 +741,6 @@ watermark를 박는 4가지 방법을 소개합니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

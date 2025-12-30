@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/18_pv_01.png">
 <meta property="article:published_time" content="2020-07-02T03:00:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:44:22.836Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.990Z">
 <meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="atom">
+<meta property="article:tag" content="paraview">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="visualization">
-<meta property="article:tag" content="paraview">
-<meta property="article:tag" content="atom">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/18_pv_01.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/07/02/Python-DS-18-pv_bond/" class="article-date">
-     <time datetime="2020-11-27T00:44:22.836Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:37.990Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -238,14 +238,14 @@
 <p><a target="_blank" rel="noopener" href="http://www.paraview.org/">Paraview</a><br><a target="_blank" rel="noopener" href="https://www.paraview.org/Wiki/Python_Programmable_Filter">Paraview: Python Programmable Filter</a><br><a target="_blank" rel="noopener" href="https://kitware.github.io/paraview-docs/latest/python/index.html">ParaView’s Python documentation!</a><br><a target="_blank" rel="noopener" href="https://vtk.org/">VTK: Visualization Toolkit</a><br><a target="_blank" rel="noopener" href="https://cvw.cac.cornell.edu/ParaViewAdv/progfilter">Cornell Virtual Workshop: Paraview Programmable Filter</a></p>
 </blockquote>
 <h3 id="Paraview-Python"><a href="#Paraview-Python" class="headerlink" title="Paraview + Python"></a>Paraview + Python</h3><ul>
-<li><p>범용 Visualizaion Program인 Paraview는 전반적으로 기능이 좋습니다.</p>
-</li>
-<li><p>Python을 지원해서 데이터를 만들거나(Programmable source) 수정할 수 있는데(Programmable filter), paraview에서 GUI 기반으로 작업하다가 코드를 작성하려면 막막합니다.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://vtk.org/"><b>VTK</b></a> 문법이라 익숙하지 않으면 낯설고, <code>print()</code>로 내가 다루는 데이터를 찍어보기도 만만찮거든요.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pdi = self.GetPolyDataInput()</span><br><span class="line">pdo =  self.GetPolyDataOutput()</span><br><span class="line">newPoints = vtk.vtkPoints()</span><br><span class="line">numPoints = pdi.GetNumberOfPoints()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, numPoints):</span><br><span class="line">    coord = pdi.GetPoint(i)</span><br><span class="line">    x, y, z = coord[:<span class="number">3</span>]</span><br><span class="line">    x = x * <span class="number">1</span></span><br><span class="line">    y = y * <span class="number">1</span></span><br><span class="line">    z = <span class="number">1</span> + z*<span class="number">0.3</span></span><br><span class="line">    newPoints.InsertPoint(i, x, y, z)</span><br><span class="line">pdo.SetPoints(newPoints)</span><br></pre></td></tr></table></figure></li>
-<li><p>위 코드를 실행하면 아래처럼 동그라미가 납작해지집니다.<br><br><img src="https://www.paraview.org/Wiki/images/thumb/6/65/PyScriptFig1.jpg/400px-PyScriptFig1.jpg.png"></p>
-</li>
+<li>범용 Visualizaion Program인 Paraview는 전반적으로 기능이 좋습니다.</li>
+<li>Python을 지원해서 데이터를 만들거나(Programmable source) 수정할 수 있는데(Programmable filter), paraview에서 GUI 기반으로 작업하다가 코드를 작성하려면 막막합니다.</li>
+<li><a target="_blank" rel="noopener" href="https://vtk.org/"><b>VTK</b></a> 문법이라 익숙하지 않으면 낯설고, <code>print()</code>로 내가 다루는 데이터를 찍어보기도 만만찮거든요.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pdi = <span class="variable language_">self</span>.GetPolyDataInput()</span><br><span class="line">pdo =  <span class="variable language_">self</span>.GetPolyDataOutput()</span><br><span class="line">newPoints = vtk.vtkPoints()</span><br><span class="line">numPoints = pdi.GetNumberOfPoints()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, numPoints):</span><br><span class="line">    coord = pdi.GetPoint(i)</span><br><span class="line">    x, y, z = coord[:<span class="number">3</span>]</span><br><span class="line">    x = x * <span class="number">1</span></span><br><span class="line">    y = y * <span class="number">1</span></span><br><span class="line">    z = <span class="number">1</span> + z*<span class="number">0.3</span></span><br><span class="line">    newPoints.InsertPoint(i, x, y, z)</span><br><span class="line">pdo.SetPoints(newPoints)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위 코드를 실행하면 아래처럼 동그라미가 납작해지집니다.<br><br><img src="https://www.paraview.org/Wiki/images/thumb/6/65/PyScriptFig1.jpg/400px-PyScriptFig1.jpg.png"></li>
 </ul>
 <h3 id="Atomic-structure"><a href="#Atomic-structure" class="headerlink" title="Atomic structure"></a>Atomic structure</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://jp-minerals.org/vesta/en/">VESTA: Visualization for Electronic and STructural Analysis</a></p>
@@ -259,23 +259,24 @@
 <li>계산과학 분야에서는 <a target="_blank" rel="noopener" href="https://jp-minerals.org/vesta/en/"><b>VESTA</b></a>라는 프로그램을 사용합니다.</li>
 <li>이 분야의 표준같은 전용 프로그램이라 훨씬 기능이 좋습니다.</li>
 </ul>
-<p><img src="18_pv_02.png"></p>
+<p><img src="/18_pv_02.png"></p>
 <ul>
 <li>그러나 제가 확인해야 하는 데이터는 여기에서 보이지 않기 때문에 손에 익은 paraview를 사용하고자 합니다.</li>
 <li>paraview가 VESTA처럼 원자간 연결선만 그려줘도 좋겠습니다.</li>
 </ul>
 <h3 id="Paraview-Programmable-Filter"><a href="#Paraview-Programmable-Filter" class="headerlink" title="Paraview Programmable Filter"></a>Paraview Programmable Filter</h3><ul>
-<li><p>한 시간 구글링 결과 아래와 같은 코드를 만들 수 있었습니다.</p>
-</li>
-<li><p>원자간 거리가 <code>dist_th</code>값보다 작으면 연결선을 그려주는 코드입니다.</p>
-</li>
-<li><p><b>Filter &gt; Data Analysis &gt; Programmable Filter</b>에서 입력합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dist_th = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">pdi = self.GetPolyDataInput()</span><br><span class="line">pdo = self.GetPolyDataOutput()</span><br><span class="line"></span><br><span class="line">numPoints = pdi.GetNumberOfPoints()</span><br><span class="line">pdo.Allocate()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, numPoints-<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, numPoints-<span class="number">1</span>):</span><br><span class="line">        points = [i, j]</span><br><span class="line">        pi = np.array(pdi.GetPoint(i))</span><br><span class="line">        pj = np.array(pdi.GetPoint(j))</span><br><span class="line">        dist = np.linalg.norm(pi - pj)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dist &lt; dist_th) <span class="keyword">and</span> (dist &gt; <span class="number">0</span>):</span><br><span class="line">            pdo.InsertNextCell(<span class="number">3</span>, <span class="number">2</span>, points)</span><br></pre></td></tr></table></figure></li>
+<li>한 시간 구글링 결과 아래와 같은 코드를 만들 수 있었습니다.</li>
+<li>원자간 거리가 <code>dist_th</code>값보다 작으면 연결선을 그려주는 코드입니다.</li>
+<li><b>Filter &gt; Data Analysis &gt; Programmable Filter</b>에서 입력합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dist_th = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">pdi = <span class="variable language_">self</span>.GetPolyDataInput()</span><br><span class="line">pdo = <span class="variable language_">self</span>.GetPolyDataOutput()</span><br><span class="line"></span><br><span class="line">numPoints = pdi.GetNumberOfPoints()</span><br><span class="line">pdo.Allocate()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, numPoints-<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, numPoints-<span class="number">1</span>):</span><br><span class="line">        points = [i, j]</span><br><span class="line">        pi = np.array(pdi.GetPoint(i))</span><br><span class="line">        pj = np.array(pdi.GetPoint(j))</span><br><span class="line">        dist = np.linalg.norm(pi - pj)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dist &lt; dist_th) <span class="keyword">and</span> (dist &gt; <span class="number">0</span>):</span><br><span class="line">            pdo.InsertNextCell(<span class="number">3</span>, <span class="number">2</span>, points)</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>그리고 <code>tube</code>를 추가해서 선에 입체감을 부여하면 이렇게 됩니다.</p>
 </li>
-<li><p>같은 구조에 왼쪽은 원소별, 오른쪽은 표면원자 여부를 나타낸겁니다.<br><br><img src="18_pv_03.PNG" alt="좌측에 paraview pipeline이 보입니다."><br></p>
+<li><p>같은 구조에 왼쪽은 원소별, 오른쪽은 표면원자 여부를 나타낸겁니다.<br><br><img src="/18_pv_03.PNG" alt="좌측에 paraview pipeline이 보입니다."><br></p>
 </li>
-<li><p>다른 구조들에도 적용해서 발표자료에 담으면, 목표 달성입니다.<br><br><img src="18_pv_04.PNG"><br></p>
+<li><p>다른 구조들에도 적용해서 발표자료에 담으면, 목표 달성입니다.<br><br><img src="/18_pv_04.PNG"><br></p>
 </li>
 </ul>
 
@@ -290,22 +291,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/02/Python-DS-18-pv_bond/" data-id="cmhueoxyv00di4gxtbvtbayii" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/02/Python-DS-18-pv_bond/" data-id="cuidROiXb2YVs7dGo9ExxPX2n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -381,7 +372,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-07-02",
         "dateCreated": "2020-07-02",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/07/02/Python-DS-18-pv_bond/",
         "description": "Contributor
 
@@ -392,7 +383,7 @@ Reference
 ParaviewParaview: Python Programmable FilterParaView’s Python documentation!VTK: Visualization ToolkitCornell Virtual Workshop: Paraview Programmable Filter
 
 Paraview + ",
-        "wordCount": 433
+        "wordCount": 441
     }
 </script>
 
@@ -474,16 +465,6 @@ Paraview + ",
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -717,10 +698,6 @@ Paraview + ",
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

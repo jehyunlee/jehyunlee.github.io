@@ -12,19 +12,19 @@
     
     <meta name="keywords" content="python,matplotlib,seaborn" />
     
-    <meta name="description" content="Seaborn violin plot은 아름답습니다. 매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다. color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다. 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.  1. 예제 데이터 seaborn의 tips 데이터셋을 사용합니다.1">
+    <meta name="description" content="Seaborn violin plot은 아름답습니다. 매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다. color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다. 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.  1. 예제 데이터 seaborn의 tips 데이터셋을 사용합니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="modifying seaborn violin plot">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Seaborn violin plot은 아름답습니다. 매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다. color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다. 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.  1. 예제 데이터 seaborn의 tips 데이터셋을 사용합니다.1">
+<meta property="og:description" content="Seaborn violin plot은 아름답습니다. 매끈한 곡선은 데이터의 분포를 직관적으로 알게 해 줍니다. color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니다. 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.  1. 예제 데이터 seaborn의 tips 데이터셋을 사용합니다.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/87_violinplotedit00.png">
 <meta property="article:published_time" content="2021-10-21T00:11:00.000Z">
-<meta property="article:modified_time" content="2021-10-21T02:26:44.817Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.556Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="seaborn">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/87_violinplotedit00.png">
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/10/21/Python-DS-87_violinplotedit/" class="article-date">
-     <time datetime="2021-10-21T02:26:44.817Z" itemprop="dateModified">2021-10-21</time>
+     <time datetime="2025-12-30T06:28:38.556Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -235,37 +235,35 @@
 <li>그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.</li>
 </ul>
 <h1 id="1-예제-데이터"><a href="#1-예제-데이터" class="headerlink" title="1. 예제 데이터"></a>1. 예제 데이터</h1><ul>
-<li>seaborn의 tips 데이터셋을 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 기본 시각화 설정</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터셋 불러오기</span></span><br><span class="line">df = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<img src="violinplotedit01.png"><br></li>
+<li>seaborn의 tips 데이터셋을 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 기본 시각화 설정</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터셋 불러오기</span></span><br><span class="line">df = sns.load_dataset(<span class="string">&quot;tips&quot;</span>)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+<p><img src="/violinplotedit01.png"><br></p>
 <h1 id="2-seaborn-violin-plot"><a href="#2-seaborn-violin-plot" class="headerlink" title="2. seaborn violin plot"></a>2. seaborn violin plot</h1><h2 id="2-1-기본-plot"><a href="#2-1-기본-plot" class="headerlink" title="2.1. 기본 plot"></a>2.1. 기본 plot</h2><ul>
-<li><p>요일별 팁 분포를 그려봅니다.</p>
-</li>
-<li><p><code>seaborn.violinplot()</code>을 사용합니다.</p>
+<li>요일별 팁 분포를 그려봅니다.</li>
+<li><code>seaborn.violinplot()</code>을 사용합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
-<p><img src="violinplotedit02.png"><br></p>
-</li>
-<li><p>기본 설정인 <code>tab10</code> palette에 따라 violin plot이 채색되었습니다.</p>
-</li>
+<p><img src="/violinplotedit02.png"><br></p>
+<ul>
+<li>기본 설정인 <code>tab10</code> palette에 따라 violin plot이 채색되었습니다.</li>
 </ul>
 <h2 id="2-2-일괄-색-변경-color"><a href="#2-2-일괄-색-변경-color" class="headerlink" title="2.2. 일괄 색 변경: color"></a>2.2. 일괄 색 변경: <code>color</code></h2><ul>
 <li>color 매개변수를 사용하면 violin plot들의 face color를 일괄적으로 바꿀 수 있습니다.</li>
-<li><code>color=&quot;gold&quot;</code>를 적용한 결과입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, </span><br><span class="line">               color=<span class="string">&quot;gold&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
-<img src="violinplotedit07.png"><br></li>
+<li><code>color=&quot;gold&quot;</code>를 적용한 결과입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, </span><br><span class="line">               color=<span class="string">&quot;gold&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
+<p><img src="/violinplotedit07.png"><br></p>
 <h2 id="2-3-팔레트-변경-palette"><a href="#2-3-팔레트-변경-palette" class="headerlink" title="2.3. 팔레트 변경: palette"></a>2.3. 팔레트 변경: <code>palette</code></h2><ul>
-<li><p>color 대신 palette 매개변수를 사용하면 violin plot마다 다른 색이 적용됩니다.</p>
-</li>
-<li><p>기본값으로 <code>tab10</code>이 적용되어 있지만, 만약 <code>sns.set_palette()</code>명령으로 기본값을 바꾸었다면 다른 색들이 입혀집니다.</p>
-</li>
-<li><p>전체 palette를 바꾸지 않아도 <code>sns.violinplot()</code>안에 <code>palette</code>매개변수를 지정하면 해당 plot에 한해 palette가 바뀝니다.</p>
+<li>color 대신 palette 매개변수를 사용하면 violin plot마다 다른 색이 적용됩니다.</li>
+<li>기본값으로 <code>tab10</code>이 적용되어 있지만, 만약 <code>sns.set_palette()</code>명령으로 기본값을 바꾸었다면 다른 색들이 입혀집니다.</li>
+<li>전체 palette를 바꾸지 않아도 <code>sns.violinplot()</code>안에 <code>palette</code>매개변수를 지정하면 해당 plot에 한해 palette가 바뀝니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, </span><br><span class="line">               palette=<span class="string">&quot;rainbow&quot;</span>, ax=ax)</span><br></pre></td></tr></table></figure>
-<p><img src="violinplotedit08.png"><br></p>
-</li>
-<li><p><code>color</code>매개변수나 <code>palette</code> 매개변수나 전체를 일괄적으로 바꾸는 것입니다.</p>
-</li>
-<li><p>만약 이 중에서 <b>일요일만 색을 바꾸고 싶다</b>면 옵션이 없습니다.</p>
-</li>
+<p><img src="/violinplotedit08.png"><br></p>
+<ul>
+<li><code>color</code>매개변수나 <code>palette</code> 매개변수나 전체를 일괄적으로 바꾸는 것입니다.</li>
+<li>만약 이 중에서 <b>일요일만 색을 바꾸고 싶다</b>면 옵션이 없습니다.</li>
 </ul>
 <h1 id="3-Matplotlib-객체지향-적용"><a href="#3-Matplotlib-객체지향-적용" class="headerlink" title="3. Matplotlib 객체지향 적용"></a>3. Matplotlib 객체지향 적용</h1><h2 id="3-1-seaborn-violin-plot-해부"><a href="#3-1-seaborn-violin-plot-해부" class="headerlink" title="3.1. seaborn violin plot 해부"></a>3.1. seaborn violin plot 해부</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/artist_api.html">matplotlib.artist</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/intermediate/artists.html">matplotlib: Artist tutorial</a></p>
@@ -275,19 +273,24 @@
 <li>따라서 seaborn으로 그린 그림은 모두 Matplotlib 객체로 이루어져 있습니다.</li>
 <li>Figure와 Axes를 제외한 구성 요소는 Artist로 이루어져 있고, Artist엔 여러 분류가 있습니다.</li>
 </ul>
-<p><img src="violinplotedit10.png" alt="Artist class"><br></p>
+<p><img src="/violinplotedit10.png" alt="Artist class"><br></p>
 <ul>
-<li>이 수많은 것들 중 <b>Collection</b>에 주목합시다.</li>
-<li>낯설게 보일 지 모르지만 파워포인트에서 여러 도형을 그룹으로 묶어놓은 것이라고 생각할 수 있습니다.</li>
-<li>파워포인트에서 그룹에 속한 도형의 선이나 색을 일괄적으로 바꿀 수 있는 것처럼 Matplotlib의 Collection도 포함된 여러 객체의 속성을 한번에 바꿀 수 있습니다.</li>
-</ul>
-<ul>
+<li><p>이 수많은 것들 중 <b>Collection</b>에 주목합시다.</p>
+</li>
+<li><p>낯설게 보일 지 모르지만 파워포인트에서 여러 도형을 그룹으로 묶어놓은 것이라고 생각할 수 있습니다.</p>
+</li>
+<li><p>파워포인트에서 그룹에 속한 도형의 선이나 색을 일괄적으로 바꿀 수 있는 것처럼 Matplotlib의 Collection도 포함된 여러 객체의 속성을 한번에 바꿀 수 있습니다.</p>
+</li>
 <li><p>violin plot으로 어떤 Collection들이 생성되었는지 확인합니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(ax.collections))</span><br><span class="line">ax.collections</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과: 8개의 collections가 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">[&lt;matplotlib.collections.PolyCollection at 0x7f61db670a50&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db719490&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db680ad0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db680550&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db68c9d0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db6e1cd0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db699ad0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db699510&gt;]</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과: 8개의 collections가 있습니다.</li>
 </ul>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">[&lt;matplotlib.collections.PolyCollection at 0x7f61db670a50&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db719490&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db680ad0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db680550&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db68c9d0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db6e1cd0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PolyCollection at 0x7f61db699ad0&gt;,</span><br><span class="line"> &lt;matplotlib.collections.PathCollection at 0x7f61db699510&gt;]</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p><b>PolyCollection</b>과 <b>PathCollection</b>이 번갈아 등장합니다.</p>
 </li>
 <li><p>PolyCollection은 간단히 <b>다각형 객체</b>입니다.</p>
@@ -296,76 +299,89 @@
 </li>
 <li><p>뭔지 잘 모르겠지만 일단 이렇게만 넘어갑시다. </p>
 </li>
-</ul>
-<ul>
 <li><p>이번에는 <b>Line2D</b>객체를 살펴봅니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(ax.lines))</span><br><span class="line">ax.lines</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과: 8개의 lines객체가 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">[&lt;matplotlib.lines.Line2D at 0x7f61db670f10&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db680290&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db680e90&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db68c2d0&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db68cdd0&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db699250&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db699e90&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db6a62d0&gt;]</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과: 8개의 lines객체가 있습니다.</li>
 </ul>
-</li>
-<li><p>이들의 정체는 바로 이렇습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">[&lt;matplotlib.lines.Line2D at 0x7f61db670f10&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db680290&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db680e90&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db68c2d0&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db68cdd0&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db699250&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db699e90&gt;,</span><br><span class="line">&lt;matplotlib.lines.Line2D at 0x7f61db6a62d0&gt;]</span><br></pre></td></tr></table></figure>
+
 <ul>
+<li>이들의 정체는 바로 이렇습니다.<ul>
 <li><b>PolyCollection</b>은 <b>violin plot</b></li>
 <li><b>PathCollection</b>은 <b>median marker</b></li>
 <li>첫번째 <b>Line2D</b>는 <b>whisker</b></li>
-<li>두번째 <b>Line2D</b>는 <b>box</b>입니다.<details>
-<summary><b>시각화 코드 보기/접기</b></summary>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">df_sample = df.query(<span class="string">&quot;day == &#x27;Sun&#x27;&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">subfigs = fig.subfigures(<span class="number">1</span>, <span class="number">2</span>, width_ratios=[<span class="number">1</span>, <span class="number">4</span>])</span><br><span class="line">axs_all = subfigs[<span class="number">0</span>].subplots(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">sns.violinplot(data=df_sample, y=<span class="string">&quot;total_bill&quot;</span>, ax=axs_all)</span><br><span class="line">axs_all.set_yticks([])</span><br><span class="line">axs_all.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">subfigs[<span class="number">1</span>].set_facecolor(<span class="string">&quot;beige&quot;</span>)</span><br><span class="line">axs_parts = subfigs[<span class="number">1</span>].subplots(<span class="number">1</span>, <span class="number">4</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">titles = [<span class="string">&quot;violin plot\n\n&quot;</span>, <span class="string">&quot;median\n\n&quot;</span>, <span class="string">&quot;whisker\n\n&quot;</span>, <span class="string">&quot;box\n\n&quot;</span>]</span><br><span class="line">artists = [<span class="string">&quot;collections[0]\n&quot;</span>, <span class="string">&quot;collections[1]\n&quot;</span>, <span class="string">&quot;lines[0]\n&quot;</span>, <span class="string">&quot;lines[1]\n&quot;</span>]</span><br><span class="line">objects = [<span class="string">&quot;PolyCollection&quot;</span>, <span class="string">&quot;PathCollection&quot;</span>, <span class="string">&quot;Line2D&quot;</span>, <span class="string">&quot;Line2D&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i, (ax, title, artist, <span class="built_in">object</span>) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs_parts, titles, artists, objects)):</span><br><span class="line">    sns.violinplot(data=df_sample, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax)</span><br><span class="line">    parts = ax.collections + ax.lines</span><br><span class="line">    [p.remove() <span class="keyword">for</span> pi, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(parts) <span class="keyword">if</span> i != pi]</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;small&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">    ax.text(<span class="number">0.5</span>, <span class="number">1.05</span>, artist, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>, color=<span class="string">&quot;brown&quot;</span>, fontsize=<span class="string">&quot;x-small&quot;</span>)</span><br><span class="line">    ax.text(<span class="number">0.5</span>, <span class="number">1.05</span>, <span class="built_in">object</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, fontsize=<span class="string">&quot;x-small&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">subfigs[<span class="number">1</span>].suptitle(<span class="string">&quot;Anatomy of seaborn violin plot&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>두번째 <b>Line2D</b>는 <b>box</b>입니다.</li>
 </ul>
 </li>
 </ul>
-<p><img src="violinplotedit11.png"><br></p>
+<details>
+    <summary><b>시각화 코드 보기/접기</b></summary>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">df_sample = df.query(<span class="string">&quot;day == &#x27;Sun&#x27;&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">subfigs = fig.subfigures(<span class="number">1</span>, <span class="number">2</span>, width_ratios=[<span class="number">1</span>, <span class="number">4</span>])</span><br><span class="line">axs_all = subfigs[<span class="number">0</span>].subplots(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">sns.violinplot(data=df_sample, y=<span class="string">&quot;total_bill&quot;</span>, ax=axs_all)</span><br><span class="line">axs_all.set_yticks([])</span><br><span class="line">axs_all.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">subfigs[<span class="number">1</span>].set_facecolor(<span class="string">&quot;beige&quot;</span>)</span><br><span class="line">axs_parts = subfigs[<span class="number">1</span>].subplots(<span class="number">1</span>, <span class="number">4</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">titles = [<span class="string">&quot;violin plot\n\n&quot;</span>, <span class="string">&quot;median\n\n&quot;</span>, <span class="string">&quot;whisker\n\n&quot;</span>, <span class="string">&quot;box\n\n&quot;</span>]</span><br><span class="line">artists = [<span class="string">&quot;collections[0]\n&quot;</span>, <span class="string">&quot;collections[1]\n&quot;</span>, <span class="string">&quot;lines[0]\n&quot;</span>, <span class="string">&quot;lines[1]\n&quot;</span>]</span><br><span class="line">objects = [<span class="string">&quot;PolyCollection&quot;</span>, <span class="string">&quot;PathCollection&quot;</span>, <span class="string">&quot;Line2D&quot;</span>, <span class="string">&quot;Line2D&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i, (ax, title, artist, <span class="built_in">object</span>) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs_parts, titles, artists, objects)):</span><br><span class="line">    sns.violinplot(data=df_sample, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax)</span><br><span class="line">    parts = ax.collections + ax.lines</span><br><span class="line">    [p.remove() <span class="keyword">for</span> pi, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(parts) <span class="keyword">if</span> i != pi]</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;small&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">    ax.text(<span class="number">0.5</span>, <span class="number">1.05</span>, artist, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>, color=<span class="string">&quot;brown&quot;</span>, fontsize=<span class="string">&quot;x-small&quot;</span>)</span><br><span class="line">    ax.text(<span class="number">0.5</span>, <span class="number">1.05</span>, <span class="built_in">object</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, fontsize=<span class="string">&quot;x-small&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">subfigs[<span class="number">1</span>].suptitle(<span class="string">&quot;Anatomy of seaborn violin plot&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/violinplotedit11.png"><br></p>
 <ul>
 <li>whisker와 box는 box-whisker plot의 그것들이 맞습니다.</li>
 </ul>
 <h2 id="3-2-객체-제어"><a href="#3-2-객체-제어" class="headerlink" title="3.2. 객체 제어"></a>3.2. 객체 제어</h2><ul>
-<li>일단 객체로 분리되면 그 다음은 수월합니다.</li>
-<li><code>.get_속성()</code> 명령으로 속성을 가져오고 <code>.set_속성(속성값)</code> 명령으로 속성을 바꿀 수 있습니다.</li>
-</ul>
-<ul>
+<li><p>일단 객체로 분리되면 그 다음은 수월합니다.</p>
+</li>
+<li><p><code>.get_속성()</code> 명령으로 속성을 가져오고 <code>.set_속성(속성값)</code> 명령으로 속성을 바꿀 수 있습니다.</p>
+</li>
 <li><p>우리 목적은 <b>일요일 데이터 강조</b>입니다.</p>
 </li>
 <li><p><b>일요일</b> 데이터를 강조하기 위해 나머지 톤을 죽입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax,</span><br><span class="line">               color=<span class="string">&quot;lavender&quot;</span>, linewidth=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>매우 밋밋한 그림이 됩니다.</p>
-</li>
-<li><p>여기에 몇 가지 코드를 추가합니다.</p>
-</li>
-<li><p>먼저, <b>일요일 violin plot</b>의 facecolor와 edgecolor, linewidth를 바꿉니다.</p>
-</li>
-<li><p>하나 건너 하나 있는 <code>PolyCollection</code>을 가져오기 위해 <code>if i%2 == 0</code>을 사용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># violin plot: PolyCollection</span></span><br><span class="line">violins = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;k&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins]  <span class="comment"># 전체 violin edgecolor 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_facecolor(<span class="string">&quot;gold&quot;</span>)     <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin linewidth 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br></pre></td></tr></table></figure></li>
-<li><p>이번엔 <b>marker를 조금 크고 귀엽게</b> 만듭니다.</p>
-</li>
-<li><p>일요일 뿐 아니라 <b>전체 데이터</b>에 적용합니다.</p>
-</li>
-<li><p>PolyCollection 밑에 있는<code>PathCollection</code>을 가져오기 위해 <code>if i%2 == 1</code>을 사용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># median marker: PathCollection</span></span><br><span class="line">markers = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>]  </span><br><span class="line">markers[<span class="number">3</span>].set_facecolor(<span class="string">&quot;w&quot;</span>)         <span class="comment"># Sunday median facecolor 변경</span></span><br><span class="line">markers[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)         <span class="comment"># Sunday median edgecolor 변경</span></span><br><span class="line">[m.set_sizes([<span class="number">50</span>]) <span class="keyword">for</span> m <span class="keyword">in</span> markers]  <span class="comment"># 전체 median size 변경</span></span><br></pre></td></tr></table></figure></li>
-<li><p>Line2D 객체들 차례입니다.</p>
-</li>
-<li><p><b>일요일 box plot 색을 검정</b>으로 만듭니다.</p>
-</li>
-<li><p><b>굵기 조정은 모두에게 적용</b>합니다.</p>
-</li>
-<li><p><code>i%2 == 0</code>과 <code>i%2 == 1</code>을 번갈아 사용해서 box와 whisker를 번갈아 선택합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># box-whisker: Line2D</span></span><br><span class="line">ls = [l <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.lines)]</span><br><span class="line">ls[-<span class="number">2</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday whisker 색상 변경</span></span><br><span class="line">ls[-<span class="number">1</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday box 색 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">5</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br></pre></td></tr></table></figure></li>
-<li><p>이 코드들을 더하면 이런 그림이 나옵니다.<br><img src="violinplotedit05.png"><br></p>
-</li>
-<li><p>마지막으로 불필요한 요소를 제거합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ax.set_ylim(<span class="number">0</span>, )</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;total bill ($)&quot;</span>)</span><br><span class="line">ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, lw=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="violinplotedit06.png"><br></p>
 </li>
 </ul>
-<h2 id="3-3-응용-hue-amp-split"><a href="#3-3-응용-hue-amp-split" class="headerlink" title="3.3. 응용: hue &amp; split"></a>3.3. 응용: hue &amp; split</h2><ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax,</span><br><span class="line">               color=<span class="string">&quot;lavender&quot;</span>, linewidth=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>매우 밋밋한 그림이 됩니다.</li>
+<li>여기에 몇 가지 코드를 추가합니다.</li>
+<li>먼저, <b>일요일 violin plot</b>의 facecolor와 edgecolor, linewidth를 바꿉니다.</li>
+<li>하나 건너 하나 있는 <code>PolyCollection</code>을 가져오기 위해 <code>if i%2 == 0</code>을 사용합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># violin plot: PolyCollection</span></span><br><span class="line">violins = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;k&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins]  <span class="comment"># 전체 violin edgecolor 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_facecolor(<span class="string">&quot;gold&quot;</span>)     <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin linewidth 변경</span></span><br><span class="line">violins[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이번엔 <b>marker를 조금 크고 귀엽게</b> 만듭니다.</li>
+<li>일요일 뿐 아니라 <b>전체 데이터</b>에 적용합니다.</li>
+<li>PolyCollection 밑에 있는<code>PathCollection</code>을 가져오기 위해 <code>if i%2 == 1</code>을 사용합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># median marker: PathCollection</span></span><br><span class="line">markers = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>]  </span><br><span class="line">markers[<span class="number">3</span>].set_facecolor(<span class="string">&quot;w&quot;</span>)         <span class="comment"># Sunday median facecolor 변경</span></span><br><span class="line">markers[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)         <span class="comment"># Sunday median edgecolor 변경</span></span><br><span class="line">[m.set_sizes([<span class="number">50</span>]) <span class="keyword">for</span> m <span class="keyword">in</span> markers]  <span class="comment"># 전체 median size 변경</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Line2D 객체들 차례입니다.</li>
+<li><b>일요일 box plot 색을 검정</b>으로 만듭니다.</li>
+<li><b>굵기 조정은 모두에게 적용</b>합니다.</li>
+<li><code>i%2 == 0</code>과 <code>i%2 == 1</code>을 번갈아 사용해서 box와 whisker를 번갈아 선택합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># box-whisker: Line2D</span></span><br><span class="line">ls = [l <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.lines)]</span><br><span class="line">ls[-<span class="number">2</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday whisker 색상 변경</span></span><br><span class="line">ls[-<span class="number">1</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday box 색 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">5</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>이 코드들을 더하면 이런 그림이 나옵니다.<br><img src="/violinplotedit05.png"><br></p>
+</li>
+<li><p>마지막으로 불필요한 요소를 제거합니다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ax.set_ylim(<span class="number">0</span>, )</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;total bill ($)&quot;</span>)</span><br><span class="line">ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, lw=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/violinplotedit06.png"><br></p>
+<h2 id="3-3-응용-hue-split"><a href="#3-3-응용-hue-split" class="headerlink" title="3.3. 응용: hue &amp; split"></a>3.3. 응용: hue &amp; split</h2><ul>
 <li>seaborn violin plot에 hue와 split을 적용하면 의미 전달도 좋고 그림도 제법 멋집니다.</li>
 <li>여기에도 위에서 사용한 기술을 똑같이 적용할 수 있지만, 주의사항이 하나 있습니다.</li>
 <li>반쪽짜리 violin plot 두 개와 center marker가 번갈아 나오기 때문에 list comprehension을 조금 바꿔야 합낟.</li>
-<li><code>i%3 == 0</code>은 Male violin plot, <code>i%3 == 1</code>은 Female violin plot, <code>i%3 == 2</code>는 center marker입니다. <details>
-  <summary><b>시각화 코드 보기/접기</b></summary>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax,</span><br><span class="line">               color=<span class="string">&quot;pink&quot;</span>, hue=<span class="string">&quot;sex&quot;</span>, split=<span class="literal">True</span>, linewidth=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">### violin plot: PolyCollection</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Male</span></span><br><span class="line">violins_M = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">0</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;gray&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_M]</span><br><span class="line">[v.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_M]</span><br><span class="line">violins_M[<span class="number">3</span>].set_facecolor(<span class="string">&quot;gold&quot;</span>)  <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_M[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_M[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Female</span></span><br><span class="line">violins_F = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">1</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;gray&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_F]</span><br><span class="line">[v.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_F]</span><br><span class="line">violins_F[<span class="number">3</span>].set_facecolor(<span class="string">&quot;orange&quot;</span>)  <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_F[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_F[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># median marker: PathCollection</span></span><br><span class="line">markers = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">2</span>]  </span><br><span class="line">markers[<span class="number">3</span>].set_facecolor(<span class="string">&quot;w&quot;</span>)         <span class="comment"># Sunday median facecolor 변경</span></span><br><span class="line">markers[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)         <span class="comment"># Sunday median edgecolor 변경</span></span><br><span class="line">[m.set_sizes([<span class="number">50</span>]) <span class="keyword">for</span> m <span class="keyword">in</span> markers]  <span class="comment"># 전체 median size 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # box-whisker: Line2D</span></span><br><span class="line">ls = [l <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.lines)]</span><br><span class="line">ls[-<span class="number">2</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday whisker 색상 변경</span></span><br><span class="line">ls[-<span class="number">1</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday box 색 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">5</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # spines 제거, grid 추가, xlabel 제거, ylabel 제거</span></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, )</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;total bill ($)&quot;</span>)</span><br><span class="line">ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, lw=<span class="number">1</span>)</span><br><span class="line">legend = ax.legend()</span><br><span class="line">legend.remove()</span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper right&quot;</span>, ncol=<span class="number">2</span>)</span><br></pre></td></tr></table></figure></li>
+<li><code>i%3 == 0</code>은 Male violin plot, <code>i%3 == 1</code>은 Female violin plot, <code>i%3 == 2</code>는 center marker입니다.</li>
 </ul>
-<p><img src="violinplotedit09.png"><br></p>
+<details>
+    <summary><b>시각화 코드 보기/접기</b></summary>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.violinplot(data=df, x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, ax=ax,</span><br><span class="line">               color=<span class="string">&quot;pink&quot;</span>, hue=<span class="string">&quot;sex&quot;</span>, split=<span class="literal">True</span>, linewidth=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">### violin plot: PolyCollection</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Male</span></span><br><span class="line">violins_M = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">0</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;gray&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_M]</span><br><span class="line">[v.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_M]</span><br><span class="line">violins_M[<span class="number">3</span>].set_facecolor(<span class="string">&quot;gold&quot;</span>)  <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_M[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_M[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Female</span></span><br><span class="line">violins_F = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">1</span>]  </span><br><span class="line">[v.set_edgecolor(<span class="string">&quot;gray&quot;</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_F]</span><br><span class="line">[v.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> v <span class="keyword">in</span> violins_F]</span><br><span class="line">violins_F[<span class="number">3</span>].set_facecolor(<span class="string">&quot;orange&quot;</span>)  <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_F[<span class="number">3</span>].set_linewidth(<span class="number">1</span>)          <span class="comment"># Sunday violin facecolor 변경</span></span><br><span class="line">violins_F[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)        <span class="comment"># Sunday violin edgecolor 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># median marker: PathCollection</span></span><br><span class="line">markers = [c <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.collections) <span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">2</span>]  </span><br><span class="line">markers[<span class="number">3</span>].set_facecolor(<span class="string">&quot;w&quot;</span>)         <span class="comment"># Sunday median facecolor 변경</span></span><br><span class="line">markers[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;k&quot;</span>)         <span class="comment"># Sunday median edgecolor 변경</span></span><br><span class="line">[m.set_sizes([<span class="number">50</span>]) <span class="keyword">for</span> m <span class="keyword">in</span> markers]  <span class="comment"># 전체 median size 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # box-whisker: Line2D</span></span><br><span class="line">ls = [l <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.lines)]</span><br><span class="line">ls[-<span class="number">2</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday whisker 색상 변경</span></span><br><span class="line">ls[-<span class="number">1</span>].set_color(<span class="string">&quot;k&quot;</span>)                 <span class="comment"># Sunday box 색 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">1</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line">[l.set_linewidth(<span class="number">5</span>) <span class="keyword">for</span> i, l <span class="keyword">in</span> <span class="built_in">enumerate</span>(ls) <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>] <span class="comment"># 전체 box, whisher 굵기 변경</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # spines 제거, grid 추가, xlabel 제거, ylabel 제거</span></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, )</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;total bill ($)&quot;</span>)</span><br><span class="line">ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, lw=<span class="number">1</span>)</span><br><span class="line">legend = ax.legend()</span><br><span class="line">legend.remove()</span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper right&quot;</span>, ncol=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/violinplotedit09.png"><br></p>
 <h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
 <li>seaborn violin plot도 결국 Matplotlib 객체 모음입니다.</li>
 <li>여러분의 아이디어를 객체 지향 방식에 마음껏 실어 나르기 바랍니다.</li>
@@ -382,22 +398,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/" data-id="cmhueoy2k00ka4gxthe32axae" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/" data-id="cuidz0u6pQX1pczqynoOVgNFu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -473,7 +479,7 @@
         "genre": "Python Data Science",
         "datePublished": "2021-10-21",
         "dateCreated": "2021-10-21",
-        "dateModified": "2021-10-21",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/10/21/Python-DS-87_violinplotedit/",
         "description": "
 Seaborn violin plot은 아름답습니다.
@@ -482,8 +488,9 @@ color와 palette 매개변수로 violin plot의 색을 지정할 수 있습니�
 그러나 특정 violin plot만 색을 바꾸어 강조하는 방법은 잘 알려져있지 않습니다.
 
 1. 예제 데이터
-seaborn의 tips 데이터셋을 사용합니다.1",
-        "wordCount": 1858
+seaborn의 tips 데이터셋을 사용합니다.
+",
+        "wordCount": 1863
     }
 </script>
 
@@ -565,16 +572,6 @@ seaborn의 tips 데이터셋을 사용합니다.1",
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -808,10 +805,6 @@ seaborn의 tips 데이터셋을 사용합니다.1",
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

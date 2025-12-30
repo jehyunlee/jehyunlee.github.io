@@ -12,19 +12,19 @@
     
     <meta name="keywords" content="imagej,image file" />
     
-    <meta name="description" content="여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.   최대한 간결하게 필수적인 지식만 전달하고자 합니다.    Reference  A Fiji Scripting Tutorial #2. Your first Fiji script  2.1. Image File 구조 ImageJ로 다룰 image는 bitmap 형식입니다.    전체 이미지는">
+    <meta name="description" content="여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.   최대한 간결하게 필수적인 지식만 전달하고자 합니다.  Reference  A Fiji Scripting Tutorial #2. Your first Fiji script  2.1. Image File 구조 ImageJ로 다룰 image는 bitmap 형식입니다.   전체 이미지는 pix">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2. Image File 구조">
 <meta property="og:url" content="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.   최대한 간결하게 필수적인 지식만 전달하고자 합니다.    Reference  A Fiji Scripting Tutorial #2. Your first Fiji script  2.1. Image File 구조 ImageJ로 다룰 image는 bitmap 형식입니다.    전체 이미지는">
+<meta property="og:description" content="여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.   최대한 간결하게 필수적인 지식만 전달하고자 합니다.  Reference  A Fiji Scripting Tutorial #2. Your first Fiji script  2.1. Image File 구조 ImageJ로 다룰 image는 bitmap 형식입니다.   전체 이미지는 pix">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/2_image_17.PNG">
 <meta property="article:published_time" content="2019-12-15T19:33:13.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:43:02.363Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.477Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="imagej">
 <meta property="article:tag" content="image file">
+<meta property="article:tag" content="imagej">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/2_image_17.PNG">
     
@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -200,7 +200,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/" class="article-date">
-     <time datetime="2020-11-27T00:43:02.363Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:37.477Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -229,89 +229,107 @@
 
             <ul>
 <li>여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.  </li>
-<li>최대한 간결하게 필수적인 지식만 전달하고자 합니다.  </li>
+<li>최대한 간결하게 필수적인 지식만 전달하고자 합니다.</li>
 </ul>
 <p><strong>Reference</strong></p>
 <blockquote>
 <p>A Fiji Scripting Tutorial <a target="_blank" rel="noopener" href="https://www.ini.uzh.ch/~acardona/fiji-tutorial/#s2">#2. Your first Fiji script</a></p>
 </blockquote>
 <h3 id="2-1-Image-File-구조"><a href="#2-1-Image-File-구조" class="headerlink" title="2.1. Image File 구조"></a>2.1. Image File 구조</h3><ul>
-<li><p><code>ImageJ</code>로 다룰 image는 <code>bitmap</code> 형식입니다.  </p>
-</li>
-<li><p>전체 이미지는 <code>pixel</code>이라 불리는 점의 집합으로 이루어져 있습니다.</p>
-</li>
-<li><p>원점은 좌측 상단이며 아래 이미지는 256x256개의 pixel을 가지고 있습니다.<br><img src="2_image_17.PNG"></p>
-<br></li>
-<li><p>이미지 파일에는 <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성이 있습니다.<br><code>Channel</code>: 하나의 <code>pixel</code>을 몇 가지의 데이터로 표현하는지.<br><code>Slices</code>: 입체적인 시료를 몇 개의 층으로 나누어 분석했는지.<br><code>Frames</code>: 몇 장의 연속된 이미지를 합쳤는지.</p>
-</li>
+<li><code>ImageJ</code>로 다룰 image는 <code>bitmap</code> 형식입니다.  </li>
+<li>전체 이미지는 <code>pixel</code>이라 불리는 점의 집합으로 이루어져 있습니다.</li>
+<li>원점은 좌측 상단이며 아래 이미지는 256x256개의 pixel을 가지고 있습니다.<br><img src="/2_image_17.PNG"></li>
 </ul>
-<p><img src="2_image_16.PNG"><br><br></p>
+<br>
+
+<ul>
+<li>이미지 파일에는 <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성이 있습니다.<br><code>Channel</code>: 하나의 <code>pixel</code>을 몇 가지의 데이터로 표현하는지.<br><code>Slices</code>: 입체적인 시료를 몇 개의 층으로 나누어 분석했는지.<br><code>Frames</code>: 몇 장의 연속된 이미지를 합쳤는지.</li>
+</ul>
+<p><img src="/2_image_16.PNG"><br><br></p>
 <h3 id="2-2-ImageJ에서-Image-File-읽기"><a href="#2-2-ImageJ에서-Image-File-읽기" class="headerlink" title="2.2. ImageJ에서 Image File 읽기."></a>2.2. <code>ImageJ</code>에서 Image File 읽기.</h3><ul>
 <li><code>ImageJ</code>에서는 다른 프로그램처럼 <code>[File] &gt; [Open]</code>을 통해서 이미지 파일을 열 수 있습니다.  </li>
 <li>각자 파일은 조금 나중에 열어보기로 하고, 여기서는 동일한 설명을 위해 같은 파일을 열어보겠습니다.  </li>
 <li><code>ImageJ</code>에서 제공하는 Sample Image를 다음과 같이 열 수 있습니다.  </li>
-<li><code>[File] &gt; [Open Samples]</code>로 가면 다양한 그림들이 있는데, 여기서 <code>Boats (356K)</code>를 선택합시다.  </li>
+<li><code>[File] &gt; [Open Samples]</code>로 가면 다양한 그림들이 있는데, 여기서 <code>Boats (356K)</code>를 선택합시다.</li>
 </ul>
-<p><img src="2_image_0.PNG"><br><br>  </p>
+<p><img src="/2_image_0.PNG"><br><br>  </p>
 <h3 id="2-3-Image-File-정보-읽기"><a href="#2-3-Image-File-정보-읽기" class="headerlink" title="2.3. Image File 정보 읽기."></a>2.3. Image File 정보 읽기.</h3><ul>
-<li>Image File에 담긴 정보를 읽는 방법을 알아봅시다.<br>가로세로 몇 개의 <code>pixel</code>로 구성되어 있는지, <code>Greyscale</code>은 몇 단계로 구성되어 있는지 등입니다.  </li>
+<li>Image File에 담긴 정보를 읽는 방법을 알아봅시다.<br>가로세로 몇 개의 <code>pixel</code>로 구성되어 있는지, <code>Greyscale</code>은 몇 단계로 구성되어 있는지 등입니다.</li>
 </ul>
 <h4 id="2-3-1-GUI"><a href="#2-3-1-GUI" class="headerlink" title="2.3.1. GUI"></a>2.3.1. GUI</h4><ul>
-<li><p>아래 왼쪽과 같이 흑백 배 사진을 보실 수 있습니다.  </p>
-</li>
-<li><p>사진 왼쪽 위를 자세히 보시면 <code>720x576 pixels; 8-bit, 405K</code>라는 정보가 나와 있습니다만 조금 더 자세히 알아봅시다.  </p>
-</li>
-<li><p><code>[Image] &gt; [Show Info]</code>를 클릭하시면 이미지의 전체적인 정보를 보실 수 있습니다.  </p>
-</li>
-<li><p>이미지 창에서 <code>Ctrl + I</code> 단축키를 입력하셔도 됩니다.<br><img src="2_image_1.PNG" alt=" "></p>
-<br>  </li>
-<li><p>그럼, 아래와 같은 Image File의 정보가 요약된 창이 뜹니다.<br><img src="2_image_2.PNG"></p>
-<br>  </li>
+<li>아래 왼쪽과 같이 흑백 배 사진을 보실 수 있습니다.  </li>
+<li>사진 왼쪽 위를 자세히 보시면 <code>720x576 pixels; 8-bit, 405K</code>라는 정보가 나와 있습니다만 조금 더 자세히 알아봅시다.  </li>
+<li><code>[Image] &gt; [Show Info]</code>를 클릭하시면 이미지의 전체적인 정보를 보실 수 있습니다.  </li>
+<li>이미지 창에서 <code>Ctrl + I</code> 단축키를 입력하셔도 됩니다.<br><img src="/2_image_1.PNG" alt=" "></li>
+</ul>
+<br>  
+
+<ul>
+<li>그럼, 아래와 같은 Image File의 정보가 요약된 창이 뜹니다.<br><img src="/2_image_2.PNG"></li>
+</ul>
+<br>  
+
+<ul>
 <li><p><code>Title</code> 은 파일명, <code>Width</code>은 이미지의 폭, <code>Height</code>는 이미지의 높이, <code>Size</code>는 파일 크기를 말하며,<br><code>Bits per pixel</code>과 <code>Display range</code>는 한 <code>pixel</code>이 담을 수 있는 데이터의 크기를 말합니다.  </p>
 </li>
-<li><p>n bit는 $ 2^{n} $개의 정보를 담을 수 있으므로, 8 bit는 한 <code>pixel</code>의 데이터를 $ 2^{8} = 256 $ 단계로 표현할 수 있습니다.<br>따라서 <code>Display range</code>는 0(black)-255(white)까지의 값을 가질 수 있습니다.  </p>
+<li><p>n bit는 $ 2^{n} $개의 정보를 담을 수 있으므로, 8 bit는 한 <code>pixel</code>의 데이터를 $ 2^{8} &#x3D; 256 $ 단계로 표현할 수 있습니다.<br>따라서 <code>Display range</code>는 0(black)-255(white)까지의 값을 가질 수 있습니다.  </p>
 </li>
-<li><p><code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성은 <code>[Image] &gt; [Properties...]</code> 에서 다음과 같이 확인 가능합니다.<br><img src="2_image_6.PNG" alt=" "></p>
-<br>  </li>
-<li><p>다른 예제를 통해 복잡한 이미지의 기본 정보를 살펴봅시다.  </p>
+<li><p><code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성은 <code>[Image] &gt; [Properties...]</code> 에서 다음과 같이 확인 가능합니다.<br><img src="/2_image_6.PNG" alt=" "></p>
 </li>
-<li><p><code>[File] &gt; [Open Samples]</code>에서 <code>mitosis.tif</code>를 선택합니다.<br>2 <code>channel</code>, 5 <code>slice</code>, 51 <code>frames</code>를 가진 171 x 196 image 입니다.<br><img src="2_image_7.PNG"></p>
-<br>  </li>
-<li><p><code>Image Info</code>: 파일명, 이미지 크기, <code>Bits per pixel</code>, <code>Frame</code> 관련 정보입니다.<br><img src="2_image_9.PNG"></p>
-<br>  </li>
-<li><p><code>Image Properties...</code>: <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 정보입니다.<br><img src="2_image_8.PNG"></p>
-<br>  </li>
 </ul>
+<br>  
+
+<ul>
+<li>다른 예제를 통해 복잡한 이미지의 기본 정보를 살펴봅시다.  </li>
+<li><code>[File] &gt; [Open Samples]</code>에서 <code>mitosis.tif</code>를 선택합니다.<br>2 <code>channel</code>, 5 <code>slice</code>, 51 <code>frames</code>를 가진 171 x 196 image 입니다.<br><img src="/2_image_7.PNG"></li>
+</ul>
+<br>  
+
+<ul>
+<li><code>Image Info</code>: 파일명, 이미지 크기, <code>Bits per pixel</code>, <code>Frame</code> 관련 정보입니다.<br><img src="/2_image_9.PNG"></li>
+</ul>
+<br>  
+
+<ul>
+<li><code>Image Properties...</code>: <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 정보입니다.<br><img src="/2_image_8.PNG"></li>
+</ul>
+<br>  
+
 <h4 id="2-3-2-ImageJ-Python-Script"><a href="#2-3-2-ImageJ-Python-Script" class="headerlink" title="2.3.2. ImageJ Python Script."></a>2.3.2. <code>ImageJ Python</code> Script.</h4><ul>
-<li><p>우리의 목적은 <code>python</code> script를 이용해서 이미지를 처리하는 것입니다.  </p>
-</li>
-<li><p><code>python</code> 명령어를 이용해서 이미지에 드러난 형상과 <code>pixel</code> 데이터를 처리하는 연습을 해 보겠습니다.  </p>
-</li>
-<li><p>다시 <code>Boats</code>를 화면에 띄우고 script 창을 열어봅시다. <code>[File] &gt; [New] &gt; [Script..]</code>를 클릭하면 됩니다.<br><img src="2_image_3.PNG"></p>
-<br>  </li>
-<li><p>단축키 <code>[</code>를 누르면 한 번에 아래와 같은 창을 띄울 수 있습니다.  </p>
-</li>
-<li><p><code>ImageJ</code>는 상당히 많은 언어를 제공합니다. [<a target="_blank" rel="noopener" href="https://imagej.net/Scripting">상세링크</a>]<br>우리는 <code>python</code>을 이용한 스크립트를 작성할 것이므로 이 중에서 <code>python</code>을 선택합시다.<br><img src="2_image_4.PNG"></p>
-<br>  </li>
+<li>우리의 목적은 <code>python</code> script를 이용해서 이미지를 처리하는 것입니다.  </li>
+<li><code>python</code> 명령어를 이용해서 이미지에 드러난 형상과 <code>pixel</code> 데이터를 처리하는 연습을 해 보겠습니다.  </li>
+<li>다시 <code>Boats</code>를 화면에 띄우고 script 창을 열어봅시다. <code>[File] &gt; [New] &gt; [Script..]</code>를 클릭하면 됩니다.<br><img src="/2_image_3.PNG"></li>
+</ul>
+<br>  
+
+<ul>
+<li>단축키 <code>[</code>를 누르면 한 번에 아래와 같은 창을 띄울 수 있습니다.  </li>
+<li><code>ImageJ</code>는 상당히 많은 언어를 제공합니다. [<a target="_blank" rel="noopener" href="https://imagej.net/Scripting">상세링크</a>]<br>우리는 <code>python</code>을 이용한 스크립트를 작성할 것이므로 이 중에서 <code>python</code>을 선택합시다.<br><img src="/2_image_4.PNG"></li>
+</ul>
+<br>  
+
+<ul>
 <li><p>엄밀히 말하면, <code>ImageJ</code>에서 지원하는 것은 <code>Python</code>이 아니라 <code>Jython</code>입니다.<br><code>Jython</code>은 <code>JAVA</code> 플랫폼에서 <code>Python</code>을 구현한 것으로, <code>JAVA</code> class를 불러올 수 있습니다. [<a target="_blank" rel="noopener" href="https://jythonbook-ko.readthedocs.io/en/latest/LangSyntax.html">Link</a>]  </p>
 </li>
 <li><p><code>JAVA</code> 기능을 활용해 UI를 제작할 수 있습니다.<br>이미지 분석 및 조작 부분은 <code>python</code>의 문법을 따릅니다. [<a target="_blank" rel="noopener" href="https://imagej.net/Jython_Scripting">Link</a>]  </p>
 </li>
-<li><p>script 창에 아래와 같은 명령을 입력하고 실행해 봅시다.<br>실행 단축키는 <code>Ctrl + R</code> 입니다.<br><img src="2_image_5.PNG">  </p>
-<br>  </li>
+<li><p>script 창에 아래와 같은 명령을 입력하고 실행해 봅시다.<br>실행 단축키는 <code>Ctrl + R</code> 입니다.<br><img src="/2_image_5.PNG"></p>
+</li>
 </ul>
+<br>  
+
 <h4 id="2-3-3-ImageJ-Python-Script-설명"><a href="#2-3-3-ImageJ-Python-Script-설명" class="headerlink" title="2.3.3. ImageJ Python Script 설명."></a>2.3.3. <code>ImageJ Python</code> Script 설명.</h4><ol>
 <li><p>package <code>ij</code>로부터 <code>IJ</code>를 불러옵니다.  </p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>imagej</code>가 제공하는 package <code>ij</code> 안에는 <code>IJ</code>외에도 다양한 <code>class</code>가 있습니다. [<a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/package-summary.html">Link</a>]<br>이 중 지금 우리가 호출할 명령어는 <code>IJ</code> 안에만 있으므로 다른 것들은 두고 <code>IJ</code>만 불러오는 것입니다.  </li>
+<li><code>imagej</code>가 제공하는 package <code>ij</code> 안에는 <code>IJ</code>외에도 다양한 <code>class</code>가 있습니다. [<a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/package-summary.html">Link</a>]<br>이 중 지금 우리가 호출할 명령어는 <code>IJ</code> 안에만 있으므로 다른 것들은 두고 <code>IJ</code>만 불러오는 것입니다.</li>
 </ul>
 </li>
 <li><p>현재 열려 있는 그림을 잡아옵니다.  </p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp = IJ.getImage()</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>IJ.getImage()</code>는 열려 있거나 마우스가 최근에 클릭한 이미지를 데이터로 메모리에 담는 명령입니다.<br><code>imp =</code>이 앞에 있으므로, 지금 열린 <code>Boat</code> 이미지를 통째로 <code>imp</code>라는 변수에 넣겠다는 뜻입니다.  </li>
-<li>이제 <code>imp</code>에서 읽는 정보는 <code>Boat</code> 이미지의 정보이고, <code>imp</code>를 수정하면 <code>Boat</code>이미지가 수정됩니다.  </li>
+<li>이제 <code>imp</code>에서 읽는 정보는 <code>Boat</code> 이미지의 정보이고, <code>imp</code>를 수정하면 <code>Boat</code>이미지가 수정됩니다.</li>
 </ul>
 </li>
 <li><p>그림의 정보를 출력합니다.  </p>
@@ -322,43 +340,49 @@
 <li><code>img</code> : “image data이고, 상세 정보는 []와 같음”.  </li>
 <li><code>&quot;boats.gif&quot;</code> : 파일명  </li>
 <li><code>(-5)</code> : ID  </li>
-<li><code>8-bit</code> : <code>pixel</code>의 data level ($ 2^{8} = 256 $)  </li>
+<li><code>8-bit</code> : <code>pixel</code>의 data level ($ 2^{8} &#x3D; 256 $)  </li>
 <li><code>720x576</code> : <code>width</code> x <code>height</code>  </li>
 <li>첫번째 <code>x1</code> : <code>channels</code>    </li>
 <li>두번째 <code>x1</code> : <code>slices</code>  </li>
-<li>세번째 <code>x1</code> : <code>frames</code>        </li>
+<li>세번째 <code>x1</code> : <code>frames</code></li>
 </ul>
 </li>
-<li><code>width</code>, <code>height</code>, <code>channels</code>, <code>slices</code>, <code>frames</code> 는 이미지 데이터에 접근하는 주소가 됩니다.  <br>  </li>
+<li><code>width</code>, <code>height</code>, <code>channels</code>, <code>slices</code>, <code>frames</code> 는 이미지 데이터에 접근하는 주소가 됩니다.</li>
 </ul>
 </li>
 </ol>
+<br>  
+
 <h3 id="2-4-Image-Meta-Data-읽기"><a href="#2-4-Image-Meta-Data-읽기" class="headerlink" title="2.4. Image Meta Data 읽기."></a>2.4. Image Meta Data 읽기.</h3><ul>
 <li>Image Data가 Image가 어떻게 구성되어 있는지에 대한 정보라면,<br>Image Meta Data는 Image가 어떻게 형성되어 있는지에 대한 정보입니다.  </li>
-<li><code>SEM</code>이나 <code>TEM</code>같은 현미경 사진 분석에 중요한 nm/pixel, 논문 작성시 필요한 가속전압 등이 있습니다.  </li>
+<li><code>SEM</code>이나 <code>TEM</code>같은 현미경 사진 분석에 중요한 nm&#x2F;pixel, 논문 작성시 필요한 가속전압 등이 있습니다.</li>
 </ul>
 <h4 id="2-4-1-TEM-Image-dm3"><a href="#2-4-1-TEM-Image-dm3" class="headerlink" title="2.4.1. TEM Image (.dm3)"></a>2.4.1. TEM Image (<code>.dm3</code>)</h4><ul>
 <li><code>ImageJ</code>에서는 <code>Gatan Digital Micrograph</code>의 <code>dm3</code> format을 지원합니다.  </li>
 <li>별도의 옵션이나 설치 없이 <code>[File] &gt; [Open]</code>을 통해 <code>dm3</code>파일을 열 수 있고,<br><code>Show Info</code>를 하면 다음과 같은 meta data 전체를 볼 수 있습니다.  </li>
-<li><code>Resolution</code>, <code>Pixel size</code>, <code>Voltage</code>, <code>Magnification</code>등의 정보가 보입니다.<br><img src="2_image_10.PNG">  </li>
+<li><code>Resolution</code>, <code>Pixel size</code>, <code>Voltage</code>, <code>Magnification</code>등의 정보가 보입니다.<br><img src="/2_image_10.PNG"></li>
 </ul>
 <h4 id="2-4-2-SEM-Image-tif"><a href="#2-4-2-SEM-Image-tif" class="headerlink" title="2.4.2. SEM Image (.tif)"></a>2.4.2. SEM Image (<code>.tif</code>)</h4><ul>
-<li><p><code>ImageJ</code>에서 <code>.tif</code>파일을 연 후, <code>Show Info</code>를 하면 <code>Resolution</code>과 <code>Pixel Size</code>정도만 보입니다.<br><img src="2_image_14.PNG">  </p>
-<br>  </li>
-<li><p><code>ImageJ</code>에서 <code>tif</code>의 meta data 전체를 보기 위해서는 별도의 플러그인을 설치해야 합니다.    </p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/plugins/tiff-tags.html">다운로드 링크</a>에서 <code>tiff_tags.jar</code>를 다운받은 후 <code>ImageJ</code>를 재시작합니다.  </p>
-</li>
-<li><p>그리고 <code>[Plugins] &gt; [TIFF Tags]</code>를 선택하면 파일 열기 창이 뜨는데, 여기에서 파일을 선택합니다.  </p>
-</li>
+<li><code>ImageJ</code>에서 <code>.tif</code>파일을 연 후, <code>Show Info</code>를 하면 <code>Resolution</code>과 <code>Pixel Size</code>정도만 보입니다.<br><img src="/2_image_14.PNG"></li>
 </ul>
-<p><img src="2_image_11.PNG"><br><br>  </p>
+<br>  
+
 <ul>
-<li><p>그리고 작은 창에서 한 줄에 몇 글자를 보여줄 지를 선택하면,<br><img src="2_image_13.PNG">  </p>
-<br>  </li>
-<li><p>아래와 같은 창이 뜨는데, <strong>모든 중요 정보가 한 줄로 나타나서 별로 유용하지 않아 사용을 권하지 않습니다.</strong><br><img src="2_image_15.PNG">  </p>
-<br>  </li>
+<li><code>ImageJ</code>에서 <code>tif</code>의 meta data 전체를 보기 위해서는 별도의 플러그인을 설치해야 합니다.    </li>
+<li><a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/plugins/tiff-tags.html">다운로드 링크</a>에서 <code>tiff_tags.jar</code>를 다운받은 후 <code>ImageJ</code>를 재시작합니다.  </li>
+<li>그리고 <code>[Plugins] &gt; [TIFF Tags]</code>를 선택하면 파일 열기 창이 뜨는데, 여기에서 파일을 선택합니다.</li>
 </ul>
+<p><img src="/2_image_11.PNG"><br><br>  </p>
+<ul>
+<li>그리고 작은 창에서 한 줄에 몇 글자를 보여줄 지를 선택하면,<br><img src="/2_image_13.PNG"></li>
+</ul>
+<br>  
+
+<ul>
+<li>아래와 같은 창이 뜨는데, <strong>모든 중요 정보가 한 줄로 나타나서 별로 유용하지 않아 사용을 권하지 않습니다.</strong><br><img src="/2_image_15.PNG"></li>
+</ul>
+<br>  
+
 
         </div>
 		<p>
@@ -371,22 +395,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/" data-id="cmhueoxw200804gxtgm0u8gbs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/" data-id="cuidF5L6k_Y0zy454C3LjxBhh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -462,11 +476,11 @@
         "genre": "ImageJ Tutorial",
         "datePublished": "2019-12-16",
         "dateCreated": "2019-12-16",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/",
         "description": "
 여러분이 다룰 Image File의 구조를 간략하게 살펴보겠습니다.  
-최대한 간결하게 필수적인 지식만 전달하고자 합니다.  
+최대한 간결하게 필수적인 지식만 전달하고자 합니다.
 
 Reference
 
@@ -474,9 +488,8 @@ A Fiji Scripting Tutorial #2. Your first Fiji script
 
 2.1. Image File 구조
 ImageJ로 다룰 image는 bitmap 형식입니다.  
-
-전체 이미지는 ",
-        "wordCount": 924
+전체 이미지는 pix",
+        "wordCount": 890
     }
 </script>
 
@@ -558,16 +571,6 @@ ImageJ로 다룰 image는 bitmap 형식입니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -801,10 +804,6 @@ ImageJ로 다룰 image는 bitmap 형식입니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

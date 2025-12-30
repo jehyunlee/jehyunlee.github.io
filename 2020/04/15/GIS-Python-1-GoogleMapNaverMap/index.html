@@ -12,21 +12,21 @@
     
     <meta name="keywords" content="python,gis,google map,naver map" />
     
-    <meta name="description" content="References  Google Maps네이버 지도   지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다. API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.   이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다. 주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이">
+    <meta name="description" content="References  Google Maps네이버 지도   지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다.  API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.  이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다.  주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Google Map, Naver Map URL 만들기">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/04/15/GIS-Python-1-GoogleMapNaverMap/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="References  Google Maps네이버 지도   지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다. API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.   이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다. 주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이">
+<meta property="og:description" content="References  Google Maps네이버 지도   지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다.  API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.  이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다.  주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/1_gnmap_1.PNG">
 <meta property="article:published_time" content="2020-04-15T08:11:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:42:26.492Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:36.816Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="gis">
 <meta property="article:tag" content="google map">
 <meta property="article:tag" content="naver map">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/1_gnmap_1.PNG">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/04/15/GIS-Python-1-GoogleMapNaverMap/" class="article-date">
-     <time datetime="2020-11-27T00:42:26.492Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:36.816Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -234,42 +234,48 @@
 <p><a target="_blank" rel="noopener" href="https://www.google.com/maps">Google Maps</a><br><a target="_blank" rel="noopener" href="https://map.naver.com/v5/?c=14165606.1351249,4367543.5483238,15,0,0,0,dh">네이버 지도</a></p>
 </blockquote>
 <ul>
-<li>지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다.</li>
-<li>API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.</li>
-</ul>
+<li><p>지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다.</p>
+</li>
+<li><p>API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.</p>
+</li>
+<li><p>이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다.</p>
 <ul>
-<li>이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다.<ul>
 <li>주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이 성가십니다. </li>
 <li>이 과정을 자동화 해보겠습니다.</li>
 </ul>
 </li>
 </ul>
 <h2 id="1-지도-URL-만들기"><a href="#1-지도-URL-만들기" class="headerlink" title="1. 지도 URL 만들기"></a>1. 지도 URL 만들기</h2><h3 id="1-1-Google-Map"><a href="#1-1-Google-Map" class="headerlink" title="1.1. Google Map"></a>1.1. Google Map</h3><ul>
-<li>구글 지도의 URL은 <code>https://google.co.kr/maps/@&#123;위도&#125;,&#123;경도&#125;,&#123;배율&#125;z</code>형식입니다.</li>
-<li>아래와 같이 간단한 함수를 만들어 위도, 경도, 배율을 URL로 바꿀 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_google_map</span>(<span class="params">lat: <span class="built_in">float</span>, lon: <span class="built_in">float</span>, mag: <span class="built_in">int</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;https://google.co.kr/maps/@<span class="subst">&#123;lat&#125;</span>,<span class="subst">&#123;lon&#125;</span>,<span class="subst">&#123;mag&#125;</span>z&quot;</span></span><br></pre></td></tr></table></figure>
-<img src="1_gnmap_2.PNG" alt="https://google.co.kr/maps/@36.2736711443984,127.473926291928,18z"></li>
+<li>구글 지도의 URL은 <code>https://google.co.kr/maps/@{위도},{경도},{배율}z</code>형식입니다.</li>
+<li>아래와 같이 간단한 함수를 만들어 위도, 경도, 배율을 URL로 바꿀 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_google_map</span>(<span class="params">lat: <span class="built_in">float</span>, lon: <span class="built_in">float</span>, mag: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;https://google.co.kr/maps/@<span class="subst">&#123;lat&#125;</span>,<span class="subst">&#123;lon&#125;</span>,<span class="subst">&#123;mag&#125;</span>z&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/1_gnmap_2.PNG" alt="https:&#x2F;&#x2F;google.co.kr&#x2F;maps&#x2F;@36.2736711443984,127.473926291928,18z"></p>
 <h3 id="1-2-네이버-지도"><a href="#1-2-네이버-지도" class="headerlink" title="1.2. 네이버 지도"></a>1.2. 네이버 지도</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://pyproj4.github.io/pyproj/stable/">pyproj Documentation</a></p>
 </blockquote>
 <ul>
-<li>네이버 지도의 URL은 <code>http://map.naver.com/v5/search?c=&#123;x좌표&#125;,&#123;y좌표&#125;,&#123;배율&#125;,0,0,0,dh</code>형식입니다.<ul>
+<li><p>네이버 지도의 URL은 <code>http://map.naver.com/v5/search?c={x좌표},{y좌표},{배율},0,0,0,dh</code>형식입니다.</p>
+<ul>
 <li>네이버 지도는 위도와 경도 대신 환산된 x, y 좌표를 받습니다.</li>
 <li>네이버 지도 v5 기준으로 <code>EPSG:3857</code>좌표계를 사용하므로 환산 과정이 필요합니다.</li>
 </ul>
 </li>
+<li><p><code>pyproj</code>의 <code>Proj</code>로 기준 좌표계를 설정하고 <code>transform</code>으로 변환을 수행합니다.</p>
+</li>
 </ul>
-<ul>
-<li><code>pyproj</code>의 <code>Proj</code>로 기준 좌표계를 설정하고 <code>transform</code>으로 변환을 수행합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyproj <span class="keyword">import</span> Proj, transform</span><br><span class="line"></span><br><span class="line"><span class="comment"># navermap</span></span><br><span class="line">proj_NAVER = Proj(init=<span class="string">&#x27;epsg:3857&#x27;</span>)</span><br><span class="line"><span class="comment"># WGS1984</span></span><br><span class="line">proj_WGS1984 = Proj(init=<span class="string">&#x27;epsg:4326&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_naver_map</span>(<span class="params">lat: <span class="built_in">float</span>, lon: <span class="built_in">float</span>, mag: <span class="built_in">int</span></span>):</span></span><br><span class="line">    x, y = transform(proj_WGS1984, proj_NAVER, lon, lat)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;http://map.naver.com/v5/search?c=<span class="subst">&#123;x&#125;</span>,<span class="subst">&#123;y&#125;</span>,<span class="subst">&#123;mag&#125;</span>,0,0,0,dh&quot;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyproj <span class="keyword">import</span> Proj, transform</span><br><span class="line"></span><br><span class="line"><span class="comment"># navermap</span></span><br><span class="line">proj_NAVER = Proj(init=<span class="string">&#x27;epsg:3857&#x27;</span>)</span><br><span class="line"><span class="comment"># WGS1984</span></span><br><span class="line">proj_WGS1984 = Proj(init=<span class="string">&#x27;epsg:4326&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_naver_map</span>(<span class="params">lat: <span class="built_in">float</span>, lon: <span class="built_in">float</span>, mag: <span class="built_in">int</span></span>):</span><br><span class="line">    x, y = transform(proj_WGS1984, proj_NAVER, lon, lat)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;http://map.naver.com/v5/search?c=<span class="subst">&#123;x&#125;</span>,<span class="subst">&#123;y&#125;</span>,<span class="subst">&#123;mag&#125;</span>,0,0,0,dh&quot;</span></span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>URL 마지막에 <code>0,0,0,</code>이라는 숫자가 있는데 각 자리의 의미는 다음과 같습니다.</li>
-<li>첫번째와 두번째 숫자는 의미가 없고, <b>세번째</b> 숫자가 <b>지도 타입</b>을 결정합니다.<br>0: 일반 지도<br>  <img src="1_gnmap_1.PNG" alt="https://map.naver.com/v5/?c=14190332.5642367,4338343.7349721,18,0,0,0,dh"><br>1: 위성 지도<br>  <img src="1_gnmap_3.PNG" alt="https://map.naver.com/v5/?c=14190332.5642367,4338343.7349721,18,0,0,1,dh"><br>2: 위성지도 + 건물명, 도로명, 번지<br>  <img src="1_gnmap_4.PNG" alt="https://map.naver.com/v5/?c=14190332.5642367,4338343.7349721,18,0,0,2,dh"><br>3: 지형지도 + 건물명, 도로명, 번지<br>  <img src="1_gnmap_5.PNG" alt="https://map.naver.com/v5/?c=14190332.5642367,4338343.7349721,18,0,0,3,dh"></li>
+<li>첫번째와 두번째 숫자는 의미가 없고, <b>세번째</b> 숫자가 <b>지도 타입</b>을 결정합니다.<br>0: 일반 지도<br>  <img src="/1_gnmap_1.PNG" alt="https:&#x2F;&#x2F;map.naver.com&#x2F;v5&#x2F;?c&#x3D;14190332.5642367,4338343.7349721,18,0,0,0,dh"><br>1: 위성 지도<br>  <img src="/1_gnmap_3.PNG" alt="https:&#x2F;&#x2F;map.naver.com&#x2F;v5&#x2F;?c&#x3D;14190332.5642367,4338343.7349721,18,0,0,1,dh"><br>2: 위성지도 + 건물명, 도로명, 번지<br>  <img src="/1_gnmap_4.PNG" alt="https:&#x2F;&#x2F;map.naver.com&#x2F;v5&#x2F;?c&#x3D;14190332.5642367,4338343.7349721,18,0,0,2,dh"><br>3: 지형지도 + 건물명, 도로명, 번지<br>  <img src="/1_gnmap_5.PNG" alt="https:&#x2F;&#x2F;map.naver.com&#x2F;v5&#x2F;?c&#x3D;14190332.5642367,4338343.7349721,18,0,0,3,dh"></li>
 </ul>
 <h2 id="2-Pandas-Dataframe에-적용하기"><a href="#2-Pandas-Dataframe에-적용하기" class="headerlink" title="2. Pandas Dataframe에 적용하기"></a>2. Pandas Dataframe에 적용하기</h2><ul>
-<li><code>pandas.DataFrame</code>이나 <code>geopandas.geoDataFrame</code>에 <code>.apply()</code>를 적용해서 구글 지도와 네이버 지도의 URL을 담을 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;googlemap&#x27;</span>] = df.apply(<span class="keyword">lambda</span> x: create_google_map(x[<span class="string">&#x27;lat&#x27;</span>], x[<span class="string">&#x27;lon&#x27;</span>]), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&#x27;navermap&#x27;</span>] = df.apply(<span class="keyword">lambda</span> x: create_naver_map(x[<span class="string">&#x27;lat&#x27;</span>], x[<span class="string">&#x27;lon&#x27;</span>]), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<img src="1_gnmap_6.PNG"></li>
+<li><code>pandas.DataFrame</code>이나 <code>geopandas.geoDataFrame</code>에 <code>.apply()</code>를 적용해서 구글 지도와 네이버 지도의 URL을 담을 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;googlemap&#x27;</span>] = df.apply(<span class="keyword">lambda</span> x: create_google_map(x[<span class="string">&#x27;lat&#x27;</span>], x[<span class="string">&#x27;lon&#x27;</span>]), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&#x27;navermap&#x27;</span>] = df.apply(<span class="keyword">lambda</span> x: create_naver_map(x[<span class="string">&#x27;lat&#x27;</span>], x[<span class="string">&#x27;lon&#x27;</span>]), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/1_gnmap_6.PNG"></p>
 
         </div>
 		<p>
@@ -282,22 +288,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/04/15/GIS-Python-1-GoogleMapNaverMap/" data-id="cmhueoxrc00074gxt6u9n80bo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/04/15/GIS-Python-1-GoogleMapNaverMap/" data-id="cuidpVe8ta03nVCZ1TAkQte6k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -373,7 +369,7 @@
         "genre": "GIS Python",
         "datePublished": "2020-04-15",
         "dateCreated": "2020-04-15",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/04/15/GIS-Python-1-GoogleMapNaverMap/",
         "description": "References
 
@@ -381,11 +377,12 @@ Google Maps네이버 지도
 
 
 지리데이터를 분석하다 보면 웹기반 지도서비스가 필요할 때가 있습니다.
+
 API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능이 필요하기도 합니다.
 
-
 이럴 때는 웹브라우저를 켜고 구글 지도나 네이버 지도를 들어가 검색을 합니다.
-주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이 ",
+
+주소를 알면 간단하겠지만 위경도 좌표밖에 모른다면 많이",
         "wordCount": 318
     }
 </script>
@@ -468,16 +465,6 @@ API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능�
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -711,10 +698,6 @@ API를 사용해서 notebook 상에서 띄워볼 수도 있지만 전체 기능�
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

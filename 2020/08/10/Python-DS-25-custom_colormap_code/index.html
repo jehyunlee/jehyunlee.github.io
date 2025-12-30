@@ -12,23 +12,23 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,color,colormap,colorbar" />
     
-    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다. 하나는 valu">
+    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다.  하나는 val">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib Colormap Customization (2)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다. 하나는 valu">
+<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다.  하나는 val">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/25_ccmap_code_0.png">
 <meta property="article:published_time" content="2020-08-10T12:12:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:44:37.988Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.060Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="color">
-<meta property="article:tag" content="colormap">
 <meta property="article:tag" content="colorbar">
+<meta property="article:tag" content="colormap">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/25_ccmap_code_0.png">
     
@@ -87,7 +87,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -204,7 +204,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/08/10/Python-DS-25-custom_colormap_code/" class="article-date">
-     <time datetime="2020-11-27T00:44:37.988Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:38.060Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,12 +239,14 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html">Creating Colormaps in Matplotlib</a></p>
 </blockquote>
 <h2 id="Matplotlib-Custom-Colormap"><a href="#Matplotlib-Custom-Colormap" class="headerlink" title="Matplotlib Custom Colormap"></a>Matplotlib Custom Colormap</h2><ul>
-<li><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에는 크게 두 가지 그림이 등장합니다.<ul>
+<li><p><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에는 크게 두 가지 그림이 등장합니다.</p>
+<ul>
 <li>하나는 value에 따른 컬러맵 명도<br><br><img src="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png"><br></li>
-<li>또 하나는 여러 컬러맵이 적용된 한반도의 풍속 분포 그림입니다.<br><br><img src="25_ccmap_code_01.png"><br></li>
+<li>또 하나는 여러 컬러맵이 적용된 한반도의 풍속 분포 그림입니다.<br><br><img src="/25_ccmap_code_01.png"><br></li>
 </ul>
 </li>
-<li>이번 글에서는 이 그림들 중 첫 번째 그림이 그려진 과정을 코드로 살펴보겠습니다.</li>
+<li><p>이번 글에서는 이 그림들 중 첫 번째 그림이 그려진 과정을 코드로 살펴보겠습니다.</p>
+</li>
 </ul>
 <h3 id="1-Value-vs-Lightness"><a href="#1-Value-vs-Lightness" class="headerlink" title="1. Value vs Lightness"></a>1. Value vs Lightness</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#sphx-glr-tutorials-colors-colormaps-py">Choosing Colormaps in Matpltlib</a></p>
@@ -267,14 +269,13 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/gallery/showcase/anatomy.html">Anatomy of a figure</a> </p>
 </blockquote>
 <ul>
-<li><p>그림의 틀<code>Figure</code>와 데이터가 놓일 축공간<code>Axes</code>을 지정합니다.</p>
-</li>
-<li><p><code>N</code>개의 컬러맵을 동시에 표현할 준비를 합니다.</p>
+<li>그림의 틀<code>Figure</code>와 데이터가 놓일 축공간<code>Axes</code>을 지정합니다.</li>
+<li><code>N</code>개의 컬러맵을 동시에 표현할 준비를 합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">N = <span class="number">5</span>  <span class="comment"># 일단 5개로 시작합니다.</span></span><br><span class="line">fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)  <span class="comment"># 3x4 크기 그림을 나열합니다.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> axes:</span><br><span class="line">    ax.scatter([<span class="number">0</span>,<span class="number">1</span>], [<span class="number">0</span>,<span class="number">1</span>])  <span class="comment"># dummy data입니다.</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()    </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="25_ccmap_code_02.png"><br></p>
-</li>
-<li><p>y축 데이터는 맨 왼쪽 그림에만 표기할 준비를 합니다.</p>
+<p><img src="/25_ccmap_code_02.png"><br></p>
 <ul>
+<li>y축 데이터는 맨 왼쪽 그림에만 표기할 준비를 합니다.<ul>
 <li><code>sharey=True</code>를 적용해서 축공간들을 동기화합니다.</li>
 <li>두번째 이후 그림에서 y축을 없애고 범위를 통일합니다.</li>
 </ul>
@@ -299,29 +300,40 @@
 </ul>
 </li>
 <li><p><b>Blues_r</b>는 짙은 파랑부터 밝은 하늘색까지 변하는 컬러맵입니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line">cmap = <span class="string">&quot;Blues_r&quot;</span></span><br><span class="line">blues_r = cm.get_cmap(cmap)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(blues_r))</span><br></pre></td></tr></table></figure>
 <p>실행결과 : <code>LinearSegmentedColormap</code> 형식입니다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#x27;matplotlib.colors.LinearSegmentedColormap&#x27;&gt;</span><br></pre></td></tr></table></figure>
-<br></li>
-<li><p>표현하고자 하는 숫자를 <code>( )</code>에 넣어 붙여주면 색이 출력됩니다.</p>
+<br>
+
+<ul>
+<li>표현하고자 하는 숫자를 <code>( )</code>에 넣어 붙여주면 색이 출력됩니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(blues_r(<span class="number">0.5</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(blues_r(<span class="number">0.5</span>)))</span><br></pre></td></tr></table></figure>
 <p>실행결과 : <code>tuple</code> 형식의 RGBA 데이터가 나옵니다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(0.42274509803921567, 0.684075355632449, 0.8398923490965013, 1.0)</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br></pre></td></tr></table></figure>
-<br></li>
-<li><p>여러 데이터를 List 형식으로 넣어주면 해당 색상이 나열됩니다.</p>
+<br>
+
+<ul>
+<li>여러 데이터를 List 형식으로 넣어주면 해당 색상이 나열됩니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(blues_r([<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.6</span>, <span class="number">0.8</span>, <span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(blues_r([<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.6</span>, <span class="number">0.8</span>, <span class="number">1</span>])))</span><br></pre></td></tr></table></figure>
 <p>실행결과 : <code>numpy.ndarray</code>형식의 RGBA 데이터가 나옵니다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[[0.03137255 0.18823529 0.41960784 1.        ]</span><br><span class="line"> [0.09019608 0.39294118 0.67058824 1.        ]</span><br><span class="line"> [0.29098039 0.5945098  0.78901961 1.        ]</span><br><span class="line"> [0.57960784 0.77019608 0.87372549 1.        ]</span><br><span class="line"> [0.81411765 0.88392157 0.94980392 1.        ]</span><br><span class="line"> [0.96862745 0.98431373 1.         1.        ]]</span><br><span class="line">&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br></pre></td></tr></table></figure>
-<br></li>
-<li><p>RGB 색상을 CIELAB으로 변환하기 위해 <code>cspace_converter</code>를 사용합니다.</p>
-</li>
-<li><p>그리고 투명도를 담당하는 A(alpha)채널을 제외한 나머지 RGB만 입력합니다.</p>
+<br>
+
+<ul>
+<li>RGB 색상을 CIELAB으로 변환하기 위해 <code>cspace_converter</code>를 사용합니다.</li>
+<li>그리고 투명도를 담당하는 A(alpha)채널을 제외한 나머지 RGB만 입력합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">rgb = blues_r([<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.6</span>, <span class="number">0.8</span>, <span class="number">1</span>])[:, :<span class="number">3</span>]  <span class="comment"># Data를 RGB로 변환</span></span><br><span class="line">lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(rgb)  <span class="comment"># RGB를 CIELAB으로 변환</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(lab)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(lab))</span><br></pre></td></tr></table></figure>
 <p>실행결과 : <code>numpy.ndarray</code>형식의 CIELAB 으로 변환됩니다.<br>이 중 첫번째 열이 <b>Lightness $$L^*$$</b>에 해당합니다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[[ 22.18014584  -6.42929944 -23.01729555]</span><br><span class="line"> [ 42.46541635 -10.62409381 -25.68722564]</span><br><span class="line"> [ 61.34976829 -13.77753277 -21.06338743]</span><br><span class="line"> [ 78.52932851 -11.90227692 -14.08646179]</span><br><span class="line"> [ 90.10413892  -5.7820838   -9.58766874]</span><br><span class="line"> [ 98.62348915  -2.92558943  -3.50908208]]</span><br><span class="line">&lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br></pre></td></tr></table></figure>
-<br></li>
-<li><p><b>주의 :</b> $$Y = 0.2126R + 0.7152G + 0.0722B$$ 라는 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Relative_luminance">공식</a>이 있습니다.</p>
+<br>
+
 <ul>
+<li><b>주의 :</b> $$Y &#x3D; 0.2126R + 0.7152G + 0.0722B$$ 라는 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Relative_luminance">공식</a>이 있습니다.<ul>
 <li>여기서 구하는 $$Y$$는 휘도<code>Luminance</code>로, 명도<code>Lightness</code>와는 엄밀히 말해 다릅니다.</li>
 <li>지금은 우리 눈이 받아들이는 밝기인 명도를 중심으로 이야기 중입니다.</li>
 <li>혼동을 방지하기 위해 휘도는 잠시 접어두겠습니다.<br></li>
@@ -332,14 +344,13 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.axes.Axes.scatter.html?highlight=axes%20scatter#matplotlib.axes.Axes.scatter">matplotlib.axes.Axes.scatter</a></p>
 </blockquote>
 <ul>
-<li><p>5가지 colormap에 0부터 1까지의 값을 입력하면서 데이터의 변화를 컬러맵으로 표시해봅시다.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.axes.Axes.scatter.html?highlight=axes%20scatter#matplotlib.axes.Axes.scatter">scatter plot</a>을 두껍게 겹쳐 그리는 방식으로 색상 변화를 표현하겠습니다.</p>
+<li>5가지 colormap에 0부터 1까지의 값을 입력하면서 데이터의 변화를 컬러맵으로 표시해봅시다.</li>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.axes.Axes.scatter.html?highlight=axes%20scatter#matplotlib.axes.Axes.scatter">scatter plot</a>을 두껍게 겹쳐 그리는 방식으로 색상 변화를 표현하겠습니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) <span class="comment"># 표현할 data를 0~1까지 256단계로 만듬</span></span><br><span class="line"></span><br><span class="line">cmaps = [<span class="string">&quot;gist_gray&quot;</span>, <span class="string">&quot;bone&quot;</span>, <span class="string">&quot;Blues_r&quot;</span>, <span class="string">&quot;Greens_r&quot;</span>, <span class="string">&quot;Oranges_r&quot;</span>]  <span class="comment"># 표현할 컬러맵 리스트</span></span><br><span class="line">N = <span class="built_in">len</span>(cmaps)  <span class="comment"># 입력받는 cmap 수에 따라 변경되도록 수정</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, cmap <span class="keyword">in</span> <span class="built_in">zip</span>(axes, cmaps): <span class="comment"># axes마다 다른 cmap 적용</span></span><br><span class="line">                                  <span class="comment"># cmaps를 함께 받도록 zip() 사용</span></span><br><span class="line">    </span><br><span class="line">    rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">    lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(rgb)  <span class="comment"># RGB 색상을 CIELAB으로 변경</span></span><br><span class="line">    y = lab[:, <span class="number">0</span>]                                     <span class="comment"># Lightness만 추출</span></span><br><span class="line">    ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>)           <span class="comment"># plot data as colormap</span></span><br><span class="line">                                                      <span class="comment"># x : 0~1까지의 데이터</span></span><br><span class="line">                                                      <span class="comment"># y : 선택된 컬러맵에서 x에 해당하는 명도 </span></span><br><span class="line">                                                      <span class="comment"># c : x를 색상으로 표현 </span></span><br><span class="line">                                                      <span class="comment"># cmap : 입력받은 cmap 적용</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()    </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="25_ccmap_code_03.png"><br></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#sphx-glr-tutorials-colors-colormaps-py">공식 홈페이지</a>의 그림과 비슷하게 출력되었습니다.</p>
-</li>
+<p><img src="/25_ccmap_code_03.png"><br></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#sphx-glr-tutorials-colors-colormaps-py">공식 홈페이지</a>의 그림과 비슷하게 출력되었습니다.</li>
 </ul>
 <h3 id="1-3-Controlling-Figure-Aesthetics"><a href="#1-3-Controlling-Figure-Aesthetics" class="headerlink" title="1.3. Controlling Figure Aesthetics"></a>1.3. Controlling Figure Aesthetics</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://jehyunlee.tistory.com/4">데이터 시각화 교과서</a></p>
@@ -362,18 +373,20 @@
 </li>
 </ul>
 <h5 id="1-3-1-1-Larger-Ticklabels"><a href="#1-3-1-1-Larger-Ticklabels" class="headerlink" title="1.3.1.1. Larger Ticklabels"></a>1.3.1.1. Larger Ticklabels</h5><ul>
-<li><code>ax.scatter()</code> 아래에 다음 두 줄을 추가해줍니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) <span class="comment"># x축 눈금 글꼴 키우기</span></span><br><span class="line">ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) <span class="comment"># y축 눈금 글꼴 키우기</span></span><br></pre></td></tr></table></figure></li>
-<li>실행결과 : 글꼴이 커졌습니다.<br><img src="25_ccmap_code_04.png"><br></li>
+<li><code>ax.scatter()</code> 아래에 다음 두 줄을 추가해줍니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) <span class="comment"># x축 눈금 글꼴 키우기</span></span><br><span class="line">ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) <span class="comment"># y축 눈금 글꼴 키우기</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과 : 글꼴이 커졌습니다.<br><img src="/25_ccmap_code_04.png"><br></li>
 </ul>
 <h5 id="1-3-1-2-Needless-Spines-Removal"><a href="#1-3-1-2-Needless-Spines-Removal" class="headerlink" title="1.3.1.2. Needless Spines Removal"></a>1.3.1.2. Needless Spines Removal</h5><h5 id="1-3-1-3-y-label-Placement"><a href="#1-3-1-3-y-label-Placement" class="headerlink" title="1.3.1.3. $$y$$-label Placement"></a>1.3.1.3. $$y$$-label Placement</h5><h5 id="1-3-1-4-Grids-On"><a href="#1-3-1-4-Grids-On" class="headerlink" title="1.3.1.4. Grids On"></a>1.3.1.4. Grids On</h5><ul>
-<li><p>맨 왼쪽 그림은 위<code>top</code>와 오른쪽<code>right</code>만, 나머지는 왼쪽<code>left</code>까지 지워줍니다.</p>
-</li>
-<li><p>첫 번째 축공간에 예외를 지정하기 위해 <code>for ~ enumerate()</code>를 사용합니다.</p>
+<li>맨 왼쪽 그림은 위<code>top</code>와 오른쪽<code>right</code>만, 나머지는 왼쪽<code>left</code>까지 지워줍니다.</li>
+<li>첫 번째 축공간에 예외를 지정하기 위해 <code>for ~ enumerate()</code>를 사용합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) </span><br><span class="line"></span><br><span class="line">cmaps = [<span class="string">&quot;gist_gray&quot;</span>, <span class="string">&quot;bone&quot;</span>, <span class="string">&quot;Blues_r&quot;</span>, <span class="string">&quot;Greens_r&quot;</span>, <span class="string">&quot;Oranges_r&quot;</span>] </span><br><span class="line">N = <span class="built_in">len</span>(cmaps) </span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, cmap) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, cmaps)):  <span class="comment"># enumerate 도입</span></span><br><span class="line">    rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">    lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(rgb)</span><br><span class="line">    y = lab[:, <span class="number">0</span>]                                    </span><br><span class="line">    ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>)      </span><br><span class="line">    </span><br><span class="line">    ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">    ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">    ax.spines[<span class="string">&#x27;top&#x27;</span>].set_visible(<span class="literal">False</span>)    <span class="comment"># 위쪽 spine 없애기</span></span><br><span class="line">    ax.spines[<span class="string">&#x27;right&#x27;</span>].set_visible(<span class="literal">False</span>)  <span class="comment"># 오른쪽 spine 없애기</span></span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)                          <span class="comment"># grid 보이기</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        ax.set_ylabel(<span class="string">&quot;Lightness $L^*$&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;)  <span class="comment"># y-label 달기</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ax.spines[<span class="string">&#x27;left&#x27;</span>].set_visible(<span class="literal">False</span>)  <span class="comment"># 2번째 이후 왼쪽 spine 없애기</span></span><br><span class="line">                                                     </span><br><span class="line">plt.tight_layout()  </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="25_ccmap_code_05.png"><br></p>
-</li>
-<li><p>생각한대로 다 됐는데 생각보다 불편합니다.</p>
+<p><img src="/25_ccmap_code_05.png"><br></p>
 <ul>
+<li>생각한대로 다 됐는데 생각보다 불편합니다.<ul>
 <li><b>데이터가 grid 뒤에</b> 있어서 답답합니다.</li>
 <li><b>공간이 좁습니다.</b> 빡빡한 느낌이 듭니다.</li>
 <li>컬러맵 윗부분 <b>색상이 잘 보이지 않습니다.</b></li>
@@ -382,12 +395,12 @@
 </li>
 </ul>
 <h5 id="1-3-1-5-Axes-Movement"><a href="#1-3-1-5-Axes-Movement" class="headerlink" title="1.3.1.5. Axes Movement"></a>1.3.1.5. Axes Movement</h5><h5 id="1-3-1-6-Title-Placement"><a href="#1-3-1-6-Title-Placement" class="headerlink" title="1.3.1.6. Title Placement"></a>1.3.1.6. Title Placement</h5><ul>
-<li><p>남은 불만사항 중 Axes에 해당하는 두번째, 네번째 것을 적용합니다.</p>
+<li>남은 불만사항 중 Axes에 해당하는 두번째, 네번째 것을 적용합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) </span><br><span class="line"></span><br><span class="line">cmaps = [<span class="string">&quot;gist_gray&quot;</span>, <span class="string">&quot;bone&quot;</span>, <span class="string">&quot;Blues_r&quot;</span>, <span class="string">&quot;Greens_r&quot;</span>, <span class="string">&quot;Oranges_r&quot;</span>] </span><br><span class="line">N = <span class="built_in">len</span>(cmaps) </span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, cmap) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, cmaps)):  </span><br><span class="line">    rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">    lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(rgb)</span><br><span class="line">    y = lab[:, <span class="number">0</span>]                                    </span><br><span class="line">    ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>)  </span><br><span class="line">    </span><br><span class="line">    ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">    ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">    ax.set_title(cmap, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;, pad=<span class="number">24</span>)  <span class="comment"># title 달기</span></span><br><span class="line">    ax.spines[<span class="string">&#x27;top&#x27;</span>].set_visible(<span class="literal">False</span>)    </span><br><span class="line">    ax.spines[<span class="string">&#x27;right&#x27;</span>].set_visible(<span class="literal">False</span>)  </span><br><span class="line">    ax.spines[<span class="string">&#x27;bottom&#x27;</span>].set_position((<span class="string">&#x27;outward&#x27;</span>, <span class="number">10</span>))  <span class="comment"># spine 아래쪽으로 이동</span></span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)                          </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        ax.set_ylabel(<span class="string">&quot;Lightness $L^*$&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;)</span><br><span class="line">        ax.spines[<span class="string">&#x27;left&#x27;</span>].set_position((<span class="string">&#x27;outward&#x27;</span>, <span class="number">10</span>))  <span class="comment"># spine 왼쪽으로 이동</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ax.spines[<span class="string">&#x27;left&#x27;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">                                                     </span><br><span class="line">plt.tight_layout()  </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="25_ccmap_code_06.png"><br></p>
-</li>
-<li><p>전체적인 틀은 한결 나아졌습니다.</p>
-</li>
+<p><img src="/25_ccmap_code_06.png"><br></p>
+<ul>
+<li>전체적인 틀은 한결 나아졌습니다.</li>
 </ul>
 <h4 id="1-3-2-Scatter-Aesthetics"><a href="#1-3-2-Scatter-Aesthetics" class="headerlink" title="1.3.2. Scatter Aesthetics"></a>1.3.2. Scatter Aesthetics</h4><ul>
 <li><p>이제 데이터 부분을 수정해 봅시다.</p>
@@ -403,11 +416,8 @@
 <li>원래 그림의 아래에 깔면 결과적으로 <b>뭉쳐진 알갱이들을 둘러싸는 윤곽선</b>이 그려집니다.</li>
 </ol>
 </li>
-</ul>
-<ul>
-<li>파워포인트에도 적용할 수 있는 트릭입니다.<br><br><img src="25_ccmap_code_07.png"><br>  </li>
-</ul>
-<ul>
+<li><p>파워포인트에도 적용할 수 있는 트릭입니다.<br><br><img src="/25_ccmap_code_07.png"><br>  </p>
+</li>
 <li><p>재사용을 위해 함수화합니다.</p>
 <ul>
 <li>컬러맵 리스트와 각 제목을 입력으로 받습니다.</li>
@@ -416,14 +426,15 @@
 </ul>
 </li>
 <li><p>최종 코드와 결과물입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_L</span>(<span class="params">cmaps, titles=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span></span><br><span class="line">    N = <span class="built_in">len</span>(cmaps)</span><br><span class="line">    <span class="keyword">assert</span> N &gt; <span class="number">0</span>  <span class="comment"># 최소한 1개의 컬러맵이 있어야 함.</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> titles==<span class="literal">None</span>:  <span class="comment"># titles 입력이 없으면 cmap 이름을 title로 사용</span></span><br><span class="line">        titles = [<span class="built_in">str</span>(cmap) <span class="keyword">for</span> cmap <span class="keyword">in</span> cmaps]  <span class="comment"># string이 아닐 경우를 대비해 string으로 변환</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> filename==<span class="literal">None</span>: <span class="comment"># filename 입력이 없으면 cmap 명단을 이름으로 사용</span></span><br><span class="line">        filename = <span class="string">&quot;L_&quot;</span> + <span class="string">&quot;_&quot;</span>.join(titles) + <span class="string">&quot;.png&quot;</span></span><br><span class="line"></span><br><span class="line">    x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) </span><br><span class="line">    </span><br><span class="line">    fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, (ax, cmap, title) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, cmaps, titles)):  </span><br><span class="line">        rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">        lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(rgb)</span><br><span class="line">        y = lab[:, <span class="number">0</span>]                                    </span><br><span class="line">        ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>, zorder=<span class="number">3</span>)  <span class="comment"># Data</span></span><br><span class="line">        ax.scatter(x, y, c=<span class="string">&quot;k&quot;</span>, s=<span class="number">550</span>, zorder=<span class="number">2</span>)           <span class="comment"># outline</span></span><br><span class="line">        ax.plot(x, y, c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">4</span>)                     <span class="comment"># center line</span></span><br><span class="line"></span><br><span class="line">        ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.set_title(title, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;, pad=<span class="number">24</span>)</span><br><span class="line">        ax.spines[<span class="string">&#x27;top&#x27;</span>].set_visible(<span class="literal">False</span>)    </span><br><span class="line">        ax.spines[<span class="string">&#x27;right&#x27;</span>].set_visible(<span class="literal">False</span>)  </span><br><span class="line">        ax.spines[<span class="string">&#x27;bottom&#x27;</span>].set_position((<span class="string">&#x27;outward&#x27;</span>, <span class="number">10</span>)) </span><br><span class="line">        ax.grid(<span class="string">&quot;on&quot;</span>)                          </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            ax.set_ylabel(<span class="string">&quot;Lightness $L^*$&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;)</span><br><span class="line">            ax.spines[<span class="string">&#x27;left&#x27;</span>].set_position((<span class="string">&#x27;outward&#x27;</span>, <span class="number">10</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ax.spines[<span class="string">&#x27;left&#x27;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    plt.tight_layout()  </span><br><span class="line">    plt.savefig(filename, dpi=<span class="number">150</span>)  <span class="comment"># 고해상도 저장</span></span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">plot_L([<span class="string">&#x27;gist_gray&#x27;</span>, <span class="string">&#x27;bone&#x27;</span>, <span class="string">&#x27;Blues_r&#x27;</span>, <span class="string">&#x27;Greens_r&#x27;</span>, <span class="string">&#x27;Oranges_r&#x27;</span>])</span><br></pre></td></tr></table></figure>
-<p><img src="L_gist_gray_bone_Blues_r_Greens_r_Oranges_r.png"><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_L</span>(<span class="params">cmaps, titles=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span><br><span class="line">    N = <span class="built_in">len</span>(cmaps)</span><br><span class="line">    <span class="keyword">assert</span> N &gt; <span class="number">0</span>  <span class="comment"># 최소한 1개의 컬러맵이 있어야 함.</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> titles==<span class="literal">None</span>:  <span class="comment"># titles 입력이 없으면 cmap 이름을 title로 사용</span></span><br><span class="line">        titles = [<span class="built_in">str</span>(cmap) <span class="keyword">for</span> cmap <span class="keyword">in</span> cmaps]  <span class="comment"># string이 아닐 경우를 대비해 string으로 변환</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> filename==<span class="literal">None</span>: <span class="comment"># filename 입력이 없으면 cmap 명단을 이름으로 사용</span></span><br><span class="line">        filename = <span class="string">&quot;L_&quot;</span> + <span class="string">&quot;_&quot;</span>.join(titles) + <span class="string">&quot;.png&quot;</span></span><br><span class="line"></span><br><span class="line">    x = np.linspace(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">256</span>) </span><br><span class="line">    </span><br><span class="line">    fig, axes = plt.subplots(ncols=N, figsize=(<span class="number">3</span>*N, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, (ax, cmap, title) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, cmaps, titles)):  </span><br><span class="line">        rgb = cm.get_cmap(cmap)(x)[:, :<span class="number">3</span>]</span><br><span class="line">        lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(rgb)</span><br><span class="line">        y = lab[:, <span class="number">0</span>]                                    </span><br><span class="line">        ax.scatter(x, y, c=x, cmap=cmap, s=<span class="number">500</span>, zorder=<span class="number">3</span>)  <span class="comment"># Data</span></span><br><span class="line">        ax.scatter(x, y, c=<span class="string">&quot;k&quot;</span>, s=<span class="number">550</span>, zorder=<span class="number">2</span>)           <span class="comment"># outline</span></span><br><span class="line">        ax.plot(x, y, c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">4</span>)                     <span class="comment"># center line</span></span><br><span class="line"></span><br><span class="line">        ax.xaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.yaxis.set_tick_params(labelsize=<span class="number">20</span>) </span><br><span class="line">        ax.set_title(title, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;, pad=<span class="number">24</span>)</span><br><span class="line">        ax.spines[<span class="string">&#x27;top&#x27;</span>].set_visible(<span class="literal">False</span>)    </span><br><span class="line">        ax.spines[<span class="string">&#x27;right&#x27;</span>].set_visible(<span class="literal">False</span>)  </span><br><span class="line">        ax.spines[<span class="string">&#x27;bottom&#x27;</span>].set_position((<span class="string">&#x27;outward&#x27;</span>, <span class="number">10</span>)) </span><br><span class="line">        ax.grid(<span class="string">&quot;on&quot;</span>)                          </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            ax.set_ylabel(<span class="string">&quot;Lightness $L^*$&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>&#125;)</span><br><span class="line">            ax.spines[<span class="string">&#x27;left&#x27;</span>].set_position((<span class="string">&#x27;outward&#x27;</span>, <span class="number">10</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ax.spines[<span class="string">&#x27;left&#x27;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    plt.tight_layout()  </span><br><span class="line">    plt.savefig(filename, dpi=<span class="number">150</span>)  <span class="comment"># 고해상도 저장</span></span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">plot_L([<span class="string">&#x27;gist_gray&#x27;</span>, <span class="string">&#x27;bone&#x27;</span>, <span class="string">&#x27;Blues_r&#x27;</span>, <span class="string">&#x27;Greens_r&#x27;</span>, <span class="string">&#x27;Oranges_r&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="/L_gist_gray_bone_Blues_r_Greens_r_Oranges_r.png"><br></p>
 <ul>
-<li>필요한 그림을 그릴 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_L([<span class="string">&quot;rainbow&quot;</span>, <span class="string">&quot;jet&quot;</span>, <span class="string">&quot;gnuplot&quot;</span>, <span class="string">&quot;brg&quot;</span>, <span class="string">&quot;cubehelix&quot;</span>], filename=<span class="string">&quot;L_rainbow&quot;</span>)  </span><br></pre></td></tr></table></figure>
-<img src="L_rainbow.png"><br></li>
+<li>필요한 그림을 그릴 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_L([<span class="string">&quot;rainbow&quot;</span>, <span class="string">&quot;jet&quot;</span>, <span class="string">&quot;gnuplot&quot;</span>, <span class="string">&quot;brg&quot;</span>, <span class="string">&quot;cubehelix&quot;</span>], filename=<span class="string">&quot;L_rainbow&quot;</span>)  </span><br></pre></td></tr></table></figure>
+<p><img src="/L_rainbow.png"><br></p>
 <ul>
 <li>본 글에 사용된 코드는 <a href="custom_colormap_map.ipynb">이 곳에서 다운받을 수 있습니다</a>.</li>
 </ul>
@@ -439,22 +450,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/" data-id="cmhueoxzb00eb4gxtf0gmdxb7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/" data-id="cuidWurywtqTEeDM15pUwLuxN" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -530,7 +531,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-08-10",
         "dateCreated": "2020-08-10",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/",
         "description": "
 matplotlib에서 custom colormap을 만들고 적용하는 방법입니다.
@@ -541,7 +542,8 @@ Creating Colormaps in Matplotlib
 
 Matplotlib Custom Colormap
 지난 글에는 크게 두 가지 그림이 등장합니다.
-하나는 valu",
+
+하나는 val",
         "wordCount": 2946
     }
 </script>
@@ -624,16 +626,6 @@ Matplotlib Custom Colormap
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -867,10 +859,6 @@ Matplotlib Custom Colormap
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

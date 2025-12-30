@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/95_tiger_00.png">
 <meta property="article:published_time" content="2022-01-03T22:25:00.000Z">
-<meta property="article:modified_time" content="2022-01-04T00:49:10.492Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.618Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
 <meta property="article:tag" content="colorsys">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/95_tiger_00.png">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/01/04/Python-DS-95-tiger/" class="article-date">
-     <time datetime="2022-01-04T00:49:10.492Z" itemprop="dateModified">2022-01-04</time>
+     <time datetime="2025-12-30T06:28:38.618Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -242,41 +242,41 @@
 <li>호랑이 해이니 호랑이 사진을 사용해 보겠습니다.</li>
 <li>저작권 걱정이 없는 <a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:Siberischer_tiger_de_edit02.jpg">wikimedia</a>에서 사진을 내려받아 <code>tiger.jpg</code>라고 저장합니다.</li>
 </ul>
-<p><img src="tiger_8.png"><br></p>
+<p><img src="/tiger_8.png"><br></p>
 <h1 id="2-Python에서-읽기"><a href="#2-Python에서-읽기" class="headerlink" title="2. Python에서 읽기"></a>2. Python에서 읽기</h1><ul>
-<li><p>먼저 기본 라이브러리를 부르고</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure></li>
-<li><p>이미지를 불러옵니다.</p>
-</li>
-<li><p><code>plt.imread()</code>명령으로 읽은 이미지는 numpy array로 저장됩니다.</p>
-</li>
-<li><p><code>.shape</code>으로 dimension을 확인하면 1200 x 1600 x 3입니다.</p>
-</li>
-<li><p>세로 1200, 가로 1600의 3차원(RGB) 이미지입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img_org = plt.imread(<span class="string">&quot;tiger.jpg&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(img_org.shape)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_org)</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1200, 1600, 3)</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_1.png"><br></p>
-</li>
+<li>먼저 기본 라이브러리를 부르고</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>이미지를 불러옵니다.</li>
+<li><code>plt.imread()</code>명령으로 읽은 이미지는 numpy array로 저장됩니다.</li>
+<li><code>.shape</code>으로 dimension을 확인하면 1200 x 1600 x 3입니다.</li>
+<li>세로 1200, 가로 1600의 3차원(RGB) 이미지입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img_org = plt.imread(<span class="string">&quot;tiger.jpg&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(img_org.shape)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_org)</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1200, 1600, 3)</span><br></pre></td></tr></table></figure>
+<p><img src="/tiger_1.png"><br></p>
 <h1 id="3-CIELab-color-space"><a href="#3-CIELab-color-space" class="headerlink" title="3. CIELab color space"></a>3. CIELab color space</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://colorspacious.readthedocs.io/en/latest/">colorspacious</a><br><a href="https://jehyunlee.github.io/2021/03/22/Python-DS-63-mpl_colors_qualitative/">Pega Devlog: 색의 속성에 대한 단어들</a></p>
 </blockquote>
 <ul>
-<li><p>사람이 인지하는 밝은 정도, 즉 <b>휘도(luminance)</b>를 파악합니다.</p>
-</li>
-<li><p>그림을 구성하는 RGB를 [colorspacious] 라이브러리의 <code>cspace_converter</code>를 사용해 <b>CIELab 색공간으로 변환</b>합니다.</p>
-</li>
-<li><p>CIELab 색공간의 첫번째 채널이 <b>$L^*$</b>, 즉 휘도입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># convert to CIELab</span></span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">img_lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(img_org/<span class="number">255</span>)</span><br><span class="line"><span class="built_in">print</span>(img_lab.shape)</span><br><span class="line">img_L = img_lab[:,:,<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_L, cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과</p>
+<li>사람이 인지하는 밝은 정도, 즉 <b>휘도(luminance)</b>를 파악합니다.</li>
+<li>그림을 구성하는 RGB를 [colorspacious] 라이브러리의 <code>cspace_converter</code>를 사용해 <b>CIELab 색공간으로 변환</b>합니다.</li>
+<li>CIELab 색공간의 첫번째 채널이 <b>$L^*$</b>, 즉 휘도입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># convert to CIELab</span></span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">img_lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(img_org/<span class="number">255</span>)</span><br><span class="line"><span class="built_in">print</span>(img_lab.shape)</span><br><span class="line">img_L = img_lab[:,:,<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_L, cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1200, 1600, 3)</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_2.png"><br></p>
-</li>
-<li><p>흑백 사진으로 변환되었습니다.</p>
-</li>
-<li><p>여기 보이는 회색조가 우리 눈이 느끼는 밝기입니다.</p>
-</li>
+<p><img src="/tiger_2.png"><br></p>
+<ul>
+<li>흑백 사진으로 변환되었습니다.</li>
+<li>여기 보이는 회색조가 우리 눈이 느끼는 밝기입니다.</li>
 </ul>
 <h1 id="4-HLS-color-space"><a href="#4-HLS-color-space" class="headerlink" title="4. HLS color space"></a>4. HLS color space</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HSL_and_HSV">wikipedia: HSL and HSV</a><br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/colorsys.html">python colorsys</a></p>
@@ -284,34 +284,33 @@
 <ul>
 <li><p>HSV (hue, saturation, value) 색공간과 더불어 HSL, 또는 HLS 색 공간이 사용됩니다.</p>
 </li>
-<li><p>색상(hue)과 명도(lightness), 채도(saturation)를 따로 조정할 수 있다는 장점이 있습니다.<br><br><img src="tiger_9.png"><br></p>
+<li><p>색상(hue)과 명도(lightness), 채도(saturation)를 따로 조정할 수 있다는 장점이 있습니다.<br><br><img src="/tiger_9.png"><br></p>
 </li>
 <li><p>python에 기본으로 내장된 <b><code>colorsys</code> 라이브러리는 색 공간 변환에 충실합니다.</b></p>
 </li>
 <li><p>RGB, YIQ, HLS, HSV 공간을 오가는 기능을 간단하게 제공합니다.</p>
 </li>
 <li><p>호랑이 이미지를 HLS 공간으로 바꾸어 hue, lightness, saturation 분포를 확인합니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line">img_hls = np.array([colorsys.rgb_to_hls(*c) <span class="keyword">for</span> c <span class="keyword">in</span> (img_org/<span class="number">255</span>).reshape((<span class="number">1600</span>*<span class="number">1200</span>, <span class="number">3</span>))]).T</span><br><span class="line"><span class="built_in">print</span>(img_hls.shape)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (title, ax) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>([<span class="string">&quot;hue&quot;</span>, <span class="string">&quot;lightness&quot;</span>, <span class="string">&quot;saturation&quot;</span>], axs)):</span><br><span class="line">    sns.histplot(img_hls[i], kde=<span class="literal">True</span>, bins=np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">21</span>), ax=ax)</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_3.png"><br></p>
-</li>
-<li><p>lightness를 보면 어두운 부분이 많은 것 같고,</p>
-</li>
-<li><p>saturation을 보면 원색에 가까운 비중이 상당히 높습니다.</p>
-</li>
-<li><p><b>hue가 좀 독특한데, 왼쪽에 몰려 있습니다.</b></p>
-</li>
-<li><p>잘못 처리한 것이 아닌지, hue의 숫자가 의미하는 색을 출력합니다.</p>
+<p><img src="/tiger_3.png"><br></p>
+<ul>
+<li>lightness를 보면 어두운 부분이 많은 것 같고,</li>
+<li>saturation을 보면 원색에 가까운 비중이 상당히 높습니다.</li>
+<li><b>hue가 좀 독특한데, 왼쪽에 몰려 있습니다.</b></li>
+<li>잘못 처리한 것이 아닌지, hue의 숫자가 의미하는 색을 출력합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hue check</span></span><br><span class="line">hues = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">21</span>)[:<span class="number">20</span>]</span><br><span class="line">rgbs = <span class="built_in">list</span>(<span class="built_in">map</span>(colorsys.hls_to_rgb, *np.array([[h, <span class="number">0.5</span>, <span class="number">1</span>] <span class="keyword">for</span> h <span class="keyword">in</span> hues]).T))</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">10</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> ax, rgb, hue <span class="keyword">in</span> <span class="built_in">zip</span>(axes.ravel(), rgbs, hues):</span><br><span class="line">    ax.set_facecolor(rgb)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_xlabel(<span class="string">f&quot;<span class="subst">&#123;hue:<span class="number">.2</span>f&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span>, labelpad=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_4.png"><br></p>
-</li>
-<li><p>히스토그램에서 hue가 몰려 있는 0.25 아래 부분은 빨강, 주황, 노랑, 연두입니다.</p>
-</li>
-<li><p><b>호랑이와 들판을 이루고 있는 색</b>입니다. 그럴 만 하네요. 정상입니다. :)</p>
-</li>
-<li><p>호랑이 그림에서 hue, lightness, saturation이 어떻게 분포하고 있는지를 봅니다.</p>
+<p><img src="/tiger_4.png"><br></p>
+<ul>
+<li>히스토그램에서 hue가 몰려 있는 0.25 아래 부분은 빨강, 주황, 노랑, 연두입니다.</li>
+<li><b>호랑이와 들판을 이루고 있는 색</b>입니다. 그럴 만 하네요. 정상입니다. :)</li>
+<li>호랑이 그림에서 hue, lightness, saturation이 어떻게 분포하고 있는지를 봅니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (title, ax) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>([<span class="string">&quot;hue&quot;</span>, <span class="string">&quot;lightness&quot;</span>, <span class="string">&quot;saturation&quot;</span>], axs)):</span><br><span class="line">    vmax = <span class="number">0.3</span> <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line">    im = ax.imshow(img_hls[i].reshape(<span class="number">1200</span>, <span class="number">1600</span>), cmap=<span class="string">&quot;rainbow&quot;</span>, vmin=<span class="number">0</span>, vmax=vmax)</span><br><span class="line">    plt.colorbar(im, orientation=<span class="string">&quot;horizontal&quot;</span>, ax=ax)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_5.png"><br></p>
-</li>
+<p><img src="/tiger_5.png"><br></p>
+<ul>
 <li><p>hue만 범위를 0-0.3으로 그리고 나머지는 0-1로 그렸습니다.</p>
 </li>
 <li><p>범위를 쉽게 파악하고자 의도적으로 rainbow colormap을 사용했습니다.</p>
@@ -320,32 +319,31 @@
 </li>
 <li><p>배경 일부에 호랑이와 hue가 같은 구간이 있는데 <b>lightness를 섞으면 같이 구분할 수 있습니다.</b></p>
 </li>
-</ul>
-<ul>
 <li><p>lightness threshold를 0.4로 고정하고</p>
 </li>
 <li><p>hue threshold (<code>h_th</code>)를 0.1~0.3으로 바꾸면서 호랑이 선택 범위를 확인합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tiger selection</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">img_hls_tiger = deepcopy(img_hls)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">h_ths = [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>]</span><br><span class="line"><span class="keyword">for</span> h_th, ax <span class="keyword">in</span> <span class="built_in">zip</span>(h_ths, axs):</span><br><span class="line">    chk_tiger = np.where((img_hls[<span class="number">0</span>] &lt; h_th) &amp; (img_hls[<span class="number">1</span>] &gt; <span class="number">0.4</span>), <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">    ax.imshow(chk_tiger.reshape(<span class="number">1200</span>, <span class="number">1600</span>), cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;h_th&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_6.png"><br></p>
 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tiger selection</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">img_hls_tiger = deepcopy(img_hls)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">h_ths = [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>]</span><br><span class="line"><span class="keyword">for</span> h_th, ax <span class="keyword">in</span> <span class="built_in">zip</span>(h_ths, axs):</span><br><span class="line">    chk_tiger = np.where((img_hls[<span class="number">0</span>] &lt; h_th) &amp; (img_hls[<span class="number">1</span>] &gt; <span class="number">0.4</span>), <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">    ax.imshow(chk_tiger.reshape(<span class="number">1200</span>, <span class="number">1600</span>), cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;h_th&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>, pad=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/tiger_6.png"><br></p>
+<ul>
 <li><p>다른 데는 비슷한데 <b>호랑이 이마와 왼쪽 뺨</b>에서 차이가 보입니다.</p>
 </li>
 <li><p>0.3으로 올리면 얼굴은 검은 줄무늬를 제외하고 거의 선택이 되고 배경으로 넘어가지 않네요.</p>
 </li>
 <li><p>hue threshold를 0.3으로 설정합니다.</p>
 </li>
-</ul>
-<ul>
 <li><p>1600 x 1200개의 픽셀 중 hue는 0.3 미만, lightness는 0.4 초과하는 범위를 잡습니다.</p>
 </li>
 <li><p>호랑이 얼굴의 명도는 올리고 채도는 낮춰서 <b>하얀 장로 호랑이 느낌</b>이 들도록 바꿉니다.</p>
 </li>
 <li><p><del>사실 올해가 검은 호랑이 해라 검게 하고 싶었는데 어떻게 해도 안예쁘더군요.</del></p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">idx_tiger = np.where((img_hls[<span class="number">0</span>] &lt; <span class="number">0.3</span>) &amp; (img_hls[<span class="number">1</span>] &gt; <span class="number">0.4</span>))[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> idx_tiger:</span><br><span class="line">    img_hls_tiger[<span class="number">1</span>, idx] = <span class="built_in">min</span>(img_hls_tiger[<span class="number">1</span>, idx]+<span class="number">0.6</span>, <span class="number">1</span>)</span><br><span class="line">    img_hls_tiger[<span class="number">2</span>, idx] = <span class="built_in">max</span>(img_hls_tiger[<span class="number">2</span>, idx]-<span class="number">0.6</span>, <span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">img_rgb_tiger = np.array([colorsys.hls_to_rgb(*c) <span class="keyword">for</span> c <span class="keyword">in</span> img_hls_tiger.T])</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(img_rgb_tiger.reshape(<span class="number">1200</span>, <span class="number">1600</span>, <span class="number">3</span>))</span><br><span class="line">ax.set_xticks([])</span><br><span class="line">ax.set_yticks([])</span><br></pre></td></tr></table></figure>
-<p><img src="tiger_7.png"><br></p>
-</li>
-<li><p><b>호랑이 해 모두 새해 복 많이 받으시기 바랍니다.</b></p>
-</li>
+<p><img src="/tiger_7.png"><br></p>
+<ul>
+<li><b>호랑이 해 모두 새해 복 많이 받으시기 바랍니다.</b></li>
 </ul>
 
         </div>
@@ -359,22 +357,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/" data-id="cmhueoy3000kt4gxt6x7393g7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/" data-id="cuidUE7dKSwN0yB7XawZ1Bnt4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -450,7 +438,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-01-04",
         "dateCreated": "2022-01-04",
-        "dateModified": "2022-01-04",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/01/04/Python-DS-95-tiger/",
         "description": "
 이미지를 처리하는 파이썬 라이브러리는 많습니다.
@@ -542,16 +530,6 @@ wikimedia commons: Siberischer ",
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -785,10 +763,6 @@ wikimedia commons: Siberischer ",
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

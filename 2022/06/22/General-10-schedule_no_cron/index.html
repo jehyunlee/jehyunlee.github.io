@@ -21,10 +21,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/10-schedule_no_cron_0.png">
 <meta property="article:published_time" content="2022-06-21T20:50:00.000Z">
-<meta property="article:modified_time" content="2023-05-13T13:43:18.894Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:36.871Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="shell script">
 <meta property="article:tag" content="job schedule">
+<meta property="article:tag" content="shell script">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/10-schedule_no_cron_0.png">
     
@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -200,7 +200,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/06/22/General-10-schedule_no_cron/" class="article-date">
-     <time datetime="2023-05-13T13:43:18.894Z" itemprop="dateModified">2023-05-13</time>
+     <time datetime="2025-12-30T06:28:36.871Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,50 +239,55 @@
 <li>Unix 계열에서 주기적으로 수행될 작업을 등록하여 실행하는 도구입니다.</li>
 <li>1975년에 AT&amp;T Bell 연구소에서 만들어졌습니다.</li>
 <li>여러 분들이 사용법을 잘 정리하셨으니 여기에는 간단하게만 정리합니다.</li>
-<li>cron을 설정하려면 crontab(cron table)에 등록하거나 등록된 내용을 수정합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ crontab -l    <span class="comment"># 등록 작업 리스트 출력</span></span><br><span class="line">$ crontab -e    <span class="comment"># 등록 작업 편집</span></span><br><span class="line">$ crontab -d    <span class="comment"># 등록 작업 삭제</span></span><br><span class="line">$ crontab -r    <span class="comment"># 현재 사용자가 등록한 crontab 전체 삭제</span></span><br></pre></td></tr></table></figure>
-<p></li>
-<li>이와 같이 crontab을 설정하면, 데몬을 재시작해야 적용됩니다.</li>
-<li><code>restart</code>로 재시작할 수 있고, <code>stop</code>후 <code>start</code>를 할 수도 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu</span></span><br><span class="line">$ service cron restart    <span class="comment"># 재시작</span></span><br><span class="line">$ service cron stop       <span class="comment"># 현재 cron 중지</span></span><br><span class="line">$ service cron start      <span class="comment"># cron 시작</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS</span></span><br><span class="line">$ service crond restart   <span class="comment"># 재시작</span></span><br><span class="line">$ service crond stop      <span class="comment"># 현재 cron 중지</span></span><br><span class="line">$ service crond start     <span class="comment"># cron 시작</span></span><br></pre></td></tr></table></figure>
-<p></li>
-<li>cron이 잘 실행되는지는 log 파일을 모니터링하면 알 수 있습니다.</li>
-<li><code>tail -f</code>를 사용하면 실시간으로 파일이 업데이트되는 모습을 볼 수 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu</span></span><br><span class="line">$ tail -f /var/<span class="built_in">log</span>/syslog | grep CRON</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS</span></span><br><span class="line">$ tail -f /var/<span class="built_in">log</span>/cron</span><br></pre></td></tr></table></figure></li>
+<li>cron을 설정하려면 crontab(cron table)에 등록하거나 등록된 내용을 수정합니다.</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ crontab -l    <span class="comment"># 등록 작업 리스트 출력</span></span><br><span class="line">$ crontab -e    <span class="comment"># 등록 작업 편집</span></span><br><span class="line">$ crontab -d    <span class="comment"># 등록 작업 삭제</span></span><br><span class="line">$ crontab -r    <span class="comment"># 현재 사용자가 등록한 crontab 전체 삭제</span></span><br></pre></td></tr></table></figure>
+<p>
+* 이와 같이 crontab을 설정하면, 데몬을 재시작해야 적용됩니다.
+* `restart`로 재시작할 수 있고, `stop`후 `start`를 할 수도 있습니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu</span></span><br><span class="line">$ service cron restart    <span class="comment"># 재시작</span></span><br><span class="line">$ service cron stop       <span class="comment"># 현재 cron 중지</span></span><br><span class="line">$ service cron start      <span class="comment"># cron 시작</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS</span></span><br><span class="line">$ service crond restart   <span class="comment"># 재시작</span></span><br><span class="line">$ service crond stop      <span class="comment"># 현재 cron 중지</span></span><br><span class="line">$ service crond start     <span class="comment"># cron 시작</span></span><br></pre></td></tr></table></figure>
+<p>
+* cron이 잘 실행되는지는 log 파일을 모니터링하면 알 수 있습니다.
+* `tail -f`를 사용하면 실시간으로 파일이 업데이트되는 모습을 볼 수 있습니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu</span></span><br><span class="line">$ <span class="built_in">tail</span> -f /var/log/syslog | grep CRON</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS</span></span><br><span class="line">$ <span class="built_in">tail</span> -f /var/log/cron</span><br></pre></td></tr></table></figure>
+
 <h1 id="2-shell-script"><a href="#2-shell-script" class="headerlink" title="2. shell script"></a>2. shell script</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://coderwall.com/p/eilosa/scheduling-jobs-in-unix-without-cron">Coderwall: Scheduling jobs in UNIX without cron</a><br><a target="_blank" rel="noopener" href="https://wikidocs.net/29981">while 루프</a></p>
 </blockquote>
 <ul>
 <li><p>약간의 불행을 겪고 있습니다.</p>
 </li>
-<li><p>cron을 어떻게 조작해도 오류가 발생하고, 작업 스케줄링이 되지 않습니다.<br><img src="Python-General-10-schedule_no_cron_1.png" alt="PAM은 왜..."><br></p>
+<li><p>cron을 어떻게 조작해도 오류가 발생하고, 작업 스케줄링이 되지 않습니다.<br><img src="/Python-General-10-schedule_no_cron_1.png" alt="PAM은 왜..."><br></p>
 </li>
 <li><p>오류를 해결하고자 구글링을 한 결과 여러 시도를 찾았습니다.</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://coderwall.com/p/eilosa/scheduling-jobs-in-unix-without-cron">shell script를 사용</a>해서 작업을 할 수 있더군요.</p>
 </li>
 <li><p><code>while do</code>만 사용해서 더 간단한 반복 코드를 작성했습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>;		<span class="comment"># 무한 반복</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> `date`		<span class="comment"># 실행 코드. 파이썬 실행이라면 `date` 대신 `python 파일명.py`</span></span><br><span class="line">sleep 10		<span class="comment"># 10초 대기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과: 10초마다 시간이 출력됩니다.<br><img src="Python-General-10-schedule_no_cron_3.png"><br></p>
 </li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>;        <span class="comment"># 무한 반복</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> `<span class="built_in">date</span>`        <span class="comment"># 실행 코드. 파이썬 실행이라면 `date` 대신 `python 파일명.py`</span></span><br><span class="line"><span class="built_in">sleep</span> 10        <span class="comment"># 10초 대기</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>nohup</code>과 <code>&amp;</code>를 붙여 백그라운드 실행을 하면 다른 작업을 할 수 있습니다.</li>
-<li>이 때 화면 출력(standard output)은 기본적으로 nohup.out에 기록됩니다.<br><img src="Python-General-10-schedule_no_cron_4.png"><br></li>
+<li><p>실행 결과: 10초마다 시간이 출력됩니다.<br><img src="/Python-General-10-schedule_no_cron_3.png"><br></p>
+</li>
+<li><p><code>nohup</code>과 <code>&amp;</code>를 붙여 백그라운드 실행을 하면 다른 작업을 할 수 있습니다.</p>
+</li>
+<li><p>이 때 화면 출력(standard output)은 기본적으로 nohup.out에 기록됩니다.<br><img src="/Python-General-10-schedule_no_cron_4.png"><br></p>
+</li>
 </ul>
 <h1 id="3-nohup-task-관리"><a href="#3-nohup-task-관리" class="headerlink" title="3. nohup task 관리"></a>3. nohup task 관리</h1><ul>
-<li><p>nohup으로 던져진 작업은 터미널 창을 닫아도 유지됩니다.</p>
-</li>
-<li><p>자칫하면 무한 반복에 빠질 수 있습니다. <code>kill</code>명령을 사용하기 위해서라도 PID를 알아야 합니다.</p>
-</li>
-<li><p>아래 명령으로 현재 실행중인 nohup 작업의 PID를 알 수 있습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep nohup</span><br></pre></td></tr></table></figure></li>
-<li><p>하지만 더 좋은 것은 작업을 시작할 때 PID를 기록하는 것입니다.</p>
-</li>
-<li><p>여러 nohup작업을 관리하려면 각각의 PID를 정리할 필요가 있기 때문입니다.</p>
-</li>
-<li><p>nohup을 다음과 같이 실행해서 기록할 수 있습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nohup script파일.sh &gt; 로그파일.<span class="built_in">log</span> 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; PID파일.txt</span><br></pre></td></tr></table></figure></li>
+<li>nohup으로 던져진 작업은 터미널 창을 닫아도 유지됩니다.</li>
+<li>자칫하면 무한 반복에 빠질 수 있습니다. <code>kill</code>명령을 사용하기 위해서라도 PID를 알아야 합니다.</li>
+<li>아래 명령으로 현재 실행중인 nohup 작업의 PID를 알 수 있습니다.</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep <span class="built_in">nohup</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>하지만 더 좋은 것은 작업을 시작할 때 PID를 기록하는 것입니다.</li>
+<li>여러 nohup작업을 관리하려면 각각의 PID를 정리할 필요가 있기 때문입니다.</li>
+<li>nohup을 다음과 같이 실행해서 기록할 수 있습니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> script파일.sh &gt; 로그파일.<span class="built_in">log</span> 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; PID파일.txt</span><br></pre></td></tr></table></figure>
         </div>
 		<p>
 		<div style="text-align:center; margin:20px 0px 20px 0px">
@@ -294,22 +299,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/06/22/General-10-schedule_no_cron/" data-id="cmhueoxru000g4gxtbeisgqf9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/06/22/General-10-schedule_no_cron/" data-id="cuidhApY8INV_F1WoQwI5GggL" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -385,7 +380,7 @@
         "genre": "General",
         "datePublished": "2022-06-22",
         "dateCreated": "2022-06-22",
-        "dateModified": "2023-05-13",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/06/22/General-10-schedule_no_cron/",
         "description": "
 윈도에서 반복 작업은 작업 스케줄러를 사용합니다.
@@ -398,7 +393,7 @@ wikipedia: cronO! JAVA: [Linux]crontab 설정 및 로그 확인
 
 Unix 계열에서 주기적으로 수행될 작업을 등록하여 실행하는 도구입니다.
 1975년에 AT&am",
-        "wordCount": 472
+        "wordCount": 504
     }
 </script>
 
@@ -480,16 +475,6 @@ Unix 계열에서 주기적으로 수행될 작업을 등록하여 실행하는 
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -723,10 +708,6 @@ Unix 계열에서 주기적으로 수행될 작업을 등록하여 실행하는 
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

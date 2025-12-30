@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/3_cth_2.jpg">
 <meta property="article:published_time" content="2020-04-19T22:20:00.000Z">
-<meta property="article:modified_time" content="2023-02-05T04:53:18.007Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.463Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="imagej">
-<meta property="article:tag" content="cookbook">
 <meta property="article:tag" content="channel threshold">
+<meta property="article:tag" content="cookbook">
+<meta property="article:tag" content="imagej">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/3_cth_2.jpg">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" class="article-date">
-     <time datetime="2023-02-05T04:53:18.007Z" itemprop="dateModified">2023-02-05</time>
+     <time datetime="2025-12-30T06:28:37.463Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -242,16 +242,17 @@
 <ul>
 <li>ImageJ는 이미지의 특정 channel을 추출하여 수정할 수 있습니다. </li>
 <li>여러 색의 개체가 한 이미지에 있고, 색상 등으로 이미지를 분석하는 것이 유리할 때가 있습니다.</li>
-<li>아래 그림의 어두운 세포를 추출해보겠습니다. (<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:Chronic_lymphocytic_leukemia.jpg">원본 다운로드</a>)<br><br><img src="3_cth_2.png" alt="Chronic lymphocytic leukemia"></li>
+<li>아래 그림의 어두운 세포를 추출해보겠습니다. (<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:Chronic_lymphocytic_leukemia.jpg">원본 다운로드</a>)<br><br><img src="/3_cth_2.png" alt="Chronic lymphocytic leukemia"></li>
 </ul>
 <h3 id="1-1-이미지-채널-분할"><a href="#1-1-이미지-채널-분할" class="headerlink" title="1.1. 이미지 채널 분할"></a>1.1. 이미지 채널 분할</h3><ul>
 <li>위 예제 이미지를 다운받아 <b>Image &gt; Properties…</b>로 확인해봅니다.</li>
-<li>channel이 1개, slice가 1개임을 확인할 수 있습니다.<br><br><img src="3_cth_3.png"></li>
+<li>channel이 1개, slice가 1개임을 확인할 수 있습니다.<br><br><img src="/3_cth_3.png"></li>
 </ul>
 <h4 id="1-1-1-RGB"><a href="#1-1-1-RGB" class="headerlink" title="1.1.1. RGB"></a>1.1.1. RGB</h4><ul>
 <li>RGB 색상별 조작을 하기 위해 별도의 채널로 만들어줍니다.</li>
-<li>제목 그대로 컬러 이미지를 Red, Green, Blue image stack으로 만듭니다.<br><b>Image &gt; Type &gt; RGB Stack</b><br><br><img src="3_cth_4.png"></li>
+<li>제목 그대로 컬러 이미지를 Red, Green, Blue image stack으로 만듭니다.</li>
 </ul>
+<p><b>Image &gt; Type &gt; RGB Stack</b><br><br><img src="/3_cth_4.png"></p>
 <ul>
 <li>image 윈도 아래 있는 슬라이드를 옮기며 어떤 채널이 효과적일지 봅시다.</li>
 <li>원본의 어두운 세포와 주변의 다른 세포들간 대조(contrast)가 크면 분리하기 좋습니다.</li>
@@ -263,15 +264,16 @@
 </ul>
 <h4 id="1-1-2-HSV-HSB"><a href="#1-1-2-HSV-HSB" class="headerlink" title="1.1.2. HSV(HSB)"></a>1.1.2. HSV(HSB)</h4><ul>
 <li>이미지를 RGB channel 외에 다른 방식으로도 분할할 수 있습니다.</li>
-<li>원본 이미지에 <b>Image &gt; Type &gt; HSB Stack</b>을 지정한 후 채널 분할을 수행하면 Hue (색상), Saturation (채도), Brightness (or Value. 명도)로 구분되는 채널이 얻어집니다.<br><br><img src="3_cth_5.png"></li>
+<li>원본 이미지에 <b>Image &gt; Type &gt; HSB Stack</b>을 지정한 후 채널 분할을 수행하면 Hue (색상), Saturation (채도), Brightness (or Value. 명도)로 구분되는 채널이 얻어집니다.<br><br><img src="/3_cth_5.png"></li>
 </ul>
 <h4 id="1-1-3-이미지-채널-분할-LAB"><a href="#1-1-3-이미지-채널-분할-LAB" class="headerlink" title="1.1.3. 이미지 채널 분할: LAB"></a>1.1.3. 이미지 채널 분할: LAB</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space">Wikipedia: CIELAB</a><br><a href="https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/">Pega Devlog: Matplotlib Colormap (2)</a></p>
 </blockquote>
 <ul>
 <li>내친 김에 LAB 방식으로도 분할해 봅시다.</li>
-<li>우리가 집중하고자 하는 세포가 가장 잘 드러나는 것이 목적이니 후보는 많을 수록 좋습니다.<br><b>Image &gt; Type &gt; Lab Stack</b><br><br><img src="3_cth_6.png"></li>
+<li>우리가 집중하고자 하는 세포가 가장 잘 드러나는 것이 목적이니 후보는 많을 수록 좋습니다.</li>
 </ul>
+<p><b>Image &gt; Type &gt; Lab Stack</b><br><br><img src="/3_cth_6.png"></p>
 <h3 id="1-2-채널을-이미지로-저장"><a href="#1-2-채널을-이미지로-저장" class="headerlink" title="1.2. 채널을 이미지로 저장"></a>1.2. 채널을 이미지로 저장</h3><ul>
 <li><b>Image &gt; Stacks &gt; Stacks to Images</b> 를 통해 분할한 채널을 개별 이미지로 저장할 수 있습니다.</li>
 </ul>
@@ -290,15 +292,17 @@
 <p><a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/docs/guide/146-28.html">ImageJ User Guide: Color Threshold…</a></p>
 </blockquote>
 <ul>
-<li>Color Threshold를 통해 색상을 기준으로 개체를 선택할 수 있습니다.</li>
-<li>앞서 LAB 방식의 $a^*$에서 어두운 cell이 잘 분리되었으니 이를 활용해봅시다.</li>
-<li><b>Image &gt; Adjust &gt; Color Threshold…</b>를 실행하고 다음과 같이 조정해 봅니다.<br><ul>
-<li>$ L^* $ : 0<del>203, $a^* $: 153</del>255, $b^* $: 0~255<br><br><img src="3_cth_7.png"></li>
+<li><p>Color Threshold를 통해 색상을 기준으로 개체를 선택할 수 있습니다.</p>
+</li>
+<li><p>앞서 LAB 방식의 $a^*$에서 어두운 cell이 잘 분리되었으니 이를 활용해봅시다.</p>
+</li>
+<li><p><b>Image &gt; Adjust &gt; Color Threshold…</b>를 실행하고 다음과 같이 조정해 봅니다.<br></p>
+<ul>
+<li>$ L^* $ : 0<del>203, $a^* $: 153</del>255, $b^* $: 0~255<br><br><img src="/3_cth_7.png"></li>
 </ul>
 </li>
-</ul>
+<li><p>버튼별 기능은 다음과 같습니다.</p>
 <ul>
-<li>버튼별 기능은 다음과 같습니다.<ul>
 <li><b>Pass : </b> 체크시 thresholds 내부(band-pass), 해제시 외부(band-reject) 선택.</li>
 <li><b>Thresholding Method : </b>Threshold 방법 16가지 선택</li>
 <li><b>Threshold Color : </b>선택영역 표시 (Red, Black, White, Black&amp;White)</li>
@@ -320,21 +324,21 @@
 <h3 id="3-1-선택영역-다듬기"><a href="#3-1-선택영역-다듬기" class="headerlink" title="3.1. 선택영역 다듬기"></a>3.1. 선택영역 다듬기</h3><ul>
 <li>일부 particle내부에는 hole이 있고, 선택하지 않을 작은 점 단위도 있습니다.</li>
 <li><b>Edit &gt; Selection &gt; Enlarge…</b>에서 6 px과 -6 px을 번갈아 적용합니다.</li>
-<li>positive value를 선택하면 hole이 메워지고, negative로 외곽선을 원상복구합니다.<br><br><img src="3_cth_9.png"></li>
+<li>positive value를 선택하면 hole이 메워지고, negative로 외곽선을 원상복구합니다.<br><br><img src="/3_cth_9.png"></li>
 </ul>
 <h3 id="3-2-선택영역-분석"><a href="#3-2-선택영역-분석" class="headerlink" title="3.2. 선택영역 분석"></a>3.2. 선택영역 분석</h3><ul>
-<li><b>Select</b>로 threshold를 ROI로 변경합니다.</li>
-<li><b>Analysis &gt; Set Measurements…</b>에서 <b>Area</b>와 <b>Centroid</b>를 선택합니다.</li>
-</ul>
+<li><p><b>Select</b>로 threshold를 ROI로 변경합니다.</p>
+</li>
+<li><p><b>Analysis &gt; Set Measurements…</b>에서 <b>Area</b>와 <b>Centroid</b>를 선택합니다.</p>
+</li>
+<li><p><b>Analysis &gt; Analyze Particles…</b>로 cell의 면적과 위치를 분석합니다.</p>
 <ul>
-<li><b>Analysis &gt; Analyze Particles…</b>로 cell의 면적과 위치를 분석합니다.<ul>
 <li>가로세로 4 x 4 미만의 pixel은 noise로 간주합니다: size의 최소값에 16을 넣습니다.</li>
 <li>분석된 세포와 결과를 매칭하기 위해 <b>Show:</b>에서 <b>Overlay</b>를 선택합니다.</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>분석 결과 이미지와 표가 동시에 출력됩니다.<br><br><img src="3_cth_8.png"></li>
+<li><p>분석 결과 이미지와 표가 동시에 출력됩니다.<br><br><img src="/3_cth_8.png"></p>
+</li>
 </ul>
 
         </div>
@@ -348,22 +352,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" data-id="cmhueoxw300834gxtaxos0c3e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/" data-id="cuidOn6avsBbbuCQLR-aFn3pt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -439,7 +433,7 @@
         "genre": "ImageJ Cookbook",
         "datePublished": "2020-04-20",
         "dateCreated": "2020-04-20",
-        "dateModified": "2023-02-05",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/04/20/ImageJ-cookbook-3-ChannelThreshold/",
         "description": "Reference
 
@@ -532,16 +526,6 @@ color image의 RGB channel마다 다른 threshold를 적용해 이미지 색조�
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -775,10 +759,6 @@ color image의 RGB channel마다 다른 threshold를 적용해 이미지 색조�
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

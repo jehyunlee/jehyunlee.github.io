@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/51_cmocean_0.png">
 <meta property="article:published_time" content="2020-12-27T19:58:00.000Z">
-<meta property="article:modified_time" content="2021-01-05T21:49:30.582Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.286Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="colormap">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/51_cmocean_0.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/12/28/Python-DS-51-cmocean/" class="article-date">
-     <time datetime="2021-01-05T21:49:30.582Z" itemprop="dateModified">2021-01-06</time>
+     <time datetime="2025-12-30T06:28:38.286Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -232,19 +232,19 @@
             <blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/cmocean/">Beatutiful colormaps for oceanography: cmocean</a><br><a target="_blank" rel="noopener" href="http://kristenthyng.com/">main developer: Krysten Thyng</a><br><a target="_blank" rel="noopener" href="https://tos.org/oceanography/assets/docs/29-3_thyng.pdf">Thyng, K. M., Greene, C. A., Hetland, R. D., Zimmerle, H. M., &amp; DiMarco, S. F. (2016). True colors of oceanography. Oceanography, 29(3), 10.</a></p>
 </blockquote>
-<p><img src="giphy.gif" alt="Arctic sea ice thickness by Nikolay Koldunov."></p>
+<p><img src="/giphy.gif" alt="Arctic sea ice thickness by Nikolay Koldunov."></p>
 <ul>
 <li>새로운 colormap은 그림을 신선하게 합니다.</li>
 <li>도메인에 맞는 colormap은 데이터를 정확하게 전달합니다.</li>
 <li>해양학(oceanography)을 위한 colormap, cmocean을 소개합니다.</li>
 <li><a target="_blank" rel="noopener" href="https://plot.ly/python/cmocean-colorscales/">Plotly</a>, <a target="_blank" rel="noopener" href="https://www.tableau.com/">Tableau</a>, <a target="_blank" rel="noopener" href="https://github.com/kthyng/cmocean-paraview">Paraview</a>, <a target="_blank" rel="noopener" href="https://kr.mathworks.com/matlabcentral/fileexchange/57773-cmocean-perceptually-uniform-colormaps">Matlab</a>, <a target="_blank" rel="noopener" href="https://dankelley.github.io/oce/">R</a>에서도 사용 가능합니다.</li>
 </ul>
-<h2 id="1-개발-amp-관리"><a href="#1-개발-amp-관리" class="headerlink" title="1. 개발 &amp; 관리"></a>1. 개발 &amp; 관리</h2><ul>
+<h2 id="1-개발-관리"><a href="#1-개발-관리" class="headerlink" title="1. 개발 &amp; 관리"></a>1. 개발 &amp; 관리</h2><ul>
 <li><p>cmocean은 <a target="_blank" rel="noopener" href="http://kristenthyng.com/">Kristen Thyng</a>을 중심으로 개발되었습니다.</p>
 </li>
 <li><p>2016년 처음으로 공개되었으며 github issue 기준 2020년 12월 10일까지 대응되었습니다.</p>
 </li>
-<li><p>논문으로 출판되었습니다: <a target="_blank" rel="noopener" href="https://tos.org/oceanography/assets/docs/29-3_thyng.pdf">Thyng, K. M., Greene, C. A., Hetland, R. D., Zimmerle, H. M., &amp; DiMarco, S. F. (2016). True colors of oceanography. Oceanography, 29(3), 10.</a><br><br><img src="51_cmocean_1.png"><br></p>
+<li><p>논문으로 출판되었습니다: <a target="_blank" rel="noopener" href="https://tos.org/oceanography/assets/docs/29-3_thyng.pdf">Thyng, K. M., Greene, C. A., Hetland, R. D., Zimmerle, H. M., &amp; DiMarco, S. F. (2016). True colors of oceanography. Oceanography, 29(3), 10.</a><br><br><img src="/51_cmocean_1.png"><br></p>
 </li>
 <li><p><b>도메인 지식</b>을 직관적으로 전달하도록 설계되어 있습니다.</p>
 </li>
@@ -257,67 +257,74 @@
 <p><img src="https://user-images.githubusercontent.com/3487237/51001557-0894f180-14f6-11e9-9f8e-94fc0ffcfe11.png" alt="topo: 지형"><br></p>
 <h2 id="2-시각적-특징"><a href="#2-시각적-특징" class="headerlink" title="2. 시각적 특징"></a>2. 시각적 특징</h2><ul>
 <li>matplotlib이나 seaborn 제공 colormap 대비 <b>톤 다운</b>되어 있습니다.</li>
-<li><a href="https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/">perceptually uniform</a>하여 <b>데이터를 정량적으로 전달하기 좋습니다.</b><br><br><img src="51_cmocean_2.png"><br></li>
+<li><a href="https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/">perceptually uniform</a>하여 <b>데이터를 정량적으로 전달하기 좋습니다.</b><br><br><img src="/51_cmocean_2.png"><br></li>
 </ul>
 <h2 id="3-기능적-특징"><a href="#3-기능적-특징" class="headerlink" title="3. 기능적 특징"></a>3. 기능적 특징</h2><h3 id="3-1-colormap-훑어보기"><a href="#3-1-colormap-훑어보기" class="headerlink" title="3.1. colormap 훑어보기"></a>3.1. colormap 훑어보기</h3><ul>
-<li><b>`cmoceans.plots’ 안에 여러 유틸리티</b>를 제공합니다.<ul>
+<li><b>&#96;cmoceans.plots’ 안에 여러 유틸리티</b>를 제공합니다.<ul>
 <li><code>.plot_gallery()</code> : 전체 colormap 훑어보기</li>
 <li><code>.plot_lightness()</code> : 전체 colormap의 명도 훑어보기</li>
 <li><code>wrap_viscm()</code> : 색분포, 색맹의 시선에서 보여주기.</li>
 </ul>
 </li>
 </ul>
-<p><img src="lightness.png" alt="cmocean.plots.plot_lightness() 실행 결과"></p>
+<p><img src="/lightness.png" alt="cmocean.plots.plot_lightness() 실행 결과"></p>
 <ul>
-<li>일부 <b>아쉬움</b>도 있습니다.</li>
-</ul>
+<li><p>일부 <b>아쉬움</b>도 있습니다.</p>
+</li>
+<li><p><b>1. 저장 폴더 지정됨</b></p>
 <ul>
-<li><b>1. 저장 폴더 지정됨</b><ul>
 <li>위 세 명령은 <code>saveplot=True</code>를 지정해 파일로 저장할 수 있습니다.</li>
 <li>그러나 저장 폴더 이름이 <code>./figures</code>로 고정되어 있어 이 <b>폴더가 없으면 에러</b>가 납니다.</li>
 <li>에러가 없도록 코드를 수정하여 pull request하였습니다. (2020.12.28.)</li>
 </ul>
 </li>
-<li><b>2. <code>cmoceans.plots</code>를 별도로 import 해야 함.</b><ul>
+<li><p><b>2. <code>cmoceans.plots</code>를 별도로 import 해야 함.</b></p>
+<ul>
 <li>위 세 명령을 사용하기 위해서는 <code>pip install &quot;cmocean[plots]&quot;</code>로 설치해야 합니다.</li>
 <li>그러나 예제처럼 <code>cmocean.plots.plot_lightness()</code>으로 사용하면 오류가 납니다.</li>
 <li><code>import cmocean.plots as cmplots</code> 식으로, <code>.plots()</code>를 별도 import해야 합니다.</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/matplotlib/cmocean/issues/60">불필요한 라이브러리를 설치하지 않기 위한 장치</a>라는데, 좀 아쉽습니다.</li>
 </ul>
 </li>
+<li><p>예를 들면 이렇습니다.</p>
+</li>
 </ul>
-<ul>
-<li>예를 들면 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cmocean.plots <span class="keyword">as</span> cmplots</span><br><span class="line"><span class="keyword">import</span> cmocean.cm <span class="keyword">as</span> cmo</span><br><span class="line"></span><br><span class="line">haline = cmo.haline</span><br><span class="line">cmplots.wrap_viscm(haline, saveplot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<img src="51_cmocean_3.png"></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cmocean.plots <span class="keyword">as</span> cmplots</span><br><span class="line"><span class="keyword">import</span> cmocean.cm <span class="keyword">as</span> cmo</span><br><span class="line"></span><br><span class="line">haline = cmo.haline</span><br><span class="line">cmplots.wrap_viscm(haline, saveplot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/51_cmocean_3.png"></p>
 <h3 id="3-2-matplotlib-colormap과-완벽-호환"><a href="#3-2-matplotlib-colormap과-완벽-호환" class="headerlink" title="3.2. matplotlib colormap과 완벽 호환"></a>3.2. matplotlib colormap과 완벽 호환</h3><ul>
 <li>matplotlib colormap을 부르듯 부르면 됩니다.</li>
-<li>단, import를 <b><code>cmo</code>라고 해야만</b> 하네요.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">import</span> cmocean.cm <span class="keyword">as</span> cmo</span><br><span class="line"></span><br><span class="line">Z = np.random.randn(<span class="number">10</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line">axs[<span class="number">0</span>].pcolormesh(Z, cmap=cm.viridis)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;matplotlib viridis&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].pcolormesh(Z, cmap=<span class="string">&quot;cmo.amp&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;cmocean amp&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="51_cmocean_5.png"></li>
+<li>단, import를 <b><code>cmo</code>라고 해야만</b> 하네요.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">import</span> cmocean.cm <span class="keyword">as</span> cmo</span><br><span class="line"></span><br><span class="line">Z = np.random.randn(<span class="number">10</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line">axs[<span class="number">0</span>].pcolormesh(Z, cmap=cm.viridis)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;matplotlib viridis&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].pcolormesh(Z, cmap=<span class="string">&quot;cmo.amp&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;cmocean amp&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/51_cmocean_5.png"></p>
 <h2 id="4-그-외-utility"><a href="#4-그-외-utility" class="headerlink" title="4. 그 외 utility"></a>4. 그 외 utility</h2><ul>
 <li>matplotlib 기능을 wrapping한 것들입니다.</li>
 <li>matplotlib에서 번거로운 것들이 많이 편리해졌습니다.</li>
 </ul>
 <h3 id="4-1-colormap-제작"><a href="#4-1-colormap-제작" class="headerlink" title="4.1. colormap 제작"></a>4.1. colormap 제작</h3><ul>
 <li>두 색을 넣어주면 interpolation으로 컬러맵을 만들어 줍니다.</li>
-<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/tutorials/colors/colormap-manipulation.html#sphx-glr-tutorials-colors-colormap-manipulation-py">matplotlib을 곧장 사용해서도</a> 할 수 있지만, 더 편리하네요.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">RG2 = cmocean.tools.cmap([<span class="string">&quot;#FF0000&quot;</span>, <span class="string">&quot;#00FF00&quot;</span>], N=<span class="number">2</span>)</span><br><span class="line">RG256 = cmocean.tools.cmap([<span class="string">&quot;#FF0000&quot;</span>, <span class="string">&quot;#00FF00&quot;</span>], N=<span class="number">256</span>)</span><br><span class="line"></span><br><span class="line">X = np.arange(<span class="number">0</span>, <span class="number">10</span>, <span class="number">0.1</span>)</span><br><span class="line">Y1 = np.sin(X)</span><br><span class="line">Y2 = np.cos(X)</span><br><span class="line"></span><br><span class="line">plt.scatter(X, Y1, c=Y1, cmap=RG2, label=<span class="string">&quot;RG2&quot;</span>)</span><br><span class="line">plt.scatter(X, Y2, c=Y2, cmap=RG256, label=<span class="string">&quot;RG256&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="51_cmocean_4.png"></li>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/tutorials/colors/colormap-manipulation.html#sphx-glr-tutorials-colors-colormap-manipulation-py">matplotlib을 곧장 사용해서도</a> 할 수 있지만, 더 편리하네요.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">RG2 = cmocean.tools.cmap([<span class="string">&quot;#FF0000&quot;</span>, <span class="string">&quot;#00FF00&quot;</span>], N=<span class="number">2</span>)</span><br><span class="line">RG256 = cmocean.tools.cmap([<span class="string">&quot;#FF0000&quot;</span>, <span class="string">&quot;#00FF00&quot;</span>], N=<span class="number">256</span>)</span><br><span class="line"></span><br><span class="line">X = np.arange(<span class="number">0</span>, <span class="number">10</span>, <span class="number">0.1</span>)</span><br><span class="line">Y1 = np.sin(X)</span><br><span class="line">Y2 = np.cos(X)</span><br><span class="line"></span><br><span class="line">plt.scatter(X, Y1, c=Y1, cmap=RG2, label=<span class="string">&quot;RG2&quot;</span>)</span><br><span class="line">plt.scatter(X, Y2, c=Y2, cmap=RG256, label=<span class="string">&quot;RG256&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/51_cmocean_4.png"></p>
 <h3 id="4-2-colormap-clipping"><a href="#4-2-colormap-clipping" class="headerlink" title="4.2. colormap clipping"></a>4.2. colormap clipping</h3><ul>
-<li>colormap의 일부 영역만 사용하는 기능입니다.</li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/18926031/how-to-extract-a-subset-of-a-colormap-as-a-new-colormap-in-matplotlib">matplotlib은 좀 번거롭습니다</a>만 여기선 간단히 구현해 주네요.</li>
+<li><p>colormap의 일부 영역만 사용하는 기능입니다.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/18926031/how-to-extract-a-subset-of-a-colormap-as-a-new-colormap-in-matplotlib">matplotlib은 좀 번거롭습니다</a>만 여기선 간단히 구현해 주네요.</p>
+</li>
+<li><p>colormap 비율로 자르기</p>
+</li>
+<li><p>옵션에 따라 한쪽, 또는 양쪽에서 특정 비율만큼 잘라낸 colormap을 씁니다.</p>
+</li>
 </ul>
-<ul>
-<li>colormap 비율로 자르기</li>
-<li>옵션에 따라 한쪽, 또는 양쪽에서 특정 비율만큼 잘라낸 colormap을 씁니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A = np.random.randint(-<span class="number">5</span>, <span class="number">6</span>, (<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">tarn = cmo.tarn</span><br><span class="line">tarn_crop = cmocean.tools.crop_by_percent(tarn, <span class="number">30</span>, which=<span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">im0 = axs[<span class="number">0</span>].pcolormesh(A, cmap=tarn)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;tarn (full)&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im0, ax=axs[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">im1 = axs[<span class="number">1</span>].pcolormesh(A, cmap=tarn_crop)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;tarn (30% removed from each end)&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im1, ax=axs[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<img src="51_cmocean_6.png"><br></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A = np.random.randint(-<span class="number">5</span>, <span class="number">6</span>, (<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">tarn = cmo.tarn</span><br><span class="line">tarn_crop = cmocean.tools.crop_by_percent(tarn, <span class="number">30</span>, which=<span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">im0 = axs[<span class="number">0</span>].pcolormesh(A, cmap=tarn)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;tarn (full)&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im0, ax=axs[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">im1 = axs[<span class="number">1</span>].pcolormesh(A, cmap=tarn_crop)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;tarn (30% removed from each end)&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im1, ax=axs[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="/51_cmocean_6.png"><br></p>
 <ul>
 <li>데이터 값으로 자르기</li>
-<li>지정된 데이터 내에 colormap을 설정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vmin, vmax = -<span class="number">2</span>, <span class="number">3</span></span><br><span class="line">A = np.random.randint(vmin, vmax, (<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">oxy = cmo.oxy</span><br><span class="line">oxy_crop = cmocean.tools.crop(oxy, vmin, vmax, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line">im0 = axs[<span class="number">0</span>].pcolormesh(A, cmap=oxy, vmin=-<span class="number">5</span>, vmax=<span class="number">5</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;oxy (full)\nColormap covers values with no data&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im0, ax=axs[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">im1 = axs[<span class="number">1</span>].pcolormesh(A, cmap=oxy_crop, vmin=vmin, vmax=vmax)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;oxy (from -2 to 3)\n Colormap covers specified values only&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im1, ax=axs[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<img src="51_cmocean_7.png"><br></li>
+<li>지정된 데이터 내에 colormap을 설정합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vmin, vmax = -<span class="number">2</span>, <span class="number">3</span></span><br><span class="line">A = np.random.randint(vmin, vmax, (<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">oxy = cmo.oxy</span><br><span class="line">oxy_crop = cmocean.tools.crop(oxy, vmin, vmax, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">3</span>))</span><br><span class="line">im0 = axs[<span class="number">0</span>].pcolormesh(A, cmap=oxy, vmin=-<span class="number">5</span>, vmax=<span class="number">5</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;oxy (full)\nColormap covers values with no data&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im0, ax=axs[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">im1 = axs[<span class="number">1</span>].pcolormesh(A, cmap=oxy_crop, vmin=vmin, vmax=vmax)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;oxy (from -2 to 3)\n Colormap covers specified values only&quot;</span>, pad=<span class="number">8</span>)</span><br><span class="line">fig.colorbar(im1, ax=axs[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="/51_cmocean_7.png"><br></p>
 
         </div>
 		<p>
@@ -330,22 +337,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/" data-id="cmhueoy0n00gy4gxt89pfhlgk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/" data-id="cuid-soLqp-thlwZQC9evMKQr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -421,7 +418,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-12-28",
         "dateCreated": "2020-12-28",
-        "dateModified": "2021-01-06",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/",
         "description": "
 Beatutiful colormaps for oceanography: cmoceanmain developer: Krysten ThyngThyng, K. M., Greene, C. A., Hetland, R. D., Zimmerle, H. M., &amp; DiMarco, S. F. (2016). True colors of oceanography. Ocea",
@@ -507,16 +504,6 @@ Beatutiful colormaps for oceanography: cmoceanmain developer: Krysten ThyngThyng
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -750,10 +737,6 @@ Beatutiful colormaps for oceanography: cmoceanmain developer: Krysten ThyngThyng
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/2_ombb_0.png">
 <meta property="article:published_time" content="2020-09-13T22:23:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:42:44.023Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:36.864Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="gis">
-<meta property="article:tag" content="qgis">
-<meta property="article:tag" content="object minimum bounding box">
 <meta property="article:tag" content="minimum oriented rectangle">
+<meta property="article:tag" content="object minimum bounding box">
+<meta property="article:tag" content="qgis">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/2_ombb_0.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/09/14/GIS-QGIS-2-OMBB/" class="article-date">
-     <time datetime="2020-11-27T00:42:44.023Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:36.864Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,17 +239,17 @@
 </blockquote>
 <h3 id="1-shapefile-읽기"><a href="#1-shapefile-읽기" class="headerlink" title="1. shapefile 읽기"></a>1. shapefile 읽기</h3><ul>
 <li>QGIS에서 <b>shapefile</b>을 읽어옵니다.</li>
-<li>건물 형상이 반영되어 곳곳이 울퉁불퉁합니다.<br><br><img src="2_ombb_1.png"><br></li>
+<li>건물 형상이 반영되어 곳곳이 울퉁불퉁합니다.<br><br><img src="/2_ombb_1.png"><br></li>
 </ul>
 <h3 id="2-대상-도형-선택"><a href="#2-대상-도형-선택" class="headerlink" title="2. 대상 도형 선택"></a>2. 대상 도형 선택</h3><ul>
 <li>형상을 단순화 할 <b>대상들을 선택</b>합니다.</li>
-<li>전체 도형을 대상으로 할 것이므로 전체를 선택합니다.<br><br><img src="2_ombb_2.png"><br></li>
+<li>전체 도형을 대상으로 할 것이므로 전체를 선택합니다.<br><br><img src="/2_ombb_2.png"><br></li>
 </ul>
 <h3 id="3-최소경계도형-옵션-선택"><a href="#3-최소경계도형-옵션-선택" class="headerlink" title="3. 최소경계도형 옵션 선택"></a>3. 최소경계도형 옵션 선택</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://docs.qgis.org/2.18/en/docs/user_manual/processing_algs/qgis/vector_general_tools.html#id73">QGIS: Oriented minimum bounding box</a><br><a target="_blank" rel="noopener" href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#minimum-bounding-geometry">QGIS: 최소 경계 도형</a></p>
 </blockquote>
 <ul>
-<li><p><b>공간 처리<code>Processing</code> &gt; 툴박스<code>Toolbox</code> &gt; 최소 경계 도형<code>Minimum Bounding Geometry</code></b>을 실행합니다.<br><br><img src="2_ombb_3.png"><br></p>
+<li><p><b>공간 처리<code>Processing</code> &gt; 툴박스<code>Toolbox</code> &gt; 최소 경계 도형<code>Minimum Bounding Geometry</code></b>을 실행합니다.<br><br><img src="/2_ombb_3.png"><br></p>
 </li>
 <li><p><b>[선택한 객체만]</b>을 선택합니다.</p>
 </li>
@@ -259,19 +259,19 @@
 <li>선택이 되지 않을 경우 전체를 뭉뚱그리는 도형이 생성됩니다.</li>
 </ul>
 </li>
-<li><p><b>[도형 유형]</b>을 선택합니다.<br><br><img src="2_ombb_6.png"><br></p>
+<li><p><b>[도형 유형]</b>을 선택합니다.<br><br><img src="/2_ombb_6.png"><br></p>
 </li>
 <li><p><b>[실행]</b>을 선택하여 최소경계도형을 생성합니다.<br></p>
 </li>
 </ul>
-<p><img src="2_ombb_8.png"><br></p>
+<p><img src="/2_ombb_8.png"><br></p>
 <h3 id="4-최소경계도형-중심점-추출"><a href="#4-최소경계도형-중심점-추출" class="headerlink" title="4. 최소경계도형 중심점 추출"></a>4. 최소경계도형 중심점 추출</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#centroids">QGIS: 중심</a></p>
 </blockquote>
 <ul>
 <li><p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 중심점<code>Polygon Centroid</code></b>을 실행합니다.</p>
 </li>
-<li><p><b>[각각의 파트별로 중심점 생성]</b>을 체크합니다.<br><br><img src="2_ombb_4.png"><br></p>
+<li><p><b>[각각의 파트별로 중심점 생성]</b>을 체크합니다.<br><br><img src="/2_ombb_4.png"><br></p>
 </li>
 <li><p><b>[실행]</b>을 선택하여 최소경계도형에서 중심점을 추출합니다.<br></p>
 </li>
@@ -282,13 +282,13 @@
 <ul>
 <li><p>활용을 위해 최소경계도형에 중심점을 추가해야 합니다.</p>
 </li>
-<li><p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 도형 속성 추가<code>Expand/Add Geometry</code></b>를 실행합니다.<br><br><img src="2_ombb_5.png"><br></p>
+<li><p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 도형 속성 추가<code>Expand/Add Geometry</code></b>를 실행합니다.<br><br><img src="/2_ombb_5.png"><br></p>
 </li>
 <li><p>중심점 좌표가 <code>xcoord</code>, <code>ycoord</code>로 붙어 있습니다.</p>
 </li>
 </ul>
 <h3 id="6-파일로-저장"><a href="#6-파일로-저장" class="headerlink" title="6. 파일로 저장"></a>6. 파일로 저장</h3><ul>
-<li><p><b>레이어<code>Layer</code> &gt; 다른 이름으로 저장<code>Save As...</code><b>에서 저장합니다.<br><img src="2_ombb_7.png"><br></p>
+<li><p><b>레이어<code>Layer</code> &gt; 다른 이름으로 저장<code>Save As...</code><b>에서 저장합니다.<br><img src="/2_ombb_7.png"><br></p>
 </li>
 <li><p><b>shapefile : <code>ESRI shapefile</code></b></p>
 </li>
@@ -307,22 +307,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/" data-id="cmhueoxrr000d4gxt0sakf0fg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/" data-id="cuidHflGXe6vV3Qmp_qriLW6G" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -398,7 +388,7 @@
         "genre": "GIS QGIS",
         "datePublished": "2020-09-14",
         "dateCreated": "2020-09-14",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/",
         "description": "
 QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다.
@@ -493,16 +483,6 @@ QGIS에서 shapefile을 읽어옵니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -736,10 +716,6 @@ QGIS에서 shapefile을 읽어옵니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

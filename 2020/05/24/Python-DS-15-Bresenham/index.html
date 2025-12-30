@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/15_bresenham_0.png">
 <meta property="article:published_time" content="2020-05-24T07:35:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:44:13.343Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.959Z">
 <meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="bresenham">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="signal processing">
-<meta property="article:tag" content="bresenham">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/15_bresenham_0.png">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/05/24/Python-DS-15-Bresenham/" class="article-date">
-     <time datetime="2020-11-27T00:44:13.343Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:37.959Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -236,33 +236,39 @@
 <li>그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮은 문제가 됩니다.</li>
 <li>제 경우는 <a href="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/">점들 사이에 벌어진 거리를 메워야 하는 문제를 해결하기 위해</a> 이 고민을 시작했습니다.</li>
 </ul>
-<p><img src="15_bresenham_0.png" alt="Bresenham&#39;s line algorithm"><br></p>
+<p><img src="/15_bresenham_0.png" alt="Bresenham&#39;s line algorithm"><br></p>
 <ul>
-<li>Brenham’s line algorithm은 위 그림 한 장으로 설명이 가능한 간단한 알고리즘입니다.</li>
-<li>1962년에 IBM에서 근무하던 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a>이라는 분이 만들었다고 하는데, 이런 수준(?)의 연구가 출판되던 시대였군요. :)</li>
-<li>간단해 보이지만 이 분 덕택에 유한한 2차원 공간에 다양한 도형을 그릴 수 있게 되었습니다. 감사합니다.</li>
-</ul>
-<ul>
-<li>한 단계 업그레이드 된 버전으로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm">Wu’s line algorithm</a>이 있습니다.</li>
-<li>1991년에 공개된 알고리즘인데 antialiasing을 지원합니다.<br><img src="15_bresenham_1.gif" alt="Xiaolin_Wu&#39;s_line_algorithm"><br></li>
+<li><p>Brenham’s line algorithm은 위 그림 한 장으로 설명이 가능한 간단한 알고리즘입니다.</p>
+</li>
+<li><p>1962년에 IBM에서 근무하던 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a>이라는 분이 만들었다고 하는데, 이런 수준(?)의 연구가 출판되던 시대였군요. :)</p>
+</li>
+<li><p>간단해 보이지만 이 분 덕택에 유한한 2차원 공간에 다양한 도형을 그릴 수 있게 되었습니다. 감사합니다.</p>
+</li>
+<li><p>한 단계 업그레이드 된 버전으로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm">Wu’s line algorithm</a>이 있습니다.</p>
+</li>
+<li><p>1991년에 공개된 알고리즘인데 antialiasing을 지원합니다.<br><img src="/15_bresenham_1.gif" alt="Xiaolin_Wu&#39;s_line_algorithm"><br></p>
+</li>
 </ul>
 <h3 id="Bresenham’s-algorithm"><a href="#Bresenham’s-algorithm" class="headerlink" title="Bresenham’s algorithm"></a>Bresenham’s algorithm</h3><ul>
-<li>$x, y$ 평면상에 두 점 $$(x_0, y_0)$$과 $$(x_1, y_1)$$이 주어졌을 때, 두 점을 지나는 직선의 방정식은 다음과 같습니다.<br>$$y = \frac{y_1 - y_0}{x_1 - x_0} (x - x_0) + y_0$$</li>
-</ul>
-<ul>
-<li>$x$가 1 증가했을 때 증가하는 $y$의 값(=기울기)을 오차로 정해두고, 오차가 0.5를 넘어서면 그 때 $y$를 $y$값 변동 방향으로 1 움직이고, 오차에서는 1을 빼줍니다.</li>
-<li>pseudocode로는 아래와 같이 정리될 수 있습니다.<br><img src="15_bresenham_4.png"></li>
+<li><p>$x, y$ 평면상에 두 점 $$(x_0, y_0)$$과 $$(x_1, y_1)$$이 주어졌을 때, 두 점을 지나는 직선의 방정식은 다음과 같습니다.<br>$$y &#x3D; \frac{y_1 - y_0}{x_1 - x_0} (x - x_0) + y_0$$</p>
+</li>
+<li><p>$x$가 1 증가했을 때 증가하는 $y$의 값(&#x3D;기울기)을 오차로 정해두고, 오차가 0.5를 넘어서면 그 때 $y$를 $y$값 변동 방향으로 1 움직이고, 오차에서는 1을 빼줍니다.</p>
+</li>
+<li><p>pseudocode로는 아래와 같이 정리될 수 있습니다.<br><img src="/15_bresenham_4.png"></p>
+</li>
 </ul>
 <h3 id="A-Bresenham’s-line-algorithm-python-code"><a href="#A-Bresenham’s-line-algorithm-python-code" class="headerlink" title="A Bresenham’s_line_algorithm python code"></a>A Bresenham’s_line_algorithm python code</h3><ul>
 <li>구글링을 통해 Bresenham’s line algorithm code를 여럿 찾을 수 있고, <a target="_blank" rel="noopener" href="https://gist.github.com/flags/1132363">그 중 하나</a>를 골랐습니다.</li>
-<li>가파른 구간에서 순서가 바뀌는 문제가 있어 코드를 일부 수정했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bresenham</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, start, end</span>):</span></span><br><span class="line">        self.start = <span class="built_in">list</span>(start)</span><br><span class="line">        self.end = <span class="built_in">list</span>(end)</span><br><span class="line">        self.path = []</span><br><span class="line"></span><br><span class="line">        self.steep = <span class="built_in">abs</span>(self.end[<span class="number">1</span>]-self.start[<span class="number">1</span>]) &gt; <span class="built_in">abs</span>(self.end[<span class="number">0</span>]-self.start[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.steep:</span><br><span class="line">            self.start = self.swap(self.start[<span class="number">0</span>],self.start[<span class="number">1</span>])</span><br><span class="line">            self.end = self.swap(self.end[<span class="number">0</span>],self.end[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.start[<span class="number">0</span>] &gt; self.end[<span class="number">0</span>]:</span><br><span class="line">            _x0 = <span class="built_in">int</span>(self.start[<span class="number">0</span>])</span><br><span class="line">            _x1 = <span class="built_in">int</span>(self.end[<span class="number">0</span>])</span><br><span class="line">            self.start[<span class="number">0</span>] = _x1</span><br><span class="line">            self.end[<span class="number">0</span>] = _x0</span><br><span class="line"></span><br><span class="line">            _y0 = <span class="built_in">int</span>(self.start[<span class="number">1</span>])</span><br><span class="line">            _y1 = <span class="built_in">int</span>(self.end[<span class="number">1</span>])</span><br><span class="line">            self.start[<span class="number">1</span>] = _y1</span><br><span class="line">            self.end[<span class="number">1</span>] = _y0</span><br><span class="line"></span><br><span class="line">        dx = self.end[<span class="number">0</span>] - self.start[<span class="number">0</span>]</span><br><span class="line">        dy = <span class="built_in">abs</span>(self.end[<span class="number">1</span>] - self.start[<span class="number">1</span>])</span><br><span class="line">        error = <span class="number">0</span></span><br><span class="line">        derr = dy/<span class="built_in">float</span>(dx)</span><br><span class="line"></span><br><span class="line">        ystep = <span class="number">0</span></span><br><span class="line">        y = self.start[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.start[<span class="number">1</span>] &lt; self.end[<span class="number">1</span>]: ystep = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>: ystep = -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(self.start[<span class="number">0</span>],self.end[<span class="number">0</span>]+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> self.steep:</span><br><span class="line">                self.path.append([y,x])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.path.append([x,y])</span><br><span class="line"></span><br><span class="line">            error += derr</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> error &gt;= <span class="number">0.5</span>:</span><br><span class="line">                y += ystep</span><br><span class="line">                error -= <span class="number">1.0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> self.steep <span class="keyword">and</span> self.start[<span class="number">1</span>] &gt; self.end[<span class="number">1</span>]:</span><br><span class="line">            self.path = <span class="built_in">list</span>(<span class="built_in">reversed</span>(self.path))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swap</span>(<span class="params">self,n1,n2</span>):</span></span><br><span class="line">        <span class="keyword">return</span> np.array([n2,n1])</span><br></pre></td></tr></table></figure></li>
+<li>가파른 구간에서 순서가 바뀌는 문제가 있어 코드를 일부 수정했습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">bresenham</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, start, end</span>):</span><br><span class="line">        <span class="variable language_">self</span>.start = <span class="built_in">list</span>(start)</span><br><span class="line">        <span class="variable language_">self</span>.end = <span class="built_in">list</span>(end)</span><br><span class="line">        <span class="variable language_">self</span>.path = []</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.steep = <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>]-<span class="variable language_">self</span>.start[<span class="number">1</span>]) &gt; <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">0</span>]-<span class="variable language_">self</span>.start[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.steep:</span><br><span class="line">            <span class="variable language_">self</span>.start = <span class="variable language_">self</span>.swap(<span class="variable language_">self</span>.start[<span class="number">0</span>],<span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">            <span class="variable language_">self</span>.end = <span class="variable language_">self</span>.swap(<span class="variable language_">self</span>.end[<span class="number">0</span>],<span class="variable language_">self</span>.end[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.start[<span class="number">0</span>] &gt; <span class="variable language_">self</span>.end[<span class="number">0</span>]:</span><br><span class="line">            _x0 = <span class="built_in">int</span>(<span class="variable language_">self</span>.start[<span class="number">0</span>])</span><br><span class="line">            _x1 = <span class="built_in">int</span>(<span class="variable language_">self</span>.end[<span class="number">0</span>])</span><br><span class="line">            <span class="variable language_">self</span>.start[<span class="number">0</span>] = _x1</span><br><span class="line">            <span class="variable language_">self</span>.end[<span class="number">0</span>] = _x0</span><br><span class="line"></span><br><span class="line">            _y0 = <span class="built_in">int</span>(<span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">            _y1 = <span class="built_in">int</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>])</span><br><span class="line">            <span class="variable language_">self</span>.start[<span class="number">1</span>] = _y1</span><br><span class="line">            <span class="variable language_">self</span>.end[<span class="number">1</span>] = _y0</span><br><span class="line"></span><br><span class="line">        dx = <span class="variable language_">self</span>.end[<span class="number">0</span>] - <span class="variable language_">self</span>.start[<span class="number">0</span>]</span><br><span class="line">        dy = <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>] - <span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">        error = <span class="number">0</span></span><br><span class="line">        derr = dy/<span class="built_in">float</span>(dx)</span><br><span class="line"></span><br><span class="line">        ystep = <span class="number">0</span></span><br><span class="line">        y = <span class="variable language_">self</span>.start[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.start[<span class="number">1</span>] &lt; <span class="variable language_">self</span>.end[<span class="number">1</span>]: ystep = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>: ystep = -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.start[<span class="number">0</span>],<span class="variable language_">self</span>.end[<span class="number">0</span>]+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.steep:</span><br><span class="line">                <span class="variable language_">self</span>.path.append([y,x])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="variable language_">self</span>.path.append([x,y])</span><br><span class="line"></span><br><span class="line">            error += derr</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> error &gt;= <span class="number">0.5</span>:</span><br><span class="line">                y += ystep</span><br><span class="line">                error -= <span class="number">1.0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.steep <span class="keyword">and</span> <span class="variable language_">self</span>.start[<span class="number">1</span>] &gt; <span class="variable language_">self</span>.end[<span class="number">1</span>]:</span><br><span class="line">            <span class="variable language_">self</span>.path = <span class="built_in">list</span>(<span class="built_in">reversed</span>(<span class="variable language_">self</span>.path))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">swap</span>(<span class="params">self,n1,n2</span>):</span><br><span class="line">        <span class="keyword">return</span> np.array([n2,n1])</span><br></pre></td></tr></table></figure>
+
 <h3 id="Application-on-my-case"><a href="#Application-on-my-case" class="headerlink" title="Application on my case"></a>Application on my case</h3><ul>
 <li><p>약간의 수정을 통해 제 <a href="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/">automated focusing</a>에 존재하던 버그를 잡았습니다.</p>
 </li>
-<li><p>기존 코드에서는 아래와 같은 버그가 발생했지만,<br><img src="15_bresenham_2.png" alt="before applying Bresenham&#39;s line algorithm"><br></p>
+<li><p>기존 코드에서는 아래와 같은 버그가 발생했지만,<br><img src="/15_bresenham_2.png" alt="before applying Bresenham&#39;s line algorithm"><br></p>
 </li>
-<li><p>Bresenham algorithm을 적용한 후에는 아래와 같이 깔끔하게 나옵니다.<br><img src="15_bresenham_3.png" alt="after applying Bresenham&#39;s line algorithm"><br></p>
+<li><p>Bresenham algorithm을 적용한 후에는 아래와 같이 깔끔하게 나옵니다.<br><img src="/15_bresenham_3.png" alt="after applying Bresenham&#39;s line algorithm"><br></p>
 </li>
 </ul>
 
@@ -277,22 +283,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/" data-id="cmhueoxyo00d84gxt9mqc89hm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/" data-id="cuidLOxgIIzCKXiV90hMZ4x8E" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -368,7 +364,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-05-24",
         "dateCreated": "2020-05-24",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/",
         "description": "
 wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmflags’s github
@@ -376,7 +372,7 @@ wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmf
 
 연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다.
 그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮은 ",
-        "wordCount": 916
+        "wordCount": 1004
     }
 </script>
 
@@ -458,16 +454,6 @@ wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmf
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -701,10 +687,6 @@ wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmf
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/108_mpl3d3_00.png">
 <meta property="article:published_time" content="2022-08-01T02:52:00.000Z">
-<meta property="article:modified_time" content="2022-08-01T04:23:21.067Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.767Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="3D">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/108_mpl3d3_00.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/08/01/Python-DS-108-mpl3d3/" class="article-date">
-     <time datetime="2022-08-01T04:23:21.067Z" itemprop="dateModified">2022-08-01</time>
+     <time datetime="2025-12-30T06:28:37.767Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -243,82 +243,79 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html">matplotlib: Choosing Colormaps in Matplotlib</a></p>
 </blockquote>
 <ul>
-<li><p>라이브러리 및 시각화 환경을 초기화합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=<span class="string">&#x27;NanumGothic&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br></pre></td></tr></table></figure></li>
-<li><p>펭귄 데이터셋을 이용해 2D KDE plot을 그립니다.</p>
-</li>
-<li><p>colormap은 inferno를 선택합니다.</p>
-</li>
-<li><p>이미지를 다시 2D data로 변환하려면 lightness가 data 값에 비례하야 하는데</p>
-</li>
-<li><p>perceptual uniform colormap 중 inferno의 범위가 가장 넓기 때문입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            fill=<span class="literal">True</span>, levels=<span class="number">100</span>, cmap=<span class="string">&quot;inferno&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과<br><img src="108_mpl3d3_01.png"><br></p>
-</li>
+<li>라이브러리 및 시각화 환경을 초기화합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=<span class="string">&#x27;NanumGothic&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>펭귄 데이터셋을 이용해 2D KDE plot을 그립니다.</li>
+<li>colormap은 inferno를 선택합니다.</li>
+<li>이미지를 다시 2D data로 변환하려면 lightness가 data 값에 비례하야 하는데</li>
+<li>perceptual uniform colormap 중 inferno의 범위가 가장 넓기 때문입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            fill=<span class="literal">True</span>, levels=<span class="number">100</span>, cmap=<span class="string">&quot;inferno&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과<br><img src="/108_mpl3d3_01.png"><br></li>
 </ul>
 <h2 id="5-2-2D-image-to-2D-data"><a href="#5-2-2D-image-to-2D-data" class="headerlink" title="5.2. 2D image to 2D data"></a>5.2. 2D image to 2D data</h2><ul>
-<li><p>x, y limit가 데이터 값에 따라 자동으로 설정되었지만 값을 다듬습니다.</p>
-</li>
-<li><p>향후 2D 데이터를 불러왔을 때 x, y 범위를 사용해야 하는데, 유효숫자가 너무 많으면 불편합니다.</p>
-</li>
-<li><p>소숫점 둘째 자리까지 반올림을 합니다.</p>
-</li>
-<li><p>Axes spines 등 불필요한 요소를 모두 제거합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x, y 범위 반올림 재설정</span></span><br><span class="line">xmin, xmax = np.<span class="built_in">round</span>(ax.get_xlim(),<span class="number">2</span>)</span><br><span class="line">ymin, ymax = np.<span class="built_in">round</span>(ax.get_ylim(),<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;xmin, xmax = <span class="subst">&#123;xmin&#125;</span>, <span class="subst">&#123;xmax&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;ymin, ymax = <span class="subst">&#123;ymin&#125;</span>, <span class="subst">&#123;ymax&#125;</span>&quot;</span>)</span><br><span class="line">ax.<span class="built_in">set</span>(xlim=(xmin, xmax), ylim=(ymin, ymax))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 윤곽선 눈금</span></span><br><span class="line">ax.axvline(xmin, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axvline(xmax, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axhline(ymin, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axhline(ymax, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;KDE_peng.png&quot;</span>)</span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과</p>
+<li>x, y limit가 데이터 값에 따라 자동으로 설정되었지만 값을 다듬습니다.</li>
+<li>향후 2D 데이터를 불러왔을 때 x, y 범위를 사용해야 하는데, 유효숫자가 너무 많으면 불편합니다.</li>
+<li>소숫점 둘째 자리까지 반올림을 합니다.</li>
+<li>Axes spines 등 불필요한 요소를 모두 제거합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x, y 범위 반올림 재설정</span></span><br><span class="line">xmin, xmax = np.<span class="built_in">round</span>(ax.get_xlim(),<span class="number">2</span>)</span><br><span class="line">ymin, ymax = np.<span class="built_in">round</span>(ax.get_ylim(),<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;xmin, xmax = <span class="subst">&#123;xmin&#125;</span>, <span class="subst">&#123;xmax&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;ymin, ymax = <span class="subst">&#123;ymin&#125;</span>, <span class="subst">&#123;ymax&#125;</span>&quot;</span>)</span><br><span class="line">ax.<span class="built_in">set</span>(xlim=(xmin, xmax), ylim=(ymin, ymax))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 윤곽선 눈금</span></span><br><span class="line">ax.axvline(xmin, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axvline(xmax, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axhline(ymin, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axhline(ymax, lw=<span class="number">0.01</span>, c=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;KDE_peng.png&quot;</span>)</span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmin, xmax = 25.91, 65.79</span><br><span class="line">ymin, ymax = 10.86, 23.74</span><br></pre></td></tr></table></figure>
-<p><img src="KDE_peng.png"><br></p>
-</li>
-<li><p>x, y 데이터의 최소와 최대 범위에 green line을 그렸습니다.</p>
-</li>
-<li><p>image를 file로 저장할 때 몇 픽셀 가량의 여백이 생기기 때문에 이를 확인하고 제거하기 위함입니다.</p>
-</li>
-<li><p>그림파일을 <code>im_pengkde</code>라는 이름으로 불러온 뒤, [:10, :10] 영역의 데이터를 출력해 green line을 확인합니다.</p>
+<p><img src="/KDE_peng.png"><br></p>
+<ul>
+<li>x, y 데이터의 최소와 최대 범위에 green line을 그렸습니다.</li>
+<li>image를 file로 저장할 때 몇 픽셀 가량의 여백이 생기기 때문에 이를 확인하고 제거하기 위함입니다.</li>
+<li>그림파일을 <code>im_pengkde</code>라는 이름으로 불러온 뒤, [:10, :10] 영역의 데이터를 출력해 green line을 확인합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(im_pengkde[:<span class="number">10</span>, :<span class="number">10</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<br><img src="108_mpl3d3_02.png"><br></li>
-</ul>
+<li><p>실행 결과<br>  <img src="/108_mpl3d3_02.png"><br></p>
 </li>
-</ul>
-<ul>
 <li><p>pixel을 눈으로 볼 수 있을 만큼 확대를 해보니 green line 두께는 1 pixel입니다.</p>
 </li>
 <li><p>그리고 그 밖으로 약간의 여백이 있습니다.</p>
 </li>
 <li><p>이 여백의 폭을 확인한 후 1 pixel을 더한 범위만큼 사방에서 잘라냅니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"></span><br><span class="line">idx_gx, idx_gy, _ =  np.where(im_pengkde[:<span class="number">5</span>, :<span class="number">5</span>] != mcolors.to_rgba(<span class="string">&quot;w&quot;</span>))</span><br><span class="line">im_pengkde= im_pengkde[idx_gx[<span class="number">0</span>]+<span class="number">1</span>:-idx_gx[<span class="number">0</span>]-<span class="number">2</span>, idx_gy[<span class="number">0</span>]+<span class="number">1</span>:-idx_gx[<span class="number">0</span>]-<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(im_pengkde[:<span class="number">2</span>, :<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(im_pengkde.shape)</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[[[1. 1. 1. 1.]</span><br><span class="line">  [1. 1. 1. 1.]]</span><br><span class="line"></span><br><span class="line"> [[1. 1. 1. 1.]</span><br><span class="line">  [1. 1. 1. 1.]]]</span><br><span class="line">(351, 351, 4)</span><br></pre></td></tr></table></figure></li>
-<li><p>image size가 <b>(351, 351)</b>로 확인됩니다.</p>
-</li>
-<li><p>잘 제거되었나 확인합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(im_pengkde[:<span class="number">10</span>, :<span class="number">10</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_03.png"><br></p>
 </li>
 </ul>
-<h2 id="5-3-data-colormap-intensity"><a href="#5-3-data-colormap-intensity" class="headerlink" title="5.3. data = colormap intensity"></a>5.3. data = colormap intensity</h2><ul>
-<li><p>inferno colormap에서 data intensity는 lightness에 비례합니다.</p>
-</li>
-<li><p><code>colorspacious</code> 라이브러리의 <code>cspace_converter</code>를 사용해 RGB를 Lab으로 변환합니다.</p>
-</li>
-<li><p>Lab color space의 첫 번째 요소가 lightness입니다.</p>
-</li>
-<li><p>데이터가 없는 하얀 색 구간이 있습니다. 여기는 데이터가 있는 부분과 구별되도록 -1을 입력합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">im_pengkde_L = np.zeros(im_pengkde.shape[:<span class="number">2</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(im_pengkde.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(im_pengkde.shape[<span class="number">1</span>]):</span><br><span class="line">        RGB = im_pengkde[i, j][:<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(RGB - np.array([<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>])) == <span class="number">0</span>:</span><br><span class="line">            im_pengkde_L[i, j] = -<span class="number">1</span>   </span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(RGB)</span><br><span class="line">            im_pengkde_L[i, j] = lab[<span class="number">0</span>]</span><br></pre></td></tr></table></figure></li>
-<li><p>im_pengkde_L에 lightness를 입력했습니다.</p>
-</li>
-<li><p>확인을 위해 inferno colormap을 적용해 image로 출력합니다.</p>
-</li>
-<li><p>아까 저장해 둔 xmin, xmax, ymin, ymax를 <code>extent</code>에 넣어 범위를 올바르게 표현하고</p>
-</li>
-<li><p><code>aspect</code>에 x, y 범위의 비율을 입력해 그림이 정사각형으로 표현되도록 조정합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"></span><br><span class="line">idx_gx, idx_gy, _ =  np.where(im_pengkde[:<span class="number">5</span>, :<span class="number">5</span>] != mcolors.to_rgba(<span class="string">&quot;w&quot;</span>))</span><br><span class="line">im_pengkde= im_pengkde[idx_gx[<span class="number">0</span>]+<span class="number">1</span>:-idx_gx[<span class="number">0</span>]-<span class="number">2</span>, idx_gy[<span class="number">0</span>]+<span class="number">1</span>:-idx_gx[<span class="number">0</span>]-<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(im_pengkde[:<span class="number">2</span>, :<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(im_pengkde.shape)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[[[1. 1. 1. 1.]</span><br><span class="line">  [1. 1. 1. 1.]]</span><br><span class="line"></span><br><span class="line"> [[1. 1. 1. 1.]</span><br><span class="line">  [1. 1. 1. 1.]]]</span><br><span class="line">(351, 351, 4)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>image size가 <b>(351, 351)</b>로 확인됩니다.</li>
+<li>잘 제거되었나 확인합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(im_pengkde[:<span class="number">10</span>, :<span class="number">10</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_03.png"><br></p>
+<h2 id="5-3-data-colormap-intensity"><a href="#5-3-data-colormap-intensity" class="headerlink" title="5.3. data &#x3D; colormap intensity"></a>5.3. data &#x3D; colormap intensity</h2><ul>
+<li>inferno colormap에서 data intensity는 lightness에 비례합니다.</li>
+<li><code>colorspacious</code> 라이브러리의 <code>cspace_converter</code>를 사용해 RGB를 Lab으로 변환합니다.</li>
+<li>Lab color space의 첫 번째 요소가 lightness입니다.</li>
+<li>데이터가 없는 하얀 색 구간이 있습니다. 여기는 데이터가 있는 부분과 구별되도록 -1을 입력합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">im_pengkde_L = np.zeros(im_pengkde.shape[:<span class="number">2</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(im_pengkde.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(im_pengkde.shape[<span class="number">1</span>]):</span><br><span class="line">        RGB = im_pengkde[i, j][:<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(RGB - np.array([<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>])) == <span class="number">0</span>:</span><br><span class="line">            im_pengkde_L[i, j] = -<span class="number">1</span>   </span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            lab = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)(RGB)</span><br><span class="line">            im_pengkde_L[i, j] = lab[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>im_pengkde_L에 lightness를 입력했습니다.</li>
+<li>확인을 위해 inferno colormap을 적용해 image로 출력합니다.</li>
+<li>아까 저장해 둔 xmin, xmax, ymin, ymax를 <code>extent</code>에 넣어 범위를 올바르게 표현하고</li>
+<li><code>aspect</code>에 x, y 범위의 비율을 입력해 그림이 정사각형으로 표현되도록 조정합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(im_pengkde_L, cmap=<span class="string">&quot;inferno&quot;</span>,</span><br><span class="line">           extent=[xmin, xmax, ymin, ymax], </span><br><span class="line">           aspect=(xmax-xmin)/(ymax-ymin))</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_04.png"><br></p>
-</li>
-<li><p>정상적으로 출력되었습니다.</p>
-</li>
-<li><p>하얀 색 부분이 검게 표현되었는데, 이 부분에 입력한 -1이 inferno colormap에서 최소값으로 감지되었기 때문입니다.</p>
-</li>
+<p><img src="/108_mpl3d3_04.png"><br></p>
+<ul>
+<li>정상적으로 출력되었습니다.</li>
+<li>하얀 색 부분이 검게 표현되었는데, 이 부분에 입력한 -1이 inferno colormap에서 최소값으로 감지되었기 때문입니다.</li>
 </ul>
 <h1 id="6-3D-plot"><a href="#6-3D-plot" class="headerlink" title="6. 3D plot"></a>6. 3D plot</h1><blockquote>
 <p><a href="https://jehyunlee.github.io/2021/07/10/Python-DS-80-mpl3d2/">Pega Devlog: Matplotlib 3D Plots(2)</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html?highlight=plot_surface#mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface">matplotlib: Axes.plot_surface()</a></p>
@@ -327,53 +324,45 @@
 <li>데이터를 추출했으므로 3D plot을 시작할 차례입니다.</li>
 </ul>
 <h2 id="6-1-plot-surface"><a href="#6-1-plot-surface" class="headerlink" title="6.1. plot_surface()"></a>6.1. <code>plot_surface()</code></h2><ul>
-<li><p><code>Axes.plot_surface()</code>등 명령어가 받아들이는 형식으로 데이터를 마련해야 합니다.</p>
-</li>
-<li><p><code>np.meshgrid()</code>로 데이터 범위에서 mesh grid를 생성합니다.</p>
+<li><code>Axes.plot_surface()</code>등 명령어가 받아들이는 형식으로 데이터를 마련해야 합니다.</li>
+<li><code>np.meshgrid()</code>로 데이터 범위에서 mesh grid를 생성합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mesh grid 생성</span></span><br><span class="line">xs = np.linspace(xmin, xmax, im_pengkde.shape[<span class="number">1</span>])</span><br><span class="line">ys = np.linspace(ymin, ymax, im_pengkde.shape[<span class="number">0</span>])</span><br><span class="line">xx, yy = np.meshgrid(xs, ys)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3D plot</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_05.png"><br></p>
-</li>
-<li><p>mesh로 이루어진 3D surface plot이 생성되었습니다.</p>
-</li>
-<li><p>앞에서 (351, 351)로 확인한 것 치고는 mesh 밀도가 너무 낮습니다.</p>
-</li>
+<p><img src="/108_mpl3d3_05.png"><br></p>
+<ul>
+<li>mesh로 이루어진 3D surface plot이 생성되었습니다.</li>
+<li>앞에서 (351, 351)로 확인한 것 치고는 mesh 밀도가 너무 낮습니다.</li>
 </ul>
 <h2 id="6-2-rstride-cstride"><a href="#6-2-rstride-cstride" class="headerlink" title="6.2. rstride, cstride"></a>6.2. rstride, cstride</h2><ul>
-<li><p><code>Axes.plot_surface()</code>는 모든 mesh를 보여주지 않스빈다.</p>
-</li>
-<li><p>row를 <code>rstride</code>만큼 건너뛰고 column을 <code>cstride</code>만큼 건너뛰는데 기본값이 10입니다. </p>
-</li>
-<li><p><code>rstride=1</code>, <code>cstride=1</code>을 입력해 모든 mesh를 출력합니다.</p>
+<li><code>Axes.plot_surface()</code>는 모든 mesh를 보여주지 않스빈다.</li>
+<li>row를 <code>rstride</code>만큼 건너뛰고 column을 <code>cstride</code>만큼 건너뛰는데 기본값이 10입니다. </li>
+<li><code>rstride=1</code>, <code>cstride=1</code>을 입력해 모든 mesh를 출력합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_06.png"><br></p>
-</li>
-<li><p>mesh가 너무 많아 하얗게 뒤덮여 버렸습니다.</p>
-</li>
-<li><p>우리가 원하는 것은 매끈한 표면이지 복잡한 mesh가 아닙니다. <code>lw=0</code>으로 mesh를 지웁니다.</p>
+<p><img src="/108_mpl3d3_06.png"><br></p>
+<ul>
+<li>mesh가 너무 많아 하얗게 뒤덮여 버렸습니다.</li>
+<li>우리가 원하는 것은 매끈한 표면이지 복잡한 mesh가 아닙니다. <code>lw=0</code>으로 mesh를 지웁니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_07.png"><br></p>
-</li>
-<li><p>이제 형태가 좀 잘 보입니다.</p>
-</li>
+<p><img src="/108_mpl3d3_07.png"><br></p>
+<ul>
+<li>이제 형태가 좀 잘 보입니다.</li>
 </ul>
 <h2 id="6-3-colormap"><a href="#6-3-colormap" class="headerlink" title="6.3. colormap"></a>6.3. colormap</h2><ul>
-<li><p>데이터 값이 z축에 드러나있지만 어디까지나 상대적인 밀도입니다.</p>
-</li>
-<li><p>절대적인 수치는 별 의미가 없지만 상대적인 대소는 의미가 있습니다.</p>
-</li>
-<li><p><code>cmap</code>매개변수로 colormap을 적용해서 높은 봉우리가 잘 드러나게 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, cmap=<span class="string">&quot;inferno&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_08.png"><br></p>
-</li>
-<li><p>colormap이 적용된 결고 왼쪽 봉우리가 오른쪽보다 높다는 사실이 한 눈에 드러납니다.</p>
-</li>
-<li><p>왠지 뒤쪽이 비쳐보이는 바람에 다소 혼란스럽기도 합니다.</p>
-</li>
-<li><p><code>antialiased=False</code>를 적용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, cmap=<span class="string">&quot;inferno&quot;</span>, </span><br><span class="line">                antialiased=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_09.png"><br></p>
-</li>
+<li>데이터 값이 z축에 드러나있지만 어디까지나 상대적인 밀도입니다.</li>
+<li>절대적인 수치는 별 의미가 없지만 상대적인 대소는 의미가 있습니다.</li>
+<li><code>cmap</code>매개변수로 colormap을 적용해서 높은 봉우리가 잘 드러나게 합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, cmap=<span class="string">&quot;inferno&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_08.png"><br></p>
+<ul>
+<li>colormap이 적용된 결고 왼쪽 봉우리가 오른쪽보다 높다는 사실이 한 눈에 드러납니다.</li>
+<li>왠지 뒤쪽이 비쳐보이는 바람에 다소 혼란스럽기도 합니다.</li>
+<li><code>antialiased=False</code>를 적용합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, cmap=<span class="string">&quot;inferno&quot;</span>, </span><br><span class="line">                antialiased=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_09.png"><br></p>
 <h2 id="6-4-mask"><a href="#6-4-mask" class="headerlink" title="6.4. mask"></a>6.4. mask</h2><blockquote>
 <p><a href="np.ma.masked_array">numpy: The numpy.ma module</a><br><a target="_blank" rel="noopener" href="https://scipy-cookbook.readthedocs.io/items/Matplotlib_Plotting_values_with_masked_arrays.html">scipy: Matplotlib: plotting values with masked arrays</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/lines_bars_and_markers/masked_demo.html">matplotlib: Plotting masked and NaN values</a></p>
 </blockquote>
@@ -381,9 +370,10 @@
 <li>우리가 사용하는 데이터는 penguins dataset의 2D KDE plot에서 온 것이고,</li>
 <li>데이터 값이 존재하지 않는 범위가 적지 않습니다.</li>
 <li>이 부분이 데이터 밀도가 매우 작은 부분과 혼동되기 때문에, 제거하는 편이 깔끔합니다.</li>
-<li><code>np.ma.masked_array()</code>를 사용해 데이터 값이 0 이하인 부분을 제거합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">im_pengkde_L_masked = np.ma.masked_array(im_pengkde_L, im_pengkde_L &lt;= <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, </span><br><span class="line">                cmap=<span class="string">&quot;inferno&quot;</span>, antialiased=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<img src="108_mpl3d3_10.png"><br></li>
+<li><code>np.ma.masked_array()</code>를 사용해 데이터 값이 0 이하인 부분을 제거합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">im_pengkde_L_masked = np.ma.masked_array(im_pengkde_L, im_pengkde_L &lt;= <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, </span><br><span class="line">                cmap=<span class="string">&quot;inferno&quot;</span>, antialiased=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_10.png"><br></p>
 <h2 id="6-5-LightSource"><a href="#6-5-LightSource" class="headerlink" title="6.5. LightSource"></a>6.5. LightSource</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.colors.LightSource.html?highlight=lightsource#matplotlib.colors.LightSource">matplotlib: matplotlib.colors.LightSource</a></p>
 </blockquote>
@@ -392,25 +382,23 @@
 <li>이를 계산해 적용해주는 모듈이 <a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.colors.LightSource.html?highlight=lightsource#matplotlib.colors.LightSource"><code>LightSource</code></a>입니다.</li>
 <li><code>ls = LightSource()</code>에 <code>azdeg</code>과 <code>altdeg</code>으로 방위각과 고도각을 입력한 후,</li>
 <li><code>rgb = ls.shade()</code>로 face마다 그림자를 계산합니다.</li>
-<li>마지막으로 <code>Axes.plot_surface()</code>에 <code>facecolors=rgb</code>를 넣어 계산된 값을 면에 입혀 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> LightSource</span><br><span class="line"></span><br><span class="line"><span class="comment"># Light Source object 생성</span></span><br><span class="line">ls = LightSource(azdeg=-<span class="number">45</span>, altdeg=<span class="number">30</span>)</span><br><span class="line"><span class="comment"># shade 생성</span></span><br><span class="line">rgb = ls.shade(im_pengkde_L, plt.get_cmap(<span class="string">&quot;inferno&quot;</span>))</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, antialiased=<span class="literal">False</span>, </span><br><span class="line">                facecolors=rgb)</span><br></pre></td></tr></table></figure>
-<img src="108_mpl3d3_11.png"><br></li>
+<li>마지막으로 <code>Axes.plot_surface()</code>에 <code>facecolors=rgb</code>를 넣어 계산된 값을 면에 입혀 출력합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> LightSource</span><br><span class="line"></span><br><span class="line"><span class="comment"># Light Source object 생성</span></span><br><span class="line">ls = LightSource(azdeg=-<span class="number">45</span>, altdeg=<span class="number">30</span>)</span><br><span class="line"><span class="comment"># shade 생성</span></span><br><span class="line">rgb = ls.shade(im_pengkde_L, plt.get_cmap(<span class="string">&quot;inferno&quot;</span>))</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, antialiased=<span class="literal">False</span>, </span><br><span class="line">                facecolors=rgb)</span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_11.png"><br></p>
 <h2 id="6-6-rotation"><a href="#6-6-rotation" class="headerlink" title="6.6. rotation"></a>6.6. rotation</h2><ul>
-<li><p>3D 객체는 일부분이 필연적으로 가려져 데이터 전달 효율이 떨어집니다.</p>
-</li>
-<li><p>이를 보완하기 위해 회전을 시키는 방법이 많이 사용됩니다.</p>
-</li>
-<li><p>방위각을 나타내는 <code>azim</code>에 기본값인 -60 외에 -30과 0을 입력한 결과를 함께 그립니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">elev = <span class="number">30</span></span><br><span class="line">azims = [-<span class="number">60</span>, -<span class="number">30</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, azim <span class="keyword">in</span> <span class="built_in">zip</span>(axs, azims):</span><br><span class="line">    ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">2</span>, cstride=<span class="number">2</span>, lw=<span class="number">0</span>, antialiased=<span class="literal">False</span>, </span><br><span class="line">                    facecolors=rgb)</span><br><span class="line">    ax.view_init(elev, azim)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;azim = <span class="subst">&#123;azim&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_12.png"><br></p>
-</li>
-<li><p>방위각에 따라 보이지 않던 부분이 드러나고 있습니다.</p>
-</li>
-<li><p>종이에 인쇄되는 환경이 아닌 웹 등으로 데이터를 전달한다면 애니메이션을 만들어 전달할 수 있습니ㅏㄷ.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation </span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">fontlabel = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init</span>():</span></span><br><span class="line">    ls = LightSource(azdeg=-<span class="number">45</span>, altdeg=<span class="number">30</span>)</span><br><span class="line">    rgb = ls.shade(im_pengkde_L, plt.get_cmap(<span class="string">&quot;inferno&quot;</span>))</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;bill length (mm)&quot;</span>, fontdict=fontlabel, labelpad=<span class="number">16</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;bill depth (mm)&quot;</span>, fontdict=fontlabel, labelpad=<span class="number">16</span>)</span><br><span class="line">    ax.set_title(<span class="string">&quot;Kernel Density&quot;</span>, fontdict=fontlabel)</span><br><span class="line">    ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, antialiased=<span class="literal">False</span>, </span><br><span class="line">                facecolors=rgb)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">animate</span>(<span class="params">i</span>):</span></span><br><span class="line">    ax.view_init(elev=<span class="number">30</span>, azim=i)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"><span class="comment"># Animate</span></span><br><span class="line">anim = animation.FuncAnimation(fig, animate, init_func=init,</span><br><span class="line">                               frames=<span class="number">360</span>, interval=<span class="number">20</span>, blit=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Save</span></span><br><span class="line">anim.save(<span class="string">&#x27;108_mpl3d3_rot_01.gif&#x27;</span>, fps=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="108_mpl3d3_rot_01.gif"><br></p>
-</li>
+<li>3D 객체는 일부분이 필연적으로 가려져 데이터 전달 효율이 떨어집니다.</li>
+<li>이를 보완하기 위해 회전을 시키는 방법이 많이 사용됩니다.</li>
+<li>방위각을 나타내는 <code>azim</code>에 기본값인 -60 외에 -30과 0을 입력한 결과를 함께 그립니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">elev = <span class="number">30</span></span><br><span class="line">azims = [-<span class="number">60</span>, -<span class="number">30</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, azim <span class="keyword">in</span> <span class="built_in">zip</span>(axs, azims):</span><br><span class="line">    ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">2</span>, cstride=<span class="number">2</span>, lw=<span class="number">0</span>, antialiased=<span class="literal">False</span>, </span><br><span class="line">                    facecolors=rgb)</span><br><span class="line">    ax.view_init(elev, azim)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;azim = <span class="subst">&#123;azim&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_12.png"><br></p>
+<ul>
+<li>방위각에 따라 보이지 않던 부분이 드러나고 있습니다.</li>
+<li>종이에 인쇄되는 환경이 아닌 웹 등으로 데이터를 전달한다면 애니메이션을 만들어 전달할 수 있습니ㅏㄷ.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation </span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">fontlabel = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init</span>():</span><br><span class="line">    ls = LightSource(azdeg=-<span class="number">45</span>, altdeg=<span class="number">30</span>)</span><br><span class="line">    rgb = ls.shade(im_pengkde_L, plt.get_cmap(<span class="string">&quot;inferno&quot;</span>))</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;bill length (mm)&quot;</span>, fontdict=fontlabel, labelpad=<span class="number">16</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;bill depth (mm)&quot;</span>, fontdict=fontlabel, labelpad=<span class="number">16</span>)</span><br><span class="line">    ax.set_title(<span class="string">&quot;Kernel Density&quot;</span>, fontdict=fontlabel)</span><br><span class="line">    ax.plot_surface(xx, yy, im_pengkde_L_masked, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, lw=<span class="number">0</span>, antialiased=<span class="literal">False</span>, </span><br><span class="line">                facecolors=rgb)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">animate</span>(<span class="params">i</span>):</span><br><span class="line">    ax.view_init(elev=<span class="number">30</span>, azim=i)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"><span class="comment"># Animate</span></span><br><span class="line">anim = animation.FuncAnimation(fig, animate, init_func=init,</span><br><span class="line">                               frames=<span class="number">360</span>, interval=<span class="number">20</span>, blit=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Save</span></span><br><span class="line">anim.save(<span class="string">&#x27;108_mpl3d3_rot_01.gif&#x27;</span>, fps=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/108_mpl3d3_rot_01.gif"><br></p>
 <h1 id="7-결론"><a href="#7-결론" class="headerlink" title="7. 결론"></a>7. 결론</h1><ul>
 <li>2D KDE plot을 3D로 바꾸어 표현할 수 있음을 확인했습니다.</li>
 <li>3D plot은 데이터의 정확한 전달력보다 독자의 주의를 끄는 데 유리합니다.</li>
@@ -428,22 +416,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/08/01/Python-DS-108-mpl3d3/" data-id="cmhueoxx800ai4gxt392j5ysp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/08/01/Python-DS-108-mpl3d3/" data-id="cuidN70QOkaFSL2L8jy57AsYl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -519,7 +497,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-08-01",
         "dateCreated": "2022-08-01",
-        "dateModified": "2022-08-01",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/08/01/Python-DS-108-mpl3d3/",
         "description": "
 Matplotlib으로 3D Plot을 할 수 있습니다.
@@ -530,7 +508,7 @@ seaborn KDE plot을 3D로 표현합니다.
 2D KDE plot은 전달력이 좋고, 은근 예쁘기도 합니다.
 두 인자의 상관 분포를 표현하는 그림으로, 데이터의 밀도를 선이나 색으로 나타냅니다.
 2D 공간을 ",
-        "wordCount": 2010
+        "wordCount": 2012
     }
 </script>
 
@@ -612,16 +590,6 @@ seaborn KDE plot을 3D로 표현합니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -855,10 +823,6 @@ seaborn KDE plot을 3D로 표현합니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

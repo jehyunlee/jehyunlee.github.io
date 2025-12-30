@@ -12,21 +12,21 @@
     
     <meta name="keywords" content="presentation,KIER,machine learning,data split,validation" />
     
-    <meta name="description" content="한국에너지기술연구원 AI 학습조직에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다. scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified K fold를 소개하고, 모든 데이터를 학습과 검증에 활용하는 cross validation을 다룹니다. 강의 자료는 여기에서 다운받으실 수 있습니다     발표 영상 : (Y">
+    <meta name="description" content="한국에너지기술연구원 AI 학습조직에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다.  scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified K fold를 소개하고, 모든 데이터를 학습과 검증에 활용하는 cross validation을 다룹니다. 강의 자료는 여기에서 다운받으실 수 있습니다   발표 영상 : (Yo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="데이터 분할과 교차 검증">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/06/15/Python-DS-104-kierlecture3/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="한국에너지기술연구원 AI 학습조직에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다. scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified K fold를 소개하고, 모든 데이터를 학습과 검증에 활용하는 cross validation을 다룹니다. 강의 자료는 여기에서 다운받으실 수 있습니다     발표 영상 : (Y">
+<meta property="og:description" content="한국에너지기술연구원 AI 학습조직에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다.  scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified K fold를 소개하고, 모든 데이터를 학습과 검증에 활용하는 cross validation을 다룹니다. 강의 자료는 여기에서 다운받으실 수 있습니다   발표 영상 : (Yo">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/104_kierlecture3_00.png">
 <meta property="article:published_time" content="2022-06-15T00:46:00.000Z">
-<meta property="article:modified_time" content="2022-06-15T05:25:11.293Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.741Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="presentation">
 <meta property="article:tag" content="KIER">
-<meta property="article:tag" content="machine learning">
 <meta property="article:tag" content="data split">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="presentation">
 <meta property="article:tag" content="validation">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/104_kierlecture3_00.png">
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/06/15/Python-DS-104-kierlecture3/" class="article-date">
-     <time datetime="2022-06-15T05:25:11.293Z" itemprop="dateModified">2022-06-15</time>
+     <time datetime="2025-12-30T06:28:37.741Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -231,14 +231,13 @@
             
 
             <ul>
-<li><b>한국에너지기술연구원 AI 학습조직</b>에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다.<ul>
+<li><p><b>한국에너지기술연구원 AI 학습조직</b>에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다.</p>
+<ul>
 <li>scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified K fold를 소개하고,</li>
 <li>모든 데이터를 학습과 검증에 활용하는 cross validation을 다룹니다.</li>
 <li><a href="220614_%EC%9D%B4%EC%A0%9C%ED%98%84_KIERML_2202_bestmodel.pdf">강의 자료는 여기에서 다운받으실 수 있습니다</a></li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p>발표 영상 : (<a target="_blank" rel="noopener" href="https://youtu.be/JX6tSOaUKuI">Youtube Link</a>)<br></p>
 </li>
 <li><p>실습 코드 : (<a target="_blank" rel="noopener" href="https://bit.ly/3QdGwGq">https://bit.ly/3QdGwGq</a>)<br></p>
@@ -248,27 +247,30 @@
 
 
 <h3 id="Cross-Validation-set-generator"><a href="#Cross-Validation-set-generator" class="headerlink" title="Cross Validation set generator"></a>Cross Validation set generator</h3><ul>
-<li><p><code>cross_val_score</code>와 <code>cross_val_predict</code>에 사전에 만든 dataset을 넣을 수 있습니다.</p>
-</li>
-<li><p>training set과 validation set의 index를 출력하는 generator를 사용하면 됩니다.</p>
-</li>
-<li><p>발표 영상에는 없지만 해당 코드를 추가합니다.</p>
-</li>
-<li><p>먼저, <code>cross_val_score</code>예시입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 사전에 분할한 cross validation set 사용</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_train_valid</span>(<span class="params">idx_trains, idx_vals</span>):</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(idx_trains) == <span class="built_in">len</span>(idx_vals) <span class="comment"># train data index와 validation data index가 다르면 중단</span></span><br><span class="line"></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> count &lt; <span class="built_in">len</span>(idx_trains):</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> idx_trains[count-<span class="number">1</span>], idx_vals[count-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">idx_cv = generate_train_valid(idx_trains, idx_vals) <span class="comment"># CV set generator</span></span><br><span class="line">-cross_val_score(model1, X, y, cv=idx_cv, scoring=<span class="string">&quot;neg_root_mean_squared_error&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([290.47491999, 332.31676581, 268.35748775, 304.48637819,</span><br><span class="line">       262.42934634])</span><br></pre></td></tr></table></figure></li>
-<li><p><code>cross_val_predict</code>예시입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_predict</span><br><span class="line"></span><br><span class="line"><span class="comment"># y_pred_cv = cross_val_predict(model1, X, y, cv=5)</span></span><br><span class="line">idx_cv = generate_train_valid(idx_trains, idx_vals)  <span class="comment"># CV set generator</span></span><br><span class="line">y_pred_cv = cross_val_predict(model1, X, y, cv=idx_cv)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization and print</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.scatter(y, y_pred_cv, c=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;true&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;predict&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">mean_squared_error(y, y_pred_cv, squared=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>실행 결과</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">292.76401468664585</span><br></pre></td></tr></table></figure>
-<p><img src="104_kierlecture3_01.png"><br></p>
-</li>
+<li><code>cross_val_score</code>와 <code>cross_val_predict</code>에 사전에 만든 dataset을 넣을 수 있습니다.</li>
+<li>training set과 validation set의 index를 출력하는 generator를 사용하면 됩니다.</li>
+<li>발표 영상에는 없지만 해당 코드를 추가합니다.</li>
+<li>먼저, <code>cross_val_score</code>예시입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 사전에 분할한 cross validation set 사용</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_train_valid</span>(<span class="params">idx_trains, idx_vals</span>):</span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(idx_trains) == <span class="built_in">len</span>(idx_vals) <span class="comment"># train data index와 validation data index가 다르면 중단</span></span><br><span class="line"></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> count &lt; <span class="built_in">len</span>(idx_trains):</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> idx_trains[count-<span class="number">1</span>], idx_vals[count-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">idx_cv = generate_train_valid(idx_trains, idx_vals) <span class="comment"># CV set generator</span></span><br><span class="line">-cross_val_score(model1, X, y, cv=idx_cv, scoring=<span class="string">&quot;neg_root_mean_squared_error&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([290.47491999, 332.31676581, 268.35748775, 304.48637819,</span><br><span class="line">       262.42934634])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>cross_val_predict</code>예시입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_predict</span><br><span class="line"></span><br><span class="line"><span class="comment"># y_pred_cv = cross_val_predict(model1, X, y, cv=5)</span></span><br><span class="line">idx_cv = generate_train_valid(idx_trains, idx_vals)  <span class="comment"># CV set generator</span></span><br><span class="line">y_pred_cv = cross_val_predict(model1, X, y, cv=idx_cv)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization and print</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.scatter(y, y_pred_cv, c=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;true&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;predict&quot;</span>, color=<span class="string">&quot;gray&quot;</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">mean_squared_error(y, y_pred_cv, squared=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">292.76401468664585</span><br></pre></td></tr></table></figure>
+<p><img src="/104_kierlecture3_01.png"><br></p>
 <p>
 * 바쁜 연구원 일정 속에 변동이 있겠지만, 최대한 일정을 지켜보고자 합니다.
 
-<p><img src="thumbnail_012.PNG" alt="학습조직 일정"></p>
+<p><img src="/thumbnail_012.PNG" alt="학습조직 일정"></p>
 
         </div>
 		<p>
@@ -281,22 +283,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/06/15/Python-DS-104-kierlecture3/" data-id="cmhueoxx100a34gxtdz6s4kue" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/06/15/Python-DS-104-kierlecture3/" data-id="cuidKt1iEM144NntMA0wmXfa5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -372,18 +364,17 @@
         "genre": "Python Data Science",
         "datePublished": "2022-06-15",
         "dateCreated": "2022-06-15",
-        "dateModified": "2022-06-15",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/06/15/Python-DS-104-kierlecture3/",
         "description": "
 한국에너지기술연구원 AI 학습조직에서는 2022년 한 해동안 머신러닝을 공부하고 있습니다.
+
 scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified K fold를 소개하고,
 모든 데이터를 학습과 검증에 활용하는 cross validation을 다룹니다.
 강의 자료는 여기에서 다운받으실 수 있습니다
 
 
-
-
-발표 영상 : (Y",
+발표 영상 : (Yo",
         "wordCount": 314
     }
 </script>
@@ -466,16 +457,6 @@ scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified 
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -709,10 +690,6 @@ scikit-learn 기능 중 데이터를 class 비율대로 분류하는 stratified 
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

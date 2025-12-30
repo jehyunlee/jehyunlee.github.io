@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/113_moon_00.png">
 <meta property="article:published_time" content="2022-09-08T21:34:00.000Z">
-<meta property="article:modified_time" content="2024-08-10T23:25:07.089Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.803Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/113_moon_00.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/09/09/Python-DS-113-moon/" class="article-date">
-     <time datetime="2024-08-10T23:25:07.089Z" itemprop="dateModified">2024-08-11</time>
+     <time datetime="2025-12-30T06:28:37.803Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -238,80 +238,75 @@
 </blockquote>
 <ul>
 <li>보름달 주위로 빛이 살짝 스며나올 때가 있습니다.</li>
-<li>구름이 옅게 끼거나 공기가 습할 때 일부가 굴절되는 것입니다.<br><br><img src="113_moon_11.jpg"><br></li>
+<li>구름이 옅게 끼거나 공기가 습할 때 일부가 굴절되는 것입니다.<br><br><img src="/113_moon_11.jpg"><br></li>
 </ul>
 <h1 id="2-빛이-스미는-보름달"><a href="#2-빛이-스미는-보름달" class="headerlink" title="2. 빛이 스미는 보름달"></a>2. 빛이 스미는 보름달</h1><h2 id="2-1-보름달"><a href="#2-1-보름달" class="headerlink" title="2.1. 보름달"></a>2.1. 보름달</h2><ul>
 <li>빛이 하늘에 번지는 보름달을 그립니다.</li>
 <li>먼저, 2022 x 2022 크기의 공간을 만들고 한 가운데 반지름이 800인 원을 그립니다.</li>
-<li>2022 x 2022 numpy array를 만든 후 가운데만 255, 나머지는 0으로 지정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">moon = np.zeros((<span class="number">2022</span>, <span class="number">2022</span>), dtype=<span class="built_in">int</span>)</span><br><span class="line">r = <span class="number">800</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2022</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2022</span>):</span><br><span class="line">        d = np.sqrt(np.power(i-<span class="number">1011</span>, <span class="number">2</span>) + np.power(j-<span class="number">1011</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="keyword">if</span> d &lt; r:</span><br><span class="line">            moon[i, j] = <span class="number">255</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(moon)</span><br></pre></td></tr></table></figure>
-<img src="113_moon_01.png"><br></li>
+<li>2022 x 2022 numpy array를 만든 후 가운데만 255, 나머지는 0으로 지정합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">moon = np.zeros((<span class="number">2022</span>, <span class="number">2022</span>), dtype=<span class="built_in">int</span>)</span><br><span class="line">r = <span class="number">800</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2022</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2022</span>):</span><br><span class="line">        d = np.sqrt(np.power(i-<span class="number">1011</span>, <span class="number">2</span>) + np.power(j-<span class="number">1011</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="keyword">if</span> d &lt; r:</span><br><span class="line">            moon[i, j] = <span class="number">255</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(moon)</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_01.png"><br></p>
 <h2 id="2-2-빛-번짐"><a href="#2-2-빛-번짐" class="headerlink" title="2.2. 빛 번짐"></a>2.2. 빛 번짐</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/rougier/scientific-visualization-book/blob/master/code/showcases/contour-dropshadow.py">Nicolas P. Rougier, Contour-Dropshadow</a><br><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.gaussian_filter.html">scipy: gaussian_filter</a></p>
 </blockquote>
 <ul>
-<li><p>빛이 번지는 효과를 구현합니다.</p>
-</li>
-<li><p><code>scipy</code>의 <code>gaussian_filter</code>를 사용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.ndimage <span class="keyword">import</span> gaussian_filter</span><br><span class="line">glow = gaussian_filter(moon, <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(glow)</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_02.png"><br></p>
-</li>
-<li><p>붉은 달이 떴습니다.</p>
-</li>
-<li><p>색은 <code>cmap</code>에 적절한 컬러맵을 입력해 조정합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.imshow(glow, origin=<span class="string">&quot;upper&quot;</span>, zorder=<span class="number">0</span>, cmap=<span class="string">&quot;viridis&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_03.png"><br></p>
-</li>
+<li>빛이 번지는 효과를 구현합니다.</li>
+<li><code>scipy</code>의 <code>gaussian_filter</code>를 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.ndimage <span class="keyword">import</span> gaussian_filter</span><br><span class="line">glow = gaussian_filter(moon, <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.imshow(glow)</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_02.png"><br></p>
+<ul>
+<li>붉은 달이 떴습니다.</li>
+<li>색은 <code>cmap</code>에 적절한 컬러맵을 입력해 조정합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.imshow(glow, origin=<span class="string">&quot;upper&quot;</span>, zorder=<span class="number">0</span>, cmap=<span class="string">&quot;viridis&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_03.png"><br></p>
 <h2 id="2-3-컬러맵-제작"><a href="#2-3-컬러맵-제작" class="headerlink" title="2.3. 컬러맵 제작"></a>2.3. 컬러맵 제작</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.color_palette.html">seaborn.color_palette</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/colors/colormap-manipulation.html#sphx-glr-tutorials-colors-colormap-manipulation-py">matplotlib: Creating Colormaps in Matplotlib</a></p>
 </blockquote>
 <ul>
-<li><p>검정에 가까운 어두운 색부터 밝은 노랑을 거쳐 흰색으로 이어지는 컬러맵이 필요합니다.</p>
-</li>
-<li><p>이런 컬러맵이 없으니 새로 만듭니다.</p>
-</li>
-<li><p>매우 어두운 노랑 ~ 조금 어두운 노랑(<code>y</code>)까지 이어지는 팔레트를 먼저 만들고,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmap0 = sns.color_palette(<span class="string">&quot;dark:y&quot;</span>, <span class="number">20</span>)</span><br><span class="line">cmap0</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_04.png"><br></p>
-</li>
-<li><p>조금 어두운 노랑(<code>y</code>)에서 흰색으로 이어지는 팔레트를 새로 만듭니다.</p>
-</li>
-<li><p>seaborn의 <code>color_palette()</code>를 사용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmap1 = sns.color_palette(<span class="string">&quot;blend:y,w&quot;</span>, <span class="number">20</span>)</span><br><span class="line">cmap1</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_05.png"><br></p>
-</li>
-<li><p>이 두 팔레트를 합쳐 Matplotlib colormap으로 출력합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"></span><br><span class="line">cmap = ListedColormap(cmap0 + cmap1)</span><br><span class="line">cmap</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_06.png"><br></p>
-</li>
-<li><p>이렇게 만든 컬러맵을 번진 달빛에 적용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.imshow(glow, origin=<span class="string">&quot;upper&quot;</span>, zorder=<span class="number">0</span>, cmap=cmap)</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_08.png"><br></p>
-</li>
+<li>검정에 가까운 어두운 색부터 밝은 노랑을 거쳐 흰색으로 이어지는 컬러맵이 필요합니다.</li>
+<li>이런 컬러맵이 없으니 새로 만듭니다.</li>
+<li>매우 어두운 노랑 ~ 조금 어두운 노랑(<code>y</code>)까지 이어지는 팔레트를 먼저 만들고,</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmap0 = sns.color_palette(<span class="string">&quot;dark:y&quot;</span>, <span class="number">20</span>)</span><br><span class="line">cmap0</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_04.png"><br></p>
+<ul>
+<li>조금 어두운 노랑(<code>y</code>)에서 흰색으로 이어지는 팔레트를 새로 만듭니다.</li>
+<li>seaborn의 <code>color_palette()</code>를 사용합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmap1 = sns.color_palette(<span class="string">&quot;blend:y,w&quot;</span>, <span class="number">20</span>)</span><br><span class="line">cmap1</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_05.png"><br></p>
+<ul>
+<li>이 두 팔레트를 합쳐 Matplotlib colormap으로 출력합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"></span><br><span class="line">cmap = ListedColormap(cmap0 + cmap1)</span><br><span class="line">cmap</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_06.png"><br></p>
+<ul>
+<li>이렇게 만든 컬러맵을 번진 달빛에 적용합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.imshow(glow, origin=<span class="string">&quot;upper&quot;</span>, zorder=<span class="number">0</span>, cmap=cmap)</span><br></pre></td></tr></table></figure>
+<p><img src="/113_moon_08.png"><br></p>
 <h2 id="2-4-보름달-빛-번짐"><a href="#2-4-보름달-빛-번짐" class="headerlink" title="2.4. 보름달 + 빛 번짐"></a>2.4. 보름달 + 빛 번짐</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/maskedarray.generic.html">Numpy: ma module</a></p>
 </blockquote>
 <ul>
-<li><p>보름달 사진을 보면, 웬만큼 구름이 끼지 않고서야 달의 동그란 경계가 선명합니다.</p>
-</li>
-<li><p>빛 번짐 그림은 경계가 흐릿합니다.</p>
-</li>
-<li><p>여기 달 그림을 반투명하게 씌워 선명한 경계를 구현합니다.</p>
-</li>
-<li><p>달 그림 중에서 배경에 해당하는 부분은 <code>numpy masked_array</code>를 사용해 그리지 않습니다.</p>
+<li>보름달 사진을 보면, 웬만큼 구름이 끼지 않고서야 달의 동그란 경계가 선명합니다.</li>
+<li>빛 번짐 그림은 경계가 흐릿합니다.</li>
+<li>여기 달 그림을 반투명하게 씌워 선명한 경계를 구현합니다.</li>
+<li>달 그림 중에서 배경에 해당하는 부분은 <code>numpy masked_array</code>를 사용해 그리지 않습니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.imshow(glow, origin=<span class="string">&quot;upper&quot;</span>, zorder=<span class="number">0</span>, cmap=cmap)</span><br><span class="line">ax.imshow(np.ma.masked_array(moon, moon &lt;<span class="number">1</span>), origin=<span class="string">&quot;upper&quot;</span>, zorder=<span class="number">0</span>, </span><br><span class="line">          vmin=<span class="number">0</span>, vmax=<span class="number">255</span>, cmap=cmap, alpha=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_10.png"><br></p>
-</li>
-<li><p>달의 경계가 살아났습니다</p>
-</li>
-<li><p>마지막으로, x 축과 y 축을 없애고 그림만 남깁니다.</p>
+<p><img src="/113_moon_10.png"><br></p>
+<ul>
+<li>달의 경계가 살아났습니다</li>
+<li>마지막으로, x 축과 y 축을 없애고 그림만 남깁니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig.set_size_inches((<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br><span class="line">fig.set_facecolor(cmap0[<span class="number">0</span>])</span><br><span class="line">fig.tight_layout()</span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
-<p><img src="113_moon_09.png"><br></p>
-</li>
-<li><p>모두 즐거운 한가위 되시기 바랍니다.</p>
-</li>
+<p><img src="/113_moon_09.png"><br></p>
+<ul>
+<li>모두 즐거운 한가위 되시기 바랍니다.</li>
 </ul>
 
         </div>
@@ -325,22 +320,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/09/09/Python-DS-113-moon/" data-id="cmhueoxxk00b04gxt7zzdh03n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/09/09/Python-DS-113-moon/" data-id="cuid9MRQIzZpYwsFSx2NE8JOU" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -416,7 +401,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-09-09",
         "dateCreated": "2022-09-09",
-        "dateModified": "2024-08-11",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/09/09/Python-DS-113-moon/",
         "description": "
 추석입니다.
@@ -514,16 +499,6 @@
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -757,10 +732,6 @@
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

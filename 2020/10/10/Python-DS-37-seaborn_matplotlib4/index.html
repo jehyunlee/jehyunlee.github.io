@@ -21,16 +21,16 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/37_s2m4_0.png">
 <meta property="article:published_time" content="2020-10-09T20:12:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:45:13.621Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.164Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
-<meta property="article:tag" content="seaborn">
-<meta property="article:tag" content="pairplot">
 <meta property="article:tag" content="PairGrid">
 <meta property="article:tag" content="align">
 <meta property="article:tag" content="legend">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="pairplot">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/37_s2m4_0.png">
     
@@ -89,7 +89,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -206,7 +206,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/10/10/Python-DS-37-seaborn_matplotlib4/" class="article-date">
-     <time datetime="2020-11-27T00:45:13.621Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:38.164Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -246,26 +246,24 @@
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">wikipedia: Exploratory data analysis</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">wikipedia: Anscombe’s quartet</a><br><a target="_blank" rel="noopener" href="https://www.autodesk.com/research/publications/same-stats-different-graphs">autodesk: datasaurus</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot">seaborn.pairplot</a></p>
 </blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">EDA</a>에서 피할 수 없는 과정이 상관도입니다.<ul>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">EDA</a>에서 피할 수 없는 과정이 상관도입니다.</p>
+<ul>
 <li>두 변수 사이의 관계를 그려 관계를 파악합니다.</li>
 <li>대개 산점도<code>scatter plot</code>나 밀도 함수<code>density plot</code>를 쓰고,</li>
 <li>추세선<code>regression</code>을 덧붙이는 경우도 있습니다.</li>
 </ul>
 </li>
-</ul>
+<li><p>데이터 분포는 통계값으로만 확인하면 안됩니다.</p>
 <ul>
-<li>데이터 분포는 통계값으로만 확인하면 안됩니다.<ul>
 <li><b>평균과 표준편차는 같은데 분포는 다른 경우</b>가 많습니다.</li>
 <li><b>반드시 분포를 그려 봐야</b> 합니다.</li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a>이 아주 좋은 예시입니다.<br><img src="37_s2m4_6.png" alt="Anscombe&#39;s quartet"></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a>이 아주 좋은 예시입니다.<br><img src="/37_s2m4_6.png" alt="Anscombe&#39;s quartet"></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>N개의 인자 사이에는 $ \frac{N(N-1)}{2} $가지 관계가 있습니다.</li>
-<li>seaborn의 <code>pairplot()</code>은 여러 인자 사이의 수많은 상관도를 쉽게 그려줍니다.</li>
-</ul>
-<ul>
+<li><p>N개의 인자 사이에는 $ \frac{N(N-1)}{2} $가지 관계가 있습니다.</p>
+</li>
+<li><p>seaborn의 <code>pairplot()</code>은 여러 인자 사이의 수많은 상관도를 쉽게 그려줍니다.</p>
+</li>
 <li><p>붓꽃<code>iris</code> 데이터셋으로 상관도를 그려봅니다.</p>
 <ul>
 <li>꽃받침<code>sepal</code>과 꽃잎<code>petal</code>,</li>
@@ -275,33 +273,35 @@
 </ul>
 </li>
 <li><p>코드 한 줄로 그려봅시다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">iris = sns.load_dataset(<span class="string">&quot;iris&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="37_s2m4_1.png"></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">iris = sns.load_dataset(<span class="string">&quot;iris&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_1.png"></p>
 <ul>
-<li>종<code>species</code>별 분포를 그려봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g = sns.pairplot(iris, hue=<span class="string">&quot;species&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_2.png"></li>
+<li>종<code>species</code>별 분포를 그려봅니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g = sns.pairplot(iris, hue=<span class="string">&quot;species&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_2.png"></p>
 <ul>
-<li><code>hue=</code>라는 인자 하나만 추가했을 뿐입니다.<ul>
+<li><p><code>hue=</code>라는 인자 하나만 추가했을 뿐입니다.</p>
+<ul>
 <li>그림이 갑자기 예뻐졌습니다.</li>
 <li>히스토그램도 밀도함수로 바뀌어서 훨씬 보기 좋습니다.</li>
 </ul>
 </li>
-</ul>
+<li><p>여기에 다른 그림을 겹쳐보겠습니다.</p>
 <ul>
-<li>여기에 다른 그림을 겹쳐보겠습니다.<ul>
 <li><b>대각선 위 :</b> 2차원 밀도함수 + 추세선</li>
 <li><b>대각선 아래 :</b> 2차원 밀도함수 + 산포도</li>
 </ul>
 </li>
+<li><p>seaborn <code>figure-level</code> 기능만으로 가능합니다.</p>
+</li>
+<li><p><code>.map_lower()</code>와 <code>.map_upper</code>를 사용합니다.</p>
+</li>
 </ul>
-<ul>
-<li>seaborn <code>figure-level</code> 기능만으로 가능합니다.</li>
-<li><code>.map_lower()</code>와 <code>.map_upper</code>를 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.pairplot(iris, hue=<span class="string">&quot;species&quot;</span>, kind=<span class="string">&quot;kde&quot;</span>, plot_kws=&#123;<span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line">g.map_lower(sns.scatterplot)</span><br><span class="line">g.map_upper(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_3.png"></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.pairplot(iris, hue=<span class="string">&quot;species&quot;</span>, kind=<span class="string">&quot;kde&quot;</span>, plot_kws=&#123;<span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line">g.map_lower(sns.scatterplot)</span><br><span class="line">g.map_upper(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_3.png"></p>
 <ul>
 <li><code>map_lower()</code>와 <code>map_upper()</code>는 대각선의 위와 아래에 <b>그림을 덧씌우는<code>map</code> 함수</b>입니다.<ul>
 <li>앞서 완성한 pairplot에 새로운 그림을 덧붙입니다.</li>
@@ -325,30 +325,33 @@
 <li><p>대각선의 아래엔 산점도와 추세선을 그리고</p>
 </li>
 <li><p>대각선 위에는 밀도함수만 그려보겠습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 틀 만들기</span></span><br><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># upper</span></span><br><span class="line">g.map_upper(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
-<p><img src="37_s2m4_4.png"></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 틀 만들기</span></span><br><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># upper</span></span><br><span class="line">g.map_upper(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_4.png"></p>
 <ul>
-<li><code>.pairplot()</code>과 같은 형식의 그림이 나왔습니다.</li>
-<li>내 의도를 더 잘 반영할 수 있게 되었습니다.</li>
-<li>8번째 줄에는 <code>plt.scatter</code>가 들어가 있습니다. </li>
-<li><code>.pairplot()</code>도 마찬가지지만 <code>.map()</code>에는 seaborn대신 matplotlib 함수를 사용할 수 있습니다.</li>
+<li><p><code>.pairplot()</code>과 같은 형식의 그림이 나왔습니다.</p>
+</li>
+<li><p>내 의도를 더 잘 반영할 수 있게 되었습니다.</p>
+</li>
+<li><p>8번째 줄에는 <code>plt.scatter</code>가 들어가 있습니다. </p>
+</li>
+<li><p><code>.pairplot()</code>도 마찬가지지만 <code>.map()</code>에는 seaborn대신 matplotlib 함수를 사용할 수 있습니다.</p>
+</li>
+<li><p>중복되는 오른쪽 윗부분을 생략할 수 있습니다.<br>*<code>corner=True</code>를 넣어줍니다.</p>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_5.png"></p>
 <ul>
-<li>중복되는 오른쪽 윗부분을 생략할 수 있습니다.</li>
-<li><code>corner=True</code>를 넣어줍니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_5.png"></li>
-</ul>
-<ul>
-<li>이제 작은 수정을 해봅니다.<ol>
+<li><p>이제 작은 수정을 해봅니다.</p>
+<ol>
 <li>대각선에 <b>사각 테두리</b> 치기</li>
 <li><b>범례를 그림 안으로</b> 가져오기</li>
 </ol>
 </li>
-</ul>
-<ul>
-<li>가슴을 열고 심장마사지를 할 시간입니다.</li>
+<li><p>가슴을 열고 심장마사지를 할 시간입니다.</p>
+</li>
 </ul>
 <h3 id="4-3-figure-level-그림-객체-접근"><a href="#4-3-figure-level-그림-객체-접근" class="headerlink" title="4.3. figure-level 그림 객체 접근"></a>4.3. <code>figure-level</code> 그림 객체 접근</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html?highlight=facetgrid#seaborn.FacetGrid">seaborn.FacetGrid</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html">matplotlib.figure.Figure</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes">matplotlib.axes.Axes</a></p>
@@ -362,9 +365,10 @@
 </ul>
 <h4 id="4-3-1-axes-axes"><a href="#4-3-1-axes-axes" class="headerlink" title="4.3.1. axes: .axes"></a>4.3.1. axes: <code>.axes</code></h4><ul>
 <li><a href="https://jehyunlee.github.io/2020/10/03/Python-DS-35-seaborn_matplotlib2/">이전 글</a>에서 <code>axes</code>를 이용해 jointplot을 재현했습니다.</li>
-<li>axes 객체는 <b><code>.axes</code></b>를 이용해 접근 가능합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.axes</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_8.png"></li>
+<li>axes 객체는 <b><code>.axes</code></b>를 이용해 접근 가능합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.axes</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_8.png"></p>
 <ul>
 <li>확인 결과 <code>AxesSubplot</code>의 array입니다.</li>
 </ul>
@@ -373,30 +377,34 @@
 </blockquote>
 <ul>
 <li>정체를 알았으니 <code>axes[i][j]</code>로 접근할 수 있습니다.</li>
-<li><code>g.axes[i][j]</code>의 spine을 보이게 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_16.png"></li>
+<li><code>g.axes[i][j]</code>의 spine을 보이게 합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">g.add_legend()</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_16.png"></p>
 <h5 id="4-3-1-2-범례-조정"><a href="#4-3-1-2-범례-조정" class="headerlink" title="4.3.1.2. 범례 조정"></a>4.3.1.2. 범례 조정</h5><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/mwaskom/seaborn/blob/master/seaborn/axisgrid.py">seaborn axisgrid.py 소스코드</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/_as_gen/matplotlib.axes.Axes.get_legend_handles_labels.html">matplotlib.axes.Axes.get_legend_handles_labels</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.legend.html?highlight=legend#matplotlib.axes.Axes.legend">matplotlib.axes.Axes.legend</a></p>
 </blockquote>
 <ul>
-<li>legend 정보를 가져와서 legend로 삽입합니다.<ul>
+<li><p>legend 정보를 가져와서 legend로 삽입합니다.</p>
+<ul>
 <li>대개 legend에 필요한 handles와 labels는 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/_as_gen/matplotlib.axes.Axes.get_legend_handles_labels.html"><code>.get_legend_handles_labels()</code></a>로 가져옵니다.</li>
 <li>하지만 seaborn <code>figure-level</code> 그림엔 이 명령이 통하지 않습니다.</li>
 <li>private처럼 보이는 <b><code>._legend_data</code></b>를 사용합니다.</li>
 <li><b>공식 문서에 없습니다. 소스 코드를 뒤적여야 합니다.</b></li>
 </ul>
 </li>
+<li><p><code>._legend_data</code> 정체를 확인합니다.</p>
+</li>
+<li><p>범례가 <code>dict</code> 형식으로 들어 있습니다.</p>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g._legend_data</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_10.png"></p>
 <ul>
-<li><code>._legend_data</code> 정체를 확인합니다.</li>
-<li>범례가 <code>dict</code> 형식으로 들어 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g._legend_data</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_10.png"></li>
+<li>아래 코드를 추가하여 범례를 이동합니다.</li>
 </ul>
-<ul>
-<li>아래 코드를 추가하여 범례를 이동합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handles = g._legend_data.values()</span><br><span class="line">labels = g._legend_data.keys()</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes[1][0] 기준으로 오른쪽 멀리 범례 삽입</span></span><br><span class="line">g.axes[<span class="number">1</span>][<span class="number">0</span>].legend(handles=handles, labels=labels,</span><br><span class="line">                    bbox_to_anchor=(<span class="number">3.45</span>, <span class="number">1</span>),</span><br><span class="line">                    fontsize=<span class="string">&quot;large&quot;</span>, frameon=<span class="literal">False</span></span><br><span class="line">                   )</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_9.png"></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handles = g._legend_data.values()</span><br><span class="line">labels = g._legend_data.keys()</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes[1][0] 기준으로 오른쪽 멀리 범례 삽입</span></span><br><span class="line">g.axes[<span class="number">1</span>][<span class="number">0</span>].legend(handles=handles, labels=labels,</span><br><span class="line">                    bbox_to_anchor=(<span class="number">3.45</span>, <span class="number">1</span>),</span><br><span class="line">                    fontsize=<span class="string">&quot;large&quot;</span>, frameon=<span class="literal">False</span></span><br><span class="line">                   )</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_9.png"></p>
 <ul>
 <li>이런 방식으로 특정 axes만 제어할 수 있습니다.<ul>
 <li><b>원하는 그림, 글자</b>을 넣을 수 있고</li>
@@ -407,9 +415,10 @@
 <h4 id="4-3-2-figure-fig"><a href="#4-3-2-figure-fig" class="headerlink" title="4.3.2. figure: .fig"></a>4.3.2. figure: <code>.fig</code></h4><ul>
 <li>개별 공간은 axes로 제어하지만</li>
 <li>여러 axes가 연관된 공간은 figure로 제어합니다.</li>
-<li>figure 객체는 <b><code>.fig</code></b>를 이용해 접근 가능합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>(g.fig)</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_11.png"></li>
+<li>figure 객체는 <b><code>.fig</code></b>를 이용해 접근 가능합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>(g.fig)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_11.png"></p>
 <ul>
 <li><code>type()</code>으로 감싸주지 않으면 그림이 통으로 출력됩니다.</li>
 </ul>
@@ -417,50 +426,57 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/_as_gen/matplotlib.figure.Figure.html?highlight=align_ylabels#matplotlib.figure.Figure.align_ylabels">matplolib.figure.Figure #align_ylabels</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/gallery/pyplots/align_ylabels.html">matplotlib Align y-labels</a></p>
 </blockquote>
 <ul>
-<li>위 그림에서 ylabel 줄이 잘 맞지 않습니다.<ul>
+<li><p>위 그림에서 ylabel 줄이 잘 맞지 않습니다.</p>
+<ul>
 <li>맨 왼쪽 아래 axes[3][0]의 label이 비죽 나왔네요.</li>
 <li>다른 ylabel을 움직여서 열을 맞춰 봅시다.</li>
 </ul>
 </li>
+<li><p>위 그림 코드의 맨 마지막 줄에 한 줄만 추가합니다.</p>
+</li>
 </ul>
-<ul>
-<li>위 그림 코드의 맨 마지막 줄에 한 줄만 추가합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.fig.align_ylabels(g.axes[:,<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_12.png"></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.fig.align_ylabels(g.axes[:,<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_12.png"></p>
 <h5 id="4-3-2-2-범례-조정"><a href="#4-3-2-2-범례-조정" class="headerlink" title="4.3.2.2. 범례 조정"></a>4.3.2.2. 범례 조정</h5><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/_as_gen/matplotlib.figure.Figure.html?highlight=legend#matplotlib.figure.Figure.legend">matplolib.figure.Figure #legend</a></p>
 </blockquote>
 <ul>
 <li>범례는 figure 기준으로도 삽입 가능합니다.</li>
 <li>아래 코드는 위의 <code>axes[1][0].legend()</code>와 동일합니다.</li>
-<li>전체적인 그림의 위치를 잡을 수 있어 더 좋습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g.fig.legend(handles=handles, labels=labels,</span><br><span class="line">             bbox_to_anchor=(<span class="number">0.75</span>, <span class="number">0.75</span>),</span><br><span class="line">             fontsize=<span class="string">&quot;large&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_13.png"></li>
+<li>전체적인 그림의 위치를 잡을 수 있어 더 좋습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g.fig.legend(handles=handles, labels=labels,</span><br><span class="line">             bbox_to_anchor=(<span class="number">0.75</span>, <span class="number">0.75</span>),</span><br><span class="line">             fontsize=<span class="string">&quot;large&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_13.png"></p>
 <h5 id="4-3-2-3-suptitle"><a href="#4-3-2-3-suptitle" class="headerlink" title="4.3.2.3. suptitle"></a>4.3.2.3. suptitle</h5><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/_as_gen/matplotlib.figure.Figure.html?highlight=suptitle#matplotlib.figure.Figure.suptitle">matplolib.figure.Figure #suptitle</a></p>
 </blockquote>
 <ul>
-<li>그림 전체에 제목을 붙일 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g.fig.suptitle(<span class="string">&quot;iris dataset&quot;</span>, y=<span class="number">1.01</span>,</span><br><span class="line">               weight=<span class="string">&quot;bold&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span></span><br><span class="line">              )</span><br><span class="line">g.fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_14.png"></li>
+<li>그림 전체에 제목을 붙일 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g.fig.suptitle(<span class="string">&quot;iris dataset&quot;</span>, y=<span class="number">1.01</span>,</span><br><span class="line">               weight=<span class="string">&quot;bold&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span></span><br><span class="line">              )</span><br><span class="line">g.fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_14.png"></p>
 <h5 id="4-3-2-4-facecolor-edgecolor"><a href="#4-3-2-4-facecolor-edgecolor" class="headerlink" title="4.3.2.4. facecolor, edgecolor"></a>4.3.2.4. facecolor, edgecolor</h5><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/_as_gen/matplotlib.figure.Figure.html?highlight=set_facecolor#matplotlib.figure.Figure.set_facecolor">matplolib.figure.Figure #set_facecolor</a></p>
 </blockquote>
 <ul>
-<li>그림 바탕색을 칠합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.fig.set_facecolor(<span class="string">&quot;whitesmoke&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_15.png"></li>
+<li>그림 바탕색을 칠합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.fig.set_facecolor(<span class="string">&quot;whitesmoke&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_15.png"></p>
 <h4 id="4-3-3-최종"><a href="#4-3-3-최종" class="headerlink" title="4.3.3. 최종"></a>4.3.3. 최종</h4><ul>
-<li>x, ylabel까지 정리하면 이렇습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = g._legend_data.values()</span><br><span class="line">labels = g._legend_data.keys()</span><br><span class="line">g.fig.legend(handles=handles, labels=labels,</span><br><span class="line">             bbox_to_anchor=(<span class="number">0.75</span>, <span class="number">0.75</span>),</span><br><span class="line">             fontsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y labels</span></span><br><span class="line">labels = [<span class="string">&quot;Sepal Length&quot;</span>, <span class="string">&quot;Sepal Width&quot;</span>, <span class="string">&quot;Petal Length&quot;</span>, <span class="string">&quot;Petal Width&quot;</span>]</span><br><span class="line">font_labels = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    g.axes[<span class="number">3</span>, i].set_xlabel(labels[i], fontdict=font_labels)</span><br><span class="line">    g.axes[i, <span class="number">0</span>].set_ylabel(labels[i], fontdict=font_labels)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ylabel alignment</span></span><br><span class="line">g.fig.align_ylabels(g.axes[:,<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># suptitle</span></span><br><span class="line">g.fig.suptitle(<span class="string">&quot;iris dataset&quot;</span>, y=<span class="number">1.01</span>,</span><br><span class="line">               weight=<span class="string">&quot;bold&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span></span><br><span class="line">              )</span><br><span class="line">g.fig.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># facecolor</span></span><br><span class="line">g.fig.set_facecolor(<span class="string">&quot;whitesmoke&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="37_s2m4_17.png"></li>
+<li>x, ylabel까지 정리하면 이렇습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris, hue=<span class="string">&quot;species&quot;</span>, diag_sharey=<span class="literal">False</span>, corner=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># diagonal</span></span><br><span class="line">g.map_diag(sns.kdeplot, fill=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    g.axes[i][i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># lower</span></span><br><span class="line">g.map_lower(plt.scatter, s=<span class="number">30</span>, edgecolor=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">g.map_lower(sns.regplot, scatter=<span class="literal">False</span>, truncate=<span class="literal">False</span>, ci=<span class="literal">False</span>)</span><br><span class="line">g.map_lower(sns.kdeplot, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = g._legend_data.values()</span><br><span class="line">labels = g._legend_data.keys()</span><br><span class="line">g.fig.legend(handles=handles, labels=labels,</span><br><span class="line">             bbox_to_anchor=(<span class="number">0.75</span>, <span class="number">0.75</span>),</span><br><span class="line">             fontsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y labels</span></span><br><span class="line">labels = [<span class="string">&quot;Sepal Length&quot;</span>, <span class="string">&quot;Sepal Width&quot;</span>, <span class="string">&quot;Petal Length&quot;</span>, <span class="string">&quot;Petal Width&quot;</span>]</span><br><span class="line">font_labels = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    g.axes[<span class="number">3</span>, i].set_xlabel(labels[i], fontdict=font_labels)</span><br><span class="line">    g.axes[i, <span class="number">0</span>].set_ylabel(labels[i], fontdict=font_labels)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ylabel alignment</span></span><br><span class="line">g.fig.align_ylabels(g.axes[:,<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># suptitle</span></span><br><span class="line">g.fig.suptitle(<span class="string">&quot;iris dataset&quot;</span>, y=<span class="number">1.01</span>,</span><br><span class="line">               weight=<span class="string">&quot;bold&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span></span><br><span class="line">              )</span><br><span class="line">g.fig.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment"># facecolor</span></span><br><span class="line">g.fig.set_facecolor(<span class="string">&quot;whitesmoke&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/37_s2m4_17.png"></p>
 <h2 id="5-결론"><a href="#5-결론" class="headerlink" title="5. 결론"></a>5. 결론</h2><ul>
-<li>네 편의 글에 걸쳐 matplotlib + seaborn 연계기를 정리했습니다.<ul>
+<li><p>네 편의 글에 걸쳐 matplotlib + seaborn 연계기를 정리했습니다.</p>
+<ul>
 <li>개별적인 코드와 기술보다는 <b>본질</b>에 집중합시다.</li>
 <li><b>figure</b>와 <b>axes</b>를 통하면 <b>웬만한건 다 된다</b>는 겁니다.</li>
 </ul>
 </li>
-<li>0.11에서 seaborn의 공식문서가 대폭 정리됐습니다.<ul>
+<li><p>0.11에서 seaborn의 공식문서가 대폭 정리됐습니다.</p>
+<ul>
 <li>하지만 아직 부족한 점이 많습니다.</li>
 <li>특히 많은 경우 matplotlib에 숙달되었다고 전제합니다.</li>
 <li><b>일단 matplotlib</b>부터 제대로 익혀봅시다.</li>
@@ -479,22 +495,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/10/10/Python-DS-37-seaborn_matplotlib4/" data-id="cmhueoy0000fn4gxt53lg1hl2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/10/10/Python-DS-37-seaborn_matplotlib4/" data-id="cuidBM7pASpgygbnexHPnWOCJ" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -570,7 +576,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-10-10",
         "dateCreated": "2020-10-10",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/10/10/Python-DS-37-seaborn_matplotlib4/",
         "description": "4. seaborn figure-level 다듬기
 seaborn + matplotlib 마지막 시간입니다.
@@ -664,16 +670,6 @@ seaborn APIseaborn tutorialseaborn with matplotlib (3)
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -907,10 +903,6 @@ seaborn APIseaborn tutorialseaborn with matplotlib (3)
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

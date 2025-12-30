@@ -21,13 +21,13 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/45_tightlayout_0.png">
 <meta property="article:published_time" content="2020-11-26T01:13:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:49:02.225Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.229Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
-<meta property="article:tag" content="seaborn">
 <meta property="article:tag" content="image">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/45_tightlayout_0.png">
     
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/11/26/Python-DS-45-tightlayout/" class="article-date">
-     <time datetime="2020-11-27T00:49:02.225Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:38.229Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -240,7 +240,7 @@
 <p>데이터짱님, <a target="_blank" rel="noopener" href="https://subinium.github.io/">안수빈</a>님</p>
 </blockquote>
 <h3 id="1-최종적으로-그릴-그림"><a href="#1-최종적으로-그릴-그림" class="headerlink" title="1. 최종적으로 그릴 그림"></a>1. 최종적으로 그릴 그림</h3><ul>
-<li><p>이번 글에서, 우리는 이 그림을 그릴겁니다.<br><br><img src="45_tightlayout_10.png" alt="우리의 목표"><br></p>
+<li><p>이번 글에서, 우리는 이 그림을 그릴겁니다.<br><br><img src="/45_tightlayout_10.png" alt="우리의 목표"><br></p>
 </li>
 <li><p>포인트는 다음과 같습니다.</p>
 <ol>
@@ -252,25 +252,21 @@
 </li>
 </ul>
 <h3 id="2-예제-그림-만들기"><a href="#2-예제-그림-만들기" class="headerlink" title="2. 예제 그림 만들기"></a>2. 예제 그림 만들기</h3><ul>
-<li><p>예제로 사용할 그림을 먼저 만듭니다.</p>
-</li>
-<li><p>이번 글에서는 비슷한 그림이 여러번 반복됩니다. </p>
-</li>
-<li><p>자칫 지겨울 수 있으니 색상을 랜덤으로 지정합시다.</p>
+<li>예제로 사용할 그림을 먼저 만듭니다.</li>
+<li>이번 글에서는 비슷한 그림이 여러번 반복됩니다. </li>
+<li>자칫 지겨울 수 있으니 색상을 랜덤으로 지정합시다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 원(circle) 데이터</span></span><br><span class="line">t = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">32</span>)</span><br><span class="line">X = <span class="number">0.5</span>* np.sin(t)</span><br><span class="line">Y = <span class="number">0.5</span>* np.cos(t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Visualization</span></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    <span class="comment"># 색상 랜덤 지정</span></span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">    ax.legend()    </span><br><span class="line">    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_1.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="45_tightlayout_1.png"><br></p>
-</li>
+<p><img src="/45_tightlayout_1.png"><br></p>
+<ul>
 <li><p><code>ax.legend()</code>를 사용해서 각 axes마다 범례를 그립니다.</p>
 </li>
-</ul>
+<li><p>원이 들어간 axes 사이의 간격은 적절해 보입니다.</p>
 <ul>
-<li>원이 들어간 axes 사이의 간격은 적절해 보입니다.<ul>
 <li>문제는 <b>눈금에 붙은 숫자가 다른 axes를 침범하고 있는 것</b>입니다.</li>
 <li>이 문제를 해결해 보겠습니다.</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p><code>fig.savefig()</code>는 그림을 파일로 저장하는 코드입니다.</p>
 <ul>
 <li>글을 읽으시는 데 불필요하다고 판단하여 이제까지 대부분 이 줄을 생략했습니다.</li>
@@ -288,17 +284,19 @@
 </blockquote>
 <ul>
 <li><code>axes.legend()</code>는 각 axes에 범례를 붙입니다.</li>
-<li>전체를 한번에 모으려면 <code>fig.legend()</code>를 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend()    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_2.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="45_tightlayout_2.png"><br></li>
+<li>전체를 한번에 모으려면 <code>fig.legend()</code>를 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend()    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_2.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/45_tightlayout_2.png"><br></p>
 <h3 id="4-axis-사이-간격-벌리기"><a href="#4-axis-사이-간격-벌리기" class="headerlink" title="4. axis 사이 간격 벌리기"></a>4. axis 사이 간격 벌리기</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/intermediate/tight_layout_guide.html">matplotlib tutorials: tight layout guide</a></p>
 </blockquote>
 <ul>
-<li><p><code>fig.tight_layout()</code> 한 줄을 추가해줌으로써 간격을 적당히 벌릴 수 있습니다.</p>
+<li><code>fig.tight_layout()</code> 한 줄을 추가해줌으로써 간격을 적당히 벌릴 수 있습니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend()   </span><br><span class="line">fig.tight_layout()  <span class="comment"># axes 사이 간격을 적당히 벌려줍니다.</span></span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_3.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="45_tightlayout_3.png"><br></p>
-</li>
+<p><img src="/45_tightlayout_3.png"><br></p>
+<ul>
 <li><p><code>fig.tight_layout()</code>은 axes의 크기를 조정합니다.  </p>
 <ul>
 <li>기준은 <b>ticklabels</b>, <b>axis labels</b>, <b>title</b>입니다.</li>
@@ -317,35 +315,39 @@
 </blockquote>
 <ul>
 <li>axes의 가로세로 비율을 데이터 스케일에 일치시킵니다.</li>
-<li><code>ax.set_aspect(&quot;equal&quot;)</code>을 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>) <span class="comment"># 종횡비를 맞춥니다.</span></span><br><span class="line"></span><br><span class="line">fig.legend()       </span><br><span class="line">fig.tight_layout()    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_4.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="45_tightlayout_4.png"><br></li>
+<li><code>ax.set_aspect(&quot;equal&quot;)</code>을 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>) <span class="comment"># 종횡비를 맞춥니다.</span></span><br><span class="line"></span><br><span class="line">fig.legend()       </span><br><span class="line">fig.tight_layout()    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_4.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/45_tightlayout_4.png"><br></p>
 <h3 id="6-legend-옆으로-빼기"><a href="#6-legend-옆으로-빼기" class="headerlink" title="6. legend 옆으로 빼기"></a>6. legend 옆으로 빼기</h3><ul>
-<li>하나로 모인 legend가 axes 하나를 다 차지하고 있네요.</li>
-<li>옆으로 빼겠습니다.</li>
-</ul>
-<ul>
+<li><p>하나로 모인 legend가 axes 하나를 다 차지하고 있네요.</p>
+</li>
+<li><p>옆으로 빼겠습니다.</p>
+</li>
 <li><p>legend 이동은 <b><code>loc</code></b>와 <b><code>bbox_to_anchor</code></b> 두 인자의 조합으로 이루어집니다.</p>
 <ul>
 <li>legend에서 <b>loc가 가리키는 곳</b>을<ul>
-<li>여기서는 “upper left” = 왼쪽 위 귀퉁이</li>
+<li>여기서는 “upper left” &#x3D; 왼쪽 위 귀퉁이</li>
 </ul>
 </li>
 <li>figure의 <b>어떤 지점</b>에 갖다 붙이라는 의미입니다.<ul>
-<li>bbox_to_anchor=(1,0.95) = 오른쪽 위 끄트머리</li>
+<li>bbox_to_anchor&#x3D;(1,0.95) &#x3D; 오른쪽 위 끄트머리</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>적용해 보겠습니다.    </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">0.95</span>))  <span class="comment"># legend의 loc와 bbox_to_anchor를 조정합니다.</span></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_5.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>화면에 잘 나옵니다.<br><br><img src="45_tightlayout_5_screen.png" alt="Jupyter Notebook 출력 화면"><br></p>
-</li>
-<li><p>그런데 저장된 파일은 이렇습니다.<br><br><img src="45_tightlayout_5.png" alt="저장된 파일"><br></p>
+<li><p>적용해 보겠습니다.</p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">0.95</span>))  <span class="comment"># legend의 loc와 bbox_to_anchor를 조정합니다.</span></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_5.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>범례의 위치를 <b>bbox_to_anchor=(1,0.95)</b>라고 지정한 것을 상기합시다.<ul>
+<li><p>화면에 잘 나옵니다.<br><br><img src="/45_tightlayout_5_screen.png" alt="Jupyter Notebook 출력 화면"><br></p>
+</li>
+<li><p>그런데 저장된 파일은 이렇습니다.<br><br><img src="/45_tightlayout_5.png" alt="저장된 파일"><br></p>
+</li>
+<li><p>범례의 위치를 <b>bbox_to_anchor&#x3D;(1,0.95)</b>라고 지정한 것을 상기합시다.</p>
+<ul>
 <li>x 좌표가 figure의 끝자락인 1인데 loc가 upper left로 정의되어 있습니다.</li>
 <li>다시 말해 figure 오른쪽 경계 너머에 붙이라는 의미라서 안 보이는 게 정상입니다.</li>
 <li>따라서, 범례까지 저장하려면 그림의 전체 범위를 figure 안쪽으로 잡아야 합니다.</li>
@@ -353,17 +355,19 @@
 </li>
 </ul>
 <h3 id="7-전체-그림-범위-지정하기"><a href="#7-전체-그림-범위-지정하기" class="headerlink" title="7. 전체 그림 범위 지정하기"></a>7. 전체 그림 범위 지정하기</h3><ul>
-<li><code>fig.tight_layout()</code>의 rect 인자를 조정합니다.</li>
-<li>figure 안에 가상의 사각형을 그리고 여기에만 axes를 배열하는 기능입니다.<ul>
-<li><b>rect=[x시작, y시작, x길이, y길이]</b>로 넣어줍니다.</li>
+<li><p><code>fig.tight_layout()</code>의 rect 인자를 조정합니다.</p>
+</li>
+<li><p>figure 안에 가상의 사각형을 그리고 여기에만 axes를 배열하는 기능입니다.</p>
+<ul>
+<li><b>rect&#x3D;[x시작, y시작, x길이, y길이]</b>로 넣어줍니다.</li>
 <li>axes 범위를 조정한 만큼, legend의 <code>bbox_to_anchor</code>도 조정합니다.</li>
 </ul>
 </li>
+<li><p>적용합시다.</p>
+</li>
 </ul>
-<ul>
-<li>적용합시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">0.8</span>, <span class="number">0.95</span>))  <span class="comment"># legend의 loc와 bbox_to_anchor를 다시 조정합니다.       </span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="number">1</span>])  <span class="comment"># axes가 표현될 공간을 지정합니다.    </span></span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_6.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="45_tightlayout_6.png"><br></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">0.8</span>, <span class="number">0.95</span>))  <span class="comment"># legend의 loc와 bbox_to_anchor를 다시 조정합니다.       </span></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="number">1</span>])  <span class="comment"># axes가 표현될 공간을 지정합니다.    </span></span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_6.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/45_tightlayout_6.png"><br></p>
 <ul>
 <li>화면 출력과 파일 출력이 다시 일치합니다.</li>
 <li>그런데 <b>그림이 작아졌습니다.</b><ul>
@@ -375,64 +379,64 @@
 </ul>
 <h3 id="8-그림-크기-재조정"><a href="#8-그림-크기-재조정" class="headerlink" title="8. 그림 크기 재조정"></a>8. 그림 크기 재조정</h3><ul>
 <li>그림 크기를 다시 조정해 줍니다.</li>
-<li>가로를 늘려도 되고, 세로를 줄여도 됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># figsize를 1 늘려줍니다.</span></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>)) <span class="comment"># 크기를 조정합니다.</span></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">0.8</span>, <span class="number">0.95</span>))       </span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="number">1</span>])    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_7.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="45_tightlayout_7.png"><br></li>
+<li>가로를 늘려도 되고, 세로를 줄여도 됩니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># figsize를 1 늘려줍니다.</span></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>)) <span class="comment"># 크기를 조정합니다.</span></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">0.8</span>, <span class="number">0.95</span>))       </span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="number">1</span>])    </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_7.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/45_tightlayout_7.png"><br></p>
 <h3 id="9-fig-add-axes-방식-워터마크-삽입"><a href="#9-fig-add-axes-방식-워터마크-삽입" class="headerlink" title="9. fig.add_axes()방식 워터마크 삽입"></a>9. <code>fig.add_axes()</code>방식 워터마크 삽입</h3><blockquote>
 <p><a href="https://jehyunlee.github.io/2020/10/14/GIS-Python-5-shadow/">Pega Devlog: Watermark on Image</a></p>
 </blockquote>
 <ul>
-<li><p><a href="https://jehyunlee.github.io/2020/10/14/GIS-Python-5-shadow/">지난 글</a>에서 워터마크를 넣는 여러 방식을 알아봤습니다.</p>
-</li>
-<li><p>이 중 fig.add_axes()방식은 아무데나 원하는 크기로 넣을 수 있어서 워터마크 외에도 응용하기 좋습니다.</p>
-</li>
-<li><p>그런데 오와 열이 맞지 않기 때문에 tight_layout() 입장에서는 처리하기 곤란한 대상입니다.</p>
+<li><a href="https://jehyunlee.github.io/2020/10/14/GIS-Python-5-shadow/">지난 글</a>에서 워터마크를 넣는 여러 방식을 알아봤습니다.</li>
+<li>이 중 fig.add_axes()방식은 아무데나 원하는 크기로 넣을 수 있어서 워터마크 외에도 응용하기 좋습니다.</li>
+<li>그런데 오와 열이 맞지 않기 때문에 tight_layout() 입장에서는 처리하기 곤란한 대상입니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>))</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax_center = fig.add_axes([<span class="number">0.15</span>, <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.8</span>])</span><br><span class="line">ax_center.imshow(im_wm, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax_center.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line">    </span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">0.8</span>, <span class="number">0.95</span>))       </span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="number">1</span>])  <span class="comment"># tight_layout에 rect를 적용합니다.</span></span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_8.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="45_tightlayout_8_screen.png" alt="tight_layout이 잘 안될거라는 경고가 뜹니다."><br></p>
-</li>
-<li><p>다행히 파일 저장이 무사히 되었습니다.</p>
-</li>
-<li><p>이번엔 운이 좋았지만 종종 그림이 밀려 어긋나거나 사라집니다.</p>
-</li>
+<p><img src="/45_tightlayout_8_screen.png" alt="tight_layout이 잘 안될거라는 경고가 뜹니다."><br></p>
+<ul>
+<li>다행히 파일 저장이 무사히 되었습니다.</li>
+<li>이번엔 운이 좋았지만 종종 그림이 밀려 어긋나거나 사라집니다.</li>
 </ul>
 <h3 id="10-tight-layout-보다-더-강한-constrained-layout"><a href="#10-tight-layout-보다-더-강한-constrained-layout" class="headerlink" title="10. tight_layout()보다 더 강한 constrained_layout"></a>10. <code>tight_layout()</code>보다 더 강한 <code>constrained_layout</code></h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/intermediate/constrainedlayout_guide.html">matplotlib tutorials: constrained layout guide</a></p>
 </blockquote>
 <ul>
-<li>아까 tight_layout은 <b>ticklabels</b>, <b>axis labels</b>, <b>title</b>를 본다고 했습니다.</li>
-<li>constrained_layout은 <b>legend</b>, <b>colorbar</b>까지 함께 봅니다.<ul>
+<li><p>아까 tight_layout은 <b>ticklabels</b>, <b>axis labels</b>, <b>title</b>를 본다고 했습니다.</p>
+</li>
+<li><p>constrained_layout은 <b>legend</b>, <b>colorbar</b>까지 함께 봅니다.</p>
+<ul>
 <li>matplotlib 내부 연산을 거쳐 딜레이가 있습니다.</li>
 <li>따라서 real-time visualization에는 적합치 않을 수 있습니다.</li>
 </ul>
 </li>
+<li><p>두 가지 중 한 가지 방식으로 사용할 수 있습니다.</p>
+<p><b>(1) 그림별 설정</b><br>지금 만드는 그림에 constrained_layout을 설정합니다.</p>
+</li>
 </ul>
-<ul>
-<li>두 가지 중 한 가지 방식으로 사용할 수 있습니다.</li>
-</ul>
-<p>  <b>(1) 그림별 설정</b><br>  지금 만드는 그림에 constrained_layout을 설정합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(constrained_layout=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
 <p>  <b>(2) 기본값 설정</b><br>  지금 이후 만드는 모든 그림에 설정합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;figure.constrained_layout.use&#x27;</span>] = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>tight_layout 대신 constrained_layout을 적용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>),</span><br><span class="line">                        constrained_layout=<span class="literal">True</span>)  <span class="comment"># 여기에 적용합니다.</span></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax_center = fig.add_axes([<span class="number">0.23</span>, <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.8</span>])</span><br><span class="line">ax_center.imshow(im_wm, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax_center.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line">    </span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">0.95</span>))       </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_9.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>화면에 잘 나옵니다.<br><br><img src="45_tightlayout_9_screen.png" alt="Jupyter Notebook 출력 화면"><br></li>
+<li>tight_layout 대신 constrained_layout을 적용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>),</span><br><span class="line">                        constrained_layout=<span class="literal">True</span>)  <span class="comment"># 여기에 적용합니다.</span></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax_center = fig.add_axes([<span class="number">0.23</span>, <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.8</span>])</span><br><span class="line">ax_center.imshow(im_wm, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax_center.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line">    </span><br><span class="line">fig.legend(loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">0.95</span>))       </span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_9.png&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>그런데 저장된 파일은 또 이렇습니다.<br><br><img src="45_tightlayout_9.png" alt="저장된 파일"><br></li>
-</ul>
+<li><p>화면에 잘 나옵니다.<br><br><img src="/45_tightlayout_9_screen.png" alt="Jupyter Notebook 출력 화면"><br></p>
+</li>
+<li><p>그런데 저장된 파일은 또 이렇습니다.<br><br><img src="/45_tightlayout_9.png" alt="저장된 파일"><br></p>
+</li>
+<li><p>당연한 결과입니다.</p>
 <ul>
-<li>당연한 결과입니다.<ul>
 <li>constrained_layout은 tight_layout의 rect같은 인자가 없기 때문입니다.</li>
 <li>하지만, 부분적으로나마 더 좋은 기능이 있습니다.</li>
 </ul>
 </li>
 </ul>
 <h3 id="10-figure-대신-axes에-범례-달기"><a href="#10-figure-대신-axes에-범례-달기" class="headerlink" title="10. figure 대신 axes에 범례 달기"></a>10. figure 대신 axes에 범례 달기</h3><ul>
-<li>우리가 만난 문제를 정리해봅시다.<br>(1) <b>axes 바깥쪽</b>에 범례를 달고 싶음.<br>(2) 그런데 <b>figure의 범위가 제한되어 있음.</b><br>(3) constrained_layout은 <b>웬만한 axes 구성 요소에 맞춰줌</b><br>(4) constrained_layout은 figure 구성 요소를 <b>축소하지 못함</b></li>
-</ul>
-<ul>
+<li><p>우리가 만난 문제를 정리해봅시다.<br>(1) <b>axes 바깥쪽</b>에 범례를 달고 싶음.<br>(2) 그런데 <b>figure의 범위가 제한되어 있음.</b><br>(3) constrained_layout은 <b>웬만한 axes 구성 요소에 맞춰줌</b><br>(4) constrained_layout은 figure 구성 요소를 <b>축소하지 못함</b></p>
+</li>
 <li><p>어려워 보이지만 해결책이 숨어 있습니다.</p>
 <ul>
 <li>constrained_layout은 <b>figure 범례엔 못 맞춥니다.</b></li>
@@ -445,10 +449,10 @@
 <li><p>axes들이 만드는 도형을 <code>handles</code>에 모으고, label을 <code>labels</code>에 모읍니다.</p>
 </li>
 <li><p>오른쪽 위에 있는 axes[0, 2]에 legend를 답니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>),</span><br><span class="line">                        constrained_layout=<span class="literal">True</span>)</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line">handles = []  <span class="comment"># 도형을 여기에 모읍니다. </span></span><br><span class="line">labels = []   <span class="comment"># 레이블을 여기에 모읍니다.</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    handle = ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">    handles.append(handle[<span class="number">0</span>])  <span class="comment"># 도형을 handles에 넣습니다.</span></span><br><span class="line">    labels.append(<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>) <span class="comment"># label을 labels에 넣습니다.</span></span><br><span class="line"></span><br><span class="line">ax_center = fig.add_axes([<span class="number">0.23</span>, <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.8</span>])</span><br><span class="line">ax_center.imshow(im_wm, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax_center.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 범례를 여기에 답니다.</span></span><br><span class="line">axs[<span class="number">2</span>].legend(handles, labels, loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">1.05</span>))</span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_10.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="45_tightlayout_10.png" alt="Jupyter Notebook과 파일 출력이 일치합니다."><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">7</span>, <span class="number">4</span>),</span><br><span class="line">                        constrained_layout=<span class="literal">True</span>)</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line">handles = []  <span class="comment"># 도형을 여기에 모읍니다. </span></span><br><span class="line">labels = []   <span class="comment"># 레이블을 여기에 모읍니다.</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    R, G, B = np.random.random(), np.random.random(), np.random.random()</span><br><span class="line">    color = [R, G, B]</span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    handle = ax.plot(X, Y, <span class="string">&quot;o-&quot;</span>, c=color, label=<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">    handles.append(handle[<span class="number">0</span>])  <span class="comment"># 도형을 handles에 넣습니다.</span></span><br><span class="line">    labels.append(<span class="string">f&quot;plot <span class="subst">&#123;i&#125;</span>&quot;</span>) <span class="comment"># label을 labels에 넣습니다.</span></span><br><span class="line"></span><br><span class="line">ax_center = fig.add_axes([<span class="number">0.23</span>, <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.8</span>])</span><br><span class="line">ax_center.imshow(im_wm, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax_center.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 범례를 여기에 답니다.</span></span><br><span class="line">axs[<span class="number">2</span>].legend(handles, labels, loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">1.05</span>))</span><br><span class="line">fig.savefig(<span class="string">&quot;45_tightlayout_10.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/45_tightlayout_10.png" alt="Jupyter Notebook과 파일 출력이 일치합니다."><br></p>
 <ul>
 <li>handles와 labels를 따로 만들어 사용하는 점이 복잡해 보이지만,</li>
 <li>상당한 matplotlib 유발 감정을 해소할 수 있는 기능입니다.</li>
@@ -466,22 +470,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/26/Python-DS-45-tightlayout/" data-id="cmhueoy0f00gi4gxt7eks7nq2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/26/Python-DS-45-tightlayout/" data-id="cuidkzKvRcCQ9YgJsGDzGpEez" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -557,7 +551,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-11-26",
         "dateCreated": "2020-11-26",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/11/26/Python-DS-45-tightlayout/",
         "description": "
 tight_layout()으로 axes 사이 간격을 적절하게 조정할 수 있습니다.
@@ -572,7 +566,7 @@ Contributor
 이번 글에서, 우리는 이 그림을 그릴겁니다.
 
 포인트는 다",
-        "wordCount": 1959
+        "wordCount": 1951
     }
 </script>
 
@@ -654,16 +648,6 @@ Contributor
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -897,10 +881,6 @@ Contributor
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

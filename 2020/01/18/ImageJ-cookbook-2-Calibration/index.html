@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/2_cal_2.jpg">
 <meta property="article:published_time" content="2020-01-18T09:30:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:42:52.916Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.453Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="imagej">
-<meta property="article:tag" content="cookbook">
 <meta property="article:tag" content="calibration">
+<meta property="article:tag" content="cookbook">
+<meta property="article:tag" content="imagej">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Cookbook/2_cal_2.jpg">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/01/18/ImageJ-cookbook-2-Calibration/" class="article-date">
-     <time datetime="2020-11-27T00:42:52.916Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:37.453Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -243,21 +243,20 @@
 </li>
 <li><p>그러나 이미지에 찍힌 대상의 실제 크기는 <code>pixel</code>과 다른, <code>meter</code> 등의 단위로 이루어져 있습니다. 이를 보정하는 과정을 <code>calibration</code>이라고 하며, <code>scale</code>을 <code>pixel</code>단위 길이나 넓이에 곱합니다.</p>
 <ul>
-<li><code>ImageJ</code>에서 이미지를 열고 포인터를 그림 위에 올리면, 메인 창에 <code>x</code>, <code>y</code>좌표와 함께 <code>pixel</code>값이 나옵니다.<br><img src="2_cal_1.PNG" alt=" ">    </li>
+<li><code>ImageJ</code>에서 이미지를 열고 포인터를 그림 위에 올리면, 메인 창에 <code>x</code>, <code>y</code>좌표와 함께 <code>pixel</code>값이 나옵니다.<br><img src="/2_cal_1.PNG" alt=" ">    </li>
 <li>그러나 어떤 이미지는 <code>ImageJ</code> 메인 창의 <code>x</code>, <code>y</code>좌표, <code>pixel</code>값에 괄호<code>()</code>가 붙어있습니다.</li>
-<li>아래 예제의 <a href="2_cal_2.tif">원본은 여기에서 다운로드</a> 받을 수 있습니다.<br><img src="2_cal_2.PNG" alt=" ">        </li>
+<li>아래 예제의 <a href="2_cal_2.tif">원본은 여기에서 다운로드</a> 받을 수 있습니다.<br><img src="/2_cal_2.PNG" alt=" ">        </li>
 <li>괄호 안의 값은 <code>pixel</code>단위, 괄호 밖의 값은 보정된(<code>calibrated</code>) 실제 길이입니다.</li>
 <li>이미지 우측 하단 $ 2\ \mu\text{m} $  scale bar의 길이는 484 px 입니다. </li>
-<li>메타데이터로부터 얻은 <code>scale</code>이 4.13 nm/px이므로, 확인을 위해 곱해보면 $ 484 \times 4.13 = 1998.92\ \text{nm} $ 이므로 $ \approx 2 \mu\text{m} $ 입니다.<br></li>
-</ul>
-</li>
-<li><p><code>ImageJ</code> <code>Calibration</code>은 크게 두 가지로 나뉘어집니다.</p>
-<ul>
-<li><strong>Spatial Calibration</strong> : <code>x</code>, <code>y</code>등 길이 방향을 보정합니다.</li>
-<li><strong>Density Calibration</strong>: <code>pixel</code>값을 보정합니다.</li>
+<li>메타데이터로부터 얻은 <code>scale</code>이 4.13 nm&#x2F;px이므로, 확인을 위해 곱해보면 $ 484 \times 4.13 &#x3D; 1998.92\ \text{nm} $ 이므로 $ \approx 2 \mu\text{m} $ 입니다.</li>
 </ul>
 </li>
 </ul>
+<br>
+* `ImageJ` `Calibration`은 크게 두 가지로 나뉘어집니다.
+  * **Spatial Calibration** : `x`, `y`등 길이 방향을 보정합니다.
+  * **Density Calibration**: `pixel`값을 보정합니다.
+
 <h3 id="2-Calibration의-활용"><a href="#2-Calibration의-활용" class="headerlink" title="2. Calibration의 활용"></a>2. Calibration의 활용</h3><ul>
 <li><p>Calibration이 된 이미지를 이용해 측정해봅시다.</p>
 <ul>
@@ -277,7 +276,7 @@
 <li><p><b><code>Analyze &gt; Surface Plot</code></b>을 선택하고 옵션에서 <code>Draw Wireframe</code>, <code>Shade</code>, <code>Draw Axis</code>, <code>Smooth</code>를 선택합니다. 2차원 그림이 3차원으로 변환됩니다. <strong>z 축</strong> 숫자를 보면 167 ~ 2408로 표시되어 있습니다. <code>Calibration</code>이 적용된 것입니다.</p>
 </li>
 <li><p><b><code>Analyze &gt; 3D Surface Plot</code></b>을 선택해도 비슷한 그림을 얻을 수 있습니다. 3D 회전을 비롯해서 <code>Grid Size</code>, <code>Smoothing</code> 등을 실시간으로 조정할 수 있는 interactive plot입니다. 여기서는 <strong>z 축</strong>에 <code>Calibration</code>이 적용되지 않았습니다.</p>
-<p><img src="2_cal_3.png" alt=" "></p>
+<p><img src="/2_cal_3.png" alt=" "></p>
 </li>
 </ul>
 </li>
@@ -291,10 +290,10 @@
 </li>
 <li><p>조금 전 손으로 그었던 선의 길이가 <code>Distance in pixels</code>로 483이 나옵니다.</p>
 </li>
-<li><p>Scale Bar에 $2\ \mu \text{m} = 2000\ \text{nm}$ 라고 되어 있으므로  <code>Known distance</code>에 2000을 입력하고 <code>Unit of length</code>에 nm를 입력합니다.</p>
+<li><p>Scale Bar에 $2\ \mu \text{m} &#x3D; 2000\ \text{nm}$ 라고 되어 있으므로  <code>Known distance</code>에 2000을 입력하고 <code>Unit of length</code>에 nm를 입력합니다.</p>
 </li>
 <li><p>본 이미지에만 적용할 Calibration이므로 <code>Global</code>은 체크되지 않은 채로 놔둔 채 <code>OK</code>를 누르면 Calibration이 적용됩니다.</p>
-<p><img src="2_cal_4.png" alt=" "></p>
+<p><img src="/2_cal_4.png" alt=" "></p>
 </li>
 </ul>
 </li>
@@ -307,7 +306,7 @@
 <li><p><b><code>Analyze &gt; Measure</code></b>를 선택하면 Results 창이 뜨고 <code>Length = 896.401</code>이 출력됩니다. Results 창에서 <b><code>File &gt; Save as...</code></b>를 선택하면 <code>.csv</code>파일로 저장할 수 있습니다.</p>
 </li>
 <li><p><b><code>Analyze &gt; Plot Profile</code></b>을 선택하면 Particle의 지름을 가로지르는 선을 따라 Intensity Profile을 얻을 수 있습니다. </p>
-<p><img src="2_cal_5.png" alt=" "></p>
+<p><img src="/2_cal_5.png" alt=" "></p>
 </li>
 </ul>
 </li>
@@ -318,7 +317,7 @@
 <li><p><code>Scale Bar</code> 창에서 Calibration 단위(<code>nm</code>) 기준의 길이와 Scale Bar의 <code>Height</code>, <code>Font Size</code>, <code>Location</code> 등을 설정합니다. 설정값에 따라 이미지 위에 실시간으로 Scale Bar가 생성되니 보시면서 원하는 상태로 설정하면 됩니다.</p>
 </li>
 <li><p>$2000\ \text{nm}$ 대신 $2\ \mu \text{m}$로 출력되기를 원하시면, calibration을 $\mu \text{m}$ 단위로 진행하시면 됩니다.</p>
-<p><img src="2_cal_11.PNG" alt=" "></p>
+<p><img src="/2_cal_11.PNG" alt=" "></p>
 </li>
 </ul>
 </li>
@@ -332,7 +331,7 @@
 </li>
 <li><p>Density Calibration을 위한 데이터가 주어지면 좋지만, 그렇지 않은 경우 이미지 한켠의 범례(<code>legend</code>)를 이용해서라도 입력해야 합니다.</p>
 </li>
-<li><p><code>GeoTIFF</code> 이미지 데이터를 이용해서 Density Calibration을 해 보겠습니다.<br><img src="2_cal_7.png" alt=" "></p>
+<li><p><code>GeoTIFF</code> 이미지 데이터를 이용해서 Density Calibration을 해 보겠습니다.<br><img src="/2_cal_7.png" alt=" "></p>
 <ul>
 <li><code>GeoTIFF</code> 형식은 지리정보(GIS)와 기상 분야에 주로 사용되며, 이미지 외에도 <code>map projection</code>, <code>coordinate systems</code>, <code>ellipsoids</code> 등의 데이터를 함께 담고 있습니다.</li>
 <li><a href="2_cal_7.tif">여기에서 예제파일을 다운</a>받습니다.</li>
@@ -344,7 +343,7 @@
 <li>1차식 데이터이므로 <b>Function </b>메뉴에서 <code>Straight Line</code>을 선택합니다.</li>
 <li><code>OK</code>를 누르면 <code>Calibration Function</code>이 보일 것입니다.</li>
 <li><code>Calibration Function</code>을 닫고 이미지 위에 마우스를 가져가면, 메인 창에 포인터가 위치한 지점의 x, y 좌표와 함께 value가 보입니다.</li>
-<li>이미지를 <b><code>File &gt; Save As</code></b>에서 <code>.tif</code>형식으로 저장하면 <code>Calibration</code>이 함께 저장됩니다.<br><img src="2_cal_8.PNG" alt=" "></li>
+<li>이미지를 <b><code>File &gt; Save As</code></b>에서 <code>.tif</code>형식으로 저장하면 <code>Calibration</code>이 함께 저장됩니다.<br><img src="/2_cal_8.PNG" alt=" "></li>
 </ol>
 </li>
 </ul>
@@ -355,7 +354,7 @@
 <li><b><code>Analysis &gt; Measurement</code></b>를 클릭하면 <b>Results</b>창이 뜹니다.</li>
 <li><b>Set Measures</b>에서 지정한 분석 결과가 담겨 있습니다.</li>
 </ul>
-<p><img src="2_cal_9.PNG" alt=" "></p>
+<p><img src="/2_cal_9.PNG" alt=" "></p>
 </li>
 <li><p>Scale Bar처럼 Density Calibration을 Legend로 삽입할 수 있습니다.</p>
 <ul>
@@ -364,7 +363,7 @@
 <li><p>Scale Bar와 대체로 비슷하지만 <code>Number of Labels</code>, <code>Decimal Places</code>, <code>Zoom Factor</code>등 다른 인자들이 있습니다. </p>
 </li>
 <li><p>직접 인자를 바꿔가면서 Legend가 실시간으로 어떻게 변하는지 살펴보시기 바랍니다.</p>
-<p><img src="2_cal_10.PNG" alt=" "></p>
+<p><img src="/2_cal_10.PNG" alt=" "></p>
 </li>
 </ul>
 </li>
@@ -384,9 +383,9 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ, ImagePlus</span><br><span class="line"><span class="keyword">from</span> ij.plugin <span class="keyword">import</span> Duplicator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Get Open Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Get Initial Calibration</span></span><br><span class="line">cal = imp.getCalibration()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;before Calibration:&#x27;</span>, cal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Duplicate Image</span></span><br><span class="line">imp2 = Duplicator().run(imp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. Apply New Calibration</span></span><br><span class="line">scale = <span class="number">4.13</span> <span class="comment"># nm/px</span></span><br><span class="line">cal.pixelWidth = scale <span class="comment"># pixelWidth : Pixel width in &#x27;unit&#x27;s</span></span><br><span class="line">cal.pixelHeight = scale <span class="comment"># pixelHeight : Pixel height in &#x27;unit&#x27;s</span></span><br><span class="line">cal.unit = <span class="string">&#x27;nm&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;after Calibration:&#x27;</span>, cal</span><br><span class="line">imp2.setCalibration(cal)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Show New Image</span></span><br><span class="line">imp2.title = <span class="string">&#x27;Calibrated&#x27;</span></span><br><span class="line">imp2.show()</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>실행 결과 </li>
+<li>실행 결과</li>
 </ul>
-<p><img src="2_cal_6.png" alt=" "></p>
+<p><img src="/2_cal_6.png" alt=" "></p>
 <ul>
 <li>새 창으로 뜨는  <code>Calibration</code>이 적용된 이미지는 처음 이미지와 동일해 보입니다.</li>
 <li>그러나 Scale Bar를 따라 <strong>Line Selection Tool</strong>을 긋고 <b><code>Analyze &gt; Measure</code></b>를 실행하면 <code>Length = 2007.180</code>이라는 값이 나옵니다.</li>
@@ -413,19 +412,19 @@
 <tbody><tr>
 <td align="center"><b>w</b></td>
 <td align="center">pixelWidth</td>
-<td align="center">pixel width scale (unit/px)</td>
+<td align="center">pixel width scale (unit&#x2F;px)</td>
 <td align="center">1.0</td>
 </tr>
 <tr>
 <td align="center"><b>h</b></td>
 <td align="center">pixelHeight</td>
-<td align="center">pixel height scale (unit/px)</td>
+<td align="center">pixel height scale (unit&#x2F;px)</td>
 <td align="center">1.0</td>
 </tr>
 <tr>
 <td align="center"><b>d</b></td>
 <td align="center">pixelDepth</td>
-<td align="center">pixel depth scale (unit/px)<br>“slice 한 장의 두께”</td>
+<td align="center">pixel depth scale (unit&#x2F;px)<br>“slice 한 장의 두께”</td>
 <td align="center">1.0</td>
 </tr>
 <tr>
@@ -443,13 +442,13 @@
 <tr>
 <td align="center"><b>nc</b></td>
 <td align="center">coefficients.length</td>
-<td align="center">function의 coefficient 수<br>(ex. y = a + bx : nc = 2)</td>
+<td align="center">function의 coefficient 수<br>(ex. y &#x3D; a + bx : nc &#x3D; 2)</td>
 <td align="center">null</td>
 </tr>
 <tr>
 <td align="center"><b>cTable</b></td>
 <td align="center">cTable.length</td>
-<td align="center">bitDepth에 대응되는 real value 수<br>(ex. bd = 8 : Table size = 256 by 2)</td>
+<td align="center">bitDepth에 대응되는 real value 수<br>(ex. bd &#x3D; 8 : Table size &#x3D; 256 by 2)</td>
 <td align="center">null</td>
 </tr>
 <tr>
@@ -461,7 +460,7 @@
 <tr>
 <td align="center"><b>bd</b></td>
 <td align="center">bitDepth</td>
-<td align="center">data depth. 2^bd.<br>(ex. 256 = 2^8 : bd = 8)</td>
+<td align="center">data depth. 2^bd.<br>(ex. 256 &#x3D; 2^8 : bd &#x3D; 8)</td>
 <td align="center">8</td>
 </tr>
 </tbody></table>
@@ -470,11 +469,13 @@
 </li>
 <li><p>자세한 설명은 소스코드를 열어 이해할 수 밖에 없었습니다. 상세한 설명이 있다면 제보바랍니다.</p>
 <p><b>[ 관련 공식문서 링크 ]</b> <a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/developer/source/ij/measure/Calibration.java.html">Calibration</a>, <a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/developer/api/ij/measure/CurveFitter.html">CurveFitter</a>, <a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/developer/api/constant-values.html">Constant Field Values</a></p>
-<br></li>
+<br>
+</li>
 <li><p>위에서 4개의 인자(<code>w</code>, <code>h</code>, <code>d</code>, <code>unit</code>)는 Spatial Calibration에 연관된 것이고,<br>아래 5개의 인자(<code>f</code>, <code>nc</code>, <code>cTable</code>, <code>vunit</code>, <code>bd</code>)는 Density Calibration에 연관된 것입니다.</p>
 </li>
-<li><p><code>bd</code>=8이라면 0~255까지 256개의 값에 대응되는 value를 cTable로 입력해야 하기 때문에 Density Calibration을 python script로 수행하기엔 좀 성가십니다.</p>
-<br></li>
+<li><p><code>bd</code>&#x3D;8이라면 0~255까지 256개의 값에 대응되는 value를 cTable로 입력해야 하기 때문에 Density Calibration을 python script로 수행하기엔 좀 성가십니다.</p>
+<br>
+</li>
 <li><p>따라서, Density Calibration을 python script로 수행할 때는 <a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-5-Script/"><b>ImageJ &gt; Tutorial &gt; 5. Python Script 작성</b></a>에 있는 <code>IJ.run()</code>을 사용하시는 것을 추천합니다.</p>
 <ul>
 <li><b>2.3.2</b>의 Density Calibration 과정을 <code>IJ.run()</code>으로 옮기면 다음과 같이 한 줄로 표현됩니다.</li>
@@ -487,12 +488,12 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ, ImagePlus</span><br><span class="line"><span class="keyword">from</span> ij.plugin <span class="keyword">import</span> Duplicator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Get Open Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Get Initial Calibration</span></span><br><span class="line">cal = imp.getCalibration()</span><br><span class="line">f = cal.getFunction()</span><br><span class="line">coef = cal.getCoefficients()</span><br><span class="line">cTable = cal.getCTable()</span><br><span class="line">vunit = cal.getValueUnit()</span><br><span class="line">bd = imp.getBitDepth()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;before Calibration:&#x27;</span>, cal</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;f:&#x27;</span>, f</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;coef:&#x27;</span>, coef</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;cTable:&#x27;</span>, cTable</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;vunit:&#x27;</span>, vunit</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;bd:&#x27;</span>, bd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Duplicate Image</span></span><br><span class="line">imp2 = Duplicator().run(imp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. Apply New Calibration</span></span><br><span class="line">IJ.run(imp, <span class="string">&quot;Calibrate...&quot;</span>, <span class="string">&quot;function=[Straight Line] unit=[Degrees Celsius] text1=[0 254] text2=[-2 45] show&quot;</span>)</span><br><span class="line">imp2.setCalibration(cal)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Get Final Calibration</span></span><br><span class="line">cal2 = imp2.getCalibration()</span><br><span class="line">f = cal2.getFunction()</span><br><span class="line">coef = cal2.getCoefficients()</span><br><span class="line">cTable = cal2.getCTable()</span><br><span class="line">vunit = cal2.getValueUnit()</span><br><span class="line">bd = imp2.getBitDepth()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;after Calibration:&#x27;</span>, cal2</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;f:&#x27;</span>, f</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;coef:&#x27;</span>, coef</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;cTable:&#x27;</span>, cTable</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;vunit:&#x27;</span>, vunit</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;bd:&#x27;</span>, bd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. Show New Image</span></span><br><span class="line">imp2.title = <span class="string">&#x27;Calibrated&#x27;</span></span><br><span class="line">imp2.show()</span><br></pre></td></tr></table></figure>
 
-<p><img src="2_cal_12.PNG" alt=" "></p>
+<p><img src="/2_cal_12.PNG" alt=" "></p>
 <ul>
 <li><p>Density Calibration <code>function</code> 값이 20에서 0으로 변했습니다.<br><a target="_blank" rel="noopener" href="https://imagej.nih.gov/ij/developer/api/constant-values.html">관련 공식 문서</a>를 보시면 <b>NONE</b>에서 <b>STRAIGHT_LINE</b>으로 변경되었다는 의미라는 것을 알 수 있습니다.</p>
-<p><img src="2_cal_13.PNG" alt=" "></p>
+<p><img src="/2_cal_13.PNG" alt=" "></p>
 </li>
-<li><p><code>function</code>의 coefficient를 의미하는 <code>coef</code>는 None에서 array(‘d’, [-2.0, 0.18504…])가 되었습니다.<br><b>2.3.2</b>의 y = a + bx 그래프에 도시된 계수가 바로 a = -2.0, b = 0.18504 입니다.</p>
+<li><p><code>function</code>의 coefficient를 의미하는 <code>coef</code>는 None에서 array(‘d’, [-2.0, 0.18504…])가 되었습니다.<br><b>2.3.2</b>의 y &#x3D; a + bx 그래프에 도시된 계수가 바로 a &#x3D; -2.0, b &#x3D; 0.18504 입니다.</p>
 </li>
 <li><p><code>cTable</code>은 None에서 어마무시한 숫자의 나열이 되었습니다.<br>위에서 말씀드린 ‘ 0~255까지 256개의 값에 대응되는 value’ 입니다.</p>
 </li>
@@ -511,22 +512,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/" data-id="cmhueoxvz007s4gxt4oo8hyla" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/" data-id="cuidOYyN_fNPelzOpiOxbLUs5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -602,7 +593,7 @@
         "genre": "ImageJ Cookbook",
         "datePublished": "2020-01-18",
         "dateCreated": "2020-01-18",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/",
         "description": "Reference
 
@@ -616,7 +607,7 @@ BraINstinct0
 이미지 파일의 구조에 대한 글에서, 이미지는 2차원 공간상에 위치한 pixel의 집합이라고 말씀드렸습니다.
 
 대개 pixel 하나당 흑백(Graysca",
-        "wordCount": 1598
+        "wordCount": 1604
     }
 </script>
 
@@ -698,16 +689,6 @@ BraINstinct0
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -941,10 +922,6 @@ BraINstinct0
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

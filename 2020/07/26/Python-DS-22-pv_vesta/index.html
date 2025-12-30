@@ -21,13 +21,13 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/22_pv_vesta_0.png">
 <meta property="article:published_time" content="2020-07-25T19:55:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:44:29.598Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.038Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="visualization">
-<meta property="article:tag" content="paraview">
 <meta property="article:tag" content="atom">
+<meta property="article:tag" content="paraview">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="vesta">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/22_pv_vesta_0.png">
     
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/07/26/Python-DS-22-pv_vesta/" class="article-date">
-     <time datetime="2020-11-27T00:44:29.598Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:38.038Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -236,11 +236,11 @@
 <h2 id="Atomic-Structure-Analysis"><a href="#Atomic-Structure-Analysis" class="headerlink" title="Atomic Structure Analysis"></a>Atomic Structure Analysis</h2><ul>
 <li><p>원자 구조를 분석할 때 저는 paraview를 사용합니다.</p>
 </li>
-<li><p>다른 분들은 분야 표준인 VESTA를 선호하시지만, 저는 제가 추출한 구조데이터를 table 형태로 함께 봐야 하기 때문입니다.<br><br><img src="22_pv_vesta_2.png" alt="원소별 색상(왼쪽), 표면원자 여부(오른쪽)"><br></p>
+<li><p>다른 분들은 분야 표준인 VESTA를 선호하시지만, 저는 제가 추출한 구조데이터를 table 형태로 함께 봐야 하기 때문입니다.<br><br><img src="/22_pv_vesta_2.png" alt="원소별 색상(왼쪽), 표면원자 여부(오른쪽)"><br></p>
 </li>
 <li><p>간혹 제 코드가 똑바로 돌았나 미심쩍을 때도 있습니다.</p>
 </li>
-<li><p>그럴 때는 VESTA를 옆에 함께 켜놓고 빙글빙글 돌리며 봅니다.<br><br><img src="22_pv_vesta_1.gif" alt="VESTA (왼쪽), paraview (가운데, 오른쪽)"><br></p>
+<li><p>그럴 때는 VESTA를 옆에 함께 켜놓고 빙글빙글 돌리며 봅니다.<br><br><img src="/22_pv_vesta_1.gif" alt="VESTA (왼쪽), paraview (가운데, 오른쪽)"><br></p>
 </li>
 <li><p>VESTA 화면과 paraview 화면을 1:1로 비교해야 하는 상황에서, 같은 원자가 다른 색상으로 표시되거나 다른 원자가 같은 색상으로 표시되면 참 혼란스럽습니다.</p>
 </li>
@@ -250,34 +250,37 @@
 </li>
 </ul>
 <h2 id="VESTA-to-Paraview"><a href="#VESTA-to-Paraview" class="headerlink" title="VESTA to Paraview"></a>VESTA to Paraview</h2><ul>
-<li>VESTA의 원소별 정보는 element.ini에 다음과 같이 들어있습니다.<br><br><img src="22_pv_vesta_3.png"><br></li>
+<li>VESTA의 원소별 정보는 element.ini에 다음과 같이 들어있습니다.<br><br><img src="/22_pv_vesta_3.png"><br></li>
 <li>이 데이터를 읽어서 <a href="VESTA_elements.csv">.csv 형태로 저장합니다</a>.</li>
 </ul>
 <h3 id="1-Element-Color"><a href="#1-Element-Color" class="headerlink" title="(1) Element Color"></a>(1) Element Color</h3><ul>
-<li>Paraview의 color map은 <code>json</code> 형식을 사용합니다.</li>
-<li>VESTA 파일 정보로부터 원소명과 RGB 색상을 읽어옵니다.</li>
-<li>그리고 인터넷에서 원소기호:원소명 테이블을 읽어 붙입니다.</li>
-<li>Paraview colormap <a href="paraview_VESTA_atom.zip">형식으로 저장</a>합니다.</li>
-</ul>
-<ul>
-<li>Paraview의 <b>Choose Preset…</b> 메뉴에서 저장한 컬러맵을 불러와 사용합니다<br><br><img src="22_pv_vesta_4.png"><br></li>
+<li><p>Paraview의 color map은 <code>json</code> 형식을 사용합니다.</p>
+</li>
+<li><p>VESTA 파일 정보로부터 원소명과 RGB 색상을 읽어옵니다.</p>
+</li>
+<li><p>그리고 인터넷에서 원소기호:원소명 테이블을 읽어 붙입니다.</p>
+</li>
+<li><p>Paraview colormap <a href="paraview_VESTA_atom.zip">형식으로 저장</a>합니다.</p>
+</li>
+<li><p>Paraview의 <b>Choose Preset…</b> 메뉴에서 저장한 컬러맵을 불러와 사용합니다<br><br><img src="/22_pv_vesta_4.png"><br></p>
+</li>
 </ul>
 <h3 id="2-Element-Size"><a href="#2-Element-Size" class="headerlink" title="(2) Element Size"></a>(2) Element Size</h3><ul>
-<li><p>VESTA의 원소별 정보를 분석프로그램에서 <code>pandas.DataFrame</code>형식으로 가지고 있다가, 데이터 저장시 원소에 맞는 크기(atomic Radius)를 넣어줍니다.</p>
-</li>
-<li><p><code>dict</code>와 <code>pandas.DataFrame.apply()</code>를 사용해서 간단하게 작업합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># insert atomic Radius</span></span><br><span class="line">df_elm = pd.read_csv(<span class="string">&quot;VESTA_elements.csv&quot;</span>)</span><br><span class="line">mats = df_elm[<span class="string">&quot;mat&quot;</span>].tolist()</span><br><span class="line">r_atomic = df_elm[<span class="string">&quot;R_atomic(A)&quot;</span>].tolist()</span><br><span class="line">mats_r = <span class="built_in">dict</span>(<span class="built_in">zip</span>(mats, r_atomic))</span><br><span class="line"></span><br><span class="line">POSCAR.data[<span class="string">&quot;R_atomic(A)&quot;</span>] = POSCAR.data[<span class="string">&quot;mat_org&quot;</span>].apply(<span class="keyword">lambda</span> x: mats_r[x])</span><br></pre></td></tr></table></figure></li>
+<li>VESTA의 원소별 정보를 분석프로그램에서 <code>pandas.DataFrame</code>형식으로 가지고 있다가, 데이터 저장시 원소에 맞는 크기(atomic Radius)를 넣어줍니다.</li>
+<li><code>dict</code>와 <code>pandas.DataFrame.apply()</code>를 사용해서 간단하게 작업합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># insert atomic Radius</span></span><br><span class="line">df_elm = pd.read_csv(<span class="string">&quot;VESTA_elements.csv&quot;</span>)</span><br><span class="line">mats = df_elm[<span class="string">&quot;mat&quot;</span>].tolist()</span><br><span class="line">r_atomic = df_elm[<span class="string">&quot;R_atomic(A)&quot;</span>].tolist()</span><br><span class="line">mats_r = <span class="built_in">dict</span>(<span class="built_in">zip</span>(mats, r_atomic))</span><br><span class="line"></span><br><span class="line">POSCAR.data[<span class="string">&quot;R_atomic(A)&quot;</span>] = POSCAR.data[<span class="string">&quot;mat_org&quot;</span>].apply(<span class="keyword">lambda</span> x: mats_r[x])</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>그리고 Paraview에서 <b>Glyph</b>의 <b>Scale Array</b>를 <code>R_Atomic(A)</code>, <b>Scale Factor</b>를 1로 설정합니다.</p>
 </li>
-<li><p>Scale Factor는 상황에 따라 변경해도 좋습니다.<br><br><img src="22_pv_vesta_6.png"><br></p>
+<li><p>Scale Factor는 상황에 따라 변경해도 좋습니다.<br><br><img src="/22_pv_vesta_6.png"><br></p>
 </li>
-</ul>
-<ul>
-<li><p>원소별 색상과 크기가 모두 지정되면, 다음과 같은 그림들을 표현할 수 있습니다.<br><br><img src="22_pv_vesta_5.png"><br></p>
+<li><p>원소별 색상과 크기가 모두 지정되면, 다음과 같은 그림들을 표현할 수 있습니다.<br><br><img src="/22_pv_vesta_5.png"><br></p>
 </li>
 <li><p>VESTA보다 입체감이 더 잘 드러나는 것 같기도 합니다.</p>
 </li>
-<li><p>그림에 힘을 주고 싶을 땐 <b>Ray Tracing</b>을 켜서 그림자를 드리웁니다.<br><br><img src="22_pv_vesta_0.png"><br></p>
+<li><p>그림에 힘을 주고 싶을 땐 <b>Ray Tracing</b>을 켜서 그림자를 드리웁니다.<br><br><img src="/22_pv_vesta_0.png"><br></p>
 </li>
 </ul>
 
@@ -292,22 +295,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/26/Python-DS-22-pv_vesta/" data-id="cmhueoxz300dy4gxt52qdd97f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/26/Python-DS-22-pv_vesta/" data-id="cuideRZiFMgc1IL08AzYftsW8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -383,7 +376,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-07-26",
         "dateCreated": "2020-07-26",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/07/26/Python-DS-22-pv_vesta/",
         "description": "
 ParaviewVESTA: Visualization for Electronic and STructural Analysis
@@ -474,16 +467,6 @@ Atomic Structure Analysis
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -717,10 +700,6 @@ Atomic Structure Analysis
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

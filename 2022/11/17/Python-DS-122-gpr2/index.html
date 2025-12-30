@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/122_gpr2_00.png">
 <meta property="article:published_time" content="2022-11-17T10:22:00.000Z">
-<meta property="article:modified_time" content="2022-11-17T13:47:43.435Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.876Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="gaussian process">
 <meta property="article:tag" content="bayesian">
+<meta property="article:tag" content="gaussian process">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="scikit-learn">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/122_gpr2_00.png">
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/11/17/Python-DS-122-gpr2/" class="article-date">
-     <time datetime="2022-11-17T13:47:43.435Z" itemprop="dateModified">2022-11-17</time>
+     <time datetime="2025-12-30T06:28:37.876Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -241,44 +241,37 @@
 <h2 id="1-1-example-data"><a href="#1-1-example-data" class="headerlink" title="1.1. example data"></a>1.1. example data</h2><ul>
 <li><a href="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/">지난 글</a>과 같은 예제를 사용합니다.</li>
 <li>오늘은 어제보다는 색을 많이 사용할 겁니다. 참값과 Gaussian Process 결과를 무채색으로 표현합니다.</li>
-<li>관측값은 참값이라고 합시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process <span class="keyword">import</span> GaussianProcessRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> RBF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Random Number Generation</span></span><br><span class="line">rng = np.random.RandomState(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Gaussian Process Regression</span></span><br><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, random_state=<span class="number">0</span>)</span><br><span class="line">gpr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># prediction</span></span><br><span class="line">y_pred_mean, y_pred_std = gpr.predict(X, return_std=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">3</span>))</span><br><span class="line">ax.plot(X, y, c=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;true&quot;</span>)</span><br><span class="line">ax.scatter(X_train, y_train, fc=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;sample without noise&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax.plot(X.ravel(), y_pred_mean, c=<span class="string">&quot;0.5&quot;</span>, label=<span class="string">&quot;GP prediction (mean)&quot;</span>)</span><br><span class="line">ax.fill_between(X.ravel(), y_pred_mean-<span class="number">1.96</span>*y_pred_std, y_pred_mean+<span class="number">1.96</span>*y_pred_std, alpha=<span class="number">0.5</span>, fc=<span class="string">&quot;lightgray&quot;</span>, label=<span class="string">&quot;95% CI&quot;</span>)</span><br><span class="line">ax.legend(loc=<span class="string">&quot;upper left&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_3.png"><br></li>
+<li>관측값은 참값이라고 합시다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process <span class="keyword">import</span> GaussianProcessRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> RBF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Random Number Generation</span></span><br><span class="line">rng = np.random.RandomState(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Gaussian Process Regression</span></span><br><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, random_state=<span class="number">0</span>)</span><br><span class="line">gpr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># prediction</span></span><br><span class="line">y_pred_mean, y_pred_std = gpr.predict(X, return_std=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">3</span>))</span><br><span class="line">ax.plot(X, y, c=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;true&quot;</span>)</span><br><span class="line">ax.scatter(X_train, y_train, fc=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;sample without noise&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax.plot(X.ravel(), y_pred_mean, c=<span class="string">&quot;0.5&quot;</span>, label=<span class="string">&quot;GP prediction (mean)&quot;</span>)</span><br><span class="line">ax.fill_between(X.ravel(), y_pred_mean-<span class="number">1.96</span>*y_pred_std, y_pred_mean+<span class="number">1.96</span>*y_pred_std, alpha=<span class="number">0.5</span>, fc=<span class="string">&quot;lightgray&quot;</span>, label=<span class="string">&quot;95% CI&quot;</span>)</span><br><span class="line">ax.legend(loc=<span class="string">&quot;upper left&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_3.png"><br></p>
 <h2 id="1-2-sample-추출"><a href="#1-2-sample-추출" class="headerlink" title="1.2. sample 추출"></a>1.2. sample 추출</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/auto_examples/gaussian_process/plot_gpr_prior_posterior.html#sphx-glr-auto-examples-gaussian-process-plot-gpr-prior-posterior-py">scikit-learn: Illustration of prior and posterior Gaussian process for different kernels</a></p>
 </blockquote>
-<p><img src="ds.gif" alt="14,000,605개의 미래를 보는 닥터 스트레인지, 대혼돈의 멀티버스 中"></p>
+<p><img src="/ds.gif" alt="14,000,605개의 미래를 보는 닥터 스트레인지, 대혼돈의 멀티버스 中"></p>
 <ul>
-<li><p>신뢰구간에는 다양한 가능성이 내포되어 있습니다.</p>
-</li>
-<li><p>이들 중 일부를 골라 추출할 수 있습니다.</p>
-</li>
-<li><p>5개를 골라 Gaussian Process Regression 위에 얹어봅니다.</p>
+<li>신뢰구간에는 다양한 가능성이 내포되어 있습니다.</li>
+<li>이들 중 일부를 골라 추출할 수 있습니다.</li>
+<li>5개를 골라 Gaussian Process Regression 위에 얹어봅니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sampling</span></span><br><span class="line">n_samples=<span class="number">5</span></span><br><span class="line">y_samples = gpr.sample_y(X, n_samples)</span><br><span class="line"></span><br><span class="line"><span class="comment"># prediction</span></span><br><span class="line">y_pred_mean, y_pred_std = gpr.predict(X, return_std=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">3</span>))</span><br><span class="line">ax.plot(X, y, c=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;true&quot;</span>)</span><br><span class="line">ax.scatter(X_train, y_train, fc=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;sample without noise&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax.plot(X.ravel(), y_pred_mean, c=<span class="string">&quot;0.5&quot;</span>, label=<span class="string">&quot;GP prediction (mean)&quot;</span>)</span><br><span class="line">ax.fill_between(X.ravel(), y_pred_mean-<span class="number">1.96</span>*y_pred_std, y_pred_mean+<span class="number">1.96</span>*y_pred_std, alpha=<span class="number">0.5</span>, fc=<span class="string">&quot;lightgray&quot;</span>, label=<span class="string">&quot;95% CI&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> y_sample <span class="keyword">in</span> y_samples.T:</span><br><span class="line">    ax.plot(X.ravel(), y_sample, lw=<span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>, label=<span class="string">&quot;GP prediction (mean)&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="122_gpr2_4.png"><br></p>
-</li>
-<li><p>대부분 신뢰구간 안에 들어와 있지만 일부는 신뢰구간 밖으로도 나가 있습니다.</p>
-</li>
-<li><p>정상입니다.</p>
-</li>
+<p><img src="/122_gpr2_4.png"><br></p>
+<ul>
+<li>대부분 신뢰구간 안에 들어와 있지만 일부는 신뢰구간 밖으로도 나가 있습니다.</li>
+<li>정상입니다.</li>
 </ul>
 <h2 id="1-3-posterior-vs-prior"><a href="#1-3-posterior-vs-prior" class="headerlink" title="1.3. posterior vs prior"></a>1.3. posterior vs prior</h2><ul>
-<li><p>지금 그린 그림은 evidence가 반영된 결과, 즉 <b>posterior(사후확률)</b>입니다.</p>
-</li>
-<li><p>학습을 시키지 않은 채 예측을 하고 sample curve를 뽑을 수도 있습니다.</p>
-</li>
-<li><p>evidence가 반영되기 전의 <b>prior(사전확률)</b>입니다.</p>
+<li>지금 그린 그림은 evidence가 반영된 결과, 즉 <b>posterior(사후확률)</b>입니다.</li>
+<li>학습을 시키지 않은 채 예측을 하고 sample curve를 뽑을 수도 있습니다.</li>
+<li>evidence가 반영되기 전의 <b>prior(사전확률)</b>입니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prior</span></span><br><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sampling</span></span><br><span class="line">y_samples = gpr.sample_y(X, n_samples)</span><br></pre></td></tr></table></figure>
-<p><img src="122_gpr2_5.png"><br></p>
-</li>
-<li><p>관측값이 반영되어 있지 않기 때문에 데이터와는 무관한 모습입니다.</p>
-</li>
-<li><p>그러나 곡선의 모양에는 우리가 선택한 RBF 커널이 드러나 있습니다.</p>
-</li>
-<li><p>학습에 커널이 반영되는만큼 <b>데이터의 모습을 반영</b>해 <b>커널을 선정</b>해야 합니다.</p>
-</li>
-<li><p>scikit-learn이 지원하는 커널들의 prior와 posterior를 살펴보겠습니다.</p>
-</li>
+<p><img src="/122_gpr2_5.png"><br></p>
+<ul>
+<li>관측값이 반영되어 있지 않기 때문에 데이터와는 무관한 모습입니다.</li>
+<li>그러나 곡선의 모양에는 우리가 선택한 RBF 커널이 드러나 있습니다.</li>
+<li>학습에 커널이 반영되는만큼 <b>데이터의 모습을 반영</b>해 <b>커널을 선정</b>해야 합니다.</li>
+<li>scikit-learn이 지원하는 커널들의 prior와 posterior를 살펴보겠습니다.</li>
 </ul>
 <h1 id="2-Kernels"><a href="#2-Kernels" class="headerlink" title="2. Kernels"></a>2. Kernels</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://pasus.tistory.com/209">Deep Campus: 가우시안 프로세스의 개념</a><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/understanding-gaussian-process-the-socratic-way-ba02369d804">towardsdatascience: Understanding Gaussian Process, the Socratic Way</a><br><a target="_blank" rel="noopener" href="https://thegradient.pub/gaussian-process-not-quite-for-dummies/">The Gradient, Gaussian process not quite for dummies</a></p>
@@ -288,11 +281,11 @@
 </li>
 <li><p>서로 다른 두 점 $x_i$와 $x_j$와의 상호 연관성을 나타냅니다.</p>
 </li>
-<li><p>이 함수를 커널 함수라고 하며, <b>Radial basis function</b>은 다음과 같이 정의됩니다.<br>$$k(x_i, x_j) = \exp\left(- \frac{d(x_i, x_j)^2}{2l^2} \right)$$</p>
+<li><p>이 함수를 커널 함수라고 하며, <b>Radial basis function</b>은 다음과 같이 정의됩니다.<br>$$k(x_i, x_j) &#x3D; \exp\left(- \frac{d(x_i, x_j)^2}{2l^2} \right)$$</p>
 </li>
 <li><p>$x_i$와 $x_j$의 거리가 같아도 $l$이 크면 $k$가 큽니다: 먼 거리의 데이터까지 연관성을 가진다는 뜻입니다.</p>
 </li>
-<li><p>$x_i = x_j$ 일때 공분산은 최대값으로 1을 가집니다.</p>
+<li><p>$x_i &#x3D; x_j$ 일때 공분산은 최대값으로 1을 가집니다.</p>
 </li>
 <li><p>그렇다면 $x_i$과 $x_j$ 사이의 한 점은 두 점 모두와의 공분산을 최대한 높이는 방향으로 결정될텐데</p>
 </li>
@@ -300,100 +293,108 @@
 </li>
 <li><p>이로 인해 아무런 관찰값이 입력되지 않아도(prior) <b>RBF</b>의 sample 함수는 <b>랜덤하게 매끈한 곡선</b>을 이룹니다.</p>
 </li>
+<li><p>같은 이유로 참값으로 관측값이 지정되면(posterior) <b>관측값과 관측값 사이를 최대한 매끈하게 잇는 곡선의 존재 범위</b>가 도출됩니다.</p>
+</li>
+<li><p>그렇다면, <b>커널 함수가 바뀌면 예측값이 바뀔 것</b>이라는 것을 상상할 수 있으며</p>
+</li>
+<li><p><b>데이터의 성격에 맞는 커널 함수가 있음</b>을 예상할 수도 있습니다.</p>
+</li>
+<li><p>최적값을 얻는 방법으로 <b>MLE(Maximum Likelihood Estimation)</b>이 사용됩니다.</p>
+</li>
+<li><p><code>log_marginal_likelihood()</code> 메소드를 사용해 결과값을 추출할 수 있습니다.</p>
+</li>
+<li><p>커널 종류를 바꾸며 prior와 posterior를 관찰합니다.</p>
+</li>
+<li><p><b>커널을 입력받는 시각화 함수</b>를 아래와 같이 준비합니다.</p>
+</li>
+<li><p>코드가 길어 접어두었습니다.</p>
+</li>
 </ul>
-<ul>
-<li>같은 이유로 참값으로 관측값이 지정되면(posterior) <b>관측값과 관측값 사이를 최대한 매끈하게 잇는 곡선의 존재 범위</b>가 도출됩니다.</li>
-<li>그렇다면, <b>커널 함수가 바뀌면 예측값이 바뀔 것</b>이라는 것을 상상할 수 있으며</li>
-<li><b>데이터의 성격에 맞는 커널 함수가 있음</b>을 예상할 수도 있습니다.</li>
-<li>최적값을 얻는 방법으로 <b>MLE(Maximum Likelihood Estimation)</b>이 사용됩니다.</li>
-<li><code>log_marginal_likelihood()</code> 메소드를 사용해 결과값을 추출할 수 있습니다.</li>
-</ul>
-<ul>
-<li>커널 종류를 바꾸며 prior와 posterior를 관찰합니다.</li>
-<li><b>커널을 입력받는 시각화 함수</b>를 아래와 같이 준비합니다.</li>
-<li>코드가 길어 접어두었습니다.<details>
-  <summary><b>코드 보기/접기</b></summary>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_pp</span>(<span class="params">kernel, kernel_name=<span class="string">&quot;&quot;</span>, X_train=X_train, y_train=y_train, X_true=X, y_true=y, n_samples=<span class="number">5</span></span>):</span></span><br><span class="line">    gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, random_state=<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># prior</span></span><br><span class="line">    y_prior_mean, y_prior_std = gpr.predict(X_true, return_std=<span class="literal">True</span>)</span><br><span class="line">    y_prior_samples = gpr.sample_y(X_true, n_samples)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># posterior</span></span><br><span class="line">    gpr.fit(X_train, y_train)</span><br><span class="line">    y_posterior_mean, y_posterior_std = gpr.predict(X_true, return_std=<span class="literal">True</span>)</span><br><span class="line">    y_posterior_samples = gpr.sample_y(X_true, n_samples)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># kernel after fitting</span></span><br><span class="line">    kernel_ = gpr.kernel_</span><br><span class="line">    theta = gpr.kernel_.theta</span><br><span class="line">    ll = gpr.log_marginal_likelihood(theta)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># visualize</span></span><br><span class="line">    fig, axs = plt.subplots(nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> ax, y_mean, y_std, y_samples, title, k <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [y_prior_mean, y_posterior_mean], </span><br><span class="line">                                                           [y_prior_std, y_posterior_std], [y_prior_samples, y_posterior_samples],</span><br><span class="line">                                                           [<span class="string">&quot;prior&quot;</span>, <span class="string">&quot;posterior&quot;</span>], [kernel, kernel_]):</span><br><span class="line">        <span class="comment"># true</span></span><br><span class="line">        ax.plot(X_true, y_true, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">        ax.scatter(X_train, y_train, fc=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># pred</span></span><br><span class="line">        ax.plot(X_true.ravel(), y_mean, c=<span class="string">&quot;0.5&quot;</span>)</span><br><span class="line">        ax.fill_between(X_true.ravel(), y_mean-<span class="number">1.96</span>*y_std, y_mean+<span class="number">1.96</span>*y_std, alpha=<span class="number">0.5</span>, fc=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># samples</span></span><br><span class="line">        <span class="keyword">for</span> y_sample <span class="keyword">in</span> y_samples.T:</span><br><span class="line">            ax.plot(X_true.ravel(), y_sample, lw=<span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># title</span></span><br><span class="line">        ax.text(<span class="number">0.18</span>, <span class="number">0.97</span>, title, fontsize=<span class="string">&quot;large&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, color=<span class="string">&quot;b&quot;</span>, ha=<span class="string">&quot;right&quot;</span>, va=<span class="string">&quot;top&quot;</span>, transform=ax.transAxes)</span><br><span class="line">        str_k = <span class="built_in">str</span>(k).replace(<span class="string">&#x27; ** &#x27;</span>,<span class="string">&#x27;^&#x27;</span>).replace(<span class="string">&#x27;**&#x27;</span>,<span class="string">&#x27;^&#x27;</span>).replace(<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;\cdot&#x27;</span>).replace(<span class="string">&#x27;length_scale&#x27;</span>,<span class="string">&#x27;l&#x27;</span>).replace(<span class="string">&#x27;alpha&#x27;</span>,<span class="string">&#x27;\\alpha&#x27;</span>).replace(<span class="string">&#x27;periodicity&#x27;</span>, <span class="string">&#x27;p&#x27;</span>).replace(<span class="string">&#x27;sigma&#x27;</span>,<span class="string">&#x27;\\sigma&#x27;</span>).replace(<span class="string">&#x27;nu&#x27;</span>,<span class="string">&#x27;\\nu&#x27;</span>)</span><br><span class="line">        ax.text(<span class="number">0.2</span>, <span class="number">0.97</span>, <span class="string">&quot;kernel: &quot;</span> + <span class="string">f&quot;$<span class="subst">&#123;str_k&#125;</span>$&quot;</span>, ha=<span class="string">&quot;left&quot;</span>, va=<span class="string">&quot;top&quot;</span>, color=<span class="string">&quot;darkblue&quot;</span>, transform=ax.transAxes)</span><br><span class="line">        </span><br><span class="line">    axs[<span class="number">1</span>].text(<span class="number">0.105</span>, <span class="number">0.84</span>, <span class="string">&quot;Log-likelihood: &quot;</span> + <span class="string">f&quot;$&#123;&#123;<span class="subst">&#123;ll:<span class="number">.3</span>f&#125;</span>&#125;&#125;$&quot;</span>, ha=<span class="string">&quot;left&quot;</span>, va=<span class="string">&quot;top&quot;</span>, color=<span class="string">&quot;darkblue&quot;</span>, transform=axs[<span class="number">1</span>].transAxes)</span><br><span class="line">    str_theta = <span class="string">&quot;, &quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;t:<span class="number">.3</span>f&#125;</span>&quot;</span> <span class="keyword">for</span> t <span class="keyword">in</span> theta])</span><br><span class="line">    axs[<span class="number">1</span>].text(<span class="number">0.265</span>, <span class="number">0.71</span>, <span class="string">f&quot;$\\theta: (&#123;&#123;<span class="subst">&#123;str_theta&#125;</span>&#125;&#125;)$&quot;</span>, ha=<span class="string">&quot;left&quot;</span>, va=<span class="string">&quot;top&quot;</span>, color=<span class="string">&quot;darkblue&quot;</span>, transform=axs[<span class="number">1</span>].transAxes)</span><br><span class="line">    fig.suptitle(kernel_name, fontsize=<span class="string">&quot;x-large&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> fig</span><br></pre></td></tr></table></figure></li>
-</ul>
+<details>
+    <summary><b>코드 보기/접기</b></summary>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_pp</span>(<span class="params">kernel, kernel_name=<span class="string">&quot;&quot;</span>, X_train=X_train, y_train=y_train, X_true=X, y_true=y, n_samples=<span class="number">5</span></span>):</span><br><span class="line">    gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, random_state=<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># prior</span></span><br><span class="line">    y_prior_mean, y_prior_std = gpr.predict(X_true, return_std=<span class="literal">True</span>)</span><br><span class="line">    y_prior_samples = gpr.sample_y(X_true, n_samples)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># posterior</span></span><br><span class="line">    gpr.fit(X_train, y_train)</span><br><span class="line">    y_posterior_mean, y_posterior_std = gpr.predict(X_true, return_std=<span class="literal">True</span>)</span><br><span class="line">    y_posterior_samples = gpr.sample_y(X_true, n_samples)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># kernel after fitting</span></span><br><span class="line">    kernel_ = gpr.kernel_</span><br><span class="line">    theta = gpr.kernel_.theta</span><br><span class="line">    ll = gpr.log_marginal_likelihood(theta)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># visualize</span></span><br><span class="line">    fig, axs = plt.subplots(nrows=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">4</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> ax, y_mean, y_std, y_samples, title, k <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [y_prior_mean, y_posterior_mean], </span><br><span class="line">                                                           [y_prior_std, y_posterior_std], [y_prior_samples, y_posterior_samples],</span><br><span class="line">                                                           [<span class="string">&quot;prior&quot;</span>, <span class="string">&quot;posterior&quot;</span>], [kernel, kernel_]):</span><br><span class="line">        <span class="comment"># true</span></span><br><span class="line">        ax.plot(X_true, y_true, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">        ax.scatter(X_train, y_train, fc=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># pred</span></span><br><span class="line">        ax.plot(X_true.ravel(), y_mean, c=<span class="string">&quot;0.5&quot;</span>)</span><br><span class="line">        ax.fill_between(X_true.ravel(), y_mean-<span class="number">1.96</span>*y_std, y_mean+<span class="number">1.96</span>*y_std, alpha=<span class="number">0.5</span>, fc=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># samples</span></span><br><span class="line">        <span class="keyword">for</span> y_sample <span class="keyword">in</span> y_samples.T:</span><br><span class="line">            ax.plot(X_true.ravel(), y_sample, lw=<span class="number">1</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># title</span></span><br><span class="line">        ax.text(<span class="number">0.18</span>, <span class="number">0.97</span>, title, fontsize=<span class="string">&quot;large&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, color=<span class="string">&quot;b&quot;</span>, ha=<span class="string">&quot;right&quot;</span>, va=<span class="string">&quot;top&quot;</span>, transform=ax.transAxes)</span><br><span class="line">        str_k = <span class="built_in">str</span>(k).replace(<span class="string">&#x27; ** &#x27;</span>,<span class="string">&#x27;^&#x27;</span>).replace(<span class="string">&#x27;**&#x27;</span>,<span class="string">&#x27;^&#x27;</span>).replace(<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;\cdot&#x27;</span>).replace(<span class="string">&#x27;length_scale&#x27;</span>,<span class="string">&#x27;l&#x27;</span>).replace(<span class="string">&#x27;alpha&#x27;</span>,<span class="string">&#x27;\\alpha&#x27;</span>).replace(<span class="string">&#x27;periodicity&#x27;</span>, <span class="string">&#x27;p&#x27;</span>).replace(<span class="string">&#x27;sigma&#x27;</span>,<span class="string">&#x27;\\sigma&#x27;</span>).replace(<span class="string">&#x27;nu&#x27;</span>,<span class="string">&#x27;\\nu&#x27;</span>)</span><br><span class="line">        ax.text(<span class="number">0.2</span>, <span class="number">0.97</span>, <span class="string">&quot;kernel: &quot;</span> + <span class="string">f&quot;$<span class="subst">&#123;str_k&#125;</span>$&quot;</span>, ha=<span class="string">&quot;left&quot;</span>, va=<span class="string">&quot;top&quot;</span>, color=<span class="string">&quot;darkblue&quot;</span>, transform=ax.transAxes)</span><br><span class="line">        </span><br><span class="line">    axs[<span class="number">1</span>].text(<span class="number">0.105</span>, <span class="number">0.84</span>, <span class="string">&quot;Log-likelihood: &quot;</span> + <span class="string">f&quot;$&#123;&#123;<span class="subst">&#123;ll:<span class="number">.3</span>f&#125;</span>&#125;&#125;$&quot;</span>, ha=<span class="string">&quot;left&quot;</span>, va=<span class="string">&quot;top&quot;</span>, color=<span class="string">&quot;darkblue&quot;</span>, transform=axs[<span class="number">1</span>].transAxes)</span><br><span class="line">    str_theta = <span class="string">&quot;, &quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;t:<span class="number">.3</span>f&#125;</span>&quot;</span> <span class="keyword">for</span> t <span class="keyword">in</span> theta])</span><br><span class="line">    axs[<span class="number">1</span>].text(<span class="number">0.265</span>, <span class="number">0.71</span>, <span class="string">f&quot;$\\theta: (&#123;&#123;<span class="subst">&#123;str_theta&#125;</span>&#125;&#125;)$&quot;</span>, ha=<span class="string">&quot;left&quot;</span>, va=<span class="string">&quot;top&quot;</span>, color=<span class="string">&quot;darkblue&quot;</span>, transform=axs[<span class="number">1</span>].transAxes)</span><br><span class="line">    fig.suptitle(kernel_name, fontsize=<span class="string">&quot;x-large&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> fig</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-2-Radial-Basis-Function"><a href="#2-2-Radial-Basis-Function" class="headerlink" title="2.2. Radial Basis Function"></a>2.2. Radial Basis Function</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RBF.html">scikit-learn: RBF Kernel</a></p>
 </blockquote>
 <ul>
 <li>Gaussian Process의 가장 기본이 되는 커널입니다.</li>
-<li>매끈한 곡선이 우리가 알고 있는 가장 기본적인 모양입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Radial Basis Function&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_6.png"><br></li>
+<li>매끈한 곡선이 우리가 알고 있는 가장 기본적인 모양입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Radial Basis Function&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_6.png"><br></p>
 <h2 id="2-2-White-Kernel"><a href="#2-2-White-Kernel" class="headerlink" title="2.2. White Kernel"></a>2.2. White Kernel</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.WhiteKernel.html">scikit-learn: White Kernel</a></p>
 </blockquote>
-<p>$$k(x_i, x_j) = noise \_ level \text{ if } x_i == x_j \text{ else } 0$$</p>
+<p>$$k(x_i, x_j) &#x3D; noise \_ level \text{ if } x_i &#x3D;&#x3D; x_j \text{ else } 0$$</p>
 <ul>
 <li>단독으로 사용되기보다 다른 커널에 더해져 노이즈 레벨을 측정하는데 활용됩니다.</li>
-<li>아래 예제에서는 RBF와의 합으로 사용되었으며, posterior에서 noise level = $1.13 \times 10^{-8}$에 불과합니다.</li>
-<li>prior의 noise level이 데이터를 만나 0에 가깝게 수렴한 것입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> WhiteKernel</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>)) + WhiteKernel(noise_level=<span class="number">1</span>, noise_level_bounds=(<span class="number">1e-8</span>, <span class="number">1e1</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Radial Basis Function + White Noise&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_11.png"><br></li>
+<li>아래 예제에서는 RBF와의 합으로 사용되었으며, posterior에서 noise level &#x3D; $1.13 \times 10^{-8}$에 불과합니다.</li>
+<li>prior의 noise level이 데이터를 만나 0에 가깝게 수렴한 것입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> WhiteKernel</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>)) + WhiteKernel(noise_level=<span class="number">1</span>, noise_level_bounds=(<span class="number">1e-8</span>, <span class="number">1e1</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Radial Basis Function + White Noise&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_11.png"><br></p>
 <h2 id="2-3-Radial-Quadratic-Kernel"><a href="#2-3-Radial-Quadratic-Kernel" class="headerlink" title="2.3. Radial Quadratic Kernel"></a>2.3. Radial Quadratic Kernel</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RationalQuadratic.html">scikit-learn: Rational Quadratic Kernel</a></p>
 </blockquote>
-<p>$$k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2 }{ 2\alpha  l^2}\right)^{-\alpha}$$</p>
+<p>$$k(x_i, x_j) &#x3D; \left(1 + \frac{d(x_i, x_j)^2 }{ 2\alpha  l^2}\right)^{-\alpha}$$</p>
 <ul>
 <li>RBF Kernel과 다른 거리 스케일링의 혼합 척도(scale mixture)로 볼 수 있습니다.</li>
-<li>prior에서는 RBF 커널에 비해 곧게 펴진 듯한 모습이지만 posterior는 RBF와 잘 구분되지 않습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> RationalQuadratic</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * RationalQuadratic(length_scale=<span class="number">1.0</span>, alpha=<span class="number">0.1</span>, alpha_bounds=(<span class="number">1e-5</span>, <span class="number">1e15</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Radial Quadratic Function&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_7.png"><br></li>
+<li>prior에서는 RBF 커널에 비해 곧게 펴진 듯한 모습이지만 posterior는 RBF와 잘 구분되지 않습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> RationalQuadratic</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * RationalQuadratic(length_scale=<span class="number">1.0</span>, alpha=<span class="number">0.1</span>, alpha_bounds=(<span class="number">1e-5</span>, <span class="number">1e15</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Radial Quadratic Function&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_7.png"><br></p>
 <h2 id="2-4-Constant-Kernel"><a href="#2-4-Constant-Kernel" class="headerlink" title="2.4. Constant Kernel"></a>2.4. Constant Kernel</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.ConstantKernel.html">scikit-learn: Constant Kernel</a></p>
 </blockquote>
-<p>$$k(x_1, x_2) = constant\_value ;\forall; x_1, x_2$$</p>
+<p>$$k(x_1, x_2) &#x3D; constant\_value ;\forall; x_1, x_2$$</p>
 <ul>
 <li>글자 그대로 상수 커널입니다.</li>
-<li>White Kernel과 유사하게 다른 커널과 함께 사용됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> ConstantKernel</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * ConstantKernel(constant_value=<span class="number">1.0</span>, constant_value_bounds=(<span class="number">1e-5</span>, <span class="number">1e15</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Constant Kernel&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_15.png"><br></li>
+<li>White Kernel과 유사하게 다른 커널과 함께 사용됩니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> ConstantKernel</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * ConstantKernel(constant_value=<span class="number">1.0</span>, constant_value_bounds=(<span class="number">1e-5</span>, <span class="number">1e15</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Constant Kernel&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_15.png"><br></p>
 <h2 id="2-5-Exp-Sine-Squared-Kernel-periodic-kernel"><a href="#2-5-Exp-Sine-Squared-Kernel-periodic-kernel" class="headerlink" title="2.5. Exp-Sine-Squared Kernel (periodic kernel)"></a>2.5. Exp-Sine-Squared Kernel (periodic kernel)</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.ExpSineSquared.html">scikit-learn: ExpSineSquared</a></p>
 </blockquote>
-<p>$$k(x_i, x_j) = \text{exp}\left(-\frac{ 2\sin^2(\pi d(x_i, x_j)/p) }{ l^ 2} \right)$$</p>
+<p>$$k(x_i, x_j) &#x3D; \text{exp}\left(-\frac{ 2\sin^2(\pi d(x_i, x_j)&#x2F;p) }{ l^ 2} \right)$$</p>
 <ul>
 <li>지수함수에 sine함수의 제곱이 포함된 형태입니다.</li>
 <li>주기성을 갖는 데이터를 묘사하기 좋으며 length scale $l &gt; 0$과 함께 periodicity $p &gt; 0$를 매개변수로 가집니다.</li>
 <li>$p$는 Euclidean distance입니다.</li>
-<li>prior와 posterior 모두 자세히 보면 주기성을 띄고 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> ExpSineSquared</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * ExpSineSquared(</span><br><span class="line">    length_scale=<span class="number">1.0</span>,</span><br><span class="line">    periodicity=<span class="number">3.0</span>,</span><br><span class="line">    length_scale_bounds=(<span class="number">0.1</span>, <span class="number">10.0</span>),</span><br><span class="line">    periodicity_bounds=(<span class="number">1.0</span>, <span class="number">10.0</span>),</span><br><span class="line">)</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;ExpSineSquared&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_8.png"><br></li>
+<li>prior와 posterior 모두 자세히 보면 주기성을 띄고 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> ExpSineSquared</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * ExpSineSquared(</span><br><span class="line">    length_scale=<span class="number">1.0</span>,</span><br><span class="line">    periodicity=<span class="number">3.0</span>,</span><br><span class="line">    length_scale_bounds=(<span class="number">0.1</span>, <span class="number">10.0</span>),</span><br><span class="line">    periodicity_bounds=(<span class="number">1.0</span>, <span class="number">10.0</span>),</span><br><span class="line">)</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;ExpSineSquared&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_8.png"><br></p>
 <h2 id="2-6-Dot-Product"><a href="#2-6-Dot-Product" class="headerlink" title="2.6. Dot Product"></a>2.6. Dot Product</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.DotProduct.html?highlight=dotproduct#sklearn.gaussian_process.kernels.DotProduct">scikit-learn: Dot Product</a></p>
 </blockquote>
-<p>$$k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j$$</p>
+<p>$$k(x_i, x_j) &#x3D; \sigma_0 ^ 2 + x_i \cdot x_j$$</p>
 <ul>
-<li><p>앞에서 본 커널들은 형태는 달라도 두 점 사이의 거리 $d(x_i, x_j)$를 주요 인자로 가집니다.</p>
-</li>
-<li><p>이런 커널을 <b>stationary kernel</b>이라고 합니다.</p>
-</li>
-<li><p>반면 $x_i$, $x_j$ 값 자체에 의해 좌우되는 커널을 <b>non-stationary kernel</b>이라고 합니다.</p>
-</li>
-<li><p>dot product로 정의되기 때문에 원점으로부터의 회전에는 무관하지만 transition에는 민감하게 반응합니다.</p>
-</li>
-<li><p>$\sigma_0 = 0$이라면 homogeneous linear kernel, $\sigma_0 \neq 0$이라면 inhomogeneous가 됩니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1st degree</span></span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> DotProduct</span><br><span class="line"></span><br><span class="line">kernel = DotProduct(sigma_0=<span class="number">1.0</span>, sigma_0_bounds=(<span class="number">0.1</span>, <span class="number">100.0</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;DotProduct&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="122_gpr2_9.png"><br></p>
-</li>
-<li><p>제곱식을 통해 다항식을 만들 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3rd degree</span></span><br><span class="line">kernel = DotProduct(sigma_0=<span class="number">1.0</span>, sigma_0_bounds=(<span class="number">0.1</span>, <span class="number">100.0</span>))**<span class="number">3</span></span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;DotProduct&quot;</span>)</span><br><span class="line">fig.axes[<span class="number">1</span>].set_ylim(-<span class="number">25</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="122_gpr2_16.png"><br></p>
-</li>
+<li>앞에서 본 커널들은 형태는 달라도 두 점 사이의 거리 $d(x_i, x_j)$를 주요 인자로 가집니다.</li>
+<li>이런 커널을 <b>stationary kernel</b>이라고 합니다.</li>
+<li>반면 $x_i$, $x_j$ 값 자체에 의해 좌우되는 커널을 <b>non-stationary kernel</b>이라고 합니다.</li>
+<li>dot product로 정의되기 때문에 원점으로부터의 회전에는 무관하지만 transition에는 민감하게 반응합니다.</li>
+<li>$\sigma_0 &#x3D; 0$이라면 homogeneous linear kernel, $\sigma_0 \neq 0$이라면 inhomogeneous가 됩니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1st degree</span></span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> DotProduct</span><br><span class="line"></span><br><span class="line">kernel = DotProduct(sigma_0=<span class="number">1.0</span>, sigma_0_bounds=(<span class="number">0.1</span>, <span class="number">100.0</span>))</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;DotProduct&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_9.png"><br></p>
+<ul>
+<li>제곱식을 통해 다항식을 만들 수 있습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3rd degree</span></span><br><span class="line">kernel = DotProduct(sigma_0=<span class="number">1.0</span>, sigma_0_bounds=(<span class="number">0.1</span>, <span class="number">100.0</span>))**<span class="number">3</span></span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;DotProduct&quot;</span>)</span><br><span class="line">fig.axes[<span class="number">1</span>].set_ylim(-<span class="number">25</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_16.png"><br></p>
 <h2 id="2-7-Matern-Kernel"><a href="#2-7-Matern-Kernel" class="headerlink" title="2.7. Matérn Kernel"></a>2.7. Matérn Kernel</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.Matern.html#sklearn.gaussian_process.kernels.Matern">scikit-learn: Matern</a></p>
 </blockquote>
-<p>$$k(x_i, x_j) =  \frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)^\nu K_\nu\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)$$</p>
+<p>$$k(x_i, x_j) &#x3D;  \frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)^\nu K_\nu\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)$$</p>
 <ul>
 <li>RBF의 일반화된 버전입니다.</li>
 <li>$\nu$로 결과 함수의 smoothness를 조절하는데 $\nu$가 $\infty$에 접근할수록 RBF에 가까워집니다.</li>
-<li>위 식의 $K_{\nu}(\cdot)$는 modified Bessel function, $\Gamma(\cdot)$는 gamma function입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> Matern</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * Matern(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-1</span>, <span class="number">10.0</span>), nu=<span class="number">1.5</span>)</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Matérn&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="122_gpr2_10.png"><br></li>
+<li>위 식의 $K_{\nu}(\cdot)$는 modified Bessel function, $\Gamma(\cdot)$는 gamma function입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> Matern</span><br><span class="line"></span><br><span class="line">kernel = <span class="number">1.0</span> * Matern(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-1</span>, <span class="number">10.0</span>), nu=<span class="number">1.5</span>)</span><br><span class="line">fig = plot_pp(kernel, <span class="string">&quot;Matérn&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/122_gpr2_10.png"><br></p>
 <h2 id="3-결론"><a href="#3-결론" class="headerlink" title="3. 결론"></a>3. 결론</h2><ul>
 <li>Gaussian Process는 임의의 적은 데이터로 멋진 결과물을 만들어내지만 Kernel function에 크게 좌우됩니다.</li>
 <li>문제의 성격과 데이터의 특성에 맞는 적절한 Kernel 선택이 매우 중요합니다.</li>
@@ -410,22 +411,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/11/17/Python-DS-122-gpr2/" data-id="cmhueoxy400c84gxthr169rkw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/11/17/Python-DS-122-gpr2/" data-id="cuidpvd3aZrorK3loVmxI179C" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -501,7 +492,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-11-17",
         "dateCreated": "2022-11-17",
-        "dateModified": "2022-11-17",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/11/17/Python-DS-122-gpr2/",
         "description": "
 Gaussian Process 연습입니다.
@@ -513,7 +504,7 @@ scikit-learn: Gaussian Process Regression: basic introductory example
 
 1.1. example data
 지난",
-        "wordCount": 1962
+        "wordCount": 1964
     }
 </script>
 
@@ -595,16 +586,6 @@ scikit-learn: Gaussian Process Regression: basic introductory example
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -838,10 +819,6 @@ scikit-learn: Gaussian Process Regression: basic introductory example
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

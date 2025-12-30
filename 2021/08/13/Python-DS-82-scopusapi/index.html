@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/82_scopusapi_0.png">
 <meta property="article:published_time" content="2021-08-13T07:05:00.000Z">
-<meta property="article:modified_time" content="2021-08-13T07:45:14.955Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.519Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="scopus">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="sciencedirect">
+<meta property="article:tag" content="scopus">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/82_scopusapi_0.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/08/13/Python-DS-82-scopusapi/" class="article-date">
-     <time datetime="2021-08-13T07:45:14.955Z" itemprop="dateModified">2021-08-13</time>
+     <time datetime="2025-12-30T06:28:38.519Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -237,40 +237,41 @@
 </ul>
 <h1 id="1-Elsevier"><a href="#1-Elsevier" class="headerlink" title="1. Elsevier"></a>1. Elsevier</h1><p><a target="_blank" rel="noopener" href="https://www.elsevier.com/">Elsevier</a><br><a target="_blank" rel="noopener" href="https://dev.elsevier.com/">Elsevier Developers</a></p>
 <h2 id="1-1-계정"><a href="#1-1-계정" class="headerlink" title="1.1. 계정"></a>1.1. 계정</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.elsevier.com/">Elsevier</a>에 가입하고 로그인합니다.<br><br><img src="82_scopusapi_1.png"><br></li>
+<li><a target="_blank" rel="noopener" href="https://www.elsevier.com/">Elsevier</a>에 가입하고 로그인합니다.<br><br><img src="/82_scopusapi_1.png"><br></li>
 </ul>
 <h2 id="1-2-API-획득"><a href="#1-2-API-획득" class="headerlink" title="1.2. API 획득"></a>1.2. API 획득</h2><ul>
 <li><p>데이터를 받아오려면 API key가 필요합니다.</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://dev.elsevier.com/">https://dev.elsevier.com/</a>에서 API key를 신청합니다.</p>
 </li>
-<li><p><b>I want an API Key</b>를 눌러 들어갑니다.<br><br><img src="82_scopusapi_3.png"><br></p>
+<li><p><b>I want an API Key</b>를 눌러 들어갑니다.<br><br><img src="/82_scopusapi_3.png"><br></p>
 </li>
 <li><p><b>Create API Key</b>를 눌러 API Key 생성 모드로 들어갑니다.</p>
 </li>
 <li><p>Label과 Website URL에는 적당히 넣어줍니다.</p>
 </li>
-<li><p>그리고 스크롤을 내려 하단의 <b>API Service Checkbox</b>와 <b>Elsevier Provisions for Text and Data Mining (TDM)</b>에 동의 후 <b>submit</b>을 누릅니다.<br><br><img src="82_scopusapi_6.png" alt="API Key를 다섯 개 받았습니다."><br></p>
+<li><p>그리고 스크롤을 내려 하단의 <b>API Service Checkbox</b>와 <b>Elsevier Provisions for Text and Data Mining (TDM)</b>에 동의 후 <b>submit</b>을 누릅니다.<br><br><img src="/82_scopusapi_6.png" alt="API Key를 다섯 개 받았습니다."><br></p>
 </li>
 <li><p>API Key마다 1주일간 한도가 있습니다. 많은게 좋습니다.</p>
 </li>
-<li><p>속도 제한도 있으니 참고합니다.<br><img src="82_scopusapi_9.png"><br></p>
+<li><p>속도 제한도 있으니 참고합니다.<br><img src="/82_scopusapi_9.png"><br></p>
 </li>
 </ul>
-<h1 id="2-Pybliometrics-amp-Pandas-DataFrame"><a href="#2-Pybliometrics-amp-Pandas-DataFrame" class="headerlink" title="2. Pybliometrics &amp; Pandas DataFrame"></a>2. Pybliometrics &amp; Pandas DataFrame</h1><h2 id="2-1-Pybliometrics로-검색결과-받아오기"><a href="#2-1-Pybliometrics로-검색결과-받아오기" class="headerlink" title="2.1. Pybliometrics로 검색결과 받아오기"></a>2.1. Pybliometrics로 검색결과 받아오기</h2><blockquote>
+<h1 id="2-Pybliometrics-Pandas-DataFrame"><a href="#2-Pybliometrics-Pandas-DataFrame" class="headerlink" title="2. Pybliometrics &amp; Pandas DataFrame"></a>2. Pybliometrics &amp; Pandas DataFrame</h1><h2 id="2-1-Pybliometrics로-검색결과-받아오기"><a href="#2-1-Pybliometrics로-검색결과-받아오기" class="headerlink" title="2.1. Pybliometrics로 검색결과 받아오기"></a>2.1. Pybliometrics로 검색결과 받아오기</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S2352711019300573">M. Rose et al. “pybliometrics:ScriptablebibliometricsusingaPythoninterfacetoScopus”, Software X 10 100263 (2019)</a><br><a target="_blank" rel="noopener" href="https://pybliometrics.readthedocs.io/en/stable/">pybliometrics</a></p>
 </blockquote>
 <ul>
-<li><p><b>파이썬을 사용해 Scopus 검색과 초록, 참고문헌 등을 받아올 수 있는 라이브러리</b>입니다.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://pybliometrics.readthedocs.io/en/stable/">공식 홈페이지</a>에 자세한 설명이 있습니다.</p>
-</li>
-<li><p>여기서는 간단하게 검색과 초록 다운로드 방법을 알아봅니다.</p>
+<li><b>파이썬을 사용해 Scopus 검색과 초록, 참고문헌 등을 받아올 수 있는 라이브러리</b>입니다.</li>
+<li><a target="_blank" rel="noopener" href="https://pybliometrics.readthedocs.io/en/stable/">공식 홈페이지</a>에 자세한 설명이 있습니다.</li>
+<li>여기서는 간단하게 검색과 초록 다운로드 방법을 알아봅니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Scopus에서 Search하는 라이브러리를 불러옵니다.</span></span><br><span class="line"><span class="keyword">from</span> pybliometrics.scopus <span class="keyword">import</span> ScopusSearch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 검색어: Scopus에서 키워드를 넣고 검색하면 발생하는 바로 그 검색식입니다.</span></span><br><span class="line"><span class="comment">#      여기서는 도시 연구에 머신러닝과 딥러닝을 활용한 것들을 찾기로 했습니다.</span></span><br><span class="line">query = <span class="string">&#x27; TITLE-ABS-KEY ( machine  AND learning  OR  deep  AND learning )  AND  \</span></span><br><span class="line"><span class="string">          TITLE-ABS-KEY ( city )&#x27;</span></span><br><span class="line">                 </span><br><span class="line"><span class="comment"># 검색 시작</span></span><br><span class="line">s = ScopusSearch(query, </span><br><span class="line">                 download=<span class="literal">True</span>, <span class="comment"># 검색 결과를 저장합니다. </span></span><br><span class="line">                 verbose=<span class="literal">True</span>)  <span class="comment"># 진행 상황을 표시합니다.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Downloading results <span class="keyword">for</span> query <span class="string">&quot; TITLE-ABS-KEY ( machine  AND learning  OR  deep  AND learning )  AND                   TITLE-ABS-KEY ( city )&quot;</span>:</span><br><span class="line">Progress: |██████████████████████████████████████████████████| 100.00% Complete</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과:</li>
 </ul>
-</li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Downloading results <span class="keyword">for</span> query <span class="string">&quot; TITLE-ABS-KEY ( machine  AND learning  OR  deep  AND learning )  AND                   TITLE-ABS-KEY ( city )&quot;</span>:</span><br><span class="line">Progress: |██████████████████████████████████████████████████| 100.00% Complete</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>처음 실행한다면 <b>API Key를 넣으라는 작은 입력창</b>이 뜰 것입니다.</p>
 </li>
 <li><p>아까 받은 API Key를 여기에 복사해서 넣으면 됩니다.</p>
@@ -279,65 +280,60 @@
 </li>
 <li><p><b><code>~/.scopus/</code>에 있는 <code>config.ini</code>파일</b>에 <b>API Key를 쉼표(,)로 띄워서 넣어두면</b> 자동으로 불러옵니다.</p>
 </li>
-</ul>
-<ul>
 <li><p>몇 편이나 검색됐는지 확인합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.get_results_size()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행 결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5275</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
-</li>
-<li><p><b>5275편</b>의 논문 정보를 받았습니다. </p>
-</li>
-<li><p>scopus.com에서 검색을 해도 같은 숫자가 보일겁니다.</p>
-</li>
-<li><p>그러나 <b>웹 검색으로는 이만큼 못가져옵니다.</b></p>
-</li>
-<li><p>API의 진가는 매우 다양한 정보를 한데 가져와서 처리할 수 있다는 데 있습니다.</p>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.get_results_size()</span><br></pre></td></tr></table></figure>
+<pre><code>* 실행 결과:
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5275</span><br></pre></td></tr></table></figure>
+</code></pre>
+<ul>
+<li><b>5275편</b>의 논문 정보를 받았습니다. </li>
+<li>scopus.com에서 검색을 해도 같은 숫자가 보일겁니다.</li>
+<li>그러나 <b>웹 검색으로는 이만큼 못가져옵니다.</b></li>
+<li>API의 진가는 매우 다양한 정보를 한데 가져와서 처리할 수 있다는 데 있습니다.</li>
 </ul>
 <h2 id="2-2-Pandas로-검색결과-정리하기"><a href="#2-2-Pandas로-검색결과-정리하기" class="headerlink" title="2.2. Pandas로 검색결과 정리하기"></a>2.2. Pandas로 검색결과 정리하기</h2><ul>
-<li><p>받아온 정보를 데이터프레임에 넣습니다.</p>
+<li>받아온 정보를 데이터프레임에 넣습니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df_s = pd.DataFrame(s.results)</span><br><span class="line">df_s.head()</span><br></pre></td></tr></table></figure>
-<p><img src="82_scopusapi_10.png"><br></p>
-</li>
-<li><p>column이 34개나 있다고 합니다.</p>
-</li>
-<li><p>맨 위 논문을 가지고 column의 이름과 내용을 살펴봅니다.</p>
-</li>
-<li><p>논문을 많이 본 분이라면 어떤 내용인지 한번에 알 수 있을 겁니다.</p>
+<p><img src="/82_scopusapi_10.png"><br></p>
+<ul>
+<li>column이 34개나 있다고 합니다.</li>
+<li>맨 위 논문을 가지고 column의 이름과 내용을 살펴봅니다.</li>
+<li>논문을 많이 본 분이라면 어떤 내용인지 한번에 알 수 있을 겁니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s0 = df_s.loc[<span class="number">0</span>]</span><br><span class="line">s0</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과: <b>문헌</b>, <b>저자</b>, <b>소속</b>, <b>출판</b> 관련 정보가 빼곡합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">eid                                                   2-s2.0-85108515894</span><br><span class="line">doi                                            10.1016/j.aej.2021.04.099</span><br><span class="line">pii                                                    S1110016821003410</span><br><span class="line">pubmed_id                                                           None</span><br><span class="line">title                  Area and energy efficient <span class="built_in">shift</span> and accumulato...</span><br><span class="line">subtype                                                               ar</span><br><span class="line">subtypeDescription                                               Article</span><br><span class="line">creator                                                      Hazarika A.</span><br><span class="line">afid                                          60115117;60015723;60000912</span><br><span class="line">affilname              Indian Institute of Information Technology Guw...</span><br><span class="line">affiliation_city                                  Guwahati;Riyadh;Howrah</span><br><span class="line">affiliation_country                             India;Saudi Arabia;India</span><br><span class="line">author_count                                                           4</span><br><span class="line">author_names           Hazarika, Anakhi;Poddar, Soumyajit;Nasralla, M...</span><br><span class="line">author_ids               57209273202;55321684000;55638677600;57207594144</span><br><span class="line">author_afids                         60115117;60115117;60015723;60000912</span><br><span class="line">coverDate                                                     2022-01-01</span><br><span class="line">coverDisplayDate                                            January 2022</span><br><span class="line">publicationName                           Alexandria Engineering Journal</span><br><span class="line">issn                                                            11100168</span><br><span class="line">source_id                                                          13907</span><br><span class="line">eIssn                                                               None</span><br><span class="line">aggregationType                                                  Journal</span><br><span class="line">volume                                                                61</span><br><span class="line">issueIdentifier                                                        1</span><br><span class="line">article_number                                                      None</span><br><span class="line">pageRange                                                        795-809</span><br><span class="line">description            Convolutional Neural Networks (CNNs) exhibit s...</span><br><span class="line">authkeywords           Approximate computing | Convolution operation ...</span><br><span class="line">citedby_count                                                          0</span><br><span class="line">openaccess                                                             1</span><br><span class="line">fund_acr                                                             PSU</span><br><span class="line">fund_no                                                   MEITY-PHD-3043</span><br><span class="line">fund_sponsor                                    Prince Sultan University</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과: <b>문헌</b>, <b>저자</b>, <b>소속</b>, <b>출판</b> 관련 정보가 빼곡합니다.</li>
 </ul>
-</li>
-<li><p><b>종류</b>별로 구분을 합시다.</p>
-</li>
-<li><p>예를 들어, 나는 Journal에 실린 논문을 원하지 책이나 컨퍼런스 프로시딩은 원하지 않는다면, 간단히 추릴 수 있습니다.</p>
-</li>
-<li><p>어떤 종류의 출판물들이 있는지 살펴봅니다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">eid                                                   2-s2.0-85108515894</span><br><span class="line">doi                                            10.1016/j.aej.2021.04.099</span><br><span class="line">pii                                                    S1110016821003410</span><br><span class="line">pubmed_id                                                           None</span><br><span class="line">title                  Area and energy efficient <span class="built_in">shift</span> and accumulato...</span><br><span class="line">subtype                                                               ar</span><br><span class="line">subtypeDescription                                               Article</span><br><span class="line">creator                                                      Hazarika A.</span><br><span class="line">afid                                          60115117;60015723;60000912</span><br><span class="line">affilname              Indian Institute of Information Technology Guw...</span><br><span class="line">affiliation_city                                  Guwahati;Riyadh;Howrah</span><br><span class="line">affiliation_country                             India;Saudi Arabia;India</span><br><span class="line">author_count                                                           4</span><br><span class="line">author_names           Hazarika, Anakhi;Poddar, Soumyajit;Nasralla, M...</span><br><span class="line">author_ids               57209273202;55321684000;55638677600;57207594144</span><br><span class="line">author_afids                         60115117;60115117;60015723;60000912</span><br><span class="line">coverDate                                                     2022-01-01</span><br><span class="line">coverDisplayDate                                            January 2022</span><br><span class="line">publicationName                           Alexandria Engineering Journal</span><br><span class="line">issn                                                            11100168</span><br><span class="line">source_id                                                          13907</span><br><span class="line">eIssn                                                               None</span><br><span class="line">aggregationType                                                  Journal</span><br><span class="line">volume                                                                61</span><br><span class="line">issueIdentifier                                                        1</span><br><span class="line">article_number                                                      None</span><br><span class="line">pageRange                                                        795-809</span><br><span class="line">description            Convolutional Neural Networks (CNNs) exhibit s...</span><br><span class="line">authkeywords           Approximate computing | Convolution operation ...</span><br><span class="line">citedby_count                                                          0</span><br><span class="line">openaccess                                                             1</span><br><span class="line">fund_acr                                                             PSU</span><br><span class="line">fund_no                                                   MEITY-PHD-3043</span><br><span class="line">fund_sponsor                                    Prince Sultan University</span><br></pre></td></tr></table></figure>
+<ul>
+<li><b>종류</b>별로 구분을 합시다.</li>
+<li>예를 들어, 나는 Journal에 실린 논문을 원하지 책이나 컨퍼런스 프로시딩은 원하지 않는다면, 간단히 추릴 수 있습니다.</li>
+<li>어떤 종류의 출판물들이 있는지 살펴봅니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_s[<span class="string">&quot;aggregationType&quot;</span>].unique()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과: 익숙한 분류들이 보입니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([<span class="string">&#x27;Journal&#x27;</span>, <span class="string">&#x27;Conference Proceeding&#x27;</span>, <span class="string">&#x27;Book&#x27;</span>, <span class="string">&#x27;Book Series&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Trade Journal&#x27;</span>], dtype=object)</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과: 익숙한 분류들이 보입니다.</li>
 </ul>
-</li>
-<li><p><b>년도별로 Journal에 출간된 논문들의 수</b>를 세어봅니다.</p>
-</li>
-<li><p>pandas DataFrame의 <code>query</code>와 <code>groupby</code>를 사용하면 간단합니다.</p>
-</li>
-<li><p>년도별 출간 편수를 세기 위해 논문마다 1을 할당하고 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df_s[<span class="string">&quot;year&quot;</span>] = df_s[<span class="string">&quot;coverDate&quot;</span>].apply(<span class="keyword">lambda</span> x: x.split(<span class="string">&quot;-&quot;</span>)[<span class="number">0</span>])</span><br><span class="line">df_s[<span class="string">&quot;year&quot;</span>] = df_s[<span class="string">&quot;year&quot;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">df_s[<span class="string">&quot;num_pub&quot;</span>] = [<span class="number">1</span>] * df_s.shape[<span class="number">0</span>]</span><br><span class="line">df_pubyear = df_s.query(<span class="string">&quot;aggregationType == &#x27;Journal&#x27;&quot;</span>).groupby(<span class="string">&quot;year&quot;</span>).<span class="built_in">sum</span>()</span><br><span class="line">df_pubyear.values.T</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([<span class="string">&#x27;Journal&#x27;</span>, <span class="string">&#x27;Conference Proceeding&#x27;</span>, <span class="string">&#x27;Book&#x27;</span>, <span class="string">&#x27;Book Series&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;Trade Journal&#x27;</span>], dtype=object)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과: 년도별 출간 건수입니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array([[  1,   1,   1,   2,   1,   1,   2,   1,   1,   1,   1,   5,   4,</span><br><span class="line">          9,   7,  12,  21,  13,  18,  36,  49,  71, 113, 256, 457, 724,</span><br><span class="line">        696,   1]])</span><br></pre></td></tr></table></figure></li>
+<li><b>년도별로 Journal에 출간된 논문들의 수</b>를 세어봅니다.</li>
+<li>pandas DataFrame의 <code>query</code>와 <code>groupby</code>를 사용하면 간단합니다.</li>
+<li>년도별 출간 편수를 세기 위해 논문마다 1을 할당하고</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df_s[<span class="string">&quot;year&quot;</span>] = df_s[<span class="string">&quot;coverDate&quot;</span>].apply(<span class="keyword">lambda</span> x: x.split(<span class="string">&quot;-&quot;</span>)[<span class="number">0</span>])</span><br><span class="line">df_s[<span class="string">&quot;year&quot;</span>] = df_s[<span class="string">&quot;year&quot;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">df_s[<span class="string">&quot;num_pub&quot;</span>] = [<span class="number">1</span>] * df_s.shape[<span class="number">0</span>]</span><br><span class="line">df_pubyear = df_s.query(<span class="string">&quot;aggregationType == &#x27;Journal&#x27;&quot;</span>).groupby(<span class="string">&quot;year&quot;</span>).<span class="built_in">sum</span>()</span><br><span class="line">df_pubyear.values.T</span><br></pre></td></tr></table></figure>
+<pre><code>* 실행 결과: 년도별 출간 건수입니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array([[  1,   1,   1,   2,   1,   1,   2,   1,   1,   1,   1,   5,   4,</span><br><span class="line">          9,   7,  12,  21,  13,  18,  36,  49,  71, 113, 256, 457, 724,</span><br><span class="line">        696,   1]])</span><br></pre></td></tr></table></figure>
+</code></pre>
 <h2 id="2-3-Matplotlib으로-출판-추세-그리기"><a href="#2-3-Matplotlib으로-출판-추세-그리기" class="headerlink" title="2.3. Matplotlib으로 출판 추세 그리기"></a>2.3. Matplotlib으로 출판 추세 그리기</h2><ul>
 <li>Matplotlib을 이용해서 간단히 <b>년도별 출판 건 수</b>를 그려봅니다.</li>
 <li><b>리뷰 논문에 하나씩 있는 그 그림</b>입니다.</li>
-<li>2010년 이전엔 논문 수가 많이 적어서 안보이기에 확대를 했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.bar(df_pubyear.index, df_pubyear[<span class="string">&quot;num_pub&quot;</span>], fc=<span class="string">&quot;orange&quot;</span>, ec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;Number of Publication&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c_inset = <span class="string">&quot;brown&quot;</span></span><br><span class="line">ax_inset = fig.add_axes([<span class="number">0.15</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.5</span>])</span><br><span class="line">ax_inset.bar(df_pubyear.index, df_pubyear[<span class="string">&quot;num_pub&quot;</span>], fc=<span class="string">&quot;goldenrod&quot;</span>, ec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">ax_inset.set_xlim(df_pubyear.index.<span class="built_in">min</span>()-<span class="number">1</span>, <span class="number">2010</span>)</span><br><span class="line">ax_inset.set_ylim(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">ax_inset.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_edgecolor(c_inset)</span><br><span class="line">ax_inset.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_linewidth(<span class="number">3</span>)</span><br><span class="line">ax_inset.tick_params(color=c_inset, labelcolor=c_inset)</span><br><span class="line"></span><br><span class="line">ax.axvspan(df_pubyear.index.<span class="built_in">min</span>(), <span class="number">2010</span>, fc=c_inset, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;Number of Publication&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">ax.set_xlim(df_pubyear.index.<span class="built_in">min</span>(), )</span><br></pre></td></tr></table></figure>
-<img src="82_scopusapi_11.png"><br></li>
+<li>2010년 이전엔 논문 수가 많이 적어서 안보이기에 확대를 했습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.bar(df_pubyear.index, df_pubyear[<span class="string">&quot;num_pub&quot;</span>], fc=<span class="string">&quot;orange&quot;</span>, ec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;Number of Publication&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c_inset = <span class="string">&quot;brown&quot;</span></span><br><span class="line">ax_inset = fig.add_axes([<span class="number">0.15</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.5</span>])</span><br><span class="line">ax_inset.bar(df_pubyear.index, df_pubyear[<span class="string">&quot;num_pub&quot;</span>], fc=<span class="string">&quot;goldenrod&quot;</span>, ec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">ax_inset.set_xlim(df_pubyear.index.<span class="built_in">min</span>()-<span class="number">1</span>, <span class="number">2010</span>)</span><br><span class="line">ax_inset.set_ylim(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">ax_inset.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_edgecolor(c_inset)</span><br><span class="line">ax_inset.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_linewidth(<span class="number">3</span>)</span><br><span class="line">ax_inset.tick_params(color=c_inset, labelcolor=c_inset)</span><br><span class="line"></span><br><span class="line">ax.axvspan(df_pubyear.index.<span class="built_in">min</span>(), <span class="number">2010</span>, fc=c_inset, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;Number of Publication&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">ax.set_xlim(df_pubyear.index.<span class="built_in">min</span>(), )</span><br></pre></td></tr></table></figure>
+<p><img src="/82_scopusapi_11.png"><br></p>
 <ul>
 <li>다음 글에서는 API를 이용한 추가 분석을 이어가겠습니다.</li>
 </ul>
@@ -353,22 +349,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/08/13/Python-DS-82-scopusapi/" data-id="cmhueoy2600jm4gxt8ykkarmc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/08/13/Python-DS-82-scopusapi/" data-id="cuide0JZTXTrUIx0ZIAvD99-A" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -444,7 +430,7 @@
         "genre": "Python Data Science",
         "datePublished": "2021-08-13",
         "dateCreated": "2021-08-13",
-        "dateModified": "2021-08-13",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/08/13/Python-DS-82-scopusapi/",
         "description": "
 연구자라면 논문 검색이 일상입니다.
@@ -455,7 +441,7 @@ elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받
 1. ElsevierElsevierElsevier Developers
 1.1. 계정
 Elsevier에 가",
-        "wordCount": 2525
+        "wordCount": 2532
     }
 </script>
 
@@ -537,16 +523,6 @@ Elsevier에 가",
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -780,10 +756,6 @@ Elsevier에 가",
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

@@ -21,10 +21,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/2_10TF_0.jpg">
 <meta property="article:published_time" content="2020-05-22T01:45:00.000Z">
-<meta property="article:modified_time" content="2020-11-29T20:41:44.650Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.549Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="tensorflow">
 <meta property="article:tag" content="deep learning">
+<meta property="article:tag" content="tensorflow">
 <meta property="article:tag" content="translation">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/2_10TF_0.jpg">
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/05/22/Python-DL-2-10_TF_skills/" class="article-date">
-     <time datetime="2020-11-29T20:41:44.650Z" itemprop="dateModified">2020-11-30</time>
+     <time datetime="2025-12-30T06:28:37.549Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -238,24 +238,18 @@
 <h3 id="한-줄-요약"><a href="#한-줄-요약" class="headerlink" title="한 줄 요약"></a>한 줄 요약</h3><ul>
 <li>텐서플로2에는 데이터 처리와 모델 커스터마이제이션을 위한 편의기능이 많이 있습니다.</li>
 </ul>
-<p><img src="https://miro.medium.com/max/1400/1*Qo7hRVJkoYBCsZlzMFxEMQ.jpeg" alt="Photo by Author, Logo via [TensorFlow](https://www.tensorflow.org/)"></p>
+<p><img src="https://miro.medium.com/max/1400/1*Qo7hRVJkoYBCsZlzMFxEMQ.jpeg" alt="Photo by Author, Logo via [TensorFlow](https:&#x2F;&#x2F;www.tensorflow.org&#x2F;)"></p>
 <h2 id="머신러닝-실무자라면-알아야-하는-텐서플로-트릭-10가지"><a href="#머신러닝-실무자라면-알아야-하는-텐서플로-트릭-10가지" class="headerlink" title="머신러닝 실무자라면 알아야 하는 텐서플로 트릭 10가지"></a>머신러닝 실무자라면 알아야 하는 텐서플로 트릭 10가지</h2><ul>
 <li>왜 텐서플로는 머신러닝 완결 패키지인가</li>
 </ul>
-<p>텐서플로 2.x은 모델 구축과 텐서플로 사용 전반을 훨씬 간결하게 해 줍니다. TF2에서 새로워진 점은 어떤 것들이 있을까요?</p>
-<ul>
-<li>   Keras와 즉시 실행(eager execution)이 있어 모델 구축이 쉽습니다.</li>
-<li>   어떤 플랫폼에서도 동작하도록 모델을 탄탄하게 배포할 수 있습니다.</li>
-<li>   연구에 강력한 실험을 적용할 수 있습니다.</li>
-<li>   사라진 API를 정리하고 중복을 줄여서 API가 단촐해졌습니다.<br>이번 글에서는 텐서플로 작업을 부드럽게 만들어주고, 코딩을 짧게 해주어 효율성을 높여주는 TF 2.0의 특징 10가지를 텐서플로 API에 속한 함수/클래스들과 함께 살펴보겠습니다.</li>
-</ul>
+<p>텐서플로 2.x은 모델 구축과 텐서플로 사용 전반을 훨씬 간결하게 해 줍니다. TF2에서 새로워진 점은 어떤 것들이 있을까요?<br>-	Keras와 즉시 실행(eager execution)이 있어 모델 구축이 쉽습니다.<br>-	어떤 플랫폼에서도 동작하도록 모델을 탄탄하게 배포할 수 있습니다.<br>-	연구에 강력한 실험을 적용할 수 있습니다.<br>-	사라진 API를 정리하고 중복을 줄여서 API가 단촐해졌습니다.<br>이번 글에서는 텐서플로 작업을 부드럽게 만들어주고, 코딩을 짧게 해주어 효율성을 높여주는 TF 2.0의 특징 10가지를 텐서플로 API에 속한 함수&#x2F;클래스들과 함께 살펴보겠습니다.</p>
 <h3 id="1-a-Input-Pipeline-구축에-좋은-tf-data-API"><a href="#1-a-Input-Pipeline-구축에-좋은-tf-data-API" class="headerlink" title="1(a) Input Pipeline 구축에 좋은 tf.data API"></a>1(a) Input Pipeline 구축에 좋은 tf.data API</h3><p>tf. data API는 데이터 파이프라인 구축 및 관련 기능을 제공합니다. 파이프라인을 구축하고, 전처리 함수들을 매핑(mapping)해주고, 데이터셋을 섞거나(shuffle) 배치(batch)로 잘라두는 외에도 많은 기능을 제공합니다.</p>
 <h4 id="텐서-입력-파이프라인-구축"><a href="#텐서-입력-파이프라인-구축" class="headerlink" title="텐서 입력 파이프라인 구축"></a>텐서 입력 파이프라인 구축</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dataset = tf.data.Dataset.from_tensor_slices([8, 3, 0, 8, 2, 1])</span><br><span class="line">&gt;&gt;&gt; iter(dataset).next().numpy()</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
 
 <h4 id="Batch와-Shuffle"><a href="#Batch와-Shuffle" class="headerlink" title="Batch와 Shuffle"></a>Batch와 Shuffle</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Shuffle</span></span><br><span class="line">&gt;&gt;&gt; dataset = tf.data.Dataset.from_tensor_slices([8, 3, 0, 8, 2, 1]).shuffle(6)</span><br><span class="line">&gt;&gt;&gt; iter(dataset).next().numpy()</span><br><span class="line">0</span><br><span class="line"><span class="comment"># Batch</span></span><br><span class="line">&gt;&gt;&gt; dataset = tf.data.Dataset.from_tensor_slices([8, 3, 0, 8, 2, 1]).batch(2)</span><br><span class="line">&gt;&gt;&gt; iter(dataset).next().numpy()</span><br><span class="line">array([8, 3], dtype=int32)</span><br><span class="line"><span class="comment"># Shuffle and Batch</span></span><br><span class="line">&gt;&gt;&gt; dataset = tf.data.Dataset.from_tensor_slices([8, 3, 0, 8, 2, 1]).shuffle(6).batch(2)</span><br><span class="line">&gt;&gt;&gt; iter(dataset).next().numpy()</span><br><span class="line">array([3, 0], dtype=int32)</span><br></pre></td></tr></table></figure>
 
 <h4 id="두-데이터셋-묶기-zipping"><a href="#두-데이터셋-묶기-zipping" class="headerlink" title="두 데이터셋 묶기(zipping)"></a>두 데이터셋 묶기(zipping)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dataset0 = tf.data.Dataset.from_tensor_slices([8, 3, 0, 8, 2, 1])</span><br><span class="line">&gt;&gt;&gt; dataset1 = tf.data.Dataset.from_tensor_slices([1, 2, 3, 4, 5, 6])</span><br><span class="line">&gt;&gt;&gt; dataset = tf.data.Dataset.zip((dataset0, dataset1))</span><br><span class="line">&gt;&gt;&gt; iter(dataset).next()</span><br><span class="line">(&lt;tf.Tensor: shape=(), dtype=int32, numpy=8&gt;, &lt;tf.Tensor: shape=(), dtype=int32, numpy=1&gt;)</span><br></pre></td></tr></table></figure>
-<h4 id="외부-함수-mapping"><a href="#외부-함수-mapping" class="headerlink" title="외부 함수 mapping"></a>외부 함수 mapping</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">into_2</span>(<span class="params">num</span>):</span></span><br><span class="line">     <span class="keyword">return</span> num * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h4 id="외부-함수-mapping"><a href="#외부-함수-mapping" class="headerlink" title="외부 함수 mapping"></a>외부 함수 mapping</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">into_2</span>(<span class="params">num</span>):</span><br><span class="line">     <span class="keyword">return</span> num * <span class="number">2</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dataset = tf.data.Dataset.from_tensor_slices([8, 3, 0, 8, 2, 1]).map(into_2)</span><br><span class="line">&gt;&gt;&gt; iter(dataset).next().numpy()</span><br><span class="line">16</span><br></pre></td></tr></table></figure>
 
@@ -272,7 +266,7 @@
 <p>실시간 데이터 수급을 위해 디렉토리를 지정합니다. 데이터프레임에도 똑같이 적용될 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">train_generator = flow_from_dataframe(</span><br><span class="line">    dataframe,</span><br><span class="line">    x_col=<span class="string">&#x27;filename&#x27;</span>,</span><br><span class="line">    y_col=<span class="string">&#x27;class&#x27;</span>,</span><br><span class="line">    class_mode=<span class="string">&#x27;categorical&#x27;</span>,</span><br><span class="line">    batch_size=<span class="number">32</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
-<p>$$x _ col$$에 이미지의 전체 경로를 정의하고, $$y _ col$$에 분류할 레이블 열을 지정합니다.<br>머신러닝 모델에는 생성기가 직접 연결될 수 있습니다. 다만 이 때, $$steps _ per _ epoch$$ 파라미터가 $$number _ of _ samples$$//$$batch _ size$$로 지정되어야 합니다.</p>
+<p>$$x _ col$$에 이미지의 전체 경로를 정의하고, $$y _ col$$에 분류할 레이블 열을 지정합니다.<br>머신러닝 모델에는 생성기가 직접 연결될 수 있습니다. 다만 이 때, $$steps _ per _ epoch$$ 파라미터가 $$number _ of _ samples$$&#x2F;&#x2F;$$batch _ size$$로 지정되어야 합니다.</p>
 <h3 id="2-tf-image를-활용한-데이터-증폭"><a href="#2-tf-image를-활용한-데이터-증폭" class="headerlink" title="2. tf.image를 활용한 데이터 증폭"></a>2. tf.image를 활용한 데이터 증폭</h3><p>데이터 증폭은 꼭 필요합니다. 데이터가 부족할 때 데이터를 바꾸며 이를 별도의 데이터포인트로 다루면 적은 수의 데이터로도 효과적으로 훈련시킬 수 있습니다.</p>
 <p>tf.image API 는 이미지를 변환시키는 도구를 여럿 가지고 있습니다. 이렇게 변환된 이미지는 앞서 언급한 tf.data API를 통한 데이터 증폭에 사용될 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flipped = tf.image.flip_left_right(image)</span><br><span class="line">visualise(image, flipped)</span><br></pre></td></tr></table></figure>
@@ -307,7 +301,7 @@
 
 <p>위 예제는 tf.estimator를 이용해 에스티메이터를 구축하고 훈련하기가 얼마나 쉬운지를 보여줍니다.<br>에스티메이터는 맞춤형으로 만들 수 있습니다.<br>텐서플로에는 LinearRegressor, BoostedTreesClassifier 등과 같은 사전제작된 에스티메이터가 많이 있습니다. 전체 에스티메이터에 대한 상세한 설명은 <a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/estimator">텐서플로 문서</a>에서 보실 수 있습니다.</p>
 <h3 id="6-맞춤형-레이어-Custom-Layers"><a href="#6-맞춤형-레이어-Custom-Layers" class="headerlink" title="6. 맞춤형 레이어(Custom Layers)"></a>6. 맞춤형 레이어(Custom Layers)</h3><p>신경망에는 여러 종류의 심층 네트워크 모델이 있다고 알려져 있습니다. 텐서플로에는 Dense, LSTM처럼 미리 정의된 레이어들이 있습니다. 하지만 더 복잡한 아키텍쳐에서는 레이어의 논리적 동작이 기본 레이어보다 훨씬 복잡합니다. 이럴 때를 대비해서, 텐서플로는 맞춤형 레이어 구축을 허용합니다. tf.keras.layers.Layer 클래스를 상속받아 만들 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomDense</span>(<span class="params">tf.keras.layers.Layer</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, num_outputs</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(CustomDense, self).__init__()</span><br><span class="line">        self.num_outputs = num_outputs</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">self, input_shape</span>):</span></span><br><span class="line">        self.kernel = self.add_weight(</span><br><span class="line">            <span class="string">&quot;kernel&quot;</span>,</span><br><span class="line">            shape=[<span class="built_in">int</span>(input_shape[-<span class="number">1</span>]),</span><br><span class="line">            self.num_outputs]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">self, <span class="built_in">input</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> tf.matmul(<span class="built_in">input</span>, self.kernel)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomDense</span>(tf.keras.layers.Layer):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_outputs</span>):</span><br><span class="line">        <span class="built_in">super</span>(CustomDense, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.num_outputs = num_outputs</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">self, input_shape</span>):</span><br><span class="line">        <span class="variable language_">self</span>.kernel = <span class="variable language_">self</span>.add_weight(</span><br><span class="line">            <span class="string">&quot;kernel&quot;</span>,</span><br><span class="line">            shape=[<span class="built_in">int</span>(input_shape[-<span class="number">1</span>]),</span><br><span class="line">            <span class="variable language_">self</span>.num_outputs]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        <span class="keyword">return</span> tf.matmul(<span class="built_in">input</span>, <span class="variable language_">self</span>.kernel)</span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/tutorials/customization/custom_layers">문서</a>에 기술된 바와 같이, 사용자 본인의 레이어를 구현하는 가장 좋은 방법은 tf.keras.Layer를 확장해서 구현하는 것입니다.</p>
 <ol>
@@ -316,21 +310,24 @@
 <li>   $$call$$ : 순방향 연산(forward computation)을 합니다.<br>커널 초기화를 _ _$$init$$_ _ 자체에서 구현할 수 있지만, build에서 구현하는 것이 더 좋습니다. 그렇지 않으면 매번 레이어 인스턴스를 생성할 때마다 input_shape을 명시해야 하기 때문입니다.</li>
 </ol>
 <h3 id="7-맞춤형-훈련-Custom-Training"><a href="#7-맞춤형-훈련-Custom-Training" class="headerlink" title="7. 맞춤형 훈련(Custom Training)"></a>7. 맞춤형 훈련(Custom Training)</h3><p>tf.keras의 Sequential 과 Model API를 사용하면 모델을 쉽게 훈련할 수 있습니다. 그러나 복잡한 모델을 훈련시키는 시간 대부분은 맞춤형 손실함수(custom loss functions)가 사용됩니다. 게다가, 모델 훈련은 기본값이랑 다른 경우도 있습니다 (예를 들어 다른 모델 요소에 그레이디언트를 다르게 적용하는 경우가 있습니다)<br>텐서플로의 자동미분을 이용하면 그레이디언트를 효과적으로 계산할 수 있는데, 이는 맞춤형 훈련 과정을 정의할 때 사용할 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">model, inputs, outputs, learning_rate</span>):</span></span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> t:</span><br><span class="line">        <span class="comment"># Computing Losses from Model Prediction</span></span><br><span class="line">        current_loss = loss(outputs, model(inputs))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Gradients for Trainable Variables with Obtained Losses</span></span><br><span class="line">    dW, db = t.gradient(current_loss, [model.W, model.b])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Applying Gradients to Weights</span></span><br><span class="line">    model.W.assign_sub(learning_rate * dW)</span><br><span class="line">    model.b.assign_sub(learning_rate * db)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">model, inputs, outputs, learning_rate</span>):</span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> t:</span><br><span class="line">        <span class="comment"># Computing Losses from Model Prediction</span></span><br><span class="line">        current_loss = loss(outputs, model(inputs))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Gradients for Trainable Variables with Obtained Losses</span></span><br><span class="line">    dW, db = t.gradient(current_loss, [model.W, model.b])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Applying Gradients to Weights</span></span><br><span class="line">    model.W.assign_sub(learning_rate * dW)</span><br><span class="line">    model.b.assign_sub(learning_rate * db)</span><br></pre></td></tr></table></figure>
 
 <p>이렇게 하면 사례별로 걸맞게 설정된 훈련을 여러 에포크(epoch) 반복할 수 있습니다.</p>
 <h3 id="8-체크포인트-Checkpoints"><a href="#8-체크포인트-Checkpoints" class="headerlink" title="8. 체크포인트(Checkpoints)"></a>8. 체크포인트(Checkpoints)</h3><p>텐서플로 모델은 두 가지 방법으로 저장할 수 있습니다.</p>
-<p>  <b>1.    SavedModel :</b> 모델의 전체 상태를 파라미터와 함께 저장합니다. 소스코드와 무관합니다.<br>  <b>2.    Chekpoints</b></p>
+<p>  <b>1.	SavedModel :</b> 모델의 전체 상태를 파라미터와 함께 저장합니다. 소스코드와 무관합니다.<br>  <b>2.	Chekpoints</b></p>
 <p>체크포인트는 모델에 사용된 파라미터의 정확한 값들을 저장합니다. Sequential API나 Model API로 작성된 모델은 SavedModel 형식으로만 저장할 수 있습니다.</p>
 <p>그러나, 맞춤형 모델이라면 체크포인트가 필요합니다.</p>
 <blockquote>
 <p>체크포인트는 모델에서 정의된 계산이 어떻게 진행되는지에 대한 정보를 가지고 있지 않기 때문에, 파라미터만 가져오는 코스와 함께 사용될 때만 유용합니다.</p>
 </blockquote>
 <ul>
-<li><b>체크포인트 저장</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">checkpoint_path = “save_path”</span><br><span class="line"></span><br><span class="line"><span class="comment"># Defining a Checkpoint</span></span><br><span class="line">ckpt = tf.train.Checkpoint(model=model, optimizer=optimizer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Creating a CheckpointManager Object</span></span><br><span class="line">ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Saving a Model</span></span><br><span class="line">ckpt_manager.save()</span><br></pre></td></tr></table></figure></li>
+<li><b>체크포인트 저장</b></li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">checkpoint_path = “save_path”</span><br><span class="line"></span><br><span class="line"><span class="comment"># Defining a Checkpoint</span></span><br><span class="line">ckpt = tf.train.Checkpoint(model=model, optimizer=optimizer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Creating a CheckpointManager Object</span></span><br><span class="line">ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Saving a Model</span></span><br><span class="line">ckpt_manager.save()</span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li><b>체크포인트 불러오기</b><br>텐서플로는 방향 그래프(directed graph)를 객체가 로딩되는 지점부터 가로지르며 변수와 체크포인트 값들을 이름이 붙은 엣지(named edge)와 매칭합니다.<br><img src="https://miro.medium.com/max/1400/1*rMqi-aL9mGFFWgbk5zw6UQ.png" alt="모델 복구 의존성 그래프 [문서](https://www.tensorflow.org/guide/checkpoint)"></li>
+<li><b>체크포인트 불러오기</b><br>텐서플로는 방향 그래프(directed graph)를 객체가 로딩되는 지점부터 가로지르며 변수와 체크포인트 값들을 이름이 붙은 엣지(named edge)와 매칭합니다.<br><img src="https://miro.medium.com/max/1400/1*rMqi-aL9mGFFWgbk5zw6UQ.png" alt="모델 복구 의존성 그래프 [문서](https:&#x2F;&#x2F;www.tensorflow.org&#x2F;guide&#x2F;checkpoint)"></li>
 </ul>
 <h3 id="9-케라스-튜너-Keras-Tuner"><a href="#9-케라스-튜너-Keras-Tuner" class="headerlink" title="9. 케라스 튜너(Keras Tuner)"></a>9. 케라스 튜너(Keras Tuner)</h3><p>텐서플로의 신무기입니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install keras-tuner</span><br></pre></td></tr></table></figure>
@@ -372,22 +369,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/05/22/Python-DL-2-10_TF_skills/" data-id="cmhueoxwi008x4gxta54o0dvz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/05/22/Python-DL-2-10_TF_skills/" data-id="cuidcDZZi4bwoWv5chVJ_hA_s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -463,7 +450,7 @@
         "genre": "Python Deep Learning",
         "datePublished": "2020-05-22",
         "dateCreated": "2020-05-22",
-        "dateModified": "2020-11-30",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/05/22/Python-DL-2-10_TF_skills/",
         "description": "
 본 글은 번역글입니다.
@@ -471,7 +458,7 @@
 
 
 원본 주소 : https://towardsdatascience.com/10-tensorflow-tricks-every-ml-practitioner-must-know-96b860e53c1번역 철학 : 매끄럽게 읽으실 수 있는 적절한 의역을 지향합니다.전문 용어 : 가급",
-        "wordCount": 2229
+        "wordCount": 2220
     }
 </script>
 
@@ -553,16 +540,6 @@
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -796,10 +773,6 @@
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

@@ -10,7 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="python,gis,raster,polygon,shapefile" />
+    <meta name="keywords" content="python,gis,polygon,shapefile,raster" />
     
     <meta name="description" content="raster map 위에 polygon을 생성하는 과정을 정리했습니다. 간단한 작업이지만 4 GB 용량의 raster file을 불러오는 과정과 좌표를 맞추는 과정이 중요합니다.  1. geotiff 읽기 geotiff는 지형과 건물 등 여러 정보를 담은 raster image입니다. 건물 그림자가 담긴 geotiff 파일을 읽고 그 위에 polygon을">
 <meta property="og:type" content="article">
@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/3_rasterpoly_0.png">
 <meta property="article:published_time" content="2020-09-21T00:46:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:42:32.564Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:36.830Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="gis">
-<meta property="article:tag" content="raster">
 <meta property="article:tag" content="polygon">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="raster">
 <meta property="article:tag" content="shapefile">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/3_rasterpoly_0.png">
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/09/21/GIS-Python-3-raster_and_polygon/" class="article-date">
-     <time datetime="2020-11-27T00:42:32.564Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:36.830Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,18 +239,21 @@
 <li>건물 그림자가 담긴 geotiff 파일을 읽고 그 위에 polygon을 그리고자 합니다.</li>
 </ul>
 <h4 id="1-1-matplotlib"><a href="#1-1-matplotlib" class="headerlink" title="1.1. matplotlib"></a>1.1. <code>matplotlib</code></h4><ul>
-<li><code>geotiff</code>는 이미지파일이기 때문에 <code>imagej</code>에서 읽을 수도 있습니다.</li>
-<li><code>matplotlib</code>에서도 이미지를 다룰 수 있습니다.</li>
-<li><code>plt.imread()</code>기능을 이용해 읽을 수 있지만 문제가 있습니다.<br><br><img src="3_rasterpoly_1.png"></li>
-</ul>
-<ul>
-<li>너무 큰 그림은 읽어들이지 못합니다.</li>
-<li>심지어 DOS 공격이라고까지 의심합니다.</li>
+<li><p><code>geotiff</code>는 이미지파일이기 때문에 <code>imagej</code>에서 읽을 수도 있습니다.</p>
+</li>
+<li><p><code>matplotlib</code>에서도 이미지를 다룰 수 있습니다.</p>
+</li>
+<li><p><code>plt.imread()</code>기능을 이용해 읽을 수 있지만 문제가 있습니다.<br><br><img src="/3_rasterpoly_1.png"></p>
+</li>
+<li><p>너무 큰 그림은 읽어들이지 못합니다.</p>
+</li>
+<li><p>심지어 DOS 공격이라고까지 의심합니다.</p>
+</li>
 </ul>
 <h4 id="1-2-gdal"><a href="#1-2-gdal" class="headerlink" title="1.2. gdal"></a>1.2. <code>gdal</code></h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/GeoTIFF">wikipedia:GeoTIFF</a><br><a target="_blank" rel="noopener" href="https://gdal.org/">GDAL</a><br><a target="_blank" rel="noopener" href="https://ljvmiranda921.github.io/notebook/2019/04/13/install-gdal/">GDAL install on ubuntu</a></p>
 </blockquote>
-<p><img src="3_rasterpoly_2.png"></p>
+<p><img src="/3_rasterpoly_2.png"></p>
 <ul>
 <li><p><b>GDAL</b>은 래스터와 벡터 데이터를 상호 교환하는 translator library입니다.</p>
 <ul>
@@ -266,77 +269,97 @@
 </ul>
 </li>
 <li><p>파일을 엽니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> osgeo <span class="keyword">import</span> gdal</span><br><span class="line">gdal.UseExceptions()</span><br><span class="line"></span><br><span class="line">ds = gdal.Open(<span class="string">&quot;파일명&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> osgeo <span class="keyword">import</span> gdal</span><br><span class="line">gdal.UseExceptions()</span><br><span class="line"></span><br><span class="line">ds = gdal.Open(<span class="string">&quot;파일명&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-raster-data-접근"><a href="#2-raster-data-접근" class="headerlink" title="2. raster data 접근"></a>2. raster data 접근</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://gdal.org/tutorials/raster_api_tut.html">GDAL: Raster API Tutorial</a></p>
 </blockquote>
 <ul>
 <li>Raster API로 파일의 데이터에 접근할 수 있습니다.</li>
-<li><code>.GetDriver()</code>로 파일의 형태를 알 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Driver: <span class="subst">&#123;ds.GetDriver().ShortName&#125;</span>/<span class="subst">&#123;ds.GetDriver().LongName&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-Driver: GTiff/GeoTIFF</li>
+<li><code>.GetDriver()</code>로 파일의 형태를 알 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Driver: <span class="subst">&#123;ds.GetDriver().ShortName&#125;</span>/<span class="subst">&#123;ds.GetDriver().LongName&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Driver: GTiff&#x2F;GeoTIFF</p>
 <ul>
 <li><code>.RasterXSize</code>와 <code>.RasterYSize</code>로 그림의 크기를 알 수 있습니다.</li>
-<li><code>.RasterCount</code>로 파일에 담긴 raster band의 수를 알 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Size is <span class="subst">&#123;ds.RasterXSize&#125;</span> x <span class="subst">&#123;ds.RasterYSize&#125;</span> x <span class="subst">&#123;ds.RasterCount&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-Size is 27001 x 36000 x 1</li>
+<li><code>.RasterCount</code>로 파일에 담긴 raster band의 수를 알 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Size is <span class="subst">&#123;ds.RasterXSize&#125;</span> x <span class="subst">&#123;ds.RasterYSize&#125;</span> x <span class="subst">&#123;ds.RasterCount&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Size is 27001 x 36000 x 1</p>
 <ul>
-<li><code>.GetProjection()</code>으로 사용된 좌표계를 확인할 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Projection is <span class="subst">&#123;ds.GetProjection()&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-Projection is PROJCS[“Korea 2000 / Central Belt 2010”,GEOGCS[“Korea 2000”,DATUM[“Geocentric_datum_of_Korea”,SPHEROID[“GRS 1980”,6378137,298.257222101,AUTHORITY[“EPSG”,”7019”]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY[“EPSG”,”6737”]],PRIMEM[“Greenwich”,0,AUTHORITY[“EPSG”,”8901”]],UNIT[“degree”,0.0174532925199433,AUTHORITY[“EPSG”,”9122”]],AUTHORITY[“EPSG”,”4737”]],PROJECTION[“Transverse_Mercator”],PARAMETER[“latitude_of_origin”,38],PARAMETER[“central_meridian”,127],PARAMETER[“scale_factor”,1],PARAMETER[“false_easting”,200000],PARAMETER[“false_northing”,600000],UNIT[“metre”,1,AUTHORITY[“EPSG”,”9001”]],AUTHORITY[“EPSG”,”5186”]]</li>
+<li><code>.GetProjection()</code>으로 사용된 좌표계를 확인할 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Projection is <span class="subst">&#123;ds.GetProjection()&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Projection is PROJCS[“Korea 2000 &#x2F; Central Belt 2010”,GEOGCS[“Korea 2000”,DATUM[“Geocentric_datum_of_Korea”,SPHEROID[“GRS 1980”,6378137,298.257222101,AUTHORITY[“EPSG”,”7019”]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY[“EPSG”,”6737”]],PRIMEM[“Greenwich”,0,AUTHORITY[“EPSG”,”8901”]],UNIT[“degree”,0.0174532925199433,AUTHORITY[“EPSG”,”9122”]],AUTHORITY[“EPSG”,”4737”]],PROJECTION[“Transverse_Mercator”],PARAMETER[“latitude_of_origin”,38],PARAMETER[“central_meridian”,127],PARAMETER[“scale_factor”,1],PARAMETER[“false_easting”,200000],PARAMETER[“false_northing”,600000],UNIT[“metre”,1,AUTHORITY[“EPSG”,”9001”]],AUTHORITY[“EPSG”,”5186”]]</p>
 <h3 id="3-raster-data-가져오기"><a href="#3-raster-data-가져오기" class="headerlink" title="3. raster data 가져오기"></a>3. raster data 가져오기</h3><ul>
 <li><code>.GetRasterBand()</code>를 사용해 raster data를 가져옵니다.</li>
 <li>제 데이터에서는 <code>.RasterCount</code>에서 band가 1개라고 했으니 괄호 안에 1을 넣어줘야 합니다.</li>
-<li>분명 파이썬 코드이지만 <b><code>GDAL</code>은 숫자를 1부터 셉니다.</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">band = ds.GetRasterBand(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
+<li>분명 파이썬 코드이지만 <b><code>GDAL</code>은 숫자를 1부터 셉니다.</b></li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">band = ds.GetRasterBand(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>band에 저장된 raster band data를 <code>numpy</code> array로 가져옵니다.</li>
 <li>제가 익숙한 방식이고, 다른 데이터와 결합해야 하기 때문입니다.</li>
-<li>가져온 데이터의 차원을 출력해 잘 읽혔는지 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">irrad = band.ReadAsArray()</span><br><span class="line">nrows, ncols = irrad.shape</span><br><span class="line"><span class="built_in">print</span>(nrows, ncols)</span><br></pre></td></tr></table></figure>
-36000 27001</li>
+<li>가져온 데이터의 차원을 출력해 잘 읽혔는지 확인합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">irrad = band.ReadAsArray()</span><br><span class="line">nrows, ncols = irrad.shape</span><br><span class="line"><span class="built_in">print</span>(nrows, ncols)</span><br></pre></td></tr></table></figure>
+<p>36000 27001</p>
 <h3 id="4-좌표-매핑"><a href="#4-좌표-매핑" class="headerlink" title="4. 좌표 매핑"></a>4. 좌표 매핑</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/tutorials/intermediate/imshow_extent.html?highlight=origin%20extent%20imshow">matplotlib: origin and extent in imshow</a></p>
 </blockquote>
 <ul>
-<li><code>numpy</code> array의 index가 0이라고 Korea Belt 2000의 좌표도 0은 아닙니다.</li>
-<li>2차원 배열의 좌표와 실제 지점의 좌표를 매핑해야 합니다.</li>
+<li><p><code>numpy</code> array의 index가 0이라고 Korea Belt 2000의 좌표도 0은 아닙니다.</p>
+</li>
+<li><p>2차원 배열의 좌표와 실제 지점의 좌표를 매핑해야 합니다.</p>
+</li>
+<li><p><code>.GetGeoTransform()</code> 명령으로 변환 인자들을 추출합니다.</p>
+</li>
+<li><p>raster band에서 가져오는 것이 아닙니다.</p>
+</li>
 </ul>
-<ul>
-<li><code>.GetGeoTransform()</code> 명령으로 변환 인자들을 추출합니다.</li>
-<li>raster band에서 가져오는 것이 아닙니다. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x0, dx, dxdy, y0, dydx, dy = ds.GetGeoTransform()</span><br><span class="line"><span class="built_in">print</span>(x0, dx, dxdy, y0, dydx, dy)</span><br><span class="line"></span><br><span class="line">x1 = x0 + dx * ncols  <span class="comment"># x limit</span></span><br><span class="line">y1 = y0 + dy * nrows  <span class="comment"># y limit</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x0, dx, dxdy, y0, dydx, dy = ds.GetGeoTransform()</span><br><span class="line"><span class="built_in">print</span>(x0, dx, dxdy, y0, dydx, dy)</span><br><span class="line"></span><br><span class="line">x1 = x0 + dx * ncols  <span class="comment"># x limit</span></span><br><span class="line">y1 = y0 + dy * nrows  <span class="comment"># y limit</span></span><br></pre></td></tr></table></figure>
 <p>222100.0 1.0 0.0 434400.0 0.0 -1.0</p>
 <ul>
 <li>이제 raster data를 화면에 그려봅시다.</li>
-<li><code>matplotlib</code>의 <code>extent</code>는 가로세로축에 실제 데이터값을 찍어줍니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">20</span>))</span><br><span class="line">ax.imshow(irrad, cmap=<span class="string">&quot;gist_gray&quot;</span>, extent=[x0, x1, y1, y0])</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="3_rasterpoly_3.png"></li>
+<li><code>matplotlib</code>의 <code>extent</code>는 가로세로축에 실제 데이터값을 찍어줍니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">20</span>))</span><br><span class="line">ax.imshow(irrad, cmap=<span class="string">&quot;gist_gray&quot;</span>, extent=[x0, x1, y1, y0])</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/3_rasterpoly_3.png"></p>
 <ul>
-<li>위 정보를 이용해 position을 index로 변환하는 함수를 만들 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># position to index</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pos2idx</span>(<span class="params">X, Y, ds=ds</span>):</span></span><br><span class="line">    x0, dx, dxdy, y0, dydx, dy = ds.GetGeoTransform()</span><br><span class="line">    X_idx = <span class="built_in">int</span>((X-x0)/dx)  <span class="comment"># x index of X coordinate</span></span><br><span class="line">    Y_idx = <span class="built_in">int</span>((Y-y0)/dy)  <span class="comment"># y index of Y coordinate</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> X_idx, Y_idx</span><br></pre></td></tr></table></figure></li>
+<li>위 정보를 이용해 position을 index로 변환하는 함수를 만들 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># position to index</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pos2idx</span>(<span class="params">X, Y, ds=ds</span>):</span><br><span class="line">    x0, dx, dxdy, y0, dydx, dy = ds.GetGeoTransform()</span><br><span class="line">    X_idx = <span class="built_in">int</span>((X-x0)/dx)  <span class="comment"># x index of X coordinate</span></span><br><span class="line">    Y_idx = <span class="built_in">int</span>((Y-y0)/dy)  <span class="comment"># y index of Y coordinate</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> X_idx, Y_idx</span><br></pre></td></tr></table></figure>
+
 <h3 id="5-Polygon-얹기"><a href="#5-Polygon-얹기" class="headerlink" title="5. Polygon 얹기"></a>5. Polygon 얹기</h3><blockquote>
 <p><a href="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/">Create Shapefile from Polygon</a><br><a target="_blank" rel="noopener" href="https://geopandas.org/reference/geopandas.read_file.html">geopandas.read_file</a></p>
 </blockquote>
 <ul>
 <li>살펴볼 지점을 확대해서 그립니다.</li>
 <li>건물들 데이터가 담긴 데이터로부터 목표 건물의 좌표를 추출하고,</li>
-<li>이 건물을 중심으로 가로세로 100 pixel 범위의 그림을 그립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">idx_range = <span class="number">100</span> <span class="comment">#pixel</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">ax.imshow(irrad[Y_idx-idx_range: Y_idx+idx_range, X_idx-idx_range:X_idx+idx_range], </span><br><span class="line">          cmap=<span class="string">&quot;gist_gray&quot;</span>, </span><br><span class="line">          extent=[idx_x-idx_range, idx_x+idx_range, idx_y-idx_range, idx_y+idx_range])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="3_rasterpoly_5.png"></li>
+<li>이 건물을 중심으로 가로세로 100 pixel 범위의 그림을 그립니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">idx_range = <span class="number">100</span> <span class="comment">#pixel</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">ax.imshow(irrad[Y_idx-idx_range: Y_idx+idx_range, X_idx-idx_range:X_idx+idx_range], </span><br><span class="line">          cmap=<span class="string">&quot;gist_gray&quot;</span>, </span><br><span class="line">          extent=[idx_x-idx_range, idx_x+idx_range, idx_y-idx_range, idx_y+idx_range])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/3_rasterpoly_5.png"></p>
 <ul>
 <li>여기에 건물을 하나 얹어봅니다.</li>
-<li><a href="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/">중심점과 가로세로 길이, 각도를 이용해서 도형을 생성하는 기술</a>을 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> mapping, Polygon</span><br><span class="line"><span class="keyword">import</span> fiona</span><br><span class="line"></span><br><span class="line">shppath = <span class="string">&quot;파일 저장 경로&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_mor</span>(<span class="params">x, y, width, height, angle, filename, shppath=shppath</span>):</span></span><br><span class="line">    h_half = height/<span class="number">2</span></span><br><span class="line">    w_half = width/<span class="number">2</span></span><br><span class="line">    a_rad = np.deg2rad(angle)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_coord</span>(<span class="params">h_half, w_half, a_rad</span>):</span></span><br><span class="line">        X = x + h_half * np.sin(a_rad) - w_half * np.cos(a_rad)</span><br><span class="line">        Y = y + h_half * np.cos(a_rad) + w_half * np.sin(a_rad)</span><br><span class="line">        <span class="keyword">return</span> (X, Y)</span><br><span class="line">    </span><br><span class="line">    points = [get_coord(h_half, w_half, a_rad), </span><br><span class="line">              get_coord(-h_half, w_half, a_rad), </span><br><span class="line">              get_coord(-h_half, -w_half, a_rad), </span><br><span class="line">              get_coord(h_half, -w_half, a_rad), </span><br><span class="line">              get_coord(h_half, w_half, a_rad), </span><br><span class="line">              ]</span><br><span class="line">    </span><br><span class="line">    schema = &#123;<span class="string">&quot;geometry&quot;</span>: <span class="string">&quot;Polygon&quot;</span>, <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    savefile = os.path.join(shppath, filename)</span><br><span class="line">    <span class="keyword">with</span> fiona.<span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;savefile&#125;</span>&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="string">&quot;ESRI Shapefile&quot;</span>, schema) <span class="keyword">as</span> c:</span><br><span class="line">        c.write(&#123;</span><br><span class="line">            <span class="string">&quot;geometry&quot;</span>: mapping(Polygon(points)),</span><br><span class="line">            <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="number">1</span>&#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure></li>
+<li><a href="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/">중심점과 가로세로 길이, 각도를 이용해서 도형을 생성하는 기술</a>을 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> mapping, Polygon</span><br><span class="line"><span class="keyword">import</span> fiona</span><br><span class="line"></span><br><span class="line">shppath = <span class="string">&quot;파일 저장 경로&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_mor</span>(<span class="params">x, y, width, height, angle, filename, shppath=shppath</span>):</span><br><span class="line">    h_half = height/<span class="number">2</span></span><br><span class="line">    w_half = width/<span class="number">2</span></span><br><span class="line">    a_rad = np.deg2rad(angle)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_coord</span>(<span class="params">h_half, w_half, a_rad</span>):</span><br><span class="line">        X = x + h_half * np.sin(a_rad) - w_half * np.cos(a_rad)</span><br><span class="line">        Y = y + h_half * np.cos(a_rad) + w_half * np.sin(a_rad)</span><br><span class="line">        <span class="keyword">return</span> (X, Y)</span><br><span class="line">    </span><br><span class="line">    points = [get_coord(h_half, w_half, a_rad), </span><br><span class="line">              get_coord(-h_half, w_half, a_rad), </span><br><span class="line">              get_coord(-h_half, -w_half, a_rad), </span><br><span class="line">              get_coord(h_half, -w_half, a_rad), </span><br><span class="line">              get_coord(h_half, w_half, a_rad), </span><br><span class="line">              ]</span><br><span class="line">    </span><br><span class="line">    schema = &#123;<span class="string">&quot;geometry&quot;</span>: <span class="string">&quot;Polygon&quot;</span>, <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    savefile = os.path.join(shppath, filename)</span><br><span class="line">    <span class="keyword">with</span> fiona.<span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;savefile&#125;</span>&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="string">&quot;ESRI Shapefile&quot;</span>, schema) <span class="keyword">as</span> c:</span><br><span class="line">        c.write(&#123;</span><br><span class="line">            <span class="string">&quot;geometry&quot;</span>: mapping(Polygon(points)),</span><br><span class="line">            <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="number">1</span>&#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>목표 건물 데이터를 읽고 사각형을 형성합니다.</li>
-<li>geopandas로 그린 건물은 실제 지도에 들어갈 좌표를 갖고 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> geopandas <span class="keyword">as</span> gpd</span><br><span class="line"></span><br><span class="line">idx_width = df_dir[<span class="string">&quot;OMBB_WIDTH&quot;</span>].loc[idx]</span><br><span class="line">idx_height = df_dir[<span class="string">&quot;OMBB_HEIGHT&quot;</span>].loc[idx]</span><br><span class="line">idx_angle = df_dir[<span class="string">&quot;OMBB_ANGLE&quot;</span>].loc[idx]</span><br><span class="line"></span><br><span class="line">create_mor(idx_x, idx_y, idx_width, idx_height, idx_angle, <span class="string">&quot;idx_100&quot;</span>)</span><br><span class="line"></span><br><span class="line">idx100 = gpd.read_file(<span class="string">&#x27;./data/200917_shadow/idx_100/idx_100.shp&#x27;</span>)</span><br><span class="line">idx100.plot()</span><br></pre></td></tr></table></figure>
-<img src="3_rasterpoly_4.png"></li>
+<li>geopandas로 그린 건물은 실제 지도에 들어갈 좌표를 갖고 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> geopandas <span class="keyword">as</span> gpd</span><br><span class="line"></span><br><span class="line">idx_width = df_dir[<span class="string">&quot;OMBB_WIDTH&quot;</span>].loc[idx]</span><br><span class="line">idx_height = df_dir[<span class="string">&quot;OMBB_HEIGHT&quot;</span>].loc[idx]</span><br><span class="line">idx_angle = df_dir[<span class="string">&quot;OMBB_ANGLE&quot;</span>].loc[idx]</span><br><span class="line"></span><br><span class="line">create_mor(idx_x, idx_y, idx_width, idx_height, idx_angle, <span class="string">&quot;idx_100&quot;</span>)</span><br><span class="line"></span><br><span class="line">idx100 = gpd.read_file(<span class="string">&#x27;./data/200917_shadow/idx_100/idx_100.shp&#x27;</span>)</span><br><span class="line">idx100.plot()</span><br></pre></td></tr></table></figure>
+<p><img src="/3_rasterpoly_4.png"></p>
 <ul>
 <li>이렇게 도형을 shapefile로 만들어주고 <code>geopandas</code>로 읽어옵니다.</li>
-<li>예쁘게 겹쳐져 있습니다.<br><br><img src="3_rasterpoly_6.png"></li>
+<li>예쁘게 겹쳐져 있습니다.<br><br><img src="/3_rasterpoly_6.png"></li>
 </ul>
 
         </div>
@@ -350,22 +373,12 @@ Projection is PROJCS[“Korea 2000 / Central Belt 2010”,GEOGCS[“Korea 2000�
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/21/GIS-Python-3-raster_and_polygon/" data-id="cmhueoxqy00014gxt4oswfk01" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/21/GIS-Python-3-raster_and_polygon/" data-id="cuid1ZNBc__TqPBR6PwOCkM-w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -437,11 +450,11 @@ Projection is PROJCS[“Korea 2000 / Central Belt 2010”,GEOGCS[“Korea 2000�
         },
         "headline": "Mapping Shapefile on Raster Map",
         "image": "https://jehyunlee.github.io/thumbnails/GIS-Python/3_rasterpoly_0.png",
-        "keywords": "python gis raster polygon shapefile",
+        "keywords": "python gis polygon shapefile raster",
         "genre": "GIS Python",
         "datePublished": "2020-09-21",
         "dateCreated": "2020-09-21",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/09/21/GIS-Python-3-raster_and_polygon/",
         "description": "
 raster map 위에 polygon을 생성하는 과정을 정리했습니다.
@@ -450,7 +463,7 @@ raster map 위에 polygon을 생성하는 과정을 정리했습니다.
 1. geotiff 읽기
 geotiff는 지형과 건물 등 여러 정보를 담은 raster image입니다.
 건물 그림자가 담긴 geotiff 파일을 읽고 그 위에 polygon을",
-        "wordCount": 1078
+        "wordCount": 1077
     }
 </script>
 
@@ -532,16 +545,6 @@ geotiff는 지형과 건물 등 여러 정보를 담은 raster image입니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -775,10 +778,6 @@ geotiff는 지형과 건물 등 여러 정보를 담은 raster image입니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

@@ -12,19 +12,19 @@
     
     <meta name="keywords" content="pytorch,GPU" />
     
-    <meta name="description" content="PyTorch GPU 버전을 설치한다고 GPU를 사용하지 않습니다. GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고, 변수와 모델에 GPU 사용 설정을 해야 합니다.  1. PyTorch 버전 확인 현재 버전을 확인합니다.123import torch, torchvisionprint(torch.__version__)print(torchvision.">
+    <meta name="description" content="PyTorch GPU 버전을 설치한다고 GPU를 사용하지 않습니다. GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고, 변수와 모델에 GPU 사용 설정을 해야 합니다.  1. PyTorch 버전 확인 현재 버전을 확인합니다.  123import torch, torchvisionprint(torch.__version__)print(torchvisio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PyTorch GPU setting">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/06/06/Python-DL-6-pytorchGPU/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="PyTorch GPU 버전을 설치한다고 GPU를 사용하지 않습니다. GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고, 변수와 모델에 GPU 사용 설정을 해야 합니다.  1. PyTorch 버전 확인 현재 버전을 확인합니다.123import torch, torchvisionprint(torch.__version__)print(torchvision.">
+<meta property="og:description" content="PyTorch GPU 버전을 설치한다고 GPU를 사용하지 않습니다. GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고, 변수와 모델에 GPU 사용 설정을 해야 합니다.  1. PyTorch 버전 확인 현재 버전을 확인합니다.  123import torch, torchvisionprint(torch.__version__)print(torchvisio">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/6-pytorchGPU_0.png">
 <meta property="article:published_time" content="2021-06-06T03:01:00.000Z">
-<meta property="article:modified_time" content="2021-06-06T03:39:31.514Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.579Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="pytorch">
 <meta property="article:tag" content="GPU">
+<meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/6-pytorchGPU_0.png">
     
@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -200,7 +200,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/06/06/Python-DL-6-pytorchGPU/" class="article-date">
-     <time datetime="2021-06-06T03:39:31.514Z" itemprop="dateModified">2021-06-06</time>
+     <time datetime="2025-12-30T06:28:37.579Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -233,56 +233,71 @@
 <li>변수와 모델에 GPU 사용 설정을 해야 합니다.</li>
 </ul>
 <h1 id="1-PyTorch-버전-확인"><a href="#1-PyTorch-버전-확인" class="headerlink" title="1. PyTorch 버전 확인"></a>1. PyTorch 버전 확인</h1><ul>
-<li>현재 버전을 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch, torchvision</span><br><span class="line"><span class="built_in">print</span>(torch.__version__)</span><br><span class="line"><span class="built_in">print</span>(torchvision.__version__)</span><br></pre></td></tr></table></figure>
+<li>현재 버전을 확인합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch, torchvision</span><br><span class="line"><span class="built_in">print</span>(torch.__version__)</span><br><span class="line"><span class="built_in">print</span>(torchvision.__version__)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.7.1+cu101</span><br><span class="line">0.8.2+cu101</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.7.1+cu101</span><br><span class="line">0.8.2+cu101</span><br></pre></td></tr></table></figure>
+
 <h1 id="2-GPU-현황-확인"><a href="#2-GPU-현황-확인" class="headerlink" title="2. GPU 현황 확인"></a>2. GPU 현황 확인</h1><ul>
 <li>GPU가 사용 가능한지 확인합니다.</li>
-<li>사용 가능하다면, 메모리 점유 현황을 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(torch.cuda.device_count()):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;# DEVICE <span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;torch.cuda.get_device_name(i)&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;- Memory Usage:&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  Allocated: <span class="subst">&#123;<span class="built_in">round</span>(torch.cuda.memory_allocated(i)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  Cached:    <span class="subst">&#123;<span class="built_in">round</span>(torch.cuda.memory_cached(i)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;# GPU is not available&quot;</span>)</span><br></pre></td></tr></table></figure>
+<li>사용 가능하다면, 메모리 점유 현황을 출력합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(torch.cuda.device_count()):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;# DEVICE <span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;torch.cuda.get_device_name(i)&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;- Memory Usage:&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  Allocated: <span class="subst">&#123;<span class="built_in">round</span>(torch.cuda.memory_allocated(i)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  Cached:    <span class="subst">&#123;<span class="built_in">round</span>(torch.cuda.memory_cached(i)/<span class="number">1024</span>**<span class="number">3</span>,<span class="number">1</span>)&#125;</span> GB\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;# GPU is not available&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DEVICE 0: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEVICE 1: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEVICE 2: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DEVICE 0: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEVICE 1: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEVICE 2: Tesla V100-PCIE-32GB</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br></pre></td></tr></table></figure>
 <h1 id="3-GPU-할당-변경"><a href="#3-GPU-할당-변경" class="headerlink" title="3. GPU 할당 변경"></a>3. GPU 할당 변경</h1><ul>
-<li>작업할 GPU를 선정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GPU 할당 변경하기</span></span><br><span class="line">GPU_NUM = <span class="number">2</span> <span class="comment"># 원하는 GPU 번호 입력</span></span><br><span class="line">device = torch.device(<span class="string">f&#x27;cuda:<span class="subst">&#123;GPU_NUM&#125;</span>&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">torch.cuda.set_device(device) <span class="comment"># change allocation of current GPU</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;# Current cuda device: &#x27;</span>, torch.cuda.current_device()) <span class="comment"># check</span></span><br></pre></td></tr></table></figure>
+<li>작업할 GPU를 선정합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GPU 할당 변경하기</span></span><br><span class="line">GPU_NUM = <span class="number">2</span> <span class="comment"># 원하는 GPU 번호 입력</span></span><br><span class="line">device = torch.device(<span class="string">f&#x27;cuda:<span class="subst">&#123;GPU_NUM&#125;</span>&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">torch.cuda.set_device(device) <span class="comment"># change allocation of current GPU</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;# Current cuda device: &#x27;</span>, torch.cuda.current_device()) <span class="comment"># check</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Current cuda device:  2</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Current cuda device:  2</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="4-GPU-사용을-기본값으로-설정"><a href="#4-GPU-사용을-기본값으로-설정" class="headerlink" title="4. GPU 사용을 기본값으로 설정"></a>4. GPU 사용을 기본값으로 설정</h1><ul>
 <li>변수를 만들때 자동으로 GPU를 사용하게 설정합니다.</li>
-<li>앞서 <code>GPU_NUM</code>으로 지정한 GPU에 할당됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    torch.set_default_tensor_type(torch.cuda.FloatTensor)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;using cuda: <span class="subst">&#123;GPU_NUM&#125;</span>, <span class="subst">&#123;torch.cuda.get_device_name(GPU_NUM)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using cuda: 2, Tesla V100-PCIE-32GB</span><br></pre></td></tr></table></figure></li>
+<li>앞서 <code>GPU_NUM</code>으로 지정한 GPU에 할당됩니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    torch.set_default_tensor_type(torch.cuda.FloatTensor)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;using cuda: <span class="subst">&#123;GPU_NUM&#125;</span>, <span class="subst">&#123;torch.cuda.get_device_name(GPU_NUM)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
+<li><p>실행 결과</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using cuda: 2, Tesla V100-PCIE-32GB</span><br></pre></td></tr></table></figure>
+
+</li>
 <li><p>변수를 만들어 확인합니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.FloatTensor([<span class="number">1.0</span>])</span><br><span class="line">x.<span class="built_in">type</span>()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;torch.FloatTensor&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p>GPU 사용을 기본값으로 명시했는데 안올라갑니다.</p>
-</li>
-<li><p>강제로 올려봅니다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;torch.FloatTensor&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>GPU 사용을 기본값으로 명시했는데 안올라갑니다.</li>
+<li>강제로 올려봅니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = x.cuda()</span><br><span class="line">x.<span class="built_in">type</span>()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;torch.cuda.FloatTensor&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;torch.cuda.FloatTensor&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>그냥 <b><code>torch.Tensor()</code></b>를 해야 GPU에 올라갑니다.</li>
-<li>자료형도 내가 원하는 <code>torch.cuda.FloatTensor</code>입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.Tensor([<span class="number">1.0</span>])</span><br><span class="line">x.<span class="built_in">type</span>()</span><br></pre></td></tr></table></figure>
+<li>자료형도 내가 원하는 <code>torch.cuda.FloatTensor</code>입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = torch.Tensor([<span class="number">1.0</span>])</span><br><span class="line">x.<span class="built_in">type</span>()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;torch.cuda.FloatTensor&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;torch.cuda.FloatTensor&#x27;</span></span><br></pre></td></tr></table></figure>
 
         </div>
 		<p>
@@ -295,22 +310,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/06/06/Python-DL-6-pytorchGPU/" data-id="cmhueoxwm00954gxtaxoj0yoo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/06/06/Python-DL-6-pytorchGPU/" data-id="cuidl1XFuJI8EdGCkFKLvFcsv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -386,7 +391,7 @@
         "genre": "Python Deep Learning",
         "datePublished": "2021-06-06",
         "dateCreated": "2021-06-06",
-        "dateModified": "2021-06-06",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/06/06/Python-DL-6-pytorchGPU/",
         "description": "
 PyTorch GPU 버전을 설치한다고 GPU를 사용하지 않습니다.
@@ -394,8 +399,10 @@ GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고,
 변수와 모델에 GPU 사용 설정을 해야 합니다.
 
 1. PyTorch 버전 확인
-현재 버전을 확인합니다.123import torch, torchvisionprint(torch.__version__)print(torchvision.",
-        "wordCount": 496
+현재 버전을 확인합니다.
+
+123import torch, torchvisionprint(torch.__version__)print(torchvisio",
+        "wordCount": 508
     }
 </script>
 
@@ -477,16 +484,6 @@ GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고,
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -720,10 +717,6 @@ GPU가 여럿이라면 어떤 GPU가 사용 가능한지 확인하고,
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

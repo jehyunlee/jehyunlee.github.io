@@ -12,20 +12,20 @@
     
     <meta name="keywords" content="imagej,jython,inspection" />
     
-    <meta name="description" content="6.1. ImagePlus: ImageJ의 이미지 instanceReference  TCP School 26) 클래스의 개념ImagePlus   지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다. instance란 것은 Class에 정의된 대로 만들어진 객체입니다.  자동차 설계도(Cla">
+    <meta name="description" content="6.1. ImagePlus: ImageJ의 이미지 instanceReference  TCP School 26) 클래스의 개념ImagePlus   지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.  instance란 것은 Class에 정의된 대로 만들어진 객체입니다.   자동차 설계도(C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6. Image Data 분석">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="6.1. ImagePlus: ImageJ의 이미지 instanceReference  TCP School 26) 클래스의 개념ImagePlus   지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다. instance란 것은 Class에 정의된 대로 만들어진 객체입니다.  자동차 설계도(Cla">
+<meta property="og:description" content="6.1. ImagePlus: ImageJ의 이미지 instanceReference  TCP School 26) 클래스의 개념ImagePlus   지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.  instance란 것은 Class에 정의된 대로 만들어진 객체입니다.   자동차 설계도(C">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/6_insp_plot6.PNG">
 <meta property="article:published_time" content="2020-01-28T04:35:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:43:18.365Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.520Z">
 <meta property="article:author" content="Jehyun Lee">
 <meta property="article:tag" content="imagej">
-<meta property="article:tag" content="jython">
 <meta property="article:tag" content="inspection">
+<meta property="article:tag" content="jython">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/ImageJ-Tutorial/6_insp_plot6.PNG">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/01/28/ImageJ-tutorial-6-Inspection/" class="article-date">
-     <time datetime="2020-11-27T00:43:18.365Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:37.520Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -233,8 +233,10 @@
 <p><a target="_blank" rel="noopener" href="http://tcpschool.com/java/java_class_intro">TCP School 26) 클래스의 개념</a><br><a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html">ImagePlus</a></p>
 </blockquote>
 <ul>
-<li><a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-5-Script/">지난 글</a>에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.</li>
-<li><code>instance</code>란 것은 <code>Class</code>에 정의된 대로 만들어진 객체입니다. <ul>
+<li><p><a href="https://jehyunlee.github.io/2019/12/19/ImageJ-tutorial-5-Script/">지난 글</a>에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.</p>
+</li>
+<li><p><code>instance</code>란 것은 <code>Class</code>에 정의된 대로 만들어진 객체입니다. </p>
+<ul>
 <li><p>자동차 설계도(<code>Class</code>)와 자동차(<code>instance</code>) 관계로 보시면 비슷합니다.</p>
 </li>
 <li><p><code>instance</code>는 <code>Class</code>에 선언된 <code>Field</code>와 <code>Method</code>를 가지고 있습니다.<br>(ex. 그랜저 <code>Class</code>로 만들어진 철수 차 <code>instance</code>의  후방카메라 옵션)</p>
@@ -245,7 +247,8 @@
 <br></li>
 </ul>
 </li>
-<li><code>ImageJ</code>에서 이미지를 읽어들이면 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html"><code>ImagePlus</code></a> instance가 됩니다.<ul>
+<li><p><code>ImageJ</code>에서 이미지를 읽어들이면 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html"><code>ImagePlus</code></a> instance가 됩니다.</p>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/ImagePlus.html">공식 문서</a>를 클릭해보시면 자체적으로 <code>changes</code>부터 <code>win</code>까지, 그리고 상위 클래스인 <code>java.awt.image.ImageObserver</code>와 <code>ij.measure.Measurements</code>로부터 상속받은 <code>Field</code>가 추가로 상당히 많습니다.</li>
 <li>그랜저 <code>Class</code>는 자동차 <code>Class</code>에 포함되므로 내연기관, 바퀴, 헤드라이트 등 자동차의 속성을 물려받습니다. 이 것을 <code>상속(inheritance)</code>이라고 합니다.</li>
 </ul>
@@ -277,16 +280,17 @@
 <li><p>위 코드를 실행하면 아래와 같이 출력됩니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line">title: boats.gif</span><br><span class="line">width: <span class="number">720</span></span><br><span class="line">height: <span class="number">576</span></span><br><span class="line">number of pixels: <span class="number">414720</span></span><br><span class="line">number of slices: <span class="number">1</span></span><br><span class="line">number of channels: <span class="number">1</span></span><br><span class="line">number of time frames: <span class="number">1</span></span><br><span class="line">image <span class="built_in">type</span>: <span class="number">8</span>-bit</span><br></pre></td></tr></table></figure>
 
-<p><img src="6_insp_1.PNG" alt=" "></p>
+<p><img src="/6_insp_1.PNG" alt=" "></p>
 <ul>
 <li><p>코드 맨 마지막 부분, <code>print &quot;image type:&quot;, types[imp.type]</code> 의 결과물로 <code>image type: 8-bit</code>이 출력되었습니다.  </p>
 </li>
 <li><p>읽어들인<code>boats.gif</code>의 type이 <code>ImagePlus</code>의  <code>GRAY8</code>형식이기 때문에 <code>imp.type</code>은 <code>ImagePlus.GRAY8</code>로 치환되었고, <code>python</code>의 데이터 타입 중 하나인 <code>dictionary</code> 호출에 따라 <code>types</code>에서 <code>ImagePlus.GRAY8</code>에 해당하는 값인 <code>8-bit</code>가 출력된 것입니다.</p>
-<br></li>
+<br>
+</li>
 <li><p><code>image type</code>은 이 이미지의 픽셀이 어떻게 구성되어 있는지를 보여줍니다.</p>
 <ul>
-<li>GRAY8 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^8 = 256 $개)의 정수값(0~255)을 가질 수 있습니다. </li>
-<li>GRAY16 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^{16} = 65536 $개)의 정수값(0~65535)을 가질 수 있습니다.</li>
+<li>GRAY8 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^8 &#x3D; 256 $개)의 정수값(0~255)을 가질 수 있습니다. </li>
+<li>GRAY16 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^{16} &#x3D; 65536 $개)의 정수값(0~65535)을 가질 수 있습니다.</li>
 <li>GRAY32 : 흑백. 한 <code>pixel</code>은 32 bit의 소수(<code>float</code>)값을 가질 수 있습니다.</li>
 <li>COLOR_256: 컬러. 한 <code>pixel</code>은 3 개(Red, Green, Blue)의 8 bit 채널을 가집니다.</li>
 <li>COLOR_RGB: 컬러. 한 <code>pixel</code>은 3 개(Red, Green, Blue)의 32 bit 채널을 가집니다.</li>
@@ -309,7 +313,7 @@
 <li><p><code>ImageJ</code>에서 이미지 데이터를 다루는 <code>ImagePlus</code> 객체는 <code>getStatistics()</code>라는 <code>Method</code>를 가지고 있습니다.</p>
 </li>
 <li><p><code>ImagePlus</code>의 <code>getStatistics()</code>는 4가지 사용 방법이 있습니다.</p>
-<p><img src="6_insp_3.PNG" alt=" "></p>
+<p><img src="/6_insp_3.PNG" alt=" "></p>
 <ol>
 <li><b>인자 없이 실행:</b> Calibration을 반영한 통계결과 (histogram, area, mean, min, max, st.dev, mode)</li>
 <li><b>측정항목(<code>mOptions</code>)을 특정해서 실행:</b> 특정한 항목에 대해서만 결과를 출력합니다.</li>
@@ -329,7 +333,7 @@
 <ul>
 <li>실행 결과, stats1로 저장한 통계 분석 결과의 각 항목들이 출력되었습니다.</li>
 </ul>
-<p><img src="6_insp_5.PNG" alt=" "></p>
+<p><img src="/6_insp_5.PNG" alt=" "></p>
 <ul>
 <li><p>histogram은 구간별 count array로 출력할 수도 있고 (<b># 3-2-1</b>),<br>plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>). </p>
 </li>
@@ -352,9 +356,10 @@
 <li><p>3D 이상이라 볼 수 있는 <code>stack</code> 관련한 데이터는 <code>ImageProcessor</code>에 포함되지 않았으며, 이 것은 <code>ImageStack</code>에 있습니다. </p>
 </li>
 <li><p><code>ImageProcessor</code>로 2D 정보만 추린 후, 여기에서 통계정보를 얻는 명령이 <code>getStatistics()</code>입니다. </p>
-<br></li>
+<br>
+</li>
 <li><p><code>getStatistics()</code> 명령을 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html"><code>ImageStatistics</code></a>에서 찾아보면, 아래와 같이 두 가지 사용법이 있습니다.</p>
-<p><img src="6_insp_2.PNG" alt=" "></p>
+<p><img src="/6_insp_2.PNG" alt=" "></p>
 <ol>
 <li><p><code>getStatistics(ImageProcessor ip)</code>: 인자로 <code>ImageProcessor</code> 객체만을 입력하고, <b><code>calibration</code>되지 않은</b> 상태의 이미지 데이터에 대한 통계를 출력합니다.</p>
 <p><code>ImagePlus</code>에서 사용하는 <code>getStatistics()</code>는 Calibration 된 이미지로, 헷갈리기 쉽습니다.</p>
@@ -366,14 +371,15 @@
 </ul>
 </li>
 <li><p><code>ImagePlus</code>에서 데이터를 뽑는 <b>6.2.2.1</b> 방식이 덜 복잡하고 더 간결해 보입니다.<br>하지만 이런 방법도 있다는 차원에서 살펴보고 지나가겠습니다.</p>
-<br></li>
+<br>
+</li>
 <li><p><b>6.2.2.1</b> 과 동일한 작업을 <code>ImageStatistics(ip)</code>로 진행해 보겠습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij.process <span class="keyword">import</span> ImageStatistics <span class="keyword">as</span> IS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석  </span></span><br><span class="line"><span class="comment"># 2-1. ImageProcessor 호출</span></span><br><span class="line">ip = imp.getProcessor()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2-2. 인자 없이 분석</span></span><br><span class="line">stats2 = IS.getStatistics(ip)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats2&quot;</span>, stats2</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats2.area</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats2.mean</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats2.<span class="built_in">min</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats2.<span class="built_in">max</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats2.stdDev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats2.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot3.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot4.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>실행 결과, <b>6.2.2.1</b> 과 동일한 형태로 다른 값들이 출력됩니다.</li>
 </ul>
-<p><img src="6_insp_6.PNG" alt=" "></p>
+<p><img src="/6_insp_6.PNG" alt=" "></p>
 <ul>
 <li><p>예를 들면 <code>max</code> 값이 45.185에서 255로 바뀌었는데, Calibration이 되지 않은 값이라 그렇습니다.</p>
 </li>
@@ -393,7 +399,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># IS.MIN_MAX 앞에 #을 붙여봅시다. </span></span><br><span class="line"><span class="comment"># 주석으로 처리해버리겠다(comment out) = 실행하지 않겠다는 뜻입니다.</span></span><br><span class="line">options = IS.MEAN | IS.MEDIAN <span class="comment">#| IS.MIN_MAX  </span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>이제 아래 코드가 되었습니다. </li>
+<li>이제 아래 코드가 되었습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij.process <span class="keyword">import</span> ImageStatistics <span class="keyword">as</span> IS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석  </span></span><br><span class="line"><span class="comment"># 2-1. ImageProcessor 호출</span></span><br><span class="line">ip = imp.getProcessor()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2-2. 항목 지정 분석</span></span><br><span class="line">options = IS.MEAN | IS.MEDIAN <span class="comment">#| IS.MIN_MAX  </span></span><br><span class="line">stats3 = IS.getStatistics(ip, options, imp.getCalibration())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats3&quot;</span>, stats3</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats3.area</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats3.mean</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;median:&quot;</span>, stats3.median</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats3.<span class="built_in">min</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats3.<span class="built_in">max</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats3.stdDev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats3.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot5.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot6.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
 
@@ -404,8 +410,9 @@
 </ol>
 </li>
 </ul>
-<p><img src="6_insp_7.PNG" alt=" "></p>
-<br></li>
+<p><img src="/6_insp_7.PNG" alt=" "></p>
+<br>
+</li>
 <li><p><code>ImagePlus</code>상태에서 데이터를 분석하는 것이 더 편하고 직관적입니다.<br>특별한 이유가 없으면 <code>ImageStatistics</code>로 넘어가지 않는 것을 권장합니다.</p>
 </li>
 </ul>
@@ -421,22 +428,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/" data-id="cmhueoxw7008c4gxt9vgsfdib" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/" data-id="cuidTKdIK8-ca6HMEaL961X0W" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -512,7 +509,7 @@
         "genre": "ImageJ Tutorial",
         "datePublished": "2020-01-28",
         "dateCreated": "2020-01-28",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/01/28/ImageJ-tutorial-6-Inspection/",
         "description": "6.1. ImagePlus: ImageJ의 이미지 instanceReference
 
@@ -520,9 +517,11 @@ TCP School 26) 클래스의 개념ImagePlus
 
 
 지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.
+
 instance란 것은 Class에 정의된 대로 만들어진 객체입니다. 
-자동차 설계도(Cla",
-        "wordCount": 1822
+
+자동차 설계도(C",
+        "wordCount": 1821
     }
 </script>
 
@@ -604,16 +603,6 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -847,10 +836,6 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

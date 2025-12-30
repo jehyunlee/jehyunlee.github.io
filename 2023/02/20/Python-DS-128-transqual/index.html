@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/128_transqual_00.png">
 <meta property="article:published_time" content="2023-02-19T22:09:00.000Z">
-<meta property="article:modified_time" content="2023-02-20T12:27:29.989Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.920Z">
 <meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="latural language processing">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="translation">
-<meta property="article:tag" content="latural language processing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/128_transqual_00.png">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2023/02/20/Python-DS-128-transqual/" class="article-date">
-     <time datetime="2023-02-20T12:27:29.989Z" itemprop="dateModified">2023-02-20</time>
+     <time datetime="2025-12-30T06:28:37.920Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -242,7 +242,7 @@
 <li><a target="_blank" rel="noopener" href="https://wikidocs.net/31695">기계 번역 결과와 사람이 직접 번역한 결과가 얼마나 유사한지 비교하여 성능을 측정하는 방법입니다.</a></li>
 <li><a target="_blank" rel="noopener" href="https://wikidocs.net/31695">n-gram에 기반하여 언어에 구애받지 않고 사용할 수 있으며 계산 속도가 빠릅니다.</a></li>
 </ul>
-<p><img src="128_transqual_01.png" alt="Skimmer: 논문 요약, 추출 번역 프로그램 (개발중)"></p>
+<p><img src="/128_transqual_01.png" alt="Skimmer: 논문 요약, 추출 번역 프로그램 (개발중)"></p>
 <ul>
 <li>그러나 제 프로그램에 사용할 프로그램은 <b>꼭 최고의 성능이 아니어도 됩니다.</b></li>
 <li>문장이 다소 어색해도 내용을 파악할 수 있는 각 분야의 준전문가 이상이 예상 사용자입니다.</li>
@@ -265,76 +265,78 @@
 <li>논문 초록(abstract)을 요약한 것과 함께 독창성(originality)을 추출한 문장을 대상으로 테스트를 진행합니다.</li>
 <li><a href="https://jehyunlee.github.io/2022/07/02/Python-DS-106-aaicon/">지난 학회</a>에서 발표한 내용을 바탕으로 일차 서비스를 만들었습니다.</li>
 <li>여기서 도출된 데이터를 이용해 번역 모델을 테스트합니다.</li>
-<li><b>abstract summary</b>는 초록이 요약된 것, <b>originality</b>는 초록 중에서 독창성을 드러내는 문장을 추출한 것입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df_ex = pd.read_excel(<span class="string">&quot;samples.xlsx&quot;</span>)</span><br><span class="line">df_ex</span><br></pre></td></tr></table></figure>
-<img src="128_transqual_02.png"></li>
+<li><b>abstract summary</b>는 초록이 요약된 것, <b>originality</b>는 초록 중에서 독창성을 드러내는 문장을 추출한 것입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df_ex = pd.read_excel(<span class="string">&quot;samples.xlsx&quot;</span>)</span><br><span class="line">df_ex</span><br></pre></td></tr></table></figure>
+<p><img src="/128_transqual_02.png"></p>
 <ul>
 <li>예컨대 첫 번째 데이터는 다음 논문입니다.</li>
 </ul>
-<p><img src="128_transqual_03.png"><br></p>
+<p><img src="/128_transqual_03.png"><br></p>
 <ul>
-<li><p>이 논문의 초록을 요약하면 다음과 같습니다.</p>
-</li>
-<li><p><b>초록 요약본</b>은 <b>64단어, 413자</b>로 구성되어 있습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">abs0 =</span><br><span class="line"><span class="string">&quot;PV panels produce unnecessary heat energy during power generation which increases the temperature and affects the efficiency of PV cells. This article investigates the performance of PV modules using aluminum heat sinks and forced air cooling techniques. The average electrical efficiency of the studied PV panels is 17% and is very close to the PV module efficiency of 19.38% under standard test conditions (STC)&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>그리고 첫 문장 같은 전반적인 동향을 뜻하는 말을 제외하고 <b>독창성</b>만 추출하면 다음과 같습니다.</p>
-</li>
-<li><p><b>독창성 추출본</b>은 <b>31단어, 184자</b>로 구성되어 있습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org0 =</span><br><span class="line"><span class="string">&quot;The results of the study show that solar energy generation can be optimized by considering the design, use of materials and proper cooling methods even when using the same solar panel.&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>읽을 수 있는 영문이고 원문에 비해 길이도 크게 줄었습니다.</p>
-</li>
-<li><p>하지만 더 쉽게 읽고 싶습니다. 여러 번역 엔진을 비교합니다.</p>
-</li>
+<li>이 논문의 초록을 요약하면 다음과 같습니다.</li>
+<li><b>초록 요약본</b>은 <b>64단어, 413자</b>로 구성되어 있습니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">abs0 =</span><br><span class="line"><span class="string">&quot;PV panels produce unnecessary heat energy during power generation which increases the temperature and affects the efficiency of PV cells. This article investigates the performance of PV modules using aluminum heat sinks and forced air cooling techniques. The average electrical efficiency of the studied PV panels is 17% and is very close to the PV module efficiency of 19.38% under standard test conditions (STC)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>그리고 첫 문장 같은 전반적인 동향을 뜻하는 말을 제외하고 <b>독창성</b>만 추출하면 다음과 같습니다.</li>
+<li><b>독창성 추출본</b>은 <b>31단어, 184자</b>로 구성되어 있습니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org0 =</span><br><span class="line"><span class="string">&quot;The results of the study show that solar energy generation can be optimized by considering the design, use of materials and proper cooling methods even when using the same solar panel.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>읽을 수 있는 영문이고 원문에 비해 길이도 크게 줄었습니다.</li>
+<li>하지만 더 쉽게 읽고 싶습니다. 여러 번역 엔진을 비교합니다.</li>
 </ul>
 <h2 id="2-1-Google-Translate"><a href="#2-1-Google-Translate" class="headerlink" title="2.1. Google Translate"></a>2.1. Google Translate</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://pypi.org/project/googletrans/">pypi:googletrans</a></p>
 </blockquote>
 <ul>
-<li><p>googletrans를 사용하는 방법이 있고 Google Cloud를 API로 이용하는 방법이 있습니다.</p>
-</li>
-<li><p>googletrans도 <b>Google Translate Ajax API</b>를 사용한다니 완전한 설치형은 아닙니다.</p>
-</li>
-<li><p>여기서는 googletrans만 사용합니다. 글이 그다지 길지 않기 때문입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!pip install googletrans   # Error 발생</span></span><br><span class="line">!pip install googletrans==<span class="number">3.1</span><span class="number">.0</span>a0</span><br></pre></td></tr></table></figure></li>
-<li><p><code>!pip install googletrans</code>를 실행하면 현재 기준 <code>3.0.0</code> 버전이 설치됩니다.</p>
-</li>
-<li><p>하지만 번역 수행시 오류가 발생하므로 문제가 없는 <code>3.1.0a0</code> 버전을 설치하시기 바랍니다.</p>
-</li>
-<li><p>사용법은 간단합니다. <code>Translator()</code>로 번역기 인스턴스를 만든 후 <code>.translate(문구, 목표언어)</code>를 입력하면 됩니다.</p>
-</li>
-<li><p>번역에 걸리는 소요시간을 계산하기 위해 앞뒤로 시간 계산 코드를 붙였습니다.</p>
+<li>googletrans를 사용하는 방법이 있고 Google Cloud를 API로 이용하는 방법이 있습니다.</li>
+<li>googletrans도 <b>Google Translate Ajax API</b>를 사용한다니 완전한 설치형은 아닙니다.</li>
+<li>여기서는 googletrans만 사용합니다. 글이 그다지 길지 않기 때문입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!pip install googletrans   # Error 발생</span></span><br><span class="line">!pip install googletrans==<span class="number">3.1</span><span class="number">.0</span>a0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>!pip install googletrans</code>를 실행하면 현재 기준 <code>3.0.0</code> 버전이 설치됩니다.</li>
+<li>하지만 번역 수행시 오류가 발생하므로 문제가 없는 <code>3.1.0a0</code> 버전을 설치하시기 바랍니다.</li>
+<li>사용법은 간단합니다. <code>Translator()</code>로 번역기 인스턴스를 만든 후 <code>.translate(문구, 목표언어)</code>를 입력하면 됩니다.</li>
+<li>번역에 걸리는 소요시간을 계산하기 위해 앞뒤로 시간 계산 코드를 붙였습니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> googletrans <span class="keyword">import</span> Translator</span><br><span class="line"></span><br><span class="line">google = Translator()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 초록 요약</span></span><br><span class="line">time_start = time()</span><br><span class="line">abs_translator0 = google.translate(abs0, dest=<span class="string">&quot;ko&quot;</span>)  <span class="comment"># 초록 번역</span></span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 초록요약= <span class="subst">&#123;abs_translator0.text&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성 추출</span></span><br><span class="line">time_start = time()</span><br><span class="line">org_translator0 = google.translate(org0, dest=<span class="string">&quot;ko&quot;</span>)  <span class="comment"># 독창성 번역</span></span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 독창성추출= <span class="subst">&#123;org_translator0.text&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록요약= PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 0.39s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성추출= 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 0.29s</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p><b>안정적인 성능</b>과 <b>매우 빠른 속도</b>를 보여줍니다.</p>
-</li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록요약= PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 0.39s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성추출= 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 0.29s</span><br></pre></td></tr></table></figure>
+<ul>
+<li><b>안정적인 성능</b>과 <b>매우 빠른 속도</b>를 보여줍니다.</li>
 </ul>
 <h2 id="2-2-Papago"><a href="#2-2-Papago" class="headerlink" title="2.2. Papago"></a>2.2. Papago</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://developers.naver.com/docs/papago/">파파고 API</a><br><a target="_blank" rel="noopener" href="https://console.ncloud.com/papago-translation/apis">네이버 클라우드 콘솔:파파고 번역</a><br><a target="_blank" rel="noopener" href="https://www.fin-ncloud.com/product/aiService/papagoTranslation">네이버 파파고 API 활용 예시</a></p>
 </blockquote>
 <ul>
-<li><p>일 5백만글자와 월 3천만글자 한도가 있습니다.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://console.ncloud.com/papago-translation/apis">네이버 클라우드 콘솔</a>에 가입하고 <b>client id</b>와 <b>secret</b>을 발급받아야 합니다.</p>
-</li>
-<li><p>이들을 각기 <code>Naver_client_id</code>, <code>Naver_client_secret</code>에 넣으면 다음과 같은 함수를 만들 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">papago</span>(<span class="params">text, src=<span class="string">&quot;en&quot;</span>, dest=<span class="string">&quot;ko&quot;</span></span>):</span>  </span><br><span class="line">    data = &#123;<span class="string">&#x27;text&#x27;</span> : text,</span><br><span class="line">            <span class="string">&#x27;source&#x27;</span> : src,</span><br><span class="line">            <span class="string">&#x27;target&#x27;</span>: dest&#125;</span><br><span class="line"></span><br><span class="line">    url = <span class="string">&quot;https://naveropenapi.apigw.ntruss.com/nmt/v1/translation&quot;</span></span><br><span class="line"></span><br><span class="line">    header = &#123;<span class="string">&quot;X-NCP-APIGW-API-KEY-ID&quot;</span>:Naver_client_id,</span><br><span class="line">              <span class="string">&quot;X-NCP-APIGW-API-KEY&quot;</span>:Naver_client_secret&#125;</span><br><span class="line"></span><br><span class="line">    response = requests.post(url, headers=header, data=data)</span><br><span class="line">    rescode = response.status_code</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(rescode==<span class="number">200</span>):</span><br><span class="line">        send_data = response.json()</span><br><span class="line">        trans_data = (send_data[<span class="string">&#x27;message&#x27;</span>][<span class="string">&#x27;result&#x27;</span>][<span class="string">&#x27;translatedText&#x27;</span>])</span><br><span class="line">        <span class="keyword">return</span> trans_data</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Error Code:&quot;</span> , rescode)</span><br></pre></td></tr></table></figure></li>
-<li><p>위 함수를 사용해 번역을 수행합니다.</p>
+<li>일 5백만글자와 월 3천만글자 한도가 있습니다.</li>
+<li><a target="_blank" rel="noopener" href="https://console.ncloud.com/papago-translation/apis">네이버 클라우드 콘솔</a>에 가입하고 <b>client id</b>와 <b>secret</b>을 발급받아야 합니다.</li>
+<li>이들을 각기 <code>Naver_client_id</code>, <code>Naver_client_secret</code>에 넣으면 다음과 같은 함수를 만들 수 있습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">papago</span>(<span class="params">text, src=<span class="string">&quot;en&quot;</span>, dest=<span class="string">&quot;ko&quot;</span></span>):  </span><br><span class="line">    data = &#123;<span class="string">&#x27;text&#x27;</span> : text,</span><br><span class="line">            <span class="string">&#x27;source&#x27;</span> : src,</span><br><span class="line">            <span class="string">&#x27;target&#x27;</span>: dest&#125;</span><br><span class="line"></span><br><span class="line">    url = <span class="string">&quot;https://naveropenapi.apigw.ntruss.com/nmt/v1/translation&quot;</span></span><br><span class="line"></span><br><span class="line">    header = &#123;<span class="string">&quot;X-NCP-APIGW-API-KEY-ID&quot;</span>:Naver_client_id,</span><br><span class="line">              <span class="string">&quot;X-NCP-APIGW-API-KEY&quot;</span>:Naver_client_secret&#125;</span><br><span class="line"></span><br><span class="line">    response = requests.post(url, headers=header, data=data)</span><br><span class="line">    rescode = response.status_code</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(rescode==<span class="number">200</span>):</span><br><span class="line">        send_data = response.json()</span><br><span class="line">        trans_data = (send_data[<span class="string">&#x27;message&#x27;</span>][<span class="string">&#x27;result&#x27;</span>][<span class="string">&#x27;translatedText&#x27;</span>])</span><br><span class="line">        <span class="keyword">return</span> trans_data</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Error Code:&quot;</span> , rescode)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위 함수를 사용해 번역을 수행합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록 요약</span></span><br><span class="line">time_start = time()</span><br><span class="line">abs_translator1 = papago(abs0, dest=<span class="string">&quot;ko&quot;</span>)</span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 초록요약= <span class="subst">&#123;abs_translator1&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성 추출</span></span><br><span class="line">time_start = time()</span><br><span class="line">org_translator1 = papago(org0, dest=<span class="string">&quot;ko&quot;</span>)</span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 독창성추출= <span class="subst">&#123;org_translator1&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록요약= PV 패널은 발전 시 불필요한 열에너지를 발생시켜 온도를 상승시키고 PV 셀의 효율에 영향을 미친다. 본 논문에서는 알루미늄 히트 싱크와 강제 공기 냉각 기술을 사용한 PV 모듈의 성능을 조사한다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 시험 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝다</span></span><br><span class="line">- 소요시간: 0.15s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성추출= 연구 결과는 동일한 태양광 패널을 사용하는 경우에도 설계와 재료 사용, 적절한 냉각 방식 등을 고려하면 태양광 발전을 최적화할 수 있음을 보여준다.</span></span><br><span class="line">- 소요시간: 0.35s</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p>Google Translate가 존대말을 하는 반면 Naver는 반말을 합니다. </p>
-</li>
-<li><p>속도도 Google Translate 비슷하지만 유료 과금이 다소 마음에 걸립니다.</p>
-</li>
-<li><p><b>5백만 글자/일</b>까지는 무료이지만 이후 <b>2만원/1백만 글자</b>로 월별 과금됩니다.</p>
-</li>
-<li><p>서비스가 인기라도 끌면 곤란해질 수 있습니다.</p>
-</li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록요약= PV 패널은 발전 시 불필요한 열에너지를 발생시켜 온도를 상승시키고 PV 셀의 효율에 영향을 미친다. 본 논문에서는 알루미늄 히트 싱크와 강제 공기 냉각 기술을 사용한 PV 모듈의 성능을 조사한다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 시험 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝다</span></span><br><span class="line">- 소요시간: 0.15s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성추출= 연구 결과는 동일한 태양광 패널을 사용하는 경우에도 설계와 재료 사용, 적절한 냉각 방식 등을 고려하면 태양광 발전을 최적화할 수 있음을 보여준다.</span></span><br><span class="line">- 소요시간: 0.35s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Google Translate가 존대말을 하는 반면 Naver는 반말을 합니다. </li>
+<li>속도도 Google Translate 비슷하지만 유료 과금이 다소 마음에 걸립니다.</li>
+<li><b>5백만 글자&#x2F;일</b>까지는 무료이지만 이후 <b>2만원&#x2F;1백만 글자</b>로 월별 과금됩니다.</li>
+<li>서비스가 인기라도 끌면 곤란해질 수 있습니다.</li>
 </ul>
 <h2 id="2-3-Huggingface"><a href="#2-3-Huggingface" class="headerlink" title="2.3. Huggingface"></a>2.3. Huggingface</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/tasks/translation">Huggingface: Transformers-translation</a><br><a target="_blank" rel="noopener" href="https://www.theclickreader.com/language-translation-using-hugging-face-and-python/">TheClickReader: Language Translation using Huggingface and Python in 3 lines of code</a><br><a target="_blank" rel="noopener" href="https://ai.facebook.com/blog/introducing-many-to-many-multilingual-machine-translation/">Meta AI: The first AI model that translates 100 languages without relying on English data</a><br><a target="_blank" rel="noopener" href="https://scontent.ficn2-2.fna.fbcdn.net/v/t39.8562-6/122141102_1284164108584699_8596121596808227915_n.pdf?_nc_cat=108&ccb=1-7&_nc_sid=ae5e01&_nc_ohc=hBPnkJzF-6AAX8qvUzN&_nc_ht=scontent.ficn2-2.fna&oh=00_AfAXVKNnFRZgRp37P9wjJFQAWslRGNXPFvCiOphK83fXXQ&oe=63F726B4">Beyond English-Centric Multilingual Machine Translation</a></p>
@@ -342,15 +344,20 @@
 <ul>
 <li>Huggingface를 사용하면 transformer등 최신 모델을 활용하기 좋습니다.</li>
 <li>별도 요금을 지불할 필요가 없기 때문에 과금에서도 자유롭습니다.</li>
-<li><code>pip</code>로 간단하게 설치하고 시작합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install transformers sentencepiece -q</span><br></pre></td></tr></table></figure></li>
+<li><code>pip</code>로 간단하게 설치하고 시작합니다.</li>
 </ul>
-<p><img src="128_transqual_04.png"><br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install transformers sentencepiece -q</span><br></pre></td></tr></table></figure>
+
+<p><img src="/128_transqual_04.png"><br></p>
 <ul>
-<li>여러 모델이 있지만 여기서는 최초의 다중언어 기계학습 모델인 M2M-100을 사용하겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line">pipe = pipeline(task=<span class="string">&#x27;text2text-generation&#x27;</span>, model=<span class="string">&#x27;facebook/m2m100_418M&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 초록 요약</span></span><br><span class="line">time_start = time()</span><br><span class="line">abs_translator2 = pipe(abs0, forced_bos_token_id=pipe.tokenizer.get_lang_id(lang=<span class="string">&#x27;ko&#x27;</span>))</span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 초록요약= <span class="subst">&#123;abs_translator2[<span class="number">0</span>][<span class="string">&#x27;generated_text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성 추출</span></span><br><span class="line">time_start = time()</span><br><span class="line">org_translator2 = pipe(org0, forced_bos_token_id=pipe.tokenizer.get_lang_id(lang=<span class="string">&#x27;ko&#x27;</span>))</span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 독창성추출= <span class="subst">&#123;org_translator2[<span class="number">0</span>][<span class="string">&#x27;generated_text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s&quot;</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록요약= PV 패널은 전원 생산 중에 불필요한 열 에너지를 생산하여 온도를 증가시키고 PV 세포의 효율성에 영향을 미칩니다.이 기사는 알루미늄 열 싱크 및 강제 공기 냉각 기술을 사용하여 PV 모듈의 성능을 조사합니다. 연구 된 PV 패널의 평균 전기 효율성은 17 %이며 표준 테스트 조건 (STC)에서 19.38 %의 PV 모듈 효율성에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 23.89s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성추출= 연구 결과에 따르면 태양 에너지 생산은 디자인, 재료 사용 및 적절한 냉각 방법을 고려하여 동일한 태양 전지판을 사용할 때에도 최적화 될 수 있습니다.</span></span><br><span class="line">- 소요시간: 8.82s</span><br></pre></td></tr></table></figure></li>
+<li>여러 모델이 있지만 여기서는 최초의 다중언어 기계학습 모델인 M2M-100을 사용하겠습니다.</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line">pipe = pipeline(task=<span class="string">&#x27;text2text-generation&#x27;</span>, model=<span class="string">&#x27;facebook/m2m100_418M&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 초록 요약</span></span><br><span class="line">time_start = time()</span><br><span class="line">abs_translator2 = pipe(abs0, forced_bos_token_id=pipe.tokenizer.get_lang_id(lang=<span class="string">&#x27;ko&#x27;</span>))</span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 초록요약= <span class="subst">&#123;abs_translator2[<span class="number">0</span>][<span class="string">&#x27;generated_text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성 추출</span></span><br><span class="line">time_start = time()</span><br><span class="line">org_translator2 = pipe(org0, forced_bos_token_id=pipe.tokenizer.get_lang_id(lang=<span class="string">&#x27;ko&#x27;</span>))</span><br><span class="line">time_end = time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# 독창성추출= <span class="subst">&#123;org_translator2[<span class="number">0</span>][<span class="string">&#x27;generated_text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초록요약= PV 패널은 전원 생산 중에 불필요한 열 에너지를 생산하여 온도를 증가시키고 PV 세포의 효율성에 영향을 미칩니다.이 기사는 알루미늄 열 싱크 및 강제 공기 냉각 기술을 사용하여 PV 모듈의 성능을 조사합니다. 연구 된 PV 패널의 평균 전기 효율성은 17 %이며 표준 테스트 조건 (STC)에서 19.38 %의 PV 모듈 효율성에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 23.89s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 독창성추출= 연구 결과에 따르면 태양 에너지 생산은 디자인, 재료 사용 및 적절한 냉각 방법을 고려하여 동일한 태양 전지판을 사용할 때에도 최적화 될 수 있습니다.</span></span><br><span class="line">- 소요시간: 8.82s</span><br></pre></td></tr></table></figure>
+<ul>
 <li>앞의 두 모델과 달리 시간이 적지 않게 걸렸습니다.</li>
 <li>GPU(NVIDIA GeForce RTX 2070)이 설치된 데스크탑에서도 실행해 보았습니다.</li>
 <li>하지만 <b>abs0: 15.59s</b>, <b>org0: 5.88s</b>로 서비스에는 적합하지 않은 시간이 소요됐습니다.</li>
@@ -359,38 +366,46 @@
 <p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/completion/translation">OpenAI: Translation</a><br><a target="_blank" rel="noopener" href="https://chat.openai.com/">ChatGPT</a><br><a target="_blank" rel="noopener" href="https://community.openai.com/t/randomly-occurring-openai-api-timeouts/28573/12">OpenAI: Randomly Occuring OpenAI API Timeouts</a></p>
 </blockquote>
 <ul>
-<li>최근 ChatGPT로 인해 언어 모델이 주목을 받고 있습니다.</li>
-<li>많은 유튜버들이 ChatGPT를 엑셀 등에 적용한 영상을 올리고 있지만 실상은 OpenAI의 <b>GPT API</b>를 사용하는 것입니다.</li>
-<li>OpenAI는 번역에 사용할 수 있는 GPT3계열의 여러 가지 모델을 지원합니다.</li>
-</ul>
+<li><p>최근 ChatGPT로 인해 언어 모델이 주목을 받고 있습니다.</p>
+</li>
+<li><p>많은 유튜버들이 ChatGPT를 엑셀 등에 적용한 영상을 올리고 있지만 실상은 OpenAI의 <b>GPT API</b>를 사용하는 것입니다.</p>
+</li>
+<li><p>OpenAI는 번역에 사용할 수 있는 GPT3계열의 여러 가지 모델을 지원합니다.</p>
+</li>
+<li><p>공식 설명을 <a target="_blank" rel="noopener" href="https://www.deepl.com/">DeepL</a>로 번역한 결과는 다음과 같습니다.</p>
 <ul>
-<li>공식 설명을 <a target="_blank" rel="noopener" href="https://www.deepl.com/">DeepL</a>로 번역한 결과는 다음과 같습니다.<ul>
 <li><b>text-davinci-003</b> : GPT-3 시리즈 중 가장 성능이 뛰어난 모델입니다. 다른 GPT-3 모델보다 더 높은 품질, 더 긴 출력, 더 나은 명령 수행 능력으로 어떤 작업도 수행할 수 있습니다. 요청당 최대 4,000개의 토큰을 처리할 수 있습니다.</li>
 <li><b>text-davinci-002</b> : GPT-3 시리즈의 2세대 모델입니다. GPT-3 모델의 엘리어가 할 수 있는 모든 작업을 수행할 수 있지만 컨텍스트가 적은 경우가 많습니다. 요청당 최대 4,000개의 토큰을 처리할 수 있습니다.</li>
 <li><b>text-davinci-001</b> : GPT-3 시리즈 중 가장 성능이 뛰어난 모델의 이전 버전입니다. 다른 GPT-3 모델이 할 수 있는 모든 작업을 수행할 수 있지만 컨텍스트가 적은 경우가 많습니다.</li>
 <li><b>text-curie-001</b> : 기능이 매우 뛰어나지만 텍스트 다빈치-003보다 빠르고 비용이 저렴합니다.</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>GPT를 사용하려면 openai에서 API key를 받아야 합니다.</li>
-<li>davinci 모델은 <b>0.12 USD/1k token</b>, curie 모델은 <b>0.012 USD/1k token</b>가 과금됩니다.</li>
-<li>함수를 만드는 김에 시간 측정을 decorator로 합니다.</li>
-<li>먼저 동일 모델을 여러번 반복하면서 일관성을 테스트합니다. 모델은 text-davinci-003 모델을 사용했습니다.</li>
-<li><b>앞서 사용한 다른 모델들과 달리 수행시마다 다른 결과가 나옵니다.</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openai</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timed</span>(<span class="params">func</span>):</span></span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        time_start = time()</span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        time_end = time()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timed</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">translateGPT</span>(<span class="params">text, model=<span class="string">&quot;text-davinci-003&quot;</span>, max_tokens=<span class="number">1000</span>, top_p=<span class="number">1.0</span></span>):</span></span><br><span class="line">    response = openai.Completion.create(</span><br><span class="line">      model=model,</span><br><span class="line">      prompt=<span class="string">f&quot;Translate this in Korean:<span class="subst">&#123;text&#125;</span>&quot;</span>,</span><br><span class="line">      temperature=<span class="number">0.3</span>,</span><br><span class="line">      max_tokens=max_tokens,</span><br><span class="line">      top_p=top_p,</span><br><span class="line">      frequency_penalty=<span class="number">0.0</span>,</span><br><span class="line">      presence_penalty=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.to_dict()[<span class="string">&#x27;choices&#x27;</span>][<span class="number">0</span>][<span class="string">&quot;text&quot;</span>].lstrip(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 5회 번역</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# <span class="subst">&#123;i&#125;</span>회: <span class="subst">&#123;translateGPT(abs0)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1회: - 소요시간: 23.38s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 시 불필요한 열 에너지를 발생시키며 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 기사는 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용하여 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17 %로 표준 시험 조건 (STC) 하에서의 PV 모듈 효율인 19.38 %에 매우 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 2회: - 소요시간: 20.41s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 시 불필요한 열 에너지를 발생시켜 PV 셀의 수율에 영향을 미치는 온도를 증가시킵니다. 이 논문은 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용한 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17 %로 표준 시험 조건(STC)에서의 PV 모듈 효율인 19.38 %에 매우 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 3회: - 소요시간: 23.22s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 중 불필요한 열 에너지를 생산하여 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 기사는 알루미늄 히트 싱크 및 강제 공기 쿨링 기술을 사용하여 PV 모듈의 성능을 조사합니다. 연구 된 PV 패널의 평균 전기 효율은 17 %이며 표준 시험 조건 (STC) 하에서의 PV 모듈 효율인 19.38 %에 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 4회: - 소요시간: 22.51s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 중 불필요한 열 에너지를 생산하여 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 논문은 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구 된 PV 패널의 평균 전기 효율은 17 %이며 표준 시험 조건 (STC) 의 PV 모듈 효율인 19.38 %에 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 5회: - 소요시간: 22.86s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 중에 불필요한 열 에너지를 발생시켜 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 기사는 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용한 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17 %이며 표준 시험 조건 (STC) 에서의 PV 모듈 효율인 19.38 %에 매우 가깝습니다.&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+<li><p>GPT를 사용하려면 openai에서 API key를 받아야 합니다.</p>
 </li>
-<li>모델별 소요 시간을 확인하기 위해 같은 문구를 모델만 바꾸어 적용했습니다. </li>
-<li>초록 요약본에서 과거 모델일수록 시간이 짧게 걸리는 동향이 확인되지만 독창성은 그렇지 않습니다.<br><br><img src="128_transqual_06.png"><br></li>
+<li><p>davinci 모델은 <b>0.12 USD&#x2F;1k token</b>, curie 모델은 <b>0.012 USD&#x2F;1k token</b>가 과금됩니다.</p>
+</li>
+<li><p>함수를 만드는 김에 시간 측정을 decorator로 합니다.</p>
+</li>
+<li><p>먼저 동일 모델을 여러번 반복하면서 일관성을 테스트합니다. 모델은 text-davinci-003 모델을 사용했습니다.</p>
+</li>
+<li><p><b>앞서 사용한 다른 모델들과 달리 수행시마다 다른 결과가 나옵니다.</b></p>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openai</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">timed</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        time_start = time()</span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        time_end = time()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;- 소요시간: <span class="subst">&#123;time_end-time_start:<span class="number">.2</span>f&#125;</span>s&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timed</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">translateGPT</span>(<span class="params">text, model=<span class="string">&quot;text-davinci-003&quot;</span>, max_tokens=<span class="number">1000</span>, top_p=<span class="number">1.0</span></span>):</span><br><span class="line">    response = openai.Completion.create(</span><br><span class="line">      model=model,</span><br><span class="line">      prompt=<span class="string">f&quot;Translate this in Korean:<span class="subst">&#123;text&#125;</span>&quot;</span>,</span><br><span class="line">      temperature=<span class="number">0.3</span>,</span><br><span class="line">      max_tokens=max_tokens,</span><br><span class="line">      top_p=top_p,</span><br><span class="line">      frequency_penalty=<span class="number">0.0</span>,</span><br><span class="line">      presence_penalty=<span class="number">0.0</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> response.to_dict()[<span class="string">&#x27;choices&#x27;</span>][<span class="number">0</span>][<span class="string">&quot;text&quot;</span>].lstrip(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 5회 번역</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# <span class="subst">&#123;i&#125;</span>회: <span class="subst">&#123;translateGPT(abs0)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
+<li>실행 결과</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1회: - 소요시간: 23.38s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 시 불필요한 열 에너지를 발생시키며 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 기사는 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용하여 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17 %로 표준 시험 조건 (STC) 하에서의 PV 모듈 효율인 19.38 %에 매우 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 2회: - 소요시간: 20.41s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 시 불필요한 열 에너지를 발생시켜 PV 셀의 수율에 영향을 미치는 온도를 증가시킵니다. 이 논문은 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용한 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17 %로 표준 시험 조건(STC)에서의 PV 모듈 효율인 19.38 %에 매우 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 3회: - 소요시간: 23.22s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 중 불필요한 열 에너지를 생산하여 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 기사는 알루미늄 히트 싱크 및 강제 공기 쿨링 기술을 사용하여 PV 모듈의 성능을 조사합니다. 연구 된 PV 패널의 평균 전기 효율은 17 %이며 표준 시험 조건 (STC) 하에서의 PV 모듈 효율인 19.38 %에 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 4회: - 소요시간: 22.51s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 중 불필요한 열 에너지를 생산하여 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 논문은 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구 된 PV 패널의 평균 전기 효율은 17 %이며 표준 시험 조건 (STC) 의 PV 모듈 효율인 19.38 %에 가깝습니다.&#x27;</span></span><br><span class="line"><span class="comment"># 5회: - 소요시간: 22.86s</span></span><br><span class="line"><span class="string">&#x27;PV 패널은 전력 생산 중에 불필요한 열 에너지를 발생시켜 온도를 증가시키고 PV 셀의 효율에 영향을 미칩니다. 이 기사는 알루미늄 히트 싱크와 강제 공기 쿨링 기술을 사용한 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17 %이며 표준 시험 조건 (STC) 에서의 PV 모듈 효율인 19.38 %에 매우 가깝습니다.&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>모델별 소요 시간을 확인하기 위해 같은 문구를 모델만 바꾸어 적용했습니다. </p>
+</li>
+<li><p>초록 요약본에서 과거 모델일수록 시간이 짧게 걸리는 동향이 확인되지만 독창성은 그렇지 않습니다.<br><br><img src="/128_transqual_06.png"><br></p>
+</li>
 <li><p>이상해서 확인을 해보니 <b>좀 심각한 문제가 있습니다.</b></p>
 </li>
 <li><p><b>originality 번역이 간혹 엉뚱한 결과를 내놓습니다.</b><br></p>
 </li>
-<li><p><b>text-davinci-001</b>은 번역을 하다가 말았고 <b>text-curie-001</b>은 영문을 같이 내뱉습니다.<br><br><img src="128_transqual_05.png"><br></p>
+<li><p><b>text-davinci-001</b>은 번역을 하다가 말았고 <b>text-curie-001</b>은 영문을 같이 내뱉습니다.<br><br><img src="/128_transqual_05.png"><br></p>
 </li>
 <li><p><b><a target="_blank" rel="noopener" href="https://community.openai.com/t/randomly-occurring-openai-api-timeouts/28573/12">간혹 API 접속 오류도 발생합니다</a></b></p>
 </li>
@@ -402,44 +417,52 @@
 <h2 id="2-5-Deep-Translate-RapidAPI"><a href="#2-5-Deep-Translate-RapidAPI" class="headerlink" title="2.5. Deep Translate (RapidAPI)"></a>2.5. Deep Translate (RapidAPI)</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://rapidapi.com/gatzuma/api/deep-translate1">RapidAPI: Deep Translate</a></p>
 </blockquote>
-<p><img src="128_transqual_07.png" alt="RapidAPI에서 제공하는 번역 API"><br></p>
+<p><img src="/128_transqual_07.png" alt="RapidAPI에서 제공하는 번역 API"><br></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://rapidapi.com/">Rapidapi</a>는 장점이 많습니다.</li>
-<li>딥러닝 모델과 여러 데이터 등을 API로 제공할 뿐 아니라</li>
-<li>다양한 언어로 예제 코드를 지원하기 때문에 고급 기능을 복붙 수준으로 구현할 수 있습니다.</li>
-<li>그 중 Google Translate와 동일 품질에 100배 저렴하다고 광고하는 Deep Translate를 사용해봅니다.</li>
-<li><b>무료로 월 10만글자</b>를 번역할 수 있고, <b>월 9달러를 지불하면 천만 글자</b>를 번역할 수 있습니다.</li>
-</ul>
-<ul>
+<li><p><a target="_blank" rel="noopener" href="https://rapidapi.com/">Rapidapi</a>는 장점이 많습니다.</p>
+</li>
+<li><p>딥러닝 모델과 여러 데이터 등을 API로 제공할 뿐 아니라</p>
+</li>
+<li><p>다양한 언어로 예제 코드를 지원하기 때문에 고급 기능을 복붙 수준으로 구현할 수 있습니다.</p>
+</li>
+<li><p>그 중 Google Translate와 동일 품질에 100배 저렴하다고 광고하는 Deep Translate를 사용해봅니다.</p>
+</li>
+<li><p><b>무료로 월 10만글자</b>를 번역할 수 있고, <b>월 9달러를 지불하면 천만 글자</b>를 번역할 수 있습니다.</p>
+</li>
 <li><p>API를 받고, 예제를 따라 Deep Translate를 실행하는 함수를 만듭니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deeptranslate</span>(<span class="params">text, RapidAPI=RapidAPI, sl=<span class="string">&quot;en&quot;</span>, tl=<span class="string">&quot;ko&quot;</span></span>):</span></span><br><span class="line">    url = <span class="string">&quot;https://deep-translate1.p.rapidapi.com/language/translate/v2&quot;</span></span><br><span class="line">    </span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">&quot;q&quot;</span>: text,</span><br><span class="line">        <span class="string">&quot;source&quot;</span>: sl,</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: tl</span><br><span class="line">    &#125;</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Key&quot;</span>: RapidAPI,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Host&quot;</span>: <span class="string">&quot;deep-translate1.p.rapidapi.com&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    response = requests.request(<span class="string">&quot;POST&quot;</span>, url, json=payload, headers=headers)</span><br><span class="line">    translated = response.json()[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;translations&quot;</span>][<span class="string">&quot;translatedText&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> translated</span><br></pre></td></tr></table></figure></li>
-<li><p>위와 마찬가지로 소요 시간을 확인하며 실행합니다.</p>
 </li>
-<li><p>먼저 초록 요약본 번역입니다. 5회 반복합니다.</p>
-</li>
-<li><p>5회 모두 동일하며, 광고대로 구글 번역 결과와 완전 동일합니다.</p>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">deeptranslate</span>(<span class="params">text, RapidAPI=RapidAPI, sl=<span class="string">&quot;en&quot;</span>, tl=<span class="string">&quot;ko&quot;</span></span>):</span><br><span class="line">    url = <span class="string">&quot;https://deep-translate1.p.rapidapi.com/language/translate/v2&quot;</span></span><br><span class="line">    </span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">&quot;q&quot;</span>: text,</span><br><span class="line">        <span class="string">&quot;source&quot;</span>: sl,</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: tl</span><br><span class="line">    &#125;</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Key&quot;</span>: RapidAPI,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Host&quot;</span>: <span class="string">&quot;deep-translate1.p.rapidapi.com&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    response = requests.request(<span class="string">&quot;POST&quot;</span>, url, json=payload, headers=headers)</span><br><span class="line">    translated = response.json()[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;translations&quot;</span>][<span class="string">&quot;translatedText&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> translated</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위와 마찬가지로 소요 시간을 확인하며 실행합니다.</li>
+<li>먼저 초록 요약본 번역입니다. 5회 반복합니다.</li>
+<li>5회 모두 동일하며, 광고대로 구글 번역 결과와 완전 동일합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# <span class="subst">&#123;i&#125;</span>회: <span class="subst">&#123;deeptranslate(abs0)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 소요시간: 1.84s</span><br><span class="line"><span class="comment"># 1회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 2.00s</span><br><span class="line"><span class="comment"># 2회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 3.20s</span><br><span class="line"><span class="comment"># 3회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 1.83s</span><br><span class="line"><span class="comment"># 4회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 2.35s</span><br><span class="line"><span class="comment"># 5회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p>독창성 부분 번역입니다. 5회 반복합니다.</p>
-</li>
-<li><p>초록 요약본과 마찬가지로 2초 가량 소요되며, 결과물도 마찬가지입니다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 소요시간: 1.84s</span><br><span class="line"><span class="comment"># 1회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 2.00s</span><br><span class="line"><span class="comment"># 2회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 3.20s</span><br><span class="line"><span class="comment"># 3회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 1.83s</span><br><span class="line"><span class="comment"># 4회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br><span class="line">- 소요시간: 2.35s</span><br><span class="line"><span class="comment"># 5회: PV 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 PV 전지의 효율에 영향을 미칩니다. 이 기사에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용하는 PV 모듈의 성능을 조사합니다. 연구된 PV 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서 PV 모듈 효율 19.38%에 매우 가깝습니다.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>독창성 부분 번역입니다. 5회 반복합니다.</li>
+<li>초록 요약본과 마찬가지로 2초 가량 소요되며, 결과물도 마찬가지입니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# <span class="subst">&#123;i&#125;</span>회: <span class="subst">&#123;deeptranslate(abs0)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 소요시간: 3.10s</span><br><span class="line"><span class="comment"># 1회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 2.05s</span><br><span class="line"><span class="comment"># 2회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 2.07s</span><br><span class="line"><span class="comment"># 3회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 1.99s</span><br><span class="line"><span class="comment"># 4회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 1.76s</span><br><span class="line"><span class="comment"># 5회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p>무료로 사용할 수 있는 Google Translate와 동일한 성능이라면,</p>
-</li>
-<li><p><b>시간도 10배쯤 더 걸리는데 굳이 돈을 내고 사용할 필요가 없습니다.</b></p>
-</li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 소요시간: 3.10s</span><br><span class="line"><span class="comment"># 1회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 2.05s</span><br><span class="line"><span class="comment"># 2회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 2.07s</span><br><span class="line"><span class="comment"># 3회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 1.99s</span><br><span class="line"><span class="comment"># 4회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br><span class="line">- 소요시간: 1.76s</span><br><span class="line"><span class="comment"># 5회: 연구 결과는 동일한 태양광 패널을 사용하더라도 설계, 재료 사용 및 적절한 냉각 방법을 고려하여 태양광 발전을 최적화할 수 있음을 보여줍니다.</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>무료로 사용할 수 있는 Google Translate와 동일한 성능이라면,</li>
+<li><b>시간도 10배쯤 더 걸리는데 굳이 돈을 내고 사용할 필요가 없습니다.</b></li>
 </ul>
 <h2 id="2-6-DeepL-Translator-RapidAPI"><a href="#2-6-DeepL-Translator-RapidAPI" class="headerlink" title="2.6. DeepL Translator (RapidAPI)"></a>2.6. DeepL Translator (RapidAPI)</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.deepl.com/">DeepL Translator</a><br><a target="_blank" rel="noopener" href="https://rapidapi.com/splintPRO/api/deepl-translator">RapidAPI: DeepL Translator</a></p>
 </blockquote>
-<p><img src="128_transqual_08.png" alt="RapidAPI DeepL"><br></p>
+<p><img src="/128_transqual_08.png" alt="RapidAPI DeepL"><br></p>
 <ul>
 <li><p><b><a target="_blank" rel="noopener" href="https://www.deepl.com/">DeepL</a></b>은 최근 공개되어 <b>구글 번역기를 능가하는 성능</b>으로 유명한 번역기입니다.</p>
 </li>
@@ -454,51 +477,59 @@
 <li><p>누군가 본인의 DeepL 계정을 사용해 사설 API를 개발하고 올린 것이 아닌가 추측합니다.</p>
 </li>
 <li><p>함수를 만들고 사용합니다. <b>RapidAPI는 동일 Key를 모든 API에 사용할 수 있습니다.</b></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timed</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deepl</span>(<span class="params">text, RapidAPI=RapidAPI, sl=<span class="string">&quot;en&quot;</span>, tl=<span class="string">&quot;ko&quot;</span></span>):</span></span><br><span class="line">    url = <span class="string">&quot;https://deepl-translator.p.rapidapi.com/translate&quot;</span></span><br><span class="line">    </span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: text,</span><br><span class="line">        <span class="string">&quot;source&quot;</span>: sl,</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: tl</span><br><span class="line">    &#125;</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Key&quot;</span>: RapidAPI,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Host&quot;</span>: <span class="string">&quot;deepl-translator.p.rapidapi.com&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    response = requests.request(<span class="string">&quot;POST&quot;</span>, url, json=payload, headers=headers)</span><br><span class="line">    <span class="keyword">return</span> response.json()[<span class="string">&quot;text&quot;</span>]</span><br></pre></td></tr></table></figure></li>
-<li><p>초록과 독창성 부분을 번역시킵니다. 5회 반복해도 동일한 결과가 반복되며 시간은 2초 미만입니다.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timed</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deepl</span>(<span class="params">text, RapidAPI=RapidAPI, sl=<span class="string">&quot;en&quot;</span>, tl=<span class="string">&quot;ko&quot;</span></span>):</span><br><span class="line">    url = <span class="string">&quot;https://deepl-translator.p.rapidapi.com/translate&quot;</span></span><br><span class="line">    </span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: text,</span><br><span class="line">        <span class="string">&quot;source&quot;</span>: sl,</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: tl</span><br><span class="line">    &#125;</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Key&quot;</span>: RapidAPI,</span><br><span class="line">        <span class="string">&quot;X-RapidAPI-Host&quot;</span>: <span class="string">&quot;deepl-translator.p.rapidapi.com&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    response = requests.request(<span class="string">&quot;POST&quot;</span>, url, json=payload, headers=headers)</span><br><span class="line">    <span class="keyword">return</span> response.json()[<span class="string">&quot;text&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>초록과 독창성 부분을 번역시킵니다. 5회 반복해도 동일한 결과가 반복되며 시간은 2초 미만입니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(deepl(abs0))</span><br><span class="line"><span class="built_in">print</span>(deepl(org0))</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 소요시간: 0.94s</span><br><span class="line"><span class="string">&#x27;태양광 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 태양광 셀의 효율에 영향을 미칩니다. 이 글에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용한 태양광 모듈의 성능을 조사합니다. 연구 대상 태양광 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서의 태양광 모듈 효율인 19.38%에 매우 근접합니다.&#x27;</span></span><br><span class="line">- 소요시간: 0.85s</span><br><span class="line">연구 결과에 따르면 동일한 태양 전지판을 사용하더라도 설계, 재료 사용, 적절한 냉각 방법을 고려하면 태양 에너지 생산을 최적화할 수 있습니다.</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p>DeepL은 <b>대체 문장을 제공한다</b>는 특징이 있습니다.</p>
-</li>
-<li><p>짧은 문장을 입력하면 <code>response.json()</code>에서 <code>&quot;text&quot;</code>를 우선 번역 결과로 제공하지만,</p>
-</li>
-<li><p><code>&quot;alternative_texts&quot;</code>에는 다른 버전의 번역본을 제공합니다.</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 소요시간: 0.94s</span><br><span class="line"><span class="string">&#x27;태양광 패널은 발전 중에 불필요한 열 에너지를 생성하여 온도를 높이고 태양광 셀의 효율에 영향을 미칩니다. 이 글에서는 알루미늄 방열판과 강제 공기 냉각 기술을 사용한 태양광 모듈의 성능을 조사합니다. 연구 대상 태양광 패널의 평균 전기 효율은 17%이며 표준 테스트 조건(STC)에서의 태양광 모듈 효율인 19.38%에 매우 근접합니다.&#x27;</span></span><br><span class="line">- 소요시간: 0.85s</span><br><span class="line">연구 결과에 따르면 동일한 태양 전지판을 사용하더라도 설계, 재료 사용, 적절한 냉각 방법을 고려하면 태양 에너지 생산을 최적화할 수 있습니다.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DeepL은 <b>대체 문장을 제공한다</b>는 특징이 있습니다.</li>
+<li>짧은 문장을 입력하면 <code>response.json()</code>에서 <code>&quot;text&quot;</code>를 우선 번역 결과로 제공하지만,</li>
+<li><code>&quot;alternative_texts&quot;</code>에는 다른 버전의 번역본을 제공합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># input text</span></span><br><span class="line">text = <span class="string">&quot;what a wonderful world.&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># DeepL 실행: payload와 headers는 deepl() 내부와 동일. payload내 text만 변경.</span></span><br><span class="line">response = requests.request(<span class="string">&quot;POST&quot;</span>, url, json=payload, headers=headers)</span><br><span class="line">r_json = response.json()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# text : <span class="subst">&#123;r_json[<span class="string">&#x27;text&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# alternative_texts : <span class="subst">&#123;r_json[<span class="string">&#x27;alternative_texts&#x27;</span>]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># text : 정말 멋진 세상입니다.</span></span><br><span class="line"><span class="comment"># alternative_texts : [&#x27;이 얼마나 멋진 세상인가요.&#x27;, &#x27;이 얼마나 멋진 세상입니까.&#x27;, &#x27;이 얼마나 멋진 세상입니까.&#x27;]</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># text : 정말 멋진 세상입니다.</span></span><br><span class="line"><span class="comment"># alternative_texts : [&#x27;이 얼마나 멋진 세상인가요.&#x27;, &#x27;이 얼마나 멋진 세상입니까.&#x27;, &#x27;이 얼마나 멋진 세상입니까.&#x27;]</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="3-번역-성능-비교"><a href="#3-번역-성능-비교" class="headerlink" title="3. 번역 성능 비교"></a>3. 번역 성능 비교</h1><ul>
 <li>이제까지 동일 문장을 6가지 모델을 사용해 번역해 보았습니다.</li>
 <li>GPT 모델을 반응시간이 가장 짧은 <code>text-curie-001</code>으로 고정하고 얻은 결과를 포함하여 <a href="transqual.xlsx">결과 파일</a>에 정리했습니다.</li>
 <li><b>경어와 반어</b>, <b>매끄러운 문장 구사</b>, <b>가격</b>, <b>속도, 안정성</b> 관점에서 정리합니다.</li>
 </ul>
 <h2 id="3-1-경어와-반어-존대말과-반말"><a href="#3-1-경어와-반어-존대말과-반말" class="headerlink" title="3.1. 경어와 반어 (존대말과 반말)"></a>3.1. 경어와 반어 (존대말과 반말)</h2><ul>
-<li>존대말이든 반말이든 <b>일관성</b>이 중요합니다.<ul>
+<li><p>존대말이든 반말이든 <b>일관성</b>이 중요합니다.</p>
+<ul>
 <li><b>GOOD :</b> Google Translate(경어), huggingface(경어), GPT3(반어), DeepL(경어)</li>
 <li><b>BAD :</b> Papago, Deep Translate</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>Deep Translate는 본 테스트 파일에서는 모두 경어로 일관되었으나 다른 테스트에서 섞어 쓰는 것이 다수 발견되었습니다.</li>
+<li><p>Deep Translate는 본 테스트 파일에서는 모두 경어로 일관되었으나 다른 테스트에서 섞어 쓰는 것이 다수 발견되었습니다.</p>
+</li>
 </ul>
 <h2 id="3-2-매끄러운-문장-구사"><a href="#3-2-매끄러운-문장-구사" class="headerlink" title="3.2. 매끄러운 문장 구사"></a>3.2. 매끄러운 문장 구사</h2><ul>
-<li>문장의 자연스러움과 띄어쓰기를 확인합니다.<ul>
+<li><p>문장의 자연스러움과 띄어쓰기를 확인합니다.</p>
+<ul>
 <li><b>BEST :</b> DeepL</li>
 <li><b>GOOD :</b> Google Translate, Papago, Deep Translate</li>
 <li><b>BAD :</b> Huggingface, GPT3</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>Huggingface는 문장끼리 붙여쓰는 경우가 발견되었습니다.</li>
-<li>GPT는 어색한 번역투 문장이 자주 보입니다 (ex. “에너지 공급을 가진다”)</li>
-<li>DeepL의 유려함이 빛납니다. Abstract를 “초록”이라 번역하는 것은 DeepL뿐입니다.</li>
+<li><p>Huggingface는 문장끼리 붙여쓰는 경우가 발견되었습니다.</p>
+</li>
+<li><p>GPT는 어색한 번역투 문장이 자주 보입니다 (ex. “에너지 공급을 가진다”)</p>
+</li>
+<li><p>DeepL의 유려함이 빛납니다. Abstract를 “초록”이라 번역하는 것은 DeepL뿐입니다.</p>
+</li>
 </ul>
 <h2 id="3-3-가격"><a href="#3-3-가격" class="headerlink" title="3.3. 가격"></a>3.3. 가격</h2><ul>
 <li>당연히 무료가 좋습니다. 적당한 선에서 가격을 지불할 용의도 있습니다. </li>
@@ -510,18 +541,20 @@
 </li>
 </ul>
 <h2 id="3-4-속도-안정성"><a href="#3-4-속도-안정성" class="headerlink" title="3.4. 속도, 안정성"></a>3.4. 속도, 안정성</h2><ul>
-<li>서비스 사용자 입장에서는 속도와 안정성이 매우 중요합니다. <ul>
+<li><p>서비스 사용자 입장에서는 속도와 안정성이 매우 중요합니다. </p>
+<ul>
 <li><b>BEST :</b> Google Translate, Papago</li>
 <li><b>GOOD :</b> Deep Translate(hard limit), DeepL(hard limit)</li>
 <li><b>BAD :</b> Huggingface(속도)</li>
 <li><b>WORST :</b> GPT3(속도, 안정성)</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>Huggingface와 GPT3는 번역 결과를 받기까지 10초 이상 걸렸습니다. </li>
-<li>GPT3는 사용자가 몰려서인지 모르겠으나 접속 안정성 이슈가 있었고 번역이 깨지는 경우가 확인됩니다.</li>
-<li>향후 안정성을 업데이트하리라 믿습니다.</li>
+<li><p>Huggingface와 GPT3는 번역 결과를 받기까지 10초 이상 걸렸습니다. </p>
+</li>
+<li><p>GPT3는 사용자가 몰려서인지 모르겠으나 접속 안정성 이슈가 있었고 번역이 깨지는 경우가 확인됩니다.</p>
+</li>
+<li><p>향후 안정성을 업데이트하리라 믿습니다.</p>
+</li>
 </ul>
 <h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
 <li>RapidAPI의 <b>DeepL API</b>가 정상적인 것인지 의심이 되기는 하지만 성능과 안정성면에서는 가장 우수합니다.</li>
@@ -539,22 +572,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2023/02/20/Python-DS-128-transqual/" data-id="cmhueoxyc00cl4gxth4zw62td" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2023/02/20/Python-DS-128-transqual/" data-id="cuiddpC3V3FnHYEr31sXY4XEa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -630,7 +653,7 @@
         "genre": "Python Data Science",
         "datePublished": "2023-02-20",
         "dateCreated": "2023-02-20",
-        "dateModified": "2023-02-20",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2023/02/20/Python-DS-128-transqual/",
         "description": "
 딥러닝의 빠른 발전으로 기계번역이 매우 쉬워졌습니다.
@@ -639,7 +662,7 @@
 
 1. 번역 성능 평가
 BLEU: a method for automatic evaluation of machine translation유원준, 안상준, “딥 러닝을 이용한 자연어",
-        "wordCount": 3659
+        "wordCount": 3675
     }
 </script>
 
@@ -721,16 +744,6 @@ BLEU: a method for automatic evaluation of machine translation유원준, 안상�
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -964,10 +977,6 @@ BLEU: a method for automatic evaluation of machine translation유원준, 안상�
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

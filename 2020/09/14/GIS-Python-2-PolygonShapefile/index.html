@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/2_polygonshp_1.png">
 <meta property="article:published_time" content="2020-09-14T04:11:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:42:29.516Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:36.823Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="gis">
 <meta property="article:tag" content="polygon">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="shapefile">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/2_polygonshp_1.png">
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/09/14/GIS-Python-2-PolygonShapefile/" class="article-date">
-     <time datetime="2020-11-27T00:42:29.516Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:36.823Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,9 +239,10 @@
 <p><a target="_blank" rel="noopener" href="https://shapely.readthedocs.io/en/latest/">shapely</a><br><a target="_blank" rel="noopener" href="https://github.com/Toblerity/Fiona">fiona</a><br><a target="_blank" rel="noopener" href="https://geopandas.org/">geopandas</a></p>
 </blockquote>
 <h3 id="1-csv-읽기"><a href="#1-csv-읽기" class="headerlink" title="1. csv 읽기"></a>1. csv 읽기</h3><ul>
-<li><code>.csv</code> 파일에서 건물 정보를 읽어옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_ombb0914 = pd.read_csv(<span class="string">&#x27;./data/ombb_200914.csv&#x27;</span>)</span><br><span class="line">df_ombb0914.head()</span><br></pre></td></tr></table></figure>
-<img src="2_polygonshp_2.png"><br></li>
+<li><code>.csv</code> 파일에서 건물 정보를 읽어옵니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_ombb0914 = pd.read_csv(<span class="string">&#x27;./data/ombb_200914.csv&#x27;</span>)</span><br><span class="line">df_ombb0914.head()</span><br></pre></td></tr></table></figure>
+<p><img src="/2_polygonshp_2.png"><br></p>
 <ul>
 <li>데이터 컬럼은 다음과 같습니다.<ul>
 <li><b><code>BD_MGT_SN</code> : </b>건물관리번호 (건물 고유 번호)</li>
@@ -255,11 +256,13 @@
 </ul>
 </li>
 </ul>
-<p><img src="2_polygonshp_3.png"><br></p>
+<p><img src="/2_polygonshp_3.png"><br></p>
 <h3 id="2-polygon-변환"><a href="#2-polygon-변환" class="headerlink" title="2. polygon 변환"></a>2. polygon 변환</h3><ul>
 <li>행 하나가 건물 하나에 해당합니다.</li>
-<li>행 하나마다 정보를 좌표로 변환해서 <code>shapefile</code>로 저장합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> mapping, Polygon</span><br><span class="line"><span class="keyword">import</span> fiona</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_polygons</span>(<span class="params">x, y, width, height, angle, filename</span>):</span></span><br><span class="line">    h_half = height/<span class="number">2</span> </span><br><span class="line">    w_half = width/<span class="number">2</span></span><br><span class="line">    a_rad = np.deg2rad(angle)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 꼭지점 좌표 생성</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_coord</span>(<span class="params">x, y, h_half, w_half, a_rad</span>):</span></span><br><span class="line">        X = x + h_half * np.sin(a_rad) - w_half * np.cos(a_rad)</span><br><span class="line">        Y = y + h_half * np.cos(a_rad) + w_half * np.sin(a_rad)</span><br><span class="line">        <span class="keyword">return</span> (X, Y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># shapefile schema 지정</span></span><br><span class="line">    schema = &#123;<span class="string">&quot;geometry&quot;</span>: <span class="string">&quot;Polygon&quot;</span>, <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 행 수만큼 반복</span></span><br><span class="line">    n_polygon = <span class="built_in">len</span>(x)</span><br><span class="line">    <span class="keyword">with</span> fiona.<span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;filename&#125;</span>&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="string">&quot;ESRI Shapefile&quot;</span>, schema) <span class="keyword">as</span> c:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_polygon):</span><br><span class="line">            p_x, p_y = x.iloc[i], y.iloc[i]</span><br><span class="line">            p_h, p_w, p_r = h_half.iloc[i], w_half.iloc[i], a_rad.iloc[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># closed loop을 이루도록 point 지정.</span></span><br><span class="line">            points = [get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      ]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># shapefile 작성</span></span><br><span class="line">            c.write(&#123;</span><br><span class="line">                <span class="string">&quot;geometry&quot;</span>: mapping(Polygon(points)),</span><br><span class="line">                <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="number">1</span>&#125;</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure></li>
+<li>행 하나마다 정보를 좌표로 변환해서 <code>shapefile</code>로 저장합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> mapping, Polygon</span><br><span class="line"><span class="keyword">import</span> fiona</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_polygons</span>(<span class="params">x, y, width, height, angle, filename</span>):</span><br><span class="line">    h_half = height/<span class="number">2</span> </span><br><span class="line">    w_half = width/<span class="number">2</span></span><br><span class="line">    a_rad = np.deg2rad(angle)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 꼭지점 좌표 생성</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_coord</span>(<span class="params">x, y, h_half, w_half, a_rad</span>):</span><br><span class="line">        X = x + h_half * np.sin(a_rad) - w_half * np.cos(a_rad)</span><br><span class="line">        Y = y + h_half * np.cos(a_rad) + w_half * np.sin(a_rad)</span><br><span class="line">        <span class="keyword">return</span> (X, Y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># shapefile schema 지정</span></span><br><span class="line">    schema = &#123;<span class="string">&quot;geometry&quot;</span>: <span class="string">&quot;Polygon&quot;</span>, <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 행 수만큼 반복</span></span><br><span class="line">    n_polygon = <span class="built_in">len</span>(x)</span><br><span class="line">    <span class="keyword">with</span> fiona.<span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;filename&#125;</span>&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="string">&quot;ESRI Shapefile&quot;</span>, schema) <span class="keyword">as</span> c:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_polygon):</span><br><span class="line">            p_x, p_y = x.iloc[i], y.iloc[i]</span><br><span class="line">            p_h, p_w, p_r = h_half.iloc[i], w_half.iloc[i], a_rad.iloc[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># closed loop을 이루도록 point 지정.</span></span><br><span class="line">            points = [get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      ]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># shapefile 작성</span></span><br><span class="line">            c.write(&#123;</span><br><span class="line">                <span class="string">&quot;geometry&quot;</span>: mapping(Polygon(points)),</span><br><span class="line">                <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="number">1</span>&#125;</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+
 <h3 id="3-QGIS에서-확인"><a href="#3-QGIS에서-확인" class="headerlink" title="3. QGIS에서 확인"></a>3. QGIS에서 확인</h3><ul>
 <li>QGIS에서 읽어서 잘 보이는지 확인합니다.<ul>
 <li>.csv를 출력한 원본(노랑)과 생성된 shapefile(파랑) 비교 결과 완벽히 일치합니다.</li>
@@ -267,7 +270,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="2_polygonshp_4.png"><br></p>
+<p><img src="/2_polygonshp_4.png"><br></p>
 
         </div>
 		<p>
@@ -280,22 +283,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/" data-id="cmhueoxr400034gxt3nr60eg2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/" data-id="cuidVSEXs6DKKaZmPwAy66414" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -371,7 +364,7 @@
         "genre": "GIS Python",
         "datePublished": "2020-09-14",
         "dateCreated": "2020-09-14",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/",
         "description": "
 csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다.
@@ -464,16 +457,6 @@ shapelyfionageopandas
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -707,10 +690,6 @@ shapelyfionageopandas
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

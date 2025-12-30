@@ -10,7 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="gis,raster,polygon,qgis,vector,data sampling" />
+    <meta name="keywords" content="gis,polygon,raster,qgis,vector,data sampling" />
     
     <meta name="description" content="References  QGISwikipedia: GeoTIFFwikipedia: ShapefileSampling Raster Data using Points or Polygons   QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.4.13-Madeira 입니다.  1. Lo">
 <meta property="og:type" content="article">
@@ -21,14 +21,14 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/1_rza_0.PNG">
 <meta property="article:published_time" content="2020-04-09T01:43:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:42:41.666Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:36.857Z">
 <meta property="article:author" content="Jehyun Lee">
+<meta property="article:tag" content="data sampling">
 <meta property="article:tag" content="gis">
-<meta property="article:tag" content="raster">
 <meta property="article:tag" content="polygon">
 <meta property="article:tag" content="qgis">
+<meta property="article:tag" content="raster">
 <meta property="article:tag" content="vector">
-<meta property="article:tag" content="data sampling">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/1_rza_0.PNG">
     
@@ -87,7 +87,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -204,7 +204,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" class="article-date">
-     <time datetime="2020-11-27T00:42:41.666Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:36.857Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -240,37 +240,46 @@
 <li>사용한 QGIS의 버전은 <code>3.4.13-Madeira</code> 입니다.</li>
 </ul>
 <h3 id="1-Load-Data-raster-file-and-shapefile"><a href="#1-Load-Data-raster-file-and-shapefile" class="headerlink" title="1. Load Data (raster file and shapefile)"></a>1. Load Data (raster file and shapefile)</h3><ul>
-<li>먼저 raster data를 불러옵니다.</li>
-<li><code>Layer &gt; Add Raster Layer...</code>를 이용해도 되고, 탐색기에서 끌어와도 됩니다.<br><br><img src="1_rza_1.PNG" alt="raster file"></li>
-<li>이번에는 건물 데이터를 불러옵니다.  </li>
-<li>마찬가지로 <code>Layer &gt; Add Vector Layer...</code>를 이용해도 되고, 탐색기에서 끌어와도 됩니다.<br><br><img src="1_rza_2.PNG" alt="shapefile">  </li>
-</ul>
-<ul>
-<li>참고로, 예제로 사용한 건물은 영화 레지던트 이블로도 유명해진 대전정부청사입니다.<br><br><img src="1_rza_3.jpg">  </li>
+<li><p>먼저 raster data를 불러옵니다.</p>
+</li>
+<li><p><code>Layer &gt; Add Raster Layer...</code>를 이용해도 되고, 탐색기에서 끌어와도 됩니다.<br><br><img src="/1_rza_1.PNG" alt="raster file"></p>
+</li>
+<li><p>이번에는 건물 데이터를 불러옵니다.  </p>
+</li>
+<li><p>마찬가지로 <code>Layer &gt; Add Vector Layer...</code>를 이용해도 되고, 탐색기에서 끌어와도 됩니다.<br><br><img src="/1_rza_2.PNG" alt="shapefile">  </p>
+</li>
+<li><p>참고로, 예제로 사용한 건물은 영화 레지던트 이블로도 유명해진 대전정부청사입니다.<br><br><img src="/1_rza_3.jpg"></p>
+</li>
 </ul>
 <h3 id="2-Data-Analysis"><a href="#2-Data-Analysis" class="headerlink" title="2. Data Analysis"></a>2. Data Analysis</h3><ul>
-<li>raster file의 데이터를 shapefile의 feature에 투영하겠습니다.</li>
-<li>우측 상단의 톱니바퀴 모양을 클릭해서 <b>[공간 처리 툴박스]</b>를 실행합니다.</li>
-<li>검색창에 <b>zonal statistics</b> 또는 <b>구역 통계</b>을 입력하여 검색합니다.<br><br><img src="1_rza_4.PNG" alt="클릭하면 커집니다"></li>
-</ul>
-<ul>
-<li><b>래스터 레이어</b>에 아까 불렀던 raster file, <b>벡터 레이어</b>에 shapefile을 입력합니다.</li>
-<li><b>산출 열 접두어</b>에 결과물에 붙을 접두어를 입력 후, <b>계산할 통계</b>에서 계산할 항목을 선택합니다.<br><img src="1_rza_5.PNG" alt="클릭하면 커집니다"></li>
-</ul>
-<ul>
-<li><b>확인</b>을 누르면 다소의 시간이 소요된 후 다시 구역 통계 화면으로 돌아옵니다.<br></li>
+<li><p>raster file의 데이터를 shapefile의 feature에 투영하겠습니다.</p>
+</li>
+<li><p>우측 상단의 톱니바퀴 모양을 클릭해서 <b>[공간 처리 툴박스]</b>를 실행합니다.</p>
+</li>
+<li><p>검색창에 <b>zonal statistics</b> 또는 <b>구역 통계</b>을 입력하여 검색합니다.<br><br><img src="/1_rza_4.PNG" alt="클릭하면 커집니다"></p>
+</li>
+<li><p><b>래스터 레이어</b>에 아까 불렀던 raster file, <b>벡터 레이어</b>에 shapefile을 입력합니다.</p>
+</li>
+<li><p><b>산출 열 접두어</b>에 결과물에 붙을 접두어를 입력 후, <b>계산할 통계</b>에서 계산할 항목을 선택합니다.<br><img src="/1_rza_5.PNG" alt="클릭하면 커집니다"></p>
+</li>
+<li><p><b>확인</b>을 누르면 다소의 시간이 소요된 후 다시 구역 통계 화면으로 돌아옵니다.<br></p>
+</li>
 </ul>
 <h3 id="3-Data-Verification"><a href="#3-Data-Verification" class="headerlink" title="3. Data Verification"></a>3. Data Verification</h3><ul>
-<li>계산된 데이터는 shapefile에 새 컬럼의 형태로 포함되어 있습니다.</li>
-<li><b>레이어</b>의 shapefile에서 우클릭으로 <b>속성 테이블 열기</b>를 통해 추가된 데이터를 확인할 수 있습니다.<br><img src="1_rza_6.PNG" alt="클릭하면 커집니다"></li>
-</ul>
-<ul>
-<li>속성 테이블에 접두어로 입력한 <code>proj_</code>와 분석을 수행한 항목이 컬럼명으로 지정되어 있습니다.<br><img src="1_rza_7.PNG"></li>
+<li><p>계산된 데이터는 shapefile에 새 컬럼의 형태로 포함되어 있습니다.</p>
+</li>
+<li><p><b>레이어</b>의 shapefile에서 우클릭으로 <b>속성 테이블 열기</b>를 통해 추가된 데이터를 확인할 수 있습니다.<br><img src="/1_rza_6.PNG" alt="클릭하면 커집니다"></p>
+</li>
+<li><p>속성 테이블에 접두어로 입력한 <code>proj_</code>와 분석을 수행한 항목이 컬럼명으로 지정되어 있습니다.<br><img src="/1_rza_7.PNG"></p>
+</li>
 </ul>
 <h3 id="4-Data-Export"><a href="#4-Data-Export" class="headerlink" title="4. Data Export"></a>4. Data Export</h3><ul>
-<li><code>내보내기 &gt; 객체를 다른 이름으로 저장 &gt; </code>에서 <code>.xlsx</code>를 선택하면 엑셀 파일로 내보낼 수 있습니다.</li>
-<li>간혹 한글이 깨진 채로 나갈 때가 있는데, 인코딩 옵션을 조정하여 해결할 수 있습니다.<br><img src="1_rza_8.png" alt="여기를 고칩니다"></li>
-<li>기본값(<b>system</b>)을 <b>UTF-8</b>로 바꿔주면 한글이 잘 나옵니다.<br><img src="1_rza_9.PNG"></li>
+<li><p><code>내보내기 &gt; 객체를 다른 이름으로 저장 &gt; </code>에서 <code>.xlsx</code>를 선택하면 엑셀 파일로 내보낼 수 있습니다.</p>
+</li>
+<li><p>간혹 한글이 깨진 채로 나갈 때가 있는데, 인코딩 옵션을 조정하여 해결할 수 있습니다.<br><img src="/1_rza_8.png" alt="여기를 고칩니다"></p>
+</li>
+<li><p>기본값(<b>system</b>)을 <b>UTF-8</b>로 바꿔주면 한글이 잘 나옵니다.<br><img src="/1_rza_9.PNG"></p>
+</li>
 </ul>
 
         </div>
@@ -284,22 +293,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" data-id="cmhueoxrh00094gxthmrn6ijl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/" data-id="cuidcOJupUVTbx2cO4s2FWimx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -371,11 +370,11 @@
         },
         "headline": "Raster Data Sampling on Polygons",
         "image": "https://jehyunlee.github.io/thumbnails/GIS-QGIS/1_rza_0.PNG",
-        "keywords": "gis raster polygon qgis vector data sampling",
+        "keywords": "gis polygon raster qgis vector data sampling",
         "genre": "GIS QGIS",
         "datePublished": "2020-04-09",
         "dateCreated": "2020-04-09",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/04/09/GIS-QGIS-1-RasterZonalAnalysis/",
         "description": "References
 
@@ -386,7 +385,7 @@ QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정�
 사용한 QGIS의 버전은 3.4.13-Madeira 입니다.
 
 1. Lo",
-        "wordCount": 236
+        "wordCount": 234
     }
 </script>
 
@@ -468,16 +467,6 @@ QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정�
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -711,10 +700,6 @@ QGIS에서 geotiff 등 raster file을 shape file에 투영하는 방법을 정�
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

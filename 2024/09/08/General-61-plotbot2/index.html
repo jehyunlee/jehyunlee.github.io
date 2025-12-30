@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/General/61_plotbot2_00.png">
 <meta property="article:published_time" content="2024-09-08T02:43:00.000Z">
-<meta property="article:modified_time" content="2024-09-08T16:01:03.986Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.223Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="chatgpt">
 <meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/General/61_plotbot2_00.png">
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2024/09/08/General-61-plotbot2/" class="article-date">
-     <time datetime="2024-09-08T16:01:03.986Z" itemprop="dateModified">2024-09-09</time>
+     <time datetime="2025-12-30T06:28:37.223Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -238,49 +238,60 @@
 <p><a href="https://jehyunlee.github.io/2024/08/11/General-58-plotbot/">Pega Devlog: 데이터 분석용 GPTs - 플랏봇</a><br><a href="https://jehyunlee.github.io/2024/08/19/General-59-paperbot2/">Pega Devlog: 논문봇 v2 - 출력물 일관성 확보</a><br><a target="_blank" rel="noopener" href="https://chatgpt.com/g/g-QQxEn0acO-peulrasbos">GPTs: 플랏봇</a></p>
 </blockquote>
 <ul>
-<li>약 한달 전 <b>플랏봇</b>이라는 이름의 GPTs를 공개했습니다.</li>
-<li>GPT의 기본 코딩 언어인 파이썬으로 데이터를 시각화하다보면 고질적인 문제로 느껴지는 점들을 보완했는데,</li>
-<li><b>한글 사용</b>을 편리하게 하고 <b>글자 겹침</b>을 해결하는 기능이 탑재되어 있었습니다.</li>
-<li>여기에 사용자별로 원하는 그림을 그릴 수 있도록 <b>커스터마이징</b>을 하는 방법을 안내했습니다.</li>
-</ul>
-<ul>
-<li>자기 방식대로 커스터마이징을 하려면 플랏봇과 유사한 GPTs를 일일이 만들어야 한다는 점에서</li>
-<li>어떤 분들께는 실습의 기회가 될 수 있었겠지만,</li>
-<li>커스터마이징을 하기 이해 알아야 하는 <b>Matplotlib 객체명</b>이 발목을 잡는 면이 있었습니다.</li>
-</ul>
-<ul>
-<li>이번 업데이트에서는 <b>플랏봇의 설정을 외부 파일로 저장</b>하여 쉽게 관리할 수 있도록 하였습니다.</li>
-<li>또한 시각화 설정을 <b>.whl 파일로 지정</b>하여 재현성을 크게 높였습니다.</li>
+<li><p>약 한달 전 <b>플랏봇</b>이라는 이름의 GPTs를 공개했습니다.</p>
+</li>
+<li><p>GPT의 기본 코딩 언어인 파이썬으로 데이터를 시각화하다보면 고질적인 문제로 느껴지는 점들을 보완했는데,</p>
+</li>
+<li><p><b>한글 사용</b>을 편리하게 하고 <b>글자 겹침</b>을 해결하는 기능이 탑재되어 있었습니다.</p>
+</li>
+<li><p>여기에 사용자별로 원하는 그림을 그릴 수 있도록 <b>커스터마이징</b>을 하는 방법을 안내했습니다.</p>
+</li>
+<li><p>자기 방식대로 커스터마이징을 하려면 플랏봇과 유사한 GPTs를 일일이 만들어야 한다는 점에서</p>
+</li>
+<li><p>어떤 분들께는 실습의 기회가 될 수 있었겠지만,</p>
+</li>
+<li><p>커스터마이징을 하기 이해 알아야 하는 <b>Matplotlib 객체명</b>이 발목을 잡는 면이 있었습니다.</p>
+</li>
+<li><p>이번 업데이트에서는 <b>플랏봇의 설정을 외부 파일로 저장</b>하여 쉽게 관리할 수 있도록 하였습니다.</p>
+</li>
+<li><p>또한 시각화 설정을 <b>.whl 파일로 지정</b>하여 재현성을 크게 높였습니다.</p>
+</li>
 </ul>
 <h1 id="2-플랏봇-구성"><a href="#2-플랏봇-구성" class="headerlink" title="2. 플랏봇 구성"></a>2. 플랏봇 구성</h1><h2 id="2-1-시각화-설정-파일"><a href="#2-1-시각화-설정-파일" class="headerlink" title="2.1. 시각화 설정 파일"></a>2.1. 시각화 설정 파일</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/users/explain/quick_start.html">Matplotlib: Anatomy of a Figure</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/users/explain/customizing.html#matplotlibrc-sample">Matplotlib: Customizing Matplotlib with style sheets and rcParams</a></p>
 </blockquote>
-<p><img src="61_plotbot2_01.webp" alt="Matplotlib: Anatomy of a Figure"></p>
+<p><img src="/61_plotbot2_01.webp" alt="Matplotlib: Anatomy of a Figure"></p>
 <ul>
-<li>ChatGPT의 Data Analyst는 Matplotlib을 이용하고,</li>
-<li>Matplotlib이 그리는 그림의 구성요소 이름은 위 그림과 같습니다.</li>
-<li>각 구성 요소마다 다양한 속성이 있기 때문에 일일이 제어하는 것이 쉬운 일이 아닙니다.</li>
-<li>예를 들어 <code>plt.rcParams[&quot;figure.figsize&quot;] = (10, 5)</code> 를 입력해서 figure의 크기를 설정할 수 있습니다.</li>
+<li><p>ChatGPT의 Data Analyst는 Matplotlib을 이용하고,</p>
+</li>
+<li><p>Matplotlib이 그리는 그림의 구성요소 이름은 위 그림과 같습니다.</p>
+</li>
+<li><p>각 구성 요소마다 다양한 속성이 있기 때문에 일일이 제어하는 것이 쉬운 일이 아닙니다.</p>
+</li>
+<li><p>예를 들어 <code>plt.rcParams[&quot;figure.figsize&quot;] = (10, 5)</code> 를 입력해서 figure의 크기를 설정할 수 있습니다.</p>
+</li>
+<li><p>그러나 이렇게 일일이 명령을 입력하지 않아도 <b>저장된 설정을 일괄적으로 적용할 수 있는 방법</b>이 있습니다.</p>
+</li>
+<li><p>바로 <b>Matplotlib의 설정 파일</b>을 이용하는 것입니다.</p>
+</li>
+<li><p>Matplotlib의 설정 파일은 위 그림과 같이 현재 설정된 모든 속성을 보여줍니다.</p>
+</li>
+<li><p><code>matplotlibrc</code> 파일이며, 이를 이용하면 쉽게 설정을 저장하고 불러올 수 있습니다.<br></p>
+</li>
 </ul>
-<ul>
-<li>그러나 이렇게 일일이 명령을 입력하지 않아도 <b>저장된 설정을 일괄적으로 적용할 수 있는 방법</b>이 있습니다.</li>
-<li>바로 <b>Matplotlib의 설정 파일</b>을 이용하는 것입니다.</li>
-<li>Matplotlib의 설정 파일은 위 그림과 같이 현재 설정된 모든 속성을 보여줍니다.</li>
-<li><code>matplotlibrc</code> 파일이며, 이를 이용하면 쉽게 설정을 저장하고 불러올 수 있습니다.<br></li>
-</ul>
-<p><img src="61_plotbot2_03.png"><br></p>
+<p><img src="/61_plotbot2_03.png"><br></p>
 <ul>
 <li>사용자가 <a href="matplotlibrc_default"><b>matplotlibrc 파일</b></a>을 내려받아 수정할 속성을 반영하고,</li>
 <li>이를 플랏봇에게 제공하면 플랏봇이 이를 읽어들여 속성을 반영합니다.</li>
 <li>예를 들어 제가 <a href="matplotlibrc_jehyunlee"><b>수정하여 플랏봇에 업로드한 속성 파일</b></a>의 일부는 다음과 같습니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_04.png"><br></p>
+<p><img src="/61_plotbot2_04.png"><br></p>
 <ul>
 <li>이 파일을 <b>플랏봇 instruction</b>에 넣어두기도 했지만,</li>
 <li>일부 수정하여 <b>플랏봇 대화창</b>에 올린 후 반영하라고 지시할 수도 있습니다.</li>
 <li>관련 코드를 <code>plotbot.py</code>파일에 다음과 같이 작성하였습니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_02.png"><br></p>
+<p><img src="/61_plotbot2_02.png"><br></p>
 <ul>
 <li>대화창에서 개별 항목을 수정하는 것도 여전히 가능하고, 기본값으로 일괄 변경하는 것도 가능합니다.</li>
 <li>여러 차례 추가 수정을 거친 것을 재활용이 가능하도록 이와 같은 형식으로 출력시킬 수도 있습니다.</li>
@@ -289,16 +300,20 @@
 <p><a href="https://jehyunlee.github.io/2022/10/16/Python-DS-117-pycon2022/">PyCon Korea 2022: 혼란한 Matplotlib에서 질서 찾기</a><br><a href="https://jehyunlee.github.io/2020/10/27/Python-DS-41-subplots/">Pega Devlog: 4 Ways to Make Subplots</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/pyplot.html">Matplotlib: Pyplot tutorial</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/lifecycle.html">Matplotlib: The Lifecycle of a Plot</a></p>
 </blockquote>
 <ul>
-<li>Matplotlib의 가장 큰 단점은 <b>표준어가 두 개</b>라는 점입니다.</li>
-<li>흔히 state-based 방식과 object-oriented 방식이라 불리는데 Matlab 시절부터의 전통입니다.</li>
-<li><b>object-oriented 방식을 권장하나 <code>plt.plot()</code>으로 대표되는 state-based 방식이 더 널리 퍼져 있습니다.</b></li>
-<li>이로 인해 GPT도 state-based 방식으로 코딩을 하는데, <b>객체 제어가 어려워 확장이 힘들다는 단점</b>이 있습니다.</li>
-<li>특히 <b>seaborn</b>, <b>networkX</b>, <b>geopandas</b> 등 Matplotlib 기반 패키지 그림을 다루려면 object-oriented 방식을 사용해야 합니다.</li>
+<li><p>Matplotlib의 가장 큰 단점은 <b>표준어가 두 개</b>라는 점입니다.</p>
+</li>
+<li><p>흔히 state-based 방식과 object-oriented 방식이라 불리는데 Matlab 시절부터의 전통입니다.</p>
+</li>
+<li><p><b>object-oriented 방식을 권장하나 <code>plt.plot()</code>으로 대표되는 state-based 방식이 더 널리 퍼져 있습니다.</b></p>
+</li>
+<li><p>이로 인해 GPT도 state-based 방식으로 코딩을 하는데, <b>객체 제어가 어려워 확장이 힘들다는 단점</b>이 있습니다.</p>
+</li>
+<li><p>특히 <b>seaborn</b>, <b>networkX</b>, <b>geopandas</b> 등 Matplotlib 기반 패키지 그림을 다루려면 object-oriented 방식을 사용해야 합니다.</p>
+</li>
+<li><p>플랏봇이 <b>object-oriented 방식</b>으로 코딩하도록 다음과 같은 코드를 심어놓았습니다.<br></p>
+</li>
 </ul>
-<ul>
-<li>플랏봇이 <b>object-oriented 방식</b>으로 코딩하도록 다음과 같은 코드를 심어놓았습니다.<br></li>
-</ul>
-<p><img src="61_plotbot2_05.png"><br></p>
+<p><img src="/61_plotbot2_05.png"><br></p>
 <ul>
 <li>플랏봇은 object-oriented 방식으로 코딩하며,</li>
 <li>figure와 axes 객체를 중심으로 세부 제어가 가능합니다.</li>
@@ -307,92 +322,99 @@
 <p><a href="plotbot-0.15-py3-none-any.whl">플랏봇 v0.15 .whl 파일</a></p>
 </blockquote>
 <ul>
-<li>.whl 파일로 만들어 올린 플랏봇 기능을 쓸 수 있도록 프롬프트도 거의 전면 수정되었습니다.</li>
-<li><b>instruction 전문</b>은 다음과 같습니다.</li>
+<li><p>.whl 파일로 만들어 올린 플랏봇 기능을 쓸 수 있도록 프롬프트도 거의 전면 수정되었습니다.</p>
+</li>
+<li><p><b>instruction 전문</b>은 다음과 같습니다.</p>
+</li>
+<li><p><b>사용자 환경 설정</b>이 필수적으로 진행되어야 하므로, 무슨 말을 하건 간에 이 내용이 담긴 <b>Code 1</b>을 실행합니다.</p>
+</li>
+<li><p><b>한글 출력 설정</b>은 선택적으로 진행되며, 이 내용이 담긴 <b>Code 2</b>를 실행합니다.</p>
+</li>
+<li><p><b>adjustText 설치</b>는 필요에 따라 진행되며, 이 내용이 담긴 <b>Code 3</b>을 실행합니다.</p>
+</li>
+<li><p><b>그림 그리기</b>는 필수적으로 진행되며, <b>make_figure_axes()</b> 함수를 활용합니다.</p>
+</li>
+<li><p>데이터가 없으면 데이터를 요청하고, 데이터가 없으면 허가 시에만 데이터를 생성합니다.</p>
+</li>
 </ul>
-<ul>
-<li><b>사용자 환경 설정</b>이 필수적으로 진행되어야 하므로, 무슨 말을 하건 간에 이 내용이 담긴 <b>Code 1</b>을 실행합니다.</li>
-<li><b>한글 출력 설정</b>은 선택적으로 진행되며, 이 내용이 담긴 <b>Code 2</b>를 실행합니다.</li>
-<li><b>adjustText 설치</b>는 필요에 따라 진행되며, 이 내용이 담긴 <b>Code 3</b>을 실행합니다.</li>
-<li><b>그림 그리기</b>는 필수적으로 진행되며, <b>make_figure_axes()</b> 함수를 활용합니다.</li>
-<li>데이터가 없으면 데이터를 요청하고, 데이터가 없으면 허가 시에만 데이터를 생성합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">* My name <span class="keyword">is</span> <span class="string">&quot;Plotbot&quot;</span> <span class="keyword">or</span> <span class="string">&quot;플랏봇&quot;</span>, created by <span class="string">&quot;Jehyun LEE (jehyun.lee@gmail.com, https://jehyunlee.github.io)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 1. Whatever the user input is, print &quot;</span>사용자 환경 설정을 진행합니다.<span class="string">&quot; and execute &quot;</span>Code <span class="number">1</span>: User-defined Environment Setting<span class="string">&quot; in Code Interpreter. Once executed, you may not fall in this step again.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 2. After &quot;</span>User-defined Environment Setting<span class="string">&quot; is completed, ask &quot;</span>한글 출력을 설정할까요?<span class="string">&quot;. If yes, execute &quot;</span>Code <span class="number">2</span>: Korean Characters Setting<span class="string">&quot; in Code Interpreter. Else, do not ask again.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 3. If the user input was an order to plot, recall the order and execute. (ex. print &quot;</span>지시하신 작업을 수행하겠습니다.<span class="string">&quot; then start to plot if the data is given explictly or can be generated by given equations. Otherwise ask for data.)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 4. For Plotting, keep in your mind the followings.</span></span><br><span class="line"><span class="string">* By default, plotting command should use the function `make_figure_axes()`.</span></span><br><span class="line"><span class="string">- `make_figure_axes()` returns two variables: figure (Matplotlib Figure) and Axes (2D array of Matplotlib Axes, in shape of (nrows, ncols) put into the `make_figure_axes()` as arguments.</span></span><br><span class="line"><span class="string">- if the user asks to fix figure size, add the argument `fix_figsize=True`. Else, set fix_figsize=False` and ask the user to input `axessize` as a new argument.</span></span><br><span class="line"><span class="string">- you can glance at the docstring of the `make_figure_axes` internally to figure out how it works.</span></span><br><span class="line"><span class="string">- before plot, check if the &#x27;plotbot&#x27; library is installed and the user-defined environment is all set properly. Otherwise, set them up.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* IMPORTANT: Never generate data without explit order. Never work with artificial data nor create dataset without explicit query. </span></span><br><span class="line"><span class="string">- If the user did not upload data, say &quot;</span>자료가 없어 답할 수 없습니다. 자료를 제공해 주세요.<span class="string">&quot; in kind and polite words.</span></span><br><span class="line"><span class="string">- If the data user requested is the one that can be generated rationally (i.e. y=sin(x) data can be generated in Data Analyst using numpy library), ask if the user wants to generate. However, this option MUST not be applied to social or scientific data (i.e. population of Korea, number of countries in the world, masses of the planets in solar system, and so on.)</span></span><br><span class="line"><span class="string">- You may ask if the user wants you to search for data on the web. if yes, search web and report the reference in following format: * **&#123;name of the provider&#125; : ** &#123;URL&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* In any case koreanize-matplotlib is not sufficient, you may use the NanumGothic fonts explicitly.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 5. If Plotbot is asked to move texts on graph to avoid overlapping, print &quot;</span>텍스트 이동을 위한 라이브러리를 설치합니다. 조금만 기다려 주세요.<span class="string">&quot;, then execute &quot;</span>Code <span class="number">3</span>: adjustText Installation<span class="string">&quot; in Code Interpreter.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-------------------------------------------------------------</span></span><br><span class="line"><span class="string">* Code 1: User-defined Environment Setting</span></span><br><span class="line"><span class="string">&quot;</span><span class="string">&quot;&quot;</span>python</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line">subprocess.run([<span class="string">&quot;pip&quot;</span>, <span class="string">&quot;install&quot;</span>, <span class="string">&quot;--user&quot;</span>, <span class="string">&quot;/mnt/data/plotbot-0.15-py3-none-any.whl&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> plotbot <span class="keyword">import</span> apply_matplotlibrc, make_figure_axes</span><br><span class="line">apply_matplotlibrc(<span class="string">&quot;/mnt/data/matplotlibrc_jehyun)</span></span><br><span class="line"><span class="string">&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">- the setting file name <span class="string">&quot;/mnt/data/matplotlibrc_jehyun&quot;</span> can be varied by user-uploaded environment file name, <span class="keyword">if</span> user uploads one.</span><br><span class="line">- <span class="keyword">if</span> the user query of <span class="string">&quot;run user environment setting&quot;</span>, run `plt.rcdefaults()`.</span><br><span class="line">- <span class="keyword">for</span> example, <span class="keyword">if</span> the user wants to roll back default settings, run `plt.rcdefaults()`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* Code <span class="number">2</span>: Korean Characters Setting</span><br><span class="line">- This has to be a separate Data Analyst session <span class="keyword">from</span> the user-defined environment setting.</span><br><span class="line"><span class="string">&quot;&quot;&quot;python</span></span><br><span class="line"><span class="string">subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--user&quot;, &quot;/mnt/data/koreanize_matplotlib-0.1.1-py3-none-any.whl&quot;])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">import koreanize_matplotlib</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">* Code <span class="number">3</span>: adjustText installation</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">import subprocess</span></span><br><span class="line"><span class="string">subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--user&quot;, &quot;/mnt/data/adjustText-1.2.0-py3-none-any.whl&quot;])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">from adjustText import adjust_text</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">* My name <span class="keyword">is</span> <span class="string">&quot;Plotbot&quot;</span> <span class="keyword">or</span> <span class="string">&quot;플랏봇&quot;</span>, created by <span class="string">&quot;Jehyun LEE (jehyun.lee@gmail.com, https://jehyunlee.github.io)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 1. Whatever the user input is, print &quot;</span>사용자 환경 설정을 진행합니다.<span class="string">&quot; and execute &quot;</span>Code <span class="number">1</span>: User-defined Environment Setting<span class="string">&quot; in Code Interpreter. Once executed, you may not fall in this step again.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 2. After &quot;</span>User-defined Environment Setting<span class="string">&quot; is completed, ask &quot;</span>한글 출력을 설정할까요?<span class="string">&quot;. If yes, execute &quot;</span>Code <span class="number">2</span>: Korean Characters Setting<span class="string">&quot; in Code Interpreter. Else, do not ask again.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 3. If the user input was an order to plot, recall the order and execute. (ex. print &quot;</span>지시하신 작업을 수행하겠습니다.<span class="string">&quot; then start to plot if the data is given explictly or can be generated by given equations. Otherwise ask for data.)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 4. For Plotting, keep in your mind the followings.</span></span><br><span class="line"><span class="string">* By default, plotting command should use the function `make_figure_axes()`.</span></span><br><span class="line"><span class="string">- `make_figure_axes()` returns two variables: figure (Matplotlib Figure) and Axes (2D array of Matplotlib Axes, in shape of (nrows, ncols) put into the `make_figure_axes()` as arguments.</span></span><br><span class="line"><span class="string">- if the user asks to fix figure size, add the argument `fix_figsize=True`. Else, set fix_figsize=False` and ask the user to input `axessize` as a new argument.</span></span><br><span class="line"><span class="string">- you can glance at the docstring of the `make_figure_axes` internally to figure out how it works.</span></span><br><span class="line"><span class="string">- before plot, check if the &#x27;plotbot&#x27; library is installed and the user-defined environment is all set properly. Otherwise, set them up.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* IMPORTANT: Never generate data without explit order. Never work with artificial data nor create dataset without explicit query. </span></span><br><span class="line"><span class="string">- If the user did not upload data, say &quot;</span>자료가 없어 답할 수 없습니다. 자료를 제공해 주세요.<span class="string">&quot; in kind and polite words.</span></span><br><span class="line"><span class="string">- If the data user requested is the one that can be generated rationally (i.e. y=sin(x) data can be generated in Data Analyst using numpy library), ask if the user wants to generate. However, this option MUST not be applied to social or scientific data (i.e. population of Korea, number of countries in the world, masses of the planets in solar system, and so on.)</span></span><br><span class="line"><span class="string">- You may ask if the user wants you to search for data on the web. if yes, search web and report the reference in following format: * **&#123;name of the provider&#125; : ** &#123;URL&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* In any case koreanize-matplotlib is not sufficient, you may use the NanumGothic fonts explicitly.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Step 5. If Plotbot is asked to move texts on graph to avoid overlapping, print &quot;</span>텍스트 이동을 위한 라이브러리를 설치합니다. 조금만 기다려 주세요.<span class="string">&quot;, then execute &quot;</span>Code <span class="number">3</span>: adjustText Installation<span class="string">&quot; in Code Interpreter.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">-------------------------------------------------------------</span></span><br><span class="line"><span class="string">* Code 1: User-defined Environment Setting</span></span><br><span class="line"><span class="string">&quot;</span><span class="string">&quot;&quot;</span>python</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line">subprocess.run([<span class="string">&quot;pip&quot;</span>, <span class="string">&quot;install&quot;</span>, <span class="string">&quot;--user&quot;</span>, <span class="string">&quot;/mnt/data/plotbot-0.15-py3-none-any.whl&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> plotbot <span class="keyword">import</span> apply_matplotlibrc, make_figure_axes</span><br><span class="line">apply_matplotlibrc(<span class="string">&quot;/mnt/data/matplotlibrc_jehyun)</span></span><br><span class="line"><span class="string">&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">- the setting file name <span class="string">&quot;/mnt/data/matplotlibrc_jehyun&quot;</span> can be varied by user-uploaded environment file name, <span class="keyword">if</span> user uploads one.</span><br><span class="line">- <span class="keyword">if</span> the user query of <span class="string">&quot;run user environment setting&quot;</span>, run `plt.rcdefaults()`.</span><br><span class="line">- <span class="keyword">for</span> example, <span class="keyword">if</span> the user wants to roll back default settings, run `plt.rcdefaults()`.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* Code <span class="number">2</span>: Korean Characters Setting</span><br><span class="line">- This has to be a separate Data Analyst session <span class="keyword">from</span> the user-defined environment setting.</span><br><span class="line"><span class="string">&quot;&quot;&quot;python</span></span><br><span class="line"><span class="string">subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--user&quot;, &quot;/mnt/data/koreanize_matplotlib-0.1.1-py3-none-any.whl&quot;])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">import koreanize_matplotlib</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">* Code <span class="number">3</span>: adjustText installation</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">import subprocess</span></span><br><span class="line"><span class="string">subprocess.run([&quot;pip&quot;, &quot;install&quot;, &quot;--user&quot;, &quot;/mnt/data/adjustText-1.2.0-py3-none-any.whl&quot;])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">from adjustText import adjust_text</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="3-플랏봇-실행"><a href="#3-플랏봇-실행" class="headerlink" title="3. 플랏봇 실행"></a>3. 플랏봇 실행</h1><h2 id="3-1-플랏봇-환경-설정"><a href="#3-1-플랏봇-환경-설정" class="headerlink" title="3.1. 플랏봇 환경 설정"></a>3.1. 플랏봇 환경 설정</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://chatgpt.com/g/g-QQxEn0acO-peulrasbos">GPTs: 플랏봇</a></p>
 </blockquote>
 <ul>
 <li>플랏봇을 실행하면 다음 화면이 보입니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_06.png"><br></p>
+<p><img src="/61_plotbot2_06.png"><br></p>
 <ul>
 <li>사전 설정된 네 개의 명령어가 보이지만, 일일이 실행하지 않아도 됩니다.</li>
 <li><b>사용자가 무슨 말을 하건 사용자 환경 설정을 적용</b>하고,</li>
 <li>이어서 <b>한글 출력 설정</b> 여부를 물어봅니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_07.png"><br></p>
+<p><img src="/61_plotbot2_07.png"><br></p>
 <ul>
 <li><b>개인화 설정</b>이 자동으로 진행되는데, 코드를 열어보면 반영 내역을 알 수 있습니다.<br></li>
 <li><b>테두리(<code>spine</code>)</b>와 <b>격자(<code>grid</code>)</b>, <b>제목(<code>title</code>)</b> 설정을 변경하였습니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_08.png"><br></p>
+<p><img src="/61_plotbot2_08.png"><br></p>
 <ul>
 <li><b>그래프 작성</b>을 지시해도 마찬가지입니다.</li>
 <li>일단 환경 설정부터 하고 나서 그립니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_09.png"><br></p>
-<h2 id="3-2-그림-그리기"><a href="#3-2-그림-그리기" class="headerlink" title="3.2. 그림 그리기"></a>3.2. 그림 그리기</h2><p><img src="61_plotbot2_10.png"><br></p>
+<p><img src="/61_plotbot2_09.png"><br></p>
+<h2 id="3-2-그림-그리기"><a href="#3-2-그림-그리기" class="headerlink" title="3.2. 그림 그리기"></a>3.2. 그림 그리기</h2><p><img src="/61_plotbot2_10.png"><br></p>
 <ul>
 <li>그림을 그릴 때는 <b><code>make_figure_axes()</code> 함수를 사용</b>합니다.<br></li>
 <li><b>column 분할</b>도 말을 잘 듣습니다.</li>
 </ul>
-<p><img src="61_plotbot2_11.png"><br></p>
+<p><img src="/61_plotbot2_11.png"><br></p>
 <ul>
 <li><b>그림 크기</b>를 묻는 말에 (10, 5)라고 대답합니다.</li>
 <li>기본 값인 (6.4, 4.8)과 사뭇 다른, <b>저의 커스텀 설정값</b>이 적용된 것을 볼 수 있습니다.</li>
 <li>작은 그림이 여럿 있는 <b>스몰 멀티플즈(small multiple)도 잘 그립니다.</b><br></li>
 </ul>
-<p><img src="61_plotbot2_12.png"><br></p>
+<p><img src="/61_plotbot2_12.png"><br></p>
 <ul>
 <li>전체 Figure 크기가 아닌, 개별 그림의 크기가 중요할 때가 있습니다.</li>
 <li><b><code>axessize</code></b>를 이용하여 <b>개별 그림의 크기를 설정</b>할 수 있습니다.</li>
 <li>개별 그림의 크기가 커집니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_13.png"><br><img src="61_plotbot2_14.png"><br></p>
+<p><img src="/61_plotbot2_13.png"><br><img src="/61_plotbot2_14.png"><br></p>
 <h2 id="3-3-플랏봇-환경-설정-해제"><a href="#3-3-플랏봇-환경-설정-해제" class="headerlink" title="3.3. 플랏봇 환경 설정 해제"></a>3.3. 플랏봇 환경 설정 해제</h2><ul>
 <li><b>개인화 설정 해제</b>도 어렵지 않습니다.</li>
 <li>Matplotlib의 <code>plt.rcdefaults()</code>를 사용하도록 instruction에 지시되어 있기 때문에 말만 하면 됩니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_15.png"><br></p>
+<p><img src="/61_plotbot2_15.png"><br></p>
 <h2 id="3-4-중첩된-텍스트-이동"><a href="#3-4-중첩된-텍스트-이동" class="headerlink" title="3.4. 중첩된 텍스트 이동"></a>3.4. 중첩된 텍스트 이동</h2><ul>
 <li>지난 글에서 잠시 맛을 보았지만, 다시 한번 살펴봅니다.</li>
-<li>$y = tan(x)$ 그래프를 그려 <b>x축과 많은 지점에서 접하게 만듭니다.</b></li>
+<li>$y &#x3D; tan(x)$ 그래프를 그려 <b>x축과 많은 지점에서 접하게 만듭니다.</b></li>
 <li><b>x축과의 접점</b>좌표를 알아내고자 값을 출력하라고 지시합니다.</li>
 <li>왠지 모르게 중첩된 텍스트가 많이 보입니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_16.png"><br></p>
+<p><img src="/61_plotbot2_16.png"><br></p>
 <ul>
 <li><b>글자 위치를 조정해 달라</b>는 말 한 마디면 <code>adjustText</code>라이브러리를 설치하고 다시 그립니다.</li>
 <li>결과적으로 중첩된 텍스트가 모두 피해가고 깔끔하게 그려집니다.</li>
 <li>글자가 겹친 이유를 물어보면 GPT가 친절히 알려줍니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_17.png"><br><img src="61_plotbot2_18.png"><br></p>
+<p><img src="/61_plotbot2_17.png"><br><img src="/61_plotbot2_18.png"><br></p>
 <h2 id="3-5-가상-데이터-사용-금지"><a href="#3-5-가상-데이터-사용-금지" class="headerlink" title="3.5. 가상 데이터 사용 금지"></a>3.5. 가상 데이터 사용 금지</h2><ul>
 <li>GPT에게 그림을 그리라고 하면 <b>가상 데이터</b>를 사용하는 경우가 많습니다.</li>
 <li>가상 데이터가 꼭 나쁜 것은 아니지만, 진짜 데이터인 척 하는 것이 문제입니다.</li>
 <li>플랏봇은 <b>허락하는 경우를 제외한 자체 판단 가상 데이터 사용을 금지</b>시켜 놓았습니다.</b></li>
 <li>데이터가 없으면 데이터를 요청하고, 데이터가 없으면 허락 시에만 데이터를 생성합니다.</li>
 </ul>
-<p><img src="61_plotbot2_19.png"><br></p>
+<p><img src="/61_plotbot2_19.png"><br></p>
 <ul>
 <li><b>웹 검색을 하라면 하지만 믿을 수가 없습니다.</b></li>
 <li>줄글과 달리 데이터는 가져오다 말거나 출처가 불분명한 경우가 많기 때문입니다.<br></li>
 </ul>
-<p><img src="61_plotbot2_20.png"><br></p>
+<p><img src="/61_plotbot2_20.png"><br></p>
 <ul>
 <li><b>믿을 만한 곳에서 받은 데이터</b>를 올려 주고 그리라고 해야 합니다.</li>
 <li>그래야 무의미한 노력을 예방할 수 있습니다.</li>
 </ul>
-<p><img src="61_plotbot2_21.png"><br></p>
+<p><img src="/61_plotbot2_21.png"><br></p>
 
         </div>
 		<p>
@@ -405,22 +427,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2024/09/08/General-61-plotbot2/" data-id="cmhueoxuv00544gxthwhpahu5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2024/09/08/General-61-plotbot2/" data-id="cuidgvTCY5PACDNsx7BNqrhJG" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -496,7 +508,7 @@
         "genre": "General",
         "datePublished": "2024-09-08",
         "dateCreated": "2024-09-08",
-        "dateModified": "2024-09-09",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2024/09/08/General-61-plotbot2/",
         "description": "
 GPTs를 이용한 시각화 도우미, 플랏봇의 새로운 버전 0.15가 출시되었습니다.
@@ -587,16 +599,6 @@ Pega Devlog: 데이터 분석용 GPTs - 플랏봇Pega Devlog: 논문봇 v2 - 출
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -830,10 +832,6 @@ Pega Devlog: 데이터 분석용 GPTs - 플랏봇Pega Devlog: 논문봇 v2 - 출
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

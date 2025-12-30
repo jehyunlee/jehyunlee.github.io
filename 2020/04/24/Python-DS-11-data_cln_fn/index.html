@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/11_dcf_1.jpg">
 <meta property="article:published_time" content="2020-04-23T21:59:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:44:05.093Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.780Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="pandas">
-<meta property="article:tag" content="data preprocessing">
 <meta property="article:tag" content="data cleansing">
+<meta property="article:tag" content="data preprocessing">
+<meta property="article:tag" content="pandas">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="set">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/11_dcf_1.jpg">
@@ -86,7 +86,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -203,7 +203,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/04/24/Python-DS-11-data_cln_fn/" class="article-date">
-     <time datetime="2020-11-27T00:44:05.093Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:37.780Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -245,7 +245,7 @@
 <ol>
 <li>데이터 <b>타입</b> 확인 및 처리: <code>chk_type()</code></li>
 <li><b>결측치</b> 확인 및 처리: <code>show()</code>, <code>chk_nan()</code></li>
-<li><b>중복치</b> 확인 및 처리: <code>pandas.DataFrame(, Series, Index).duplicated([&#123;key_column&#125;]).sum()</code></li>
+<li><b>중복치</b> 확인 및 처리: <code>pandas.DataFrame(, Series, Index).duplicated([{key_column}]).sum()</code></li>
 <li><b>병합데이터 일치</b> 확인 및 처리: <code>cmp_dfs()</code></li>
 </ol>
 <ul>
@@ -253,19 +253,21 @@
 <li>데이터 정리에 사용할 수 있는 함수를 몇 개 소개합니다.</li>
 </ul>
 <h2 id="1-데이터-타입-확인"><a href="#1-데이터-타입-확인" class="headerlink" title="1. 데이터 타입 확인"></a>1. 데이터 타입 확인</h2><ul>
-<li><p>함수에 데이터를 넣을 때, 특정 타입만을 받아들여야 할 때가 있습니다.</p>
-</li>
-<li><p>타입이 잘못되면 어디선가 에러가 나지만, 깊은 곳에서 에러가 나면 원인을 찾기 힘드니 데이터를 받자마자 타입을 점검하는 것이 효과적입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 변수(var)가 예상한 타입(typename)이면 True, 아니면 False 출력</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chk_type</span>(<span class="params">var, typename</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    check type of variable</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    var : variable</span></span><br><span class="line"><span class="string">    typename : (str)type name </span></span><br><span class="line"><span class="string">               &#x27;array&#x27; is regarded as &#x27;list&#x27; as well.    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    True, if type of variable is typename</span></span><br><span class="line"><span class="string">    False, if not.    </span></span><br><span class="line"><span class="string">               </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    typename_tol = []</span><br><span class="line">    typename_tol_arraylike = [<span class="string">&quot;array&quot;</span>, <span class="string">&quot;list&quot;</span>, <span class="string">&quot;series&quot;</span>]</span><br><span class="line">    typename_tol_scalar = [<span class="string">&quot;float&quot;</span>, <span class="string">&quot;int&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># &#x27;list&#x27; and &#x27;array&#x27; are regarded as same type</span></span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;list&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_arraylike</span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;array&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_arraylike</span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;array-like&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_arraylike</span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;scalar&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_scalar</span><br><span class="line"></span><br><span class="line">    typename_tol.append(typename)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>([(typetol <span class="keyword">in</span> <span class="built_in">str</span>(<span class="built_in">type</span>(var))) <span class="keyword">for</span> typetol <span class="keyword">in</span> typename_tol]):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></li>
-<li><p>예시</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>) <span class="comment"># type: numpy.ndarray </span></span><br><span class="line"></span><br><span class="line">chk_type(x, <span class="string">&#x27;array&#x27;</span>)  <span class="comment"># type test 통과</span></span><br></pre></td></tr></table></figure>
-<p><img src="11_dcf_1.png"></p>
-</li>
+<li>함수에 데이터를 넣을 때, 특정 타입만을 받아들여야 할 때가 있습니다.</li>
+<li>타입이 잘못되면 어디선가 에러가 나지만, 깊은 곳에서 에러가 나면 원인을 찾기 힘드니 데이터를 받자마자 타입을 점검하는 것이 효과적입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 변수(var)가 예상한 타입(typename)이면 True, 아니면 False 출력</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">chk_type</span>(<span class="params">var, typename</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    check type of variable</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    var : variable</span></span><br><span class="line"><span class="string">    typename : (str)type name </span></span><br><span class="line"><span class="string">               &#x27;array&#x27; is regarded as &#x27;list&#x27; as well.    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    True, if type of variable is typename</span></span><br><span class="line"><span class="string">    False, if not.    </span></span><br><span class="line"><span class="string">               </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    typename_tol = []</span><br><span class="line">    typename_tol_arraylike = [<span class="string">&quot;array&quot;</span>, <span class="string">&quot;list&quot;</span>, <span class="string">&quot;series&quot;</span>]</span><br><span class="line">    typename_tol_scalar = [<span class="string">&quot;float&quot;</span>, <span class="string">&quot;int&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># &#x27;list&#x27; and &#x27;array&#x27; are regarded as same type</span></span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;list&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_arraylike</span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;array&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_arraylike</span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;array-like&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_arraylike</span><br><span class="line">    <span class="keyword">if</span> typename == <span class="string">&quot;scalar&quot;</span>:</span><br><span class="line">        typename_tol = typename_tol_scalar</span><br><span class="line"></span><br><span class="line">    typename_tol.append(typename)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>([(typetol <span class="keyword">in</span> <span class="built_in">str</span>(<span class="built_in">type</span>(var))) <span class="keyword">for</span> typetol <span class="keyword">in</span> typename_tol]):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>예상 타입과 실제가 다를 경우<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chk_type(x, <span class="string">&#x27;float&#x27;</span>)  <span class="comment"># type test 실패</span></span><br></pre></td></tr></table></figure>
-<img src="11_dcf_2.png"></li>
+<li>예시</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>) <span class="comment"># type: numpy.ndarray </span></span><br><span class="line"></span><br><span class="line">chk_type(x, <span class="string">&#x27;array&#x27;</span>)  <span class="comment"># type test 통과</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/11_dcf_1.png"></p>
+<ul>
+<li>예상 타입과 실제가 다를 경우</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chk_type(x, <span class="string">&#x27;float&#x27;</span>)  <span class="comment"># type test 실패</span></span><br></pre></td></tr></table></figure>
+<p>  <img src="/11_dcf_2.png"></p>
 <h2 id="2-결측치-확인"><a href="#2-결측치-확인" class="headerlink" title="2. 결측치 확인"></a>2. 결측치 확인</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/ResidentMario/missingno">github: missingno</a></p>
 </blockquote>
@@ -274,63 +276,78 @@
 <li>여기에 대한 글은 많으니 본 글에서는 다루지 않겠습니다.</li>
 </ul>
 <h3 id="2-1-numpy-array"><a href="#2-1-numpy-array" class="headerlink" title="2.1. numpy array"></a>2.1. numpy array</h3><ul>
-<li>결측치가 있는 numpy data를 만들고, 여기서 결측치의 갯수와 위치를 확인해 봅시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>, dtype=<span class="string">&#x27;float&#x27;</span>)    <span class="comment"># 예제 데이터 만들기</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):   <span class="comment"># 예제 데이터에 랜덤으로 결측치 3개 심기</span></span><br><span class="line">    idx = randint(<span class="number">0</span>, <span class="number">9</span>)</span><br><span class="line">    x[idx] = np.nan</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)    </span><br></pre></td></tr></table></figure>
-<img src="11_dcf_3.png"></li>
+<li>결측치가 있는 numpy data를 만들고, 여기서 결측치의 갯수와 위치를 확인해 봅시다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">10</span>, dtype=<span class="string">&#x27;float&#x27;</span>)    <span class="comment"># 예제 데이터 만들기</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):   <span class="comment"># 예제 데이터에 랜덤으로 결측치 3개 심기</span></span><br><span class="line">    idx = randint(<span class="number">0</span>, <span class="number">9</span>)</span><br><span class="line">    x[idx] = np.nan</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)    </span><br></pre></td></tr></table></figure>
+<p>  <img src="/11_dcf_3.png"></p>
 <ul>
-<li>결측치 index 확인<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idxnan = np.where(np.isnan(x))[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(idxnan)</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_4.png"></li>
+<li>결측치 index 확인</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idxnan = np.where(np.isnan(x))[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(idxnan)</span><br></pre></td></tr></table></figure>
+<p>  <img src="/11_dcf_4.png"></p>
 <ul>
-<li>결측치를 제외한 데이터 추출<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x1 = np.delete(x, idxnan)</span><br><span class="line"><span class="built_in">print</span>(x1)</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_5.png"></li>
+<li>결측치를 제외한 데이터 추출</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x1 = np.delete(x, idxnan)</span><br><span class="line"><span class="built_in">print</span>(x1)</span><br></pre></td></tr></table></figure>
+<p><img src="/11_dcf_5.png"></p>
 <h3 id="2-2-pandas-DataFrame"><a href="#2-2-pandas-DataFrame" class="headerlink" title="2.2. pandas DataFrame"></a>2.2. pandas DataFrame</h3><ul>
 <li>jupyter notebook에서 cell의 마지막 줄에 dataframe 이름만 입력하면 예쁜 table이 나오지만, cell 중간에 dataframe의 내용을 알아보기 위해 <code>print(df)</code>를 하면 숫자들의 나열로만 나와 알아보기 힘듭니다. </li>
-<li>cell 중간에 dataframe을 출력해도 예쁘게 나올 함수를 간단하게 만들 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> HTML</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">df</span>):</span></span><br><span class="line">    display(HTML(df.to_html()))</span><br></pre></td></tr></table></figure></li>
+<li>cell 중간에 dataframe을 출력해도 예쁘게 나올 함수를 간단하게 만들 수 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> HTML</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show</span>(<span class="params">df</span>):</span><br><span class="line">    display(HTML(df.to_html()))</span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li>10행 x 3열 DataFrame을 만들어서 테스트합시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dim = <span class="number">10</span></span><br><span class="line">x = np.arange(dim, dtype=<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line">y = np.arange(dim, dtype=<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line">c = np.arange(dim, dtype=<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;X&#x27;</span>:x, <span class="string">&#x27;Y&#x27;</span>:y, <span class="string">&#x27;C&#x27;</span>:c&#125;)</span><br><span class="line">show(df)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_6.png"></li>
+<li>10행 x 3열 DataFrame을 만들어서 테스트합시다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">dim = <span class="number">10</span></span><br><span class="line">x = np.arange(dim, dtype=<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line">y = np.arange(dim, dtype=<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line">c = np.arange(dim, dtype=<span class="string">&#x27;float&#x27;</span>)</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;X&#x27;</span>:x, <span class="string">&#x27;Y&#x27;</span>:y, <span class="string">&#x27;C&#x27;</span>:c&#125;)</span><br><span class="line">show(df)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br></pre></td></tr></table></figure>
+<p><img src="/11_dcf_6.png"></p>
 <ul>
-<li>일부 데이터를 랜덤하게 결측치로 만듭니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):  <span class="comment"># 컬럼별로 최대 3개를 결측시키겠습니다.</span></span><br><span class="line">        idx = randint(<span class="number">0</span>, dim-<span class="number">1</span>)</span><br><span class="line">        df.loc[idx, col] = np.nan</span><br><span class="line"></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_7.png"></li>
+<li>일부 데이터를 랜덤하게 결측치로 만듭니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):  <span class="comment"># 컬럼별로 최대 3개를 결측시키겠습니다.</span></span><br><span class="line">        idx = randint(<span class="number">0</span>, dim-<span class="number">1</span>)</span><br><span class="line">        df.loc[idx, col] = np.nan</span><br><span class="line"></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+<p><img src="/11_dcf_7.png"></p>
 <ul>
-<li><code>.plot</code> 명령으로 데이터를 출력하면 결측치를 제외하고 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>, kind=<span class="string">&#x27;scatter&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_8.png"></li>
+<li><code>.plot</code> 명령으로 데이터를 출력하면 결측치를 제외하고 출력합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>, kind=<span class="string">&#x27;scatter&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/11_dcf_8.png"></p>
 <ul>
 <li><code>c=&#39;C&#39;, cmap=&#39;jet&#39;</code>를 추가해서 colormap까지 입혀보겠습니다.</li>
-<li>색상 결측치까지 반영되어 데이터가 사라집니다: (7, 7) 지점이 사라졌습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>, c=<span class="string">&#x27;C&#x27;</span>, kind=<span class="string">&#x27;scatter&#x27;</span>, cmap=<span class="string">&#x27;jet&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_9.png"></li>
+<li>색상 결측치까지 반영되어 데이터가 사라집니다: (7, 7) 지점이 사라졌습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(<span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Y&#x27;</span>, c=<span class="string">&#x27;C&#x27;</span>, kind=<span class="string">&#x27;scatter&#x27;</span>, cmap=<span class="string">&#x27;jet&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/11_dcf_9.png"></p>
 <h3 id="2-3-결측치-합집합-제거"><a href="#2-3-결측치-합집합-제거" class="headerlink" title="2.3. 결측치 합집합 제거"></a>2.3. 결측치 합집합 제거</h3><ul>
 <li>에러의 소지가 되는 결측치를 자동으로 제거해 주어서 좋지만, 데이터 손실량을 알 수 없습니다.</li>
-<li>앞서 사용한 <code>np.where()</code>와 <code>np.delete()</code>를 이용해서 결측치 위치를 확인하고 삭제할 수 있지만, 방심하면 엉뚱한 데이터끼리 붙어버립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delnan</span>(<span class="params">arr</span>):</span></span><br><span class="line">    idxnan = np.where(np.isnan(arr))[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> np.delete(arr, idxnan)</span><br><span class="line"></span><br><span class="line">x1 = delnan(df[<span class="string">&#x27;X&#x27;</span>].tolist())</span><br><span class="line">y1 = delnan(df[<span class="string">&#x27;Y&#x27;</span>].tolist())</span><br><span class="line">c1 = delnan(df[<span class="string">&#x27;C&#x27;</span>].tolist())</span><br><span class="line"></span><br><span class="line">plt.scatter(x1, y1, c=c1, cmap=<span class="string">&#x27;jet&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
-<img src="11_dcf_10.png"></li>
+<li>앞서 사용한 <code>np.where()</code>와 <code>np.delete()</code>를 이용해서 결측치 위치를 확인하고 삭제할 수 있지만, 방심하면 엉뚱한 데이터끼리 붙어버립니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">delnan</span>(<span class="params">arr</span>):</span><br><span class="line">    idxnan = np.where(np.isnan(arr))[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> np.delete(arr, idxnan)</span><br><span class="line"></span><br><span class="line">x1 = delnan(df[<span class="string">&#x27;X&#x27;</span>].tolist())</span><br><span class="line">y1 = delnan(df[<span class="string">&#x27;Y&#x27;</span>].tolist())</span><br><span class="line">c1 = delnan(df[<span class="string">&#x27;C&#x27;</span>].tolist())</span><br><span class="line"></span><br><span class="line">plt.scatter(x1, y1, c=c1, cmap=<span class="string">&#x27;jet&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/11_dcf_10.png"></p>
 <ul>
-<li>보시다시피 네 개 밖에 없어야 할 점이 7개나 있고, y=x에서도 벗어납니다.</li>
+<li>보시다시피 네 개 밖에 없어야 할 점이 7개나 있고, y&#x3D;x에서도 벗어납니다.</li>
 <li>이럴 때는 독립된 결측치를 먼저 합집합으로 만든 후에 x, y, c에서 모두 삭제해야 합니다.</li>
-<li>이 과정을 하나의 함수로 실행해 보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chk_nan</span>(<span class="params">*args</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    returns null-free dataset.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    *args : array-like data (list, numpy.ndarray, pd.Series)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    data_names = []</span><br><span class="line">    data = []</span><br><span class="line">    data_nanidx = []</span><br><span class="line">    data_new = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, arg <span class="keyword">in</span> <span class="built_in">enumerate</span>(args):</span><br><span class="line">        <span class="comment"># data should be array-like</span></span><br><span class="line">        <span class="keyword">assert</span> chk_type(arg, <span class="string">&#x27;list&#x27;</span>) <span class="keyword">or</span> chk_type(arg, <span class="string">&#x27;array&#x27;</span>) <span class="keyword">or</span> chk_type(arg, <span class="string">&#x27;series&#x27;</span>), <span class="string">&quot;Only array-like data is acceptable&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># data names</span></span><br><span class="line">        <span class="keyword">if</span> chk_type(arg, <span class="string">&#x27;series&#x27;</span>):</span><br><span class="line">            data_names.append(arg.name)</span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            data_names.append(<span class="string">f&#x27;data_<span class="subst">&#123;i&#125;</span>&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># data</span></span><br><span class="line">        data.append(np.array(arg))</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># null values</span></span><br><span class="line">        data_nanidx.append(np.where(np.isnan(arg))[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(data_nanidx[i]) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;# WARNING <span class="subst">&#123;data_names[i]&#125;</span>: Number of null values=<span class="subst">&#123;<span class="built_in">len</span>(data_nanidx[i])&#125;</span> of <span class="subst">&#123;<span class="built_in">len</span>(data[i])&#125;</span>.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># union indices of null values </span></span><br><span class="line">    data_nanidx_all = reduce(<span class="keyword">lambda</span> a, b: <span class="built_in">list</span>(<span class="built_in">set</span>(a) | <span class="built_in">set</span>(b)), data_nanidx)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;# Total number of missing data: <span class="subst">&#123;<span class="built_in">len</span>(data_nanidx_all)&#125;</span>&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, datum <span class="keyword">in</span> <span class="built_in">enumerate</span>(data):</span><br><span class="line">        data_new.append(np.delete(data[i], data_nanidx_all))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> data_new</span><br></pre></td></tr></table></figure></li>
-<li><code>assert</code>를 사용해서 <code>&#39;list&#39;, &#39;array&#39;, &#39;series&#39;</code>에만 적용되도록 했습니다.</li>
-<li>합집합을 구하는 <code>set(A) | set(B)</code> 명령을 사용했으며,</li>
-<li><code>*args</code>와 <code>reduce</code>를 이용해서 입력받는 인자의 갯수에 무관하게 동작합니다.</li>
+<li>이 과정을 하나의 함수로 실행해 보겠습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">chk_nan</span>(<span class="params">*args</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    returns null-free dataset.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    *args : array-like data (list, numpy.ndarray, pd.Series)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    data_names = []</span><br><span class="line">    data = []</span><br><span class="line">    data_nanidx = []</span><br><span class="line">    data_new = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, arg <span class="keyword">in</span> <span class="built_in">enumerate</span>(args):</span><br><span class="line">        <span class="comment"># data should be array-like</span></span><br><span class="line">        <span class="keyword">assert</span> chk_type(arg, <span class="string">&#x27;list&#x27;</span>) <span class="keyword">or</span> chk_type(arg, <span class="string">&#x27;array&#x27;</span>) <span class="keyword">or</span> chk_type(arg, <span class="string">&#x27;series&#x27;</span>), <span class="string">&quot;Only array-like data is acceptable&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># data names</span></span><br><span class="line">        <span class="keyword">if</span> chk_type(arg, <span class="string">&#x27;series&#x27;</span>):</span><br><span class="line">            data_names.append(arg.name)</span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            data_names.append(<span class="string">f&#x27;data_<span class="subst">&#123;i&#125;</span>&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># data</span></span><br><span class="line">        data.append(np.array(arg))</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># null values</span></span><br><span class="line">        data_nanidx.append(np.where(np.isnan(arg))[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(data_nanidx[i]) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;# WARNING <span class="subst">&#123;data_names[i]&#125;</span>: Number of null values=<span class="subst">&#123;<span class="built_in">len</span>(data_nanidx[i])&#125;</span> of <span class="subst">&#123;<span class="built_in">len</span>(data[i])&#125;</span>.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># union indices of null values </span></span><br><span class="line">    data_nanidx_all = reduce(<span class="keyword">lambda</span> a, b: <span class="built_in">list</span>(<span class="built_in">set</span>(a) | <span class="built_in">set</span>(b)), data_nanidx)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;# Total number of missing data: <span class="subst">&#123;<span class="built_in">len</span>(data_nanidx_all)&#125;</span>&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, datum <span class="keyword">in</span> <span class="built_in">enumerate</span>(data):</span><br><span class="line">        data_new.append(np.delete(data[i], data_nanidx_all))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> data_new</span><br></pre></td></tr></table></figure>
 <ul>
+<li><p><code>assert</code>를 사용해서 <code>&#39;list&#39;, &#39;array&#39;, &#39;series&#39;</code>에만 적용되도록 했습니다.</p>
+</li>
+<li><p>합집합을 구하는 <code>set(A) | set(B)</code> 명령을 사용했으며,</p>
+</li>
+<li><p><code>*args</code>와 <code>reduce</code>를 이용해서 입력받는 인자의 갯수에 무관하게 동작합니다.</p>
+</li>
 <li><p>아까 만들었던, 결측치가 있는 <code>numpy.ndarray</code>에 적용해 보겠습니다.</p>
+</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x2, y2, c2 = chk_nan(x, y, c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># pandas Series도 입력 가능합니다.</span></span><br><span class="line"><span class="comment"># x2, y2, c2 = chk_nan(df[&#x27;X&#x27;], df[&#x27;Y&#x27;], df[&#x27;C&#x27;]) </span></span><br><span class="line"></span><br><span class="line">plt.scatter(x2, y2, c=c2, cmap=<span class="string">&#x27;jet&#x27;</span>, s=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="11_dcf_11.png"></p>
-</li>
-<li><p>각 항의 결측치 갯수와 함께 전체적으로 몇 개의 데이터가 빠졌는지 알려줍니다.</p>
-</li>
-<li><p>plot도 정상적으로 출력됩니다.</p>
+<p><img src="/11_dcf_11.png"></p>
 <ul>
+<li>각 항의 결측치 갯수와 함께 전체적으로 몇 개의 데이터가 빠졌는지 알려줍니다.</li>
+<li>plot도 정상적으로 출력됩니다.<ul>
 <li>matplotlib은 자체적으로 결측치를 정상적으로 제거하고 plot을 수행합니다.</li>
 <li>그러나 <code>seaborn</code>의 <code>distplot()</code>은 결측치가 있으면 동작하지 않습니다.</li>
-<li>사실 <code>chk_nan()</code>은 plot보다 다른 작업시 결측치를 오류 없이 처리할 때 유용합니다.  </li>
+<li>사실 <code>chk_nan()</code>은 plot보다 다른 작업시 결측치를 오류 없이 처리할 때 유용합니다.</li>
 </ul>
 </li>
 </ul>
@@ -343,39 +360,44 @@
 </ul>
 <p><b>1. 중복치 확인은 key 값을 넣고 하자 :</b> </p>
 <ul>
-<li><code>df.duplicated()</code>의 기본값은 행 전체를 비교하므로 일부만 중복되면 다른 데이터로 간주합니다.<br>보통 데이터는 기준이 되는 key 값이 있으므로 <code>.duplicated([&#123;key_column&#125;])</code>를 수행하는 것이 좋습니다.</li>
-<li><b>중복치 갯수</b>는 뒤에 <code>.sum()</code>을 붙이면 간단합니다.<br>중복 여부를 True(1)/False(0)로 표기한 Series를 출력하기 때문입니다.</li>
-<li>중복치를 제거하기 전에 <b>중복 데이터를 뽑아서 육안으로 검사</b>를 하는 것이 좋습니다.<br><b>중복 자체가 뭔가 많이 잘못된 겁니다.</b> 경험상 결측보다 중복이 있을 때 고생스런 일이 더 많았습니다.<br></li>
+<li><code>df.duplicated()</code>의 기본값은 행 전체를 비교하므로 일부만 중복되면 다른 데이터로 간주합니다.<br>  보통 데이터는 기준이 되는 key 값이 있으므로 <code>.duplicated([{key_column}])</code>를 수행하는 것이 좋습니다.</li>
+<li><b>중복치 갯수</b>는 뒤에 <code>.sum()</code>을 붙이면 간단합니다.<br>  중복 여부를 True(1)&#x2F;False(0)로 표기한 Series를 출력하기 때문입니다.</li>
+<li>중복치를 제거하기 전에 <b>중복 데이터를 뽑아서 육안으로 검사</b>를 하는 것이 좋습니다.</li>
 </ul>
+<p>  <b>중복 자체가 뭔가 많이 잘못된 겁니다.</b> 경험상 결측보다 중복이 있을 때 고생스런 일이 더 많았습니다.<br></p>
 <p><b>2. <code>.drop_duplicates()</code>는 기본적으로 첫 데이터를 남긴다 :</b> </p>
 <ul>
-<li>데이터의 중복을 확인한 후에는 어떤 것을 지울지 선택해야 합니다.</li>
-<li>중복치를 제거하는 명령으로 <code>drop_duplicates()</code>를 사용하는데, <code>keep=&#39;first&#39;</code>가 기본 옵션입니다.</li>
-<li>여러 중복 데이터 중 첫 데이터만을 남기고 삭제하기 때문에 옳지 못한 선택일 수 있습니다.</li>
-<li><b>중복 데이터의 feature를 종합적으로 살펴본 후 선택해야 합니다.</b> 때로는 수동 삭제가 필요합니다.</li>
-</ul>
-<ul>
-<li>아래는 제가 실제로 겪은 중복 데이터 사례입니다.</li>
-<li>철거된 건물(붉은 실선)이 신축 건물(녹색 다각형)과 겹쳐 있습니다.<br><br><img src="11_dcf_12.png"></li>
-</ul>
-<h2 id="4-병합데이터-일치-여부-확인"><a href="#4-병합데이터-일치-여부-확인" class="headerlink" title="4. 병합데이터 일치 여부 확인"></a>4. 병합데이터 일치 여부 확인</h2><p><img src="11_dcf_13.png"></p>
-<ul>
-<li><p>두 dataframe A와 B을 합칠 때 집합의 포함관계를 살펴야 합니다.</p>
+<li><p>데이터의 중복을 확인한 후에는 어떤 것을 지울지 선택해야 합니다.</p>
 </li>
-<li><p>key feature 기준 $$ A=B $$라면 가장 좋겠으나, $$ A - B \ne \emptyset$$ 이면 B에 결측치가 생기기 때문입니다.</p>
+<li><p>중복치를 제거하는 명령으로 <code>drop_duplicates()</code>를 사용하는데, <code>keep=&#39;first&#39;</code>가 기본 옵션입니다.</p>
 </li>
-<li><p>$$ A-B, B-A, A \cap B, A \cup B$$는 다음 함수로 한번에 확인 가능합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmp_dfs</span>(<span class="params">df1, df2, key1, key2=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    check type of variable</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    df1, df2   : (pandas.DataFrame)</span></span><br><span class="line"><span class="string">    key1, key2 : (str) key column name of df1 and df2, respectively.</span></span><br><span class="line"><span class="string">                 if key2 == None: key2 = key1</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> key2 == <span class="literal">None</span>: key2 = key1</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">assert</span> key1 <span class="keyword">in</span> df1.columns</span><br><span class="line">    <span class="keyword">assert</span> key2 <span class="keyword">in</span> df2.columns</span><br><span class="line">    </span><br><span class="line">    dfkey1 = df1[key1].tolist()</span><br><span class="line">    dfkey2 = df2[key2].tolist()</span><br><span class="line"></span><br><span class="line">    df1_2 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey1) - <span class="built_in">set</span>(dfkey2))</span><br><span class="line">    df2_1 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey2) - <span class="built_in">set</span>(dfkey1))</span><br><span class="line">    df1n2 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey1) &amp; <span class="built_in">set</span>(dfkey2))</span><br><span class="line">    df1u2 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey1) | <span class="built_in">set</span>(dfkey2))</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;# No. of df1= <span class="subst">&#123;df1.shape[<span class="number">0</span>]&#125;</span>, df2= <span class="subst">&#123;df2.shape[<span class="number">0</span>]&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df1 - df2] = <span class="subst">&#123;<span class="built_in">len</span>(df1_2)&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df2 - df1] = <span class="subst">&#123;<span class="built_in">len</span>(df2_1)&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df1 &amp; df2] = <span class="subst">&#123;<span class="built_in">len</span>(df1n2)&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df1 | df2] = <span class="subst">&#123;<span class="built_in">len</span>(df1u2)&#125;</span>&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df1_2, df2_1, df1n2, df1u2</span><br></pre></td></tr></table></figure></li>
-<li><p>예제 DataFrame을 두 개 만들어서 비교해 보겠습니다.</p>
+<li><p>여러 중복 데이터 중 첫 데이터만을 남기고 삭제하기 때문에 옳지 못한 선택일 수 있습니다.</p>
+</li>
+<li><p><b>중복 데이터의 feature를 종합적으로 살펴본 후 선택해야 합니다.</b> 때로는 수동 삭제가 필요합니다.</p>
+</li>
+<li><p>아래는 제가 실제로 겪은 중복 데이터 사례입니다.</p>
+</li>
+<li><p>철거된 건물(붉은 실선)이 신축 건물(녹색 다각형)과 겹쳐 있습니다.<br><br><img src="/11_dcf_12.png"></p>
+</li>
+</ul>
+<h2 id="4-병합데이터-일치-여부-확인"><a href="#4-병합데이터-일치-여부-확인" class="headerlink" title="4. 병합데이터 일치 여부 확인"></a>4. 병합데이터 일치 여부 확인</h2><p><img src="/11_dcf_13.png"></p>
+<ul>
+<li>두 dataframe A와 B을 합칠 때 집합의 포함관계를 살펴야 합니다.</li>
+<li>key feature 기준 $$ A&#x3D;B $$라면 가장 좋겠으나, $$ A - B \ne \emptyset$$ 이면 B에 결측치가 생기기 때문입니다.</li>
+<li>$$ A-B, B-A, A \cap B, A \cup B$$는 다음 함수로 한번에 확인 가능합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cmp_dfs</span>(<span class="params">df1, df2, key1, key2=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    check type of variable</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    df1, df2   : (pandas.DataFrame)</span></span><br><span class="line"><span class="string">    key1, key2 : (str) key column name of df1 and df2, respectively.</span></span><br><span class="line"><span class="string">                 if key2 == None: key2 = key1</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> key2 == <span class="literal">None</span>: key2 = key1</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">assert</span> key1 <span class="keyword">in</span> df1.columns</span><br><span class="line">    <span class="keyword">assert</span> key2 <span class="keyword">in</span> df2.columns</span><br><span class="line">    </span><br><span class="line">    dfkey1 = df1[key1].tolist()</span><br><span class="line">    dfkey2 = df2[key2].tolist()</span><br><span class="line"></span><br><span class="line">    df1_2 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey1) - <span class="built_in">set</span>(dfkey2))</span><br><span class="line">    df2_1 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey2) - <span class="built_in">set</span>(dfkey1))</span><br><span class="line">    df1n2 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey1) &amp; <span class="built_in">set</span>(dfkey2))</span><br><span class="line">    df1u2 = <span class="built_in">list</span>(<span class="built_in">set</span>(dfkey1) | <span class="built_in">set</span>(dfkey2))</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;# No. of df1= <span class="subst">&#123;df1.shape[<span class="number">0</span>]&#125;</span>, df2= <span class="subst">&#123;df2.shape[<span class="number">0</span>]&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df1 - df2] = <span class="subst">&#123;<span class="built_in">len</span>(df1_2)&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df2 - df1] = <span class="subst">&#123;<span class="built_in">len</span>(df2_1)&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df1 &amp; df2] = <span class="subst">&#123;<span class="built_in">len</span>(df1n2)&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;- No. of [df1 | df2] = <span class="subst">&#123;<span class="built_in">len</span>(df1u2)&#125;</span>&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df1_2, df2_1, df1n2, df1u2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>예제 DataFrame을 두 개 만들어서 비교해 보겠습니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;<span class="string">&#x27;A&#x27;</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">&#x27;B&#x27;</span>:[<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>]&#125;)</span><br><span class="line">df2 = pd.DataFrame(&#123;<span class="string">&#x27;A&#x27;</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>], <span class="string">&#x27;D&#x27;</span>:[<span class="number">11</span>,<span class="number">12</span>,<span class="number">14</span>]&#125;)</span><br><span class="line"></span><br><span class="line">cmp_dfs(df1, df2, <span class="string">&#x27;A&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="11_dcf_14.png"></p>
+<p><img src="/11_dcf_14.png"></p>
+<ul>
+<li><p>차례대로 출력되는 $$ A-B, B-A, A \cap B, A \cup B$$ 를 변수로 저장해 활용할 수 있습니다.</p>
 </li>
-</ul>
+<li><p><code>cmp_dfs()</code>함수는 key feature만 비교하므로, 좀 더 자세히 볼 여지가 있습니다.</p>
 <ul>
-<li>차례대로 출력되는 $$ A-B, B-A, A \cap B, A \cup B$$ 를 변수로 저장해 활용할 수 있습니다.</li>
-</ul>
-<ul>
-<li><code>cmp_dfs()</code>함수는 key feature만 비교하므로, 좀 더 자세히 볼 여지가 있습니다.<ul>
 <li>차집합을 <b>버릴 것인지(<code>inner join</code>)</b>, 결측치를 만들며 <b>포함할 것인지(<code>outer join</code>)</b>.</li>
 <li>교집합은 <b>key feature 외 다른 값들은 어떤지</b>. 데이터의 <b>수</b>, <b>타입</b>,<b>내용</b>을 모두 확인합니다.</li>
 </ul>
@@ -393,22 +415,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/" data-id="cmhueoxxg00aq4gxtczuhgbnk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/" data-id="cuidh57p3Pitu1FzLD-f32Oc5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -484,13 +496,13 @@
         "genre": "Python Data Science",
         "datePublished": "2020-04-24",
         "dateCreated": "2020-04-24",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/04/24/Python-DS-11-data_cln_fn/",
         "description": "
 데이터 분석에 앞서 잘못된 부분을 찾아내고 이를 메꾸는 작업을 데이터 정리(data cleansing)이라고 합니다.
 개별 데이터의 타입(type), 크기(length) 등이 잘못된 경우도 있고, 개별 데이터는 정상적이지만 이것들을 합쳤더니(merge) 결측치가 양산되거나 중복되는 경우도 있습니다.
 분석이나 예측모델 생성시 문제의 원인이 되기 때문에 처음",
-        "wordCount": 2288
+        "wordCount": 2300
     }
 </script>
 
@@ -572,16 +584,6 @@
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -815,10 +817,6 @@
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

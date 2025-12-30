@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/1-conv2d_0.png">
 <meta property="article:published_time" content="2020-11-28T20:21:00.000Z">
-<meta property="article:modified_time" content="2020-12-03T04:43:28.885Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.539Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="tensorflow">
-<meta property="article:tag" content="keras">
 <meta property="article:tag" content="convolution">
+<meta property="article:tag" content="keras">
+<meta property="article:tag" content="tensorflow">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/1-conv2d_0.png">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/11/29/Python-DL-1-conv2d/" class="article-date">
-     <time datetime="2020-12-03T04:43:28.885Z" itemprop="dateModified">2020-12-03</time>
+     <time datetime="2025-12-30T06:28:37.539Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -237,12 +237,12 @@
 <p><a target="_blank" rel="noopener" href="https://www.pyimagesearch.com/2018/12/31/keras-conv2d-and-convolutional-layers/">pyimagesearch: Keras Conv2D and Convolutional Layers</a></p>
 </blockquote>
 <ul>
-<li>convolution, 또는 합성곱 연산은 CNN(Convolution Neural Network)이라는 이름으로 접하신 분이 많을테지만 image processing을 비롯한 signal processing에서 사용되어 온 연산 기법입니다.</li>
-</ul>
-<ul>
-<li>다음 두 가지 특징이 있습니다.<ol>
+<li><p>convolution, 또는 합성곱 연산은 CNN(Convolution Neural Network)이라는 이름으로 접하신 분이 많을테지만 image processing을 비롯한 signal processing에서 사용되어 온 연산 기법입니다.</p>
+</li>
+<li><p>다음 두 가지 특징이 있습니다.</p>
+<ol>
 <li><b>인접 데이터</b>끼리 연산 (localization)</li>
-<li><b>동일 연산</b>을 전체 데이터에 적용 (weight sharing)<br><br><img src="keras_conv2d_padding.gif" alt="convolution 연산 과정. 출처=pyimagesearch"><br></li>
+<li><b>동일 연산</b>을 전체 데이터에 적용 (weight sharing)<br><br><img src="/keras_conv2d_padding.gif" alt="convolution 연산 과정. 출처&#x3D;pyimagesearch"><br></li>
 </ol>
 </li>
 </ul>
@@ -250,60 +250,68 @@
 <p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D">tf.keras.layers.Conv2D</a></p>
 </blockquote>
 <ul>
-<li>공식 홈페이지에 따르면 입출력은 다음과 같습니다.<ul>
+<li><p>공식 홈페이지에 따르면 입출력은 다음과 같습니다.</p>
+<ul>
 <li><b>입력 형식</b> : 4차원 이상의 텐서.<br><code>data_format=&#39;channel_first&#39;</code>일 때: <b>batch_shape + (channels, rows, cols)</b>,<br><code>data_format=&#39;channel_last&#39;</code>일 때: <b>batch_shape + (rows, cols, channels)</b>,</li>
 <li><b>출력 형식</b> : 4차원 이상의 텐서.<br><code>data_format=&#39;channel_first&#39;</code>일 때: <b>batch_shape + (filters, rows, cols)</b>,<br><code>data_format=&#39;channel_last&#39;</code>일 때: <b>batch_shape + (rows, cols, filters)</b>,</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>텐서를 받아 텐서를 출력합니다.</li>
-<li>입력의 channel 자리가 출력의 filter 자리로 바뀝니다.</li>
-<li>또한, rows와 columns는 padding, strides 등에 따라 달라질 수 있습니다.</li>
-</ul>
-<ul>
-<li>텐서를 입력으로 받기 때문에 일반 이미지는 텐서로 변환하여 넣어야 합니다.</li>
+<li><p>텐서를 받아 텐서를 출력합니다.</p>
+</li>
+<li><p>입력의 channel 자리가 출력의 filter 자리로 바뀝니다.</p>
+</li>
+<li><p>또한, rows와 columns는 padding, strides 등에 따라 달라질 수 있습니다.</p>
+</li>
+<li><p>텐서를 입력으로 받기 때문에 일반 이미지는 텐서로 변환하여 넣어야 합니다.</p>
+</li>
 </ul>
 <h3 id="2-2-이미지-입력"><a href="#2-2-이미지-입력" class="headerlink" title="2.2. 이미지 입력"></a>2.2. 이미지 입력</h3><ul>
-<li>텐서플로와 케라스의 버전을 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(tf.__version__)</span><br><span class="line"><span class="built_in">print</span>(tf.keras.__version__)</span><br></pre></td></tr></table></figure>
+<li>텐서플로와 케라스의 버전을 확인합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(tf.__version__)</span><br><span class="line"><span class="built_in">print</span>(tf.keras.__version__)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: tensorflow v2.3.1, tf.keras v2.4.0 입니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;2.3.1&#x27;</span></span><br><span class="line"><span class="string">&#x27;2.4.0&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>실행결과: tensorflow v2.3.1, tf.keras v2.4.0 입니다.</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;2.3.1&#x27;</span></span><br><span class="line"><span class="string">&#x27;2.4.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li>예제 이미지를 읽어옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img = plt.imread(<span class="string">&quot;./1-conv2d_1.jpg&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img))</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line">plt.imshow(img)</span><br></pre></td></tr></table></figure>
+<li>예제 이미지를 읽어옵니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img = plt.imread(<span class="string">&quot;./1-conv2d_1.jpg&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img))</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line">plt.imshow(img)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과 : numpy array 형식, 1080 x 1080 3 channel(RGB) 이미지입니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;</span><br><span class="line">(1080, 1080, 3)</span><br></pre></td></tr></table></figure>
-<img src="1-conv2d_6.png"></li>
+<li>실행결과 : numpy array 형식, 1080 x 1080 3 channel(RGB) 이미지입니다.</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;</span><br><span class="line">(1080, 1080, 3)</span><br></pre></td></tr></table></figure>
+<p><img src="/1-conv2d_6.png"></p>
 <h3 id="2-3-Conv2D-적용-1-1-filter"><a href="#2-3-Conv2D-적용-1-1-filter" class="headerlink" title="2.3. Conv2D 적용 (1) 1 filter"></a>2.3. Conv2D 적용 (1) 1 filter</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/convert_to_tensor">tf.convert_to_tensor</a></p>
 </blockquote>
 <ul>
-<li><p>이미지를 텐서로 변환합니다.</p>
+<li>이미지를 텐서로 변환합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img_tf = tf.convert_to_tensor([img], dtype=<span class="string">&quot;float32&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img_tf))</span><br><span class="line"><span class="built_in">print</span>(img_tf.shape)</span><br><span class="line"><span class="built_in">print</span>(img_tf.dtype)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과 : numpy array가 EagerTensor로 변환되었습니다.<pre><code>      3차원을 4차원으로 만들어주기 위해 []를 씌웠습니다.
-</code></pre>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;tensorflow.python.framework.ops.EagerTensor&#x27;</span>&gt;</span><br><span class="line">(1, 1080, 1080, 3)</span><br><span class="line">&lt;dtype: <span class="string">&#x27;float32&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li>실행결과 : numpy array가 EagerTensor로 변환되었습니다.<br>      3차원을 4차원으로 만들어주기 위해 []를 씌웠습니다.</li>
 </ul>
-</li>
-<li><p>Convolution을 수행합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;tensorflow.python.framework.ops.EagerTensor&#x27;</span>&gt;</span><br><span class="line">(1, 1080, 1080, 3)</span><br><span class="line">&lt;dtype: <span class="string">&#x27;float32&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Convolution을 수행합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conv_1 = layers.Conv2D(<span class="number">1</span>, <span class="number">3</span>, padding=<span class="string">&quot;same&quot;</span>)(img_tf)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(conv_1))</span><br><span class="line"><span class="built_in">print</span>(conv_1.shape)</span><br><span class="line"><span class="built_in">print</span>(conv_1.dtype)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과 : 1 channel EagerTensor가 출력되었습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;tensorflow.python.framework.ops.EagerTensor&#x27;</span>&gt;</span><br><span class="line">(1, 1080, 1080, 1)</span><br><span class="line">&lt;dtype: <span class="string">&#x27;float32&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li>실행결과 : 1 channel EagerTensor가 출력되었습니다.</li>
 </ul>
-</li>
-<li><p>matplotlib에서 출력하기 위해 다시 numpy로 변환합니다.</p>
-</li>
-<li><p>연산 범위가 0~1을 넘어갈 수 있으므로 normalize 처리를 합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;tensorflow.python.framework.ops.EagerTensor&#x27;</span>&gt;</span><br><span class="line">(1, 1080, 1080, 1)</span><br><span class="line">&lt;dtype: <span class="string">&#x27;float32&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>matplotlib에서 출력하기 위해 다시 numpy로 변환합니다.</li>
+<li>연산 범위가 0~1을 넘어갈 수 있으므로 normalize 처리를 합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conv_1_np = conv_1.numpy()</span><br><span class="line">plt.imshow((conv_1_np[<span class="number">0</span>]-conv_1_np[<span class="number">0</span>].<span class="built_in">min</span>())/(conv_1_np[<span class="number">0</span>].<span class="built_in">max</span>()-conv_1_np[<span class="number">0</span>].<span class="built_in">min</span>()), cmap=<span class="string">&quot;gist_gray&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과 : convolution이 적용되어 그림 모양이 바뀌었습니다.<br><img src="1-conv2d_2.png"></li>
-</ul>
+<li><p>실행결과 : convolution이 적용되어 그림 모양이 바뀌었습니다.<br>  <img src="/1-conv2d_2.png"></p>
 </li>
 <li><p>그림이 어떻게 바뀔지는 예측할 수 없습니다.</p>
 </li>
@@ -312,26 +320,31 @@
 </ul>
 <h3 id="2-3-Conv2D-적용-2-1-filter-x-8회"><a href="#2-3-Conv2D-적용-2-1-filter-x-8회" class="headerlink" title="2.3. Conv2D 적용 (2) 1 filter x 8회"></a>2.3. Conv2D 적용 (2) 1 filter x 8회</h3><ul>
 <li>랜덤한 커널의 영향을 확인해 보겠습니다.</li>
-<li>Conv2D를 반복해서 실행하며 결과가 바뀌는지 확인합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">13</span>, <span class="number">6</span>))</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    conv_1 = layers.Conv2D(<span class="number">1</span>, <span class="number">3</span>, padding=<span class="string">&quot;same&quot;</span>)(img_tf)</span><br><span class="line">    conv_1_np = conv_1.numpy()</span><br><span class="line">    ax.imshow(conv_1_np[<span class="number">0</span>], cmap=<span class="string">&quot;gist_gray&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;try <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행결과 : 실행할때마다 다른 그림이 나옵니다.<br><img src="1-conv2d_3.png"></li>
+<li>Conv2D를 반복해서 실행하며 결과가 바뀌는지 확인합니다.</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">13</span>, <span class="number">6</span>))</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    conv_1 = layers.Conv2D(<span class="number">1</span>, <span class="number">3</span>, padding=<span class="string">&quot;same&quot;</span>)(img_tf)</span><br><span class="line">    conv_1_np = conv_1.numpy()</span><br><span class="line">    ax.imshow(conv_1_np[<span class="number">0</span>], cmap=<span class="string">&quot;gist_gray&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;try <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과 : 실행할때마다 다른 그림이 나옵니다.<br>  <img src="/1-conv2d_3.png"></li>
 </ul>
 <h3 id="2-3-Conv2D-적용-3-16-filter"><a href="#2-3-Conv2D-적용-3-16-filter" class="headerlink" title="2.3. Conv2D 적용 (3) 16 filter"></a>2.3. Conv2D 적용 (3) 16 filter</h3><ul>
-<li>필터의 수를 지정하면 반복된 결과물이 channel로 쌓입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conv_16 = layers.Conv2D(<span class="number">16</span>, <span class="number">3</span>, padding=<span class="string">&quot;same&quot;</span>)(img_tf)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(conv_16))</span><br><span class="line"><span class="built_in">print</span>(conv_16.shape)</span><br><span class="line"><span class="built_in">print</span>(conv_16.dtype)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행결과 : 16 channel이 출력됩니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;tensorflow.python.framework.ops.EagerTensor&#x27;</span>&gt;</span><br><span class="line">(1, 1080, 1080, 16)</span><br><span class="line">&lt;dtype: <span class="string">&#x27;float32&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li>필터의 수를 지정하면 반복된 결과물이 channel로 쌓입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conv_16 = layers.Conv2D(<span class="number">16</span>, <span class="number">3</span>, padding=<span class="string">&quot;same&quot;</span>)(img_tf)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(conv_16))</span><br><span class="line"><span class="built_in">print</span>(conv_16.shape)</span><br><span class="line"><span class="built_in">print</span>(conv_16.dtype)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과 : 16 channel이 출력됩니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;tensorflow.python.framework.ops.EagerTensor&#x27;</span>&gt;</span><br><span class="line">(1, 1080, 1080, 16)</span><br><span class="line">&lt;dtype: <span class="string">&#x27;float32&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>각각의 채널을 출력합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">conv_16_np = conv_16.numpy()</span><br><span class="line">conv_16_norm = (conv_16_np[<span class="number">0</span>]-conv_16_np.<span class="built_in">min</span>())/(conv_16_np.<span class="built_in">max</span>()-conv_16_np.<span class="built_in">min</span>())</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">4</span>, figsize=(<span class="number">13</span>, <span class="number">13</span>))</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    ax.imshow(conv_16_norm[:,:,i], cmap=<span class="string">&quot;gist_gray&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;Channel <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>실행결과 : 랜덤 커널 적용 결과 16개가 나왔습니다.<br>  <img src="/1-conv2d_5.png"></p>
 </li>
-</ul>
-<ul>
-<li>각각의 채널을 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">conv_16_np = conv_16.numpy()</span><br><span class="line">conv_16_norm = (conv_16_np[<span class="number">0</span>]-conv_16_np.<span class="built_in">min</span>())/(conv_16_np.<span class="built_in">max</span>()-conv_16_np.<span class="built_in">min</span>())</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">4</span>, nrows=<span class="number">4</span>, figsize=(<span class="number">13</span>, <span class="number">13</span>))</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    ax.imshow(conv_16_norm[:,:,i], cmap=<span class="string">&quot;gist_gray&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;Channel <span class="subst">&#123;i&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행결과 : 랜덤 커널 적용 결과 16개가 나왔습니다.<br><img src="1-conv2d_5.png"></li>
-</ul>
+<li><p>CNN 학습은 커널의 가중치를 목적에 맞도록 조정하는 과정입니다.</p>
 </li>
-<li>CNN 학습은 커널의 가중치를 목적에 맞도록 조정하는 과정입니다.</li>
 </ul>
 
         </div>
@@ -345,22 +358,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/29/Python-DL-1-conv2d/" data-id="cmhueoxwd008l4gxtdwc2du2v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/29/Python-DL-1-conv2d/" data-id="cuidSb5QbNAksGRrDyP4K-a0U" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -436,7 +439,7 @@
         "genre": "Python Deep Learning",
         "datePublished": "2020-11-29",
         "dateCreated": "2020-11-29",
-        "dateModified": "2020-12-03",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/11/29/Python-DL-1-conv2d/",
         "description": "
 Convolution의 기초 명령어 Conv2D 예시입니다.
@@ -448,7 +451,7 @@ pyimagesearch: Keras Conv2D and Convolutional Layers
 
 
 convolution, 또는 합성곱 연산은 CNN(Convolut",
-        "wordCount": 683
+        "wordCount": 689
     }
 </script>
 
@@ -530,16 +533,6 @@ convolution, 또는 합성곱 연산은 CNN(Convolut",
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -773,10 +766,6 @@ convolution, 또는 합성곱 연산은 CNN(Convolut",
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

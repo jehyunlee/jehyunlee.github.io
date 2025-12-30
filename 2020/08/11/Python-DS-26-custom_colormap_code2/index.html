@@ -12,23 +12,23 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,color,colormap,colorbar" />
     
-    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다. 하나는 valu">
+    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다.  하나는 val">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib Colormap Customization (3)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다. 하나는 valu">
+<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  Matplotlib Custom Colormap 지난 글에는 크게 두 가지 그림이 등장합니다.  하나는 val">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png">
 <meta property="article:published_time" content="2020-08-11T00:28:00.000Z">
-<meta property="article:modified_time" content="2020-11-27T00:44:39.442Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.067Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="color">
-<meta property="article:tag" content="colormap">
 <meta property="article:tag" content="colorbar">
+<meta property="article:tag" content="colormap">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/26_ccmap_code2_0.png">
     
@@ -87,7 +87,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -204,7 +204,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/08/11/Python-DS-26-custom_colormap_code2/" class="article-date">
-     <time datetime="2020-11-27T00:44:39.442Z" itemprop="dateModified">2020-11-27</time>
+     <time datetime="2025-12-30T06:28:38.067Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,12 +239,14 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html">Creating Colormaps in Matplotlib</a></p>
 </blockquote>
 <h2 id="Matplotlib-Custom-Colormap"><a href="#Matplotlib-Custom-Colormap" class="headerlink" title="Matplotlib Custom Colormap"></a>Matplotlib Custom Colormap</h2><ul>
-<li><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에는 크게 두 가지 그림이 등장합니다.<ul>
+<li><p><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에는 크게 두 가지 그림이 등장합니다.</p>
+<ul>
 <li>하나는 value에 따른 컬러맵 명도<br><br><img src="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png"><br></li>
 <li>또 하나는 여러 컬러맵이 적용된 한반도의 풍속 분포 그림입니다.<br><br><img src="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/25_ccmap_code_01.png"><br></li>
 </ul>
 </li>
-<li>이번 글에서는 이 그림들 중 두 번째 그림이 그려진 과정을 코드로 살펴보겠습니다.</li>
+<li><p>이번 글에서는 이 그림들 중 두 번째 그림이 그려진 과정을 코드로 살펴보겠습니다.</p>
+</li>
 </ul>
 <h3 id="2-Wind-Visualization"><a href="#2-Wind-Visualization" class="headerlink" title="2. Wind Visualization"></a>2. Wind Visualization</h3><ul>
 <li><p>한반도 풍속 데이터를 가져옵니다.</p>
@@ -254,26 +256,26 @@
 </ul>
 </li>
 <li><p><code>pandas DataFrame</code>으로 읽어옵니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">df_wind = pd.read_csv(<span class="string">&quot;wind.csv&quot;</span>)</span><br><span class="line">df_wind.head()</span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_01.png"><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"></span><br><span class="line">df_wind = pd.read_csv(<span class="string">&quot;wind.csv&quot;</span>)</span><br><span class="line">df_wind.head()</span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_01.png"><br></p>
 <h4 id="2-1-Distortion-Spherical-vs-Projection"><a href="#2-1-Distortion-Spherical-vs-Projection" class="headerlink" title="2.1. Distortion: Spherical vs Projection"></a>2.1. Distortion: Spherical vs Projection</h4><ul>
-<li>X와 Y축으로 사용할 데이터가 두 가지 있습니다.<ul>
+<li><p>X와 Y축으로 사용할 데이터가 두 가지 있습니다.</p>
+<ul>
 <li>하나는 <b>위도<code>LAT: latitude</code></b>와 <b>경도<code>LON: longitude</code></b>,</li>
 <li>하나는 <b>X좌표<code>UTM_X</code></b>와 <b>Y좌표<code>UTM_Y</code></b> 입니다.</li>
 <li>결론부터 말씀드리면 위도와 경도는 지구의 곡면에서 사용하는 좌표계입니다. </li>
 <li>곡면을 2D에 그대로 그리면 왜곡이 발생하기 때문에 왜곡을 최소화해서 투영시킨 <b>UTM : Universal Transverse Mercator</b> 좌표계를 사용해야 합니다.</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p>두 좌표계를 사용해 그린 한반도 모습을 보면 이해가 빠를 것입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">20</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">Xs = [<span class="string">&quot;LON&quot;</span>, <span class="string">&quot;UTM_X&quot;</span>]</span><br><span class="line">Ys = [<span class="string">&quot;LAT&quot;</span>, <span class="string">&quot;UTM_Y&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X, Y <span class="keyword">in</span> <span class="built_in">zip</span>(axes, Xs, Ys):</span><br><span class="line">    ax.scatter(df_wind[X], df_wind[Y], s=<span class="number">1</span>, c=df_wind[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;X&#125;</span> and <span class="subst">&#123;Y&#125;</span>&quot;</span>, fontsize=<span class="number">24</span>)</span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)  </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_02.png"><br></p>
 </li>
-<li><p>컬러맵으로 도시된 풍속은 차치하고, <b>먼저 격자무늬를 봅시다.</b></p>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">20</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">Xs = [<span class="string">&quot;LON&quot;</span>, <span class="string">&quot;UTM_X&quot;</span>]</span><br><span class="line">Ys = [<span class="string">&quot;LAT&quot;</span>, <span class="string">&quot;UTM_Y&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X, Y <span class="keyword">in</span> <span class="built_in">zip</span>(axes, Xs, Ys):</span><br><span class="line">    ax.scatter(df_wind[X], df_wind[Y], s=<span class="number">1</span>, c=df_wind[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;X&#125;</span> and <span class="subst">&#123;Y&#125;</span>&quot;</span>, fontsize=<span class="number">24</span>)</span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)  </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_02.png"><br></p>
 <ul>
+<li>컬러맵으로 도시된 풍속은 차치하고, <b>먼저 격자무늬를 봅시다.</b><ul>
 <li>지구는 구형이고 한반도는 북반구에 위치하고 있습니다.</li>
 <li>따라서 북쪽으로 갈수록 단위 경도의 길이가 짧아져야 합니다.</li>
 <li>그러나 좌측처럼 위도와 경도로 그리면 이 전제에 위배되어 <b>지도를 그림처럼 왜곡시킵니다.</b></li>
@@ -287,7 +289,7 @@
 <ul>
 <li><p>UTM 좌표계를 적용해도 matplotlib에서 왜곡이 발생합니다.</p>
 </li>
-<li><p>그림 크기가 적절치 않았던 탓에 가로가 세로보다 더 깁니다.<br><br><img src="26_ccmap_code2_03.png"><br></p>
+<li><p>그림 크기가 적절치 않았던 탓에 가로가 세로보다 더 깁니다.<br><br><img src="/26_ccmap_code2_03.png"><br></p>
 </li>
 <li><p><code>matplotlib</code>에는 그림의 종횡비를 데이터에 맞춰주는 명령이 있습니다.</p>
 <ul>
@@ -296,37 +298,41 @@
 <li><code>ax.set_aspect(&quot;equal&quot;, &quot;box&quot;)</code> : 종횡비를 맞추고 데이터에 맞게 축공간을 조정합니다.<br></li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p>아래 예시를 통해 확인하겠습니다.<br></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 예제 원 데이터 (반지름=3)</span></span><br><span class="line">an = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">X, Y = <span class="number">3</span>*np.cos(an), <span class="number">3</span>*np.sin(an)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">titles = [<span class="string">&quot;default&quot;</span>, <span class="string">&quot;axis(&#x27;equal&#x27;)&quot;</span>, <span class="string">&quot;axis(&#x27;scaled&#x27;)&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, title) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, titles)):</span><br><span class="line">    ax.plot(X, Y)</span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">    ticklabels = ax.get_xticks()</span><br><span class="line">    ax.set_yticks(ticklabels)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        ax.axis(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">2</span>:</span><br><span class="line">        ax.axis(<span class="string">&quot;scaled&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()        </span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_04.png"><br>  </p>
 </li>
-<li><p><code>set_aspect()</code>를 사용하면 종횡비 수치 조정이 가능합니다.<br><img src="26_ccmap_code2_05.png"><br>  </p>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 예제 원 데이터 (반지름=3)</span></span><br><span class="line">an = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">X, Y = <span class="number">3</span>*np.cos(an), <span class="number">3</span>*np.sin(an)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">titles = [<span class="string">&quot;default&quot;</span>, <span class="string">&quot;axis(&#x27;equal&#x27;)&quot;</span>, <span class="string">&quot;axis(&#x27;scaled&#x27;)&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, title) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axes, titles)):</span><br><span class="line">    ax.plot(X, Y)</span><br><span class="line">    ax.grid(<span class="string">&quot;on&quot;</span>)</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">    ticklabels = ax.get_xticks()</span><br><span class="line">    ax.set_yticks(ticklabels)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</span><br><span class="line">        ax.axis(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">2</span>:</span><br><span class="line">        ax.axis(<span class="string">&quot;scaled&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()        </span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_04.png"><br>  </p>
+<ul>
+<li><p><code>set_aspect()</code>를 사용하면 종횡비 수치 조정이 가능합니다.<br><img src="/26_ccmap_code2_05.png"><br>  </p>
 </li>
 <li><p>적절한 데이터 표현을 위해 <code>set_aspect(&quot;equal&quot;, &quot;box&quot;)</code>를 적용합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 무의미한 여백을 피하기 위한 데이터 범위 다듬기</span></span><br><span class="line">df_trim = df_wind.loc[df_wind[<span class="string">&quot;UTM_X&quot;</span>] &lt; <span class="number">700000</span>].loc[df_wind[<span class="string">&quot;UTM_X&quot;</span>] &gt; -<span class="number">80000</span>].loc[df_wind[<span class="string">&quot;UTM_Y&quot;</span>] &lt; <span class="number">4800000</span>].loc[df_wind[<span class="string">&quot;UTM_Y&quot;</span>] &gt; <span class="number">3620000</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 지도 그리기</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(df_wind[<span class="string">&quot;UTM_X&quot;</span>], df_wind[<span class="string">&quot;UTM_Y&quot;</span>], s=<span class="number">1</span>, c=df_wind[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.grid(<span class="string">&quot;on&quot;</span>)  <span class="comment"># 종횡비 설정 확인</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_06.png"><br>  </p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 무의미한 여백을 피하기 위한 데이터 범위 다듬기</span></span><br><span class="line">df_trim = df_wind.loc[df_wind[<span class="string">&quot;UTM_X&quot;</span>] &lt; <span class="number">700000</span>].loc[df_wind[<span class="string">&quot;UTM_X&quot;</span>] &gt; -<span class="number">80000</span>].loc[df_wind[<span class="string">&quot;UTM_Y&quot;</span>] &lt; <span class="number">4800000</span>].loc[df_wind[<span class="string">&quot;UTM_Y&quot;</span>] &gt; <span class="number">3620000</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 지도 그리기</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(df_wind[<span class="string">&quot;UTM_X&quot;</span>], df_wind[<span class="string">&quot;UTM_Y&quot;</span>], s=<span class="number">1</span>, c=df_wind[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.grid(<span class="string">&quot;on&quot;</span>)  <span class="comment"># 종횡비 설정 확인</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_06.png"><br>  </p>
 <h4 id="2-3-Axes-Aesthetics"><a href="#2-3-Axes-Aesthetics" class="headerlink" title="2.3. Axes Aesthetics"></a>2.3. Axes Aesthetics</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.pyplot.colorbar.html">matplotlib.pyplot.colorbar</a></p>
 </blockquote>
 <ul>
-<li>데이터를 왜곡 없이 표현했으므로 축을 보기 좋게 조정해줍니다.<ul>
+<li><p>데이터를 왜곡 없이 표현했으므로 축을 보기 좋게 조정해줍니다.</p>
+<ul>
 <li>grid가 데이터를 가립니다 → <b>지웁시다</b></li>
 <li>윤곽선이 무의미합니다 → <b>지웁시다</b></li>
 <li>데이터의 의미를 알 수 없습니다 → <b>colorbar를 추가합니다.</b></li>
 </ul>
 </li>
-<li>위 사항들을 반영합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">im = ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>], df_trim[<span class="string">&quot;UTM_Y&quot;</span>], s=<span class="number">1</span>, c=df_trim[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)  <span class="comment"># 윤곽선 삭제</span></span><br><span class="line">ax.grid(<span class="string">&quot;off&quot;</span>)  <span class="comment"># grid 삭제</span></span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, ax=ax)                            <span class="comment"># colorbar 추가 </span></span><br><span class="line">cbar.set_label(<span class="string">&quot;wind speed (m/s)&quot;</span>, fontsize=<span class="number">24</span>)           <span class="comment"># colorbar label</span></span><br><span class="line">cbar.ax.tick_params(labelsize=<span class="number">20</span>)                         <span class="comment"># colorbar 숫자 fontsize</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="26_ccmap_code2_07.png"><br>  </li>
+<li><p>위 사항들을 반영합니다.</p>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">im = ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>], df_trim[<span class="string">&quot;UTM_Y&quot;</span>], s=<span class="number">1</span>, c=df_trim[<span class="string">&quot;wind&quot;</span>], cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)  <span class="comment"># 윤곽선 삭제</span></span><br><span class="line">ax.grid(<span class="string">&quot;off&quot;</span>)  <span class="comment"># grid 삭제</span></span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, ax=ax)                            <span class="comment"># colorbar 추가 </span></span><br><span class="line">cbar.set_label(<span class="string">&quot;wind speed (m/s)&quot;</span>, fontsize=<span class="number">24</span>)           <span class="comment"># colorbar label</span></span><br><span class="line">cbar.ax.tick_params(labelsize=<span class="number">20</span>)                         <span class="comment"># colorbar 숫자 fontsize</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_07.png"><br>  </p>
 <h4 id="2-4-Data-Vision-Deficiency"><a href="#2-4-Data-Vision-Deficiency" class="headerlink" title="2.4. Data Vision Deficiency"></a>2.4. Data Vision Deficiency</h4><blockquote>
 <p><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">Matplotlib Colormap Customization (1)</a><br><a target="_blank" rel="noopener" href="https://nuli.navercorp.com/community/article/1132656?email=true">Naver: 널리 알리는 기술소식. 색각이상자를 위한 웹 접근성 가이드라인</a><br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/nocoffee/jjeeggmbnhckmgdhmgdckeigabjfbddl">NoCoffee Vision Simulator</a><br><a target="_blank" rel="noopener" href="https://asada.website/webCVS/">Chromatic Vision Simulator</a></p>
 </blockquote>
 <ul>
-<li>컬러맵이 적절치 않으면 <b>데이터 독해력이 떨어집니다.</b><ul>
+<li><p>컬러맵이 적절치 않으면 <b>데이터 독해력이 떨어집니다.</b></p>
+<ul>
 <li><a href="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/">지난 글</a>에서 여러가지 컬러맵을 적용한 경우를 보았습니다.</li>
 <li>효과적인 데이터 전달을 위해 데이터를 꾸미기 전에 <b>색각이상자<code>Color Vision Deficiency</code></b>들 입장에서 컬러맵이 어떻게 보일지 간접적으로나마 경험해 봅시다.</li>
 <li>색각이상은 남성에게 특히 심한데, <b>국내 남성의 6%</b>, 전 세계 <b>남성의 8%</b>, 특히 코카서스인(백인)의 <b>11%</b>가 색각이상자라고 합니다. </li>
@@ -334,9 +340,10 @@
 <li>내 주위에 남성 50명이 있다면 그 중 3~4명은 색각이상을 겪고 있을 수 있습니다.</li>
 </ul>
 </li>
-<li><a target="_blank" rel="noopener" href="https://asada.website/webCVS/">Chromatic Vision Simulator</a>를 통해 색각이상자들의 시야를 엿볼 수 있습니다.</li>
+<li><p><a target="_blank" rel="noopener" href="https://asada.website/webCVS/">Chromatic Vision Simulator</a>를 통해 색각이상자들의 시야를 엿볼 수 있습니다.</p>
+</li>
 </ul>
-<p><img src="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png" alt="정상시각자"><br><img src="protanopia.jpg" alt="제일색맹(적색맹. protanopia)"><br><img src="deuteranopia.jpg" alt="제이색맹(녹색맹. deuteranopia)"><br><img src="tritanopia.jpg" alt="제삼색맹(청색맹. tritanopia)"></p>
+<p><img src="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png" alt="정상시각자"><br><img src="/protanopia.jpg" alt="제일색맹(적색맹. protanopia)"><br><img src="/deuteranopia.jpg" alt="제이색맹(녹색맹. deuteranopia)"><br><img src="/tritanopia.jpg" alt="제삼색맹(청색맹. tritanopia)"></p>
 <ul>
 <li><b>데이터와 명도간 상관관계</b>가 강한 cubehelix는 데이터 전달에 지장이 적습니다.<ul>
 <li>하지만 데이터를 주로 색채로 전달하는 다른 컬러맵은 구분이 어렵습니다.</li>
@@ -346,46 +353,43 @@
 </li>
 </ul>
 <h4 id="2-5-Data-Aesthetics"><a href="#2-5-Data-Aesthetics" class="headerlink" title="2.5. Data Aesthetics"></a>2.5. Data Aesthetics</h4><h5 id="2-5-1-Efficient-Color-Space"><a href="#2-5-1-Efficient-Color-Space" class="headerlink" title="2.5.1 Efficient Color Space"></a>2.5.1 Efficient Color Space</h5><ul>
-<li><p>색공간을 효율적으로 사용합시다.</p>
-</li>
-<li><p>histogram으로 데이터 분포를 확인합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">ax[<span class="number">0</span>].hist(df_trim[<span class="string">&quot;wind&quot;</span>], bins=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].hist(df_trim[<span class="string">&quot;wind&quot;</span>], bins=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_yscale(<span class="string">&quot;log&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&quot;histogram(normal)&quot;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&quot;histogram(log)&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">&quot;26_ccmap_code2_08.png&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_08.png"><br>  </p>
-</li>
-<li><p>9 m/s 기준으로 데이터를 제한하기로 합니다.</p>
-</li>
-<li><p>그 이상은 일종의 outlier로 간주하여 별도 표시를 합니다.</p>
-</li>
-<li><p>바다도 <b>gist_gray</b>를 적용해서 흑백처리를 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">cmap_ = <span class="string">&quot;viridis&quot;</span></span><br><span class="line">cmap = cm.get_cmap(cmap_)</span><br><span class="line">cmap.set_over(<span class="string">&quot;magenta&quot;</span>)  <span class="comment"># over 색상 지정</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 육지 : viridis</span></span><br><span class="line">im = ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], </span><br><span class="line">                df_trim[<span class="string">&quot;UTM_Y&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], s=<span class="number">1</span>, </span><br><span class="line">                c=df_trim[<span class="string">&quot;wind&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], cmap=cmap, vmax=<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 바다 : gist_gray</span></span><br><span class="line">ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], </span><br><span class="line">           df_trim[<span class="string">&quot;UTM_Y&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], s=<span class="number">1</span>, </span><br><span class="line">           c=df_trim[<span class="string">&quot;wind&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], cmap=<span class="string">&quot;gist_gray&quot;</span>, vmax=<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)  <span class="comment"># 윤곽선 삭제</span></span><br><span class="line">ax.grid(<span class="string">&quot;off&quot;</span>)  <span class="comment"># grid 삭제</span></span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, ax=ax, extend=<span class="string">&quot;max&quot;</span>)    <span class="comment"># extend=max 추가</span></span><br><span class="line">cbar.set_label(<span class="string">&quot;wind speed @land (m/s)&quot;</span>, fontsize=<span class="number">24</span>, labelpad=<span class="number">12</span>)           </span><br><span class="line">cbar.ax.tick_params(labelsize=<span class="number">20</span>)                         </span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_09.png"><br>  </p>
-</li>
+<li>색공간을 효율적으로 사용합시다.</li>
+<li>histogram으로 데이터 분포를 확인합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">ax[<span class="number">0</span>].hist(df_trim[<span class="string">&quot;wind&quot;</span>], bins=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].hist(df_trim[<span class="string">&quot;wind&quot;</span>], bins=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_yscale(<span class="string">&quot;log&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&quot;histogram(normal)&quot;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&quot;histogram(log)&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">&quot;26_ccmap_code2_08.png&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_08.png"><br>  </p>
+<ul>
+<li>9 m&#x2F;s 기준으로 데이터를 제한하기로 합니다.</li>
+<li>그 이상은 일종의 outlier로 간주하여 별도 표시를 합니다.</li>
+<li>바다도 <b>gist_gray</b>를 적용해서 흑백처리를 합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">cmap_ = <span class="string">&quot;viridis&quot;</span></span><br><span class="line">cmap = cm.get_cmap(cmap_)</span><br><span class="line">cmap.set_over(<span class="string">&quot;magenta&quot;</span>)  <span class="comment"># over 색상 지정</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 육지 : viridis</span></span><br><span class="line">im = ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], </span><br><span class="line">                df_trim[<span class="string">&quot;UTM_Y&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], s=<span class="number">1</span>, </span><br><span class="line">                c=df_trim[<span class="string">&quot;wind&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]!=<span class="string">&quot;sea&quot;</span>], cmap=cmap, vmax=<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 바다 : gist_gray</span></span><br><span class="line">ax.scatter(df_trim[<span class="string">&quot;UTM_X&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], </span><br><span class="line">           df_trim[<span class="string">&quot;UTM_Y&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], s=<span class="number">1</span>, </span><br><span class="line">           c=df_trim[<span class="string">&quot;wind&quot;</span>].loc[df_trim[<span class="string">&quot;MORPH&quot;</span>]==<span class="string">&quot;sea&quot;</span>], cmap=<span class="string">&quot;gist_gray&quot;</span>, vmax=<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">ax.set_aspect(<span class="string">&quot;equal&quot;</span>, <span class="string">&quot;box&quot;</span>)</span><br><span class="line">ax.set_xlim(-<span class="number">80000</span>, <span class="number">700000</span>)</span><br><span class="line">ax.set_ylim(<span class="number">3620000</span>, <span class="number">4800000</span>)</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)  <span class="comment"># 윤곽선 삭제</span></span><br><span class="line">ax.grid(<span class="string">&quot;off&quot;</span>)  <span class="comment"># grid 삭제</span></span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, ax=ax, extend=<span class="string">&quot;max&quot;</span>)    <span class="comment"># extend=max 추가</span></span><br><span class="line">cbar.set_label(<span class="string">&quot;wind speed @land (m/s)&quot;</span>, fontsize=<span class="number">24</span>, labelpad=<span class="number">12</span>)           </span><br><span class="line">cbar.ax.tick_params(labelsize=<span class="number">20</span>)                         </span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_09.png"><br>  </p>
 <h5 id="2-5-2-Colormap-Customization"><a href="#2-5-2-Colormap-Customization" class="headerlink" title="2.5.2. Colormap Customization"></a>2.5.2. Colormap Customization</h5><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html#sphx-glr-tutorials-colors-colormap-manipulation-py">Creating Colormaps in Matplotlib</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.ListedColormap.html">matplotlib.colors.ListedColormap</a></p>
 </blockquote>
 <ul>
-<li>기상청 풍속구간 기준에 맞추어 컬러맵의 색상을 변경합니다.<ul>
+<li><p>기상청 풍속구간 기준에 맞추어 컬러맵의 색상을 변경합니다.</p>
+<ul>
 <li>저풍속구간에 <b>Greens_r</b>, 고풍속구간에 <b>Blues_r</b>을 배치합니다.</li>
-<li>4 m/s 지점을 최대한 정확히 끊어야 합니다.</li>
+<li>4 m&#x2F;s 지점을 최대한 정확히 끊어야 합니다.</li>
 </ul>
 </li>
-</ul>
+<li><p><b>Greens_r</b>과 <b>Blues_r</b>을 잘라서 붙입니다.</p>
 <ul>
-<li><b>Greens_r</b>과 <b>Blues_r</b>을 잘라서 붙입니다.<ul>
 <li>각기 0~1 사이를 256 단계로 쪼갠 후, 85 레벨을 기준으로 잘라서 붙입니다.</li>
 <li>그냥 붙인 것을 <b>Greens_Blues_1</b>, </li>
 <li>스케일을 줄여 이동한 것을 <b>Greens_Blues_2</b>라고 이름짓습니다.</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.ListedColormap.html">ListedColormap</a>은 <code>numpy.ndarray</code>를 colormap으로 변환합니다.</p>
 </li>
 <li><p>RGBA 4열을 담고 있는 행렬 만든 후 <b>ListedColormap</b>에 담아 새로운 컬러맵을 만들 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">Blues_r = cm.get_cmap(<span class="string">&quot;Blues_r&quot;</span>, <span class="number">256</span>)(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">256</span>))</span><br><span class="line">Greens_r = cm.get_cmap(<span class="string">&quot;Greens_r&quot;</span>, <span class="number">256</span>)(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">256</span>))</span><br><span class="line"></span><br><span class="line">boundary = <span class="number">85</span></span><br><span class="line">Greens_Blues_1_ = np.vstack((Greens_r[:boundary], Blues_r[boundary:]))</span><br><span class="line">Greens_Blues_1 = ListedColormap(Greens_Blues_1_)</span><br><span class="line"></span><br><span class="line">Blues_r_2 = deepcopy(Blues_r)</span><br><span class="line">Blues_r_2[:,:<span class="number">3</span>] = Blues_r_2[:,:<span class="number">3</span>]*<span class="number">0.8</span>+<span class="number">0.2</span> </span><br><span class="line">Greens_Blues_2_ = np.vstack((Greens_r[:boundary], Blues_r_2[boundary:]))</span><br><span class="line">Greens_Blues_2 = ListedColormap(Greens_Blues_2_)</span><br></pre></td></tr></table></figure>
-<p><img src="L_gist_gray_viridis_Greens_Blues_1_Greens_Blues_2.png"><br></p>
 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> ListedColormap</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">Blues_r = cm.get_cmap(<span class="string">&quot;Blues_r&quot;</span>, <span class="number">256</span>)(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">256</span>))</span><br><span class="line">Greens_r = cm.get_cmap(<span class="string">&quot;Greens_r&quot;</span>, <span class="number">256</span>)(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">256</span>))</span><br><span class="line"></span><br><span class="line">boundary = <span class="number">85</span></span><br><span class="line">Greens_Blues_1_ = np.vstack((Greens_r[:boundary], Blues_r[boundary:]))</span><br><span class="line">Greens_Blues_1 = ListedColormap(Greens_Blues_1_)</span><br><span class="line"></span><br><span class="line">Blues_r_2 = deepcopy(Blues_r)</span><br><span class="line">Blues_r_2[:,:<span class="number">3</span>] = Blues_r_2[:,:<span class="number">3</span>]*<span class="number">0.8</span>+<span class="number">0.2</span> </span><br><span class="line">Greens_Blues_2_ = np.vstack((Greens_r[:boundary], Blues_r_2[boundary:]))</span><br><span class="line">Greens_Blues_2 = ListedColormap(Greens_Blues_2_)</span><br></pre></td></tr></table></figure>
+<p><img src="/L_gist_gray_viridis_Greens_Blues_1_Greens_Blues_2.png"><br></p>
+<ul>
 <li><p>Greens_Blues_1과 _2 생성시 스케일 적용 차이가 반영되었습니다.</p>
 <ul>
 <li>Greens_Blues_1은 <b>일부 명암 구간이 겹치고</b>,</li>
@@ -393,25 +397,26 @@
 </ul>
 </li>
 <li><p>경계구간 명암 차이로 <b>구간 시인성</b>이 달라집니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 위 풍속 시각화 코드에 컬러맵만 다르게 적용합니다.</span></span><br><span class="line">cmap = Greens_Blues_1</span><br><span class="line">cmap.set_over(<span class="string">&quot;magenta&quot;</span>) </span><br></pre></td></tr></table></figure>
-<p><img src="26_ccmap_code2_10.png"><br><br><img src="26_ccmap_code2_11.png"><br> </p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 위 풍속 시각화 코드에 컬러맵만 다르게 적용합니다.</span></span><br><span class="line">cmap = Greens_Blues_1</span><br><span class="line">cmap.set_over(<span class="string">&quot;magenta&quot;</span>) </span><br></pre></td></tr></table></figure>
+<p><img src="/26_ccmap_code2_10.png"><br><br><img src="/26_ccmap_code2_11.png"><br> </p>
 <ul>
-<li>평균 풍속이 약한 구간(청색)과 약간 강한 구간(녹색)이 잘 구분됩니다.<ul>
+<li><p>평균 풍속이 약한 구간(청색)과 약간 강한 구간(녹색)이 잘 구분됩니다.</p>
+<ul>
 <li>데이터가 잘 구분되면 <b>시각적 에너지 소모가 적습니다.</b></li>
 <li>따라서 더 많은 에너지를 <b>정량적, 정성적 비교</b>에 투입하여</li>
 <li>추가 분석을 위한 <b>아이디어 발굴</b>, <b>인사이트 도출</b>에 집중할 수 있습니다.</li>
 </ul>
 </li>
-</ul>
+<li><p>시각화는 집중력을 분배하는 과정입니다.</p>
 <ul>
-<li>시각화는 집중력을 분배하는 과정입니다.<ul>
 <li>적절하고 빠른 시각화는 본질에 집중하게 해 주지만</li>
 <li>시각화 과정이 부적절하고 느리면 그 자체로 에너지 손실입니다.</li>
 </ul>
 </li>
-<li>본 글에 사용된 코드는 <a href="custom_colormap_map2.ipynb">이 곳에서 다운받을 수 있습니다</a>.</li>
+<li><p>본 글에 사용된 코드는 <a href="custom_colormap_map2.ipynb">이 곳에서 다운받을 수 있습니다</a>.</p>
+</li>
 </ul>
 
         </div>
@@ -425,22 +430,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/" data-id="cmhueoxzc00ee4gxt7vfv0jsk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/" data-id="cuidWuJ6zWPORdvx4cqyIILqX" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -516,7 +511,7 @@
         "genre": "Python Data Science",
         "datePublished": "2020-08-11",
         "dateCreated": "2020-08-11",
-        "dateModified": "2020-11-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/08/11/Python-DS-26-custom_colormap_code2/",
         "description": "
 matplotlib에서 custom colormap을 만들고 적용하는 방법입니다.
@@ -527,7 +522,8 @@ Creating Colormaps in Matplotlib
 
 Matplotlib Custom Colormap
 지난 글에는 크게 두 가지 그림이 등장합니다.
-하나는 valu",
+
+하나는 val",
         "wordCount": 1589
     }
 </script>
@@ -610,16 +606,6 @@ Matplotlib Custom Colormap
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -853,10 +839,6 @@ Matplotlib Custom Colormap
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

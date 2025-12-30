@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/60_mpl_colors_0.png">
 <meta property="article:published_time" content="2021-02-04T00:08:00.000Z">
-<meta property="article:modified_time" content="2021-04-24T21:38:31.017Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.356Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
-<meta property="article:tag" content="visualization">
 <meta property="article:tag" content="color">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/60_mpl_colors_0.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/02/04/Python-DS-60-mpl_colors/" class="article-date">
-     <time datetime="2021-04-24T21:38:31.017Z" itemprop="dateModified">2021-04-25</time>
+     <time datetime="2025-12-30T06:28:38.356Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -241,35 +241,44 @@
 <li>이들을 그려볼 example bed를 준비합니다.</li>
 </ul>
 <h2 id="1-1-Sample-Data"><a href="#1-1-Sample-Data" class="headerlink" title="1.1. Sample Data"></a>1.1. Sample Data</h2><ul>
-<li>예제 데이터로 sine curve 다발을 사용할 것입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">X = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">size=<span class="number">16</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sine wave plot</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">    ax.plot(X, np.sin(X - <span class="number">0.2</span>*i), linewidth=<span class="number">4</span>)</span><br><span class="line">    </span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_05.png"><br></li>
+<li>예제 데이터로 sine curve 다발을 사용할 것입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">X = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">size=<span class="number">16</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sine wave plot</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">    ax.plot(X, np.sin(X - <span class="number">0.2</span>*i), linewidth=<span class="number">4</span>)</span><br><span class="line">    </span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_05.png"><br></p>
 <h2 id="1-2-Background-Image"><a href="#1-2-Background-Image" class="headerlink" title="1.2. Background Image"></a>1.2. Background Image</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lena_Fors%C3%A9n">wikipedia: Lena Forsén(Lena Söderberg)</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=75vOBQpPLfw">youtube: Losing Lena</a><br><a target="_blank" rel="noopener" href="https://womenlovetech.com/losing-lena-why-we-need-to-remove-one-image-and-end-techs-original-sin/">women love tech: Losing Lena – Why Removing One Image Will End Tech’s Original Sin</a><br><a target="_blank" rel="noopener" href="http://sipi.usc.edu/database/">The USC-SIPI Image Database</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Eurasian_eagle-owl">wikipedia: Eurasian eagle-owl</a></p>
 </blockquote>
 <ul>
-<li><b>반투명 색상</b>이 잘 표현되는지 확인하기 위해 뒤에 이미지를 깝니다.</li>
-<li>이럴 때 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lena_Fors%C3%A9n">Lena Forsén(Lena Söderberg)</a>님의 이미지를 많이 사용했습니다.</li>
-<li>그러나 본인이 <b>더 이상 자신의 이미지를 사용하지 않았으면 좋겠다(“I retired from modelling a long time ago, It’s time I retired from tech, too.”)</b>고 하셨기 때문에 의사를 존중해드리려고 합니다.<br><br><img src="Lena-Test-Image.jpg" alt="이미지 데이터가 필요하면 여기로 오라는군요: http://sipi.usc.edu/database/"><br></li>
+<li><p><b>반투명 색상</b>이 잘 표현되는지 확인하기 위해 뒤에 이미지를 깝니다.</p>
+</li>
+<li><p>이럴 때 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lena_Fors%C3%A9n">Lena Forsén(Lena Söderberg)</a>님의 이미지를 많이 사용했습니다.</p>
+</li>
+<li><p>그러나 본인이 <b>더 이상 자신의 이미지를 사용하지 않았으면 좋겠다(“I retired from modelling a long time ago, It’s time I retired from tech, too.”)</b>고 하셨기 때문에 의사를 존중해드리려고 합니다.<br><br><img src="/Lena-Test-Image.jpg" alt="이미지 데이터가 필요하면 여기로 오라는군요: http:&#x2F;&#x2F;sipi.usc.edu&#x2F;database&#x2F;"><br></p>
+</li>
+<li><p>대신 <b>부엉이</b>를 사용합니다.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Eurasian_eagle-owl">유라시안 수리부엉이</a> 사진을 가져와서 넣습니다.</p>
+</li>
+<li><p><code>ax.twinx()</code>로 메인 axes와 x축을 공유하는 axes를 만들고, <code>OffsetImage</code>와 <code>AnnotationBbox</code>를 사용해 한가운데 넣습니다.</p>
+</li>
 </ul>
-<ul>
-<li>대신 <b>부엉이</b>를 사용합니다.</li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Eurasian_eagle-owl">유라시안 수리부엉이</a> 사진을 가져와서 넣습니다.</li>
-<li><code>ax.twinx()</code>로 메인 axes와 x축을 공유하는 axes를 만들고, <code>OffsetImage</code>와 <code>AnnotationBbox</code>를 사용해 한가운데 넣습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># image overlay: 위 코드에 추가</span></span><br><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> OffsetImage, AnnotationBbox</span><br><span class="line"></span><br><span class="line">owl = plt.imread(<span class="string">&quot;owl.jpg&quot;</span>)    <span class="comment"># 배경 이미지 읽어오기</span></span><br><span class="line">ax_owl = ax.twinx()            <span class="comment"># 이미지가 들어갈 axes 만들기</span></span><br><span class="line">ax_owl.set_xlim(ax.get_xlim())       <span class="comment"># 메인 axes와 x범위 통일 : 혼동 방지</span></span><br><span class="line">ax_owl.set_ylim(ax.get_ylim())       <span class="comment"># 메인 axes와 y범위 통일 : 혼동 방지</span></span><br><span class="line"></span><br><span class="line">oi = OffsetImage(owl, zoom=<span class="number">0.3</span>, alpha=<span class="number">1</span>)         <span class="comment"># 이미지 삽입 준비</span></span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">5</span>, <span class="number">0</span>), frameon=<span class="literal">False</span>) <span class="comment"># 이미지 삽입 좌표 지정, 테두리 삭제</span></span><br><span class="line">ax_owl.add_artist(box0)                          <span class="comment"># 이미지 삽입</span></span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_06.png"><br></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># image overlay: 위 코드에 추가</span></span><br><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> OffsetImage, AnnotationBbox</span><br><span class="line"></span><br><span class="line">owl = plt.imread(<span class="string">&quot;owl.jpg&quot;</span>)    <span class="comment"># 배경 이미지 읽어오기</span></span><br><span class="line">ax_owl = ax.twinx()            <span class="comment"># 이미지가 들어갈 axes 만들기</span></span><br><span class="line">ax_owl.set_xlim(ax.get_xlim())       <span class="comment"># 메인 axes와 x범위 통일 : 혼동 방지</span></span><br><span class="line">ax_owl.set_ylim(ax.get_ylim())       <span class="comment"># 메인 axes와 y범위 통일 : 혼동 방지</span></span><br><span class="line"></span><br><span class="line">oi = OffsetImage(owl, zoom=<span class="number">0.3</span>, alpha=<span class="number">1</span>)         <span class="comment"># 이미지 삽입 준비</span></span><br><span class="line">box0 = AnnotationBbox(oi, (<span class="number">5</span>, <span class="number">0</span>), frameon=<span class="literal">False</span>) <span class="comment"># 이미지 삽입 좌표 지정, 테두리 삭제</span></span><br><span class="line">ax_owl.add_artist(box0)                          <span class="comment"># 이미지 삽입</span></span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_06.png"><br></p>
 <ul>
 <li><code>ax_owl.set_zorder(-1)</code>로 순서를 뒤로 옮깁니다.</li>
 <li><code>ax</code>의 기본 zorder는 0이기 때문에 부엉이 그림이 sine 곡선 뒤에 놓입니다.</li>
-<li>메인 axes <code>ax</code>를 투명하게 하는 것을 잊지 않습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ax_owl.axis(<span class="literal">False</span>)                               <span class="comment"># 배경 이미지 눈금 안보이게</span></span><br><span class="line">ax_owl.set_zorder(-<span class="number">1</span>)                            <span class="comment"># 배경 이미지 axes를 메인 axes뒤로</span></span><br><span class="line">ax.set_facecolor(<span class="string">&quot;none&quot;</span>)                         <span class="comment"># 메인 axes를 투명하게</span></span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_07.png"><br></li>
+<li>메인 axes <code>ax</code>를 투명하게 하는 것을 잊지 않습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ax_owl.axis(<span class="literal">False</span>)                               <span class="comment"># 배경 이미지 눈금 안보이게</span></span><br><span class="line">ax_owl.set_zorder(-<span class="number">1</span>)                            <span class="comment"># 배경 이미지 axes를 메인 axes뒤로</span></span><br><span class="line">ax.set_facecolor(<span class="string">&quot;none&quot;</span>)                         <span class="comment"># 메인 axes를 투명하게</span></span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_07.png"><br></p>
 <h2 id="1-3-function-Color-Plot"><a href="#1-3-function-Color-Plot" class="headerlink" title="1.3. function: Color Plot"></a>1.3. function: Color Plot</h2><ul>
 <li>sine 곡선의 색상을 바꿔가며 그릴 함수를 만듭니다.</li>
 <li>입력 인자로 colors(<code>list</code>), title(<code>str</code>)을 의무적으로 받고, style(<code>str</code>)과 prop_cycle(<code>list</code>), 그리고 저장할 파일명을 옵션으로 받게 합니다.</li>
 <li>똑같은 sine curve를 <b>colors</b>에 따라 다른 색으로 그릴 것입니다.</li>
-<li>style과 prop_cycle은 아래에서 설명하겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_color_example</span>(<span class="params">colors, title, style=<span class="string">&quot;default&quot;</span>, prop_cycle=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">with</span> plt.style.context(style):</span><br><span class="line">        fig, ax = plt.subplots(figsize=(<span class="number">10</span>,<span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">        X = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> prop_cycle:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;# prop_cycle=<span class="subst">&#123;prop_cycle&#125;</span>&quot;</span>)</span><br><span class="line">            ax.set_prop_cycle(<span class="string">&#x27;color&#x27;</span>, prop_cycle)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> i, color <span class="keyword">in</span> <span class="built_in">enumerate</span>(colors):</span><br><span class="line">            ax.set_facecolor(<span class="string">&quot;none&quot;</span>)</span><br><span class="line">            ax.set_zorder(<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> prop_cycle <span class="keyword">or</span> style != <span class="string">&quot;default&quot;</span>:</span><br><span class="line">                ax.plot(X, np.sin(X-<span class="number">0.2</span>*i), lw=<span class="number">4</span>, label=<span class="string">f&quot;color_<span class="subst">&#123;i:02d&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ax.plot(X, np.sin(X-<span class="number">0.2</span>*i), c=color, lw=<span class="number">4</span>, label=color)</span><br><span class="line">            ax.set_title(title, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">6</span>)</span><br><span class="line">            ax.legend(ncol=<span class="number">2</span>, loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">            ax.set_xlim(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">        ax_owl = ax.twinx()</span><br><span class="line">        ax_owl.set_zorder(-<span class="number">1</span>)</span><br><span class="line">        ax_owl.set_ylim(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        oi = OffsetImage(owl, zoom = <span class="number">0.3</span>, alpha=<span class="number">1</span>)</span><br><span class="line">        box0 = AnnotationBbox(oi, (<span class="number">5</span>, <span class="number">0</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">        ax_owl.add_artist(box0)</span><br><span class="line">        ax_owl.axis(<span class="literal">False</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> filename:</span><br><span class="line">            fig.savefig(filename)</span><br></pre></td></tr></table></figure></li>
+<li>style과 prop_cycle은 아래에서 설명하겠습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_color_example</span>(<span class="params">colors, title, style=<span class="string">&quot;default&quot;</span>, prop_cycle=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">with</span> plt.style.context(style):</span><br><span class="line">        fig, ax = plt.subplots(figsize=(<span class="number">10</span>,<span class="number">3</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">        X = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> prop_cycle:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;# prop_cycle=<span class="subst">&#123;prop_cycle&#125;</span>&quot;</span>)</span><br><span class="line">            ax.set_prop_cycle(<span class="string">&#x27;color&#x27;</span>, prop_cycle)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> i, color <span class="keyword">in</span> <span class="built_in">enumerate</span>(colors):</span><br><span class="line">            ax.set_facecolor(<span class="string">&quot;none&quot;</span>)</span><br><span class="line">            ax.set_zorder(<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> prop_cycle <span class="keyword">or</span> style != <span class="string">&quot;default&quot;</span>:</span><br><span class="line">                ax.plot(X, np.sin(X-<span class="number">0.2</span>*i), lw=<span class="number">4</span>, label=<span class="string">f&quot;color_<span class="subst">&#123;i:02d&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ax.plot(X, np.sin(X-<span class="number">0.2</span>*i), c=color, lw=<span class="number">4</span>, label=color)</span><br><span class="line">            ax.set_title(title, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">6</span>)</span><br><span class="line">            ax.legend(ncol=<span class="number">2</span>, loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">            ax.set_xlim(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">        ax_owl = ax.twinx()</span><br><span class="line">        ax_owl.set_zorder(-<span class="number">1</span>)</span><br><span class="line">        ax_owl.set_ylim(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        oi = OffsetImage(owl, zoom = <span class="number">0.3</span>, alpha=<span class="number">1</span>)</span><br><span class="line">        box0 = AnnotationBbox(oi, (<span class="number">5</span>, <span class="number">0</span>), frameon=<span class="literal">False</span>)</span><br><span class="line">        ax_owl.add_artist(box0)</span><br><span class="line">        ax_owl.axis(<span class="literal">False</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> filename:</span><br><span class="line">            fig.savefig(filename)</span><br></pre></td></tr></table></figure>
+
 <h1 id="2-Colors"><a href="#2-Colors" class="headerlink" title="2. Colors"></a>2. Colors</h1><ul>
 <li>Matplotlib은 다양한 <b>형태</b>의 색상을 지원합니다.</li>
 <li>하나하나 그려보며 확인하겠습니다.</li>
@@ -280,73 +289,103 @@
 </ul>
 <h3 id="2-1-1-Grayscale"><a href="#2-1-1-Grayscale" class="headerlink" title="2.1.1. Grayscale"></a>2.1.1. Grayscale</h3><ul>
 <li>회색조를 0~1 사이 값 <b><code>str</code> 타입</b>으로 표현할 수 있습니다.</li>
-<li>0이 검정, 1이 흰색입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">colors = [<span class="string">f&quot;<span class="subst">&#123;f:<span class="number">.2</span>f&#125;</span>&quot;</span> <span class="keyword">for</span> f <span class="keyword">in</span> np.linspace(<span class="number">0</span>, <span class="number">0.9</span>, size)]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;Grayscale [0~1]&quot;</span>, filename=<span class="string">&quot;mpl_colors_09.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: 따옴표가 꼭 필요합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;0.00&#x27;</span>, <span class="string">&#x27;0.06&#x27;</span>, <span class="string">&#x27;0.12&#x27;</span>, <span class="string">&#x27;0.18&#x27;</span>, <span class="string">&#x27;0.24&#x27;</span>, <span class="string">&#x27;0.30&#x27;</span>, <span class="string">&#x27;0.36&#x27;</span>, <span class="string">&#x27;0.42&#x27;</span>, <span class="string">&#x27;0.48&#x27;</span>, <span class="string">&#x27;0.54&#x27;</span>, <span class="string">&#x27;0.60&#x27;</span>, <span class="string">&#x27;0.66&#x27;</span>, <span class="string">&#x27;0.72&#x27;</span>, <span class="string">&#x27;0.78&#x27;</span>, <span class="string">&#x27;0.84&#x27;</span>, <span class="string">&#x27;0.90&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_09.png"><br></li>
+<li>0이 검정, 1이 흰색입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">colors = [<span class="string">f&quot;<span class="subst">&#123;f:<span class="number">.2</span>f&#125;</span>&quot;</span> <span class="keyword">for</span> f <span class="keyword">in</span> np.linspace(<span class="number">0</span>, <span class="number">0.9</span>, size)]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;Grayscale [0~1]&quot;</span>, filename=<span class="string">&quot;mpl_colors_09.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 따옴표가 꼭 필요합니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;0.00&#x27;</span>, <span class="string">&#x27;0.06&#x27;</span>, <span class="string">&#x27;0.12&#x27;</span>, <span class="string">&#x27;0.18&#x27;</span>, <span class="string">&#x27;0.24&#x27;</span>, <span class="string">&#x27;0.30&#x27;</span>, <span class="string">&#x27;0.36&#x27;</span>, <span class="string">&#x27;0.42&#x27;</span>, <span class="string">&#x27;0.48&#x27;</span>, <span class="string">&#x27;0.54&#x27;</span>, <span class="string">&#x27;0.60&#x27;</span>, <span class="string">&#x27;0.66&#x27;</span>, <span class="string">&#x27;0.72&#x27;</span>, <span class="string">&#x27;0.78&#x27;</span>, <span class="string">&#x27;0.84&#x27;</span>, <span class="string">&#x27;0.90&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_09.png"><br></p>
 <h3 id="2-1-2-RGB-array"><a href="#2-1-2-RGB-array" class="headerlink" title="2.1.2. RGB (array)"></a>2.1.2. RGB (array)</h3><ul>
 <li>RGB 각 채널을 0~1 사이 값 <b><code>float</code> 3개 array</b>로 표현할 수 있습니다.</li>
-<li>랜덤으로 색상을 추출했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">colors = [(r.<span class="built_in">round</span>(<span class="number">2</span>), g.<span class="built_in">round</span>(<span class="number">2</span>), b.<span class="built_in">round</span>(<span class="number">2</span>)) <span class="keyword">for</span> r, g, b</span><br><span class="line">          <span class="keyword">in</span> <span class="built_in">zip</span>(np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size))]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;RGB [0~1]&quot;</span>, filename=<span class="string">&quot;mpl_colors_10.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: 3차원 array입니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0.46, 0.8, 0.32), (0.13, 0.35, 0.6), (0.67, 0.3, 0.52), (0.89, 0.87, 0.72), (0.59, 0.12, 0.22), (0.86, 0.34, 0.55), (0.55, 0.72, 0.9), (0.58, 0.05, 0.16), (0.78, 0.14, 0.58), (0.78, 0.13, 0.51), (0.78, 0.13, 0.31), (0.56, 0.82, 0.57), (0.62, 0.18, 0.76), (0.67, 0.69, 0.69), (0.4, 0.18, 0.93), (0.87, 0.81, 0.65)]</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_10.png"><br></li>
+<li>랜덤으로 색상을 추출했습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">colors = [(r.<span class="built_in">round</span>(<span class="number">2</span>), g.<span class="built_in">round</span>(<span class="number">2</span>), b.<span class="built_in">round</span>(<span class="number">2</span>)) <span class="keyword">for</span> r, g, b</span><br><span class="line">          <span class="keyword">in</span> <span class="built_in">zip</span>(np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size))]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;RGB [0~1]&quot;</span>, filename=<span class="string">&quot;mpl_colors_10.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 3차원 array입니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0.46, 0.8, 0.32), (0.13, 0.35, 0.6), (0.67, 0.3, 0.52), (0.89, 0.87, 0.72), (0.59, 0.12, 0.22), (0.86, 0.34, 0.55), (0.55, 0.72, 0.9), (0.58, 0.05, 0.16), (0.78, 0.14, 0.58), (0.78, 0.13, 0.51), (0.78, 0.13, 0.31), (0.56, 0.82, 0.57), (0.62, 0.18, 0.76), (0.67, 0.69, 0.69), (0.4, 0.18, 0.93), (0.87, 0.81, 0.65)]</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_10.png"><br></p>
 <h3 id="2-1-3-RGBA-array"><a href="#2-1-3-RGBA-array" class="headerlink" title="2.1.3. RGBA (array)"></a>2.1.3. RGBA (array)</h3><ul>
 <li>RGB에 <b>Alpha(불투명도)채널</b> 하나를 더 추가합니다.</li>
-<li>역시 랜덤으로 추출했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">colors = [(r.<span class="built_in">round</span>(<span class="number">2</span>), g.<span class="built_in">round</span>(<span class="number">2</span>), b.<span class="built_in">round</span>(<span class="number">2</span>), a.<span class="built_in">round</span>(<span class="number">2</span>)) <span class="keyword">for</span> r, g, b, a </span><br><span class="line">          <span class="keyword">in</span> <span class="built_in">zip</span>(np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size))]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;RGBA [0~1]&quot;</span>, filename=<span class="string">&quot;mpl_colors_11.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: 4차원 array입니다. 선 너머로 그림이 비칩니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0.48, 0.43, 0.92, 0.95), (0.47, 0.17, 0.25, 0.58), (0.93, 0.12, 0.7, 0.6), (0.16, 0.23, 0.79, 0.34), (0.43, 0.05, 0.58, 0.05), (0.5, 0.99, 0.2, 0.75), (0.55, 0.97, 0.51, 0.05), (0.77, 0.79, 0.8, 0.7), (0.85, 0.22, 0.18, 0.13), (0.09, 0.27, 0.41, 0.77), (0.32, 0.41, 0.88, 0.74), (0.6, 0.43, 0.89, 0.02), (0.35, 0.88, 0.74, 0.14), (0.24, 0.31, 0.33, 0.82), (0.49, 0.4, 0.47, 0.82), (0.92, 0.31, 0.93, 0.58)]</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_11.png"><br></li>
+<li>역시 랜덤으로 추출했습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">colors = [(r.<span class="built_in">round</span>(<span class="number">2</span>), g.<span class="built_in">round</span>(<span class="number">2</span>), b.<span class="built_in">round</span>(<span class="number">2</span>), a.<span class="built_in">round</span>(<span class="number">2</span>)) <span class="keyword">for</span> r, g, b, a </span><br><span class="line">          <span class="keyword">in</span> <span class="built_in">zip</span>(np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size), np.random.uniform(<span class="number">0</span>, <span class="number">1</span>, size=size))]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;RGBA [0~1]&quot;</span>, filename=<span class="string">&quot;mpl_colors_11.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 4차원 array입니다. 선 너머로 그림이 비칩니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0.48, 0.43, 0.92, 0.95), (0.47, 0.17, 0.25, 0.58), (0.93, 0.12, 0.7, 0.6), (0.16, 0.23, 0.79, 0.34), (0.43, 0.05, 0.58, 0.05), (0.5, 0.99, 0.2, 0.75), (0.55, 0.97, 0.51, 0.05), (0.77, 0.79, 0.8, 0.7), (0.85, 0.22, 0.18, 0.13), (0.09, 0.27, 0.41, 0.77), (0.32, 0.41, 0.88, 0.74), (0.6, 0.43, 0.89, 0.02), (0.35, 0.88, 0.74, 0.14), (0.24, 0.31, 0.33, 0.82), (0.49, 0.4, 0.47, 0.82), (0.92, 0.31, 0.93, 0.58)]</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_11.png"><br></p>
 <h3 id="2-1-4-RGB-or-RGBA-hex"><a href="#2-1-4-RGB-or-RGBA-hex" class="headerlink" title="2.1.4. RGB or RGBA (hex)"></a>2.1.4. RGB or RGBA (hex)</h3><blockquote>
 <p><a href="https://jehyunlee.github.io/2021/01/15/Python-DS-55-colors/">Pega Devlog: Picking and Modifying Colors</a><br><a href="https://jehyunlee.github.io/2020/02/16/Python-DS-3-matplotlib_color/">Pega Devlog: Matplotlib colors</a></p>
 </blockquote>
 <ul>
 <li>RGB 또는 RGBA 형식은 array 외에도 <b>hex code</b>로도 표현됩니다.</li>
-<li>대소문자는 구분하지 않습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hex_chrs = [<span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]           <span class="comment"># 0 ~ 9</span></span><br><span class="line">hex_chrs.extend([<span class="built_in">chr</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">65</span>, <span class="number">71</span>)]) <span class="comment"># A ~ F</span></span><br><span class="line">colors = [<span class="string">f&quot;#<span class="subst">&#123;r0&#125;</span><span class="subst">&#123;r1&#125;</span><span class="subst">&#123;g0&#125;</span><span class="subst">&#123;g1&#125;</span><span class="subst">&#123;b0&#125;</span><span class="subst">&#123;b1&#125;</span><span class="subst">&#123;a0&#125;</span><span class="subst">&#123;a1&#125;</span>&quot;</span> <span class="keyword">for</span> r0, r1, g0, g1, b0, b1, a0, a1 </span><br><span class="line">          <span class="keyword">in</span> <span class="built_in">zip</span>(np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size),</span><br><span class="line">                 np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size))]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;RGB or RGBA [Hex]&quot;</span>, filename=<span class="string">&quot;mpl_colors_12.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: # 뒤에 알파벳 6개(RGB) 또는 8개(RGBA)가 오면 됩니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0.48, 0.43, 0.92, 0.95), (0.47, 0.17, 0.25, 0.58), (0.93, 0.12, 0.7, 0.6), (0.16, 0.23, 0.79, 0.34), (0.43, 0.05, 0.58, 0.05), (0.5, 0.99, 0.2, 0.75), (0.55, 0.97, 0.51, 0.05), (0.77, 0.79, 0.8, 0.7), (0.85, 0.22, 0.18, 0.13), (0.09, 0.27, 0.41, 0.77), (0.32, 0.41, 0.88, 0.74), (0.6, 0.43, 0.89, 0.02), (0.35, 0.88, 0.74, 0.14), (0.24, 0.31, 0.33, 0.82), (0.49, 0.4, 0.47, 0.82), (0.92, 0.31, 0.93, 0.58)]</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_12.png"><br></li>
+<li>대소문자는 구분하지 않습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hex_chrs = [<span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]           <span class="comment"># 0 ~ 9</span></span><br><span class="line">hex_chrs.extend([<span class="built_in">chr</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">65</span>, <span class="number">71</span>)]) <span class="comment"># A ~ F</span></span><br><span class="line">colors = [<span class="string">f&quot;#<span class="subst">&#123;r0&#125;</span><span class="subst">&#123;r1&#125;</span><span class="subst">&#123;g0&#125;</span><span class="subst">&#123;g1&#125;</span><span class="subst">&#123;b0&#125;</span><span class="subst">&#123;b1&#125;</span><span class="subst">&#123;a0&#125;</span><span class="subst">&#123;a1&#125;</span>&quot;</span> <span class="keyword">for</span> r0, r1, g0, g1, b0, b1, a0, a1 </span><br><span class="line">          <span class="keyword">in</span> <span class="built_in">zip</span>(np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size),</span><br><span class="line">                 np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size), np.random.choice(hex_chrs, size=size))]</span><br><span class="line"><span class="built_in">print</span>(colors)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;RGB or RGBA [Hex]&quot;</span>, filename=<span class="string">&quot;mpl_colors_12.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: # 뒤에 알파벳 6개(RGB) 또는 8개(RGBA)가 오면 됩니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0.48, 0.43, 0.92, 0.95), (0.47, 0.17, 0.25, 0.58), (0.93, 0.12, 0.7, 0.6), (0.16, 0.23, 0.79, 0.34), (0.43, 0.05, 0.58, 0.05), (0.5, 0.99, 0.2, 0.75), (0.55, 0.97, 0.51, 0.05), (0.77, 0.79, 0.8, 0.7), (0.85, 0.22, 0.18, 0.13), (0.09, 0.27, 0.41, 0.77), (0.32, 0.41, 0.88, 0.74), (0.6, 0.43, 0.89, 0.02), (0.35, 0.88, 0.74, 0.14), (0.24, 0.31, 0.33, 0.82), (0.49, 0.4, 0.47, 0.82), (0.92, 0.31, 0.93, 0.58)]</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_12.png"><br></p>
 <h3 id="2-1-5-Utitlities"><a href="#2-1-5-Utitlities" class="headerlink" title="2.1.5. Utitlities"></a>2.1.5. Utitlities</h3><ul>
 <li><code>matplotlib.colors</code>의 <b><code>to_hex()</code>를 사용하면 array가 hex code로 변경</b>됩니다.</li>
 <li>반대 방향은 <b><code>to_rgb()</code></b>, <b><code>to_rgba()</code></b>, <b><code>to_rgba_array()</code></b>로 가능합니다.</li>
 <li>어딘가에서 온 array나 string이 matplotlib <b>색상 표현에 적합한지 알아보는 명령어</b>도 있습니다.</li>
-<li><b><code>is_color_like</code></b>입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check if input is a color</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mcolors.is_color_like((0.16, 0.23, 0.79, 0.34)) = <span class="subst">&#123;mcolors.is_color_like((<span class="number">0.16</span>, <span class="number">0.23</span>, <span class="number">0.79</span>, <span class="number">0.34</span>))&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mcolors.is_color_like((0.16, 0.23, 0.79, 1.34)) = <span class="subst">&#123;mcolors.is_color_like((<span class="number">0.16</span>, <span class="number">0.23</span>, <span class="number">0.79</span>, <span class="number">1.34</span>))&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;\nmcolors.is_color_like(&#x27;#4F12226E&#x27;) = <span class="subst">&#123;mcolors.is_color_like(<span class="string">&#x27;#4F12226E&#x27;</span>)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mcolors.is_color_like(&#x27;#4F1226E&#x27;) = <span class="subst">&#123;mcolors.is_color_like(<span class="string">&#x27;#4F1226E&#x27;</span>)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: 1을 넘는 array, 자릿수가 부족한 hex code는 <code>False</code>가 나옵니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mcolors.is_color_like((0.16, 0.23, 0.79, 0.34)) = True</span><br><span class="line">mcolors.is_color_like((0.16, 0.23, 0.79, 1.34)) = False</span><br><span class="line"></span><br><span class="line">mcolors.is_color_like(<span class="string">&#x27;#4F12226E&#x27;</span>) = True</span><br><span class="line">mcolors.is_color_like(<span class="string">&#x27;#4F1226E&#x27;</span>) = False</span><br></pre></td></tr></table></figure></li>
+<li><b><code>is_color_like</code></b>입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check if input is a color</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mcolors.is_color_like((0.16, 0.23, 0.79, 0.34)) = <span class="subst">&#123;mcolors.is_color_like((<span class="number">0.16</span>, <span class="number">0.23</span>, <span class="number">0.79</span>, <span class="number">0.34</span>))&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mcolors.is_color_like((0.16, 0.23, 0.79, 1.34)) = <span class="subst">&#123;mcolors.is_color_like((<span class="number">0.16</span>, <span class="number">0.23</span>, <span class="number">0.79</span>, <span class="number">1.34</span>))&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;\nmcolors.is_color_like(&#x27;#4F12226E&#x27;) = <span class="subst">&#123;mcolors.is_color_like(<span class="string">&#x27;#4F12226E&#x27;</span>)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mcolors.is_color_like(&#x27;#4F1226E&#x27;) = <span class="subst">&#123;mcolors.is_color_like(<span class="string">&#x27;#4F1226E&#x27;</span>)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 1을 넘는 array, 자릿수가 부족한 hex code는 <code>False</code>가 나옵니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mcolors.is_color_like((<span class="number">0.16</span>, <span class="number">0.23</span>, <span class="number">0.79</span>, <span class="number">0.34</span>)) = True</span><br><span class="line">mcolors.is_color_like((<span class="number">0.16</span>, <span class="number">0.23</span>, <span class="number">0.79</span>, <span class="number">1.34</span>)) = False</span><br><span class="line"></span><br><span class="line">mcolors.is_color_like(<span class="string">&#x27;#4F12226E&#x27;</span>) = True</span><br><span class="line">mcolors.is_color_like(<span class="string">&#x27;#4F1226E&#x27;</span>) = False</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-2-Strings"><a href="#2-2-Strings" class="headerlink" title="2.2. Strings"></a>2.2. Strings</h2><ul>
 <li>Matplotlib에 string으로 저장된 pre-defined color가 있습니다.</li>
 <li><b>네 가지</b>가 있습니다: <code>BASE_COLORS</code>, <code>XKCD_COLORS</code>, <code>CSS4_COLORS</code>, <code>TABLEAU_COLORS</code>입니다.</li>
-<li>dictionary 형태로 float array 또는 hex code와 함께 저장되어 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(mcolors.BASE_COLORS))</span><br><span class="line">mcolors.BASE_COLORS</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;dict&#x27;</span>&gt;</span><br><span class="line">&#123;<span class="string">&#x27;b&#x27;</span>: (0, 0, 1),</span><br><span class="line"> <span class="string">&#x27;g&#x27;</span>: (0, 0.5, 0),</span><br><span class="line"> <span class="string">&#x27;r&#x27;</span>: (1, 0, 0),</span><br><span class="line"> <span class="string">&#x27;c&#x27;</span>: (0, 0.75, 0.75),</span><br><span class="line"> <span class="string">&#x27;m&#x27;</span>: (0.75, 0, 0.75),</span><br><span class="line"> <span class="string">&#x27;y&#x27;</span>: (0.75, 0.75, 0),</span><br><span class="line"> <span class="string">&#x27;k&#x27;</span>: (0, 0, 0),</span><br><span class="line"> <span class="string">&#x27;w&#x27;</span>: (1, 1, 1)&#125;</span><br></pre></td></tr></table></figure></li>
+<li>dictionary 형태로 float array 또는 hex code와 함께 저장되어 있습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(mcolors.BASE_COLORS))</span><br><span class="line">mcolors.BASE_COLORS</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;dict&#x27;</span>&gt;</span><br><span class="line">&#123;<span class="string">&#x27;b&#x27;</span>: (0, 0, 1),</span><br><span class="line"> <span class="string">&#x27;g&#x27;</span>: (0, 0.5, 0),</span><br><span class="line"> <span class="string">&#x27;r&#x27;</span>: (1, 0, 0),</span><br><span class="line"> <span class="string">&#x27;c&#x27;</span>: (0, 0.75, 0.75),</span><br><span class="line"> <span class="string">&#x27;m&#x27;</span>: (0.75, 0, 0.75),</span><br><span class="line"> <span class="string">&#x27;y&#x27;</span>: (0.75, 0.75, 0),</span><br><span class="line"> <span class="string">&#x27;k&#x27;</span>: (0, 0, 0),</span><br><span class="line"> <span class="string">&#x27;w&#x27;</span>: (1, 1, 1)&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-2-1-BASE-COLORS"><a href="#2-2-1-BASE-COLORS" class="headerlink" title="2.2.1. BASE_COLORS"></a>2.2.1. <code>BASE_COLORS</code></h3><ul>
 <li>영어 한 글자로 색상을 표현합니다.</li>
-<li>RGB + CMYK + W 입니다. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">colors = <span class="built_in">list</span>(mcolors.BASE_COLORS.keys())</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;Base Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_13.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_13.png"><br></li>
+<li>RGB + CMYK + W 입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">colors = <span class="built_in">list</span>(mcolors.BASE_COLORS.keys())</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;Base Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_13.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_13.png"><br></p>
 <h3 id="2-2-2-XKCD-COLORS"><a href="#2-2-2-XKCD-COLORS" class="headerlink" title="2.2.2. XKCD_COLORS"></a>2.2.2. <code>XKCD_COLORS</code></h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://xkcd.com/color/rgb/">list of xkcd colors</a></p>
 </blockquote>
 <ul>
 <li>954개의 가장 흔히 사용되는 색상에 투표로 이름을 붙였다고 합니다.</li>
-<li>역시 랜덤으로 16개만 골랐습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c_xkcd = <span class="built_in">list</span>(mcolors.XKCD_COLORS.keys())</span><br><span class="line"><span class="built_in">print</span>(c_xkcd)</span><br><span class="line">colors = np.random.choice(c_xkcd, replace=<span class="literal">False</span>, size=size)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;XKCD Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_14.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_14.png"><br></li>
+<li>역시 랜덤으로 16개만 골랐습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c_xkcd = <span class="built_in">list</span>(mcolors.XKCD_COLORS.keys())</span><br><span class="line"><span class="built_in">print</span>(c_xkcd)</span><br><span class="line">colors = np.random.choice(c_xkcd, replace=<span class="literal">False</span>, size=size)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;XKCD Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_14.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_14.png"><br></p>
 <h3 id="2-2-3-CSS4-COLORS-“Named-Colors”"><a href="#2-2-3-CSS4-COLORS-“Named-Colors”" class="headerlink" title="2.2.3. CSS4_COLORS: “Named Colors”"></a>2.2.3. <code>CSS4_COLORS</code>: “Named Colors”</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/gallery/color/named_colors.html">matplotlib: List of named colors</a></p>
 </blockquote>
 <ul>
 <li>저는 색상을 고를 때 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/gallery/color/named_colors.html">이 색상들을</a> 주로 참고하곤 합니다.</li>
-<li>세련되고 보기 편한 색상들이 잘 정돈되어 있거든요.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c_css4 = <span class="built_in">list</span>(mcolors.CSS4_COLORS.keys())</span><br><span class="line"><span class="built_in">print</span>(c_css4)</span><br><span class="line">colors = np.random.choice(c_css4, replace=<span class="literal">False</span>, size=size)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;Named Colors (CSS4)&quot;</span>, filename=<span class="string">&quot;mpl_colors_15.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_15.png"><br></li>
+<li>세련되고 보기 편한 색상들이 잘 정돈되어 있거든요.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c_css4 = <span class="built_in">list</span>(mcolors.CSS4_COLORS.keys())</span><br><span class="line"><span class="built_in">print</span>(c_css4)</span><br><span class="line">colors = np.random.choice(c_css4, replace=<span class="literal">False</span>, size=size)</span><br><span class="line"></span><br><span class="line">plot_color_example(colors, <span class="string">&quot;Named Colors (CSS4)&quot;</span>, filename=<span class="string">&quot;mpl_colors_15.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_15.png"><br></p>
 <h3 id="2-2-4-TABLEAU-COLORS"><a href="#2-2-4-TABLEAU-COLORS" class="headerlink" title="2.2.4. TABLEAU_COLORS"></a>2.2.4. <code>TABLEAU_COLORS</code></h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/2.0.0/users/dflt_style_changes.html#colors-color-cycles-and-color-maps">matplotlib: what’s new in matplotlib 2.0 &gt; Colors, color cycles, and color maps </a></p>
 </blockquote>
 <ul>
 <li>데이터 시각화에서 태블로를 빼놓기 어렵습니다.</li>
-<li>태블로의 팔레트를 matplotlib에 심었고, matplotlib 버전 2부터 RGBCMWK를 밀어내고 기본 cycle이 되었습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c_tableau = <span class="built_in">list</span>(mcolors.TABLEAU_COLORS.keys())</span><br><span class="line"></span><br><span class="line">plot_color_example(c_tableau, <span class="string">&quot;Tableau Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_16.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_16.png"><br></li>
+<li>태블로의 팔레트를 matplotlib에 심었고, matplotlib 버전 2부터 RGBCMWK를 밀어내고 기본 cycle이 되었습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c_tableau = <span class="built_in">list</span>(mcolors.TABLEAU_COLORS.keys())</span><br><span class="line"></span><br><span class="line">plot_color_example(c_tableau, <span class="string">&quot;Tableau Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_16.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_16.png"><br></p>
 <h2 id="2-3-CN"><a href="#2-3-CN" class="headerlink" title="2.3. CN"></a>2.3. CN</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/colors/colors.html">matplotlib: Specifying Colors</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/colors/colors.html">matplotlib: Customizing Matplotlib with style sheets and rcParams</a></p>
 </blockquote>
@@ -358,62 +397,72 @@
 </ul>
 <h3 id="2-3-1-Default-TABLEAU-COLORS"><a href="#2-3-1-Default-TABLEAU-COLORS" class="headerlink" title="2.3.1. Default: TABLEAU_COLORS"></a>2.3.1. Default: <code>TABLEAU_COLORS</code></h3><ul>
 <li><b>논문 그림</b>처럼 복잡한 그림들을 그릴 때 <b>앞에서 사용된 특정 색상</b>을 다시 사용해야 할 때가 있습니다.</li>
-<li>이럴 때 CN이 매우 유용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c_CN = [<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>)]</span><br><span class="line"><span class="built_in">print</span>(c_CN)</span><br><span class="line"></span><br><span class="line">plot_color_example(c_CN, <span class="string">&quot;&#x27;CN&#x27; Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_17.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>실행 결과: 기본값은 Tableau와 같습니다. 10개를 상한으로 다시 C0과 같아집니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>, <span class="string">&#x27;C4&#x27;</span>, <span class="string">&#x27;C5&#x27;</span>, <span class="string">&#x27;C6&#x27;</span>, <span class="string">&#x27;C7&#x27;</span>, <span class="string">&#x27;C8&#x27;</span>, <span class="string">&#x27;C9&#x27;</span>, <span class="string">&#x27;C10&#x27;</span>, <span class="string">&#x27;C11&#x27;</span>, <span class="string">&#x27;C12&#x27;</span>, <span class="string">&#x27;C13&#x27;</span>, <span class="string">&#x27;C14&#x27;</span>, <span class="string">&#x27;C15&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_17.png"><br></li>
+<li>이럴 때 CN이 매우 유용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c_CN = [<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>)]</span><br><span class="line"><span class="built_in">print</span>(c_CN)</span><br><span class="line"></span><br><span class="line">plot_color_example(c_CN, <span class="string">&quot;&#x27;CN&#x27; Colors&quot;</span>, filename=<span class="string">&quot;mpl_colors_17.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과: 기본값은 Tableau와 같습니다. 10개를 상한으로 다시 C0과 같아집니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>, <span class="string">&#x27;C4&#x27;</span>, <span class="string">&#x27;C5&#x27;</span>, <span class="string">&#x27;C6&#x27;</span>, <span class="string">&#x27;C7&#x27;</span>, <span class="string">&#x27;C8&#x27;</span>, <span class="string">&#x27;C9&#x27;</span>, <span class="string">&#x27;C10&#x27;</span>, <span class="string">&#x27;C11&#x27;</span>, <span class="string">&#x27;C12&#x27;</span>, <span class="string">&#x27;C13&#x27;</span>, <span class="string">&#x27;C14&#x27;</span>, <span class="string">&#x27;C15&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_17.png"><br></p>
 <h3 id="2-3-2-Palette"><a href="#2-3-2-Palette" class="headerlink" title="2.3.2. Palette"></a>2.3.2. Palette</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://jiffyclub.github.io/palettable/">Palettable</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/tutorial/color_palettes.html">seaborn: General principles for using color in plots</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.set_prop_cycle.html">matplotlib.axes.Axes.set_prop_cycle</a></p>
 </blockquote>
 <ul>
-<li><p>Matplotlib 외부의 팔레트를 가져와 사용할 수 있습니다.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://jiffyclub.github.io/palettable/">Palettable</a>도 좋고, <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/tutorial/color_palettes.html">seaborn</a>도 좋습니다.</p>
-</li>
-<li><p><code>ax.set_prop_cycle(&quot;color&quot;, Palette)</code>형태로 Palette를 지정합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> palettable.scientific.sequential <span class="keyword">import</span> Buda_16</span><br><span class="line"></span><br><span class="line">plot_color_example(c_CN, <span class="string">&quot;palette: &#x27;scientific.sequential.Buda_16&#x27;&quot;</span>, prop_cycle=Buda_16.mpl_colors, filename=<span class="string">&quot;mpl_colors_18.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="mpl_colors_18.png"><br></p>
-</li>
-<li><p>여러 가지 선택지가 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> palettable.cartocolors.qualitative <span class="keyword">import</span> Pastel_8</span><br><span class="line"></span><br><span class="line">plot_color_example(c_CN, <span class="string">&quot;palette: &#x27;cartocolors.qualitative.Pastel_8&#x27;&quot;</span>, prop_cycle=Pastel_8.mpl_colors, filename=<span class="string">&quot;mpl_colors_19.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="mpl_colors_19.png"><br></p>
-</li>
+<li>Matplotlib 외부의 팔레트를 가져와 사용할 수 있습니다.</li>
+<li><a target="_blank" rel="noopener" href="https://jiffyclub.github.io/palettable/">Palettable</a>도 좋고, <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/tutorial/color_palettes.html">seaborn</a>도 좋습니다.</li>
+<li><code>ax.set_prop_cycle(&quot;color&quot;, Palette)</code>형태로 Palette를 지정합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> palettable.scientific.sequential <span class="keyword">import</span> Buda_16</span><br><span class="line"></span><br><span class="line">plot_color_example(c_CN, <span class="string">&quot;palette: &#x27;scientific.sequential.Buda_16&#x27;&quot;</span>, prop_cycle=Buda_16.mpl_colors, filename=<span class="string">&quot;mpl_colors_18.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_18.png"><br></p>
+<ul>
+<li>여러 가지 선택지가 있습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> palettable.cartocolors.qualitative <span class="keyword">import</span> Pastel_8</span><br><span class="line"></span><br><span class="line">plot_color_example(c_CN, <span class="string">&quot;palette: &#x27;cartocolors.qualitative.Pastel_8&#x27;&quot;</span>, prop_cycle=Pastel_8.mpl_colors, filename=<span class="string">&quot;mpl_colors_19.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_19.png"><br></p>
 <h3 id="2-3-3-Colormap"><a href="#2-3-3-Colormap" class="headerlink" title="2.3.3. Colormap"></a>2.3.3. Colormap</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/tutorials/colors/colormaps.html?highlight=colormap">matplotlib: Choosing Colormaps in Matplotlib</a></p>
 </blockquote>
 <ul>
 <li>colormap에서도 팔레트를 뽑아낼 수 있습니다.</li>
 <li>먼저 <code>matplotlib.cm.get_cmap()</code>함수를 사용해서 colormap 객체를 만듭니다.</li>
-<li>여기에 괄호로 숫자를 넣어주면 거기에 해당하는 색생이 추출됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line">blues = cm.get_cmap(<span class="string">&quot;Blues&quot;</span>, lut=size)</span><br><span class="line">c_blues = [blues(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"></span><br><span class="line">plot_color_example(c_blues, <span class="string">&quot;colormap: &#x27;Blues&#x27;&quot;</span>, prop_cycle=c_blues, filename=<span class="string">&quot;mpl_colors_24.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_24.png"><br></li>
+<li>여기에 괄호로 숫자를 넣어주면 거기에 해당하는 색생이 추출됩니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line">blues = cm.get_cmap(<span class="string">&quot;Blues&quot;</span>, lut=size)</span><br><span class="line">c_blues = [blues(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"></span><br><span class="line">plot_color_example(c_blues, <span class="string">&quot;colormap: &#x27;Blues&#x27;&quot;</span>, prop_cycle=c_blues, filename=<span class="string">&quot;mpl_colors_24.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_24.png"><br></p>
 <ul>
-<li>경우의 수가 풍족해집니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">magma = cm.get_cmap(<span class="string">&quot;magma&quot;</span>, lut=size)</span><br><span class="line">c_magma = [magma(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"></span><br><span class="line">plot_color_example(c_blues, <span class="string">&quot;colormap: &#x27;magma&#x27;&quot;</span>, prop_cycle=c_magma, filename=<span class="string">&quot;mpl_colors_25.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_25.png"><br></li>
+<li>경우의 수가 풍족해집니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">magma = cm.get_cmap(<span class="string">&quot;magma&quot;</span>, lut=size)</span><br><span class="line">c_magma = [magma(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"></span><br><span class="line">plot_color_example(c_blues, <span class="string">&quot;colormap: &#x27;magma&#x27;&quot;</span>, prop_cycle=c_magma, filename=<span class="string">&quot;mpl_colors_25.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_25.png"><br></p>
 <h3 id="2-3-4-style"><a href="#2-3-4-style" class="headerlink" title="2.3.4. style"></a>2.3.4. style</h3><ul>
-<li>matplotlib은 style에 글꼴, 색상 등 많은 정보를 담고 있습니다.</li>
-<li>style을 바꿔서 cyclic color를 변경할 수 있습니다.</li>
+<li><p>matplotlib은 style에 글꼴, 색상 등 많은 정보를 담고 있습니다.</p>
+</li>
+<li><p>style을 바꿔서 cyclic color를 변경할 수 있습니다.</p>
+</li>
+<li><p><b>작성중인 코드 전체의 스타일을 바꿀 때</b>는 <b><code>plt.style.use()</code></b>를 사용합니다.</p>
+</li>
+<li><p><b>임시로 사용</b>하겠다면 <b><code>with plt.style.context():</code></b>를 사용합니다.</p>
+</li>
+<li><p>그런데 <code>plt.style.context()</code>를 사용하면, <code>c=C0</code> 등으로 지정하면 기본 style의 cyclic color가 나옵니다.</p>
+</li>
+<li><p><b>색상 자체를 지정하지 않아야 <code>plt.style.context()</code>명령이 의도대로 수행됩니다.</p>
+</li>
+<li><p>matplotlib 1.x 기본 색상입니다.</p>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_color_example(c_CN, <span class="string">&quot;style: &#x27;classic&#x27;&quot;</span>, style=<span class="string">&quot;classic&quot;</span>, filename=<span class="string">&quot;mpl_colors_20.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_20.png"><br></p>
 <ul>
-<li><b>작성중인 코드 전체의 스타일을 바꿀 때</b>는 <b><code>plt.style.use()</code></b>를 사용합니다.</li>
-<li><b>임시로 사용</b>하겠다면 <b><code>with plt.style.context():</code></b>를 사용합니다.</li>
-<li>그런데 <code>plt.style.context()</code>를 사용하면, <code>c=C0</code> 등으로 지정하면 기본 style의 cyclic color가 나옵니다.</li>
-<li><b>색상 자체를 지정하지 않아야 <code>plt.style.context()</code>명령이 의도대로 수행됩니다.</li>
+<li>ggplot 스타일도 가능합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_color_example(c_CN, <span class="string">&quot;style: &#x27;ggplot&#x27;&quot;</span>, style=<span class="string">&quot;ggplot&quot;</span>, filename=<span class="string">&quot;mpl_colors_21.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_21.png"><br></p>
 <ul>
-<li>matplotlib 1.x 기본 색상입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_color_example(c_CN, <span class="string">&quot;style: &#x27;classic&#x27;&quot;</span>, style=<span class="string">&quot;classic&quot;</span>, filename=<span class="string">&quot;mpl_colors_20.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_20.png"><br></li>
+<li>강렬한 fivethirtyeight입니다.</li>
 </ul>
-<ul>
-<li>ggplot 스타일도 가능합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_color_example(c_CN, <span class="string">&quot;style: &#x27;ggplot&#x27;&quot;</span>, style=<span class="string">&quot;ggplot&quot;</span>, filename=<span class="string">&quot;mpl_colors_21.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_21.png"><br></li>
-</ul>
-<ul>
-<li>강렬한 fivethirtyeight입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_color_example(c_CN, <span class="string">&quot;style: fivethirtyeight&quot;</span>, style=<span class="string">&quot;fivethirtyeight&quot;</span>, filename=<span class="string">&quot;mpl_colors_23.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="mpl_colors_23.png"><br></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_color_example(c_CN, <span class="string">&quot;style: fivethirtyeight&quot;</span>, style=<span class="string">&quot;fivethirtyeight&quot;</span>, filename=<span class="string">&quot;mpl_colors_23.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/mpl_colors_23.png"><br></p>
 <h1 id="3-결론"><a href="#3-결론" class="headerlink" title="3. 결론"></a>3. 결론</h1><ul>
 <li>인지과학적으로 색은 글자보다 먼저 전달되는 정보입니다.</li>
 <li>색상만 평소와 다르게 사용하는 것 만으로도 한결 산뜻한 느낌이 들 수 있습니다.</li>
@@ -431,22 +480,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/02/04/Python-DS-60-mpl_colors/" data-id="cmhueoy1000hm4gxtd2fg8w3a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/02/04/Python-DS-60-mpl_colors/" data-id="cuidwXcdcLFqE24E_KkAp3UVe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -522,7 +561,7 @@
         "genre": "Python Data Science",
         "datePublished": "2021-02-04",
         "dateCreated": "2021-02-04",
-        "dateModified": "2021-04-25",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/02/04/Python-DS-60-mpl_colors/",
         "description": "
 시각화에서 색상은 중요한 요소입니다.
@@ -533,7 +572,7 @@ matplotlib은 푸짐한 상을 차려놓고 우리를 기다리고 있습니다.
 화면상에서 색상은 대개 RGB 3채널로 구성됩니다.
 여기에 불투명도 Alpha가 붙어 RGBA 4채널이 되기도 합니다.
 같은 색상도 숫",
-        "wordCount": 2606
+        "wordCount": 2612
     }
 </script>
 
@@ -615,16 +654,6 @@ matplotlib은 푸짐한 상을 차려놓고 우리를 기다리고 있습니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -858,10 +887,6 @@ matplotlib은 푸짐한 상을 차려놓고 우리를 기다리고 있습니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

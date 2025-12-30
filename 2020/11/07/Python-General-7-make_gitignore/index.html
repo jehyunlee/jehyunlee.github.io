@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/7_mg_0.png">
 <meta property="article:published_time" content="2020-11-07T10:32:00.000Z">
-<meta property="article:modified_time" content="2020-11-26T07:41:49.072Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.693Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="automation">
 <meta property="article:tag" content="github">
 <meta property="article:tag" content="gitignore">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/7_mg_0.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2020/11/07/Python-General-7-make_gitignore/" class="article-date">
-     <time datetime="2020-11-26T07:41:49.072Z" itemprop="dateModified">2020-11-26</time>
+     <time datetime="2025-12-30T06:28:38.693Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -239,19 +239,18 @@
 <li>이를 방지하고자 .gitignore 파일을 자동으로 생성하는 간단한 프로그램을 만들었습니다.</li>
 </ul>
 <h2 id="1-gitignore-파일-구조"><a href="#1-gitignore-파일-구조" class="headerlink" title="1. .gitignore 파일 구조"></a>1. .gitignore 파일 구조</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">github/gitignore</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">github&#x2F;gitignore</a></p>
 </blockquote>
 <ul>
-<li><p>.gitignore는 아주 간단한 구조를 가지고 있습니다.</p>
-</li>
-<li><p>add하지 않을 파일의 목록을 상대경로로 적어주기만 하면 됩니다.</p>
-</li>
-<li><p>제 .gitignore 파일의 일부입니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_ml/X_train_full.pkl</span><br><span class="line">data_ml/X3_test_full.pkl</span><br><span class="line">data_ml/X3_train_full.pkl</span><br><span class="line">data_ml/X3_full_poolconv.pkl</span><br></pre></td></tr></table></figure></li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">더 좋은 구조를 갖춘 .gitignore 파일의 예시</a>를 모아둔 곳도 있습니다</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.vim.org/">vim</a> 같은 텍스트 편집기로 열어서 항목을 추가하면 됩니다.</p>
-</li>
+<li>.gitignore는 아주 간단한 구조를 가지고 있습니다.</li>
+<li>add하지 않을 파일의 목록을 상대경로로 적어주기만 하면 됩니다.</li>
+<li>제 .gitignore 파일의 일부입니다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_ml/X_train_full.pkl</span><br><span class="line">data_ml/X3_test_full.pkl</span><br><span class="line">data_ml/X3_train_full.pkl</span><br><span class="line">data_ml/X3_full_poolconv.pkl</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">더 좋은 구조를 갖춘 .gitignore 파일의 예시</a>를 모아둔 곳도 있습니다</li>
+<li><a target="_blank" rel="noopener" href="https://www.vim.org/">vim</a> 같은 텍스트 편집기로 열어서 항목을 추가하면 됩니다.</li>
 </ul>
 <h2 id="2-gitignore-파일-자동-생성-프로그램-제작"><a href="#2-gitignore-파일-자동-생성-프로그램-제작" class="headerlink" title="2. .gitignore 파일 자동 생성 프로그램 제작"></a>2. .gitignore 파일 자동 생성 프로그램 제작</h2><ul>
 <li>용량이 50 MB를 넘어서는 파일을 자동으로 모아 <b>자동으로 .gitignore를 만들어 봅시다.</b></li>
@@ -259,12 +258,15 @@
 </ul>
 <h3 id="2-1-파이썬-프로그램-제작"><a href="#2-1-파이썬-프로그램-제작" class="headerlink" title="2-1. 파이썬 프로그램 제작"></a>2-1. 파이썬 프로그램 제작</h3><ul>
 <li>다음과 같이 짧은 프로그램을 만듭니다.</li>
-<li><b>make_gitignore.py</b>라는 이름으로 저장했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">files_50m = <span class="string">&quot;50m.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. find files larger than 50M</span></span><br><span class="line">cmd_50m = <span class="string">f&quot;find -size +50000k &gt; <span class="subst">&#123;files_50m&#125;</span>&quot;</span></span><br><span class="line">os.system(cmd_50m)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. edit lines and save</span></span><br><span class="line">items = []</span><br><span class="line">line = <span class="string">&quot; &quot;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(files_50m, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> rf:</span><br><span class="line">    wf = <span class="built_in">open</span>(<span class="string">&quot;.gitignore&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(line):</span><br><span class="line">        line = rf.readline()</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;.git&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> line.split(<span class="string">&quot;/&quot;</span>):</span><br><span class="line">            add_item = line.lstrip(<span class="string">&quot;./&quot;</span>)</span><br><span class="line">            items.append(add_item)</span><br><span class="line">            wf.write(add_item)</span><br><span class="line">    wf.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. verification</span></span><br><span class="line">[<span class="built_in">print</span>(item.rstrip(<span class="string">&quot;\n&quot;</span>)) <span class="keyword">for</span> item <span class="keyword">in</span> items]</span><br></pre></td></tr></table></figure></li>
+<li><b>make_gitignore.py</b>라는 이름으로 저장했습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">files_50m = <span class="string">&quot;50m.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. find files larger than 50M</span></span><br><span class="line">cmd_50m = <span class="string">f&quot;find -size +50000k &gt; <span class="subst">&#123;files_50m&#125;</span>&quot;</span></span><br><span class="line">os.system(cmd_50m)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. edit lines and save</span></span><br><span class="line">items = []</span><br><span class="line">line = <span class="string">&quot; &quot;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(files_50m, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> rf:</span><br><span class="line">    wf = <span class="built_in">open</span>(<span class="string">&quot;.gitignore&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(line):</span><br><span class="line">        line = rf.readline()</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;.git&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> line.split(<span class="string">&quot;/&quot;</span>):</span><br><span class="line">            add_item = line.lstrip(<span class="string">&quot;./&quot;</span>)</span><br><span class="line">            items.append(add_item)</span><br><span class="line">            wf.write(add_item)</span><br><span class="line">    wf.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. verification</span></span><br><span class="line">[<span class="built_in">print</span>(item.rstrip(<span class="string">&quot;\n&quot;</span>)) <span class="keyword">for</span> item <span class="keyword">in</span> items]</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>코드는 이런 작업을 합니다.<ol>
 <li>50MB를 넘는 <b>파일 명단</b> 작성 (50m.txt)</li>
-<li>파일을 열어서 한 줄 한 줄 보면서<br>2-1. <b>.git</b>이 포함된 파일은 무시하고<br>2-2. 상대경로 처음 부분 <b>./ 삭제</b><br>2-3. 바뀐 내용을 <b>.gitignore 파일에 저장</b></li>
+<li>파일을 열어서 한 줄 한 줄 보면서<br>  2-1. <b>.git</b>이 포함된 파일은 무시하고<br>  2-2. 상대경로 처음 부분 <b>.&#x2F; 삭제</b><br>  2-3. 바뀐 내용을 <b>.gitignore 파일에 저장</b></li>
 <li><b>목록을 출력</b>합니다.</li>
 </ol>
 </li>
@@ -272,8 +274,11 @@
 <h3 id="2-2-alias-설정"><a href="#2-2-alias-설정" class="headerlink" title="2-2. alias 설정"></a>2-2. alias 설정</h3><ul>
 <li>파이썬 프로그램을 만들었지만 이걸 실행하려고 <code>python make_gitignore.py</code>를 입력하기 번거롭습니다.</li>
 <li>그냥 <code>mg</code>만 입력하면 되게 하고 싶네요.</li>
-<li><b>.bashrc</b> 파일을 열고 한 줄 적어줍니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> mg=<span class="string">&#x27;python /workplace/utils/make_gitignore/make_gitignore.py&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><b>.bashrc</b> 파일을 열고 한 줄 적어줍니다.</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> mg=<span class="string">&#x27;python /workplace/utils/make_gitignore/make_gitignore.py&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>위 줄에서 <code>/workplace/utils/make_gitignore/</code>는 제가 파일을 저장한 경로입니다.</li>
 <li>각자 자기 설정에 맞게 변경하시면 됩니다.</li>
@@ -282,23 +287,24 @@
 <li><code>source ~/.bashrc</code>를 해서 바뀐 설정을 적용합니다.</li>
 </ul>
 <h2 id="3-실행"><a href="#3-실행" class="headerlink" title="3. 실행"></a>3. 실행</h2><ul>
-<li>이제 작업공간으로 가서 커밋하기 전에 명령어를 한 줄 실행합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mg</span><br></pre></td></tr></table></figure>
-<img src="7_mg_1.png"><br></li>
+<li>이제 작업공간으로 가서 커밋하기 전에 명령어를 한 줄 실행합니다.</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mg</span><br></pre></td></tr></table></figure>
+<p><img src="/7_mg_1.png"><br></p>
 <ul>
-<li>git <b>add</b>, <b>commit</b>에 이어 <b>push</b>도 해봅니다.<br><br><img src="7_mg_2.png"></li>
-</ul>
-<ul>
-<li>잘 됩니다.</li>
+<li><p>git <b>add</b>, <b>commit</b>에 이어 <b>push</b>도 해봅니다.<br><br><img src="/7_mg_2.png"></p>
+</li>
+<li><p>잘 됩니다.</p>
+</li>
 </ul>
 <p>
 <div style="text-align:center; margin:20px 0px 20px 0px">
   <a href="https://donaricano.com/mypage/1543013959_CGtZmr" target="_blank">
-    <img
-     src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
-     alt="도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
-     style="height:70px !important;width: 200px !important;"
-     />
+	<img
+	 src="https://d1u4yishnma8v5.cloudfront.net/donarincano_gift.png"
+	 alt="도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다"
+	 style="height:70px !important;width: 200px !important;"
+	 />
  </a>
 </div>
         </div>
@@ -312,22 +318,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/07/Python-General-7-make_gitignore/" data-id="cmhueoyjc01wf4gxtcm727u2y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/07/Python-General-7-make_gitignore/" data-id="cuidnXWNsJ-IxILVJmGSovxhw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -403,7 +399,7 @@
         "genre": "Python General",
         "datePublished": "2020-11-07",
         "dateCreated": "2020-11-07",
-        "dateModified": "2020-11-26",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/11/07/Python-General-7-make_gitignore/",
         "description": "
 GitHub Docs: Ignoring files
@@ -413,7 +409,7 @@ GitHub Docs: Ignoring files
 보안상 민감한 파일일 수도 있고 github 용량제한을 넘어서는 대용량 파일일 수도 있습니다.
 한참 일을 하다보니 발생한 대용량 파일을 잊고 커밋했다가 문제가 되었습니다.
 이를 방지하고자 .gitignore 파일을 자동",
-        "wordCount": 507
+        "wordCount": 493
     }
 </script>
 
@@ -495,16 +491,6 @@ GitHub Docs: Ignoring files
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -738,10 +724,6 @@ GitHub Docs: Ignoring files
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

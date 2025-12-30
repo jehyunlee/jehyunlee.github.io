@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/9_fullmoon_0.png">
 <meta property="article:published_time" content="2021-09-25T23:52:00.000Z">
-<meta property="article:modified_time" content="2021-09-29T22:14:34.584Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.710Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="matplotlib">
 <meta property="article:tag" content="art">
+<meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-General/9_fullmoon_0.png">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/09/26/Python-General-9-fullmoon/" class="article-date">
-     <time datetime="2021-09-29T22:14:34.584Z" itemprop="dateModified">2021-09-30</time>
+     <time datetime="2025-12-30T06:28:38.710Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -234,7 +234,7 @@
 <li>자다가 문득 코드가 떠올라 보름달을 그렸습니다.</li>
 </ul>
 <h1 id="1-보름달은"><a href="#1-보름달은" class="headerlink" title="1. 보름달은?"></a>1. 보름달은?</h1><ul>
-<li><p><b>보름달</b>이 어떻게 생겼는지 모르는 사람은 없을 겁니다.<br><br><img src="9_fullmoon_01.jpg"><br></p>
+<li><p><b>보름달</b>이 어떻게 생겼는지 모르는 사람은 없을 겁니다.<br><br><img src="/9_fullmoon_01.jpg"><br></p>
 </li>
 <li><p><b>검은 밤 하늘에 떠 있는 하얀 동그라미</b>로 단순화할 수 있습니다.</p>
 </li>
@@ -250,7 +250,7 @@
 <li>무미건조한 코드나 데이터로 아름다움을 만들어내는 분들이 있으십니다.</li>
 <li>데이터 시각화의 심미적 요소를 한껏 활용하는 것으로 볼 수도 있고</li>
 <li>그림을 그리는 도구가 바뀌었을 뿐 데이터와 무관한 아름다움을 추구하기도 합니다.</li>
-<li>이런 분들을 따라해 보기로 합니다<br><br><img src="9_fullmoon_08.png" alt="(좌) 이주행, &quot;Pixel Stack&quot;, (우) Mark Napier &quot;Black and White&quot;"><br></li>
+<li>이런 분들을 따라해 보기로 합니다<br><br><img src="/9_fullmoon_08.png" alt="(좌) 이주행, &quot;Pixel Stack&quot;, (우) Mark Napier &quot;Black and White&quot;"><br></li>
 </ul>
 <h2 id="2-2-약간의-기하학"><a href="#2-2-약간의-기하학" class="headerlink" title="2.2. 약간의 기하학"></a>2.2. 약간의 기하학</h2><ul>
 <li><p>중심을 (0,0)으로 하는 극좌표계 공간을 만듭니다.</p>
@@ -264,61 +264,58 @@
 <li><p>원의 반지름을 <code>1-원점으로부터의 거리</code>로 설정하면 원의 윤곽선에 항상 맞닿습니다.</p>
 </li>
 <li><p>10개만 그려봅시다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Circle</span><br><span class="line"></span><br><span class="line">num = <span class="number">10</span>    <span class="comment"># 원의 수</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 극좌표계에서 원 생성</span></span><br><span class="line">R = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)                   <span class="comment"># 반지름의 범위: 0~1</span></span><br><span class="line">pos_r = np.random.choice(R, size=num)        <span class="comment"># 랜덤 위치 (반지름)</span></span><br><span class="line">pos_a = <span class="number">2</span>*np.pi*np.random.uniform(size=num)  <span class="comment"># 랜덤 위치 (방위각)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 직교좌표계 변환</span></span><br><span class="line">pos_x = pos_r * np.cos(pos_a)         <span class="comment"># 직교좌표계 x</span></span><br><span class="line">pos_y = pos_r * np.sin(pos_a)         <span class="comment"># 직교좌표계 y</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x, y, r <span class="keyword">in</span> <span class="built_in">zip</span>(pos_x, pos_y, pos_r):</span><br><span class="line">    r_circle = <span class="number">1</span>-r  <span class="comment"># 원의 반지름</span></span><br><span class="line">    o = Circle((x, y), r_circle, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">    ax.add_patch(o)</span><br><span class="line">    </span><br><span class="line">ax.set_xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.axvline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">ax.axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="9_fullmoon_02.png"><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Circle</span><br><span class="line"></span><br><span class="line">num = <span class="number">10</span>    <span class="comment"># 원의 수</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 극좌표계에서 원 생성</span></span><br><span class="line">R = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)                   <span class="comment"># 반지름의 범위: 0~1</span></span><br><span class="line">pos_r = np.random.choice(R, size=num)        <span class="comment"># 랜덤 위치 (반지름)</span></span><br><span class="line">pos_a = <span class="number">2</span>*np.pi*np.random.uniform(size=num)  <span class="comment"># 랜덤 위치 (방위각)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 직교좌표계 변환</span></span><br><span class="line">pos_x = pos_r * np.cos(pos_a)         <span class="comment"># 직교좌표계 x</span></span><br><span class="line">pos_y = pos_r * np.sin(pos_a)         <span class="comment"># 직교좌표계 y</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x, y, r <span class="keyword">in</span> <span class="built_in">zip</span>(pos_x, pos_y, pos_r):</span><br><span class="line">    r_circle = <span class="number">1</span>-r  <span class="comment"># 원의 반지름</span></span><br><span class="line">    o = Circle((x, y), r_circle, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">    ax.add_patch(o)</span><br><span class="line">    </span><br><span class="line">ax.set_xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.axvline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">ax.axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/9_fullmoon_02.png"><br></p>
 <h2 id="2-3-확률-제어"><a href="#2-3-확률-제어" class="headerlink" title="2.3. 확률 제어"></a>2.3. 확률 제어</h2><ul>
-<li><p>100개를 그리면 이렇습니다.<br><img src="9_fullmoon_03.png"><br></p>
+<li><p>100개를 그리면 이렇습니다.<br><img src="/9_fullmoon_03.png"><br></p>
 </li>
 <li><p>뭔가 특이한 점을 느끼셨을까요?</p>
 </li>
-</ul>
-<ul>
 <li><p>원의 중심점 분포를 그리면 이렇습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 점들 사이 최단거리 계산</span></span><br><span class="line">pos_xy = np.array(<span class="built_in">list</span>(<span class="built_in">zip</span>(pos_x, pos_y)))</span><br><span class="line">d_shortests = []</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> pos_xy:</span><br><span class="line">    dp = pos_xy-p</span><br><span class="line">    d_shortest = np.inf</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> dp:</span><br><span class="line">        sd = np.sqrt(d[<span class="number">0</span>]**<span class="number">2</span> + d[<span class="number">1</span>]**<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt; sd &lt; d_shortest:</span><br><span class="line">            d_shortest = sd</span><br><span class="line">    d_shortests.append(d_shortest)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 시각화</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(pos_x, pos_y)</span><br><span class="line">axs[<span class="number">0</span>].axvline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">axs[<span class="number">0</span>].axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">sns.kdeplot(d_shortests, cut=<span class="number">0</span>, ax=axs[<span class="number">1</span>], fill=<span class="literal">True</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, <span class="built_in">max</span>(d_shortests))</span><br></pre></td></tr></table></figure>
-<p><img src="9_fullmoon_04.png"><br></p>
 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 점들 사이 최단거리 계산</span></span><br><span class="line">pos_xy = np.array(<span class="built_in">list</span>(<span class="built_in">zip</span>(pos_x, pos_y)))</span><br><span class="line">d_shortests = []</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> pos_xy:</span><br><span class="line">    dp = pos_xy-p</span><br><span class="line">    d_shortest = np.inf</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> dp:</span><br><span class="line">        sd = np.sqrt(d[<span class="number">0</span>]**<span class="number">2</span> + d[<span class="number">1</span>]**<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt; sd &lt; d_shortest:</span><br><span class="line">            d_shortest = sd</span><br><span class="line">    d_shortests.append(d_shortest)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 시각화</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].scatter(pos_x, pos_y)</span><br><span class="line">axs[<span class="number">0</span>].axvline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">axs[<span class="number">0</span>].axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">sns.kdeplot(d_shortests, cut=<span class="number">0</span>, ax=axs[<span class="number">1</span>], fill=<span class="literal">True</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, <span class="built_in">max</span>(d_shortests))</span><br></pre></td></tr></table></figure>
+<p><img src="/9_fullmoon_04.png"><br></p>
+<ul>
 <li><p>원점 부근을 중심으로 하는 점들이 월등히 많습니다.</p>
 </li>
 <li><p>앞서 그림을 그릴 때 원의 반지름을 <code>1-원점으로부터의 거리</code>로 설정했지요.</p>
 </li>
 <li><p><b>큰 원과 작은 원의 수는 비슷하더라도 작은 원은 여기저기 퍼져있고 큰 원은 뭉쳐있다</b>는 의미입니다.</p>
 </li>
-</ul>
-<ul>
-<li>나쁘다는 것은 아닙니다.</li>
-<li>전체 원의 가운데보다 바깥 부분에 많은 선이 그려진다는 뜻이고,</li>
-<li>원의 갯수를 키우는 것 만으로도 뭔가 3D 느낌이 납니다.</li>
-<li>500개를 그리면 이렇게 됩니다.<br><img src="9_fullmoon_05.png"><br></li>
-</ul>
-<ul>
+<li><p>나쁘다는 것은 아닙니다.</p>
+</li>
+<li><p>전체 원의 가운데보다 바깥 부분에 많은 선이 그려진다는 뜻이고,</p>
+</li>
+<li><p>원의 갯수를 키우는 것 만으로도 뭔가 3D 느낌이 납니다.</p>
+</li>
+<li><p>500개를 그리면 이렇게 됩니다.<br><img src="/9_fullmoon_05.png"><br></p>
+</li>
 <li><p>다만, <b>약간의 확률 조작을 통해 연출이 가능하다</b>는 의미입니다.</p>
 </li>
-<li><p>예를 들어 이런 확률분포를 사용하면,<br><img src="9_fullmoon_06.png"><br></p>
+<li><p>예를 들어 이런 확률분포를 사용하면,<br><img src="/9_fullmoon_06.png"><br></p>
 </li>
 <li><p>그림은 이렇게 바뀝니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 극좌표계에서 원 생성</span></span><br><span class="line">R = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)                   <span class="comment"># 반지름의 범위: 0~1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># np.random.choice에 매개변수 p 적용, 확률 제어</span></span><br><span class="line">f = np.float_power(np.sin(R), <span class="number">10</span>)</span><br><span class="line">p = (f/<span class="built_in">max</span>(f))/<span class="built_in">sum</span>(f/<span class="built_in">max</span>(f))</span><br><span class="line">pos_r = np.random.choice(R, size=num, p=p)   <span class="comment"># 랜덤 위치 (반지름)</span></span><br><span class="line">pos_a = <span class="number">2</span>*np.pi*np.random.uniform(size=num)  <span class="comment"># 랜덤 위치 (방위각)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 직교좌표계 변환</span></span><br><span class="line">pos_x = pos_r * np.cos(pos_a)         <span class="comment"># 직교좌표계 x</span></span><br><span class="line">pos_y = pos_r * np.sin(pos_a)         <span class="comment"># 직교좌표계 y</span></span><br><span class="line"></span><br><span class="line">r_circles = []</span><br><span class="line"><span class="keyword">for</span> x, y, r <span class="keyword">in</span> <span class="built_in">zip</span>(pos_x, pos_y, pos_r):</span><br><span class="line">    r_circle = <span class="number">1</span>-r  <span class="comment"># 원의 반지름</span></span><br><span class="line">    r_circles.append(r_circle)</span><br><span class="line">    o = Circle((x, y), r_circle, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>, lw=<span class="number">0.1</span>)</span><br><span class="line">    ax.add_patch(o)</span><br><span class="line">    </span><br><span class="line">ax.set_xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.axvline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">ax.axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="9_fullmoon_07.png"><br></p>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 극좌표계에서 원 생성</span></span><br><span class="line">R = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)                   <span class="comment"># 반지름의 범위: 0~1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># np.random.choice에 매개변수 p 적용, 확률 제어</span></span><br><span class="line">f = np.float_power(np.sin(R), <span class="number">10</span>)</span><br><span class="line">p = (f/<span class="built_in">max</span>(f))/<span class="built_in">sum</span>(f/<span class="built_in">max</span>(f))</span><br><span class="line">pos_r = np.random.choice(R, size=num, p=p)   <span class="comment"># 랜덤 위치 (반지름)</span></span><br><span class="line">pos_a = <span class="number">2</span>*np.pi*np.random.uniform(size=num)  <span class="comment"># 랜덤 위치 (방위각)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 직교좌표계 변환</span></span><br><span class="line">pos_x = pos_r * np.cos(pos_a)         <span class="comment"># 직교좌표계 x</span></span><br><span class="line">pos_y = pos_r * np.sin(pos_a)         <span class="comment"># 직교좌표계 y</span></span><br><span class="line"></span><br><span class="line">r_circles = []</span><br><span class="line"><span class="keyword">for</span> x, y, r <span class="keyword">in</span> <span class="built_in">zip</span>(pos_x, pos_y, pos_r):</span><br><span class="line">    r_circle = <span class="number">1</span>-r  <span class="comment"># 원의 반지름</span></span><br><span class="line">    r_circles.append(r_circle)</span><br><span class="line">    o = Circle((x, y), r_circle, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>, lw=<span class="number">0.1</span>)</span><br><span class="line">    ax.add_patch(o)</span><br><span class="line">    </span><br><span class="line">ax.set_xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax.axvline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">ax.axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/9_fullmoon_07.png"><br></p>
 <h2 id="2-4-달-띄우기"><a href="#2-4-달-띄우기" class="headerlink" title="2.4. 달 띄우기"></a>2.4. 달 띄우기</h2><ul>
-<li><p>달을 그리는 함수를 만들어봅니다.</p>
-</li>
-<li><p>앞에서 만든 함수에 딱 하나, <code>faceccolor</code>와 ‘edgecolor`를 제어하는 매개변수를 추가했습니다.</p>
-</li>
-<li><p>facecolor에 numpy array를 넣으면 랜덤하게 색을 입히는 기능을 추가했고요.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_fullmoon</span>(<span class="params">size, scale=<span class="number">5</span>, fc=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;none&quot;</span>, filename=<span class="string">&quot;fullmoon&quot;</span>, **kwargs</span>):</span></span><br><span class="line">    scale = np.<span class="built_in">float</span>(scale)</span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">20</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">    ax.set_facecolor(<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    ax.spines[[<span class="string">&quot;top&quot;</span>, <span class="string">&quot;left&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># random circle</span></span><br><span class="line">    R = np.linspace(<span class="number">0</span>, <span class="number">1</span>, size)</span><br><span class="line">    F = np.float_power(np.sin(R), <span class="number">10</span>)</span><br><span class="line">    P = (<span class="number">1</span>-F/<span class="built_in">max</span>(F))/<span class="built_in">sum</span>(<span class="number">1</span>-F/<span class="built_in">max</span>(F))</span><br><span class="line"></span><br><span class="line">    pos_r = np.random.choice(R, size=size, p=P)</span><br><span class="line">    pos_a = <span class="number">2</span>*np.pi*np.random.uniform(size=size)</span><br><span class="line">    pos_x = pos_r * np.cos(pos_a)</span><br><span class="line">    pos_y = pos_r * np.sin(pos_a)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x, y, r <span class="keyword">in</span> <span class="built_in">zip</span>(pos_x, pos_y, pos_r):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(fc, np.ndarray):</span><br><span class="line">            fc = np.array([<span class="number">0.8</span>, <span class="number">0.8</span>, <span class="number">0.8</span>]) + np.array([np.random.normal(loc=<span class="number">0.1</span>, scale=<span class="number">0.05</span>), np.random.normal(loc=<span class="number">0.1</span>, scale=<span class="number">0.05</span>), np.random.normal(loc=<span class="number">0.1</span>, scale=<span class="number">0.05</span>)])</span><br><span class="line">            fc[<span class="number">0</span>] = <span class="built_in">min</span>(fc[<span class="number">0</span>], <span class="number">1</span>)</span><br><span class="line">            fc[<span class="number">1</span>] = <span class="built_in">min</span>(fc[<span class="number">1</span>], <span class="number">1</span>)</span><br><span class="line">            fc[<span class="number">2</span>] = <span class="built_in">min</span>(fc[<span class="number">2</span>], <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">        o = Circle((x, y), <span class="number">1</span>-r, fc=fc, ec=ec, alpha=scale/size, **kwargs)</span><br><span class="line">            </span><br><span class="line">        ax.add_patch(o)</span><br><span class="line"></span><br><span class="line">    ax.set_xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    fig.set_facecolor(<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    fig.savefig(<span class="string">f&quot;<span class="subst">&#123;filename&#125;</span>.png&quot;</span>, dpi=<span class="number">300</span>)</span><br><span class="line">    </span><br><span class="line">plot_fullmoon(<span class="number">10</span>, fc=np.array([<span class="number">0.6</span>, <span class="number">0.6</span>, <span class="number">0.6</span>]), filename=<span class="string">&quot;fmc_10&quot;</span>, ec=<span class="string">&quot;w&quot;</span>, lw=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="fmc_10.png"><br></p>
-</li>
+<li>달을 그리는 함수를 만들어봅니다.</li>
+<li>앞에서 만든 함수에 딱 하나, <code>faceccolor</code>와 ‘edgecolor&#96;를 제어하는 매개변수를 추가했습니다.</li>
+<li>facecolor에 numpy array를 넣으면 랜덤하게 색을 입히는 기능을 추가했고요.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_fullmoon</span>(<span class="params">size, scale=<span class="number">5</span>, fc=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;none&quot;</span>, filename=<span class="string">&quot;fullmoon&quot;</span>, **kwargs</span>):</span><br><span class="line">    scale = np.<span class="built_in">float</span>(scale)</span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">20</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">    ax.set_facecolor(<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    ax.spines[[<span class="string">&quot;top&quot;</span>, <span class="string">&quot;left&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># random circle</span></span><br><span class="line">    R = np.linspace(<span class="number">0</span>, <span class="number">1</span>, size)</span><br><span class="line">    F = np.float_power(np.sin(R), <span class="number">10</span>)</span><br><span class="line">    P = (<span class="number">1</span>-F/<span class="built_in">max</span>(F))/<span class="built_in">sum</span>(<span class="number">1</span>-F/<span class="built_in">max</span>(F))</span><br><span class="line"></span><br><span class="line">    pos_r = np.random.choice(R, size=size, p=P)</span><br><span class="line">    pos_a = <span class="number">2</span>*np.pi*np.random.uniform(size=size)</span><br><span class="line">    pos_x = pos_r * np.cos(pos_a)</span><br><span class="line">    pos_y = pos_r * np.sin(pos_a)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x, y, r <span class="keyword">in</span> <span class="built_in">zip</span>(pos_x, pos_y, pos_r):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(fc, np.ndarray):</span><br><span class="line">            fc = np.array([<span class="number">0.8</span>, <span class="number">0.8</span>, <span class="number">0.8</span>]) + np.array([np.random.normal(loc=<span class="number">0.1</span>, scale=<span class="number">0.05</span>), np.random.normal(loc=<span class="number">0.1</span>, scale=<span class="number">0.05</span>), np.random.normal(loc=<span class="number">0.1</span>, scale=<span class="number">0.05</span>)])</span><br><span class="line">            fc[<span class="number">0</span>] = <span class="built_in">min</span>(fc[<span class="number">0</span>], <span class="number">1</span>)</span><br><span class="line">            fc[<span class="number">1</span>] = <span class="built_in">min</span>(fc[<span class="number">1</span>], <span class="number">1</span>)</span><br><span class="line">            fc[<span class="number">2</span>] = <span class="built_in">min</span>(fc[<span class="number">2</span>], <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">        o = Circle((x, y), <span class="number">1</span>-r, fc=fc, ec=ec, alpha=scale/size, **kwargs)</span><br><span class="line">            </span><br><span class="line">        ax.add_patch(o)</span><br><span class="line"></span><br><span class="line">    ax.set_xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    fig.set_facecolor(<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    fig.savefig(<span class="string">f&quot;<span class="subst">&#123;filename&#125;</span>.png&quot;</span>, dpi=<span class="number">300</span>)</span><br><span class="line">    </span><br><span class="line">plot_fullmoon(<span class="number">10</span>, fc=np.array([<span class="number">0.6</span>, <span class="number">0.6</span>, <span class="number">0.6</span>]), filename=<span class="string">&quot;fmc_10&quot;</span>, ec=<span class="string">&quot;w&quot;</span>, lw=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/fmc_10.png"><br></p>
+<ul>
 <li><p>원 10개로 그리면 이런 달이 떠오릅니다.</p>
 </li>
-</ul>
-<ul>
-<li>원 20개, 50개, 100개로도 그려볼 수 있겠죠.<br><br><img src="fmc_10-100.png"><br></li>
-</ul>
-<ul>
-<li>꼭 추석이 아니더라도 모두들 둥근 달처럼 행복하시기 바랍니다.<br><br><img src="fmc_200.png"><br></li>
+<li><p>원 20개, 50개, 100개로도 그려볼 수 있겠죠.<br><br><img src="/fmc_10-100.png"><br></p>
+</li>
+<li><p>꼭 추석이 아니더라도 모두들 둥근 달처럼 행복하시기 바랍니다.<br><br><img src="/fmc_200.png"><br></p>
+</li>
 </ul>
 
         </div>
@@ -332,22 +329,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/09/26/Python-General-9-fullmoon/" data-id="cmhueoyj101w74gxt5tmsfrk4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/09/26/Python-General-9-fullmoon/" data-id="cuidYscEZ5P7AtZqPUYrLePF4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -423,7 +410,7 @@
         "genre": "Python General",
         "datePublished": "2021-09-26",
         "dateCreated": "2021-09-26",
-        "dateModified": "2021-09-30",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/09/26/Python-General-9-fullmoon/",
         "description": "
 지난 추석, 간만에 긴장을 풀었습니다.
@@ -518,16 +505,6 @@
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -761,10 +738,6 @@
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

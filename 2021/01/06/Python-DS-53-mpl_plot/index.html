@@ -12,19 +12,19 @@
     
     <meta name="keywords" content="python,matplotlib,visualization" />
     
-    <meta name="description" content="matplotlib의 가장 기본적인 시각화 명령은 plot()입니다. 데이터를 line plot으로 표현하는 명령인데 marker만 남기면 scatter plot도 가능합니다. 여러 옵션들을 한 눈에 그려봅니다.  1. Sample Data 수능 데이터에서 일부를 가져옵니다.12x &#x3D; np.array([2009, 2010, 2011, 2012, 2013]">
+    <meta name="description" content="matplotlib의 가장 기본적인 시각화 명령은 plot()입니다. 데이터를 line plot으로 표현하는 명령인데 marker만 남기면 scatter plot도 가능합니다. 여러 옵션들을 한 눈에 그려봅니다.  1. Sample Data 수능 데이터에서 일부를 가져옵니다.  12x &#x3D; np.array([2009, 2010, 2011, 2012, 201">
 <meta property="og:type" content="article">
 <meta property="og:title" content="matplotlib plot()">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/01/06/Python-DS-53-mpl_plot/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="matplotlib의 가장 기본적인 시각화 명령은 plot()입니다. 데이터를 line plot으로 표현하는 명령인데 marker만 남기면 scatter plot도 가능합니다. 여러 옵션들을 한 눈에 그려봅니다.  1. Sample Data 수능 데이터에서 일부를 가져옵니다.12x &#x3D; np.array([2009, 2010, 2011, 2012, 2013]">
+<meta property="og:description" content="matplotlib의 가장 기본적인 시각화 명령은 plot()입니다. 데이터를 line plot으로 표현하는 명령인데 marker만 남기면 scatter plot도 가능합니다. 여러 옵션들을 한 눈에 그려봅니다.  1. Sample Data 수능 데이터에서 일부를 가져옵니다.  12x &#x3D; np.array([2009, 2010, 2011, 2012, 201">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/53_mpl_plot_0.png">
 <meta property="article:published_time" content="2021-01-05T21:49:00.000Z">
-<meta property="article:modified_time" content="2021-01-05T23:58:31.053Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.297Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="matplotlib">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/53_mpl_plot_0.png">
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/01/06/Python-DS-53-mpl_plot/" class="article-date">
-     <time datetime="2021-01-05T23:58:31.053Z" itemprop="dateModified">2021-01-06</time>
+     <time datetime="2025-12-30T06:28:38.297Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -234,21 +234,26 @@
 <li>여러 옵션들을 한 눈에 그려봅니다.</li>
 </ul>
 <h2 id="1-Sample-Data"><a href="#1-Sample-Data" class="headerlink" title="1. Sample Data"></a>1. Sample Data</h2><ul>
-<li><a href="https://jehyunlee.github.io/2020/12/17/Python-DS-48-suneung/">수능 데이터</a>에서 일부를 가져옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">2009</span>, <span class="number">2010</span>, <span class="number">2011</span>, <span class="number">2012</span>, <span class="number">2013</span>])</span><br><span class="line">y = np.array([<span class="number">588839</span>, <span class="number">677834</span>, <span class="number">712227</span>, <span class="number">693631</span>, <span class="number">668522</span>])</span><br></pre></td></tr></table></figure></li>
+<li><a href="https://jehyunlee.github.io/2020/12/17/Python-DS-48-suneung/">수능 데이터</a>에서 일부를 가져옵니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">2009</span>, <span class="number">2010</span>, <span class="number">2011</span>, <span class="number">2012</span>, <span class="number">2013</span>])</span><br><span class="line">y = np.array([<span class="number">588839</span>, <span class="number">677834</span>, <span class="number">712227</span>, <span class="number">693631</span>, <span class="number">668522</span>])</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="2-plot"><a href="#2-plot" class="headerlink" title="2. plot()"></a>2. <code>plot()</code></h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.plot.html">matplotlib.pyplot.plot</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.axes.Axes.plot.html?highlight=axes%20plot#matplotlib.axes.Axes.plot">matplotlib.axes.Axes.plot</a></p>
 </blockquote>
 <h3 id="2-1-기본-그림"><a href="#2-1-기본-그림" class="headerlink" title="2.1. 기본 그림"></a>2.1. 기본 그림</h3><ul>
-<li>기본 명령만 사용해서 그려봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">2</span>))</span><br><span class="line">ax.plot(x, y)</span><br></pre></td></tr></table></figure>
-<img src="53_mpl_plot_1.png"><br></li>
+<li>기본 명령만 사용해서 그려봅니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">2</span>))</span><br><span class="line">ax.plot(x, y)</span><br></pre></td></tr></table></figure>
+<p><img src="/53_mpl_plot_1.png"><br></p>
 <ul>
-<li>line plot이 그려집니다.</li>
-<li>그런데 plot()에는 엄청나게 많은 옵션이 있습니다.<br><br><img src="53_mpl_plot_3.png" alt="plot parameters (일부)"><br></li>
-</ul>
-<ul>
-<li>이 중 알아두면 유용한 것들을 살펴봅시다.</li>
+<li><p>line plot이 그려집니다.</p>
+</li>
+<li><p>그런데 plot()에는 엄청나게 많은 옵션이 있습니다.<br><br><img src="/53_mpl_plot_3.png" alt="plot parameters (일부)"><br></p>
+</li>
+<li><p>이 중 알아두면 유용한 것들을 살펴봅시다.</p>
+</li>
 </ul>
 <h3 id="2-2-Join-styles-Cap-styles"><a href="#2-2-Join-styles-Cap-styles" class="headerlink" title="2.2. Join styles, Cap styles"></a>2.2. Join styles, Cap styles</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/joinstyle.html">matplotlib: Join styles and cap styles</a></p>
@@ -256,7 +261,7 @@
 <ul>
 <li><p><b>join style</b>은 line plot의 꺾이는 지점 표현 방식</p>
 </li>
-<li><p><b>cap style</b>은 line plot의 양 끝지점 표현 방식입니다.<br><br><img src="53_mpl_plot_4.png"><br><img src="53_mpl_plot_5.png"><br></p>
+<li><p><b>cap style</b>은 line plot의 양 끝지점 표현 방식입니다.<br><br><img src="/53_mpl_plot_4.png"><br><img src="/53_mpl_plot_5.png"><br></p>
 </li>
 <li><p><code>solid_capstyle</code>과 <code>solid_joinstyle</code>은 실선,</p>
 </li>
@@ -267,43 +272,56 @@
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D.set_markerfacecoloralt">matplotlib.lines.Line2D</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/colors_api.html?highlight=color#module-matplotlib.colors">matplotlib.colors</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/linestyles.html">matplotlib Linestyles</a></p>
 </blockquote>
 <ul>
-<li>Line은 <b>두께<code>linewidth</code></b>, <b>색상<code>color</code></b>, <b>스타일<code>linestyle</code></b>을 조정할 수 있습니다.</li>
-<li>각기 <code>.plot()</code>안에 <code>linewidth=</code>, <code>color=</code>, <code>linestyle=</code>로 지정하면 되는데,</li>
-<li><code>linewidth</code>는 <code>lw</code>, <code>color</code>는 <code>c</code>, <code>linestyle</code>은 <code>ls</code>로 줄여서 넣을 수 있습니다.</li>
-</ul>
+<li><p>Line은 <b>두께<code>linewidth</code></b>, <b>색상<code>color</code></b>, <b>스타일<code>linestyle</code></b>을 조정할 수 있습니다.</p>
+</li>
+<li><p>각기 <code>.plot()</code>안에 <code>linewidth=</code>, <code>color=</code>, <code>linestyle=</code>로 지정하면 되는데,</p>
+</li>
+<li><p><code>linewidth</code>는 <code>lw</code>, <code>color</code>는 <code>c</code>, <code>linestyle</code>은 <code>ls</code>로 줄여서 넣을 수 있습니다.</p>
+</li>
+<li><p><b>※ 주의 ※ <code>linecolor</code>가 아니라 <code>color</code>입니다.</b></p>
 <ul>
-<li><b>※ 주의 ※ <code>linecolor</code>가 아니라 <code>color</code>입니다.</b><ul>
 <li>matplotlib의 인자 이름에 통일성이 부족합니다.</li>
 <li>그 바람에 많이 헷갈리는데, <code>color</code>가 대표적인 사례입니다.</li>
 </ul>
 </li>
-<li>위 세 가지 옵션을 조합해서 그림을 그려봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">linewidths = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&quot;chartreuse&quot;</span>, <span class="string">&quot;coral&quot;</span>, <span class="string">&quot;violet&quot;</span>, <span class="string">&#x27;#d62728&#x27;</span>, <span class="string">&#x27;#9467bd&#x27;</span>, <span class="string">&#x27;#8c564b&#x27;</span>, <span class="string">&quot;0.2&quot;</span>, <span class="string">&quot;0.5&quot;</span>, <span class="string">&quot;0.7&quot;</span>]</span><br><span class="line">linestyles = [<span class="string">&quot;-&quot;</span>, <span class="string">&quot;:&quot;</span>, <span class="string">&quot;--&quot;</span>, <span class="string">&quot;-.&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">2</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, lw) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs, linewidths)):</span><br><span class="line">    <span class="keyword">for</span> j, (y_offset, c, ls) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">0</span>, -<span class="number">80000</span>, -<span class="number">20000</span>), colors, linestyles)):</span><br><span class="line">        ax.plot(x, y+y_offset, lw=lw, c=colors[<span class="number">4</span>*i+j], ls=ls)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(<span class="number">2009.5</span>, <span class="number">2012.5</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_ylim(<span class="number">600000</span>, <span class="number">720000</span>)</span><br></pre></td></tr></table></figure>
-<img src="53_mpl_plot_6.png"><br></li>
+<li><p>위 세 가지 옵션을 조합해서 그림을 그려봅니다.</p>
+</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">linewidths = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&quot;chartreuse&quot;</span>, <span class="string">&quot;coral&quot;</span>, <span class="string">&quot;violet&quot;</span>, <span class="string">&#x27;#d62728&#x27;</span>, <span class="string">&#x27;#9467bd&#x27;</span>, <span class="string">&#x27;#8c564b&#x27;</span>, <span class="string">&quot;0.2&quot;</span>, <span class="string">&quot;0.5&quot;</span>, <span class="string">&quot;0.7&quot;</span>]</span><br><span class="line">linestyles = [<span class="string">&quot;-&quot;</span>, <span class="string">&quot;:&quot;</span>, <span class="string">&quot;--&quot;</span>, <span class="string">&quot;-.&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">2</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (ax, lw) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs, linewidths)):</span><br><span class="line">    <span class="keyword">for</span> j, (y_offset, c, ls) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">0</span>, -<span class="number">80000</span>, -<span class="number">20000</span>), colors, linestyles)):</span><br><span class="line">        ax.plot(x, y+y_offset, lw=lw, c=colors[<span class="number">4</span>*i+j], ls=ls)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(<span class="number">2009.5</span>, <span class="number">2012.5</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_ylim(<span class="number">600000</span>, <span class="number">720000</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/53_mpl_plot_6.png"><br></p>
 <ul>
-<li><b><code>color</code>의 형식</b>이 다양합니다.</li>
-<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/colors_api.html?highlight=color#module-matplotlib.colors">색상 이름, 색상 이름 약자, (R, G, B) array, #RGBA hex code</a>를 모두 지원합니다.</li>
-<li>예를 들어 랜덤 색상은 <code>color=[np.random.random(), np.random.random(), np.random.random()]</code>으로 쉽게 구현할 수 있습니다.</li>
-</ul>
-<ul>
-<li><b><code>linestyle</code>도 형식이 다양합니다.</b></li>
-<li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/linestyles.html"><code>dotted</code>, <code>:</code>, <code>(0, (1, 1))</code> 모두 점선을 의미합니다.</a></li>
-<li>특히 tuple을 모스 부호처럼 넣어주면 거기에 대응되는 dot과 dash의 조합이 만들어집니다.<br><br><img src="53_mpl_plot_7.png"><br></li>
+<li><p><b><code>color</code>의 형식</b>이 다양합니다.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/colors_api.html?highlight=color#module-matplotlib.colors">색상 이름, 색상 이름 약자, (R, G, B) array, #RGBA hex code</a>를 모두 지원합니다.</p>
+</li>
+<li><p>예를 들어 랜덤 색상은 <code>color=[np.random.random(), np.random.random(), np.random.random()]</code>으로 쉽게 구현할 수 있습니다.</p>
+</li>
+<li><p><b><code>linestyle</code>도 형식이 다양합니다.</b></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/gallery/lines_bars_and_markers/linestyles.html"><code>dotted</code>, <code>:</code>, <code>(0, (1, 1))</code> 모두 점선을 의미합니다.</a></p>
+</li>
+<li><p>특히 tuple을 모스 부호처럼 넣어주면 거기에 대응되는 dot과 dash의 조합이 만들어집니다.<br><br><img src="/53_mpl_plot_7.png"><br></p>
+</li>
 </ul>
 <h3 id="2-4-marker"><a href="#2-4-marker" class="headerlink" title="2.4. marker"></a>2.4. marker</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/markers_api.html#module-matplotlib.markers">matplotlib.markers</a></p>
 </blockquote>
 <ul>
-<li>marker는 line보다 옵션이 많습니다.</li>
-<li><b>모양<code>marker</code></b>, <b>크기<code>markersize</code>(또는 <code>ms</code>)</b>, <b>채우기 색상<code>markerfacecolor</code>(또는 <code>mfc</code>)</b>, <b>채우기 스타일<code>fillstyle</code></b>, <b>윤곽선 색상<code>markeredgecolor</code>(또는 <code>mec</code>)</b>, <b>윤곽선 굵기<code>markeredgewidth</code>(또는 <code>mew</code>)</b>에 <b>건너뛰기 빈도<code>markevery</code></b>까지 있습니다.</li>
-<li>이 중 marker 모양만 해도 종류가 많기 때문에 <b>자주 쓰는 몇 개만 사용하는 것</b>이 일반적입니다.</li>
-<li>하지만 때로 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/markers_api.html#module-matplotlib.markers">공식 홈페이지</a>를 뒤져서 변화를 주는 것도 좋습니다.<br><br><img src="53_mpl_plot_8.png"><br></li>
+<li><p>marker는 line보다 옵션이 많습니다.</p>
+</li>
+<li><p><b>모양<code>marker</code></b>, <b>크기<code>markersize</code>(또는 <code>ms</code>)</b>, <b>채우기 색상<code>markerfacecolor</code>(또는 <code>mfc</code>)</b>, <b>채우기 스타일<code>fillstyle</code></b>, <b>윤곽선 색상<code>markeredgecolor</code>(또는 <code>mec</code>)</b>, <b>윤곽선 굵기<code>markeredgewidth</code>(또는 <code>mew</code>)</b>에 <b>건너뛰기 빈도<code>markevery</code></b>까지 있습니다.</p>
+</li>
+<li><p>이 중 marker 모양만 해도 종류가 많기 때문에 <b>자주 쓰는 몇 개만 사용하는 것</b>이 일반적입니다.</p>
+</li>
+<li><p>하지만 때로 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/api/markers_api.html#module-matplotlib.markers">공식 홈페이지</a>를 뒤져서 변화를 주는 것도 좋습니다.<br><br><img src="/53_mpl_plot_8.png"><br></p>
+</li>
+<li><p>line과 marker 인자를 일부를 조합해서 시각화합니다.</p>
+</li>
+<li><p>일부라도 해도 경우의 수가 너무 많아서 random하게 조합되도록 했습니다.</p>
+</li>
 </ul>
-<ul>
-<li>line과 marker 인자를 일부를 조합해서 시각화합니다.</li>
-<li>일부라도 해도 경우의 수가 너무 많아서 random하게 조합되도록 했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">markerstyles = [<span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;v&#x27;</span>, <span class="string">&#x27;^&#x27;</span>, <span class="string">&#x27;&lt;&#x27;</span>, <span class="string">&#x27;8&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;*&#x27;</span>, <span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;H&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, <span class="string">&#x27;X&#x27;</span>]</span><br><span class="line">fillstyles = [<span class="string">&#x27;full&#x27;</span>, <span class="string">&#x27;left&#x27;</span>, <span class="string">&#x27;right&#x27;</span>, <span class="string">&#x27;bottom&#x27;</span>, <span class="string">&#x27;top&#x27;</span>, <span class="string">&#x27;none&#x27;</span>]</span><br><span class="line">linestyles = [<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;--&#x27;</span>, <span class="string">&#x27;-.&#x27;</span>, <span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">colors = [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, </span><br><span class="line">          <span class="string">&quot;gold&quot;</span>, <span class="string">&quot;chartreuse&quot;</span>, <span class="string">&quot;skyblue&quot;</span>, <span class="string">&quot;plum&quot;</span>, <span class="string">&quot;coral&quot;</span>, <span class="string">&quot;violet&quot;</span>, <span class="string">&quot;salmon&quot;</span>, <span class="string">&quot;aqua&quot;</span>, <span class="string">&quot;hotpink&quot;</span>, <span class="string">&quot;orchid&quot;</span>,</span><br><span class="line">          <span class="string">&#x27;#1f77b4&#x27;</span>, <span class="string">&#x27;#ff7f0e&#x27;</span>, <span class="string">&#x27;#2ca02c&#x27;</span>, <span class="string">&#x27;#d62728&#x27;</span>, <span class="string">&#x27;#9467bd&#x27;</span>, <span class="string">&#x27;#8c564b&#x27;</span>, <span class="string">&#x27;#e377c2&#x27;</span>, <span class="string">&#x27;#7f7f7f&#x27;</span>, <span class="string">&#x27;#bcbd22&#x27;</span>, <span class="string">&#x27;#17becf&#x27;</span>, </span><br><span class="line">          <span class="string">&quot;0.2&quot;</span>, <span class="string">&quot;0.5&quot;</span>, <span class="string">&quot;0.7&quot;</span>]</span><br><span class="line"></span><br><span class="line">len_m = <span class="built_in">len</span>(markerstyles)</span><br><span class="line">len_f = <span class="built_in">len</span>(fillstyles)</span><br><span class="line">len_l = <span class="built_in">len</span>(linestyles)</span><br><span class="line">len_c = <span class="built_in">len</span>(colors)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(nrows=<span class="number">8</span>, ncols=<span class="number">8</span>, figsize=(<span class="number">10</span>, <span class="number">10</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    marker = markerstyles[np.random.choice(len_m)]</span><br><span class="line">    fillstyle = fillstyles[np.random.choice(len_f)]</span><br><span class="line">    linestyle = linestyles[np.random.choice(len_l)]</span><br><span class="line">    color = colors[np.random.choice(len_c)]</span><br><span class="line">    mfc = colors[np.random.choice(len_c)]</span><br><span class="line">    mec = colors[np.random.choice(len_c)]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> color == <span class="string">&quot;w&quot;</span> <span class="keyword">or</span> mec == <span class="string">&quot;w&quot;</span>:</span><br><span class="line">        color = <span class="string">&quot;w&quot;</span></span><br><span class="line">        mec = <span class="string">&quot;w&quot;</span></span><br><span class="line">        ax.set_facecolor(<span class="string">&quot;0.5&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    ax.plot(x, y, marker=marker, </span><br><span class="line">            mfc=mfc, mec=mec,</span><br><span class="line">            fillstyle=fillstyle, linestyle=linestyle, color=color)</span><br><span class="line">    ax.set_xlim(<span class="number">2009.5</span>, <span class="number">2012.5</span>)</span><br><span class="line">    ax.set_ylim(<span class="number">650000</span>, <span class="number">950000</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> text_y, e <span class="keyword">in</span> <span class="built_in">zip</span>(np.arange(<span class="number">0.89</span>, <span class="number">0.18</span>, -<span class="number">0.12</span>), [<span class="string">&quot;marker&quot;</span>, <span class="string">&quot;fillstyle&quot;</span>, <span class="string">&quot;linestyle&quot;</span>, <span class="string">&quot;color&quot;</span>, <span class="string">&quot;mfc&quot;</span>, <span class="string">&quot;mec&quot;</span>]):</span><br><span class="line">        ax.text(<span class="number">0.05</span>, text_y, <span class="string">f&quot;<span class="subst">&#123;e&#125;</span>=&#x27;<span class="subst">&#123;<span class="built_in">eval</span>(e)&#125;</span>&#x27;&quot;</span>, transform=ax.transAxes, fontsize=<span class="string">&quot;x-small&quot;</span>)   </span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)        </span><br><span class="line">fig.tight_layout()        </span><br><span class="line">fig.savefig(<span class="string">&quot;53_mpl_plot_2.png&quot;</span>, dpi=<span class="number">200</span>)</span><br></pre></td></tr></table></figure>
-<img src="53_mpl_plot_2.png"><br></li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">markerstyles = [<span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;v&#x27;</span>, <span class="string">&#x27;^&#x27;</span>, <span class="string">&#x27;&lt;&#x27;</span>, <span class="string">&#x27;8&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;*&#x27;</span>, <span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;H&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;P&#x27;</span>, <span class="string">&#x27;X&#x27;</span>]</span><br><span class="line">fillstyles = [<span class="string">&#x27;full&#x27;</span>, <span class="string">&#x27;left&#x27;</span>, <span class="string">&#x27;right&#x27;</span>, <span class="string">&#x27;bottom&#x27;</span>, <span class="string">&#x27;top&#x27;</span>, <span class="string">&#x27;none&#x27;</span>]</span><br><span class="line">linestyles = [<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;--&#x27;</span>, <span class="string">&#x27;-.&#x27;</span>, <span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">colors = [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, </span><br><span class="line">          <span class="string">&quot;gold&quot;</span>, <span class="string">&quot;chartreuse&quot;</span>, <span class="string">&quot;skyblue&quot;</span>, <span class="string">&quot;plum&quot;</span>, <span class="string">&quot;coral&quot;</span>, <span class="string">&quot;violet&quot;</span>, <span class="string">&quot;salmon&quot;</span>, <span class="string">&quot;aqua&quot;</span>, <span class="string">&quot;hotpink&quot;</span>, <span class="string">&quot;orchid&quot;</span>,</span><br><span class="line">          <span class="string">&#x27;#1f77b4&#x27;</span>, <span class="string">&#x27;#ff7f0e&#x27;</span>, <span class="string">&#x27;#2ca02c&#x27;</span>, <span class="string">&#x27;#d62728&#x27;</span>, <span class="string">&#x27;#9467bd&#x27;</span>, <span class="string">&#x27;#8c564b&#x27;</span>, <span class="string">&#x27;#e377c2&#x27;</span>, <span class="string">&#x27;#7f7f7f&#x27;</span>, <span class="string">&#x27;#bcbd22&#x27;</span>, <span class="string">&#x27;#17becf&#x27;</span>, </span><br><span class="line">          <span class="string">&quot;0.2&quot;</span>, <span class="string">&quot;0.5&quot;</span>, <span class="string">&quot;0.7&quot;</span>]</span><br><span class="line"></span><br><span class="line">len_m = <span class="built_in">len</span>(markerstyles)</span><br><span class="line">len_f = <span class="built_in">len</span>(fillstyles)</span><br><span class="line">len_l = <span class="built_in">len</span>(linestyles)</span><br><span class="line">len_c = <span class="built_in">len</span>(colors)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(nrows=<span class="number">8</span>, ncols=<span class="number">8</span>, figsize=(<span class="number">10</span>, <span class="number">10</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    marker = markerstyles[np.random.choice(len_m)]</span><br><span class="line">    fillstyle = fillstyles[np.random.choice(len_f)]</span><br><span class="line">    linestyle = linestyles[np.random.choice(len_l)]</span><br><span class="line">    color = colors[np.random.choice(len_c)]</span><br><span class="line">    mfc = colors[np.random.choice(len_c)]</span><br><span class="line">    mec = colors[np.random.choice(len_c)]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> color == <span class="string">&quot;w&quot;</span> <span class="keyword">or</span> mec == <span class="string">&quot;w&quot;</span>:</span><br><span class="line">        color = <span class="string">&quot;w&quot;</span></span><br><span class="line">        mec = <span class="string">&quot;w&quot;</span></span><br><span class="line">        ax.set_facecolor(<span class="string">&quot;0.5&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    ax.plot(x, y, marker=marker, </span><br><span class="line">            mfc=mfc, mec=mec,</span><br><span class="line">            fillstyle=fillstyle, linestyle=linestyle, color=color)</span><br><span class="line">    ax.set_xlim(<span class="number">2009.5</span>, <span class="number">2012.5</span>)</span><br><span class="line">    ax.set_ylim(<span class="number">650000</span>, <span class="number">950000</span>)</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> text_y, e <span class="keyword">in</span> <span class="built_in">zip</span>(np.arange(<span class="number">0.89</span>, <span class="number">0.18</span>, -<span class="number">0.12</span>), [<span class="string">&quot;marker&quot;</span>, <span class="string">&quot;fillstyle&quot;</span>, <span class="string">&quot;linestyle&quot;</span>, <span class="string">&quot;color&quot;</span>, <span class="string">&quot;mfc&quot;</span>, <span class="string">&quot;mec&quot;</span>]):</span><br><span class="line">        ax.text(<span class="number">0.05</span>, text_y, <span class="string">f&quot;<span class="subst">&#123;e&#125;</span>=&#x27;<span class="subst">&#123;<span class="built_in">eval</span>(e)&#125;</span>&#x27;&quot;</span>, transform=ax.transAxes, fontsize=<span class="string">&quot;x-small&quot;</span>)   </span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)        </span><br><span class="line">fig.tight_layout()        </span><br><span class="line">fig.savefig(<span class="string">&quot;53_mpl_plot_2.png&quot;</span>, dpi=<span class="number">200</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/53_mpl_plot_2.png"><br></p>
 <h2 id="3-결론"><a href="#3-결론" class="headerlink" title="3. 결론"></a>3. 결론</h2><ul>
 <li><code>plot()</code>은 matplotlib의 여러 기능 중 가장 자유도가 높은 명령이 아닐까 싶습니다.</li>
 <li>오늘 소개한 것 외에도 <code>drawstyle</code>을 이용해서 <b>step</b>을 만들 수도 있고 <code>alpha</code>를 이용해서 <b>투명도</b>를 조절할 수도 있습니다.</li>
@@ -321,22 +339,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/06/Python-DS-53-mpl_plot/" data-id="cmhueoy0u00ha4gxt42oqgtam" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/06/Python-DS-53-mpl_plot/" data-id="cuidYeYtusqaJtnA5YM4-LS9U" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -412,7 +420,7 @@
         "genre": "Python Data Science",
         "datePublished": "2021-01-06",
         "dateCreated": "2021-01-06",
-        "dateModified": "2021-01-06",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/01/06/Python-DS-53-mpl_plot/",
         "description": "
 matplotlib의 가장 기본적인 시각화 명령은 plot()입니다.
@@ -420,7 +428,9 @@ matplotlib의 가장 기본적인 시각화 명령은 plot()입니다.
 여러 옵션들을 한 눈에 그려봅니다.
 
 1. Sample Data
-수능 데이터에서 일부를 가져옵니다.12x = np.array([2009, 2010, 2011, 2012, 2013]",
+수능 데이터에서 일부를 가져옵니다.
+
+12x = np.array([2009, 2010, 2011, 2012, 201",
         "wordCount": 992
     }
 </script>
@@ -503,16 +513,6 @@ matplotlib의 가장 기본적인 시각화 명령은 plot()입니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -746,10 +746,6 @@ matplotlib의 가장 기본적인 시각화 명령은 plot()입니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

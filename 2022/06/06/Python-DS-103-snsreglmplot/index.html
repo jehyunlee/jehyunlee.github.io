@@ -21,12 +21,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/103_snsreglmplot_00.png">
 <meta property="article:published_time" content="2022-06-06T09:51:00.000Z">
-<meta property="article:modified_time" content="2022-06-06T11:01:55.237Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.735Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="visualization">
-<meta property="article:tag" content="seaborn">
-<meta property="article:tag" content="regplot">
 <meta property="article:tag" content="lmplot">
+<meta property="article:tag" content="regplot">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/103_snsreglmplot_00.png">
     
@@ -85,7 +85,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -202,7 +202,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/06/06/Python-DS-103-snsreglmplot/" class="article-date">
-     <time datetime="2022-06-06T11:01:55.237Z" itemprop="dateModified">2022-06-06</time>
+     <time datetime="2025-12-30T06:28:37.735Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -244,63 +244,63 @@
 </ul>
 <h2 id="1-1-예제-데이터"><a href="#1-1-예제-데이터" class="headerlink" title="1.1. 예제 데이터"></a>1.1. 예제 데이터</h2><ul>
 <li>예제 데이터를 사용해서 직접 그려보겠습니다.</li>
-<li>seaborn에 내장된 penguins dataset을 사용합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># 시각화 설정</span></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예제 데이터 불러오기</span></span><br><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">df_peng.head()</span><br></pre></td></tr></table></figure>
-<img src="103_snsreglmplot_11.png"><br></li>
+<li>seaborn에 내장된 penguins dataset을 사용합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># 시각화 설정</span></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예제 데이터 불러오기</span></span><br><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">df_peng.head()</span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_11.png"><br></p>
 <h2 id="1-2-sns-regplot"><a href="#1-2-sns-regplot" class="headerlink" title="1.2. sns.regplot()"></a>1.2. <code>sns.regplot()</code></h2><ul>
-<li><p>seaborn의 다른 명령어들이 그렇듯 <b><code>sns.regplot</code>도 한 줄로 실행</b>합니다.</p>
-</li>
-<li><p>그림이 담길 Figure와 Axes를 Matplotlib으로 만들고 이 안에 regplot을 담습니다.</p>
-</li>
-<li><p>그림을 파일로 저장할 때는 Figure 객체 fig에 <b><code>fig.savefig()</code></b> 명령을 내립니다.</p>
+<li>seaborn의 다른 명령어들이 그렇듯 <b><code>sns.regplot</code>도 한 줄로 실행</b>합니다.</li>
+<li>그림이 담길 Figure와 Axes를 Matplotlib으로 만들고 이 안에 regplot을 담습니다.</li>
+<li>그림을 파일로 저장할 때는 Figure 객체 fig에 <b><code>fig.savefig()</code></b> 명령을 내립니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_01.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="103_snsreglmplot_01.png"><br></p>
-</li>
-<li><p><code>x</code>와 <code>y</code>에 각기 x, y축에 놓일 데이터를,</p>
-</li>
-<li><p><code>data</code>에 x와 y가 담긴 dataset을 입력합니다.</p>
-</li>
-<li><p>마지막으로 <code>ax</code>에 regplot이 들어갈 Axes 이름을 입력했습니다.</p>
-</li>
+<p><img src="/103_snsreglmplot_01.png"><br></p>
+<ul>
+<li><code>x</code>와 <code>y</code>에 각기 x, y축에 놓일 데이터를,</li>
+<li><code>data</code>에 x와 y가 담긴 dataset을 입력합니다.</li>
+<li>마지막으로 <code>ax</code>에 regplot이 들어갈 Axes 이름을 입력했습니다.</li>
 </ul>
 <h2 id="1-3-scatter-kws"><a href="#1-3-scatter-kws" class="headerlink" title="1.3. scatter_kws"></a>1.3. <code>scatter_kws</code></h2><ul>
 <li>scatter plot의 속성을 지정할 때 <code>scatter_kws</code> 매개변수를 사용합니다.</li>
-<li>dictionary 형식으로 scatter 객체의 속성 이름과 값을 key와 value로 만들어 넣습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">100</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_02.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="103_snsreglmplot_02.png"><br></li>
+<li>dictionary 형식으로 scatter 객체의 속성 이름과 값을 key와 value로 만들어 넣습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">100</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_02.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_02.png"><br></p>
 <h2 id="1-4-line-kws"><a href="#1-4-line-kws" class="headerlink" title="1.4. line_kws"></a>1.4. <code>line_kws</code></h2><ul>
 <li>scatter 속성을 <code>scatter_kws</code>로 조정했듯,</li>
 <li>line 속성은 <code>line_kws</code>로 조정합니다.</li>
 <li>line width, line style, alpha를 설정할 수 있습니다.</li>
-<li>다만 line과 confidence band의 색은 별도의 매개변수 <code>color</code>로 조정해야 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">100</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;,</span><br><span class="line">            color=<span class="string">&quot;r&quot;</span>, line_kws=&#123;<span class="string">&quot;lw&quot;</span>:<span class="number">3</span>, <span class="string">&quot;ls&quot;</span>:<span class="string">&quot;--&quot;</span>,<span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_03.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="103_snsreglmplot_03.png"><br></li>
+<li>다만 line과 confidence band의 색은 별도의 매개변수 <code>color</code>로 조정해야 합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">100</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;,</span><br><span class="line">            color=<span class="string">&quot;r&quot;</span>, line_kws=&#123;<span class="string">&quot;lw&quot;</span>:<span class="number">3</span>, <span class="string">&quot;ls&quot;</span>:<span class="string">&quot;--&quot;</span>,<span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_03.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_03.png"><br></p>
 <h2 id="1-5-confidence-band"><a href="#1-5-confidence-band" class="headerlink" title="1.5. confidence band"></a>1.5. confidence band</h2><ul>
-<li>confidence band 속성을 제어하기 위해서는 객체를 추출하고 속성을 개별 제어해야 합니다.</li>
-<li>regplot이 그려지는 Axes의 세 번째 객체가 confidence band입니다. </li>
-<li>첫 번째와 두 번째 객체는 scatter plot, regression line입니다.</li>
+<li><p>confidence band 속성을 제어하기 위해서는 객체를 추출하고 속성을 개별 제어해야 합니다.</p>
+</li>
+<li><p>regplot이 그려지는 Axes의 세 번째 객체가 confidence band입니다. </p>
+</li>
+<li><p>첫 번째와 두 번째 객체는 scatter plot, regression line입니다.</p>
+</li>
+<li><p><code>ax.get_children()[2]</code>로 confidence band를 추출하고,</p>
+</li>
+<li><p><code>.set()</code> 메소드로 속성을 제어합니다.</p>
+</li>
 </ul>
-<ul>
-<li><code>ax.get_children()[2]</code>로 confidence band를 추출하고,</li>
-<li><code>.set()</code> 메소드로 속성을 제어합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">100</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;,</span><br><span class="line">            color=<span class="string">&quot;r&quot;</span>, line_kws=&#123;<span class="string">&quot;lw&quot;</span>:<span class="number">3</span>, <span class="string">&quot;ls&quot;</span>:<span class="string">&quot;--&quot;</span>,<span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line"></span><br><span class="line">ci = ax.get_children()[<span class="number">2</span>]                   <span class="comment"># confidence band 추출</span></span><br><span class="line">ci.<span class="built_in">set</span>(fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;orange&quot;</span>, alpha=<span class="number">0.8</span>) <span class="comment"># face &amp; edge color, alpha 조정</span></span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_04.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<img src="103_snsreglmplot_04.png"><br></li>
-</ul>
-<h2 id="1-6-sns-regplot-amp-hue"><a href="#1-6-sns-regplot-amp-hue" class="headerlink" title="1.6. sns.regplot &amp; hue"></a>1.6. <code>sns.regplot</code> &amp; <code>hue</code></h2><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=ax,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">100</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;,</span><br><span class="line">            color=<span class="string">&quot;r&quot;</span>, line_kws=&#123;<span class="string">&quot;lw&quot;</span>:<span class="number">3</span>, <span class="string">&quot;ls&quot;</span>:<span class="string">&quot;--&quot;</span>,<span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line"></span><br><span class="line">ci = ax.get_children()[<span class="number">2</span>]                   <span class="comment"># confidence band 추출</span></span><br><span class="line">ci.<span class="built_in">set</span>(fc=<span class="string">&quot;yellow&quot;</span>, ec=<span class="string">&quot;orange&quot;</span>, alpha=<span class="number">0.8</span>) <span class="comment"># face &amp; edge color, alpha 조정</span></span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_04.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_04.png"><br></p>
+<h2 id="1-6-sns-regplot-hue"><a href="#1-6-sns-regplot-hue" class="headerlink" title="1.6. sns.regplot &amp; hue"></a>1.6. <code>sns.regplot</code> &amp; <code>hue</code></h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.britannica.com/topic/Simpsons-paradox">Brinnica: Simpson’s paradox</a></p>
 </blockquote>
 <ul>
-<li><p>seaborn의 여러 함수에는 <code>hue</code> 매개변수가 있습니다.</p>
-</li>
-<li><p>categorical feature의 class별로 다른 색이나 style을 적용해 구분하도록 해 줍니다.</p>
-</li>
-<li><p>그러나 불행히도 <b><code>sns.regplot</code>에는 <code>hue</code>매개변수가 없습니다.</b></p>
-</li>
-<li><p>예를 들어 species별로 다른 색과 회귀선으로 표현하려면 for loop 등으로 반복해 그림을 그려야 합니다.</p>
-</li>
-<li><p>Axes 두 개를 마련해 왼쪽에 전체를, 오른쪽에 species별로 hue를 수동으로 구현한 그림을 그립니다.</p>
+<li>seaborn의 여러 함수에는 <code>hue</code> 매개변수가 있습니다.</li>
+<li>categorical feature의 class별로 다른 색이나 style을 적용해 구분하도록 해 줍니다.</li>
+<li>그러나 불행히도 <b><code>sns.regplot</code>에는 <code>hue</code>매개변수가 없습니다.</b></li>
+<li>예를 들어 species별로 다른 색과 회귀선으로 표현하려면 for loop 등으로 반복해 그림을 그려야 합니다.</li>
+<li>Axes 두 개를 마련해 왼쪽에 전체를, 오른쪽에 species별로 hue를 수동으로 구현한 그림을 그립니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">   </span><br><span class="line"><span class="comment"># (A) 전체 시각화</span></span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=axs[<span class="number">0</span>], color=<span class="string">&quot;k&quot;</span>,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;lightgray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (B) species별 그룹 시각화</span></span><br><span class="line">peng_species = df_peng[<span class="string">&quot;species&quot;</span>].unique()  <span class="comment"># 펭귄 데이터셋 중 species 종류 추출</span></span><br><span class="line"><span class="keyword">for</span> species <span class="keyword">in</span> peng_species:</span><br><span class="line">    df_s = df_peng.loc[df_peng[<span class="string">&quot;species&quot;</span>] == species]   <span class="comment"># species별 펭귄 데이터 추출</span></span><br><span class="line">    sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_s, ax=axs[<span class="number">1</span>], label=species,</span><br><span class="line">                scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line">   </span><br><span class="line">    axs[<span class="number">1</span>].legend(loc=<span class="string">&quot;center left&quot;</span>, bbox_to_anchor=[<span class="number">1</span>, <span class="number">0.5</span>], frameon=<span class="literal">False</span>)</span><br><span class="line">    axs[<span class="number">1</span>].set_ylabel(<span class="string">&quot; \n&quot;</span>)                    <span class="comment"># gridspec_kw를 사용하지 않고 Axes 간격 띄우기</span></span><br><span class="line">    </span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_05.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
-<p><img src="103_snsreglmplot_05.png"><br></p>
-</li>
+<p><img src="/103_snsreglmplot_05.png"><br></p>
+<ul>
 <li><p>전체와 부분의 경향이 다른 것을 <b><a target="_blank" rel="noopener" href="https://www.britannica.com/topic/Simpsons-paradox">심슨의 역설(Simpson’s paradox)</a></b>이라 합니다.</p>
 </li>
 <li><p>펭귄 데이터셋 중 부리 길이(bill_length_mm)와 부리 폭(bill_depth_mm)에서 심슨의 역설이 관찰되었습니다.</p>
@@ -309,43 +309,41 @@
 </li>
 <li><p>데이터를 분석할 때 분할(segmentation)에 주의를 기울여야 하는 이유입니다.</p>
 </li>
-</ul>
-<ul>
-<li><code>sns.regplot()</code>에는 <code>hue</code> 기능이 없어서 for loop을 불편하게 돌려야만 했습니다.</li>
-<li>그러나 우리의 seaborn은 같은 기능을 하는 다른 함수로 <code>hue</code>를 제공합니다. </li>
-<li><code>sns.lmplot()</code>이라는 이름입니다.</li>
+<li><p><code>sns.regplot()</code>에는 <code>hue</code> 기능이 없어서 for loop을 불편하게 돌려야만 했습니다.</p>
+</li>
+<li><p>그러나 우리의 seaborn은 같은 기능을 하는 다른 함수로 <code>hue</code>를 제공합니다. </p>
+</li>
+<li><p><code>sns.lmplot()</code>이라는 이름입니다.</p>
+</li>
 </ul>
 <h1 id="2-seaborn-lmplot"><a href="#2-seaborn-lmplot" class="headerlink" title="2. seaborn lmplot"></a>2. seaborn lmplot</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html">seaborn lmplot</a></p>
 </blockquote>
 <h2 id="2-1-sns-lmplot"><a href="#2-1-sns-lmplot" class="headerlink" title="2.1. sns.lmplot()"></a>2.1. <code>sns.lmplot()</code></h2><ul>
-<li><p>seaborn lmplot은 본질적으로 regplot과 동일합니다. 내부에서 <code>sns.regplot()</code>을 호출하기 때문입니다.</p>
-</li>
-<li><p>그러나 <b><code>sns.regplot()</code>이 Axes-level function인 반면 <code>sns.lmplot()</code>은 Figure-level function</b>이라는 가장 큰 차이가 있습니다.</p>
-</li>
-<li><p>간단하게 그려서 확인해 보겠습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, hue=<span class="string">&quot;species&quot;</span>, </span><br><span class="line">               height=<span class="number">5</span>, aspect=<span class="number">1</span>,</span><br><span class="line">               scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig = g.fig</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_06.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
-<p><img src="103_snsreglmplot_06.png"><br></p>
-</li>
-<li><p><code>sns.regplot</code>과 문법이 동일하면서도 <code>hue</code>가 적용된 plot이 한 줄로 그려졌습니다.</p>
-</li>
-<li><p>그러나 이 명령을 이용해 심슨의 역설을 그리려다가는 이런 일이 벌어집니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Axes 두 개 생성</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전체 시각화</span></span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=axs[<span class="number">0</span>], color=<span class="string">&quot;k&quot;</span>,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;lightgray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.lmplot() 실행</span></span><br><span class="line">sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, hue=<span class="string">&quot;species&quot;</span>,            </span><br><span class="line">           scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="103_snsreglmplot_07.png"><br></p>
-</li>
-<li><p><code>sns.lmplot()</code>의 결과물이 미리 만들어 둔 Axes에 들어가지 않습니다.</p>
-</li>
-<li><p>이는 <code>sns.lmplot()</code>이 Figure-level function으로, Figure보다 상위에 있는 Grid라는 객체를 생성하기 때문입니다.</p>
-</li>
-<li><p>그렇기 때문에, 파일을 저장하기 위해서 figure 객체에 <code>g.fig</code>로 접근하는 과정이 필요합니다.</p>
-</li>
+<li>seaborn lmplot은 본질적으로 regplot과 동일합니다. 내부에서 <code>sns.regplot()</code>을 호출하기 때문입니다.</li>
+<li>그러나 <b><code>sns.regplot()</code>이 Axes-level function인 반면 <code>sns.lmplot()</code>은 Figure-level function</b>이라는 가장 큰 차이가 있습니다.</li>
+<li>간단하게 그려서 확인해 보겠습니다.</li>
 </ul>
-<h2 id="2-2-col-amp-row"><a href="#2-2-col-amp-row" class="headerlink" title="2.2. col &amp; row"></a>2.2. <code>col</code> &amp; <code>row</code></h2><ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, hue=<span class="string">&quot;species&quot;</span>, </span><br><span class="line">               height=<span class="number">5</span>, aspect=<span class="number">1</span>,</span><br><span class="line">               scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig = g.fig</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_06.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_06.png"><br></p>
+<ul>
+<li><code>sns.regplot</code>과 문법이 동일하면서도 <code>hue</code>가 적용된 plot이 한 줄로 그려졌습니다.</li>
+<li>그러나 이 명령을 이용해 심슨의 역설을 그리려다가는 이런 일이 벌어집니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Axes 두 개 생성</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 전체 시각화</span></span><br><span class="line">sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, ax=axs[<span class="number">0</span>], color=<span class="string">&quot;k&quot;</span>,</span><br><span class="line">            scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;lightgray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.lmplot() 실행</span></span><br><span class="line">sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, hue=<span class="string">&quot;species&quot;</span>,            </span><br><span class="line">           scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_07.png"><br></p>
+<ul>
+<li><code>sns.lmplot()</code>의 결과물이 미리 만들어 둔 Axes에 들어가지 않습니다.</li>
+<li>이는 <code>sns.lmplot()</code>이 Figure-level function으로, Figure보다 상위에 있는 Grid라는 객체를 생성하기 때문입니다.</li>
+<li>그렇기 때문에, 파일을 저장하기 위해서 figure 객체에 <code>g.fig</code>로 접근하는 과정이 필요합니다.</li>
+</ul>
+<h2 id="2-2-col-row"><a href="#2-2-col-row" class="headerlink" title="2.2. col &amp; row"></a>2.2. <code>col</code> &amp; <code>row</code></h2><ul>
 <li><b>Figure-level function의 장점</b>은 따로 있습니다.</li>
 <li><b>categorical feature의 class를 FacetGrid로 쉽게 구현할 수 있다는 것</b>입니다.</li>
-<li><code>col</code>과 <code>row</code>에 열과 행을 나눌 categorical feature 이름을 입력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, </span><br><span class="line">           col=<span class="string">&quot;species&quot;</span>, row=<span class="string">&quot;sex&quot;</span>,                          <span class="comment"># species와 sex로 데이터 분할</span></span><br><span class="line">           truncate=<span class="literal">False</span>, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;) <span class="comment"># sns.regplot() 사용 매개변수 적용</span></span><br><span class="line"></span><br><span class="line">fig = g.fig</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_08.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
-<img src="103_snsreglmplot_08.png"><br></li>
+<li><code>col</code>과 <code>row</code>에 열과 행을 나눌 categorical feature 이름을 입력합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, </span><br><span class="line">           col=<span class="string">&quot;species&quot;</span>, row=<span class="string">&quot;sex&quot;</span>,                          <span class="comment"># species와 sex로 데이터 분할</span></span><br><span class="line">           truncate=<span class="literal">False</span>, scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;) <span class="comment"># sns.regplot() 사용 매개변수 적용</span></span><br><span class="line"></span><br><span class="line">fig = g.fig</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_08.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_08.png"><br></p>
 <ul>
 <li>데이터가 sex와 species에 따라 나뉘어 그려졌습니다.</li>
 </ul>
@@ -353,27 +351,25 @@
 <li>Figure-level function의 결과물은 Axes에 들어갈 수 없지만,</li>
 <li>Axes-level function의 결과물은 Figure-level function의 결과물에 들어갈 수 있습니다.</li>
 <li><code>sns.lmplot()</code>으로 만들어진 FacetGrid에서 Axes를 추출해 <code>sns.regplot()</code>을 적용합니다.</li>
-<li><code>sns.regplot()</code>으로 전체 데이터 범위를, <code>sns.lmplot()</code>으로 개별 데이터를 표현하는 식입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>,       <span class="comment"># sns.lmplot 생성 FacetGrid 출력</span></span><br><span class="line">               data=df_peng, </span><br><span class="line">               col=<span class="string">&quot;species&quot;</span>, row=<span class="string">&quot;sex&quot;</span>,                    <span class="comment"># species와 sex로 데이터 분할</span></span><br><span class="line">               scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line">  </span><br><span class="line">axes = g.axes               <span class="comment"># FacetGrid에서 Axes 추출</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():     <span class="comment"># Axes 순회, 전체 데이터를 배경으로 표현</span></span><br><span class="line">    sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, </span><br><span class="line">                fit_reg=<span class="literal">False</span>, </span><br><span class="line">                scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;none&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;, ax=ax)</span><br><span class="line"></span><br><span class="line">fig = g.fig</span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_09.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
-<img src="103_snsreglmplot_09.png"><br></li>
+<li><code>sns.regplot()</code>으로 전체 데이터 범위를, <code>sns.lmplot()</code>으로 개별 데이터를 표현하는 식입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>,       <span class="comment"># sns.lmplot 생성 FacetGrid 출력</span></span><br><span class="line">               data=df_peng, </span><br><span class="line">               col=<span class="string">&quot;species&quot;</span>, row=<span class="string">&quot;sex&quot;</span>,                    <span class="comment"># species와 sex로 데이터 분할</span></span><br><span class="line">               scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line">  </span><br><span class="line">axes = g.axes               <span class="comment"># FacetGrid에서 Axes 추출</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():     <span class="comment"># Axes 순회, 전체 데이터를 배경으로 표현</span></span><br><span class="line">    sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, </span><br><span class="line">                fit_reg=<span class="literal">False</span>, </span><br><span class="line">                scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;none&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;, ax=ax)</span><br><span class="line"></span><br><span class="line">fig = g.fig</span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_09.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_09.png"><br></p>
 <h2 id="2-4-sns-lmplot-결과마다-다른-색"><a href="#2-4-sns-lmplot-결과마다-다른-색" class="headerlink" title="2.4. sns.lmplot()결과마다 다른 색"></a>2.4. <code>sns.lmplot()</code>결과마다 다른 색</h2><ul>
-<li><p><code>sns.lmplot()</code>에는 hue로 나뉘는 데이터에 적용하기 위한 <code>palette</code>매개변수가 있습니다.</p>
-</li>
-<li><p>그러나 Facet별로 다르게 들어간 데이터에는 <code>palette</code>매개변수가 적용되지 않습니다.</p>
-</li>
-<li><p><code>color</code>매개변수도 존재하지 않기 때문에, 개별 객체를 접근해야 합니다.</p>
-</li>
-<li><p>matplotlib 기능을 이용해 hue, lightness, saturation을 조정하는 <code>modify_hls()</code> 함수를 먼저 만듭니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modify_hls</span>(<span class="params">c, dh=<span class="number">0</span>, dl=<span class="number">0</span>, ds=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(c, <span class="built_in">str</span>):</span><br><span class="line">        c = mcolors.to_rgb(c)</span><br><span class="line">    </span><br><span class="line">    h, l, s = colorsys.rgb_to_hls(*c)</span><br><span class="line">    h = h + dh</span><br><span class="line">    l = <span class="built_in">max</span>(<span class="built_in">min</span>(l + dl, <span class="number">1</span>), <span class="number">0</span>)</span><br><span class="line">    s = <span class="built_in">max</span>(<span class="built_in">min</span>(s + ds, <span class="number">1</span>), <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> colorsys.hls_to_rgb(h, l, s)</span><br></pre></td></tr></table></figure></li>
-<li><p>위 Axes 순회 코드에 Axes마다 다른 facecolor와 edgecolor를 적용하는 코드를 추가합니다.</p>
-</li>
-<li><p>species에 따라서는 CN을 적용하고 (C0, C1, C2)</p>
-</li>
-<li><p>sex에 따라서는 hue를 5% 옮긴 색을 입힙니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>,       <span class="comment"># sns.lmplot 생성 FacetGrid 출력</span></span><br><span class="line">               data=df_peng, </span><br><span class="line">               col=<span class="string">&quot;species&quot;</span>, row=<span class="string">&quot;sex&quot;</span>,                    <span class="comment"># species와 sex로 데이터 분할</span></span><br><span class="line">               scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line"></span><br><span class="line">axes = g.axes               <span class="comment"># FacetGrid에서 Axes 추출</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes.ravel()):     <span class="comment"># Axes 순회, 전체 데이터를 배경으로 표현</span></span><br><span class="line">    scatter, reg, cb = ax.get_children()[:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">2</span>:</span><br><span class="line">        i -= <span class="number">3</span></span><br><span class="line">        dh = -<span class="number">0.05</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dh = <span class="number">0</span></span><br><span class="line">    scatter.<span class="built_in">set</span>(fc=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dl=<span class="number">0.3</span>, dh=dh), ec=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh), alpha=<span class="number">1</span>)</span><br><span class="line">    reg.set_color(modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh))</span><br><span class="line">    cb.<span class="built_in">set</span>(fc=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dl=<span class="number">0.3</span>, dh=dh), ec=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh))</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, </span><br><span class="line">                fit_reg=<span class="literal">False</span>, </span><br><span class="line">                scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;none&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;, ax=ax)</span><br><span class="line">    title = ax.get_title()</span><br><span class="line">    ax.set_title(title, color=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh))</span><br><span class="line">    </span><br><span class="line">fig = g.fig</span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_10.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
-<p><img src="103_snsreglmplot_10.png"><br></p>
-</li>
+<li><code>sns.lmplot()</code>에는 hue로 나뉘는 데이터에 적용하기 위한 <code>palette</code>매개변수가 있습니다.</li>
+<li>그러나 Facet별로 다르게 들어간 데이터에는 <code>palette</code>매개변수가 적용되지 않습니다.</li>
+<li><code>color</code>매개변수도 존재하지 않기 때문에, 개별 객체를 접근해야 합니다.</li>
+<li>matplotlib 기능을 이용해 hue, lightness, saturation을 조정하는 <code>modify_hls()</code> 함수를 먼저 만듭니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> mcolors</span><br><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">modify_hls</span>(<span class="params">c, dh=<span class="number">0</span>, dl=<span class="number">0</span>, ds=<span class="number">0</span></span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(c, <span class="built_in">str</span>):</span><br><span class="line">        c = mcolors.to_rgb(c)</span><br><span class="line">    </span><br><span class="line">    h, l, s = colorsys.rgb_to_hls(*c)</span><br><span class="line">    h = h + dh</span><br><span class="line">    l = <span class="built_in">max</span>(<span class="built_in">min</span>(l + dl, <span class="number">1</span>), <span class="number">0</span>)</span><br><span class="line">    s = <span class="built_in">max</span>(<span class="built_in">min</span>(s + ds, <span class="number">1</span>), <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> colorsys.hls_to_rgb(h, l, s)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위 Axes 순회 코드에 Axes마다 다른 facecolor와 edgecolor를 적용하는 코드를 추가합니다.</li>
+<li>species에 따라서는 CN을 적용하고 (C0, C1, C2)</li>
+<li>sex에 따라서는 hue를 5% 옮긴 색을 입힙니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">g = sns.lmplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>,       <span class="comment"># sns.lmplot 생성 FacetGrid 출력</span></span><br><span class="line">               data=df_peng, </span><br><span class="line">               col=<span class="string">&quot;species&quot;</span>, row=<span class="string">&quot;sex&quot;</span>,                    <span class="comment"># species와 sex로 데이터 분할</span></span><br><span class="line">               scatter_kws=&#123;<span class="string">&quot;s&quot;</span>:<span class="number">50</span>&#125;)</span><br><span class="line"></span><br><span class="line">axes = g.axes               <span class="comment"># FacetGrid에서 Axes 추출</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes.ravel()):     <span class="comment"># Axes 순회, 전체 데이터를 배경으로 표현</span></span><br><span class="line">    scatter, reg, cb = ax.get_children()[:<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">2</span>:</span><br><span class="line">        i -= <span class="number">3</span></span><br><span class="line">        dh = -<span class="number">0.05</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dh = <span class="number">0</span></span><br><span class="line">    scatter.<span class="built_in">set</span>(fc=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dl=<span class="number">0.3</span>, dh=dh), ec=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh), alpha=<span class="number">1</span>)</span><br><span class="line">    reg.set_color(modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh))</span><br><span class="line">    cb.<span class="built_in">set</span>(fc=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dl=<span class="number">0.3</span>, dh=dh), ec=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh))</span><br><span class="line">    sns.regplot(x=<span class="string">&quot;bill_length_mm&quot;</span>, y=<span class="string">&quot;bill_depth_mm&quot;</span>, data=df_peng, </span><br><span class="line">                fit_reg=<span class="literal">False</span>, </span><br><span class="line">                scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ec&quot;</span>:<span class="string">&quot;none&quot;</span>, <span class="string">&quot;s&quot;</span>:<span class="number">50</span>, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;, ax=ax)</span><br><span class="line">    title = ax.get_title()</span><br><span class="line">    ax.set_title(title, color=modify_hls(<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, dh=dh))</span><br><span class="line">    </span><br><span class="line">fig = g.fig</span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;103_snsreglmplot_10.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
+<p><img src="/103_snsreglmplot_10.png"><br></p>
 <h1 id="3-결론"><a href="#3-결론" class="headerlink" title="3. 결론"></a>3. 결론</h1><ul>
 <li>seaborn의 Figure-level function은 매우 유용하지만 Grid를 출력하는 속성은 종종 간과됩니다.</li>
 <li>seaborn을 사용할 때 발생하는 에러의 대부분이 바로 이 Grid입니다.</li>
@@ -392,22 +388,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/06/06/Python-DS-103-snsreglmplot/" data-id="cmhueoxx300a54gxtd3okh7ii" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/06/06/Python-DS-103-snsreglmplot/" data-id="cuidX_kaG5TbUE14vi7l1OfV0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -483,7 +469,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-06-06",
         "dateCreated": "2022-06-06",
-        "dateModified": "2022-06-06",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/06/06/Python-DS-103-snsreglmplot/",
         "description": "
 seaborn에는 regplot이라는 기능이 있습니다.
@@ -578,16 +564,6 @@ scatter plot, r",
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -821,10 +797,6 @@ scatter plot, r",
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

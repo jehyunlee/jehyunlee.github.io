@@ -21,11 +21,11 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/102_kdeplot_00.png">
 <meta property="article:published_time" content="2022-05-26T23:51:00.000Z">
-<meta property="article:modified_time" content="2022-05-27T06:03:18.966Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:37.725Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="visualization">
-<meta property="article:tag" content="seaborn">
 <meta property="article:tag" content="kdeplot">
+<meta property="article:tag" content="seaborn">
+<meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/102_kdeplot_00.png">
     
@@ -84,7 +84,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -201,7 +201,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2022/05/27/Python-DS-102-kdeplot/" class="article-date">
-     <time datetime="2022-05-27T06:03:18.966Z" itemprop="dateModified">2022-05-27</time>
+     <time datetime="2025-12-30T06:28:37.725Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -240,7 +240,7 @@
 <li>현대 대한민국의 가장 큰 화두 중 하나는 <b>공정</b>입니다.</li>
 <li>기회의 공정, 결과의 공정, 또는 떨어질 때 떨어지더라도 이유라도 알자는 의미의 공정.</li>
 <li>여러 면에서 여러 의미로 공정이 오르내리고 있으며 그 중 하나는 <b>부모찬스</b>입니다.</li>
-<li><a target="_blank" rel="noopener" href="https://www.khan.co.kr/national/national-general/article/202205250600005">경향신문</a>과 <a target="_blank" rel="noopener" href="http://underscore.kr/">언더스코어</a>에서 의미있는 분석을 시도하고 있습니다.<br><br><img src="102_kdeplot_06.png"><br></li>
+<li><a target="_blank" rel="noopener" href="https://www.khan.co.kr/national/national-general/article/202205250600005">경향신문</a>과 <a target="_blank" rel="noopener" href="http://underscore.kr/">언더스코어</a>에서 의미있는 분석을 시도하고 있습니다.<br><br><img src="/102_kdeplot_06.png"><br></li>
 </ul>
 <h1 id="2-KDE-plot"><a href="#2-KDE-plot" class="headerlink" title="2. KDE plot"></a>2. KDE plot</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">Kernel Density Estimation</a></p>
@@ -248,7 +248,7 @@
 <ul>
 <li>설문 결과 분포를 표현하기 위해 기사에 사용된 이와 같은 시각화 기법을 <b>KDE plot</b>이라고 합니다.</li>
 <li><b>Kernel Density Plot</b>의 약자이며, 히스토그램의 단점을 보완하기 위해 제안된 방식입니다.</li>
-<li>히스토그램이 구간별 데이터 수를 bar plot으로 표현하는 방식이라면 KDE plot은 각 데이터로 밀도 분포를 추정하여 합산하는 방식입니다.<br><br><img src="102_kdeplot_07.png" alt="wikipedia, Kernel density estimation"><br></li>
+<li>히스토그램이 구간별 데이터 수를 bar plot으로 표현하는 방식이라면 KDE plot은 각 데이터로 밀도 분포를 추정하여 합산하는 방식입니다.<br><br><img src="/102_kdeplot_07.png" alt="wikipedia, Kernel density estimation"><br></li>
 </ul>
 <h1 id="3-seaborn-histogram-vs-kdeplot"><a href="#3-seaborn-histogram-vs-kdeplot" class="headerlink" title="3. seaborn histogram vs kdeplot"></a>3. seaborn histogram vs kdeplot</h1><blockquote>
 <p><a href="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/">Pega Devlog: Ridgeline Plot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html">seaborn: kdeplot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.histplot.html">seaborn: histplot</a></p>
@@ -260,18 +260,18 @@
 </ul>
 <h2 id="3-1-예제-데이터"><a href="#3-1-예제-데이터" class="headerlink" title="3.1. 예제 데이터"></a>3.1. 예제 데이터</h2><ul>
 <li>seaborn에서 제공하는 Penguins dataset을 사용합니다.</li>
-<li>펭귄들의 체중 데이터를 그림으로 그려보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># penguins dataset 불러오기</span></span><br><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">df_peng.head(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<img src="102_kdeplot_08.png"></li>
+<li>펭귄들의 체중 데이터를 그림으로 그려보겠습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># penguins dataset 불러오기</span></span><br><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">df_peng.head(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/102_kdeplot_08.png"></p>
 <h2 id="3-2-histogram-vs-KDE-plot"><a href="#3-2-histogram-vs-KDE-plot" class="headerlink" title="3.2. histogram vs KDE plot"></a>3.2. histogram vs KDE plot</h2><ul>
-<li><p>histogram과 KDE plot을 차례로 그려 비교합니다.</p>
-</li>
-<li><p>histogram은 구간(bins) 수에 따라 모양이 변합니다.</p>
-</li>
-<li><p>이 글은 KDE plot의 특징에 집중하기 위해 코드 설명은 생략합니다.</p>
+<li>histogram과 KDE plot을 차례로 그려 비교합니다.</li>
+<li>histogram은 구간(bins) 수에 따라 모양이 변합니다.</li>
+<li>이 글은 KDE plot의 특징에 집중하기 위해 코드 설명은 생략합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Circle</span><br><span class="line"></span><br><span class="line">vmin, vmax = df_peng[<span class="string">&quot;body_mass_g&quot;</span>].<span class="built_in">min</span>(), df_peng[<span class="string">&quot;body_mass_g&quot;</span>].<span class="built_in">max</span>() </span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">3.5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    sns.histplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, bins=<span class="number">10</span>*i, ax=ax)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;bins=<span class="subst">&#123;<span class="number">10</span>*i&#125;</span>&quot;</span>, pad=<span class="number">12</span>, color=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    ymin, ymax = ax.get_ylim()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># changes</span></span><br><span class="line">    circle0 = Circle((<span class="number">0.5</span>, <span class="number">0.5</span>), <span class="number">0.17</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>, transform=ax.transAxes)</span><br><span class="line">    circle1 = Circle((<span class="number">0.8</span>, <span class="number">0.27</span>), <span class="number">0.17</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>, transform=ax.transAxes)</span><br><span class="line">    ax.add_patch(circle0)</span><br><span class="line">    ax.add_patch(circle1)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data min, max</span></span><br><span class="line">    ax.axvline(vmin, c=<span class="string">&quot;orange&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax.axvline(vmax, c=<span class="string">&quot;orange&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="102_kdeplot_01.png"><br></p>
-</li>
+<p><img src="/102_kdeplot_01.png"><br></p>
+<ul>
 <li><p>같은 데이터를 10, 20, 30개의 구간을 가진 histogram으로 표현했습니다.</p>
 </li>
 <li><p>bins 수가 늘어날 수록 보이지 않던 봉우리들이 보입니다. (붉은 원)</p>
@@ -282,14 +282,14 @@
 </li>
 <li><p>바구니의 범위가 좁아지니 데이터가 덜 담기는 것이 당연합니다.</p>
 </li>
-</ul>
-<ul>
 <li><p>같은 데이터를 KDE plot으로 그립니다.</p>
 </li>
 <li><p><code>seaborn.kdeplot</code>에서는 Kernel size를 bw_adjust라는 매개변수로 조절할 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">3.5</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, bw_adjust=i**<span class="number">2</span>/<span class="number">4</span>, fill=<span class="literal">True</span>, ax=ax)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;bw_adjust=<span class="subst">&#123;i**<span class="number">2</span>/<span class="number">4</span>:<span class="number">.3</span>f&#125;</span>&quot;</span>, pad=<span class="number">12</span>, color=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    ymin, ymax = ax.get_ylim()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># changes</span></span><br><span class="line">    circle0 = Circle((<span class="number">0.5</span>, <span class="number">0.5</span>), <span class="number">0.1</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>, transform=ax.transAxes)</span><br><span class="line">    circle1 = Circle((<span class="number">0.62</span>, <span class="number">0.3</span>), <span class="number">0.1</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>, transform=ax.transAxes)</span><br><span class="line">    ax.add_patch(circle0)</span><br><span class="line">    ax.add_patch(circle1)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data min, max</span></span><br><span class="line">    ax.axvline(vmin, c=<span class="string">&quot;orange&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax.axvline(vmax, c=<span class="string">&quot;orange&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="102_kdeplot_02.png"><br></p>
 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>, <span class="number">3.5</span>), constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, bw_adjust=i**<span class="number">2</span>/<span class="number">4</span>, fill=<span class="literal">True</span>, ax=ax)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;bw_adjust=<span class="subst">&#123;i**<span class="number">2</span>/<span class="number">4</span>:<span class="number">.3</span>f&#125;</span>&quot;</span>, pad=<span class="number">12</span>, color=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    ymin, ymax = ax.get_ylim()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># changes</span></span><br><span class="line">    circle0 = Circle((<span class="number">0.5</span>, <span class="number">0.5</span>), <span class="number">0.1</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>, transform=ax.transAxes)</span><br><span class="line">    circle1 = Circle((<span class="number">0.62</span>, <span class="number">0.3</span>), <span class="number">0.1</span>, fc=<span class="string">&quot;none&quot;</span>, ec=<span class="string">&quot;r&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>, transform=ax.transAxes)</span><br><span class="line">    ax.add_patch(circle0)</span><br><span class="line">    ax.add_patch(circle1)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data min, max</span></span><br><span class="line">    ax.axvline(vmin, c=<span class="string">&quot;orange&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax.axvline(vmax, c=<span class="string">&quot;orange&quot;</span>, lw=<span class="number">3</span>, alpha=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/102_kdeplot_02.png"><br></p>
+<ul>
 <li><p><code>sharex=True</code>와 <code>sharey=True</code>로 그래프의 x와 y 범위를 통일시켰습니다.</p>
 </li>
 <li><p>bw_adjust가 커질수록 아이스크림이 녹듯 높이가 낮아지고 옆으로 퍼지는 모습이 보입니다.</p>
@@ -298,81 +298,82 @@
 </li>
 <li><p>또한, 오렌지색 선으로 표시한 데이터의 하한선과 상한선을 점점 더 많이 넘어가고 있습니다.</p>
 </li>
-</ul>
-<ul>
-<li><b>데이터 범위를 넘어선다</b>는 것이 KDE plot의 가장 큰 특징입니다.</li>
-<li><b>제한된 데이터로 수집되지 않은 범위까지 추정을 해줄 수 있는 장점</b>으로 작용함과 동시에</li>
-<li><b>존재할 수 없는 데이터를 생성하는 단점</b>으로 작용합니다. (ex. 나이 분포를 그리면 0보다 작은 범위가 생깁니다)</li>
-<li><b>처음에 인용한 기사에서도 1~5점으로 조사했지만 1점이 안 되는 데이터와 5점이 넘는 데이터가 추정되었습니다.</b></li>
+<li><p><b>데이터 범위를 넘어선다</b>는 것이 KDE plot의 가장 큰 특징입니다.</p>
+</li>
+<li><p><b>제한된 데이터로 수집되지 않은 범위까지 추정을 해줄 수 있는 장점</b>으로 작용함과 동시에</p>
+</li>
+<li><p><b>존재할 수 없는 데이터를 생성하는 단점</b>으로 작용합니다. (ex. 나이 분포를 그리면 0보다 작은 범위가 생깁니다)</p>
+</li>
+<li><p><b>처음에 인용한 기사에서도 1~5점으로 조사했지만 1점이 안 되는 데이터와 5점이 넘는 데이터가 추정되었습니다.</b></p>
+</li>
 </ul>
 <h2 id="3-3-KDE-plot-기본"><a href="#3-3-KDE-plot-기본" class="headerlink" title="3.3. KDE plot 기본"></a>3.3. KDE plot 기본</h2><ul>
 <li>KDE plot의 특징을 조금 더 알아보겠습니다. </li>
-<li>먼저, <b>밀도 분포</b>라는 개념을 사용하기 때문에 <b>전체 넓이는 1로 조정됩니다.</b><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    area = Polygon(axs[<span class="number">0</span>].collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot at axs[<span class="subst">&#123;i&#125;</span>] = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot at axs[0]= 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot at axs[1]= 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot at axs[2]= 1.000</span></span><br></pre></td></tr></table></figure></li>
+<li>먼저, <b>밀도 분포</b>라는 개념을 사용하기 때문에 <b>전체 넓이는 1로 조정됩니다.</b></li>
 </ul>
-</li>
-</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axs):</span><br><span class="line">    area = Polygon(axs[<span class="number">0</span>].collections[<span class="number">0</span>].get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot at axs[<span class="subst">&#123;i&#125;</span>] = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>seaborn KDE plot 기능을 조금 더 알아봅니다.</p>
-</li>
-<li><p>펭귄 데이터셋에는 Adelie, Chinstrap, Gentoo 펭귄이 있습니다.</p>
-</li>
-<li><p>전체와 함께 이들 각각의 분포를 함께 살펴봅니다.</p>
+<li>실행 결과</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot at axs[0]= 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot at axs[1]= 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot at axs[2]= 1.000</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>seaborn KDE plot 기능을 조금 더 알아봅니다.</li>
+<li>펭귄 데이터셋에는 Adelie, Chinstrap, Gentoo 펭귄이 있습니다.</li>
+<li>전체와 함께 이들 각각의 분포를 함께 살펴봅니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax)</span><br><span class="line"></span><br><span class="line">xmin, xmax = ax.get_xlim()</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
-<p><img src="102_kdeplot_03.png"><br></p>
-</li>
-<li><p>세 종이 다른 분포를 보이며 겹쳐 그려져 있습니다.</p>
-</li>
-<li><p><b>Adelie 펭귄의 분포 일부가 전체의 합보다 높게 그려져 있습니다.</b></p>
-</li>
-<li><p>여기에서도 <b>KDE plot이 정량적으로 부정확할 수 있음을 알 수 있습니다.</b></p>
-</li>
-<li><p>이렇게 나누어 그리면 각각의 넓이가 데이터 비율만큼 표현됩니다.</p>
+<p><img src="/102_kdeplot_03.png"><br></p>
+<ul>
+<li>세 종이 다른 분포를 보이며 겹쳐 그려져 있습니다.</li>
+<li><b>Adelie 펭귄의 분포 일부가 전체의 합보다 높게 그려져 있습니다.</b></li>
+<li>여기에서도 <b>KDE plot이 정량적으로 부정확할 수 있음을 알 수 있습니다.</b></li>
+<li>이렇게 나누어 그리면 각각의 넓이가 데이터 비율만큼 표현됩니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">areas = []</span><br><span class="line"><span class="keyword">for</span> i, (p, label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(ax.get_children()[:<span class="number">4</span>], labels)):</span><br><span class="line">    area = Polygon(p.get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    areas.append(area)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot: <span class="subst">&#123;label&#125;</span> = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot: all species = 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot: Adelie = 0.360</span></span><br><span class="line"><span class="comment"># area of KDE plot: Chinstrap = 0.199</span></span><br><span class="line"><span class="comment"># area of KDE plot: Gentoo = 0.441</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot: all species = 1.000</span></span><br><span class="line"><span class="comment"># area of KDE plot: Adelie = 0.360</span></span><br><span class="line"><span class="comment"># area of KDE plot: Chinstrap = 0.199</span></span><br><span class="line"><span class="comment"># area of KDE plot: Gentoo = 0.441</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="3-4-데이터-범위-밖-잘라내기"><a href="#3-4-데이터-범위-밖-잘라내기" class="headerlink" title="3.4. 데이터 범위 밖 잘라내기"></a>3.4. 데이터 범위 밖 잘라내기</h2><ul>
 <li>데이터 범위를 벗어나 그려지는 문제를 해결하기 위한 방법으로 <code>cut</code> 매개변수를 제시하고 있습니다.</li>
 <li>smoothing bandwidth에 곱해지는 상수로 기본값은 3입니다.</li>
-<li>크기를 줄이면 적어지는데, <code>cut=0</code>을 입력하면 입력된 데이터 범위까지만 끊습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, cut=<span class="number">0</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax, cut=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">ax.set_xlim(xmin, xmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
-<img src="102_kdeplot_04.png"><br></li>
+<li>크기를 줄이면 적어지는데, <code>cut=0</code>을 입력하면 입력된 데이터 범위까지만 끊습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, cut=<span class="number">0</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax, cut=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">ax.set_xlim(xmin, xmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
+<p><img src="/102_kdeplot_04.png"><br></p>
 <h2 id="3-5-가능한-데이터-범위-밖-잘라내기"><a href="#3-5-가능한-데이터-범위-밖-잘라내기" class="headerlink" title="3.5. 가능한 데이터 범위 밖 잘라내기"></a>3.5. 가능한 데이터 범위 밖 잘라내기</h2><ul>
 <li>수집된 데이터가 가능한 데이터의 일부인 경우가 많습니다.</li>
 <li>이 때 데이터 값으로 끊으면 이 또한 왜곡이 될 수 있기 때문에, 특정 범위를 지정할 수 있습니다.</li>
 <li><code>clip</code>이라는 이름의 매개변수를 사용합니다. 여기서는 <b>2500 ~ 6500 범위</b>로 잘랐습니다. </li>
-<li><code>cut</code>에 비해 덜 잘렸고, 이 범위 안에 있는 Chinstrap과 Gentoo의 오른쪽, 그리고 Adelie의 왼쪽은 전혀 잘리지 않았습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, clip=(<span class="number">2500</span>, <span class="number">6500</span>))</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax, clip=(<span class="number">2500</span>, <span class="number">6500</span>))</span><br><span class="line"></span><br><span class="line">ax.set_xlim(xmin, xmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
-<img src="102_kdeplot_09.png"><br></li>
+<li><code>cut</code>에 비해 덜 잘렸고, 이 범위 안에 있는 Chinstrap과 Gentoo의 오른쪽, 그리고 Adelie의 왼쪽은 전혀 잘리지 않았습니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, clip=(<span class="number">2500</span>, <span class="number">6500</span>))</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax, clip=(<span class="number">2500</span>, <span class="number">6500</span>))</span><br><span class="line"></span><br><span class="line">ax.set_xlim(xmin, xmax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
+<p><img src="/102_kdeplot_09.png"><br></p>
 <h2 id="3-6-자른-이후의-넓이-확인"><a href="#3-6-자른-이후의-넓이-확인" class="headerlink" title="3.6. 자른 이후의 넓이 확인"></a>3.6. 자른 이후의 넓이 확인</h2><ul>
-<li><p>KDE plot은 밀도 함수이기 때문에 넓이 = 1로 설정된다고 했습니다.</p>
-</li>
-<li><p>그렇지만 <code>cut</code>이나 <code>clip</code>을 적용하면 잘리는 만큼 넓이가 작아집니다.</p>
-</li>
-<li><p><code>cut</code> 적용 전과 뒤를 겹쳐서 확인합니다. </p>
+<li>KDE plot은 밀도 함수이기 때문에 넓이 &#x3D; 1로 설정된다고 했습니다.</li>
+<li>그렇지만 <code>cut</code>이나 <code>clip</code>을 적용하면 잘리는 만큼 넓이가 작아집니다.</li>
+<li><code>cut</code> 적용 전과 뒤를 겹쳐서 확인합니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># without cut=0</span></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, ec=<span class="string">&quot;gray&quot;</span>, fc=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># with cut=0</span></span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, ax=ax, lw=<span class="number">3</span>, ec=<span class="string">&quot;k&quot;</span>, fc=<span class="string">&quot;#FFFFFF00&quot;</span>, cut=<span class="number">0</span>)</span><br><span class="line">sns.kdeplot(x=<span class="string">&quot;body_mass_g&quot;</span>, data=df_peng, fill=<span class="literal">True</span>, hue=<span class="string">&quot;species&quot;</span>, ax=ax, </span><br><span class="line">            cut=<span class="number">0</span>, lw=<span class="number">3</span>, palette=[<span class="string">&quot;b&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="string">&quot;g&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend</span></span><br><span class="line">handles = ax.get_children()[:<span class="number">4</span>]</span><br><span class="line">labels = [<span class="string">&quot;all species&quot;</span>, <span class="string">&quot;Adelie&quot;</span>, <span class="string">&quot;Chinstrap&quot;</span>, <span class="string">&quot;Gentoo&quot;</span>]</span><br><span class="line">ax.legend(handles=handles, labels=labels)</span><br></pre></td></tr></table></figure>
-<p><img src="102_kdeplot_05.png"><br></p>
-</li>
-<li><p><code>cut</code>이 적용된 그림은 그저 좌우가 잘릴 뿐임을 알 수 있습니다.</p>
-</li>
-<li><p>그렇다면 넓이도 줄어들 것입니다.</p>
+<p><img src="/102_kdeplot_05.png"><br></p>
+<ul>
+<li><code>cut</code>이 적용된 그림은 그저 좌우가 잘릴 뿐임을 알 수 있습니다.</li>
+<li>그렇다면 넓이도 줄어들 것입니다.</li>
+</ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, (p, label, a) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(ax.get_children()[<span class="number">4</span>:<span class="number">8</span>], labels, areas)):</span><br><span class="line">    area = Polygon(p.get_paths()[<span class="number">0</span>].vertices).area</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;# area of KDE plot: <span class="subst">&#123;label&#125;</span> = <span class="subst">&#123;area:<span class="number">.3</span>f&#125;</span> (cf. <span class="subst">&#123;a:<span class="number">.3</span>f&#125;</span>)&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot: all species = 0.986 (cf. 1.000)</span></span><br><span class="line"><span class="comment"># area of KDE plot: Adelie = 0.353 (cf. 0.360)</span></span><br><span class="line"><span class="comment"># area of KDE plot: Chinstrap = 0.195 (cf. 0.199)</span></span><br><span class="line"><span class="comment"># area of KDE plot: Gentoo = 0.423 (cf. 0.441)</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과</li>
 </ul>
-</li>
-<li><p>잘려지는 넓이가 보상되지 않고 있습니다.</p>
-</li>
-<li><p>데이터에 따라, 그리고 수집하는 숫자의 범위에 따라 얼마가 잘려질지는 알 수 없습니다.</p>
-</li>
-<li><p>기사에 나온 그림처럼 분포가 한쪽 끝에 치우쳐 있다면 훨씬 많이 잘려나갈 것입니다.</p>
-</li>
-<li><p>보완 알고리즘을 구현하려 해도 생각보다 복잡합니다. 단순하게 비율을 곱하는 것으로는 부족합니다.</p>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># area of KDE plot: all species = 0.986 (cf. 1.000)</span></span><br><span class="line"><span class="comment"># area of KDE plot: Adelie = 0.353 (cf. 0.360)</span></span><br><span class="line"><span class="comment"># area of KDE plot: Chinstrap = 0.195 (cf. 0.199)</span></span><br><span class="line"><span class="comment"># area of KDE plot: Gentoo = 0.423 (cf. 0.441)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>잘려지는 넓이가 보상되지 않고 있습니다.</li>
+<li>데이터에 따라, 그리고 수집하는 숫자의 범위에 따라 얼마가 잘려질지는 알 수 없습니다.</li>
+<li>기사에 나온 그림처럼 분포가 한쪽 끝에 치우쳐 있다면 훨씬 많이 잘려나갈 것입니다.</li>
+<li>보완 알고리즘을 구현하려 해도 생각보다 복잡합니다. 단순하게 비율을 곱하는 것으로는 부족합니다.</li>
 </ul>
 <h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
 <li>KDE plot은 매끈한 곡선으로 이루어져 보기 좋고 겹쳐 그리기 좋아 많이 사용됩니다.</li>
@@ -391,22 +392,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/05/27/Python-DS-102-kdeplot/" data-id="cmhueoxwv009s4gxtcex7790v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/05/27/Python-DS-102-kdeplot/" data-id="cuidObSl0IQUMtzi6yqI4ofIb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -482,7 +473,7 @@
         "genre": "Python Data Science",
         "datePublished": "2022-05-27",
         "dateCreated": "2022-05-27",
-        "dateModified": "2022-05-27",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/05/27/Python-DS-102-kdeplot/",
         "description": "
 경향신문과 언더스코어가 공동으로 조사한 ‘부모찬스’기사가 실렸습니다.
@@ -491,7 +482,7 @@ KDE plot의 특징과 한계를 살펴봅니다.
 
 
 언더스코어경향신문: 두 얼굴의 공정(1) 조국과 정호영, 누가 더 ‘불공정’합니까?경향신문: 정치 성향에 따라 부모찬스에 들이댄 ‘공정 잣",
-        "wordCount": 1727
+        "wordCount": 1726
     }
 </script>
 
@@ -573,16 +564,6 @@ KDE plot의 특징과 한계를 살펴봅니다.
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -816,10 +797,6 @@ KDE plot의 특징과 한계를 살펴봅니다.
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 

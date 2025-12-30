@@ -12,19 +12,19 @@
     
     <meta name="keywords" content="python,pandas" />
     
-    <meta name="description" content="수입이 불규칙한 영업사원을 가정하고, 은행계좌를 간단하게 분석합니다. 데이터프레임의 문자열 일부를 이용해 데이터를 분류합니다. 분석을 위한 데이터도 직접 만들어봅니다.  1. 입금 데이터 급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다. 그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다.    투잡을 하는 영업사원 A씨">
+    <meta name="description" content="수입이 불규칙한 영업사원을 가정하고, 은행계좌를 간단하게 분석합니다. 데이터프레임의 문자열 일부를 이용해 데이터를 분류합니다. 분석을 위한 데이터도 직접 만들어봅니다.  1. 입금 데이터 급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다.  그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다.   투잡을 하는 영업사원 A씨">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Income from Two Companies (1)">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/01/21/Python-DS-57-income/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="수입이 불규칙한 영업사원을 가정하고, 은행계좌를 간단하게 분석합니다. 데이터프레임의 문자열 일부를 이용해 데이터를 분류합니다. 분석을 위한 데이터도 직접 만들어봅니다.  1. 입금 데이터 급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다. 그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다.    투잡을 하는 영업사원 A씨">
+<meta property="og:description" content="수입이 불규칙한 영업사원을 가정하고, 은행계좌를 간단하게 분석합니다. 데이터프레임의 문자열 일부를 이용해 데이터를 분류합니다. 분석을 위한 데이터도 직접 만들어봅니다.  1. 입금 데이터 급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다.  그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다.   투잡을 하는 영업사원 A씨">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/57_income_0.png">
 <meta property="article:published_time" content="2021-01-21T08:35:00.000Z">
-<meta property="article:modified_time" content="2021-01-29T02:54:41.029Z">
+<meta property="article:modified_time" content="2025-12-30T06:28:38.329Z">
 <meta property="article:author" content="Jehyun Lee">
-<meta property="article:tag" content="python">
 <meta property="article:tag" content="pandas">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/57_income_0.png">
     
@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
     <div id="wrap">
@@ -200,7 +200,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/01/21/Python-DS-57-income/" class="article-date">
-     <time datetime="2021-01-29T02:54:41.029Z" itemprop="dateModified">2021-01-29</time>
+     <time datetime="2025-12-30T06:28:38.329Z" itemprop="dateModified">2025-12-30</time>
   </a>
 </div>
 
@@ -233,42 +233,46 @@
 <li>분석을 위한 데이터도 직접 만들어봅니다.</li>
 </ul>
 <h1 id="1-입금-데이터"><a href="#1-입금-데이터" class="headerlink" title="1. 입금 데이터"></a>1. 입금 데이터</h1><ul>
-<li>급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다.</li>
-<li>그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다. </li>
-</ul>
-<ul>
-<li><b>투잡을 하는 영업사원 A씨의 통장</b>에 찍힌 연간 수입을 정리합시다.</li>
-<li>인터넷 뱅킹을 통해 거래내역을 조회할 수 있습니다.</li>
-<li><b>날짜</b>별 <b>용도(적요)</b>에 따른 <b>입금액</b>을 분석합니다.<br><br><img src="57_income_01.png"><br></li>
+<li><p>급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다.</p>
+</li>
+<li><p>그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다. </p>
+</li>
+<li><p><b>투잡을 하는 영업사원 A씨의 통장</b>에 찍힌 연간 수입을 정리합시다.</p>
+</li>
+<li><p>인터넷 뱅킹을 통해 거래내역을 조회할 수 있습니다.</p>
+</li>
+<li><p><b>날짜</b>별 <b>용도(적요)</b>에 따른 <b>입금액</b>을 분석합니다.<br><br><img src="/57_income_01.png"><br></p>
+</li>
 </ul>
 <h2 id="1-1-입금-내역-데이터를-읽어옵니다"><a href="#1-1-입금-내역-데이터를-읽어옵니다" class="headerlink" title="1.1. 입금 내역 데이터를 읽어옵니다."></a>1.1. 입금 내역 데이터를 읽어옵니다.</h2><ul>
 <li>사용된 데이터를 <a href="57_income.xlsx">여기서 다운</a>받을 수 있습니다.</li>
-<li>진짜 데이터가 아닌, <b>임의로 만든 데이터</b>입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">y2020 = pd.read_excel(<span class="string">&quot;57_income.xlsx&quot;</span>)</span><br><span class="line">y2020.head(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-<img src="57_income_02.png"><br></li>
+<li>진짜 데이터가 아닌, <b>임의로 만든 데이터</b>입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">y2020 = pd.read_excel(<span class="string">&quot;57_income.xlsx&quot;</span>)</span><br><span class="line">y2020.head(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/57_income_02.png"><br></p>
 <ul>
-<li>여러 입금내역이 섞여있습니다.<ul>
+<li><p>여러 입금내역이 섞여있습니다.</p>
+<ul>
 <li><b>성과급</b>, <b>컨텐츠</b>, <b>결제환급</b>, <b>카드</b>, <b>출장</b>, 이런 내용이 있습니다.</li>
 <li>A씨는 <b>영업사원</b>으로 근무하는 동시에 퇴근 후와 주말을 이용해 <b>컨텐츠</b>를 제작합니다.</li>
 <li>본업인 <b>회사</b>, 그리고 <b>투잡</b>인 컨텐츠 제작과 관계된 내역만을 골라내봅니다.</li>
 </ul>
 </li>
-</ul>
-<ul>
-<li><b>회사</b>에서는 세 가지 수입이 있습니다.<ol>
+<li><p><b>회사</b>에서는 세 가지 수입이 있습니다.</p>
+<ol>
 <li><b>기본급 :</b> 매달 200만원. 달마다 약간의 변동이 있습니다.</li>
 <li><b>출장비 :</b> 일비 3만원, 그리고 장소 이동 1건당 교통비 3만원.</li>
 <li><b>성과급 :</b> 계약 성사시 건당 1천만원입니다.</li>
 </ol>
 </li>
-<li><b>투잡</b>에서는 두 가지 수입이 있습니다.<ol>
+<li><p><b>투잡</b>에서는 두 가지 수입이 있습니다.</p>
+<ol>
 <li><b>컨텐츠 제작비 :</b> 컨텐츠 회사와 건당 10만원의 계약을 했습니다.<br> 출장이 없는 날의 60% 가량을 투자합니다.</li>
 <li><b>2차 창작비 :</b> 드물지만 컨텐츠가 2차 창작됩니다.<br> 1% 확률로 출판 계약, 저작권료 등으로 건당 100만원을 받습니다.</li>
 </ol>
 </li>
-</ul>
-<ul>
-<li>그리고 제외해야 하는 <b>사적 입금액</b>이 있습니다.<ol>
+<li><p>그리고 제외해야 하는 <b>사적 입금액</b>이 있습니다.</p>
+<ol>
 <li><b>카드 결제 취소액</b>이 입금되기도 하고</li>
 <li><b>가족</b>으로부터 자녀에게 오는 용돈이 있습니다.</li>
 </ol>
@@ -276,24 +280,32 @@
 </ul>
 <h2 id="1-2-총-입금액-확인"><a href="#1-2-총-입금액-확인" class="headerlink" title="1.2. 총 입금액 확인"></a>1.2. 총 입금액 확인</h2><ul>
 <li>총 입금액을 확인합니다.</li>
-<li><b>카드 환불금</b>, <b>자녀에게 줄 돈</b>이 섞여있는 금액입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y2020[<span class="string">&quot;입금액&quot;</span>].<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
+<li><b>카드 환불금</b>, <b>자녀에게 줄 돈</b>이 섞여있는 금액입니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y2020[<span class="string">&quot;입금액&quot;</span>].<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">76418000</span><br></pre></td></tr></table></figure></li>
+<li>실행 결과:</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">76418000</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>총 7천6백4십만원 가량입니다만 읽기 힘듭니다.</li>
 <li>읽기 좋게 <b>천 단위로 쉼표</b>를 찍습니다.</li>
-<li><code>format(데이터, &quot;,&quot;)</code>를 사용하면 쉽게 가능합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">format</span>(y2020[<span class="string">&quot;입금액&quot;</span>].<span class="built_in">sum</span>(), <span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
+<li><code>format(데이터, &quot;,&quot;)</code>를 사용하면 쉽게 가능합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">format</span>(y2020[<span class="string">&quot;입금액&quot;</span>].<span class="built_in">sum</span>(), <span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;76,418,000&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>실행 결과:</li>
 </ul>
-</li>
-</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;76,418,000&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
 <h2 id="1-3-소득-확인"><a href="#1-3-소득-확인" class="headerlink" title="1.3. 소득 확인"></a>1.3. 소득 확인</h2><ul>
-<li>일을 해서 얻은 소득만 확인합니다.</li>
-<li><b>“적요”</b>에서 <b>기본급, 출장비, 성과급, 컨텐츠, 2차 창작비</b>를 추출합니다.<ol>
+<li><p>일을 해서 얻은 소득만 확인합니다.</p>
+</li>
+<li><p><b>“적요”</b>에서 <b>기본급, 출장비, 성과급, 컨텐츠, 2차 창작비</b>를 추출합니다.</p>
+<ol>
 <li><b>기본급 : ‘우리회사’</b> 뒤에 숫자가 붙어 입금됩니다.</li>
 <li><b>출장비 : ‘출장’</b> 뒤에 숫자가 붙어 입금됩니다.</li>
 <li><b>성과급 : </b>건당 <b>‘성과급’</b>으로 입금됩니다.</li>
@@ -301,34 +313,49 @@
 <li><b>2차 창작물 : ‘출판 계약금’, ‘저작권료’</b>등으로 입금됩니다.</li>
 </ol>
 </li>
-<li>숫자를 제외하고 공통으로 포함된 단어만 사용해서 추출합니다.</li>
-<li>근로소득만 담은 데이터프레임을 <b>y2020_company</b>로 저장합니다.</li>
-<li><code>pd.Series.str.contains(&quot;문자열&quot;)</code>을 사용합니다. <code>regex=True</code>로 정규식을 사용할 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y2020_company = y2020.loc[y2020[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;우리회사|출장|성과급|컨텐츠|출판|출연|저작권&quot;</span>, regex=<span class="literal">True</span>)]</span><br><span class="line">y2020_company[<span class="string">&quot;입금액&quot;</span>] = y2020_company[<span class="string">&quot;입금액&quot;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">y2020_company.head()</span><br></pre></td></tr></table></figure>
-<img src="57_income_03.png"><br></li>
-</ul>
-<ul>
-<li>총 근로소득을 확인해봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">format</span>(y2020_company[<span class="string">&quot;입금액&quot;</span>].<span class="built_in">sum</span>(), <span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행 결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;65,826,000&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+<li><p>숫자를 제외하고 공통으로 포함된 단어만 사용해서 추출합니다.</p>
+</li>
+<li><p>근로소득만 담은 데이터프레임을 <b>y2020_company</b>로 저장합니다.</p>
+</li>
+<li><p><code>pd.Series.str.contains(&quot;문자열&quot;)</code>을 사용합니다. <code>regex=True</code>로 정규식을 사용할 수 있습니다.</p>
 </li>
 </ul>
-<h3 id="1-3-1-소득원별-소득"><a href="#1-3-1-소득원별-소득" class="headerlink" title="1.3.1. 소득원별 소득"></a>1.3.1. 소득원별 소득</h3><ul>
-<li>같은 명령을 사용해서 소득원별 index를 추출합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 1. 회사</span></span><br><span class="line"><span class="comment"># 기본급</span></span><br><span class="line">index_salary = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;우리회사&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 출장비</span></span><br><span class="line">index_biztrip = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;출장&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 성과급</span></span><br><span class="line">index_success = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;성과급&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment">### 2. 투잡</span></span><br><span class="line"><span class="comment"># 컨텐츠 제작비</span></span><br><span class="line">index_contents = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;컨텐츠&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2차 창작물</span></span><br><span class="line">index_2nd = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;출판|출연|저작권&quot;</span>, regex=<span class="literal">True</span>)].index</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y2020_company = y2020.loc[y2020[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;우리회사|출장|성과급|컨텐츠|출판|출연|저작권&quot;</span>, regex=<span class="literal">True</span>)]</span><br><span class="line">y2020_company[<span class="string">&quot;입금액&quot;</span>] = y2020_company[<span class="string">&quot;입금액&quot;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">y2020_company.head()</span><br></pre></td></tr></table></figure>
+<p><img src="/57_income_03.png"><br></p>
+<ul>
+<li>총 근로소득을 확인해봅니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">format</span>(y2020_company[<span class="string">&quot;입금액&quot;</span>].<span class="built_in">sum</span>(), <span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행 결과:</li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;65,826,000&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="1-3-1-소득원별-소득"><a href="#1-3-1-소득원별-소득" class="headerlink" title="1.3.1. 소득원별 소득"></a>1.3.1. 소득원별 소득</h3><ul>
+<li>같은 명령을 사용해서 소득원별 index를 추출합니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 1. 회사</span></span><br><span class="line"><span class="comment"># 기본급</span></span><br><span class="line">index_salary = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;우리회사&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 출장비</span></span><br><span class="line">index_biztrip = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;출장&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 성과급</span></span><br><span class="line">index_success = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;성과급&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment">### 2. 투잡</span></span><br><span class="line"><span class="comment"># 컨텐츠 제작비</span></span><br><span class="line">index_contents = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;컨텐츠&quot;</span>, regex=<span class="literal">False</span>)].index</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2차 창작물</span></span><br><span class="line">index_2nd = y2020_company.loc[y2020_company[<span class="string">&quot;적요&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;출판|출연|저작권&quot;</span>, regex=<span class="literal">True</span>)].index</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>그리고 <b>‘type’</b>이라는 컬럼을 새로 만들어 정리합니다.</li>
-<li><b><code>groupby</code>로 정렬</b>하기 위해서입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">y2020_company[<span class="string">&quot;type&quot;</span>] = np.nan</span><br><span class="line"></span><br><span class="line">y2020_company.loc[index_salary, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;기본급&quot;</span></span><br><span class="line">y2020_company.loc[index_biztrip, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;출장비&quot;</span></span><br><span class="line">y2020_company.loc[index_success, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;성과급&quot;</span></span><br><span class="line"></span><br><span class="line">y2020_company.loc[index_contents, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;컨텐츠&quot;</span></span><br><span class="line">y2020_company.loc[index_2nd, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;2차&quot;</span></span><br></pre></td></tr></table></figure>
-<img src="57_income_04.png"><br></li>
+<li><b><code>groupby</code>로 정렬</b>하기 위해서입니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">y2020_company[<span class="string">&quot;type&quot;</span>] = np.nan</span><br><span class="line"></span><br><span class="line">y2020_company.loc[index_salary, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;기본급&quot;</span></span><br><span class="line">y2020_company.loc[index_biztrip, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;출장비&quot;</span></span><br><span class="line">y2020_company.loc[index_success, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;성과급&quot;</span></span><br><span class="line"></span><br><span class="line">y2020_company.loc[index_contents, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;컨텐츠&quot;</span></span><br><span class="line">y2020_company.loc[index_2nd, <span class="string">&quot;type&quot;</span>] = <span class="string">&quot;2차&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/57_income_04.png"><br></p>
 <h3 id="1-3-2-시각화"><a href="#1-3-2-시각화" class="headerlink" title="1.3.2. 시각화"></a>1.3.2. 시각화</h3><ul>
 <li>소득원별 소득을 보기 좋게 그림으로 표현합니다.</li>
-<li><b>한글 사용</b>을 설정하고, <b>seaborn</b>의 힘을 빌립니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=<span class="string">&#x27;NanumGothic&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><b>한글 사용</b>을 설정하고, <b>seaborn</b>의 힘을 빌립니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=<span class="string">&#x27;NanumGothic&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li><b><code>plt.subplots()</code></b>에 <b><code>gridspec_kw</code></b>를 사용하면 비대칭 subplot을 만들기 편리합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;width_ratios&quot;</span>:[<span class="number">3</span>,<span class="number">2</span>], <span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_income</span>(<span class="params">df, idx, ax, palette=<span class="string">&quot;tab10&quot;</span>, title=<span class="literal">None</span></span>):</span></span><br><span class="line">    sns.barplot(x=idx, y=<span class="string">&quot;입금액&quot;</span>, data=df.loc[idx], palette=palette, ax=ax, zorder=<span class="number">2</span>)</span><br><span class="line">    ax.set_xlabel(<span class="literal">None</span>)</span><br><span class="line">    ax.set_ylabel(<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    yticks = ax.get_yticks()</span><br><span class="line">    ax.set_yticks(yticks)</span><br><span class="line">    ax.set_yticklabels([])</span><br><span class="line"></span><br><span class="line">    ax.set_facecolor(<span class="string">&quot;0.9&quot;</span>)</span><br><span class="line">    [ax.spines[k].set_visible(<span class="literal">False</span>) <span class="keyword">for</span> k <span class="keyword">in</span> [<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]]</span><br><span class="line"></span><br><span class="line">    ax.tick_params(axis=<span class="string">&quot;both&quot;</span>, length=<span class="number">0</span>)</span><br><span class="line">    [ax.axhline(y, zorder=<span class="number">1</span>, c=<span class="string">&quot;lightgray&quot;</span>) <span class="keyword">for</span> y <span class="keyword">in</span> yticks];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.patches):</span><br><span class="line">        h = p.get_height()</span><br><span class="line">        ax.text(i, h+<span class="number">2e6</span>, <span class="built_in">format</span>(<span class="built_in">int</span>(h), <span class="string">&quot;,&quot;</span>), ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">        </span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;title&#125;</span> (<span class="subst">&#123;<span class="built_in">format</span>(<span class="built_in">int</span>(df.loc[idx].<span class="built_in">sum</span>()), <span class="string">&#x27;,&#x27;</span>)&#125;</span>)&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> ax</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">idx_company = [<span class="string">&quot;기본급&quot;</span>, <span class="string">&quot;출장비&quot;</span>, <span class="string">&quot;성과급&quot;</span>]</span><br><span class="line">idx_2job = [<span class="string">&quot;컨텐츠&quot;</span>, <span class="string">&quot;2차&quot;</span>]</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>] = plot_income(y2020_g, idx_company, axs[<span class="number">0</span>], palette=<span class="string">&quot;Blues_r&quot;</span>, title=<span class="string">&quot;회사&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>] = plot_income(y2020_g, idx_2job, axs[<span class="number">1</span>], palette=<span class="string">&quot;Reds_r&quot;</span>, title=<span class="string">&quot;투잡&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">axs[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_color(<span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.suptitle(<span class="string">f&quot;2020년 총 소득: <span class="subst">&#123;<span class="built_in">format</span>(<span class="built_in">int</span>(y2020_g.<span class="built_in">sum</span>()), <span class="string">&#x27;,&#x27;</span>)&#125;</span>원&quot;</span>)</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<img src="57_income.png"></li>
+<li><b><code>plt.subplots()</code></b>에 <b><code>gridspec_kw</code></b>를 사용하면 비대칭 subplot을 만들기 편리합니다.</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;width_ratios&quot;</span>:[<span class="number">3</span>,<span class="number">2</span>], <span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_income</span>(<span class="params">df, idx, ax, palette=<span class="string">&quot;tab10&quot;</span>, title=<span class="literal">None</span></span>):</span><br><span class="line">    sns.barplot(x=idx, y=<span class="string">&quot;입금액&quot;</span>, data=df.loc[idx], palette=palette, ax=ax, zorder=<span class="number">2</span>)</span><br><span class="line">    ax.set_xlabel(<span class="literal">None</span>)</span><br><span class="line">    ax.set_ylabel(<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    yticks = ax.get_yticks()</span><br><span class="line">    ax.set_yticks(yticks)</span><br><span class="line">    ax.set_yticklabels([])</span><br><span class="line"></span><br><span class="line">    ax.set_facecolor(<span class="string">&quot;0.9&quot;</span>)</span><br><span class="line">    [ax.spines[k].set_visible(<span class="literal">False</span>) <span class="keyword">for</span> k <span class="keyword">in</span> [<span class="string">&quot;left&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;right&quot;</span>]]</span><br><span class="line"></span><br><span class="line">    ax.tick_params(axis=<span class="string">&quot;both&quot;</span>, length=<span class="number">0</span>)</span><br><span class="line">    [ax.axhline(y, zorder=<span class="number">1</span>, c=<span class="string">&quot;lightgray&quot;</span>) <span class="keyword">for</span> y <span class="keyword">in</span> yticks];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.patches):</span><br><span class="line">        h = p.get_height()</span><br><span class="line">        ax.text(i, h+<span class="number">2e6</span>, <span class="built_in">format</span>(<span class="built_in">int</span>(h), <span class="string">&quot;,&quot;</span>), ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">        </span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;title&#125;</span> (<span class="subst">&#123;<span class="built_in">format</span>(<span class="built_in">int</span>(df.loc[idx].<span class="built_in">sum</span>()), <span class="string">&#x27;,&#x27;</span>)&#125;</span>)&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> ax</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">idx_company = [<span class="string">&quot;기본급&quot;</span>, <span class="string">&quot;출장비&quot;</span>, <span class="string">&quot;성과급&quot;</span>]</span><br><span class="line">idx_2job = [<span class="string">&quot;컨텐츠&quot;</span>, <span class="string">&quot;2차&quot;</span>]</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>] = plot_income(y2020_g, idx_company, axs[<span class="number">0</span>], palette=<span class="string">&quot;Blues_r&quot;</span>, title=<span class="string">&quot;회사&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>] = plot_income(y2020_g, idx_2job, axs[<span class="number">1</span>], palette=<span class="string">&quot;Reds_r&quot;</span>, title=<span class="string">&quot;투잡&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">True</span>)</span><br><span class="line">axs[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_color(<span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.suptitle(<span class="string">f&quot;2020년 총 소득: <span class="subst">&#123;<span class="built_in">format</span>(<span class="built_in">int</span>(y2020_g.<span class="built_in">sum</span>()), <span class="string">&#x27;,&#x27;</span>)&#125;</span>원&quot;</span>)</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<p><img src="/57_income.png"></p>
 <h2 id="1-4-결론"><a href="#1-4-결론" class="headerlink" title="1.4. 결론"></a>1.4. 결론</h2><ul>
 <li>숫자들의 나열인 통장 입금내역을 간단하게 정리했습니다.</li>
 <li><b><code>pandas.DataFrame</code></b> 또는 <b><code>pandas.Series</code></b>명령은 데이터를 정리하기 좋습니다.</li>
@@ -347,22 +374,12 @@
 		 </a><br>
 		 <p><b>도움이 되셨나요? 카페인을 투입하시면 다음 포스팅으로 변환됩니다</b>
 		</div>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/21/Python-DS-57-income/" data-id="cmhueoy1200hq4gxt0jf68x4i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/21/Python-DS-57-income/" data-id="cuidok2KtlqAUfYEZcIP5RLBf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -438,7 +455,7 @@
         "genre": "Python Data Science",
         "datePublished": "2021-01-21",
         "dateCreated": "2021-01-21",
-        "dateModified": "2021-01-29",
+        "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2021/01/21/Python-DS-57-income/",
         "description": "
 수입이 불규칙한 영업사원을 가정하고, 은행계좌를 간단하게 분석합니다.
@@ -447,11 +464,11 @@
 
 1. 입금 데이터
 급여통장을 지정하고 모든 수입을 통일하면 창구는 일원화됩니다.
+
 그러나 통장에 찍히는 급여내역이 그다지 친절하지 않으면 정리가 어렵습니다. 
 
-
 투잡을 하는 영업사원 A씨",
-        "wordCount": 921
+        "wordCount": 927
     }
 </script>
 
@@ -533,16 +550,6 @@
 </nav>
 
     
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2487538550660613"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div class="widgets-container">
         
             
@@ -776,10 +783,6 @@
 
     
 
-    
-      <script data-ad-client="ca-ca-pub-2487538550660613" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    
     
 
 
