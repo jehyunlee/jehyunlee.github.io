@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,color" />
     
-    <meta name="description" content="contributor : Jerry Kim   색을 고르다 보면 이런 단어들을 만납니다:Brightness, Lightness, Value, Luminosity, Luma 우리 말로는 모두 명도, 명도, 명도, 명도, 명도이지만 의미가 모두 다릅니다. 같은 뜻으로 생각하면 실수할 수도 있으니 한번 짚고 넘어갑시다.  1. 용어 정리 Gilchrist, “">
+    <meta name="description" content="contributor : Jerry Kim   색을 고르다 보면 이런 단어들을 만납니다: Brightness, Lightness, Value, Luminosity, Luma 우리 말로는 모두 명도, 명도, 명도, 명도, 명도이지만 의미가 모두 다릅니다. 같은 뜻으로 생각하면 실수할 수도 있으니 한번 짚고 넘어갑시다.  1. 용어 정리  Gilchrist,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="색의 속성에 대한 단어들">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/03/22/Python-DS-63-mpl_colors_qualitative/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="contributor : Jerry Kim   색을 고르다 보면 이런 단어들을 만납니다:Brightness, Lightness, Value, Luminosity, Luma 우리 말로는 모두 명도, 명도, 명도, 명도, 명도이지만 의미가 모두 다릅니다. 같은 뜻으로 생각하면 실수할 수도 있으니 한번 짚고 넘어갑시다.  1. 용어 정리 Gilchrist, “">
+<meta property="og:description" content="contributor : Jerry Kim   색을 고르다 보면 이런 단어들을 만납니다: Brightness, Lightness, Value, Luminosity, Luma 우리 말로는 모두 명도, 명도, 명도, 명도, 명도이지만 의미가 모두 다릅니다. 같은 뜻으로 생각하면 실수할 수도 있으니 한번 짚고 넘어갑시다.  1. 용어 정리  Gilchrist,">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/63_mpl_0.png">
 <meta property="article:published_time" content="2021-03-22T03:07:00.000Z">
@@ -233,30 +233,42 @@
 <p><b>contributor :</b> <a target="_blank" rel="noopener" href="http://jjerry-k.github.io/">Jerry Kim</a></p>
 </blockquote>
 <ul>
-<li>색을 고르다 보면 이런 단어들을 만납니다:<br><i>Brightness, Lightness, Value, Luminosity, Luma</i></li>
+<li>색을 고르다 보면 이런 단어들을 만납니다:<br>
+<i>Brightness, Lightness, Value, Luminosity, Luma</i></li>
 <li>우리 말로는 모두 명도, 명도, 명도, 명도, 명도이지만 의미가 모두 다릅니다.</li>
 <li>같은 뜻으로 생각하면 실수할 수도 있으니 한번 짚고 넘어갑시다.</li>
 </ul>
-<h1 id="1-용어-정리"><a href="#1-용어-정리" class="headerlink" title="1. 용어 정리"></a>1. 용어 정리</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://linkinghub.elsevier.com/retrieve/pii/S0960982207008780">Gilchrist, “Lightness and Brightness”, Curr Biol. 2007</a><br><a target="_blank" rel="noopener" href="http://changingminds.org/explanations/perception/visual/lightness_variants.htm">Lightness, Lumiosity, Luminance and Other Tonal Descriptors</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space#cite_note-11">wikipedia: CIELAB color space</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HSL_and_HSV">wikipedia: HSL and HSV</a><br>데이터 시각화, 인지과학을 만나다 (에이콘)</p>
+<h1>1. 용어 정리</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://linkinghub.elsevier.com/retrieve/pii/S0960982207008780">Gilchrist, “Lightness and Brightness”, Curr Biol. 2007</a><br>
+<a target="_blank" rel="noopener" href="http://changingminds.org/explanations/perception/visual/lightness_variants.htm">Lightness, Lumiosity, Luminance and Other Tonal Descriptors</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space#cite_note-11">wikipedia: CIELAB color space</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HSL_and_HSV">wikipedia: HSL and HSV</a><br>
+데이터 시각화, 인지과학을 만나다 (에이콘)</p>
 </blockquote>
 <ul>
-<li><p><b>lightness</b>와 <b>brightness</b>에 대한 글은 <a target="_blank" rel="noopener" href="https://linkinghub.elsevier.com/retrieve/pii/S0960982207008780">2007년의 논문 설명</a>이 가장 와닿았습니다.</p>
+<li>
+<p><b>lightness</b>와 <b>brightness</b>에 대한 글은 <a target="_blank" rel="noopener" href="https://linkinghub.elsevier.com/retrieve/pii/S0960982207008780">2007년의 논문 설명</a>이 가장 와닿았습니다.</p>
 </li>
-<li><p><b>value</b>의 의미는 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HSL_and_HSV">wikipedia</a>가 가장 이해하기 좋았고,</p>
+<li>
+<p><b>value</b>의 의미는 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HSL_and_HSV">wikipedia</a>가 가장 이해하기 좋았고,</p>
 </li>
-<li><p>전반적으로는 <a target="_blank" rel="noopener" href="http://changingminds.org/explanations/perception/visual/lightness_variants.htm">이 글</a>에 용어들이 잘 정리되어 있습니다.</p>
+<li>
+<p>전반적으로는 <a target="_blank" rel="noopener" href="http://changingminds.org/explanations/perception/visual/lightness_variants.htm">이 글</a>에 용어들이 잘 정리되어 있습니다.</p>
 </li>
-<li><p>제 블로그 글에서도 용어가 왔다갔다 해왔습니다. 이제부터라도 통일하려고 합니다.</p>
+<li>
+<p>제 블로그 글에서도 용어가 왔다갔다 해왔습니다. 이제부터라도 통일하려고 합니다.</p>
 </li>
-<li><p><b>데이터 시각화, 인지과학을 만나다</b>의 번역을 주로 따랐습니다.</p>
+<li>
+<p><b>데이터 시각화, 인지과학을 만나다</b>의 번역을 주로 따랐습니다.</p>
 <ul>
 <li><b>brightness :</b> 명도(明度)</li>
-<li><b>lightness :</b> 밝기 </li>
+<li><b>lightness :</b> 밝기</li>
 <li><b>luminance :</b> 휘도(輝度)</li>
 <li><b>luminosity(luminous intensity) :</b> 광도(光度)</li>
 <li><b>hue :</b> 색상(色相)</li>
-<li><b>value :</b> 밸류<ul>
+<li><b>value :</b> 밸류
+<ul>
 <li>모든 문서에 <b>명도</b>로 번역되어 있지만 brightness, lightness와 충돌합니다.</li>
 <li>고민을 거듭한 끝에 영어 발음을 그대로 사용하기로 했습니다.</li>
 </ul>
@@ -265,149 +277,173 @@
 </ul>
 </li>
 </ul>
-<h2 id="1-1-간단한-역사"><a href="#1-1-간단한-역사" class="headerlink" title="1.1. 간단한 역사"></a>1.1. 간단한 역사</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Young%E2%80%93Helmholtz_theory">Young-Helmholtz theory</a><br><a target="_blank" rel="noopener" href="https://wolfcrow.com/what-is-the-difference-between-cie-lab-cie-rgb-cie-xyy-and-cie-xyz/">wolfcrow: What is the difference between CIE LAB, CIE RGB, CIE xyY and CIE XYZ?</a></p>
+<h2 id="1-1-간단한-역사">1.1. 간단한 역사</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Young%E2%80%93Helmholtz_theory">Young-Helmholtz theory</a><br>
+<a target="_blank" rel="noopener" href="https://wolfcrow.com/what-is-the-difference-between-cie-lab-cie-rgb-cie-xyy-and-cie-xyz/">wolfcrow: What is the difference between CIE LAB, CIE RGB, CIE xyY and CIE XYZ?</a></p>
 </blockquote>
 <ul>
-<li><p>복잡한 일은 역사를 들여다보면 체계가 잡히기도 합니다.</p>
+<li>
+<p>복잡한 일은 역사를 들여다보면 체계가 잡히기도 합니다.</p>
 </li>
-<li><p><b>1850년경 - RGB 3원색 이론: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Young%E2%80%93Helmholtz_theory">영-헬름홀츠 색각설</a></b></p>
+<li>
+<p><b>1850년경 - RGB 3원색 이론: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Young%E2%80%93Helmholtz_theory">영-헬름홀츠 색각설</a></b></p>
 <ul>
-<li><b>“빛의 3원색”</b> &#x3D; Red, Green, Blue</li>
-<li>R + G + B &#x3D; White. 섞을 수록 밝아짐.<br></li>
+<li><b>“빛의 3원색”</b> = Red, Green, Blue</li>
+<li>R + G + B = White. 섞을 수록 밝아짐.<br><br>
+<img src="Tartan_Ribbon.jpg" alt="최초의 컬러 사진 (1861)" width="200"/></li>
 </ul>
-<img src="Tartan_Ribbon.jpg" alt="최초의 컬러 사진 (1861)" width="200"/>
-
 </li>
-<li><p><b>1906년 - CMYK 4색 인쇄: the Eagle Printing Ink Company</b></p>
+<li>
+<p><b>1906년 - CMYK 4색 인쇄: the Eagle Printing Ink Company</b></p>
 <ul>
-<li><b>“색의 3원색”</b> &#x3D; Cyan, Magenta, Yellow</li>
-<li>C + M + Y &#x3D; Black. 섞을 수록 어두워짐.<br></li>
-<li>수백년 전 RYB → CMY  → CMYK<br></li>
+<li><b>“색의 3원색”</b> = Cyan, Magenta, Yellow</li>
+<li>C + M + Y = Black. 섞을 수록 어두워짐.<br></li>
+<li>수백년 전 RYB → CMY  → CMYK<br><br>
+<img src="NIEdot367.jpg" alt="CMY 3색 인쇄 (1902)" width="200"/></li>
 </ul>
-<img src="NIEdot367.jpg" alt="CMY 3색 인쇄 (1902)" width="200"/>
-
 </li>
-<li><p><b>1913년 - 국제 조명 위원회(CIE) 설립</b></p>
+<li>
+<p><b>1913년 - 국제 조명 위원회(CIE) 설립</b></p>
 <ul>
 <li>Commission Internationale de l’éclairage</li>
 <li>색에 대한 표준 등을 정립하는 단체</li>
 </ul>
 </li>
-<li><p><b>1931년 - CIERGB, CIEXYZ 색공간 정립</b></p>
+<li>
+<p><b>1931년 - CIERGB, CIEXYZ 색공간 정립</b></p>
 <ul>
 <li>RGB : 1920년대 수행된 인간 시각에 대한 연구 기반 (W. David Wright and John Guild)</li>
-<li>XYZ : 당시까지 알려진 인간 시각의 수학적 한계. Y&#x3D;휘도, Z~blue, X&#x3D;휘도와 직교하는 RGB의 나머지 요소</li>
+<li>XYZ : 당시까지 알려진 인간 시각의 수학적 한계. Y=휘도, Z~blue, X=휘도와 직교하는 RGB의 나머지 요소</li>
 </ul>
 </li>
-<li><p><b>1938년 - HSL 색공간 정립</b></p>
+<li>
+<p><b>1938년 - HSL 색공간 정립</b></p>
 <ul>
 <li>Hue, Saturation, Luminosity (or Lightness)</li>
-<li><b>목적 : 흑백으로 진행되던 TV 방송에 휘도(L) 데이터 변경 없이 color encoding 추가</b><br></li>
+<li><b>목적 : 흑백으로 진행되던 TV 방송에 휘도(L) 데이터 변경 없이 color encoding 추가</b><br><br>
+<img src="HSL_color_solid_cylinder_saturation_gray.png" alt="HSL cylinder" width="200"/></li>
 </ul>
-<img src="HSL_color_solid_cylinder_saturation_gray.png" alt="HSL cylinder" width="200"/>
-
 </li>
-<li><p><b>1956년 - 세 가지 원뿔세포가 R, G, B를 인식한다는 것이 알려짐 (Svaetichin,  Acta Physiol Scand Suppl. 1956)</b></p>
+<li>
+<p><b>1956년 - 세 가지 원뿔세포가 R, G, B를 인식한다는 것이 알려짐 (Svaetichin,  Acta Physiol Scand Suppl. 1956)</b></p>
 <ul>
 <li>감응하는 파장은 558 nm, 531 nm, 419 nm 영역.</li>
-<li>원뿔세포의 비율은 R : G : B &#x3D; 40 : 20 : 1<br></li>
+<li>원뿔세포의 비율은 R : G : B = 40 : 20 : 1<br><br>
+<img src="conecell.PNG" alt="망막 세포 구조와 원뿔세포 배열" width="400"/></li>
 </ul>
-<img src="conecell.PNG" alt="망막 세포 구조와 원뿔세포 배열" width="400"/>
-
 </li>
-<li><p><b>1970년대 중반 - HSV 색공간 정립</b></p>
+<li>
+<p><b>1970년대 중반 - HSV 색공간 정립</b></p>
 <ul>
 <li>Hue, Saturation, Value</li>
 <li><b>목적 : HSL보다 전통적이고 직관적인 색 혼합 모델</b></li>
-<li>색이 어떻게 혼합되고 사람의 눈에 어떻게 보이는지에 중점.<br></li>
+<li>색이 어떻게 혼합되고 사람의 눈에 어떻게 보이는지에 중점.<br><br>
+<img src="HSV_color_solid_cylinder_saturation_gray.png" alt="HSV cylinder" width="200"/></li>
 </ul>
-<img src="HSV_color_solid_cylinder_saturation_gray.png" alt="HSV cylinder" width="200"/>
-
 </li>
-<li><p><b>1976년 - CIELAB 색공간 정립</b></p>
+<li>
+<p><b>1976년 - CIELAB 색공간 정립</b></p>
 <ul>
 <li><b>목적 : 사람의 인식과 최대한 비슷한 색 공간 구현</b></li>
-<li>$L^*$ : 휘도. black &#x3D; 0, white &#x3D; 100</li>
+<li>$L^*$ : 휘도. black = 0, white = 100</li>
 <li>$a^*$ : green-red 요소. -128 ~ 127</li>
-<li>$b^*$ : blue-yellow 요소. -128 ~ 127<br></li>
-</ul>
+<li>$b^*$ : blue-yellow 요소. -128 ~ 127<br><br>
 <img src="CIELAB_color_space_top_view.png" alt="CIELAB color space top view" width="200"/></li>
 </ul>
-<h2 id="1-2-용어의-뜻"><a href="#1-2-용어의-뜻" class="headerlink" title="1.2. 용어의 뜻"></a>1.2. 용어의 뜻</h2><ul>
-<li><p><b>luminosity(광도)</b> $vs$ <b>luminance(휘도)</b></p>
+</li>
+</ul>
+<h2 id="1-2-용어의-뜻">1.2. 용어의 뜻</h2>
+<ul>
+<li>
+<p><b>luminosity(광도)</b> $vs$ <b>luminance(휘도)</b></p>
 <ul>
 <li><b>광도 :</b> 물체에서 발산되는 빛 에너지.</li>
-<li><b>휘도 :</b> 관찰자의 눈에 들어오는 빛. 단위 면적당 광도. </li>
+<li><b>휘도 :</b> 관찰자의 눈에 들어오는 빛. 단위 면적당 광도.</li>
 <li>상황에 따라 둘 다 <b>HSL</b>의 구성요소로 사용됨.</li>
 </ul>
 </li>
-<li><p><b>brightness(명도)</b> $vs$ <b>lightness(밝기)</b> </p>
+<li>
+<p><b>brightness(명도)</b> $vs$ <b>lightness(밝기)</b></p>
 <ul>
-<li><b>명도 : 어두움과 밝음의 정도. 주관적인 수치.</b><ul>
+<li><b>명도 : 어두움과 밝음의 정도. 주관적인 수치.</b>
+<ul>
 <li>빛의 인식 : “perception of luminance”</li>
 </ul>
 </li>
-<li><b>밝기 : 흰색과 검정의 정도. 객관적인 수치.</b><ul>
+<li><b>밝기 : 흰색과 검정의 정도. 객관적인 수치.</b>
+<ul>
 <li>빛이 반사되는 표면의 인식 : “perception of reflectance”</li>
 <li>상황에 따라 <b>HSL</b>의 구성요소로 사용됨.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><b>lightness(밝기)</b> $vs$ <b>value(밸류)</b></p>
+<li>
+<p><b>lightness(밝기)</b> $vs$ <b>value(밸류)</b></p>
 <ul>
-<li><b>유채색의 밝기 :</b> 유채색에 하얀 물감을 섞은 정도.<ul>
+<li><b>유채색의 밝기 :</b> 유채색에 하얀 물감을 섞은 정도.
+<ul>
 <li>하얀 물감을 아주 많이 섞으면 본래 색이 사라지고 하얀 색이 됨.</li>
 </ul>
 </li>
-<li><b>유채색의 정도 :</b> 유채색에 밝은 빛을 비춘 정도.<ul>
+<li><b>유채색의 정도 :</b> 유채색에 밝은 빛을 비춘 정도.
+<ul>
 <li>밝은 빛을 아주 강하게 비춰도 본래 색이 드러남.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><b>relative luminance(상대 휘도)</b> </p>
+<li>
+<p><b>relative luminance(상대 휘도)</b></p>
 <ul>
 <li>RGB 모니터의 밝기</li>
 <li>CIEXYZ의 Y(휘도)와 유사.</li>
-<li>$Y &#x3D; 0.2126R + 0.7152G + 0.0722B$</li>
+<li>$Y = 0.2126R + 0.7152G + 0.0722B$</li>
 </ul>
 </li>
 </ul>
-<h1 id="2-Matplotlib-Colormap-속성-분석"><a href="#2-Matplotlib-Colormap-속성-분석" class="headerlink" title="2. Matplotlib Colormap 속성 분석"></a>2. Matplotlib Colormap 속성 분석</h1><blockquote>
+<h1>2. Matplotlib Colormap 속성 분석</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html?highlight=lightness">matplotlib: Choosing Colormaps in Matplotlib</a></p>
 </blockquote>
 <ul>
-<li><p>matplotlib에는 컬러맵이 다수 내장되어 있습니다.</p>
+<li>
+<p>matplotlib에는 컬러맵이 다수 내장되어 있습니다.</p>
 </li>
-<li><p>이들 컬러맵은 어떤 색들을 가지고 있는지 살펴봅시다.</p>
+<li>
+<p>이들 컬러맵은 어떤 색들을 가지고 있는지 살펴봅시다.</p>
 </li>
-<li><p><b>주의할 사항</b>이 있습니다.</p>
+<li>
+<p><b>주의할 사항</b>이 있습니다.</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html?highlight=lightness">Matplotlib 공식문서</a>에 <b>lightness($L^*$)</b>라는 표현이 있습니다.</li>
 <li>이 $L^*$는 CIELAB 색공간의 휘도(luminance)이고, 밝기(lightness)와는 다릅니다.</li>
 <li>사람이 인지하는 <b>밝은 정도</b>는 <b>휘도($L^*$)</b>가 가깝습니다.</li>
 </ul>
 </li>
-<li><p>색(color)이라는 데이터의 속성이 어떻게 다른지 엄밀히 따져보겠습니다.</p>
+<li>
+<p>색(color)이라는 데이터의 속성이 어떻게 다른지 엄밀히 따져보겠습니다.</p>
 <ul>
 <li>흔히 <b>명도</b>로 통용되는 데이터에 집중합니다.</li>
 <li><b>밸류(V), 휘도($L^<em>$), 상대 휘도(r$L^</em>$), 밝기(L)</b>가 그 대상입니다.</li>
 </ul>
 </li>
 </ul>
-<h2 id="2-1-Perpetually-Uniform-Sequential-Colormaps"><a href="#2-1-Perpetually-Uniform-Sequential-Colormaps" class="headerlink" title="2.1. Perpetually Uniform Sequential Colormaps"></a>2.1. Perpetually Uniform Sequential Colormaps</h2><ul>
+<h2 id="2-1-Perpetually-Uniform-Sequential-Colormaps">2.1. Perpetually Uniform Sequential Colormaps</h2>
+<ul>
 <li>Perpetually Uniform Sequential Colormap은 휘도($L^*$)가 <b>직선으로 증가</b>한다고 합니다.</li>
 <li>맞는지 확인해봅시다.</li>
 </ul>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/viridis.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/inferno.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/plasma.png"><br></p>
+<p><img src="viridis.png" alt=""><br></p>
+<p><img src="inferno.png" alt=""><br></p>
+<p><img src="plasma.png" alt=""><br></p>
 <ul>
-<li><p>휘도가 넓은 범위에 걸쳐 선형으로 증가하고 있습니다.</p>
+<li>
+<p>휘도가 넓은 범위에 걸쳐 선형으로 증가하고 있습니다.</p>
 </li>
-<li><p><b>밸류와 휘도, 밝기가 완전히 따로 놉니다.</b> </p>
+<li>
+<p><b>밸류와 휘도, 밝기가 완전히 따로 놉니다.</b></p>
 <ul>
 <li>시각적으로 어두운 색의 밸류가 높고, 밝은 색의 밸류가 낮기도 합니다.</li>
 <li>밝기는 휘도와 비슷하게 가다가 어느 순간 이탈합니다.</li>
@@ -415,161 +451,197 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-2-Qualitative-colormaps"><a href="#2-2-Qualitative-colormaps" class="headerlink" title="2.2. Qualitative colormaps"></a>2.2. Qualitative colormaps</h2><ul>
+<h2 id="2-2-Qualitative-colormaps">2.2. Qualitative colormaps</h2>
+<ul>
 <li>범주(category)별 비교에 주로 사용되는 qualitative colormap은 휘도($L^*$)가 <b>거의 균일</b>합니다.</li>
 <li>사람의 눈은 휘도를 데이터의 크고 작음으로 생각하는 경향이 있기 때문에,</li>
 <li>혼동을 주지 않도록 비슷한 휘도의 색을 나열하는 것입니다.</li>
 </ul>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/tab10.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/Pastel1.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/Set1.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/Accent.png"><br></p>
+<p><img src="tab10.png" alt=""><br></p>
+<p><img src="Pastel1.png" alt=""><br></p>
+<p><img src="Set1.png" alt=""><br></p>
+<p><img src="Accent.png" alt=""><br></p>
 <ul>
 <li>Perpetually Uniform Sequential Colormap에 비해 $L^*$가 특정 구간에 몰려있습니다.</li>
 <li>하지만 <b>Accent는 그렇지 않네요.</b> 사용시 주의해야겠습니다.</li>
 </ul>
-<h2 id="2-3-Miscellaneous-colormaps"><a href="#2-3-Miscellaneous-colormaps" class="headerlink" title="2.3. Miscellaneous colormaps"></a>2.3. Miscellaneous colormaps</h2><ul>
+<h2 id="2-3-Miscellaneous-colormaps">2.3. Miscellaneous colormaps</h2>
+<ul>
 <li>기타 컬러맵입니다.</li>
 <li>자주 사용되는 것들을 살펴봅니다.</li>
 </ul>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/jet.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/turbo.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/rainbow.png"><br></p>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/gnuplot.png"><br></p>
+<p><img src="jet.png" alt=""><br></p>
+<p><img src="turbo.png" alt=""><br></p>
+<p><img src="rainbow.png" alt=""><br></p>
+<p><img src="gnuplot.png" alt=""><br></p>
 <ul>
-<li><p>비슷한 무지개 계열임에도 <b>gluplot</b>은 순서를 바꿔서 <b>휘도가 순차적으로 증가</b>합니다.</p>
+<li>
+<p>비슷한 무지개 계열임에도 <b>gluplot</b>은 순서를 바꿔서 <b>휘도가 순차적으로 증가</b>합니다.</p>
 </li>
-<li><p>전체적으로 <b>상대 휘도</b>, <b>휘도</b>는 값이 유사하지만, <b>value(밸류)</b>와는 상당히 다릅니다.</p>
+<li>
+<p>전체적으로 <b>상대 휘도</b>, <b>휘도</b>는 값이 유사하지만, <b>value(밸류)</b>와는 상당히 다릅니다.</p>
 </li>
-<li><p><b>밝기</b>도 어느 정도 <b>휘도</b>와 비슷한 경향을 따릅니다. </p>
+<li>
+<p><b>밝기</b>도 어느 정도 <b>휘도</b>와 비슷한 경향을 따릅니다.</p>
 </li>
-<li><p>많은 문서에서 value를 명도라고 번역하는 바람에 <b>lightness(밝기)</b>, <b>brightness(명도)</b>와 혼동되지만 이렇게 그려놓고 보니 <b>절대 혼용하면 안 되는 개념</b>이라는 생각이 듭니다.</p>
+<li>
+<p>많은 문서에서 value를 명도라고 번역하는 바람에 <b>lightness(밝기)</b>, <b>brightness(명도)</b>와 혼동되지만 이렇게 그려놓고 보니 <b>절대 혼용하면 안 되는 개념</b>이라는 생각이 듭니다.</p>
 </li>
 </ul>
-<h1 id="3-Matplotlib-구현"><a href="#3-Matplotlib-구현" class="headerlink" title="3. Matplotlib 구현"></a>3. Matplotlib 구현</h1><ul>
-<li>앞에 나열된 그림들을 그리는 코드를 설명합니다.<ul>
+<h1>3. Matplotlib 구현</h1>
+<ul>
+<li>앞에 나열된 그림들을 그리는 코드를 설명합니다.
+<ul>
 <li><b>V(value: 밸류)</b>, <b>r$L^<em>$(relative luminance: 상대 휘도)</b>, <b>$L^</em>$(lightness: 휘도)</b>, <b>L(lightness: 밝기)</b>를 중심으로,</li>
 <li><b>H(hue: 색상)</b>, <b>S(saturation: 채도)</b>의 변화도 함께 봅니다.</li>
 </ul>
 </li>
 </ul>
-<h2 id="3-1-시각화-설계"><a href="#3-1-시각화-설계" class="headerlink" title="3.1. 시각화 설계"></a>3.1. 시각화 설계</h2><ul>
-<li><p>이렇게 화면을 구상했습니다.</p>
+<h2 id="3-1-시각화-설계">3.1. 시각화 설계</h2>
+<ul>
+<li>
+<p>이렇게 화면을 구상했습니다.</p>
 <ul>
 <li>컬러맵의 색상들을 좌측 상단에 나열하고,</li>
 <li>각 색상에 대응되는 H, S, V, r$L^<em>$, $L^</em>$, L을 바로 아래에 line plot으로 그립니다.</li>
 <li>그리고 속성들의 분포를 우측 하단에 violin plot으로 그립니다.</li>
-<li>우측 상단은 비웁니다. 단, 우측 하단의 xticklabel 대신 우측 상단 공간을 활용하겠습니다.<br><br><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_01.png"><br></li>
+<li>우측 상단은 비웁니다. 단, 우측 하단의 xticklabel 대신 우측 상단 공간을 활용하겠습니다.<br><br>
+<img src="63_mpl_01.png" alt=""><br></li>
 </ul>
 </li>
-<li><p>위 그림을 그린 코드는 이렇습니다.</p>
+<li>
+<p>위 그림을 그린 코드는 이렇습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># subplots 나누기</span></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">                                      <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">7</span>, <span class="number">3</span>]&#125;</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 폰트 설정</span></span><br><span class="line">fonts_ex = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 글자 넣기</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">0</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;colors in colormap (list)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;(blank)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, <span class="number">0</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV (line plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, <span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV distribution\n(violin plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ticks 제거</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-2-컬러맵-뿌리기"><a href="#3-2-컬러맵-뿌리기" class="headerlink" title="3.2. 컬러맵 뿌리기"></a>3.2. 컬러맵 뿌리기</h2><h3 id="3-2-1-컬러맵-가져오기"><a href="#3-2-1-컬러맵-가져오기" class="headerlink" title="3.2.1. 컬러맵 가져오기"></a>3.2.1. 컬러맵 가져오기</h3><blockquote>
+<h2 id="3-2-컬러맵-뿌리기">3.2. 컬러맵 뿌리기</h2>
+<h3 id="3-2-1-컬러맵-가져오기">3.2.1. 컬러맵 가져오기</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html?highlight=lightness">matplotlib: Choosing Colormaps in Matplotlib</a></p>
 </blockquote>
 <ul>
-<li><p>컬러맵을 하나 골라서 뿌려봅니다.</p>
+<li>
+<p>컬러맵을 하나 골라서 뿌려봅니다.</p>
 <ul>
 <li>좌측 상단 구역을 색 갯수만큼 나눠야 합니다.</li>
 </ul>
 </li>
-<li><p>컬러맵의 종류에 따라 색상의 갯수를 지정하는 방식이 달라집니다.</p>
+<li>
+<p>컬러맵의 종류에 따라 색상의 갯수를 지정하는 방식이 달라집니다.</p>
 <ul>
 <li><b>Qualitative colormap</b>은 갯수가 지정되어 있습니다.</li>
 <li><b>그 외</b>의 컬러맵은 갯수를 지정해야 합니다.</li>
 <li>10개로 지정합니다. <br></li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵 불러오기</span></span><br><span class="line">cmap_ = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"><span class="comment"># 컬러맵의 색 수</span></span><br><span class="line">ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:  <span class="comment"># qualitative colormap</span></span><br><span class="line">    ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"><span class="keyword">except</span> AttributeError: <span class="comment"># others</span></span><br><span class="line">    ncmap = <span class="number">10</span></span><br><span class="line">    cmap_ = cm.get_cmap(cmap, ncmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 수가 너무 많으면 10개로 제한</span></span><br><span class="line"><span class="keyword">if</span> ncmap &gt; <span class="number">15</span>:</span><br><span class="line">    ncmap = <span class="number">10</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵 불러오기</span></span><br><span class="line">cmap_ = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"><span class="comment"># 컬러맵의 색 수</span></span><br><span class="line">ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:  <span class="comment"># qualitative colormap</span></span><br><span class="line">    ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"><span class="keyword">except</span> AttributeError: <span class="comment"># others</span></span><br><span class="line">    ncmap = <span class="number">10</span></span><br><span class="line">    cmap_ = cm.get_cmap(cmap, ncmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 수가 너무 많으면 10개로 제한</span></span><br><span class="line"><span class="keyword">if</span> ncmap &gt; <span class="number">15</span>:</span><br><span class="line">    ncmap = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="3-2-2-컬러맵-subplots-나누기"><a href="#3-2-2-컬러맵-subplots-나누기" class="headerlink" title="3.2.2. 컬러맵 subplots 나누기"></a>3.2.2. 컬러맵 subplots 나누기</h3><ul>
-<li><p>목적에 맞게 subplots를 준비합니다.</p>
+<h3 id="3-2-2-컬러맵-subplots-나누기">3.2.2. 컬러맵 subplots 나누기</h3>
+<ul>
+<li>
+<p>목적에 맞게 subplots를 준비합니다.</p>
 <ul>
 <li>좌측 상단 구역에 색상을 하나씩 넣을 것입니다.</li>
-<li>line plot을 그릴 공간까지 잘려버렸지만 일단 넘어갑니다.<br><br><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_02.png"></li>
+<li>line plot을 그릴 공간까지 잘려버렸지만 일단 넘어갑니다.<br><br>
+<img src="63_mpl_02.png" alt=""></li>
 </ul>
 </li>
-<li><p>위 그림을 그린 코드는 이렇습니다.</p>
+<li>
+<p>위 그림을 그린 코드는 이렇습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># subplots 나누기 (ncmap 반영)</span></span><br><span class="line">fig, axes = plt.subplots(ncols=ncmap+<span class="number">1</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">                                      <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">7</span>/ncmap]*ncmap + [<span class="number">3</span>]&#125;</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 폰트 설정</span></span><br><span class="line">fonts_ex = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 글자 넣기</span></span><br><span class="line">fig.text(<span class="number">0.35</span>, <span class="number">0.83</span>, <span class="string">&quot;colors in colormap (list)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">0</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;(blank)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">fig.text(<span class="number">0.35</span>, <span class="number">0.33</span>, <span class="string">&quot;HSV (line plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV distribution\n(violin plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ticks 제거</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-3-컬러맵-색상-칠하기"><a href="#3-2-3-컬러맵-색상-칠하기" class="headerlink" title="3.2.3. 컬러맵 색상 칠하기"></a>3.2.3. 컬러맵 색상 칠하기</h3><ul>
-<li><p>컬러맵 색상을 하나씩 넣습니다.</p>
+<h3 id="3-2-3-컬러맵-색상-칠하기">3.2.3. 컬러맵 색상 칠하기</h3>
+<ul>
+<li>
+<p>컬러맵 색상을 하나씩 넣습니다.</p>
 <ul>
 <li>색상에서 RGB를 추출해 글자로 넣습니다.</li>
-<li>컬러맵에 정수 i를 넣거나 0~1 사이의 값을 넣으면 이에 해당하는 색이 추출됩니다.<br><br><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_03.png"></li>
+<li>컬러맵에 정수 i를 넣거나 0~1 사이의 값을 넣으면 이에 해당하는 색이 추출됩니다.<br><br>
+<img src="63_mpl_03.png" alt=""></li>
 </ul>
 </li>
-<li><p>위 그림을 그린 코드는 이렇습니다.</p>
+<li>
+<p>위 그림을 그린 코드는 이렇습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 컬러맵 불러오기</span></span><br><span class="line">cmap_ = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"><span class="comment"># 컬러맵의 색 수</span></span><br><span class="line">ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: <span class="comment"># qualitative colormap</span></span><br><span class="line">    ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"><span class="keyword">except</span> AttributeError: <span class="comment"># others</span></span><br><span class="line">    ncmap = <span class="number">10</span></span><br><span class="line">    cmap_ = cm.get_cmap(cmap, ncmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 수가 너무 많으면 10개로 제한</span></span><br><span class="line"><span class="keyword">if</span> ncmap &gt; <span class="number">15</span>:</span><br><span class="line">    ncmap = <span class="number">10</span>    </span><br><span class="line"></span><br><span class="line"><span class="comment"># subplots 나누기 (ncmap 반영)</span></span><br><span class="line">fig, axes = plt.subplots(ncols=ncmap+<span class="number">1</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">                                      <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">7</span>/ncmap]*ncmap + [<span class="number">3</span>]&#125;</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 폰트 설정</span></span><br><span class="line">fonts_ex = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 글자 넣기</span></span><br><span class="line">axes[<span class="number">0</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;(blank)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">fig.text(<span class="number">0.35</span>, <span class="number">0.33</span>, <span class="string">&quot;HSV (line plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV distribution\n(violin plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵으로 subplot 채우고 RGB 정보 입력</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes[<span class="number">0</span>, :-<span class="number">1</span>]):</span><br><span class="line">    ax.set_facecolor(cmap_(i/ncmap))</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    R, G, B, A = cmap_(i/ncmap)</span><br><span class="line"></span><br><span class="line">    fontcolor = <span class="string">&quot;k&quot;</span></span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.8</span>, <span class="string">f&quot;R: <span class="subst">&#123;R:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.6</span>, <span class="string">f&quot;G: <span class="subst">&#123;G:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.4</span>, <span class="string">f&quot;B: <span class="subst">&#123;B:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 좌측 하단 subplots 합침        </span></span><br><span class="line">gs = axes[<span class="number">1</span>, <span class="number">0</span>].get_gridspec()    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes[<span class="number">1</span>, :-<span class="number">1</span>]:</span><br><span class="line">    ax.remove()</span><br><span class="line">axbig = fig.add_subplot(gs[<span class="number">1</span>, :-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># ticks 제거</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="3-3-색상-정보-line-plot"><a href="#3-3-색상-정보-line-plot" class="headerlink" title="3.3. 색상 정보 line plot"></a>3.3. 색상 정보 line plot</h2><h3 id="3-3-1-좌측-하단-subplots-합치기"><a href="#3-3-1-좌측-하단-subplots-합치기" class="headerlink" title="3.3.1. 좌측 하단 subplots 합치기"></a>3.3.1. 좌측 하단 subplots 합치기</h3><blockquote>
+<h2 id="3-3-색상-정보-line-plot">3.3. 색상 정보 line plot</h2>
+<h3 id="3-3-1-좌측-하단-subplots-합치기">3.3.1. 좌측 하단 subplots 합치기</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/intermediate/gridspec.html">matplotlib: Customizing Figure Layouts Using GridSpec and Other Functions</a></p>
 </blockquote>
 <ul>
-<li><p>Matplotlib에서 subplots를 합치는 과정은 다음 두 단계를 거칩니다.</p>
+<li>
+<p>Matplotlib에서 subplots를 합치는 과정은 다음 두 단계를 거칩니다.</p>
 <ol>
 <li>기존의 subplots를 삭제합니다.</li>
 <li>빈 공간에 맞게 새 subplot을 그립니다.</li>
 </ol>
 </li>
-<li><p>좌측 하단 공간에 axbig이라는 새로운 이름이 붙었습니다.<br><br><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_04.png"></p>
+<li>
+<p>좌측 하단 공간에 axbig이라는 새로운 이름이 붙었습니다.<br><br>
+<img src="63_mpl_04.png" alt=""></p>
 </li>
-<li><p>코드는 이렇습니다.</p>
+<li>
+<p>코드는 이렇습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 컬러맵 불러오기</span></span><br><span class="line">cmap_ = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"><span class="comment"># 컬러맵의 색 수</span></span><br><span class="line">ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: <span class="comment"># qualitative colormap</span></span><br><span class="line">    ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"><span class="keyword">except</span> AttributeError: <span class="comment"># others</span></span><br><span class="line">    ncmap = <span class="number">10</span></span><br><span class="line">    cmap_ = cm.get_cmap(cmap, ncmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 수가 너무 많으면 10개로 제한</span></span><br><span class="line"><span class="keyword">if</span> ncmap &gt; <span class="number">15</span>:</span><br><span class="line">    ncmap = <span class="number">10</span>    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># subplots 나누기 (ncmap 반영)</span></span><br><span class="line">fig, axes = plt.subplots(ncols=ncmap+<span class="number">1</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">                                      <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">7</span>/ncmap]*ncmap + [<span class="number">3</span>]&#125;</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 폰트 설정</span></span><br><span class="line">fonts_ex = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵으로 subplot 채우고 RGB 정보 입력</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes[<span class="number">0</span>, :-<span class="number">1</span>]):</span><br><span class="line">    ax.set_facecolor(cmap_(i/ncmap))</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    R, G, B, A = cmap_(i/ncmap)</span><br><span class="line"></span><br><span class="line">    fontcolor = <span class="string">&quot;k&quot;</span></span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.8</span>, <span class="string">f&quot;R: <span class="subst">&#123;R:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.6</span>, <span class="string">f&quot;G: <span class="subst">&#123;G:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.4</span>, <span class="string">f&quot;B: <span class="subst">&#123;B:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 좌측 하단 subplots 합침: axbig        </span></span><br><span class="line">gs = axes[<span class="number">1</span>, <span class="number">0</span>].get_gridspec()    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes[<span class="number">1</span>, :-<span class="number">1</span>]:</span><br><span class="line">    ax.remove()</span><br><span class="line">axbig = fig.add_subplot(gs[<span class="number">1</span>, :-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 글자 넣기</span></span><br><span class="line">axes[<span class="number">0</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;(blank)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axbig.text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV (line plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV distribution\n(violin plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ticks 제거</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-2-색-속성-추출"><a href="#3-3-2-색-속성-추출" class="headerlink" title="3.3.2. 색 속성 추출"></a>3.3.2. 색 속성 추출</h3><ul>
-<li><p>RGB 데이터를 HSV로 변환합니다.</p>
+<h3 id="3-3-2-색-속성-추출">3.3.2. 색 속성 추출</h3>
+<ul>
+<li>
+<p>RGB 데이터를 HSV로 변환합니다.</p>
 </li>
-<li><p>다른 한편으로 휘도(luminance)와 밝기(lightness)로도 변환합니다.</p>
+<li>
+<p>다른 한편으로 휘도(luminance)와 밝기(lightness)로도 변환합니다.</p>
 <ul>
 <li>휘도 변환에는 colorspacious 라이브러리를 사용하고,</li>
 <li>밝기 변환에는 colorsys를 사용합니다.</li>
 <li>그리고 이들을 list로 모읍니다.</li>
-<li>어두운 색들의 글자 색도 하얗게 바꿉니다.<br><br><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_05.png"></li>
+<li>어두운 색들의 글자 색도 하얗게 바꿉니다.<br><br>
+<img src="63_mpl_05.png" alt=""></li>
 </ul>
 </li>
-<li><p>여기까지 코드는 이렇습니다.</p>
+<li>
+<p>여기까지 코드는 이렇습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵 불러오기</span></span><br><span class="line">cmap_ = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"><span class="comment"># 컬러맵의 색 수</span></span><br><span class="line">ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: <span class="comment"># qualitative colormap</span></span><br><span class="line">    ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"><span class="keyword">except</span> AttributeError: <span class="comment"># others</span></span><br><span class="line">    ncmap = <span class="number">10</span></span><br><span class="line">    cmap_ = cm.get_cmap(cmap, ncmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 수가 너무 많으면 10개로 제한</span></span><br><span class="line"><span class="keyword">if</span> ncmap &gt; <span class="number">15</span>:</span><br><span class="line">    ncmap = <span class="number">10</span>    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># subplots 나누기 (ncmap 반영)</span></span><br><span class="line">fig, axes = plt.subplots(ncols=ncmap+<span class="number">1</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">                                      <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">7</span>/ncmap]*ncmap + [<span class="number">3</span>]&#125;</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 폰트 설정</span></span><br><span class="line">fonts_ex = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵 데이터 모음 list</span></span><br><span class="line">Hs, Ss, Vs, rLs, Ls, ls = [], [], [], [], [], []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵으로 subplot 채우고 RGB 정보 입력</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes[<span class="number">0</span>, :-<span class="number">1</span>]):</span><br><span class="line">    ax.set_facecolor(cmap_(i/ncmap))</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    <span class="comment"># RGB + alpha</span></span><br><span class="line">    R, G, B, A = cmap_(i/ncmap)</span><br><span class="line">    <span class="comment"># HSV</span></span><br><span class="line">    H, S, V = colors.rgb_to_hsv((R, G, B))</span><br><span class="line">    <span class="comment"># 휘도(luminance)</span></span><br><span class="line">    L, _, _ = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)([R, G, B])</span><br><span class="line">    <span class="comment"># 상대 휘도(relative luminance)</span></span><br><span class="line">    rL = <span class="number">0.2126</span>*R + <span class="number">0.7152</span>*G + <span class="number">0.0722</span>*B</span><br><span class="line">    <span class="comment"># 밝기 (lightness)</span></span><br><span class="line">    _, l, _ = colorsys.rgb_to_hls(R, G, B)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 데이터 모음</span></span><br><span class="line">    Hs.append(H)</span><br><span class="line">    Ss.append(S)</span><br><span class="line">    Vs.append(V)</span><br><span class="line">    Ls.append(L/<span class="number">100</span>)</span><br><span class="line">    rLs.append(rL)</span><br><span class="line">    ls.append(l)</span><br><span class="line"></span><br><span class="line">    fontcolor = <span class="string">&quot;k&quot;</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 밝기 기준 어두운 색은 밝은 색으로 표시</span></span><br><span class="line">    <span class="keyword">if</span> L/<span class="number">100</span> &lt; <span class="number">0.6</span>:</span><br><span class="line">        fontcolor = <span class="string">&quot;w&quot;</span></span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.8</span>, <span class="string">f&quot;R: <span class="subst">&#123;R:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.6</span>, <span class="string">f&quot;G: <span class="subst">&#123;G:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.4</span>, <span class="string">f&quot;B: <span class="subst">&#123;B:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 좌측 하단 subplots 합침: axbig        </span></span><br><span class="line">gs = axes[<span class="number">1</span>, <span class="number">0</span>].get_gridspec()    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes[<span class="number">1</span>, :-<span class="number">1</span>]:</span><br><span class="line">    ax.remove()</span><br><span class="line">axbig = fig.add_subplot(gs[<span class="number">1</span>, :-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 글자 넣기</span></span><br><span class="line">axes[<span class="number">0</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;(blank)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axbig.text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV (line plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV distribution\n(violin plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ticks 제거</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-3-3-색별-속성-시각화"><a href="#3-3-3-색별-속성-시각화" class="headerlink" title="3.3.3. 색별 속성 시각화"></a>3.3.3. 색별 속성 시각화</h3><ul>
-<li><p>컬러맵 색상들 아래에 속성을 line plot으로 시각화합니다.</p>
+<h3 id="3-3-3-색별-속성-시각화">3.3.3. 색별 속성 시각화</h3>
+<ul>
+<li>
+<p>컬러맵 색상들 아래에 속성을 line plot으로 시각화합니다.</p>
 <ul>
 <li>x축 눈금은 불필요하므로 제거하고 y축만 남깁니다.</li>
 <li>데이터를 상단의 컬러맵과 매칭하기 좋도록 grid를 추가합니다.</li>
-<li>전체 윤곽선도 불필요하므로 제거합니다.<br><br><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_06.png"><br></li>
+<li>전체 윤곽선도 불필요하므로 제거합니다.<br><br>
+<img src="63_mpl_06.png" alt=""><br></li>
 </ul>
 </li>
-<li><p>이것 하나만 해도 일반적인 하나의 plot이네요.</p>
+<li>
+<p>이것 하나만 해도 일반적인 하나의 plot이네요.</p>
 </li>
-<li><p>코드가 제법 길어졌습니다.</p>
+<li>
+<p>코드가 제법 길어졌습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> colorspacious <span class="keyword">import</span> cspace_converter</span><br><span class="line"><span class="keyword">import</span> colorsys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵 불러오기</span></span><br><span class="line">cmap_ = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"><span class="comment"># 컬러맵의 색 수</span></span><br><span class="line">ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: <span class="comment"># qualitative colormap</span></span><br><span class="line">    ncmap = <span class="built_in">len</span>(cmap_.colors)</span><br><span class="line"><span class="keyword">except</span> AttributeError: <span class="comment"># others</span></span><br><span class="line">    ncmap = <span class="number">10</span></span><br><span class="line">    cmap_ = cm.get_cmap(cmap, ncmap)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 수가 너무 많으면 10개로 제한</span></span><br><span class="line"><span class="keyword">if</span> ncmap &gt; <span class="number">15</span>:</span><br><span class="line">    ncmap = <span class="number">10</span>    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># subplots 나누기 (ncmap 반영)</span></span><br><span class="line">fig, axes = plt.subplots(ncols=ncmap+<span class="number">1</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">3</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>:[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">                                      <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">7</span>/ncmap]*ncmap + [<span class="number">3</span>]&#125;</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 폰트 설정</span></span><br><span class="line">fonts_ex = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵 데이터 모음 list</span></span><br><span class="line">Hs, Ss, Vs, rLs, Ls, ls = [], [], [], [], [], []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 컬러맵으로 subplot 채우고 RGB 정보 입력</span></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes[<span class="number">0</span>, :-<span class="number">1</span>]):</span><br><span class="line">    ax.set_facecolor(cmap_(i/ncmap))</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line">    <span class="comment"># RGB + alpha</span></span><br><span class="line">    R, G, B, A = cmap_(i/ncmap)</span><br><span class="line">    <span class="comment"># HSV</span></span><br><span class="line">    H, S, V = colors.rgb_to_hsv((R, G, B))</span><br><span class="line">    <span class="comment"># 휘도(luminance)</span></span><br><span class="line">    L, _, _ = cspace_converter(<span class="string">&quot;sRGB1&quot;</span>, <span class="string">&quot;CAM02-UCS&quot;</span>)([R, G, B])</span><br><span class="line">    <span class="comment"># 상대 휘도(relative luminance)</span></span><br><span class="line">    rL = <span class="number">0.2126</span>*R + <span class="number">0.7152</span>*G + <span class="number">0.0722</span>*B</span><br><span class="line">    <span class="comment"># 밝기(lightness)</span></span><br><span class="line">    _, l, _ = colorsys.rgb_to_hls(R, G, B)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 데이터 모음</span></span><br><span class="line">    Hs.append(H)</span><br><span class="line">    Ss.append(S)</span><br><span class="line">    Vs.append(V)</span><br><span class="line">    Ls.append(L/<span class="number">100</span>)</span><br><span class="line">    rLs.append(rL)</span><br><span class="line">    ls.append(l)</span><br><span class="line"></span><br><span class="line">    fontcolor = <span class="string">&quot;k&quot;</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 밝기 기준 어두운 색은 밝은 색으로 표시</span></span><br><span class="line">    <span class="keyword">if</span> L/<span class="number">100</span> &lt; <span class="number">0.6</span>:</span><br><span class="line">        fontcolor = <span class="string">&quot;w&quot;</span></span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.8</span>, <span class="string">f&quot;R: <span class="subst">&#123;R:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.6</span>, <span class="string">f&quot;G: <span class="subst">&#123;G:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line">    ax.text(<span class="number">0.1</span>, <span class="number">0.4</span>, <span class="string">f&quot;B: <span class="subst">&#123;B:<span class="number">.2</span>f&#125;</span>&quot;</span>, c=fontcolor, transform=ax.transAxes, fontsize=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 좌측 하단 subplots 합침: axbig        </span></span><br><span class="line">gs = axes[<span class="number">1</span>, <span class="number">0</span>].get_gridspec()    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes[<span class="number">1</span>, :-<span class="number">1</span>]:</span><br><span class="line">    ax.remove()</span><br><span class="line">axbig = fig.add_subplot(gs[<span class="number">1</span>, :-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 색상별 데이터 plot</span></span><br><span class="line">axbig.plot(Hs, <span class="string">&quot;-o&quot;</span>, c=<span class="string">&quot;c&quot;</span>, alpha=<span class="number">0.5</span>)  <span class="comment"># hue (색상)</span></span><br><span class="line">axbig.plot(Ss, <span class="string">&quot;-o&quot;</span>, c=<span class="string">&quot;m&quot;</span>, alpha=<span class="number">0.5</span>)  <span class="comment"># saturation (채도)</span></span><br><span class="line">axbig.plot(Vs, <span class="string">&quot;-o&quot;</span>, c=<span class="string">&quot;y&quot;</span>)             <span class="comment"># value (밸류)</span></span><br><span class="line">axbig.plot(rLs, <span class="string">&quot;-o&quot;</span>, c=<span class="string">&quot;gray&quot;</span>)         <span class="comment"># relative luminance (상대 휘도)</span></span><br><span class="line">axbig.plot(Ls, <span class="string">&quot;-o&quot;</span>, c=<span class="string">&quot;k&quot;</span>)             <span class="comment"># luminance (휘도)</span></span><br><span class="line">axbig.plot(ls, <span class="string">&quot;-o&quot;</span>, mec=<span class="string">&quot;b&quot;</span>, mfc=<span class="string">&quot;w&quot;</span>, c=<span class="string">&quot;b&quot;</span>)  <span class="comment"># lightness (밝기)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 색상별 데이터 subplot 설정</span></span><br><span class="line">axbig.set_xticks([])                 <span class="comment"># xticks 삭제</span></span><br><span class="line">axbig.set_xlim(-<span class="number">0.4</span>, ncmap-<span class="number">1</span> + <span class="number">0.4</span>)  <span class="comment"># x 범위 지정</span></span><br><span class="line">axbig.set_ylim(-<span class="number">0.1</span>, <span class="number">1.2</span>)            <span class="comment"># y 범위 지정</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(ncmap):               <span class="comment"># x축 grid 대체 점선</span></span><br><span class="line">    axbig.axvline(x, ls=<span class="string">&quot;:&quot;</span>, c=<span class="string">&quot;lightgray&quot;</span>, zorder=<span class="number">0</span>)</span><br><span class="line">axbig.grid(axis=<span class="string">&quot;y&quot;</span>, ls=<span class="string">&quot;:&quot;</span>)         <span class="comment"># y축 grid</span></span><br><span class="line">axbig.set_frame_on(<span class="literal">False</span>)            <span class="comment"># 윤곽선 삭제</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 글자 넣기</span></span><br><span class="line">axes[<span class="number">0</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;(blank)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">axes[<span class="number">1</span>, -<span class="number">1</span>].text(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="string">&quot;HSV distribution\n(violin plot)&quot;</span>, fontdict=fonts_ex)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ticks 제거</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes.ravel():</span><br><span class="line">    ax.set_xticks([])</span><br><span class="line">    ax.set_yticks([])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-3-4-컬러맵별-속성-분포"><a href="#3-3-4-컬러맵별-속성-분포" class="headerlink" title="3.3.4. 컬러맵별 속성 분포"></a>3.3.4. 컬러맵별 속성 분포</h3><ul>
-<li><p>데이터가 여섯 개나 되고, 뭐가 뭔지 알아보기 힘듭니다.</p>
+<h3 id="3-3-4-컬러맵별-속성-분포">3.3.4. 컬러맵별 속성 분포</h3>
+<ul>
+<li>
+<p>데이터가 여섯 개나 되고, 뭐가 뭔지 알아보기 힘듭니다.</p>
 </li>
-<li><p>violin plot으로 분포를 확인합니다.</p>
+<li>
+<p>violin plot으로 분포를 확인합니다.</p>
 <ul>
 <li><code>.get_children()</code>으로 violin plot을 하나씩 지정하고,</li>
 <li><code>.set_facecolor()</code>로 violin plot의 색상을 데이터 종류에 맞추어 지정합니다.</li>
 <li>비슷하게 <code>.set_alpha()</code>를 사용해서 불투명도를 제어합니다.</li>
 </ul>
 </li>
-<li><p>속성 분포를 개별 색의 데이터와 비교하기 좋게 배열합니다.</p>
+<li>
+<p>속성 분포를 개별 색의 데이터와 비교하기 좋게 배열합니다.</p>
 <ul>
 <li>y 범위를 맞춰 우측 아래 공간에 넣습니다.</li>
 <li>색상별 데이터 이름을 함께 적어줍니다.</li>
@@ -577,7 +649,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2021/03/22/Python-DS-63-mpl_colors_qualitative/63_mpl_07.png"></p>
+<p><img src="63_mpl_07.png" alt=""></p>
 <ul>
 <li>그럴싸한 통계 분석이 되었습니다.</li>
 </ul>
@@ -599,7 +671,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/03/22/Python-DS-63-mpl_colors_qualitative/" data-id="cuidrvaMXMJZnizDAHRjaN1xf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/03/22/Python-DS-63-mpl_colors_qualitative/" data-id="cuidpCRHOz7-2Zlp2ht68DNRw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -681,13 +753,15 @@
 contributor : Jerry Kim
 
 
-색을 고르다 보면 이런 단어들을 만납니다:Brightness, Lightness, Value, Luminosity, Luma
+색을 고르다 보면 이런 단어들을 만납니다:
+Brightness, Lightness, Value, Luminosity, Luma
 우리 말로는 모두 명도, 명도, 명도, 명도, 명도이지만 의미가 모두 다릅니다.
 같은 뜻으로 생각하면 실수할 수도 있으니 한번 짚고 넘어갑시다.
 
 1. 용어 정리
-Gilchrist, “",
-        "wordCount": 5663
+
+Gilchrist,",
+        "wordCount": 5569
     }
 </script>
 
@@ -784,6 +858,26 @@ Gilchrist, “",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -858,26 +952,6 @@ Gilchrist, “",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

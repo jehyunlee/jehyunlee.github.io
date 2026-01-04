@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,open API,Google Colab,NIA data story" />
     
-    <meta name="description" content="한국지능정보사회진흥원(NIA) 요청으로 데이터 스토리를 작성했습니다. 1971-2020, 50년간 국내 개봉작을 데이터의 형태로 경험했습니다. 시각화 코드를 조금 자세히 풀어서 전달드리고자 합니다.  1. “빅”데이터 검수 문제 통합 데이터 지도   최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.  앞으로 다가올 데이터 기반 사회를">
+    <meta name="description" content="한국지능정보사회진흥원(NIA) 요청으로 데이터 스토리를 작성했습니다. 1971-2020, 50년간 국내 개봉작을 데이터의 형태로 경험했습니다. 시각화 코드를 조금 자세히 풀어서 전달드리고자 합니다.  1. &quot;빅&quot;데이터 검수 문제  통합 데이터 지도    최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.   앞으로 다가">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NIA Data Story - Movie) 0. intro">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/11/29/Python-DS-91-movie01/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="한국지능정보사회진흥원(NIA) 요청으로 데이터 스토리를 작성했습니다. 1971-2020, 50년간 국내 개봉작을 데이터의 형태로 경험했습니다. 시각화 코드를 조금 자세히 풀어서 전달드리고자 합니다.  1. “빅”데이터 검수 문제 통합 데이터 지도   최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.  앞으로 다가올 데이터 기반 사회를">
+<meta property="og:description" content="한국지능정보사회진흥원(NIA) 요청으로 데이터 스토리를 작성했습니다. 1971-2020, 50년간 국내 개봉작을 데이터의 형태로 경험했습니다. 시각화 코드를 조금 자세히 풀어서 전달드리고자 합니다.  1. &quot;빅&quot;데이터 검수 문제  통합 데이터 지도    최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.   앞으로 다가">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/91_movie01_0.png">
 <meta property="article:published_time" content="2021-11-29T11:50:00.000Z">
@@ -235,74 +235,108 @@
 <li>1971-2020, 50년간 국내 개봉작을 데이터의 형태로 경험했습니다.</li>
 <li>시각화 코드를 조금 자세히 풀어서 전달드리고자 합니다.</li>
 </ul>
-<h1 id="1-“빅”데이터-검수-문제"><a href="#1-“빅”데이터-검수-문제" class="headerlink" title="1. “빅”데이터 검수 문제"></a>1. “빅”데이터 검수 문제</h1><blockquote>
+<h1>1. &quot;빅&quot;데이터 검수 문제</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="http://www.bigdata-map.kr/">통합 데이터 지도</a></p>
 </blockquote>
 <ul>
-<li><p>최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.</p>
+<li>
+<p>최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.</p>
 </li>
-<li><p>앞으로 다가올 데이터 기반 사회를 위한 기초공사입니다.</p>
+<li>
+<p>앞으로 다가올 데이터 기반 사회를 위한 기초공사입니다.</p>
 </li>
-<li><p>그러나 <b>수집된 데이터의 유효성을 검증하기는 참으로 어렵습니다.</b></p>
+<li>
+<p>그러나 <b>수집된 데이터의 유효성을 검증하기는 참으로 어렵습니다.</b></p>
 </li>
-<li><p>데이터가 한 두 개도 아니고 일일이 열어보기 어려울 뿐더러, </p>
+<li>
+<p>데이터가 한 두 개도 아니고 일일이 열어보기 어려울 뿐더러,</p>
 </li>
-<li><p><b>데이터가 있다</b>와 <b>쓸만한 데이터가 있다</b>는 것은 완전히 다른 차원의 문제입니다.<br><img src="/2021/11/29/Python-DS-91-movie01/91_movie01_5.png"><br></p>
+<li>
+<p><b>데이터가 있다</b>와 <b>쓸만한 데이터가 있다</b>는 것은 완전히 다른 차원의 문제입니다.<br>
+<img src="91_movie01_5.png" alt=""><br></p>
 </li>
-<li><p>NIA의 데이터 검증 의지를 가지신 분들 덕택에 모니터링단으로 활동할 수 있었습니다.</p>
+<li>
+<p>NIA의 데이터 검증 의지를 가지신 분들 덕택에 모니터링단으로 활동할 수 있었습니다.</p>
 </li>
-<li><p>적지 않은 문제를 발견해 공식 보고와 함께 여러 제언을 드렸습니다.</p>
+<li>
+<p>적지 않은 문제를 발견해 공식 보고와 함께 여러 제언을 드렸습니다.</p>
 </li>
-<li><p>그 중 가장 강하게 말씀드린 것은 <b>데이터는 활용될 때 검증된다</b>는 것,</p>
+<li>
+<p>그 중 가장 강하게 말씀드린 것은 <b>데이터는 활용될 때 검증된다</b>는 것,</p>
 </li>
-<li><p>그리고 <b>사람의 힘으로는 불가능하니 자동 검수 시스템이 필요하다</b>는 것이었습니다.<br><br><img src="/2021/11/29/Python-DS-91-movie01/91_movie01_4.png"><br></p>
+<li>
+<p>그리고 <b>사람의 힘으로는 불가능하니 자동 검수 시스템이 필요하다</b>는 것이었습니다.<br><br>
+<img src="91_movie01_4.png" alt=""><br></p>
 </li>
-<li><p>작년 AI Festival에서 이 말씀을 발표드리는 한편 신문에 기고문도 실었습니다.</p>
+<li>
+<p>작년 AI Festival에서 이 말씀을 발표드리는 한편 신문에 기고문도 실었습니다.</p>
 <ul>
 <li>해당 발표와 기고문은 <a href="https://jehyunlee.github.io/2020/09/03/Python-DS-33-aifestival_bigdatareality/">여기서 보실 수 있습니다.</a></li>
 </ul>
 </li>
 </ul>
-<p><img src="/2021/11/29/Python-DS-91-movie01/91_movie01_6.png" alt="2020 AI Festival 발표 영상"><br></p>
-<h1 id="2-NIA-데이터-스토리"><a href="#2-NIA-데이터-스토리" class="headerlink" title="2. NIA 데이터 스토리"></a>2. NIA 데이터 스토리</h1><blockquote>
+<p><img src="91_movie01_6.png" alt="2020 AI Festival 발표 영상"><br></p>
+<h1>2. NIA 데이터 스토리</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="http://www.bigdata-map.kr/datastory">데이터 스토리</a></p>
 </blockquote>
 <ul>
-<li><p>다행히 NIA에 비슷한 생각을 하는 분들이 있으셨습니다.</p>
+<li>
+<p>다행히 NIA에 비슷한 생각을 하는 분들이 있으셨습니다.</p>
 </li>
-<li><p><b>적재된 데이터를 소비자가 구매하기 전에 스토리로 가공하여 게시</b>하셨습니다.</p>
+<li>
+<p><b>적재된 데이터를 소비자가 구매하기 전에 스토리로 가공하여 게시</b>하셨습니다.</p>
 </li>
-<li><p>많은 분들이 글을 써 주셨고, 제게도 기회가 주어졌습니다.<br><br><img src="/2021/11/29/Python-DS-91-movie01/91_movie01_3.png"><br></p>
+<li>
+<p>많은 분들이 글을 써 주셨고, 제게도 기회가 주어졌습니다.<br><br>
+<img src="91_movie01_3.png" alt=""><br></p>
 </li>
-<li><p>데이터 스토리 작성을 위해 여러 데이터를 살펴보았고, 문제점을 찾을 때마다 보고를 했습니다.</p>
+<li>
+<p>데이터 스토리 작성을 위해 여러 데이터를 살펴보았고, 문제점을 찾을 때마다 보고를 했습니다.</p>
 </li>
-<li><p>그리고 영화 데이터에 정착하여 <b>영화 데이터를 분석한 스토리</b>를 기고했습니다.</p>
+<li>
+<p>그리고 영화 데이터에 정착하여 <b>영화 데이터를 분석한 스토리</b>를 기고했습니다.</p>
 </li>
-<li><p><b>1971년 이후 50년간의 개봉 영화 23,409편</b>을 대상으로 삼았습니다.</p>
+<li>
+<p><b>1971년 이후 50년간의 개봉 영화 23,409편</b>을 대상으로 삼았습니다.</p>
 </li>
-<li><p><b>(1) 장르 <a target="_blank" rel="noopener" href="https://bit.ly/3xhc8BV">[Link]</a></b>와 <b>(2) 박스오피스 <a target="_blank" rel="noopener" href="https://bit.ly/3cBpZK3">[Link]</a></b> 두 편으로 나누어 작성했습니다.<br><br><img src="/2021/11/29/Python-DS-91-movie01/91_movie01_7.png"><br></p>
+<li>
+<p><b>(1) 장르 <a target="_blank" rel="noopener" href="https://bit.ly/3xhc8BV">[Link]</a></b>와 <b>(2) 박스오피스 <a target="_blank" rel="noopener" href="https://bit.ly/3cBpZK3">[Link]</a></b> 두 편으로 나누어 작성했습니다.<br><br>
+<img src="91_movie01_7.png" alt=""><br></p>
 </li>
-<li><p>제 글에 점수를 주라면 100점 만점에 60~70점 정도 되는 것 같습니다.</p>
+<li>
+<p>제 글에 점수를 주라면 100점 만점에 60~70점 정도 되는 것 같습니다.</p>
 </li>
-<li><p>너무 힘이 들어간 부분도 있고, 지쳐 힘이 빠진 부분도 있습니다.</p>
+<li>
+<p>너무 힘이 들어간 부분도 있고, 지쳐 힘이 빠진 부분도 있습니다.</p>
 </li>
-<li><p>이렇게 긴 분석 글을 처음 쓰다 보니 결과물을 볼 때 많이 아쉬운 것이 사실입니다.</p>
+<li>
+<p>이렇게 긴 분석 글을 처음 쓰다 보니 결과물을 볼 때 많이 아쉬운 것이 사실입니다.</p>
 </li>
-<li><p>한편 부족하나마 제 성장에도 보탬이 된 것이 사실입니다.</p>
+<li>
+<p>한편 부족하나마 제 성장에도 보탬이 된 것이 사실입니다.</p>
 </li>
 </ul>
-<h1 id="3-과정"><a href="#3-과정" class="headerlink" title="3. 과정"></a>3. 과정</h1><ul>
-<li><p>데이터 스토리는 <b><a target="_blank" rel="noopener" href="https://github.com/niadatamap/DataMap_DataStory/raw/master/2021/23/">소스 코드까지 제출하여 공개</a>했습니다.</b></p>
+<h1>3. 과정</h1>
+<ul>
+<li>
+<p>데이터 스토리는 <b><a target="_blank" rel="noopener" href="https://github.com/niadatamap/DataMap_DataStory/raw/master/2021/23/">소스 코드까지 제출하여 공개</a>했습니다.</b></p>
 </li>
-<li><p>그러나 <b>저 그림을 그리기 위해 생각한 과정들,</b></p>
+<li>
+<p>그러나 <b>저 그림을 그리기 위해 생각한 과정들,</b></p>
 </li>
-<li><p>그리고 <b>저 그림의 코드는 왜 저렇게 작성되었는지</b>는 충분히 설명되지 않았습니다.</p>
+<li>
+<p>그리고 <b>저 그림의 코드는 왜 저렇게 작성되었는지</b>는 충분히 설명되지 않았습니다.</p>
 </li>
-<li><p>앞으로 여러 개의 글을 통해 이 점을 메꾸려고 합니다.</p>
+<li>
+<p>앞으로 여러 개의 글을 통해 이 점을 메꾸려고 합니다.</p>
 </li>
-<li><p>여러분께서 보시고 좋은 점은 교사로, 부족한 점은 반면교사로 활용하시면 좋겠습니다.</p>
+<li>
+<p>여러분께서 보시고 좋은 점은 교사로, 부족한 점은 반면교사로 활용하시면 좋겠습니다.</p>
 </li>
-<li><p>이 글을 쓰는 과정이 제 성장의 거름이 되었듯 여러분의 성장에도 보탬이 되기를 바랍니다.</p>
+<li>
+<p>이 글을 쓰는 과정이 제 성장의 거름이 되었듯 여러분의 성장에도 보탬이 되기를 바랍니다.</p>
 </li>
 </ul>
 
@@ -322,7 +356,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/11/29/Python-DS-91-movie01/" data-id="cuidQs4zRSdZaFkMeOdOW7tx4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/11/29/Python-DS-91-movie01/" data-id="cuidirmyzKpKLKX_embaFiG_H" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -405,14 +439,17 @@
 1971-2020, 50년간 국내 개봉작을 데이터의 형태로 경험했습니다.
 시각화 코드를 조금 자세히 풀어서 전달드리고자 합니다.
 
-1. “빅”데이터 검수 문제
+1. &quot;빅&quot;데이터 검수 문제
+
 통합 데이터 지도
+
 
 
 최근 전에 없이 국가적인 단위에서 데이터 수집 사업이 수행되었습니다.
 
-앞으로 다가올 데이터 기반 사회를 ",
-        "wordCount": 295
+
+앞으로 다가",
+        "wordCount": 279
     }
 </script>
 
@@ -509,6 +546,26 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -583,26 +640,6 @@
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

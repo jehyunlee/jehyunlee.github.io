@@ -233,205 +233,289 @@
 <li>저도 이 바람에 Matplotlib을 버릴까 했으나 Matplotlib에 의존하는 라이브러리가 너무 많더군요.</li>
 <li>피할 수 없다면, 헷갈리지 않게 그리는 방법을 익혀봅시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="built_in">print</span>(mpl.__version__)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 버전은 3.2.1. 기준입니다.<br>그 새 공식 버전이 올라갔습니다.</li>
+<li>실행결과: 버전은 3.2.1. 기준입니다.<br>
+그 새 공식 버전이 올라갔습니다.</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;3.2.1&#x27;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;3.2.1&#x27;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p><b> References </b>  </p>
+<p><b> References </b></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py">matplotlib: The Lifecycle of a Plot</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/introductory/pyplot.html">matplotlib: Pyplot tutorial</a><br><a target="_blank" rel="noopener" href="https://brunch.co.kr/@hvnpoet/91">루나 brunch: 파이썬으로 빅데이터 시각화의 문을 열다, 존 헌터</a></p>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py">matplotlib: The Lifecycle of a Plot</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/introductory/pyplot.html">matplotlib: Pyplot tutorial</a><br>
+<a target="_blank" rel="noopener" href="https://brunch.co.kr/@hvnpoet/91">루나 brunch: 파이썬으로 빅데이터 시각화의 문을 열다, 존 헌터</a></p>
 </blockquote>
 <ul>
 <li>matplotlib이 헷갈리는 이유 중 하나는 두 가지 방식이 혼재한다는 것입니다.</li>
 <li>보통 pyplot으로 입문하지만 이 문법은 pandas와의 연계용으로만 사용합시다.</li>
 <li>matplotlib에서 그림을 그리겠다면 object oriented에 집중하는 것이 효과적입니다.</li>
 </ul>
-<h3 id="1-matplotlib-pyplot"><a href="#1-matplotlib-pyplot" class="headerlink" title="1. matplotlib.pyplot"></a>1. matplotlib.pyplot</h3><ul>
-<li><p>하나는 MATLAB 과 유사한 스타일의 <code>pyplot</code>입니다. </p>
+<h3 id="1-matplotlib-pyplot">1. matplotlib.pyplot</h3>
+<ul>
+<li>
+<p>하나는 MATLAB 과 유사한 스타일의 <code>pyplot</code>입니다.</p>
 </li>
-<li><p>데이터를 즉석에서 그려보기 편하며, 간단한 예는 다음과 같습니다.</p>
+<li>
+<p>데이터를 즉석에서 그려보기 편하며, 간단한 예는 다음과 같습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: x축도 정의하지 않았는데 그래프가 금방 그려집니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_1.png"></li>
+<li>실행결과: x축도 정의하지 않았는데 그래프가 금방 그려집니다.<br>
+<img src="9_mpla_1.png" alt=""></li>
 </ul>
 </li>
-<li><p>bar, scatter plot과 더불어 화면을 나누는 subplot도 가능합니다.</p>
+<li>
+<p>bar, scatter plot과 더불어 화면을 나누는 subplot도 가능합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;group_a&#x27;</span>, <span class="string">&#x27;group_b&#x27;</span>, <span class="string">&#x27;group_c&#x27;</span>]</span><br><span class="line">values = [<span class="number">1</span>, <span class="number">10</span>, <span class="number">100</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">9</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">131</span>)</span><br><span class="line">plt.bar(names, values)</span><br><span class="line">plt.subplot(<span class="number">132</span>)</span><br><span class="line">plt.scatter(names, values)</span><br><span class="line">plt.subplot(<span class="number">133</span>)</span><br><span class="line">plt.plot(names, values)</span><br><span class="line">plt.suptitle(<span class="string">&#x27;Categorical Plotting&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 여러 종류의 plot을 동시에 그리고, suptitle도 달았습니다.<br>각 subplot은 <code>plt.subplot()</code>으로 정의됩니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_2.png"></li>
+<li>실행결과: 여러 종류의 plot을 동시에 그리고, suptitle도 달았습니다.<br>
+각 subplot은 <code>plt.subplot()</code>으로 정의됩니다.<br>
+<img src="9_mpla_2.png" alt=""></li>
 </ul>
 </li>
-<li><p>pyplot은 그 자체로 상당한 기능이 있지만 우리는 앞으로 Object Oriented에 집중하겠습니다.</p>
+<li>
+<p>pyplot은 그 자체로 상당한 기능이 있지만 우리는 앞으로 Object Oriented에 집중하겠습니다.</p>
 </li>
-<li><p>Object Oriented가 더 기능이 많고, 세부적인 제어가 가능하며, 둘 다 익숙해지기엔 헷갈리기 때문입니다.</p>
+<li>
+<p>Object Oriented가 더 기능이 많고, 세부적인 제어가 가능하며, 둘 다 익숙해지기엔 헷갈리기 때문입니다.</p>
 </li>
 </ul>
-<h3 id="2-Object-Oriented"><a href="#2-Object-Oriented" class="headerlink" title="2. Object Oriented"></a>2. Object Oriented</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure">matplotlib.figure.Figure</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/axes_api.html#matplotlib.axes.Axes">matplotlib.axes.Axes</a></p>
+<h3 id="2-Object-Oriented">2. Object Oriented</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure">matplotlib.figure.Figure</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/axes_api.html#matplotlib.axes.Axes">matplotlib.axes.Axes</a></p>
 </blockquote>
 <ul>
-<li><p>저는 Object Oriented plot을 통상적으로 아래와 같이 진행합니다.</p>
+<li>
+<p>저는 Object Oriented plot을 통상적으로 아래와 같이 진행합니다.</p>
 </li>
-<li><p>seaborn이 기본적인 설정을 잘 잡아주기 때문에 seaborn을 함께 이용하고,</p>
+<li>
+<p>seaborn이 기본적인 설정을 잘 잡아주기 때문에 seaborn을 함께 이용하고,</p>
 </li>
-<li><p>fontdict를 사용해서 label과 title 등 text가 들어가는 부분의 형식을 처리합니다.</p>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_0.png"></p>
+<li>
+<p>fontdict를 사용해서 label과 title 등 text가 들어가는 부분의 형식을 처리합니다.</p>
+<p><img src="9_mpla_0.png" alt=""></p>
 </li>
 </ul>
-<h4 id="2-1-figure-and-axes"><a href="#2-1-figure-and-axes" class="headerlink" title="2.1. figure and axes"></a>2.1. figure and axes</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/users/style_sheets.html">Customizing Matplotlib with style sheets and rcParams</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_context.html">seaborn.set_context</a></p>
+<h4 id="2-1-figure-and-axes">2.1. figure and axes</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/users/style_sheets.html">Customizing Matplotlib with style sheets and rcParams</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_context.html">seaborn.set_context</a></p>
 </blockquote>
 <ul>
-<li><p>하얀 도화지를 펼치는 것으로 시작합니다.</p>
+<li>
+<p>하얀 도화지를 펼치는 것으로 시작합니다.</p>
 </li>
-<li><p><code>Figure</code>와 <code>Axes</code>를 동시에 생성하는데 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure"><code>Figure</code></a>는 캔바스 자체, <a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/axes_api.html#matplotlib.axes.Axes"><code>Axes</code></a>는 그림의 여러 부분을 담고 있습니다.</p>
+<li>
+<p><code>Figure</code>와 <code>Axes</code>를 동시에 생성하는데 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure"><code>Figure</code></a>는 캔바스 자체, <a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/axes_api.html#matplotlib.axes.Axes"><code>Axes</code></a>는 그림의 여러 부분을 담고 있습니다.</p>
 </li>
-<li><p>Object Oriented interface에서는 <code>Axes</code>를 통해서 시각화 요소들을 제어합니다.</p>
+<li>
+<p>Object Oriented interface에서는 <code>Axes</code>를 통해서 시각화 요소들을 제어합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 도화지가 하나 깔립니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_3.png"></li>
+<li>실행결과: 도화지가 하나 깔립니다.<br>
+<img src="9_mpla_3.png" alt=""></li>
 </ul>
 </li>
-<li><p>font, fontsize, axis range, grid style 등이 <a target="_blank" rel="noopener" href="https://matplotlib.org/api/matplotlib_configuration_api.html"><code>plt.rcParams</code></a>에 기본값으로 정의되어 있습니다.</p>
+<li>
+<p>font, fontsize, axis range, grid style 등이 <a target="_blank" rel="noopener" href="https://matplotlib.org/api/matplotlib_configuration_api.html"><code>plt.rcParams</code></a>에 기본값으로 정의되어 있습니다.</p>
 </li>
-<li><p>그래프를 그린 후 일일이 설정할 수도 있으나 손이 두 번 가는 경우가 많습니다.</p>
+<li>
+<p>그래프를 그린 후 일일이 설정할 수도 있으나 손이 두 번 가는 경우가 많습니다.</p>
 </li>
-<li><p>효율적인 방법 하나는 사전에 설정을 하고 나서 plot을 하는 것입니다. 일일이 하기보다 저장된 값을 불러오면 더 좋습니다.</p>
+<li>
+<p>효율적인 방법 하나는 사전에 설정을 하고 나서 plot을 하는 것입니다. 일일이 하기보다 저장된 값을 불러오면 더 좋습니다.</p>
 </li>
-<li><p>background color, grid color 등은 <a target="_blank" rel="noopener" href="https://matplotlib.org/users/style_sheets.html"><code>plt.style.use()</code></a>를 사용하면 설정이 용이합니다.</p>
+<li>
+<p>background color, grid color 등은 <a target="_blank" rel="noopener" href="https://matplotlib.org/users/style_sheets.html"><code>plt.style.use()</code></a>를 사용하면 설정이 용이합니다.</p>
 </li>
-<li><p>fontsize, linewidth 등은 seaborn의 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_context.html"><code>seaborn.set_context()</code></a>를 사용하면 좋습니다.</p>
+<li>
+<p>fontsize, linewidth 등은 seaborn의 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_context.html"><code>seaborn.set_context()</code></a>를 사용하면 좋습니다.</p>
 </li>
-<li><p>그림의 크기를 함께 바꿔봅시다. <code>plt.subplots()</code> 안에 <code>figsize=(가로, 세로)</code>를 넣으면 됩니다.<br>단위는 inch입니다.</p>
+<li>
+<p>그림의 크기를 함께 바꿔봅시다. <code>plt.subplots()</code> 안에 <code>figsize=(가로, 세로)</code>를 넣으면 됩니다.<br>
+단위는 inch입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">plt.style.use(<span class="string">&#x27;seaborn-whitegrid&#x27;</span>)</span><br><span class="line">sns.set_context(<span class="string">&#x27;talk&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 시각화 기본 설정이 변경되었습니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_4.png"></li>
+<li>실행결과: 시각화 기본 설정이 변경되었습니다.<br>
+<img src="9_mpla_4.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h4 id="2-2-Data-Preparation"><a href="#2-2-Data-Preparation" class="headerlink" title="2.2. Data Preparation"></a>2.2. Data Preparation</h4><ul>
-<li>시각화에 사용할 예제 데이터를 만듭니다. dictionary로 만들어보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">&#x27;Barton LLC&#x27;</span>: <span class="number">109438.50</span>,</span><br><span class="line">        <span class="string">&#x27;Frami, Hills and Schmidt&#x27;</span>: <span class="number">103569.59</span>,</span><br><span class="line">        <span class="string">&#x27;Fritsch, Russel and Anderson&#x27;</span>: <span class="number">112214.71</span>,</span><br><span class="line">        <span class="string">&#x27;Jerde-Hilpert&#x27;</span>: <span class="number">112591.43</span>,</span><br><span class="line">        <span class="string">&#x27;Keeling LLC&#x27;</span>: <span class="number">100934.30</span>,</span><br><span class="line">        <span class="string">&#x27;Koepp Ltd&#x27;</span>: <span class="number">103660.54</span>,</span><br><span class="line">        <span class="string">&#x27;Kulas Inc&#x27;</span>: <span class="number">137351.96</span>,</span><br><span class="line">        <span class="string">&#x27;Trantow-Barrows&#x27;</span>: <span class="number">123381.38</span>,</span><br><span class="line">        <span class="string">&#x27;White-Trantow&#x27;</span>: <span class="number">135841.99</span>,</span><br><span class="line">        <span class="string">&#x27;Will LLC&#x27;</span>: <span class="number">104437.60</span>&#125;</span><br><span class="line">group_data = <span class="built_in">list</span>(data.values())</span><br><span class="line">group_names = <span class="built_in">list</span>(data.keys())</span><br></pre></td></tr></table></figure></li>
+<h4 id="2-2-Data-Preparation">2.2. Data Preparation</h4>
+<ul>
+<li>시각화에 사용할 예제 데이터를 만듭니다. dictionary로 만들어보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">&#x27;Barton LLC&#x27;</span>: <span class="number">109438.50</span>,</span><br><span class="line">        <span class="string">&#x27;Frami, Hills and Schmidt&#x27;</span>: <span class="number">103569.59</span>,</span><br><span class="line">        <span class="string">&#x27;Fritsch, Russel and Anderson&#x27;</span>: <span class="number">112214.71</span>,</span><br><span class="line">        <span class="string">&#x27;Jerde-Hilpert&#x27;</span>: <span class="number">112591.43</span>,</span><br><span class="line">        <span class="string">&#x27;Keeling LLC&#x27;</span>: <span class="number">100934.30</span>,</span><br><span class="line">        <span class="string">&#x27;Koepp Ltd&#x27;</span>: <span class="number">103660.54</span>,</span><br><span class="line">        <span class="string">&#x27;Kulas Inc&#x27;</span>: <span class="number">137351.96</span>,</span><br><span class="line">        <span class="string">&#x27;Trantow-Barrows&#x27;</span>: <span class="number">123381.38</span>,</span><br><span class="line">        <span class="string">&#x27;White-Trantow&#x27;</span>: <span class="number">135841.99</span>,</span><br><span class="line">        <span class="string">&#x27;Will LLC&#x27;</span>: <span class="number">104437.60</span>&#125;</span><br><span class="line">group_data = <span class="built_in">list</span>(data.values())</span><br><span class="line">group_names = <span class="built_in">list</span>(data.keys())</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h4 id="2-3-Bar-Plot"><a href="#2-3-Bar-Plot" class="headerlink" title="2.3. Bar Plot"></a>2.3. Bar Plot</h4><blockquote>
+<h4 id="2-3-Bar-Plot">2.3. Bar Plot</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.pyplot.barh.html">matplotlib.pyplot.barh</a></p>
 </blockquote>
 <ul>
-<li><p>데이터를 bar plot으로 표현합니다.</p>
+<li>
+<p>데이터를 bar plot으로 표현합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">4</span>))</span><br><span class="line">ax.barh(group_names, group_data)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: horizontal bar plot이 출력됩니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_5.png"></li>
+<li>실행결과: horizontal bar plot이 출력됩니다.<br>
+<img src="9_mpla_5.png" alt=""></li>
 </ul>
 </li>
-<li><p>잠시 pandas와의 연계기를 살펴보겠습니다.  (<a target="_blank" rel="noopener" href="https://subinium.github.io/">안수빈님</a> 제안 감사드립니다)</p>
+<li>
+<p>잠시 pandas와의 연계기를 살펴보겠습니다.  (<a target="_blank" rel="noopener" href="https://subinium.github.io/">안수빈님</a> 제안 감사드립니다)</p>
 </li>
-<li><p>pandas의 <code>DataFrame.from_dict()</code> 기능을 이용해서 dataframe을 만듭니다.</p>
+<li>
+<p>pandas의 <code>DataFrame.from_dict()</code> 기능을 이용해서 dataframe을 만듭니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame.from_dict(data, orient=<span class="string">&#x27;index&#x27;</span>, columns=[<span class="string">&#x27;revenue&#x27;</span>])</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_14.png"></p>
+<p><img src="9_mpla_14.png" alt=""></p>
 </li>
-<li><p>dataframe에 직접 <code>.plot()</code>을 수행합니다. 가로방향 bar plot이니 <code>kind=&#39;barh&#39;</code>를 넣습니다.</p>
+<li>
+<p>dataframe에 직접 <code>.plot()</code>을 수행합니다. 가로방향 bar plot이니 <code>kind='barh'</code>를 넣습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.plot(kind=<span class="string">&#x27;barh&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 깔끔하게 bar plot이 나왔습니다.<br>이 그래프도 여러 옵션을 통해 아름답게 만들 수 있지만, 본 글에서는 다루지 않겠습니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_15.png"></li>
+<li>실행결과: 깔끔하게 bar plot이 나왔습니다.<br>
+이 그래프도 여러 옵션을 통해 아름답게 만들 수 있지만, 본 글에서는 다루지 않겠습니다.<br>
+<img src="9_mpla_15.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h4 id="2-4-Color-Setting"><a href="#2-4-Color-Setting" class="headerlink" title="2.4. Color Setting"></a>2.4. Color Setting</h4><blockquote>
+<h4 id="2-4-Color-Setting">2.4. Color Setting</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.barplot.html?highlight=barplot#seaborn.barplot">seaborn.barplot</a></p>
 </blockquote>
 <ul>
-<li><p>bar 색상이 좀 어두워서 아쉽습니다.</p>
+<li>
+<p>bar 색상이 좀 어두워서 아쉽습니다.</p>
 </li>
-<li><p><code>ax.barh()</code> 안에 <code>color=&#39;blue&#39;</code>처럼 색상을 지정하는 식으로 색상을 변경할 수도 있지만 번거롭습니다.</p>
+<li>
+<p><code>ax.barh()</code> 안에 <code>color='blue'</code>처럼 색상을 지정하는 식으로 색상을 변경할 수도 있지만 번거롭습니다.</p>
 </li>
-<li><p>앞으로 그릴 그림들의 색상을 일괄적으로 변경합시다.</p>
+<li>
+<p>앞으로 그릴 그림들의 색상을 일괄적으로 변경합시다.</p>
 </li>
-<li><p>seaborn의 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_palette.html#seaborn.set_palette"><code>seaborn.set_palette</code></a>가 이럴 때 편리합니다.  </p>
+<li>
+<p>seaborn의 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_palette.html#seaborn.set_palette"><code>seaborn.set_palette</code></a>가 이럴 때 편리합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.set_palette(<span class="string">&#x27;bright&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">4</span>))</span><br><span class="line">ax.barh(group_names, group_data)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: bar 색상이 변경되었습니다.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_6.png"></li>
+<li>실행결과: bar 색상이 변경되었습니다.<br>
+<img src="9_mpla_6.png" alt=""></li>
 </ul>
 </li>
-<li><p>barplot 자체를 seaborn으로 그릴 수도 있습니다.</p>
+<li>
+<p>barplot 자체를 seaborn으로 그릴 수도 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">4</span>))</span><br><span class="line">sns.barplot(group_data, group_names)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: bar마다 다른 색상이 적용되었습니다.<br>자세히 보니 matplotlib과는 y축 label 순서가 뒤집혀 있네요.<br><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_7.png"></li>
+<li>실행결과: bar마다 다른 색상이 적용되었습니다.<br>
+자세히 보니 matplotlib과는 y축 label 순서가 뒤집혀 있네요.<br>
+<img src="9_mpla_7.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h4 id="2-5-Titles-and-Axes-Labels"><a href="#2-5-Titles-and-Axes-Labels" class="headerlink" title="2.5. Titles and Axes Labels"></a>2.5. Titles and Axes Labels</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html?highlight=set_xlabels">matplotlib.axes.Axes.set_xlabel</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_title.html">matplotlib.axes.Axes.set_title</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/text/text_props.html">matplotlib: Text properties and layout</a><br><a href="https://jehyunlee.github.io/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/">Pega Devlog: Matplotlib Defaults &amp; Fonts</a></p>
+<h4 id="2-5-Titles-and-Axes-Labels">2.5. Titles and Axes Labels</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html?highlight=set_xlabels">matplotlib.axes.Axes.set_xlabel</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_title.html">matplotlib.axes.Axes.set_title</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/text/text_props.html">matplotlib: Text properties and layout</a><br>
+<a href="https://jehyunlee.github.io/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/">Pega Devlog: Matplotlib Defaults &amp; Fonts</a></p>
 </blockquote>
 <ul>
-<li><p>x와 y축에 label을 붙이고 plot title을 설정합니다.</p>
+<li>
+<p>x와 y축에 label을 붙이고 plot title을 설정합니다.</p>
 </li>
-<li><p>x축 label은 <code>set_xlabel()</code>로, plot title은 <code>set_title()</code>로 설정할 수 있습니다.</p>
+<li>
+<p>x축 label은 <code>set_xlabel()</code>로, plot title은 <code>set_title()</code>로 설정할 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">4</span>))</span><br><span class="line">sns.barplot(group_data, group_names)</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Total Revenue&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Company&#x27;</span>)</span><br><span class="line">ax.set_title(<span class="string">&#x27;Company Revenue&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_8.png"></p>
+<p><img src="9_mpla_8.png" alt=""></p>
 </li>
-<li><p>font size, color 등을 변경하고 싶을 때는 <code>fontdict</code>를 사용하면 편리합니다.</p>
+<li>
+<p>font size, color 등을 변경하고 싶을 때는 <code>fontdict</code>를 사용하면 편리합니다.</p>
 </li>
-<li><p>dictionary 형식으로 설정값을 정리한 후 넣어주는 방식입니다.</p>
+<li>
+<p>dictionary 형식으로 설정값을 정리한 후 넣어주는 방식입니다.</p>
 </li>
-<li><p>label, title과 ticklabels와의 거리는 추가 인자로 지정할 수 있습니다.</p>
+<li>
+<p>label, title과 ticklabels와의 거리는 추가 인자로 지정할 수 있습니다.</p>
 </li>
-<li><p><b>[ 주의 ]</b> 거리를 지정하는 인자 이름이 label에서는 <code>labelpad</code>, title은 <code>pad</code>입니다.</p>
+<li>
+<p><b>[ 주의 ]</b> 거리를 지정하는 인자 이름이 label에서는 <code>labelpad</code>, title은 <code>pad</code>입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">font_label = &#123;</span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>: <span class="string">&#x27;gray&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span>: <span class="string">&#x27;bold&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">font_title = &#123;</span><br><span class="line">    <span class="string">&#x27;family&#x27;</span>: <span class="string">&#x27;serif&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;size&#x27;</span>: <span class="number">20</span>,</span><br><span class="line"><span class="comment">#     &#x27;backgroundcolor&#x27;: &#x27;yellow&#x27;,</span></span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>: <span class="string">&#x27;brown&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span>: <span class="string">&#x27;bold&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;verticalalignment&#x27;</span>: <span class="string">&#x27;baseline&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;horizontalalignment&#x27;</span>: <span class="string">&#x27;center&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">7</span>,<span class="number">4</span>))</span><br><span class="line">sns.barplot(group_data, group_names)</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Total Revenue ($)&#x27;</span>, fontdict=font_label, labelpad=<span class="number">20</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Company&#x27;</span>, fontdict=font_label, labelpad=<span class="number">20</span>)</span><br><span class="line">ax.set_title(<span class="string">&#x27;Company Revenue&#x27;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_9.png"></p>
+<p><img src="9_mpla_9.png" alt=""></p>
 </li>
 </ul>
-<h4 id="2-6-Axis-Range-and-Tick-Format"><a href="#2-6-Axis-Range-and-Tick-Format" class="headerlink" title="2.6. Axis Range and Tick Format"></a>2.6. Axis Range and Tick Format</h4><blockquote>
+<h4 id="2-6-Axis-Range-and-Tick-Format">2.6. Axis Range and Tick Format</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html?highlight=set_xlim#matplotlib.axes.Axes.set_xlim">matplotlib.axes.Axes.set_xlim</a></p>
 </blockquote>
 <ul>
-<li><p>예제 데이터의 X축인 Total Revenue의 범위가 모두 100000 이상입니다.</p>
+<li>
+<p>예제 데이터의 X축인 Total Revenue의 범위가 모두 100000 이상입니다.</p>
 </li>
-<li><p>데이터간 차이를 집중해서 보여주기 힘들고, 공간이 낭비되는 경향이 있으니 바꿔봅시다.</p>
+<li>
+<p>데이터간 차이를 집중해서 보여주기 힘들고, 공간이 낭비되는 경향이 있으니 바꿔봅시다.</p>
 </li>
-<li><p>아래 줄을 위 코드에 추가합니다.</p>
+<li>
+<p>아래 줄을 위 코드에 추가합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.set_xlim(<span class="number">75000</span>, <span class="number">150000</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_10.png"></p>
+<p><img src="9_mpla_10.png" alt=""></p>
 </li>
-<li><p>이번엔 x축에 있는 숫자가 영 헷갈리네요. 0이 너무 많아 헷갈립니다. x축 숫자를 돌려보겠습니다. </p>
+<li>
+<p>이번엔 x축에 있는 숫자가 영 헷갈리네요. 0이 너무 많아 헷갈립니다. x축 숫자를 돌려보겠습니다.</p>
 </li>
-<li><p><code>set_xticklabels()</code>에 <code>rotation=45</code>를 넣으면 되는데, label을 함께 넣어야 합니다.</p>
+<li>
+<p><code>set_xticklabels()</code>에 <code>rotation=45</code>를 넣으면 되는데, label을 함께 넣어야 합니다.</p>
 </li>
-<li><p><code>labels=[8000, 10000, 12000, 140000]</code> 처럼 넣을 수도 있지만 기존 ticklabel을 그대로 살려보겠습니다.</p>
+<li>
+<p><code>labels=[8000, 10000, 12000, 140000]</code> 처럼 넣을 수도 있지만 기존 ticklabel을 그대로 살려보겠습니다.</p>
 </li>
-<li><p>plot에 있는 데이터를 추출할 때는 <code>get_()</code>형식의 함수를 사용하고, 여기선 <code>get_xticks()</code>명령을 사용합니다.</p>
+<li>
+<p>plot에 있는 데이터를 추출할 때는 <code>get_()</code>형식의 함수를 사용하고, 여기선 <code>get_xticks()</code>명령을 사용합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xlabels = ax.get_xticks()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;xlabels type=<span class="subst">&#123;<span class="built_in">type</span>(xlabels)&#125;</span>, \nxlabels=<span class="subst">&#123;xlabels&#125;</span>&#x27;</span>)</span><br><span class="line">ax.set_xticklabels(xlabels.astype(<span class="string">&#x27;int&#x27;</span>), rotation=<span class="number">45</span>, </span><br><span class="line">                   horizontalalignment=<span class="string">&#x27;right&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: xticks는 <code>numpy.array</code>로 추출되었습니다.<br>float type이기 때문에 <code>.astype(&#39;int&#39;)</code>를 붙여 정수로 변환하고 소수점을 떼냅니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xlabels <span class="built_in">type</span>=&lt;class <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;, </span><br><span class="line">xlabels=[ 60000.  80000. 100000. 120000. 140000. 160000.]</span><br></pre></td></tr></table></figure>
-<img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_11.png"></li>
+<li>실행결과: xticks는 <code>numpy.array</code>로 추출되었습니다.<br>
+float type이기 때문에 <code>.astype('int')</code>를 붙여 정수로 변환하고 소수점을 떼냅니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xlabels <span class="built_in">type</span>=&lt;class <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;, </span><br><span class="line">xlabels=[ 60000.  80000. 100000. 120000. 140000. 160000.]</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<p><img src="9_mpla_11.png" alt=""></p>
 </li>
-<li><p>45도로 돌리니 조금 나은 듯도 하지만 여전히 0이 너무 많습니다. K를 붙이고 0 세 개를 떼냅시다.</p>
+<li>
+<p>45도로 돌리니 조금 나은 듯도 하지만 여전히 0이 너무 많습니다. K를 붙이고 0 세 개를 떼냅시다.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py">공식 tutorial</a>에서는 <code>ticker.Funcformatter()</code>를 사용하고 있습니다만, 좀 복잡합니다.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/introductory/lifecycle.html#sphx-glr-tutorials-introductory-lifecycle-py">공식 tutorial</a>에서는 <code>ticker.Funcformatter()</code>를 사용하고 있습니다만, 좀 복잡합니다.</p>
 </li>
-<li><p>간단하게 list comprehension으로 처리해 보겠습니다.</p>
+<li>
+<p>간단하게 list comprehension으로 처리해 보겠습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.set_xticklabels([<span class="string">f&#x27;<span class="subst">&#123;xlabel/<span class="number">1000</span>:<span class="number">0.0</span>f&#125;</span>K&#x27;</span> <span class="keyword">for</span> xlabel <span class="keyword">in</span> xlabels])</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_12.png"></p>
+<p><img src="9_mpla_12.png" alt=""></p>
 </li>
 </ul>
-<h4 id="2-7-Additional-Information"><a href="#2-7-Additional-Information" class="headerlink" title="2.7. Additional Information"></a>2.7. Additional Information</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axvline.html?highlight=axvline#matplotlib.axes.Axes.axvline">matplotlib.axes.Axes.axvline</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/text/text_props.html">matplotlib: Text properties and layout</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.annotate.html?highlight=annotate#matplotlib.axes.Axes.annotate">matplotlib.axes.Axes.annotate</a></p>
+<h4 id="2-7-Additional-Information">2.7. Additional Information</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axvline.html?highlight=axvline#matplotlib.axes.Axes.axvline">matplotlib.axes.Axes.axvline</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/text/text_props.html">matplotlib: Text properties and layout</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.annotate.html?highlight=annotate#matplotlib.axes.Axes.annotate">matplotlib.axes.Axes.annotate</a></p>
 </blockquote>
 <ul>
-<li><p>종종 데이터 외에도 데이터를 읽기 좋은 부가 정보를 추가해야 할 때가 있습니다.</p>
+<li>
+<p>종종 데이터 외에도 데이터를 읽기 좋은 부가 정보를 추가해야 할 때가 있습니다.</p>
 </li>
-<li><p>예를 들면, 데이터들의 평균 값을 표시하거나 데이터에 레이블을 달아야 할 때가 있습니다.</p>
+<li>
+<p>예를 들면, 데이터들의 평균 값을 표시하거나 데이터에 레이블을 달아야 할 때가 있습니다.</p>
 </li>
-<li><p>예제 데이터(회사별 수익)의 평균과 신규 업체를 표시해 보겠습니다.</p>
+<li>
+<p>예제 데이터(회사별 수익)의 평균과 신규 업체를 표시해 보겠습니다.</p>
 </li>
-<li><p>평균 수익은 전체 수익의 평균을 구해서 수직선을 그어 표시합니다: <code>ax.axvline()</code></p>
+<li>
+<p>평균 수익은 전체 수익의 평균을 구해서 수직선을 그어 표시합니다: <code>ax.axvline()</code></p>
 </li>
-<li><p>수직선이 평균이라는 것을 알려주기 위해 화살표와 텍스트를 추가합니다: <code>ax.annotate()</code></p>
+<li>
+<p>수직선이 평균이라는 것을 알려주기 위해 화살표와 텍스트를 추가합니다: <code>ax.annotate()</code></p>
 </li>
-<li><p>신규 업체는 bar 위에 글자를 써서 표시합니다: <code>ax.text()</code></p>
+<li>
+<p>신규 업체는 bar 위에 글자를 써서 표시합니다: <code>ax.text()</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">font_text = &#123;</span><br><span class="line">    <span class="string">&#x27;size&#x27;</span>: <span class="number">10</span>,</span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span>: <span class="string">&#x27;bold&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;horizontalalignment&#x27;</span>: <span class="string">&#x27;left&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;verticalalignment&#x27;</span>: <span class="string">&#x27;center&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add a vertical line, here we set the style in the function call</span></span><br><span class="line">group_mean = np.mean(group_data)</span><br><span class="line">ax.axvline(group_mean, ls=<span class="string">&#x27;-&#x27;</span>, lw=<span class="number">3</span>, color=<span class="string">&#x27;#8C87&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add average</span></span><br><span class="line">arrowprops = &#123;</span><br><span class="line">    <span class="string">&#x27;arrowstyle&#x27;</span>: <span class="string">&#x27;-&gt;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">ax.annotate(<span class="string">&quot;average&quot;</span>, (group_mean, <span class="number">2.5</span>), xytext=(<span class="number">125000</span>, <span class="number">2.5</span>),</span><br><span class="line">          color=<span class="string">&#x27;green&#x27;</span>, fontfamily=<span class="string">&#x27;serif&#x27;</span>, fontstyle=<span class="string">&#x27;italic&#x27;</span>, fontsize=<span class="number">15</span>,</span><br><span class="line">          arrowprops=arrowprops)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Annotate new companies</span></span><br><span class="line"><span class="keyword">for</span> group <span class="keyword">in</span> [<span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>]:</span><br><span class="line">    ax.text(<span class="number">80000</span>, group, <span class="string">&quot;New Company&quot;</span>, fontdict=font_text)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/31/Python-DS-9-matplotlib_axis/9_mpla_13.png"></p>
+<p><img src="9_mpla_13.png" alt=""></p>
 </li>
-<li><p>전체 코드가 담긴 노트북은 <a href="9_mpla.ipynb">여기에서 다운로드 가능</a>합니다.</p>
+<li>
+<p>전체 코드가 담긴 노트북은 <a href="9_mpla.ipynb">여기에서 다운로드 가능</a>합니다.</p>
 </li>
 </ul>
 
@@ -451,7 +535,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/03/31/Python-DS-9-matplotlib_axis/" data-id="cuids9ZJouVazj8O6oUiPlVrM" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/03/31/Python-DS-9-matplotlib_axis/" data-id="cuidB7zRdctlqJhyDmoXTsuel" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -533,7 +617,7 @@
 Matplotlib은 자유도가 높은 만큼 건드릴 곳이 많아서 익숙해지기가 영 만만치 않습니다.
 저도 이 바람에 Matplotlib을 버릴까 했으나 Matplotlib에 의존하는 라이브러리가 너무 많더군요.
 피할 수 없다면, 헷갈리지 않게 그리는 방법을 익혀봅시다.1234import matplotlib.pyplot as pltimport matplotlib",
-        "wordCount": 1505
+        "wordCount": 1465
     }
 </script>
 
@@ -630,6 +714,26 @@ Matplotlib은 자유도가 높은 만큼 건드릴 곳이 많아서 익숙해지
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -704,26 +808,6 @@ Matplotlib은 자유도가 높은 만큼 건드릴 곳이 많아서 익숙해지
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

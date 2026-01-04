@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,seaborn,axes" />
     
-    <meta name="description" content="1. seaborn + matplotlib seaborn을 matplotlib과 섞어쓰는 방법입니다. 4부 중 첫 번째 시간입니다. seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입니다.   seaborn API   seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.  따라서 seaborn의 결과물은">
+    <meta name="description" content="1. seaborn + matplotlib  seaborn을 matplotlib과 섞어쓰는 방법입니다. 4부 중 첫 번째 시간입니다. seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입니다.   seaborn API    seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.  따라서 seaborn의 결과">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Seaborn with Matplotlib (1)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="1. seaborn + matplotlib seaborn을 matplotlib과 섞어쓰는 방법입니다. 4부 중 첫 번째 시간입니다. seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입니다.   seaborn API   seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.  따라서 seaborn의 결과물은">
+<meta property="og:description" content="1. seaborn + matplotlib  seaborn을 matplotlib과 섞어쓰는 방법입니다. 4부 중 첫 번째 시간입니다. seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입니다.   seaborn API    seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.  따라서 seaborn의 결과">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/34_s2m_0.png">
 <meta property="article:published_time" content="2020-09-30T11:58:00.000Z">
@@ -230,7 +230,8 @@
 
             
 
-            <h2 id="1-seaborn-matplotlib"><a href="#1-seaborn-matplotlib" class="headerlink" title="1. seaborn + matplotlib"></a>1. seaborn + matplotlib</h2><ul>
+            <h2 id="1-seaborn-matplotlib">1. seaborn + matplotlib</h2>
+<ul>
 <li>seaborn을 matplotlib과 섞어쓰는 방법입니다.</li>
 <li>4부 중 첫 번째 시간입니다.</li>
 <li>seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입니다.</li>
@@ -239,50 +240,61 @@
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/api.html">seaborn API</a></p>
 </blockquote>
 <ul>
-<li><p>seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.</p>
+<li>
+<p>seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.</p>
 <ul>
 <li>따라서 seaborn의 결과물은 당연히 matplotlib의 결과물입니다.</li>
 <li>그러나 간혹 seaborn이 그린 그림의 폰트, 색상에 접근이 되지 않아 난처합니다.</li>
 <li>seaborn의 구조를 잘 이해하지 못하면 해결도 어렵습니다.</li>
 </ul>
 </li>
-<li><p>v0.11 기준으로 seaborn에는 다음 함수들이 있습니다. <br><br><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_1.png" alt="seaborn functions"></p>
+<li>
+<p>v0.11 기준으로 seaborn에는 다음 함수들이 있습니다. <br><br>
+<img src="34_s2m_1.png" alt="seaborn functions"></p>
 </li>
-<li><p>matplotlib의 출력물은 <code>figure</code>와 <code>axes</code>만을 반환합니다.</p>
+<li>
+<p>matplotlib의 출력물은 <code>figure</code>와 <code>axes</code>만을 반환합니다.</p>
 <ul>
 <li>seaborn의 명령어 중 <code>axes</code>를 반환하는 것들은 matplotlib과 섞어 쓰기 좋습니다.</li>
-<li>먼저 matplotlib의 <b>객체 지향<code>object oriented</code> interface</b>를 사용해서 그림의 틀을 만든 뒤, </li>
+<li>먼저 matplotlib의 <b>객체 지향<code>object oriented</code> interface</b>를 사용해서 그림의 틀을 만든 뒤,</li>
 <li>특정 <code>axes</code>에 seaborn을 삽입하면 됩니다.</li>
 <li><b>결론적으로, 하고 싶은 거 다 됩니다.</b></li>
 </ul>
 </li>
 </ul>
-<h3 id="1-1-Load-data"><a href="#1-1-Load-data" class="headerlink" title="1.1. Load data"></a>1.1. Load data</h3><ul>
+<h3 id="1-1-Load-data">1.1. Load data</h3>
+<ul>
 <li>예제로 사용할 펭귄 데이터를 불러옵니다.</li>
 <li>seaborn에 내장되어 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">penguins = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">penguins.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_3.png"></p>
-<h3 id="1-2-figure-and-axes"><a href="#1-2-figure-and-axes" class="headerlink" title="1.2. figure and axes"></a>1.2. <b><code>figure</code></b> and <b><code>axes</code></b></h3><ul>
+<p><img src="34_s2m_3.png" alt=""></p>
+<h3 id="1-2-b-figure-b-and-b-axes-b">1.2. <b><code>figure</code></b> and <b><code>axes</code></b></h3>
+<ul>
 <li>matplotlib으로 도화지<code>figure</code>를 깔고 축공간<code>axes</code>를 만듭니다.</li>
 <li>1 x 2 축공간을 구성합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_2.png"></p>
-<h3 id="1-3-plot-with-matplotlib"><a href="#1-3-plot-with-matplotlib" class="headerlink" title="1.3. plot with matplotlib"></a>1.3. plot with matplotlib</h3><ul>
-<li><p>matplotlib 기능을 이용해서 산점도를 그립니다.</p>
+<p><img src="34_s2m_2.png" alt=""></p>
+<h3 id="1-3-plot-with-matplotlib">1.3. plot with matplotlib</h3>
+<ul>
+<li>
+<p>matplotlib 기능을 이용해서 산점도를 그립니다.</p>
 <ul>
 <li>x축은 부리 길이 <code>bill length</code></li>
 <li>y축은 부리 위 아래 두께 <code>bill depth</code></li>
-<li>색상은 종<code>species</code>로 합니다.<br>Adelie, Chinstrap, Gentoo이 있습니다.</li>
+<li>색상은 종<code>species</code>로 합니다.<br>
+Adelie, Chinstrap, Gentoo이 있습니다.</li>
 </ul>
 </li>
-<li><p>두 축공간 중 왼쪽에만 그립니다.</p>
+<li>
+<p>두 축공간 중 왼쪽에만 그립니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">species_u = penguins[<span class="string">&quot;species&quot;</span>].unique()</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 0 : matplotlib</span></span><br><span class="line"><span class="keyword">for</span> i, s <span class="keyword">in</span> <span class="built_in">enumerate</span>(species_u):</span><br><span class="line">    axes[<span class="number">0</span>].scatter(penguins[<span class="string">&quot;bill_length_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s],</span><br><span class="line">                   penguins[<span class="string">&quot;bill_depth_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s],</span><br><span class="line">                   c=<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, label=s, alpha=<span class="number">0.3</span></span><br><span class="line">                  )</span><br><span class="line">axes[<span class="number">0</span>].legend(species_u, title=<span class="string">&quot;species&quot;</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_xlabel(<span class="string">&quot;Bill Length (mm)&quot;</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_ylabel(<span class="string">&quot;Bill Depth (mm)&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_4.png"></p>
-<h3 id="1-4-plot-with-seaborn"><a href="#1-4-plot-with-seaborn" class="headerlink" title="1.4. plot with seaborn"></a>1.4. plot with seaborn</h3><blockquote>
+<p><img src="34_s2m_4.png" alt=""></p>
+<h3 id="1-4-plot-with-seaborn">1.4. plot with seaborn</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html">seaborn scatterplot</a></p>
 </blockquote>
 <ul>
@@ -290,42 +302,50 @@
 <li>위 코드에 아래 세 줄만 추가합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plot 1 : seaborn</span></span><br><span class="line">sns.scatterplot(<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, hue=<span class="string">&quot;species&quot;</span>, data=penguins, alpha=<span class="number">0.3</span>, ax=axes[<span class="number">1</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_xlabel(<span class="string">&quot;Bill Length (mm)&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_ylabel(<span class="string">&quot;Bill Depth (mm)&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_5.png"></p>
+<p><img src="34_s2m_5.png" alt=""></p>
 <ul>
-<li><p>단 세 줄로 거의 동일한 그림이 나왔습니다.</p>
+<li>
+<p>단 세 줄로 거의 동일한 그림이 나왔습니다.</p>
 <ul>
 <li>scatter plot의 점 크기만 살짝 작습니다.</li>
 <li>label의 투명도만 살짝 다릅니다.</li>
 </ul>
 </li>
-<li><p>seaborn 명령 <code>scatterplot()</code>을 그대로 사용했습니다.</p>
+<li>
+<p>seaborn 명령 <code>scatterplot()</code>을 그대로 사용했습니다.</p>
 </li>
-<li><p>x축과 y축 label도 바꾸었습니다.</p>
+<li>
+<p>x축과 y축 label도 바꾸었습니다.</p>
 <ul>
 <li><code>ax=axes[1]</code> 인자에서 볼 수 있듯, 존재하는 <code>axes</code>에 그림만 얹었습니다.</li>
 <li><b>matplotlib 틀 + seaborn 그림</b> 이므로, matplotlib 명령이 모두 통합니다.</li>
 </ul>
 </li>
 </ul>
-<h4 id="1-5-matplotlib-seaborn-seaborn-matplotlib"><a href="#1-5-matplotlib-seaborn-seaborn-matplotlib" class="headerlink" title="1.5. matplotlib + seaborn &amp; seaborn + matplotlib"></a>1.5. matplotlib + seaborn &amp; seaborn + matplotlib</h4><ul>
-<li><p>matplotlib과 seaborn이 자유롭게 섞일 수 있습니다.</p>
+<h4 id="1-5-matplotlib-seaborn-seaborn-matplotlib">1.5. matplotlib + seaborn &amp; seaborn + matplotlib</h4>
+<ul>
+<li>
+<p>matplotlib과 seaborn이 자유롭게 섞일 수 있습니다.</p>
 <ul>
 <li><b>matplotlib 산점도 위에 seaborn 추세선</b>을 얹을 수 있고,</li>
 <li><b>seaborn 산점도 위에 matplotlib 중심점</b>을 얹을 수 있습니다.</li>
 </ul>
 </li>
-<li><p>파이썬 코드는 다음과 같습니다.</p>
+<li>
+<p>파이썬 코드는 다음과 같습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">species_u = penguins[<span class="string">&quot;species&quot;</span>].unique()</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 0 : matplotlib + seaborn</span></span><br><span class="line"><span class="keyword">for</span> i, s <span class="keyword">in</span> <span class="built_in">enumerate</span>(species_u):</span><br><span class="line">    <span class="comment"># matplotlib 산점도</span></span><br><span class="line">    axes[<span class="number">0</span>].scatter(penguins[<span class="string">&quot;bill_length_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s],</span><br><span class="line">                   penguins[<span class="string">&quot;bill_depth_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s],</span><br><span class="line">                   c=<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, label=s, alpha=<span class="number">0.3</span></span><br><span class="line">                  )</span><br><span class="line">                  </span><br><span class="line">    <span class="comment"># seaborn 추세선</span></span><br><span class="line">    sns.regplot(<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, data=penguins.loc[penguins[<span class="string">&quot;species&quot;</span>]==s], </span><br><span class="line">                scatter=<span class="literal">False</span>, ax=axes[<span class="number">0</span>])</span><br><span class="line">    </span><br><span class="line">axes[<span class="number">0</span>].legend(species_u, title=<span class="string">&quot;species&quot;</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_xlabel(<span class="string">&quot;Bill Length (mm)&quot;</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_ylabel(<span class="string">&quot;Bill Depth (mm)&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 1 : seaborn + matplotlib</span></span><br><span class="line"><span class="comment"># seaborn 산점도</span></span><br><span class="line">sns.scatterplot(<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, hue=<span class="string">&quot;species&quot;</span>, data=penguins, alpha=<span class="number">0.3</span>, ax=axes[<span class="number">1</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_xlabel(<span class="string">&quot;Bill Length (mm)&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_ylabel(<span class="string">&quot;Bill Depth (mm)&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, s <span class="keyword">in</span> <span class="built_in">enumerate</span>(species_u):</span><br><span class="line">    <span class="comment"># matplotlib 중심점</span></span><br><span class="line">    axes[<span class="number">1</span>].scatter(penguins[<span class="string">&quot;bill_length_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s].mean(),</span><br><span class="line">                   penguins[<span class="string">&quot;bill_depth_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s].mean(),</span><br><span class="line">                   c=<span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span>, alpha=<span class="number">1</span>, marker=<span class="string">&quot;x&quot;</span>, s=<span class="number">100</span></span><br><span class="line">                  )</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_6.png"></p>
-<h4 id="1-6-seaborn-seaborn-matplotlib"><a href="#1-6-seaborn-seaborn-matplotlib" class="headerlink" title="1.6. seaborn + seaborn + matplotlib"></a>1.6. seaborn + seaborn + matplotlib</h4><ul>
-<li>안 될 이유가 없습니다. </li>
+<p><img src="34_s2m_6.png" alt=""></p>
+<h4 id="1-6-seaborn-seaborn-matplotlib">1.6. seaborn + seaborn + matplotlib</h4>
+<ul>
+<li>안 될 이유가 없습니다.</li>
 <li>seaborn <code>scatterplot</code> + seaborn <code>kdeplot</code> + matplotlib <code>text</code>입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">6</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 0: scatter plot</span></span><br><span class="line">sns.scatterplot(<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, color=<span class="string">&quot;k&quot;</span>, data=penguins, alpha=<span class="number">0.3</span>, ax=ax, legend=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 1: kde plot</span></span><br><span class="line">sns.kdeplot(<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, hue=<span class="string">&quot;species&quot;</span>, data=penguins, alpha=<span class="number">0.5</span>, ax=ax, legend=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># text:</span></span><br><span class="line">species_u = penguins[<span class="string">&quot;species&quot;</span>].unique()</span><br><span class="line"><span class="keyword">for</span> i, s <span class="keyword">in</span> <span class="built_in">enumerate</span>(species_u):</span><br><span class="line">    ax.text(penguins[<span class="string">&quot;bill_length_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s].mean(),</span><br><span class="line">            penguins[<span class="string">&quot;bill_depth_mm&quot;</span>].loc[penguins[<span class="string">&quot;species&quot;</span>]==s].mean(),</span><br><span class="line">            s = s, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">14</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>,<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">&quot;Bill Length (mm)&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;Bill Depth (mm)&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/30/Python-DS-34-seaborn_matplotlib/34_s2m_7.png"></p>
-<h4 id="1-7-결론"><a href="#1-7-결론" class="headerlink" title="1.7. 결론"></a>1.7. 결론</h4><ul>
+<p><img src="34_s2m_7.png" alt=""></p>
+<h4 id="1-7-결론">1.7. 결론</h4>
+<ul>
 <li><b>seaborn을 matplotlib과 마음껏 섞어쓰세요</b></li>
 <li><b>단, <code>axes</code>를 반환하는 명령어에 한해서 말입니다.</b></li>
 <li>이런 명령어를 <b><code>axes-level function</code></b> 이라고 합니다.</li>
@@ -347,7 +367,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/" data-id="cuid2BeVlMUl8KDrx0A_aM0eT" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/" data-id="cuidagMZlMM2EfdjBK9VfGt3l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -426,6 +446,7 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/09/30/Python-DS-34-seaborn_matplotlib/",
         "description": "1. seaborn + matplotlib
+
 seaborn을 matplotlib과 섞어쓰는 방법입니다.
 4부 중 첫 번째 시간입니다.
 seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입니다.
@@ -434,10 +455,11 @@ seaborn 함수 중 matplotlib axes를 반환하는 함수들에 관한 내용입
 seaborn API
 
 
+
 seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.
 
-따라서 seaborn의 결과물은",
-        "wordCount": 1045
+따라서 seaborn의 결과",
+        "wordCount": 998
     }
 </script>
 
@@ -534,6 +556,26 @@ seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -608,26 +650,6 @@ seaborn은 matplotlib을 쉽고 아름답게 쓰고자 만들어졌습니다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

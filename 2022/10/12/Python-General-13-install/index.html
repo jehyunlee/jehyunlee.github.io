@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,pip" />
     
-    <meta name="description" content="Colab 같은 클라우드 환경 사용 비중이 늘어나고 있습니다. 클라우드에 기본으로 설치되지 않은 라이브러리를 설치하는 방법을 알아봅니다. pip도 import 해서 사용할 수 있습니다.  1. 클라우드 환경 Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다. 장점이 많지만 서버가 물리적으로 고정되어">
+    <meta name="description" content="Colab 같은 클라우드 환경 사용 비중이 늘어나고 있습니다. 클라우드에 기본으로 설치되지 않은 라이브러리를 설치하는 방법을 알아봅니다. pip도 import 해서 사용할 수 있습니다.  1. 클라우드 환경  Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다. 장점이 많지만 서버가 물리적으로 고정되어">
 <meta property="og:type" content="article">
 <meta property="og:title" content="모듈(.py) 안에서 library 설치">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/10/12/Python-General-13-install/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Colab 같은 클라우드 환경 사용 비중이 늘어나고 있습니다. 클라우드에 기본으로 설치되지 않은 라이브러리를 설치하는 방법을 알아봅니다. pip도 import 해서 사용할 수 있습니다.  1. 클라우드 환경 Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다. 장점이 많지만 서버가 물리적으로 고정되어">
+<meta property="og:description" content="Colab 같은 클라우드 환경 사용 비중이 늘어나고 있습니다. 클라우드에 기본으로 설치되지 않은 라이브러리를 설치하는 방법을 알아봅니다. pip도 import 해서 사용할 수 있습니다.  1. 클라우드 환경  Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다. 장점이 많지만 서버가 물리적으로 고정되어">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/13_install_00.png">
 <meta property="article:published_time" content="2022-10-11T21:34:00.000Z">
@@ -232,22 +232,23 @@
 <li>클라우드에 기본으로 설치되지 않은 라이브러리를 설치하는 방법을 알아봅니다.</li>
 <li>pip도 import 해서 사용할 수 있습니다.</li>
 </ul>
-<h1 id="1-클라우드-환경"><a href="#1-클라우드-환경" class="headerlink" title="1. 클라우드 환경"></a>1. 클라우드 환경</h1><ul>
+<h1>1. 클라우드 환경</h1>
+<ul>
 <li>Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다.</li>
 <li>장점이 많지만 서버가 물리적으로 고정되어 있지 않다 보니 필요한 라이브러리가 없을 때가 많습니다.</li>
 <li>일일이 확인하면서 <code>!pip install {library}</code>를 실행하기가 번거롭습니다.</li>
 <li>그렇다고 <code>requirements.txt</code>를 쓸 만큼 큰 일도 아닐 때 간단하게 처리하고 싶습니다.</li>
 </ul>
-<h1 id="2-import-pip"><a href="#2-import-pip" class="headerlink" title="2. import pip"></a>2. <code>import pip</code></h1><ul>
+<h1>2. <code>import pip</code></h1>
+<ul>
 <li>라이브러리 설치에 사용하는 <code>pip</code>는 import도 가능합니다.</li>
 <li>노트북 환경이건 모듈로 사용되는 .py 파일이건 무관합니다.</li>
 <li>프로그램 시작 부분에 아래 코드를 삽입해 import가 안 되어 있는 라이브러리를 설치할 수 있습니다.</li>
 <li>아래는 geopandas를 사용하고자 설치하는 코드입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pip</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">install</span>(<span class="params">package, upgrade=<span class="literal">True</span></span>):</span><br><span class="line">    <span class="comment"># package install with upgrade or not</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">hasattr</span>(pip, <span class="string">&#x27;main&#x27;</span>):</span><br><span class="line">        <span class="keyword">if</span> upgrade:</span><br><span class="line">            pip.main([<span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;--upgrade&#x27;</span>, package])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pip.main([<span class="string">&#x27;install&#x27;</span>, package])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> upgrade:</span><br><span class="line">            pip._internal.main([<span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;--upgrade&#x27;</span>, package])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pip._internal.main([<span class="string">&#x27;install&#x27;</span>, package])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># import package</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">eval</span>(<span class="string">f&quot;import <span class="subst">&#123;package&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> ModuleNotFoundError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;# Package name might be differnt. please check it again.&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="3-GeoPandas-예제-Choro-legends"><a href="#3-GeoPandas-예제-Choro-legends" class="headerlink" title="3. GeoPandas 예제: Choro legends"></a>3. GeoPandas 예제: Choro legends</h1><blockquote>
+<h1>3. GeoPandas 예제: Choro legends</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://geopandas.org/en/stable/gallery/choro_legends.html">GeoPandas Example Gallery: Choro legends</a></p>
 </blockquote>
 <ul>
@@ -255,7 +256,7 @@
 <li>이후 아래 코드를 실행하면 깔끔하게 실행됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> geopandas <span class="keyword">import</span> read_file</span><br><span class="line"></span><br><span class="line">_ = libpysal.examples.load_example(<span class="string">&#x27;South&#x27;</span>)</span><br><span class="line">pth = libpysal.examples.get_path(<span class="string">&#x27;south.shp&#x27;</span>)</span><br><span class="line">df = read_file(pth)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">df.plot(column=<span class="string">&#x27;HR60&#x27;</span>, scheme=<span class="string">&#x27;QUANTILES&#x27;</span>, k=<span class="number">4</span>, \</span><br><span class="line">             cmap=<span class="string">&#x27;BuPu&#x27;</span>, legend=<span class="literal">True</span>,</span><br><span class="line">             legend_kwds=&#123;<span class="string">&#x27;loc&#x27;</span>: <span class="string">&#x27;center left&#x27;</span>, <span class="string">&#x27;bbox_to_anchor&#x27;</span>:(<span class="number">1</span>,<span class="number">0.5</span>)&#125;,</span><br><span class="line">             ax=ax)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;13_install_01.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/10/12/Python-General-13-install/13_install_01.png"><br></p>
+<p><img src="13_install_01.png" alt=""><br></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1_oF9RkHi_XADp9m9UJMD4383YnDSosCF?usp=sharing">위 코드는 여기에서 확인 가능합니다 (링크)</a></li>
 </ul>
@@ -276,7 +277,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/10/12/Python-General-13-install/" data-id="cuiduVNayHkg_5_ypmqpYy7-d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/10/12/Python-General-13-install/" data-id="cuidkSmZqiDCNLsR4XJFMdWBn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -360,9 +361,10 @@ Colab 같은 클라우드 환경 사용 비중이 늘어나고 있습니다.
 pip도 import 해서 사용할 수 있습니다.
 
 1. 클라우드 환경
+
 Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 비율이 늘어납니다.
-장점이 많지만 서버가 물리적으로 고정되어 ",
-        "wordCount": 507
+장점이 많지만 서버가 물리적으로 고정되어",
+        "wordCount": 488
     }
 </script>
 
@@ -459,6 +461,26 @@ Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 �
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -533,26 +555,6 @@ Google Colab이나 Streamlit cloud 처럼 클라우드 기반 서비스 활용 �
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

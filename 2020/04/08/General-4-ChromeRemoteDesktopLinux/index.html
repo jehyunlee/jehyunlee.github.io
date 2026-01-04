@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="chrome remote desktop,linux" />
     
-    <meta name="description" content="References  How to Install Chrome Remote Desktop on Ubuntu 18.04   Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.  그러나 Linux의 GUI를 활용해야 하거나, port나 ssh가 막힌 경우가 있습니다. 이 때 chrome remote desktop이 답이 될">
+    <meta name="description" content="References  How to Install Chrome Remote Desktop on Ubuntu 18.04    Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.  그러나 Linux의 GUI를 활용해야 하거나, port나 ssh가 막힌 경우가 있습니다. 이 때 chrome remote desktop이 답이">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu Desktop @Chrome Remote Desktop">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/04/08/General-4-ChromeRemoteDesktopLinux/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="References  How to Install Chrome Remote Desktop on Ubuntu 18.04   Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.  그러나 Linux의 GUI를 활용해야 하거나, port나 ssh가 막힌 경우가 있습니다. 이 때 chrome remote desktop이 답이 될">
+<meta property="og:description" content="References  How to Install Chrome Remote Desktop on Ubuntu 18.04    Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.  그러나 Linux의 GUI를 활용해야 하거나, port나 ssh가 막힌 경우가 있습니다. 이 때 chrome remote desktop이 답이">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-General/4_crd_0.png">
 <meta property="article:published_time" content="2020-04-08T04:38:00.000Z">
@@ -232,80 +232,91 @@
 <p><a target="_blank" rel="noopener" href="https://medium.com/@vsimon/how-to-install-chrome-remote-desktop-on-ubuntu-18-04-52d99980d83e">How to Install Chrome Remote Desktop on Ubuntu 18.04</a></p>
 </blockquote>
 <ul>
-<li><p>Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.</p>
+<li>
+<p>Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.</p>
 <ul>
 <li>그러나 Linux의 GUI를 활용해야 하거나, port나 ssh가 막힌 경우가 있습니다.</li>
 <li>이 때 chrome remote desktop이 답이 될 수 있습니다.</li>
 </ul>
 </li>
-<li><p>chrome remote desktop Linux 설치는 위 링크를 참고해 주시기 바랍니다.</p>
+<li>
+<p>chrome remote desktop Linux 설치는 위 링크를 참고해 주시기 바랍니다.</p>
 <ul>
 <li>설치 후 외부에서 접속하면 아래와 같은 화면이 나옵니다.</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2020/04/08/General-4-ChromeRemoteDesktopLinux/4_crm_1.png" alt="어쩌라고"></p>
-<h2 id="Ubuntu-Desktop-가져오기"><a href="#Ubuntu-Desktop-가져오기" class="headerlink" title="Ubuntu Desktop 가져오기"></a>Ubuntu Desktop 가져오기</h2><ul>
-<li>작업하던 Ubuntu Desktop을 그대로 가져오고자 합니다.<ol>
+<p><img src="4_crm_1.png" alt="어쩌라고"></p>
+<h2 id="Ubuntu-Desktop-가져오기">Ubuntu Desktop 가져오기</h2>
+<ul>
+<li>작업하던 Ubuntu Desktop을 그대로 가져오고자 합니다.
+<ol>
 <li>작동중인 chrome remote desktop을 멈추고,</li>
 <li><code>/opt/google/chrome-remote-desktop/chrome-remote-desktop</code> 파일을 수정하고,</li>
 <li>다시 chrome remote desktop을 실행해야 합니다.</li>
 </ol>
 </li>
 </ul>
-<h3 id="1-chrome-remote-desktop-정지"><a href="#1-chrome-remote-desktop-정지" class="headerlink" title="1. chrome remote desktop 정지"></a>1. <b>chrome remote desktop 정지</b></h3><ul>
+<h3 id="1-b-chrome-remote-desktop-정지-b">1. <b>chrome remote desktop 정지</b></h3>
+<ul>
 <li>작업 위치로 이동해서 정지시키고, 파일을 백업합니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /opt/google/chrome-remote-desktop/</span><br><span class="line">$ chrome-remote-desktop --stop</span><br><span class="line">$ <span class="built_in">cp</span> chrome-remote-desktop chrome-remote-desktop.org</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-remote-desktop-실행-및-설정파일-수정"><a href="#2-remote-desktop-실행-및-설정파일-수정" class="headerlink" title="2. remote desktop 실행 및 설정파일 수정"></a>2. remote desktop 실행 및 설정파일 수정</h3><ul>
+<h3 id="2-remote-desktop-실행-및-설정파일-수정">2. remote desktop 실행 및 설정파일 수정</h3>
+<ul>
 <li><code>vi</code>나 <code>gedit</code>등으로 <code>/opt/google/chrome-remote-desktop/chrome-remote-desktop</code>파일을 엽니다.</li>
 </ul>
-<h4 id="2-1-화면-크기를-나에게-맞게-변경"><a href="#2-1-화면-크기를-나에게-맞게-변경" class="headerlink" title="2-1. 화면 크기를 나에게 맞게 변경"></a>2-1. <b>화면 크기를 나에게 맞게 변경</b></h4><ul>
+<h4 id="2-1-b-화면-크기를-나에게-맞게-변경-b">2-1. <b>화면 크기를 나에게 맞게 변경</b></h4>
+<ul>
 <li><code>DEFAULT_SIZES</code>부분을 찾아서 아래와 같이 수정합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_SIZES = <span class="string">&quot;1920x1080&quot;</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-2-DISPLAY-번호-변경"><a href="#2-2-DISPLAY-번호-변경" class="headerlink" title="2-2. DISPLAY 번호 변경"></a>2-2. <b>DISPLAY 번호 변경</b></h4><ul>
+<h4 id="2-2-b-DISPLAY-번호-변경-b">2-2. <b>DISPLAY 번호 변경</b></h4>
+<ul>
 <li><code>FIRST_X_DISPLAY_NUMBER</code>부분을 찾아서 0으로 수정합니다 (18.04는 1).</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FIRST_X_DISPLAY_NUMBER = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-3-추가-DISPLAY를-찾지-않도록-변경"><a href="#2-3-추가-DISPLAY를-찾지-않도록-변경" class="headerlink" title="2-3. 추가 DISPLAY를 찾지 않도록 변경"></a>2-3. <b>추가 DISPLAY를 찾지 않도록 변경</b></h4><ul>
+<h4 id="2-3-b-추가-DISPLAY를-찾지-않도록-변경-b">2-3. <b>추가 DISPLAY를 찾지 않도록 변경</b></h4>
+<ul>
 <li><code>while os.path.exists</code>를 찾아서 아래 줄까지 주석처리합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># while os.path.exists(X_LOCK_FILE_TEMPLATE % display):</span></span><br><span class="line"><span class="comment">#  display += 1</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-4-X-session을-새로-띄우지-않고-기존-것을-사용하도록-변경"><a href="#2-4-X-session을-새로-띄우지-않고-기존-것을-사용하도록-변경" class="headerlink" title="2-4. X session을 새로 띄우지 않고 기존 것을 사용하도록 변경"></a>2-4. <b>X session을 새로 띄우지 않고 기존 것을 사용하도록 변경</b></h4><ul>
+<h4 id="2-4-b-X-session을-새로-띄우지-않고-기존-것을-사용하도록-변경-b">2-4. <b>X session을 새로 띄우지 않고 기존 것을 사용하도록 변경</b></h4>
+<ul>
 <li><code>self._launch_x_server(x_args)</code>과 아랫줄의 <code>self._launch_x_session()</code>를 주석처리합니다.</li>
 <li>그리고 하단에 x_server와 x_session을 론칭할 두 줄을 추가합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># self._launch_x_server(x_args)</span></span><br><span class="line"><span class="comment"># self._launch_x_session()</span></span><br><span class="line">display=<span class="variable language_">self</span>.get_unused_display_number()</span><br><span class="line"><span class="variable language_">self</span>.child_env[\<span class="string">&quot;DISPLAY\&quot;]=\&quot;:%d\&quot; % display</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-start-chrome-remote-desktop"><a href="#3-start-chrome-remote-desktop" class="headerlink" title="3. start chrome remote desktop"></a>3. <b>start chrome remote desktop</b></h3><ul>
+<h3 id="3-b-start-chrome-remote-desktop-b">3. <b>start chrome remote desktop</b></h3>
+<ul>
 <li>다시 chrome remote desktop을 시작합니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chrome-remote-desktop --start</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-한-번에-다운로드"><a href="#4-한-번에-다운로드" class="headerlink" title="4. 한 번에 다운로드"></a>4. 한 번에 다운로드</h3><ul>
-<li><p>긴장한 손으로 하나씩 고치는 것도 일입니다. 한번에 끝냅시다.</p>
+<h3 id="4-한-번에-다운로드">4. 한 번에 다운로드</h3>
+<ul>
+<li>
+<p>긴장한 손으로 하나씩 고치는 것도 일입니다. 한번에 끝냅시다.</p>
 <ul>
 <li>위 절차를 자동으로 수행하는 script는 <a href="chrome_remote_desktop_monkeypatching.sh">여기에서 다운로드 가능</a>합니다.</li>
 <li><code>sudo</code> 권한이 필요합니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> chrome_remote_desktop_monkeypatching.sh</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>변경이 반영된 <code>chrome-remote-desktop</code>파일은 <a href="chrome-remote-desktop">여기에서 다운로드 할 수 있습니다</a>.</li>
 </ul>
 </li>
-<li><p>마지막 단계, <code>chrome-remote-desktop --start</code>만 추가로 해 주면 됩니다.<br><br><img src="/2020/04/08/General-4-ChromeRemoteDesktopLinux/4_crm_2.png" alt="짜잔"></p>
+<li>
+<p>마지막 단계, <code>chrome-remote-desktop --start</code>만 추가로 해 주면 됩니다.<br><br>
+<img src="4_crm_2.png" alt="짜잔"></p>
 <ul>
 <li>띄워놓은 firefox가 잘 보입니다.</li>
 </ul>
 </li>
 </ul>
-<h3 id="추가-Ubuntu-20-04-업데이트-2021-02-16"><a href="#추가-Ubuntu-20-04-업데이트-2021-02-16" class="headerlink" title="[추가] Ubuntu 20.04 업데이트 (2021.02.16)"></a>[추가] Ubuntu 20.04 업데이트 (2021.02.16)</h3><ul>
-<li>업데이트 이후 잘 되던 monkeypatching이 안되더군요.<ul>
+<h3 id="추가-Ubuntu-20-04-업데이트-2021-02-16">[추가] Ubuntu 20.04 업데이트 (2021.02.16)</h3>
+<ul>
+<li>업데이트 이후 잘 되던 monkeypatching이 안되더군요.
+<ul>
 <li>chrome-remote-desktop 기본 파일 구조가 바뀌었습니다.</li>
 <li>변경을 반영한 버전을 추가합니다.</li>
 <li><code>chrome-remote-desktop</code>파일: <a href="chrome-remote-desktop_20.04">다운로드 후 파일명 변경 필요</a></li>
@@ -313,8 +324,10 @@
 </ul>
 </li>
 </ul>
-<h3 id="추가-Ubuntu-20-04-무한로그인-버그"><a href="#추가-Ubuntu-20-04-무한로그인-버그" class="headerlink" title="[추가] Ubuntu 20.04 무한로그인 버그(?)"></a>[추가] Ubuntu 20.04 무한로그인 버그(?)</h3><blockquote>
-<p>[이번에도 어김없이 발생한 우분투 무한 로그인 ubuntu 20.04]<a target="_blank" rel="noopener" href="https://likecode.tistory.com/310">https://likecode.tistory.com/310</a>)<br><a target="_blank" rel="noopener" href="https://medium.com/@satyabratbhol/how-to-get-rid-of-login-screen-loop-in-ubuntu-feead4cb2302">How to get rid of Login Screen Loop in Ubuntu ?</a></p>
+<h3 id="추가-Ubuntu-20-04-무한로그인-버그">[추가] Ubuntu 20.04 무한로그인 버그(?)</h3>
+<blockquote>
+<p>[이번에도 어김없이 발생한 우분투 무한 로그인 ubuntu 20.04]<a target="_blank" rel="noopener" href="https://likecode.tistory.com/310">https://likecode.tistory.com/310</a>)<br>
+<a target="_blank" rel="noopener" href="https://medium.com/@satyabratbhol/how-to-get-rid-of-login-screen-loop-in-ubuntu-feead4cb2302">How to get rid of Login Screen Loop in Ubuntu ?</a></p>
 </blockquote>
 <ul>
 <li>우분투 20.04를 설치하고 위 파일을 적용했더니, 무한 로그인 버그가 발생했다.</li>
@@ -323,7 +336,7 @@
 <p><b>1. tty로 들어간다.</b></p>
 <ul>
 <li><code>Ctrl</code> + <code>Alt</code> + <code>F2</code>를 누른다.</li>
-<li><code>F2</code> 대신 <code>F1</code>~&#96;F6&#96;까지 모두 가능하다.</li>
+<li><code>F2</code> 대신 <code>F1</code>~<code>F6</code>까지 모두 가능하다.</li>
 </ul>
 <p><b>2. lightdm을 삭제 후 설치한다.</b></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get purge lightdm <span class="comment">#lightdm이 설치되지 않았다고 해도 이상해하지 말자.</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install lightdm</span><br><span class="line"><span class="built_in">sudo</span> dpkg-reconfigure lightdm</span><br></pre></td></tr></table></figure>
@@ -349,7 +362,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/04/08/General-4-ChromeRemoteDesktopLinux/" data-id="cuidGJ0P5ZSAerFV_-G2Lf71B" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/04/08/General-4-ChromeRemoteDesktopLinux/" data-id="cuid_t0pZMWaYbhK4YUmwczy4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -432,11 +445,12 @@
 How to Install Chrome Remote Desktop on Ubuntu 18.04
 
 
+
 Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 많이 사용합니다.
 
 그러나 Linux의 GUI를 활용해야 하거나, port나 ssh가 막힌 경우가 있습니다.
-이 때 chrome remote desktop이 답이 될",
-        "wordCount": 497
+이 때 chrome remote desktop이 답이 ",
+        "wordCount": 415
     }
 </script>
 
@@ -533,6 +547,26 @@ Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 �
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -607,26 +641,6 @@ Linux 시스템에 접속해서 일을 할 때 port 접속이나 ssh 방식을 �
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

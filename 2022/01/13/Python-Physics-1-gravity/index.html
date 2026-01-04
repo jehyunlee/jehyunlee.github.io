@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,numpy" />
     
-    <meta name="description" content="파이썬은 과학과 공학을 구현하기 좋습니다. 간단한 몇 개의 코드로 방정식을 구현하고, 시각화 기법을 사용해 우리 눈으로 봅니다.  1. 만유인력 wikipedia: gravity   질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다. 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다. 두 물체의 질량이 $m_">
+    <meta name="description" content="파이썬은 과학과 공학을 구현하기 좋습니다. 간단한 몇 개의 코드로 방정식을 구현하고, 시각화 기법을 사용해 우리 눈으로 봅니다.  1. 만유인력  wikipedia: gravity   질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다. 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다. 두 물체의 질량이 $m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gravity">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="파이썬은 과학과 공학을 구현하기 좋습니다. 간단한 몇 개의 코드로 방정식을 구현하고, 시각화 기법을 사용해 우리 눈으로 봅니다.  1. 만유인력 wikipedia: gravity   질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다. 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다. 두 물체의 질량이 $m_">
+<meta property="og:description" content="파이썬은 과학과 공학을 구현하기 좋습니다. 간단한 몇 개의 코드로 방정식을 구현하고, 시각화 기법을 사용해 우리 눈으로 봅니다.  1. 만유인력  wikipedia: gravity   질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다. 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다. 두 물체의 질량이 $m">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-Physics/1_gravity_00.png">
 <meta property="article:published_time" content="2022-01-13T12:25:00.000Z">
@@ -233,7 +233,8 @@
 <li>간단한 몇 개의 코드로 방정식을 구현하고,</li>
 <li>시각화 기법을 사용해 우리 눈으로 봅니다.</li>
 </ul>
-<h1 id="1-만유인력"><a href="#1-만유인력" class="headerlink" title="1. 만유인력"></a>1. 만유인력</h1><blockquote>
+<h1>1. 만유인력</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Gravity">wikipedia: gravity</a></p>
 </blockquote>
 <ul>
@@ -241,96 +242,105 @@
 <li>뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다.</li>
 <li>두 물체의 질량이 $m_1$, $m_2$, 거리가 $r$일 때 다음과 같은 방정식으로 표현됩니다.</li>
 </ul>
-<p>$$F &#x3D; G\frac{m_1 m_2}{r^2}$$</p>
+<p>$$F = G\frac{m_1 m_2}{r^2}$$</p>
 <ul>
 <li>$G$는 중력 상수라고 하며 값은 $6.67 \times 10^{-11} [\textrm{m} \cdot \textrm{kg}^{-1}\textrm{s}^{-2}]$ 입니다.</li>
 </ul>
-<h1 id="2-자유-낙하"><a href="#2-자유-낙하" class="headerlink" title="2. 자유 낙하"></a>2. 자유 낙하</h1><ul>
+<h1>2. 자유 낙하</h1>
+<ul>
 <li>만유 인력을 일상의 물건들에서 느끼기엔 너무 미미하지만 지구나 태양이라면 이야기가 달라집니다.</li>
 <li>위 식의 $m_2$에 지구의 질량을 넣고 $r$에 지구 반지름을 넣으면 <b>지구의 중력</b>이 됩니다.</li>
 </ul>
-<p>$$F &#x3D; mg$$ </p>
+<p>$$F = mg$$</p>
 <ul>
-<li>중학교때 배운 식으로 정리되며, <b>중력 가속도</b> $g &#x3D; 9.8 [\textrm{m} \cdot \textrm{s}^{-2}]$ 입니다.</li>
+<li>중학교때 배운 식으로 정리되며, <b>중력 가속도</b> $g = 9.8 [\textrm{m} \cdot \textrm{s}^{-2}]$ 입니다.</li>
 <li>간단히 물체의 자유 낙하를 시뮬레이션 합니다.</li>
 </ul>
-<h2 id="2-1-python-setting"><a href="#2-1-python-setting" class="headerlink" title="2.1. python setting"></a>2.1. python setting</h2><ul>
+<h2 id="2-1-python-setting">2.1. python setting</h2>
+<ul>
 <li>기본 라이브러리를 불러오고 물체의 질량 등을 설정합니다.</li>
 <li>연속적인 시간을 0.01초 단위로 끊어서 자유낙하를 모사하려고 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 기본 라이브러리</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 물체 </span></span><br><span class="line">mass = <span class="number">1</span>                     <span class="comment"># 질량 [kg] </span></span><br><span class="line">position = np.array([<span class="number">0</span>, <span class="number">10</span>]) <span class="comment"># x, y 위치 [m]</span></span><br><span class="line">v = np.array([<span class="number">0</span>, <span class="number">0</span>])         <span class="comment"># x, y 방향 초기 속도 [m/s]</span></span><br><span class="line">t = <span class="number">0</span>                        <span class="comment"># 초기 시간 [s]</span></span><br><span class="line">dt = <span class="number">0.01</span>                    <span class="comment"># 시간 단위 [s]</span></span><br><span class="line">g = np.array([<span class="number">0</span>, -<span class="number">9.8</span>])      <span class="comment"># 중력 가속도 [m/s]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-자유-낙하-시뮬레이션"><a href="#2-2-자유-낙하-시뮬레이션" class="headerlink" title="2.2. 자유 낙하 시뮬레이션"></a>2.2. 자유 낙하 시뮬레이션</h2><ul>
+<h2 id="2-2-자유-낙하-시뮬레이션">2.2. 자유 낙하 시뮬레이션</h2>
+<ul>
 <li>지상 높이 10미터에서 땅에 떨어지는 시간을 살펴봅니다.</li>
 <li>중학교에서 배우는 아래 공식에 $a$ 대신 $g$를 넣습니다.</li>
 </ul>
-<p>$$s &#x3D; v_0 t + \frac{1}{2}at^2$$</p>
+<p>$$s = v_0 t + \frac{1}{2}at^2$$</p>
 <ul>
 <li>땅을 뚫고 들어가는 상황은 가정하지 않습니다.</li>
 <li>초기 위치로 가정한 position의 y좌표 &gt; 0일 때만 계산합니다.</li>
 <li>걸리는 <b>시간</b>은 <code>ts</code>리스트, 위치는 <code>positions</code>에 모읍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 시뮬레이션</span></span><br><span class="line">ts = []</span><br><span class="line">positions = []</span><br><span class="line"><span class="keyword">while</span> position[<span class="number">1</span>] &gt;= <span class="number">0</span>:</span><br><span class="line">    ts.append(t)</span><br><span class="line">    positions.append(position)</span><br><span class="line"></span><br><span class="line">    position = position + v*t + <span class="number">0.5</span> * g * t**<span class="number">2</span></span><br><span class="line">    t += dt</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 시각화</span></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">directions = [<span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i, (ax, direction) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(axs, directions)):</span><br><span class="line">    ax.scatter(ts, np.array(positions)[:,i], alpha=<span class="number">0.3</span>, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;time (s)&quot;</span>)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;<span class="subst">&#123;direction&#125;</span> position (m)&quot;</span>, pad=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_01.png"><br></p>
+<p><img src="1_gravity_01.png" alt=""><br></p>
 <ul>
 <li>좌우로 흔들릴 일은 없으므로 x position은 그대로</li>
 <li>중력에 의해 떨어지기만 하므로 y position만 변화합니다.</li>
 </ul>
-<h2 id="2-3-자유-낙하-애니메이션"><a href="#2-3-자유-낙하-애니메이션" class="headerlink" title="2.3. 자유 낙하 애니메이션"></a>2.3. 자유 낙하 애니메이션</h2><ul>
+<h2 id="2-3-자유-낙하-애니메이션">2.3. 자유 낙하 애니메이션</h2>
+<ul>
 <li>좀 재밌게 만들어 봅시다.</li>
 <li>matplotlib의 애니메이션 기능을 이용해서 만들 수 있습니다.</li>
 <li>물체의 위치를 표현할 scatter plot과 시간을 표현할 text를 내용만 비우고 만든 뒤에,</li>
 <li>time step마다 각각의 데이터만 업데이트하는 방식을 사용했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">scatter, = ax.plot([], [], marker=<span class="string">&quot;o&quot;</span>, mfc=<span class="string">&quot;b&quot;</span>, mec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">time_text = ax.text(<span class="number">0.5</span>, <span class="number">0.9</span>, <span class="string">f&quot;&quot;</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">updatefig</span>(<span class="params">i</span>):       </span><br><span class="line">    scatter.set_data(positions[i][<span class="number">0</span>], positions[i][<span class="number">1</span>])</span><br><span class="line">    time_text.set_text(<span class="string">f&quot;t = <span class="subst">&#123;ts[i]:<span class="number">.03</span>f&#125;</span> sec.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ani = animation.FuncAnimation(fig, updatefig, interval=<span class="number">100</span>, blit=<span class="literal">True</span>, repeat=<span class="literal">False</span>, frames=<span class="built_in">len</span>(ts))</span><br><span class="line">ani.save(<span class="string">&quot;1_gravity_02.gif&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_02.gif"><br></p>
+<p><img src="1_gravity_02.gif" alt=""><br></p>
 <ul>
 <li><code>ani.save()</code>명령으로 파일로 저장했습니다.</li>
 <li>주피터 노트북이나 Google Colab에서 다음 코드를 사용하면 interactive animation을 얻을 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> HTML</span><br><span class="line">HTML(ani.to_jshtml())</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_11.gif"><br></p>
-<h1 id="3-움직이는-두-개의-물체"><a href="#3-움직이는-두-개의-물체" class="headerlink" title="3. 움직이는 두 개의 물체"></a>3. 움직이는 두 개의 물체</h1><h2 id="3-1-class로-물체-생성"><a href="#3-1-class로-물체-생성" class="headerlink" title="3.1. class로 물체 생성"></a>3.1. class로 물체 생성</h2><ul>
+<p><img src="1_gravity_11.gif" alt=""><br></p>
+<h1>3. 움직이는 두 개의 물체</h1>
+<h2 id="3-1-class로-물체-생성">3.1. class로 물체 생성</h2>
+<ul>
 <li><b>지구 vs 물체</b> 대신 <b>물체 vs 물체</b> 구도가 되면 조금 복잡해집니다.</li>
 <li>지구는 너무나 거대하기 때문에 상수로 놓을 수 있었지만 물체는 변수입니다.</li>
 <li>서로 힘을 주고 받을 때 위치와 속도가 변합니다.</li>
 <li>물체마다 받는 힘과 이로 인한 위치 변화 등을 계산합시다. <b>class</b>가 편합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Particle</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, mass, pos, v, fix=<span class="literal">False</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.mass = mass <span class="comment"># scalar  # 질량. scalar</span></span><br><span class="line">        <span class="variable language_">self</span>.pos = np.array(pos)   <span class="comment"># 위치 (x, y) 2D vector </span></span><br><span class="line">        <span class="variable language_">self</span>.v = np.array(v)       <span class="comment"># 속도 (x, y) 2D vector</span></span><br><span class="line">        <span class="variable language_">self</span>.a = np.array([<span class="number">0</span>,<span class="number">0</span>])   <span class="comment"># 가속도 (x, y) 2D vector</span></span><br><span class="line">        <span class="variable language_">self</span>.fix = fix             <span class="comment"># 고정 여부. True or False</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, force</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.fix:           <span class="comment"># 고정이 되어 있지 않을 때만 데이터 업데이트</span></span><br><span class="line">            <span class="variable language_">self</span>.a = force/<span class="variable language_">self</span>.mass</span><br><span class="line">            <span class="variable language_">self</span>.pos = <span class="variable language_">self</span>.pos + (<span class="variable language_">self</span>.v * dt) + (<span class="number">0.5</span>*<span class="variable language_">self</span>.a * dt**<span class="number">2</span>)</span><br><span class="line">            <span class="variable language_">self</span>.v = <span class="variable language_">self</span>.v + <span class="variable language_">self</span>.a * dt</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>이제 물체를 class로 정의할 준비가 되었습니다.</li>
 <li>물체를 입자라는 뜻의 Particle로 부르겠습니다.</li>
 <li>각각의 질량, 위치, 속도를 정하고 생성합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">P1_mass, P2_mass = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">P1_pos, P2_pos = [<span class="number">1</span>, <span class="number">1</span>], [-<span class="number">1</span>, -<span class="number">1</span>]</span><br><span class="line">P1_v, P2_v = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v)</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-2-중력-계산-함수"><a href="#3-2-중력-계산-함수" class="headerlink" title="3.2. 중력 계산 함수"></a>3.2. 중력 계산 함수</h2><ul>
-<li><p>물체들 간의 인력을 계산할 함수를 만듭니다.</p>
+<h2 id="3-2-중력-계산-함수">3.2. 중력 계산 함수</h2>
+<ul>
+<li>
+<p>물체들 간의 인력을 계산할 함수를 만듭니다.</p>
 </li>
-<li><p>맨 위의 방정식을 옮깁니다.</p>
+<li>
+<p>맨 위의 방정식을 옮깁니다.</p>
 </li>
-<li><p>방정식에 따르면 거리가 너무 가까울 때 만유인력이 무한대로 증가하는 문제가 있습니다.</p>
+<li>
+<p>방정식에 따르면 거리가 너무 가까울 때 만유인력이 무한대로 증가하는 문제가 있습니다.</p>
 </li>
-<li><p><b>특정 거리<code>dist_cr</code> 미만으로 오면 인력을 0으로 강제</b>해서 관성으로만 움직이게 합니다.</p>
+<li>
+<p><b>특정 거리<code>dist_cr</code> 미만으로 오면 인력을 0으로 강제</b>해서 관성으로만 움직이게 합니다.</p>
 </li>
-<li><p>만유인력 상수가 너무 작아서 임의로 크게 키웠습니다.</p>
+<li>
+<p>만유인력 상수가 너무 작아서 임의로 크게 키웠습니다.</p>
 </li>
-<li><p>여기에 걸맞게 질량이 아주 커다란 천체들의 움직임이라고 생각할 수 있습니다.</p>
+<li>
+<p>여기에 걸맞게 질량이 아주 커다란 천체들의 움직임이라고 생각할 수 있습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calc_force</span>(<span class="params">P_self, P_other, k=<span class="number">1</span>, dist_cr = <span class="number">0.02</span></span>):</span><br><span class="line">    pos_self = P_self.pos</span><br><span class="line">    pos_other = P_other.pos</span><br><span class="line">    rel_vec = pos_other - pos_self</span><br><span class="line">    dist = np.linalg.norm(rel_vec)    </span><br><span class="line"></span><br><span class="line">    mass_self = P_self.mass</span><br><span class="line">    mass_other = P_other.mass</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> dist &lt; dist_cr:</span><br><span class="line">        force = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> rel_vec <span class="comment"># [0, 0]</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        force = k*mass_self*mass_other/ dist**<span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> force * rel_vec/dist</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-3-두-물체간의-만유인력"><a href="#3-3-두-물체간의-만유인력" class="headerlink" title="3.3. 두 물체간의 만유인력"></a>3.3. 두 물체간의 만유인력</h2><ul>
+<h2 id="3-3-두-물체간의-만유인력">3.3. 두 물체간의 만유인력</h2>
+<ul>
 <li>150번 iteration하면서 시간, 위치, 속도, 힘을 차례로 뽑아내며 업데이트합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">iter_max = <span class="number">150</span></span><br><span class="line"></span><br><span class="line">ts = []                  <span class="comment"># 시간</span></span><br><span class="line">P1_pos, P2_pos = [], []  <span class="comment"># 시간별 위치</span></span><br><span class="line">P1_v, P2_v = [], []      <span class="comment"># 시간별 속도</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iter_max):</span><br><span class="line">    <span class="comment"># time update</span></span><br><span class="line">    ts.append(i*dt)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># position update</span></span><br><span class="line">    P1_pos.append(P1.pos)</span><br><span class="line">    P2_pos.append(P2.pos)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># velocity update</span></span><br><span class="line">    P1_v.append(P1.v)</span><br><span class="line">    P2_v.append(P2.v)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># calculate force</span></span><br><span class="line">    P1_force = calc_force(P1, P2, k=<span class="number">10</span>)</span><br><span class="line">    P2_force = calc_force(P2, P1, k=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># update</span></span><br><span class="line">    P1.update(P1_force)</span><br><span class="line">    P2.update(P2_force)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>어떻게 움직였나 한번 봅시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">P1_pos = np.array(P1_pos)</span><br><span class="line">P2_pos = np.array(P2_pos)</span><br><span class="line"></span><br><span class="line">plt.plot(P1_pos[:, <span class="number">0</span>], P1_pos[:, <span class="number">1</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P1&quot;</span>)</span><br><span class="line">plt.plot(P2_pos[:, <span class="number">0</span>], P2_pos[:, <span class="number">1</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P2&quot;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;position&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_03.png"></p>
+<p><img src="1_gravity_03.png" alt=""></p>
 <ul>
 <li><b>뭔가 이상합니다.</b></li>
 <li>시작점은 P1이 [1, 1], P2가 [-1, -1]이었습니다.</li>
@@ -338,13 +348,14 @@
 <li>x방향 속도를 그려봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(np.array(P1_v)[:, <span class="number">0</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P1&quot;</span>)</span><br><span class="line">plt.plot(np.array(P2_v)[:, <span class="number">0</span>], <span class="string">&quot;o-&quot;</span>, label=<span class="string">&quot;P2&quot;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;x-directional velocity (m/s&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_04.png"></p>
+<p><img src="1_gravity_04.png" alt=""></p>
 <ul>
 <li>120번째 step 부근에서 속도가 크게 빨라졌다가 감소하지만 부호는 바뀌지 않습니다.</li>
-<li>원점을 지나 힘이 거꾸로 작용해도 관성에 의해 서로를 지나쳤고, </li>
+<li>원점을 지나 힘이 거꾸로 작용해도 관성에 의해 서로를 지나쳤고,</li>
 <li>이 때 작용하는 힘은 다시 불러오기엔 역부족인 듯 합니다.</li>
 </ul>
-<h2 id="3-4-동영상-제작-함수"><a href="#3-4-동영상-제작-함수" class="headerlink" title="3.4. 동영상 제작 함수"></a>3.4. 동영상 제작 함수</h2><ul>
+<h2 id="3-4-동영상-제작-함수">3.4. 동영상 제작 함수</h2>
+<ul>
 <li>동영상으로 확실하게 살펴봅니다.</li>
 <li>왠지 앞으로 동영상을 자주 만들 것 같습니다.</li>
 <li>N개의 입자를 다룰 수 있도록 앞의 코드를 일반화합니다.</li>
@@ -352,86 +363,110 @@
 <li><b>컬러맵을 사용해서 입자마다 다른 색을 두르도록</b>합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">cmap = plt.get_cmap(<span class="string">&quot;tab10&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen_animation</span>(<span class="params">Ps, Ps_pos, ts, title, legend=<span class="literal">True</span></span>):</span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    mfcs = [<span class="string">&quot;k&quot;</span> <span class="keyword">if</span> P.mass &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;w&quot;</span> <span class="keyword">for</span> P <span class="keyword">in</span> Ps]</span><br><span class="line">    mss = [<span class="number">12</span>*np.sqrt(<span class="built_in">abs</span>(P.mass)) <span class="keyword">for</span> P <span class="keyword">in</span> Ps]</span><br><span class="line">    plots = [ax.plot([], [], marker=<span class="string">&quot;o&quot;</span>, mfc=mfc, mec=cmap(j/<span class="number">10</span>), mew=<span class="number">3</span>, ms=ms, label=<span class="string">f&quot;P<span class="subst">&#123;j+<span class="number">1</span>&#125;</span>&quot;</span>) </span><br><span class="line">             <span class="keyword">for</span> j, (P_pos, mfc, ms) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(Ps_pos, mfcs, mss))]</span><br><span class="line">    time_text = ax.text(<span class="number">0.5</span>, <span class="number">0.9</span>, <span class="string">f&quot;&quot;</span>, transform=ax.transAxes, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">    title = ax.set_title(title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    ax.set_xlim(-<span class="number">1.1</span>, <span class="number">1.1</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.1</span>, <span class="number">1.1</span>)</span><br><span class="line">    <span class="keyword">if</span> legend:</span><br><span class="line">        ax.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">updatefig</span>(<span class="params">i</span>):</span><br><span class="line">        [plot[<span class="number">0</span>].set_data(P_pos[i][<span class="number">0</span>], P_pos[i][<span class="number">1</span>]) <span class="keyword">for</span> plot, P_pos <span class="keyword">in</span> <span class="built_in">zip</span>(plots, Ps_pos)]       </span><br><span class="line">        time_text.set_text(<span class="string">f&quot;t = <span class="subst">&#123;ts[i]:<span class="number">.03</span>f&#125;</span> sec.&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ani = animation.FuncAnimation(fig, updatefig, interval=<span class="number">100</span>, blit=<span class="literal">True</span>, repeat=<span class="literal">False</span>, frames=<span class="built_in">len</span>(ts))</span><br><span class="line">    <span class="keyword">return</span> ani</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>아까 데이터를 다시 넣어 애니메이션을 만듭니다.</li>
 <li><b>서로를 지나쳐간 뒤에 속도가 줄어드는 모습</b>이 관찰됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ani = gen_animation([P1, P2], [P1_pos, P2_pos], ts, <span class="string">&quot;position in xy coordinate&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_05.gif"><br></p>
-<h1 id="4-고정된-물체와-움직이는-물체"><a href="#4-고정된-물체와-움직이는-물체" class="headerlink" title="4. 고정된 물체와 움직이는 물체"></a>4. 고정된 물체와 움직이는 물체</h1><h2 id="4-1-N개의-물체-사이-만유인력"><a href="#4-1-N개의-물체-사이-만유인력" class="headerlink" title="4.1. N개의 물체 사이 만유인력"></a>4.1. N개의 물체 사이 만유인력</h2><ul>
+<p><img src="1_gravity_05.gif" alt=""><br></p>
+<h1>4. 고정된 물체와 움직이는 물체</h1>
+<h2 id="4-1-N개의-물체-사이-만유인력">4.1. N개의 물체 사이 만유인력</h2>
+<ul>
 <li>이제 우리는 만유인력을 계산하고 그릴 수 있습니다.</li>
 <li>N개의 물체를 그리는 함수를 만들었으니, <b>N개의 물체 사이 힘을 계산하는 함수</b>도 만듭시다.</li>
 <li>2중 for loop을 사용해서 모든 입자간의 인력을 계산하여 총 합을 구합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run_force</span>(<span class="params">Ps, k=<span class="number">10</span>, iter_max=<span class="number">150</span></span>):</span><br><span class="line">    Ps_pos = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> Ps:</span><br><span class="line">        Ps_pos.append([])</span><br><span class="line"></span><br><span class="line">    ts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iter_max):</span><br><span class="line">        <span class="comment"># time update</span></span><br><span class="line">        ts.append(i*dt)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># position update</span></span><br><span class="line">        <span class="keyword">for</span> P, P_pos <span class="keyword">in</span> <span class="built_in">zip</span>(Ps, Ps_pos):</span><br><span class="line">            P_pos.append(P.pos)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># calculate force</span></span><br><span class="line">        P_splits = [[P, <span class="built_in">list</span>(<span class="built_in">set</span>(Ps) - <span class="built_in">set</span>([P]))] <span class="keyword">for</span> P <span class="keyword">in</span> Ps]</span><br><span class="line">        <span class="keyword">for</span> j, (P_self, P_others) <span class="keyword">in</span> <span class="built_in">enumerate</span>(P_splits):</span><br><span class="line">            P_self_force = np.array([<span class="number">0.0</span>, <span class="number">0.0</span>])</span><br><span class="line">            <span class="keyword">for</span> P_other <span class="keyword">in</span> P_others:</span><br><span class="line">                P_self_force += calc_force(P_self, P_other, k=k)</span><br><span class="line">            <span class="comment"># update force</span></span><br><span class="line">            P_self.update(P_self_force)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Ps, Ps_pos, ts</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2-고정된-물체와-던져진-물체"><a href="#4-2-고정된-물체와-던져진-물체" class="headerlink" title="4.2. 고정된 물체와 던져진 물체"></a>4.2. 고정된 물체와 던져진 물체</h2><ul>
+<h2 id="4-2-고정된-물체와-던져진-물체">4.2. 고정된 물체와 던져진 물체</h2>
+<ul>
 <li>1번 물체 P1은 원점 [0,0]에 고정하고</li>
 <li>2번 물체 P2는 [0, 0.7]에서 $-x$방향으로 던집니다.</li>
 <li><b>P2의 속도에 따른 궤적 변화</b>를 살펴봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 물체 정의</span></span><br><span class="line">P1_mass, P2_mass = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">P1_pos, P2_pos = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.7</span>]</span><br><span class="line">P1_v, P2_v = [<span class="number">0</span>, <span class="number">0</span>], [-<span class="number">2</span>, <span class="number">0</span>]</span><br><span class="line">P1_fix, P2_fix = <span class="literal">True</span>, <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v, P1_fix)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v, P2_fix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 만유인력 계산, 시각화</span></span><br><span class="line">Ps = [P1, P2]</span><br><span class="line">Ps, Ps_pos, ts = run_force(Ps, k=<span class="number">10</span>, iter_max=<span class="number">150</span>)</span><br><span class="line">ani = gen_animation(Ps, Ps_pos, ts, <span class="string">&quot;position in xy coordinate&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_06.gif"><br></p>
+<p><img src="1_gravity_06.gif" alt=""><br></p>
 <ul>
-<li><p><b>SF영화에서 많이 본 듯한 모습</b>이 관찰됩니다.</p>
+<li>
+<p><b>SF영화에서 많이 본 듯한 모습</b>이 관찰됩니다.</p>
 </li>
-<li><p>중앙의 P1을 축으로 빙 돌아 자신이 온 방향으로 나갑니다.</p>
+<li>
+<p>중앙의 P1을 축으로 빙 돌아 자신이 온 방향으로 나갑니다.</p>
 </li>
-<li><p>이번엔 P2를 조금 빠르게 던집니다.</p>
+<li>
+<p>이번엔 P2를 조금 빠르게 던집니다.</p>
 </li>
-<li><p>나머진 가만히 두고 position 초기화, velocity 재설정만 추가합니다.</p>
+<li>
+<p>나머진 가만히 두고 position 초기화, velocity 재설정만 추가합니다.</p>
 </li>
-<li><p>만유인력과 원심력이 같아지는 속도에서는 물체가 지표면에서 추락하지 않고 궤도를 그립니다.</p>
+<li>
+<p>만유인력과 원심력이 같아지는 속도에서는 물체가 지표면에서 추락하지 않고 궤도를 그립니다.</p>
 </li>
-<li><p>우리가 사용한 질량 등을 넣으면 다음과 같이 정리됩니다.</p>
+<li>
+<p>우리가 사용한 질량 등을 넣으면 다음과 같이 정리됩니다.</p>
 </li>
 </ul>
-<p>$$ v &#x3D; \sqrt{\frac{km_1}{r}} &#x3D; 3.8 [\textrm{m}&#x2F;\textrm{s}]$$</p>
+<p>$$ v = \sqrt{\frac{km_1}{r}} = 3.8 [\textrm{m}/\textrm{s}]$$</p>
 <ul>
 <li>이를 <b>제1 우주 속도</b>라고 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 시작점과 속도 재설정</span></span><br><span class="line">P1_pos, P2_pos = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.7</span>]</span><br><span class="line">P1_v, P2_v = [<span class="number">0</span>, <span class="number">0</span>], [-<span class="number">3.8</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v, P1_fix)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v, P2_fix)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 만유인력 계산, 시각화</span></span><br><span class="line">Ps = [P1, P2]</span><br><span class="line">Ps, Ps_pos, ts = run_force(Ps, k=<span class="number">10</span>, iter_max=<span class="number">150</span>)</span><br><span class="line">ani = gen_animation(Ps, Ps_pos, ts, <span class="string">&quot;position in xy coordinate&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_07.gif"><br></p>
+<p><img src="1_gravity_07.gif" alt=""><br></p>
 <ul>
-<li><p>쪼개진 시간과 유효숫자 등의 차이로 원궤도에서는 다소 어긋났습니다.</p>
+<li>
+<p>쪼개진 시간과 유효숫자 등의 차이로 원궤도에서는 다소 어긋났습니다.</p>
 </li>
-<li><p>하지만 <b>전반적으로 원을 그리며 제 자리로 옵니다.</b></p>
+<li>
+<p>하지만 <b>전반적으로 원을 그리며 제 자리로 옵니다.</b></p>
 </li>
-<li><p><b>더 빠르면?</b> 말할 것도 없습니다.</p>
+<li>
+<p><b>더 빠르면?</b> 말할 것도 없습니다.</p>
 </li>
-<li><p>도망가 버립니다.</p>
+<li>
+<p>도망가 버립니다.</p>
 </li>
-<li><p>속도를 $5 [\textrm{m}&#x2F;\textrm{s}]$로 빠르게 했을 때 그림입니다.<br><br><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_08.gif"><br></p>
+<li>
+<p>속도를 $5 [\textrm{m}/\textrm{s}]$로 빠르게 했을 때 그림입니다.<br><br>
+<img src="1_gravity_08.gif" alt=""><br></p>
 </li>
 </ul>
-<h1 id="5-마이너스-질량"><a href="#5-마이너스-질량" class="headerlink" title="5. 마이너스 질량"></a>5. 마이너스 질량</h1><ul>
+<h1>5. 마이너스 질량</h1>
+<ul>
 <li>실제로는 불가능하지만 코드에는 마이너스 질량을 넣을 수 있습니다.</li>
 <li><b>10배 무거운 마이너스 질량의 벽</b>을 뚫을 수 있나 봅시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">P0_mass, P1_mass, P2_mass, P3_mass, P4_mass = <span class="number">1</span>, -<span class="number">10</span>, -<span class="number">10</span>, -<span class="number">10</span>, -<span class="number">10</span></span><br><span class="line">P0_pos, P1_pos, P2_pos, P3_pos, P4_pos = [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0.7</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.7</span>], [-<span class="number">0.7</span>, <span class="number">0</span>], [<span class="number">0</span>, -<span class="number">0.7</span>]</span><br><span class="line">P0_v, P1_v, P2_v, P3_v, P4_v = [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">P0_fix, P1_fix, P2_fix, P3_fix, P4_fix = <span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">P0 = Particle(P0_mass, P0_pos, P0_v, P0_fix)</span><br><span class="line">P1 = Particle(P1_mass, P1_pos, P1_v, P1_fix)</span><br><span class="line">P2 = Particle(P2_mass, P2_pos, P2_v, P2_fix)</span><br><span class="line">P3 = Particle(P3_mass, P3_pos, P3_v, P3_fix)</span><br><span class="line">P4 = Particle(P4_mass, P4_pos, P4_v, P4_fix)</span><br><span class="line"></span><br><span class="line">Ps = [P0, P1, P2, P3, P4]</span><br><span class="line">Ps, Ps_pos, ts = run_force(Ps, k=<span class="number">10</span>, iter_max=<span class="number">50</span>)</span><br><span class="line">ani = gen_animation(Ps, Ps_pos, ts, <span class="string">&quot;position in xy coordinate&quot;</span>, legend=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_09.gif"><br></p>
+<p><img src="1_gravity_09.gif" alt=""><br></p>
 <ul>
-<li><p>$(3, 1) [\textrm{m}&#x2F;\textrm{s}]$로는 부족합니다. 못 나갑니다.</p>
+<li>
+<p>$(3, 1) [\textrm{m}/\textrm{s}]$로는 부족합니다. 못 나갑니다.</p>
 </li>
-<li><p>$(5, 2) [\textrm{m}&#x2F;\textrm{s}]$는 어떨까요?<br><br><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_10.gif"><br></p>
+<li>
+<p>$(5, 2) [\textrm{m}/\textrm{s}]$는 어떨까요?<br><br>
+<img src="1_gravity_10.gif" alt=""><br></p>
 </li>
-<li><p>몸부림 끝에 탈출에 성공합니다.</p>
+<li>
+<p>몸부림 끝에 탈출에 성공합니다.</p>
 </li>
 </ul>
-<h1 id="6-정전기력"><a href="#6-정전기력" class="headerlink" title="6. 정전기력"></a>6. 정전기력</h1><ul>
+<h1>6. 정전기력</h1>
+<ul>
 <li>만유인력 방정식은 <b>정전기력<code>electrostatic force</code>과 매우 비슷합니다.</b></li>
 <li>전하 $q_1$과 $q_2$를 가진 전하 두 개가 거리 $r$만큼 멀리 있다면 이들 사이에는 아래 힘이 작용합니다.</li>
 </ul>
-<p>$$F &#x3D; k\frac{q_1 q_2}{r^2}$$</p>
+<p>$$F = k\frac{q_1 q_2}{r^2}$$</p>
 <ul>
-<li><p>상수 $k$는 $8.99 \times 10^9 [N \cdot m^2 \cdot C^{-2}]$ 입니다.</p>
+<li>
+<p>상수 $k$는 $8.99 \times 10^9 [N \cdot m^2 \cdot C^{-2}]$ 입니다.</p>
 </li>
-<li><p>일반적으로 만유인력보다 훨씬 강하기 때문에 우리 일상에서 자주 볼 수 있습니다.<br><br><img src="/2022/01/13/Python-Physics-1-gravity/1_gravity_12.gif" alt="전설이 되어버린 일렉트릭 정화: EXID"><br></p>
+<li>
+<p>일반적으로 만유인력보다 훨씬 강하기 때문에 우리 일상에서 자주 볼 수 있습니다.<br><br>
+<img src="1_gravity_12.gif" alt="전설이 되어버린 일렉트릭 정화: EXID"><br></p>
 </li>
-<li><p>정전기력은 부호가 다르면 끌어당기고 부호가 같면 밀칩니다.</p>
+<li>
+<p>정전기력은 부호가 다르면 끌어당기고 부호가 같면 밀칩니다.</p>
 </li>
-<li><p>위에서 마이너스 질량을 사용한 예시는 같은 부호의 정전기력 시각화로 볼 수도 있습니다.</p>
+<li>
+<p>위에서 마이너스 질량을 사용한 예시는 같은 부호의 정전기력 시각화로 볼 수도 있습니다.</p>
 </li>
 </ul>
 
@@ -451,7 +486,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/" data-id="cuidxsB-mznWybCfg_4mbUu5-" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/01/13/Python-Physics-1-gravity/" data-id="cuiddfij1qt8Ip0nSgnFz2Vyi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -535,13 +570,14 @@
 시각화 기법을 사용해 우리 눈으로 봅니다.
 
 1. 만유인력
+
 wikipedia: gravity
 
 
 질량이 있는 물체끼리는 끌어당기는 힘이 있습니다. 만유인력이라고 합니다.
 뉴턴이 발견한 것으로 유명하고, 중력파는 우주의 비밀을 여는 열쇠가 됩니다.
-두 물체의 질량이 $m_",
-        "wordCount": 2913
+두 물체의 질량이 $m",
+        "wordCount": 2829
     }
 </script>
 
@@ -638,6 +674,26 @@ wikipedia: gravity
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -712,26 +768,6 @@ wikipedia: gravity
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

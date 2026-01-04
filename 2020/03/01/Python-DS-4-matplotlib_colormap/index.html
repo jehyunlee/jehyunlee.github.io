@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,color,colormap" />
     
-    <meta name="description" content="어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.  이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.  Matplotlib에서 colormap을 적용하는 방법">
+    <meta name="description" content="어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.   이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.   Matplotlib에서 colormap을 적용하는 방">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib Colormap (1)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/03/01/Python-DS-4-matplotlib_colormap/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.  이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.  Matplotlib에서 colormap을 적용하는 방법">
+<meta property="og:description" content="어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.   이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.   Matplotlib에서 colormap을 적용하는 방">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/4_cmap_1.jpg">
 <meta property="article:published_time" content="2020-02-29T15:06:00.000Z">
@@ -230,108 +230,156 @@
 
             
 
-            <p>  <img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_16.png" alt=" "></p>
+            <p><img src="4_cmap_16.png" alt=" "></p>
 <ul>
-<li><p>어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.</p>
+<li>
+<p>어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.</p>
 </li>
-<li><p>이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.</p>
+<li>
+<p>이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.</p>
 </li>
-<li><p>Matplotlib에서 colormap을 적용하는 방법을 알아봅시다.</p>
+<li>
+<p>Matplotlib에서 colormap을 적용하는 방법을 알아봅시다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="built_in">print</span>(mpl.__version__)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 버전은 3.1.3. 기준입니다.</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;3.1.3&#x27;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;3.1.3&#x27;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <p><b> References </b></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py">Matplotlib 3.1.3 (Usage Guide)</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py">Matplotlib 3.1.3 (Usage Guide)</a></p>
 </blockquote>
-<h3 id="1-Colormaps"><a href="#1-Colormaps" class="headerlink" title="1. Colormaps"></a>1. Colormaps</h3><h4 id="1-1-데이터-불러오기"><a href="#1-1-데이터-불러오기" class="headerlink" title="1.1. 데이터 불러오기"></a>1.1. 데이터 불러오기</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/boston-housing">Kaggle, Boston Housing</a><br><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/datasets/index.html#boston-dataset">Scikit-Learn, 7.Dataset loading utilities</a></p>
+<h3 id="1-Colormaps">1. Colormaps</h3>
+<h4 id="1-1-데이터-불러오기">1.1. 데이터 불러오기</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/boston-housing">Kaggle, Boston Housing</a><br>
+<a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/datasets/index.html#boston-dataset">Scikit-Learn, 7.Dataset loading utilities</a></p>
 </blockquote>
 <ul>
-<li><p>Colormap을 적용할 예제를 위해 보스턴 집값(boston housing) 데이터를 불러오겠습니다.</p>
+<li>
+<p>Colormap을 적용할 예제를 위해 보스턴 집값(boston housing) 데이터를 불러오겠습니다.</p>
 </li>
-<li><p>보스턴 집값 데이터는 <a target="_blank" rel="noopener" href="https://www.kaggle.com/c/boston-housing">kaggle에서 다운</a>받을 수도 있지만 편의를 위해 <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/datasets/index.html#boston-dataset">scikit-learn에 내장된 데이터</a>를 불러오겠습니다.</p>
+<li>
+<p>보스턴 집값 데이터는 <a target="_blank" rel="noopener" href="https://www.kaggle.com/c/boston-housing">kaggle에서 다운</a>받을 수도 있지만 편의를 위해 <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/datasets/index.html#boston-dataset">scikit-learn에 내장된 데이터</a>를 불러오겠습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_boston</span><br><span class="line"></span><br><span class="line">boston = load_boston()</span><br><span class="line"><span class="built_in">print</span>(boston.feature_names)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 보스턴 집값의 인자(feature) 이름은 다음과 같습니다.</li>
-<li>각 인자들의 의미는 <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/datasets/index.html#boston-house-prices-dataset">여기에서 찾을 수 있지만</a>, 직관적이지 않습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;CRIM&#x27;</span> <span class="string">&#x27;ZN&#x27;</span> <span class="string">&#x27;INDUS&#x27;</span> <span class="string">&#x27;CHAS&#x27;</span> <span class="string">&#x27;NOX&#x27;</span> <span class="string">&#x27;RM&#x27;</span> <span class="string">&#x27;AGE&#x27;</span> <span class="string">&#x27;DIS&#x27;</span> <span class="string">&#x27;RAD&#x27;</span> <span class="string">&#x27;TAX&#x27;</span> <span class="string">&#x27;PTRATIO&#x27;</span> <span class="string">&#x27;B&#x27;</span> <span class="string">&#x27;LSTAT&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+<li>각 인자들의 의미는 <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/datasets/index.html#boston-house-prices-dataset">여기에서 찾을 수 있지만</a>, 직관적이지 않습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;CRIM&#x27;</span> <span class="string">&#x27;ZN&#x27;</span> <span class="string">&#x27;INDUS&#x27;</span> <span class="string">&#x27;CHAS&#x27;</span> <span class="string">&#x27;NOX&#x27;</span> <span class="string">&#x27;RM&#x27;</span> <span class="string">&#x27;AGE&#x27;</span> <span class="string">&#x27;DIS&#x27;</span> <span class="string">&#x27;RAD&#x27;</span> <span class="string">&#x27;TAX&#x27;</span> <span class="string">&#x27;PTRATIO&#x27;</span> <span class="string">&#x27;B&#x27;</span> <span class="string">&#x27;LSTAT&#x27;</span>]</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dfX = pd.DataFrame(boston.data, columns=boston.feature_names)</span><br><span class="line">dfy = pd.DataFrame(boston.target, columns=[<span class="string">&quot;MEDV&quot;</span>])</span><br><span class="line">dfb = pd.concat([dfX, dfy], axis=<span class="number">1</span>)</span><br><span class="line">dfb.describe()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 결측치 없는 506개의 데이터에 대한 요약을 볼 수 있습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_2.png" alt=" "></li>
+<li>실행결과: 결측치 없는 506개의 데이터에 대한 요약을 볼 수 있습니다.<br>
+<img src="4_cmap_2.png" alt=" "><br>
+<br></li>
+</ul>
+</li>
+<li>
+<p><a href="https://jehyunlee.github.io/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/">앞선 글</a>의 설정을 이용하여 한글 사용을 가능하게 한 후, 데이터를 시각화 해보겠습니다.</p>
+</li>
+<li>
+<p>각각의 인자들이 집값(<code>MEDV</code>)과 어떤 관계를 가지고 있는지 알아보기 위해 인자들과 집값과의 상관도를 그려보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>,<span class="number">6</span>), ncols=<span class="number">5</span>, nrows=<span class="number">3</span>)   <span class="comment"># 그래프를 5 x 3으로 배열합니다.</span></span><br><span class="line"></span><br><span class="line">axes = ax.ravel()              <span class="comment"># 5 x 3 으로 생성된 subplot을 1 x 15로 변환해 줍니다.</span></span><br><span class="line">feats = boston.feature_names   <span class="comment"># feature 이름을 가져옵니다.</span></span><br><span class="line"><span class="keyword">for</span> i, col <span class="keyword">in</span> <span class="built_in">enumerate</span>(dfb.columns):            <span class="comment"># column의 순서와 이름을 동시에 가지고 옵니다.</span></span><br><span class="line">    axes[i].scatter(dfb[col], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">3</span>)  <span class="comment"># scatter plot을 그립니다.</span></span><br><span class="line">    axes[i].set_xlabel(col)                      <span class="comment"># x label에 feature 이름을 넣어줍니다.</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout() </span><br><span class="line">plt.plot()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과: 두 인자 간의 관계를 알 수 있는 14개의 scatter plot이 그려집니다.<br>
+<img src="4_cmap_3.png" alt=" "><br>
+<br></li>
+</ul>
+</li>
+<li>
+<p>각 인자들과 집값 사이의 관계는 알기 쉬워졌지만, 정작 어떤 인자들인지 한 눈에 들어오지 않습니다.</p>
+</li>
+<li>
+<p>이해도를 돕기 위해 x축의 인자 명을 한글로 입혀봅시다.</p>
+</li>
+<li>
+<p><code>ax.set_xlabel()</code> 에 한글 이름을 넣어주면 가능하지만 14개 그래프에 일일이 넣기 힘드니 일괄적으로 처리해 보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">labels_kr = [  <span class="comment"># 홈페이지 설명을 바탕으로 레이블 이름을 정해줍니다.</span></span><br><span class="line">    <span class="string">&quot;범죄율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;25kft2 초과 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;비상업 면적비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;찰스강 근교 여부&quot;</span>,</span><br><span class="line">    <span class="string">&quot;일산화질소 농도&quot;</span>,</span><br><span class="line">    <span class="string">&quot;평균 방 수&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&lt; 1940년 주택 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;직업센터까지 거리&quot;</span>,</span><br><span class="line">    <span class="string">&quot;고속도로까지 거리&quot;</span>,</span><br><span class="line">    <span class="string">&quot;재산세율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;학생 교사 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;흑인 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;하위 계층 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;주택 가격 (중앙값)&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">cols = dfb.columns  <span class="comment"># 집값을 포함한 feature 이름을 가져옵니다.</span></span><br><span class="line">labelb = <span class="built_in">dict</span>(<span class="built_in">zip</span>(cols, labels_kr)) <span class="comment"># feature 이름과 한글 이름을 쌍으로 하는 dictionary를 만들어 줍니다.</span></span><br><span class="line"><span class="built_in">print</span>(labelb)  <span class="comment"># 생성된 dictionary를 확인합니다.</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과: dictionary가 생성되었습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;CRIM&#x27;</span>: <span class="string">&#x27;범죄율&#x27;</span>, <span class="string">&#x27;ZN&#x27;</span>: <span class="string">&#x27;25kft2 초과 비율&#x27;</span>, <span class="string">&#x27;INDUS&#x27;</span>: <span class="string">&#x27;비상업 면적비율&#x27;</span>, <span class="string">&#x27;CHAS&#x27;</span>: <span class="string">&#x27;찰스강 근교 여부&#x27;</span>, <span class="string">&#x27;NOX&#x27;</span>: <span class="string">&#x27;일산화질소 농도&#x27;</span>, <span class="string">&#x27;RM&#x27;</span>: <span class="string">&#x27;평균 방 수&#x27;</span>, <span class="string">&#x27;AGE&#x27;</span>: <span class="string">&#x27;&lt; 1940년 주택 비율&#x27;</span>, <span class="string">&#x27;DIS&#x27;</span>: <span class="string">&#x27;직업센터까지 거리&#x27;</span>, <span class="string">&#x27;RAD&#x27;</span>: <span class="string">&#x27;고속도로까지 거리&#x27;</span>, <span class="string">&#x27;TAX&#x27;</span>: <span class="string">&#x27;재산세율&#x27;</span>, <span class="string">&#x27;PTRATIO&#x27;</span>: <span class="string">&#x27;학생 교사 비율&#x27;</span>, <span class="string">&#x27;B&#x27;</span>: <span class="string">&#x27;흑인 비율&#x27;</span>, <span class="string">&#x27;LSTAT&#x27;</span>: <span class="string">&#x27;하위 계층 비율&#x27;</span>, <span class="string">&#x27;MEDV&#x27;</span>: <span class="string">&#x27;주택 가격 (중앙값)&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><code>set_xlabel()</code>부분을 다음과 같이 수정하고 그리면, 한글 그래프가 출력됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axes[i].set_xlabel(labelb[col])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과: 그래프의 가독성이 향상되었습니다.<br>
+<img src="4_cmap_4.png" alt=" "></li>
 </ul>
 </li>
 </ul>
-<br>  
-* [앞선 글](https://jehyunlee.github.io/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/)의 설정을 이용하여 한글 사용을 가능하게 한 후, 데이터를 시각화 해보겠습니다.
-* 각각의 인자들이 집값(`MEDV`)과 어떤 관계를 가지고 있는지 알아보기 위해 인자들과 집값과의 상관도를 그려보겠습니다.
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>,<span class="number">6</span>), ncols=<span class="number">5</span>, nrows=<span class="number">3</span>)   <span class="comment"># 그래프를 5 x 3으로 배열합니다.</span></span><br><span class="line"></span><br><span class="line">axes = ax.ravel()              <span class="comment"># 5 x 3 으로 생성된 subplot을 1 x 15로 변환해 줍니다.</span></span><br><span class="line">feats = boston.feature_names   <span class="comment"># feature 이름을 가져옵니다.</span></span><br><span class="line"><span class="keyword">for</span> i, col <span class="keyword">in</span> <span class="built_in">enumerate</span>(dfb.columns):            <span class="comment"># column의 순서와 이름을 동시에 가지고 옵니다.</span></span><br><span class="line">    axes[i].scatter(dfb[col], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">3</span>)  <span class="comment"># scatter plot을 그립니다.</span></span><br><span class="line">    axes[i].set_xlabel(col)                      <span class="comment"># x label에 feature 이름을 넣어줍니다.</span></span><br><span class="line"></span><br><span class="line">plt.tight_layout() </span><br><span class="line">plt.plot()</span><br></pre></td></tr></table></figure>
-  * 실행결과: 두 인자 간의 관계를 알 수 있는 14개의 scatter plot이 그려집니다. 
-    ![ ](4_cmap_3.png)
-<br>
-* 각 인자들과 집값 사이의 관계는 알기 쉬워졌지만, 정작 어떤 인자들인지 한 눈에 들어오지 않습니다.
-* 이해도를 돕기 위해 x축의 인자 명을 한글로 입혀봅시다.
-* `ax.set_xlabel()` 에 한글 이름을 넣어주면 가능하지만 14개 그래프에 일일이 넣기 힘드니 일괄적으로 처리해 보겠습니다.
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">labels_kr = [  <span class="comment"># 홈페이지 설명을 바탕으로 레이블 이름을 정해줍니다.</span></span><br><span class="line">    <span class="string">&quot;범죄율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;25kft2 초과 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;비상업 면적비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;찰스강 근교 여부&quot;</span>,</span><br><span class="line">    <span class="string">&quot;일산화질소 농도&quot;</span>,</span><br><span class="line">    <span class="string">&quot;평균 방 수&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&lt; 1940년 주택 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;직업센터까지 거리&quot;</span>,</span><br><span class="line">    <span class="string">&quot;고속도로까지 거리&quot;</span>,</span><br><span class="line">    <span class="string">&quot;재산세율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;학생 교사 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;흑인 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;하위 계층 비율&quot;</span>,</span><br><span class="line">    <span class="string">&quot;주택 가격 (중앙값)&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">cols = dfb.columns  <span class="comment"># 집값을 포함한 feature 이름을 가져옵니다.</span></span><br><span class="line">labelb = <span class="built_in">dict</span>(<span class="built_in">zip</span>(cols, labels_kr)) <span class="comment"># feature 이름과 한글 이름을 쌍으로 하는 dictionary를 만들어 줍니다.</span></span><br><span class="line"><span class="built_in">print</span>(labelb)  <span class="comment"># 생성된 dictionary를 확인합니다.</span></span><br></pre></td></tr></table></figure>
-  * 실행결과: dictionary가 생성되었습니다.
-    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;CRIM&#x27;</span>: <span class="string">&#x27;범죄율&#x27;</span>, <span class="string">&#x27;ZN&#x27;</span>: <span class="string">&#x27;25kft2 초과 비율&#x27;</span>, <span class="string">&#x27;INDUS&#x27;</span>: <span class="string">&#x27;비상업 면적비율&#x27;</span>, <span class="string">&#x27;CHAS&#x27;</span>: <span class="string">&#x27;찰스강 근교 여부&#x27;</span>, <span class="string">&#x27;NOX&#x27;</span>: <span class="string">&#x27;일산화질소 농도&#x27;</span>, <span class="string">&#x27;RM&#x27;</span>: <span class="string">&#x27;평균 방 수&#x27;</span>, <span class="string">&#x27;AGE&#x27;</span>: <span class="string">&#x27;&lt; 1940년 주택 비율&#x27;</span>, <span class="string">&#x27;DIS&#x27;</span>: <span class="string">&#x27;직업센터까지 거리&#x27;</span>, <span class="string">&#x27;RAD&#x27;</span>: <span class="string">&#x27;고속도로까지 거리&#x27;</span>, <span class="string">&#x27;TAX&#x27;</span>: <span class="string">&#x27;재산세율&#x27;</span>, <span class="string">&#x27;PTRATIO&#x27;</span>: <span class="string">&#x27;학생 교사 비율&#x27;</span>, <span class="string">&#x27;B&#x27;</span>: <span class="string">&#x27;흑인 비율&#x27;</span>, <span class="string">&#x27;LSTAT&#x27;</span>: <span class="string">&#x27;하위 계층 비율&#x27;</span>, <span class="string">&#x27;MEDV&#x27;</span>: <span class="string">&#x27;주택 가격 (중앙값)&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>set_xlabel()</code>부분을 다음과 같이 수정하고 그리면, 한글 그래프가 출력됩니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axes[i].set_xlabel(labelb[col])</span><br></pre></td></tr></table></figure>
-<ul>
-<li>실행결과: 그래프의 가독성이 향상되었습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_4.png" alt=" "></li>
-</ul>
-</li>
-</ul>
-<h4 id="1-2-Colormap-Basic"><a href="#1-2-Colormap-Basic" class="headerlink" title="1.2. Colormap Basic"></a>1.2. Colormap Basic</h4><blockquote>
+<h4 id="1-2-Colormap-Basic">1.2. Colormap Basic</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/colors/colormaps.html">Choosing Colormaps in Matplotlib</a></p>
 </blockquote>
 <ul>
-<li>보스턴 집값 데이터에서, DIS(직업센터까지 거리)와 MEDV(주택 가격: 중앙값)을 따로 그려봅시다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<li>
+<p>보스턴 집값 데이터에서, DIS(직업센터까지 거리)와 MEDV(주택 가격: 중앙값)을 따로 그려봅시다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 직업센터와의 거리와 주택가격 사이에 양의 상관관계가 있어보입니다.</li>
 <li>그런데, 여기서는 1940년 이전 주택 비율과의 관계가 전혀 보이지 않습니다.</li>
-<li>위에서 1940년 이전 주택 비율은 주택 가격과 무관해 보이기 때문에 더 알기 어렵습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_8.png" alt=" "></li>
+<li>위에서 1940년 이전 주택 비율은 주택 가격과 무관해 보이기 때문에 더 알기 어렵습니다.<br>
+<img src="4_cmap_8.png" alt=" "><br>
+<br></li>
 </ul>
 </li>
-</ul>
-<br>
-* 세 변수 사이의 관계를 한 장의 그림으로 파악해 봅시다.
-* scatter의 색상을 AGE(1940년 이전 주택 비율)로 입혀보겠습니다.
-* `ax.scatter()`에 `c`와 `cmap` 파라미터를 추가해주면 됩니다.
-  * `c`: `color`. 색상 이름이나 코드를 입력할 수도 있지만, 변수명을 입력할 수 있습니다.
-  * `cmap`: `colormap`. [전체 목록은 여기에 있습니다](https://matplotlib.org/tutorials/colors/colormaps.html).
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
-  * 실행결과: scatter에 <b>AGE(1940년 이전 주택 비율)</b> 데이터가 입혀집니다.
-  * <b>DIS(직업센터까지 거리)</b>가 짧을 수록 노후한 주택이 많다는 것을 알 수 있습니다.
-  ![ ](4_cmap_9.png)
-
+<li>
+<p>세 변수 사이의 관계를 한 장의 그림으로 파악해 봅시다.</p>
+</li>
+<li>
+<p>scatter의 색상을 AGE(1940년 이전 주택 비율)로 입혀보겠습니다.</p>
+</li>
+<li>
+<p><code>ax.scatter()</code>에 <code>c</code>와 <code>cmap</code> 파라미터를 추가해주면 됩니다.</p>
 <ul>
-<li>Matplotlib에서 다양한 colormap을 지원합니다.</li>
-<li><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/colors/colormaps.html">홈페이지</a>에서 이름과 색상 배열을 보고 원하는 것을 골라 적용할 수 있습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_19.png" alt=" "></li>
+<li><code>c</code>: <code>color</code>. 색상 이름이나 코드를 입력할 수도 있지만, 변수명을 입력할 수 있습니다.</li>
+<li><code>cmap</code>: <code>colormap</code>. <a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/colors/colormaps.html">전체 목록은 여기에 있습니다</a>.</li>
 </ul>
-<h4 id="1-3-Colorbar"><a href="#1-3-Colorbar" class="headerlink" title="1.3. Colorbar"></a>1.3. Colorbar</h4><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행결과: scatter에 <b>AGE(1940년 이전 주택 비율)</b> 데이터가 입혀집니다.</li>
+<li><b>DIS(직업센터까지 거리)</b>가 짧을 수록 노후한 주택이 많다는 것을 알 수 있습니다.<br>
+<img src="4_cmap_9.png" alt=" "></li>
+</ul>
+</li>
+<li>
+<p>Matplotlib에서 다양한 colormap을 지원합니다.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/colors/colormaps.html">홈페이지</a>에서 이름과 색상 배열을 보고 원하는 것을 골라 적용할 수 있습니다.<br>
+<img src="4_cmap_19.png" alt=" "></p>
+</li>
+</ul>
+<h4 id="1-3-Colorbar">1.3. Colorbar</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.pyplot.colorbar.html">matplotlib colorbar</a></p>
 </blockquote>
 <ul>
-<li><p>colormap으로 나타낸 데이터에서, 어떤 색상이 어떤 값에 해당하는지 명시해야 할 필요가 있습니다.</p>
+<li>
+<p>colormap으로 나타낸 데이터에서, 어떤 색상이 어떤 값에 해당하는지 명시해야 할 필요가 있습니다.</p>
 </li>
-<li><p>이럴 때 가장 보편적으로 사용되는 것이 colorbar 입니다.</p>
+<li>
+<p>이럴 때 가장 보편적으로 사용되는 것이 colorbar 입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">im = ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">plt.colorbar(im)</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: colorbar가 생성되었습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_10.png" alt=" "></li>
+<li>실행결과: colorbar가 생성되었습니다.<br>
+<img src="4_cmap_10.png" alt=" "></li>
 </ul>
 </li>
-<li><p>colorbar를 별도의 객체로 지정하고 <code>set_label()</code>을 이용해 label을 지정할 수 있습니다.</p>
+<li>
+<p>colorbar를 별도의 객체로 지정하고 <code>set_label()</code>을 이용해 label을 지정할 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">im = ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im)</span><br><span class="line">cbar.set_label(labelb[<span class="string">&#x27;AGE&#x27;</span>])</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: colorbar에 label이 생성되었습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_11.png" alt=" "></li>
+<li>실행결과: colorbar에 label이 생성되었습니다.<br>
+<img src="4_cmap_11.png" alt=" "></li>
 </ul>
 </li>
-<li><p>colobar의 속성을 다음과 같은 세 가지 방식으로 제어할 수 있습니다.</p>
+<li>
+<p>colobar의 속성을 다음과 같은 세 가지 방식으로 제어할 수 있습니다.</p>
 </li>
 </ul>
 <ol>
@@ -340,12 +388,14 @@
 <ul>
 <li><code>orientation</code> (horizontal or vertical)</li>
 <li><code>fraction</code> (default: 0.15. colorbar가 차지하는 영역의 비율)</li>
-<li><code>aspect</code> (default: 20. colorbar의 긴 변 : 짧은 변 비율)<br>  등이 있습니다.</li>
+<li><code>aspect</code> (default: 20. colorbar의 긴 변 : 짧은 변 비율)<br>
+등이 있습니다.</li>
 </ul>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">im = ax.scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">ax.set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line"></span><br><span class="line">cbar = plt.colorbar(im, orientation=<span class="string">&#x27;horizontal&#x27;</span>, aspect=<span class="number">10</span>, fraction=<span class="number">0.5</span>)</span><br><span class="line">cbar.set_label(labelb[<span class="string">&#x27;AGE&#x27;</span>])</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: colorbar가 가로로, 뚱뚱하게, 그래프의 절반을 차지하게 되었습니다.</li>
-<li>이미지를 클릭하거나 드래그하시면 배경에 가려진 이미지의 절반을 보실 수 있습니다.<br>  <img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_12.png" alt=" "></li>
+<li>이미지를 클릭하거나 드래그하시면 배경에 가려진 이미지의 절반을 보실 수 있습니다.<br>
+<img src="4_cmap_12.png" alt=" "></li>
 </ul>
 <ol start="2">
 <li><code>colorbar</code> properties: colorbar 자체의 속성.</li>
@@ -353,56 +403,76 @@
 <ul>
 <li><code>ticks</code> (default: automatic)</li>
 <li><code>format</code> (tick values 형식)</li>
-<li><code>drawedges</code> (default: False. color 구간마다 윤곽선 표시)<br>  등이 있습니다.</li>
+<li><code>drawedges</code> (default: False. color 구간마다 윤곽선 표시)<br>
+등이 있습니다.</li>
 </ul>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>,<span class="number">4</span>), ncols=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">    im = ax[i].scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax[i].set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">    ax[i].set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line">    cbar = plt.colorbar(im, ax=ax[i], ticks=[<span class="number">15</span>, <span class="number">50</span>, <span class="number">60</span>], <span class="built_in">format</span>=<span class="string">&#x27;%1.2e&#x27;</span>, drawedges=i)</span><br><span class="line">    ax[i].set_title(<span class="string">f&#x27;drawedges = <span class="subst">&#123;<span class="built_in">bool</span>(i)&#125;</span>&#x27;</span>)</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>실행결과: 지정된 위치에만, 지수 형식으로, drawedge의 False(0)과 True(1)가 생성되었습니다.</p>
+<li>
+<p>실행결과: 지정된 위치에만, 지수 형식으로, drawedge의 False(0)과 True(1)가 생성되었습니다.</p>
 </li>
-<li><p>drawedges 옵션 적용시 색상이 어두워지는데, 1 단위로 edge가 생성되기 때문입니다.</p>
+<li>
+<p>drawedges 옵션 적용시 색상이 어두워지는데, 1 단위로 edge가 생성되기 때문입니다.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15003353/why-does-my-colorbar-have-lines-in-it">관련된 이슈와 workaround가 이곳에 정리</a>되어 있습니다.<br>  <img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_13.png" alt=" "></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15003353/why-does-my-colorbar-have-lines-in-it">관련된 이슈와 workaround가 이곳에 정리</a>되어 있습니다.<br>
+<img src="4_cmap_13.png" alt=" "></p>
 </li>
-<li><p>위와 같이 여러 개의 subplot을 가지는 경우 공통 colorbar를 삽입할 경우가 있습니다.</p>
+<li>
+<p>위와 같이 여러 개의 subplot을 가지는 경우 공통 colorbar를 삽입할 경우가 있습니다.</p>
 </li>
-<li><p>그러나 직관적으로 <code>plt.colorbar()</code>를 맨 마지막으로 옮기고 <code>plt.tight_layout()</code>을 실행하면 plot과 colorbar가 겹치게 됩니다.</p>
+<li>
+<p>그러나 직관적으로 <code>plt.colorbar()</code>를 맨 마지막으로 옮기고 <code>plt.tight_layout()</code>을 실행하면 plot과 colorbar가 겹치게 됩니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>,<span class="number">4</span>), ncols=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">  im = ax[i].scatter(dfb[<span class="string">&#x27;DIS&#x27;</span>], dfb[<span class="string">&#x27;MEDV&#x27;</span>], s=<span class="number">5</span>, c=dfb[<span class="string">&#x27;AGE&#x27;</span>], cmap=<span class="string">&#x27;jet&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">  ax[i].set_xlabel(labelb[<span class="string">&#x27;DIS&#x27;</span>])</span><br><span class="line">  ax[i].set_ylabel(labelb[<span class="string">&#x27;MEDV&#x27;</span>])</span><br><span class="line">  ax[i].set_title(<span class="string">f&#x27;drawedges = <span class="subst">&#123;<span class="built_in">bool</span>(i)&#125;</span>&#x27;</span>)</span><br><span class="line">cbar = plt.colorbar(im, ax=ax, ticks=[<span class="number">15</span>, <span class="number">50</span>, <span class="number">60</span>], <span class="built_in">format</span>=<span class="string">&#x27;%1.2e&#x27;</span>, drawedges=i)    </span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_14.png" alt=" "></p>
+<p><img src="4_cmap_14.png" alt=" "></p>
 </li>
-<li><p>따라서, <code>plt.tight_layout()</code>에 <code>rect</code> 옵션을 주어 plot 영역을 지정해줘야 합니다.</p>
+<li>
+<p>따라서, <code>plt.tight_layout()</code>에 <code>rect</code> 옵션을 주어 plot 영역을 지정해줘야 합니다.</p>
 </li>
-<li><p><code>rect</code> 옵션은 그림의 어느 부분에 <code>axes</code>가 들어가는지를 tuple 형태로, (left, bottom, right, top)으로 지정합니다. 기본값은 (0, 0, 1, 1)입니다.</p>
+<li>
+<p><code>rect</code> 옵션은 그림의 어느 부분에 <code>axes</code>가 들어가는지를 tuple 형태로, (left, bottom, right, top)으로 지정합니다. 기본값은 (0, 0, 1, 1)입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.tight_layout(rect=(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.75</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_15.png" alt=" "></p>
+<p><img src="4_cmap_15.png" alt=" "></p>
 </li>
 </ul>
-<h4 id="1-4-Image-as-2D-Data"><a href="#1-4-Image-as-2D-Data" class="headerlink" title="1.4. Image as 2D Data"></a>1.4. Image as 2D Data</h4><blockquote>
+<h4 id="1-4-Image-as-2D-Data">1.4. Image as 2D Data</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.1/users/dflt_style_changes.html">Matplotlib, Changes to the default style</a></p>
 </blockquote>
-<p><img src="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/2_cal_7.png"></p>
+<p><img src="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/2_cal_7.png" alt=""></p>
 <ul>
-<li><p><a href="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/">다른 글</a>에서 다루었듯 이미지가 단순 그림이 아니라 x, y 2차원 공간상의 데이터일 수 있습니다.</p>
+<li>
+<p><a href="https://jehyunlee.github.io/2020/01/18/ImageJ-cookbook-2-Calibration/">다른 글</a>에서 다루었듯 이미지가 단순 그림이 아니라 x, y 2차원 공간상의 데이터일 수 있습니다.</p>
 </li>
-<li><p>이럴 때 이미지에서 데이터를 표기하는 colormap을 Look-up table(LUT)라고 부르며, 경우에 따라 다른 색상을 입혀 표현합니다.</p>
+<li>
+<p>이럴 때 이미지에서 데이터를 표기하는 colormap을 Look-up table(LUT)라고 부르며, 경우에 따라 다른 색상을 입혀 표현합니다.</p>
 </li>
-<li><p>matplotlib에서 2D Data로서의 Image를 읽어들인 후 LUT를 변경하는 방법을 정리합니다. </p>
+<li>
+<p>matplotlib에서 2D Data로서의 Image를 읽어들인 후 LUT를 변경하는 방법을 정리합니다.</p>
 </li>
-<li><p>.tif 이미지를 읽고 저장하기 위해 <a target="_blank" rel="noopener" href="https://pillow.readthedocs.io/en/stable/">Pillow</a>가 필요합니다.</p>
+<li>
+<p>.tif 이미지를 읽고 저장하기 위해 <a target="_blank" rel="noopener" href="https://pillow.readthedocs.io/en/stable/">Pillow</a>가 필요합니다.</p>
 </li>
-<li><p><a href="4_cmap_16.tif">예제 이미지는 여기에서 다운로드</a> 가능합니다.</p>
+<li>
+<p><a href="4_cmap_16.tif">예제 이미지는 여기에서 다운로드</a> 가능합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">im = Image.<span class="built_in">open</span>(<span class="string">&#x27;4_cmap_16.tif&#x27;</span>)</span><br><span class="line"></span><br><span class="line">imarray = np.array(im)</span><br><span class="line">plt.imshow(imarray)</span><br><span class="line">plt.imsave(<span class="string">&#x27;4_cmap_17.png&#x27;</span>, imarray)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: <a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/users/dflt_style_changes.html">기본 colormap</a>인 <code>viridis</code>가 적용된 이미지가 생성됩니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_17.png" alt=" "></li>
+<li>실행결과: <a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/users/dflt_style_changes.html">기본 colormap</a>인 <code>viridis</code>가 적용된 이미지가 생성됩니다.<br>
+<img src="4_cmap_17.png" alt=" "></li>
 </ul>
 </li>
-<li><p><code>plt.imshow()</code>에 <code>cmap=</code> 인자를 지정하면 이미지에 적용되는 colormap을 변경할 수 있습니다.</p>
+<li>
+<p><code>plt.imshow()</code>에 <code>cmap=</code> 인자를 지정하면 이미지에 적용되는 colormap을 변경할 수 있습니다.</p>
 </li>
-<li><p>파일로 저장할 때는 별도로 <code>cmap=</code> 인자를 지정해야 합니다.</p>
+<li>
+<p>파일로 저장할 때는 별도로 <code>cmap=</code> 인자를 지정해야 합니다.</p>
 </li>
-<li><p>그렇지 않으면 화면과는 무관한 기본 <code>viridis</code> colormap이 적용된 결과를 볼 수 있습니다.</p>
+<li>
+<p>그렇지 않으면 화면과는 무관한 기본 <code>viridis</code> colormap이 적용된 결과를 볼 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(imarray, cmap=<span class="string">&#x27;ocean&#x27;</span>)</span><br><span class="line">plt.imsave(<span class="string">&#x27;4_cmap_18.png&#x27;</span>, imarray, cmap=<span class="string">&#x27;ocean&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: colormap이 <code>ocean</code>으로 변경되었습니다.<br><img src="/2020/03/01/Python-DS-4-matplotlib_colormap/4_cmap_18.png" alt=" "></li>
+<li>실행결과: colormap이 <code>ocean</code>으로 변경되었습니다.<br>
+<img src="4_cmap_18.png" alt=" "></li>
 </ul>
 </li>
 </ul>
@@ -423,7 +493,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/03/01/Python-DS-4-matplotlib_colormap/" data-id="cuidBV53SVKmS57aSQ-e5fzNr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/03/01/Python-DS-4-matplotlib_colormap/" data-id="cuidUaD1D28e80tEdp3JuG48q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -501,14 +571,17 @@
         "dateCreated": "2020-03-01",
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/03/01/Python-DS-4-matplotlib_colormap/",
-        "description": "  
+        "description": "
+
 
 어떤 프로그램이든 visualization을 해보신 분은 한번쯤 화려한 무지개빛 그림을 보고, “나도 저렇게 해보고 싶다” 라고 생각해보셨을 것 같습니다.
 
+
 이런 그림은 colormap이라고 불리는 기능을 이용하는 것으로, 데이터를 색으로 표현하여 아름다움과 함께 직관적인 이해력을 높여줍니다.
 
-Matplotlib에서 colormap을 적용하는 방법",
-        "wordCount": 1672
+
+Matplotlib에서 colormap을 적용하는 방",
+        "wordCount": 1596
     }
 </script>
 
@@ -605,6 +678,26 @@ Matplotlib에서 colormap을 적용하는 방법",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -679,26 +772,6 @@ Matplotlib에서 colormap을 적용하는 방법",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

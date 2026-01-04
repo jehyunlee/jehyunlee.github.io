@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,color,colormap,colorbar" />
     
-    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  1. Visual Perception Practical Rules for Using Color in Chart">
+    <meta name="description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  1. Visual Perception  Practical Rules for Using Color in Char">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib Colormap Customization (1)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  1. Visual Perception Practical Rules for Using Color in Chart">
+<meta property="og:description" content="matplotlib에서 custom colormap을 만들고 적용하는 방법입니다. 3부로 나누어 1부에 해당하는 본 글에서는 시각적 디자인을, 2~3부에서는 코드 위주로 정리합니다.   Creating Colormaps in Matplotlib  1. Visual Perception  Practical Rules for Using Color in Char">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/24_ccmap_0.PNG">
 <meta property="article:published_time" content="2020-08-06T11:56:00.000Z">
@@ -238,72 +238,99 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html">Creating Colormaps in Matplotlib</a></p>
 </blockquote>
-<h3 id="1-Visual-Perception"><a href="#1-Visual-Perception" class="headerlink" title="1. Visual Perception"></a>1. Visual Perception</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="http://www.perceptualedge.com/articles/visual_business_intelligence/rules_for_using_color.pdf">Practical Rules for Using Color in Charts</a><br><a target="_blank" rel="noopener" href="http://ccom.unh.edu/sites/default/files/publications/Ware_1988_CGA_Color_sequences_univariate_maps.pdf">Color Sequences for Univariate Maps: Theory, Experiments, and Principles</a><br><a target="_blank" rel="noopener" href="https://medium.com/@MunchStudio/visual-perception-and-the-sequence-of-cognition-3e654c9981ee">Visual Perception and the Sequence of Cognition</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELAB color space</a></p>
+<h3 id="1-Visual-Perception">1. Visual Perception</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.perceptualedge.com/articles/visual_business_intelligence/rules_for_using_color.pdf">Practical Rules for Using Color in Charts</a><br>
+<a target="_blank" rel="noopener" href="http://ccom.unh.edu/sites/default/files/publications/Ware_1988_CGA_Color_sequences_univariate_maps.pdf">Color Sequences for Univariate Maps: Theory, Experiments, and Principles</a><br>
+<a target="_blank" rel="noopener" href="https://medium.com/@MunchStudio/visual-perception-and-the-sequence-of-cognition-3e654c9981ee">Visual Perception and the Sequence of Cognition</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELAB color space</a></p>
 </blockquote>
 <ul>
-<li><p>시각화<code>visualization</code>는 숫자로 표현된 데이터를 우리 눈으로 받아들이도록 변환하는 과정입니다.</p>
+<li>
+<p>시각화<code>visualization</code>는 숫자로 표현된 데이터를 우리 눈으로 받아들이도록 변환하는 과정입니다.</p>
 <ul>
 <li>시각화 결과물을 접하는 사람이 어떻게 받아들일지를 생각해야 합니다.</li>
 <li>그럴려면 우리 눈이 사물을 어떻게 받아들이는지,</li>
 <li>우리 뇌는 이를 어떻게 해석하는지에 대한 이해가 필요합니다.</li>
 </ul>
 </li>
-<li><p>눈앞에 어떤 물체나 도형이 나타났을 때, 시각적 인지 순서는 다음과 같습니다.</p>
+<li>
+<p>눈앞에 어떤 물체나 도형이 나타났을 때, 시각적 인지 순서는 다음과 같습니다.</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.amazon.co.uk/gp/product/1118980824/ref=as_li_tl?ie=UTF8&camp=1634&creative=6738&creativeASIN=1118980824&linkCode=as2&tag=munch-21&linkId=682d435272711541c786494c5b081459"><b>형태 &gt; 색 &gt; 글자</b>의 순으로 인지합니다</a>.<br><b>Quiz: 왜 짝퉁은 오리지널 로고의 형상과 색조를 유지하고 글자같은 디테일만 바꿀까요?</b><br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/shape_colour_content.jpg" alt="https:&#x2F;&#x2F;thedeependdesign.com&#x2F;psychology-of-branding&#x2F;"></li>
+<li><a target="_blank" rel="noopener" href="https://www.amazon.co.uk/gp/product/1118980824/ref=as_li_tl?ie=UTF8&amp;camp=1634&amp;creative=6738&amp;creativeASIN=1118980824&amp;linkCode=as2&amp;tag=munch-21&amp;linkId=682d435272711541c786494c5b081459"><b>형태 &gt; 색 &gt; 글자</b>의 순으로 인지합니다</a>.<br>
+<b>Quiz: 왜 짝퉁은 오리지널 로고의 형상과 색조를 유지하고 글자같은 디테일만 바꿀까요?</b><br><br>
+<img src="shape_colour_content.jpg" alt="https://thedeependdesign.com/psychology-of-branding/"></li>
 <li>또한 우리는 <b>색의 명도 변화를 색상 변화보다 더 잘 받아들입니다.</b></li>
 <li>따라서 데이터의 증감을 명도 변화로 표현하는 것이 효율적입니다.<br></li>
 </ul>
 </li>
-<li><p>일부 용어가 혼동됩니다.</p>
+<li>
+<p>일부 용어가 혼동됩니다.</p>
 <ul>
 <li>명도(brightness, value)와 휘도(luminance, intensity, gray-level)가 혼용됩니다.</li>
-<li>사전적으로 <b>명도</b>는 관찰자의 주관적 밝기로 측정이 불가능한 반면, <b>휘도</b>는 관찰자가 광원으로부터 인지하는 에너지의 양($$cd&#x2F;m^2$$)입니다.</li>
+<li>사전적으로 <b>명도</b>는 관찰자의 주관적 밝기로 측정이 불가능한 반면, <b>휘도</b>는 관찰자가 광원으로부터 인지하는 에너지의 양($$cd/m^2$$)입니다.</li>
 <li>여기서는 같은 의미로, 더 익숙한 명도를 사용하도록 하겠습니다.</li>
 <li>정확히는 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELAB color space</a>의 Lightness입니다.</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-Colormap-Selection"><a href="#2-Colormap-Selection" class="headerlink" title="2. Colormap Selection"></a>2. Colormap Selection</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/colors/colormaps.html#ware">Choosing Colormaps in Matplotlib</a><br><a href="https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/">Matplotlib Colormap (2)</a><br><a href="https://jehyunlee.github.io/2020/08/03/Python-DS-23-rainbow_mislead/">Rainbow 컬러맵은 우리를 어떻게 호도하는가</a><br><a href="https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/">과학 시각화: 색상은 우리가 무엇을 볼지 어떻게 결정하는가</a></p>
+<h3 id="2-Colormap-Selection">2. Colormap Selection</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/tutorials/colors/colormaps.html#ware">Choosing Colormaps in Matplotlib</a><br>
+<a href="https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/">Matplotlib Colormap (2)</a><br>
+<a href="https://jehyunlee.github.io/2020/08/03/Python-DS-23-rainbow_mislead/">Rainbow 컬러맵은 우리를 어떻게 호도하는가</a><br>
+<a href="https://jehyunlee.github.io/2020/07/08/Python-DS-19-vs_color/">과학 시각화: 색상은 우리가 무엇을 볼지 어떻게 결정하는가</a></p>
 </blockquote>
 <ul>
-<li><p><b>Perpetually Uniform Sequential</b>이 정석입니다.</p>
+<li>
+<p><b>Perpetually Uniform Sequential</b>이 정석입니다.</p>
 <ul>
-<li><b>viridis</b>, <b>plasma</b>, <b>inferno</b>, <b>magma</b>, <b>cividis</b>가 있습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_01.PNG"><br></li>
+<li><b>viridis</b>, <b>plasma</b>, <b>inferno</b>, <b>magma</b>, <b>cividis</b>가 있습니다.<br><br>
+<img src="24_ccmap_01.PNG" alt=""><br></li>
 <li>이들 컬러맵의 index와 명도의 관계를 그려보면 다음과 같습니다.</li>
 <li>데이터값의 차이와 명도의 차이가 정확히 비례하여 데이터를 정직하게 표현할 수 있습니다.</li>
-<li>밝기 차이가 세 배인 두 지점은 데이터 값 차이도 세 배입니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/L_puniform.png"><br></li>
+<li>밝기 차이가 세 배인 두 지점은 데이터 값 차이도 세 배입니다.<br><br>
+<img src="L_puniform.png" alt=""><br></li>
 </ul>
 </li>
-<li><p><b>Sequential Colormap</b>도 괜찮은 선택입니다.</p>
+<li>
+<p><b>Sequential Colormap</b>도 괜찮은 선택입니다.</p>
 <ul>
 <li>단색조의 명도 변화를 통해 익숙함과 편안함을 느낄 수 있습니다.</li>
-<li>정확하지는 않지만 데이터값의 변화를 전반적으로 잘 반영합니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/L_sequential.png"><br></li>
+<li>정확하지는 않지만 데이터값의 변화를 전반적으로 잘 반영합니다.<br><br>
+<img src="L_sequential.png" alt=""><br></li>
 </ul>
 </li>
-<li><p><b>Rainbow</b> 계열은 자제합시다.</p>
+<li>
+<p><b>Rainbow</b> 계열은 자제합시다.</p>
 <ul>
 <li>현란한 색을 사용하면 그림이 풍성해보이는 효과가 있습니다.</li>
 <li><b>rainbow</b>, <b>jet</b> 등이 자주 쓰이지만 데이터 전달력 관점에서는 적절하다고 하기 힘듭니다.</li>
-<li>좀 낯설기는 하지만 <b>cubehelix</b>가 그래도 괜찮은 명도 분포를 보여주고 있습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/L_rainbow.png"><br></li>
+<li>좀 낯설기는 하지만 <b>cubehelix</b>가 그래도 괜찮은 명도 분포를 보여주고 있습니다.<br><br>
+<img src="L_rainbow.png" alt=""><br></li>
 </ul>
 </li>
 </ul>
-<h3 id="3-Colormap-Customization"><a href="#3-Colormap-Customization" class="headerlink" title="3. Colormap Customization"></a>3. Colormap Customization</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html">Creating Colormaps in Matplotlib</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.ListedColormap.html">matplotlib.colors.ListedColormap</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.LinearSegmentedColormap.html">matplotlib.colors.LinearSegmentedColormap</a><br><a target="_blank" rel="noopener" href="https://www.weather.go.kr/weather/images/rader_integrate.jsp">기상청: 레이더 합성영상</a></p>
+<h3 id="3-Colormap-Customization">3. Colormap Customization</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/tutorials/colors/colormap-manipulation.html">Creating Colormaps in Matplotlib</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.ListedColormap.html">matplotlib.colors.ListedColormap</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.colors.LinearSegmentedColormap.html">matplotlib.colors.LinearSegmentedColormap</a><br>
+<a target="_blank" rel="noopener" href="https://www.weather.go.kr/weather/images/rader_integrate.jsp">기상청: 레이더 합성영상</a></p>
 </blockquote>
 <ul>
-<li><p>컬러맵은 연속된 색상의 나열입니다.</p>
+<li>
+<p>컬러맵은 연속된 색상의 나열입니다.</p>
 <ul>
 <li>데이터의 값 변화를 색상에 대응시켜 표시하는 것도 좋지만, <b>데이터의 특정 값이 의미를 가진다면 그에 맞추어 색상을 변화시키는 것</b>도 방법입니다.</li>
 <li>아래 그림은 기상청 제공 2020년 8월 5일 16:35 현재 대전, 충남의 강수 현황입니다.</li>
-<li>시간당 강수량 구간을 색상으로 나누고, 각 색상 구간은 다시 명도로 나뉘어 있습니다. </li>
-<li>구간이 바뀔때마다 명도가 크게 바뀌어 다소 혼란스럽지만 폭우 구간이 잘 드러납니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_02.PNG"><br></li>
+<li>시간당 강수량 구간을 색상으로 나누고, 각 색상 구간은 다시 명도로 나뉘어 있습니다.</li>
+<li>구간이 바뀔때마다 명도가 크게 바뀌어 다소 혼란스럽지만 폭우 구간이 잘 드러납니다.<br><br>
+<img src="24_ccmap_02.PNG" alt=""><br></li>
 </ul>
 </li>
-<li><p><code>matplotlib</code>에서는 컬러맵 작성 기능을 제공합니다.</p>
+<li>
+<p><code>matplotlib</code>에서는 컬러맵 작성 기능을 제공합니다.</p>
 <ul>
 <li>기존에 정의된 색상을 나열하여 컬러맵을 조합할 수 있고,</li>
 <li><code>numpy.array</code>를 활용하여 새로운 컬러맵을 생성하거나 기존 컬러맵을 수정할 수 있습니다.</li>
@@ -311,92 +338,117 @@
 <li>상세한 설명과 코드는 다음 글로 미루고, 여기서는 같은 데이터에 컬러맵을 바꿔가며 적용한 예시를 보여드리겠습니다.</li>
 </ul>
 </li>
-<li><p>시각화에 사용한 데이터는 지상 40m 지점의 연평균 풍속입니다.</p>
+<li>
+<p>시각화에 사용한 데이터는 지상 40m 지점의 연평균 풍속입니다.</p>
 </li>
 </ul>
-<h4 id="3-1-“rainbow”-and-“cubehelix”"><a href="#3-1-“rainbow”-and-“cubehelix”" class="headerlink" title="3.1. “rainbow” and “cubehelix”"></a>3.1. “rainbow” and “cubehelix”</h4><ul>
-<li><p>첫 번째로, 습관적으로 사용하는 <b>rainbow</b>를 적용했습니다.</p>
+<h4 id="3-1-“rainbow”-and-“cubehelix”">3.1. “rainbow” and “cubehelix”</h4>
+<ul>
+<li>
+<p>첫 번째로, 습관적으로 사용하는 <b>rainbow</b>를 적용했습니다.</p>
 <ul>
 <li>어려서부터 배운 빨주노초파남보라 익숙하고 편한 느낌이 있습니다.</li>
 <li>고지대가 잘 보이는 한편 해안선을 따라 한반도 전체가 밝게 빛나는 느낌이 납니다.</li>
-<li>시선이 백두대간에 처음 꽂혔다가 자꾸 해안선을 따라 빙빙 돌게 됩니다. </li>
-<li>가장 밝은 곳이자 주변과의 명도차가 가장 큰 구간이기 때문에 그렇습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_03.PNG"><br></li>
+<li>시선이 백두대간에 처음 꽂혔다가 자꾸 해안선을 따라 빙빙 돌게 됩니다.</li>
+<li>가장 밝은 곳이자 주변과의 명도차가 가장 큰 구간이기 때문에 그렇습니다.<br><br>
+<img src="24_ccmap_03.PNG" alt=""><br></li>
 </ul>
 </li>
-<li><p>이 그림을 보는 사람이 해안선이 아닌 내륙의 풍속 분포에 집중해주기를 원합니다.</p>
+<li>
+<p>이 그림을 보는 사람이 해안선이 아닌 내륙의 풍속 분포에 집중해주기를 원합니다.</p>
 <ul>
 <li>컬러맵의 명도로 데이터의 크기를 알 수 있는 <b>cubehelix</b>를 적용했습니다.</li>
 <li>해안선이 어두워지면서 한층 누그러지고, 시선을 덜 빼앗깁니다.</li>
-<li>내륙지방의 디테일이 강화되어 들여다보기 좀 더 편해집니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_04.PNG"><br></li>
+<li>내륙지방의 디테일이 강화되어 들여다보기 좀 더 편해집니다.<br><br>
+<img src="24_ccmap_04.PNG" alt=""><br></li>
 </ul>
 </li>
 </ul>
-<h4 id="3-2-“viridis”-with-Color-range-adjustment"><a href="#3-2-“viridis”-with-Color-range-adjustment" class="headerlink" title="3.2. “viridis” with Color range adjustment"></a>3.2. “viridis” with Color range adjustment</h4><ul>
-<li><p>Perceptually Uniform Sequential인 <b>viridis</b>를 적용한 결과입니다.</p>
+<h4 id="3-2-“viridis”-with-Color-range-adjustment">3.2. “viridis” with Color range adjustment</h4>
+<ul>
+<li>
+<p>Perceptually Uniform Sequential인 <b>viridis</b>를 적용한 결과입니다.</p>
 <ul>
 <li>많은 경우에 적용되는 <b>matplotlib</b>의 기본 컬러맵입니다.</li>
 <li>사실 처음에 봤을 때는 무지개에 익숙한터라 상당히 낯설었습니다.</li>
 <li>cubehelix에 비해 색상 변화가 단조로워 더 어둡게 느껴집니다.</li>
-<li>특히 해안선이 잘 보이지 않아서 육지와 바다가 잘 구분되지 않습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_05.PNG"><br></li>
+<li>특히 해안선이 잘 보이지 않아서 육지와 바다가 잘 구분되지 않습니다.<br><br>
+<img src="24_ccmap_05.PNG" alt=""><br></li>
 </ul>
 </li>
-<li><p><b>색공간이 낭비되고 있는 느낌</b>이 듭니다.</p>
+<li>
+<p><b>색공간이 낭비되고 있는 느낌</b>이 듭니다.</p>
 <ul>
 <li>자동으로 감지한 최대값은 11 정도이지만 화면에 그만큼 밝은 부분이 많이 보이지 않습니다.</li>
 <li>그 바람에 전체적으로 그림이 어두워지고 내륙지방의 디테일이 잘 살아나지 않습니다.</li>
 <li>histogram을 그려서 데이터 범위를 확인해봅니다.</li>
-<li>9 이상의 데이터가 극히 드뭅니다. 이 정도는 뭉뚱그려도 실보다 득이 클 것입니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_07.PNG"><br></li>
+<li>9 이상의 데이터가 극히 드뭅니다. 이 정도는 뭉뚱그려도 실보다 득이 클 것입니다.<br><br>
+<img src="24_ccmap_07.PNG" alt=""><br></li>
 </ul>
 </li>
-<li><p>컬러맵의 범위를 조정해줍니다.</p>
+<li>
+<p>컬러맵의 범위를 조정해줍니다.</p>
 <ul>
 <li>최대 범위를 9로 설정해서 그 이상은 모두 같은 색으로 표시되도록 합니다.</li>
-<li>전체적으로 그림이 밝아지고 디테일이 살아났습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_06.PNG"><br></li>
+<li>전체적으로 그림이 밝아지고 디테일이 살아났습니다.<br><br>
+<img src="24_ccmap_06.PNG" alt=""><br></li>
 </ul>
 </li>
 </ul>
-<h4 id="3-3-Colormap-Customization"><a href="#3-3-Colormap-Customization" class="headerlink" title="3.3. Colormap Customization"></a>3.3. Colormap Customization</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="http://www.kma.go.kr/aboutkma/biz/forecast05.jsp">기상청: 예보용어 해설</a><br><a target="_blank" rel="noopener" href="https://color.adobe.com/create/color-wheel">Adobe Color</a></p>
+<h4 id="3-3-Colormap-Customization">3.3. Colormap Customization</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.kma.go.kr/aboutkma/biz/forecast05.jsp">기상청: 예보용어 해설</a><br>
+<a target="_blank" rel="noopener" href="https://color.adobe.com/create/color-wheel">Adobe Color</a></p>
 </blockquote>
 <ul>
-<li><p>제가 전달하고자 하는 데이터는 <b>육지 풍속</b>입니다.</p>
+<li>
+<p>제가 전달하고자 하는 데이터는 <b>육지 풍속</b>입니다.</p>
 <ul>
 <li>해안선 부분에서 바다와 육지의 색이 비슷해서 잘 구분이 되지 않습니다.</li>
 <li>바다에만 선택적으로 <b>gist_gray</b>를 적용해서 흑백으로 처리합니다.</li>
 <li>gist_gray는 viridis와 명도차가 있어 같은 데이터가 다른 밝기를 가지지만, 여기서는 바다에 눈길을 주지 않으려는 의도이므로 관계없습니다.</li>
-<li>바다가 더 어두워져서 육지에 집중하기에 한결 더 편해졌습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_08.PNG"><br></li>
+<li>바다가 더 어두워져서 육지에 집중하기에 한결 더 편해졌습니다.<br><br>
+<img src="24_ccmap_08.PNG" alt=""><br></li>
 </ul>
 </li>
-<li><p>도메인을 살짝 얹어보겠습니다.</p>
+<li>
+<p>도메인을 살짝 얹어보겠습니다.</p>
 <ul>
-<li>기상청의 예보 용어 기준으로, 바람이 4 m&#x2F;s 미만일 때는 <b>바람이 약하다</b>고 하고 4 이상 9 m&#x2F;s 미만일 때는 <b>바람이 약간 강하다</b>고 합니다.<br></li>
-<li>그리고 앞서 데이터를 뭉개버렸던 9 m&#x2F;s 이상 구간이 <b>바람이 강하다</b>고 되어 있습니다.</li>
-<li>구간이 다르니 아래 구간과 같은 색으로 표현하지 않는게 좋겠습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_09.PNG"><br></li>
+<li>기상청의 예보 용어 기준으로, 바람이 4 m/s 미만일 때는 <b>바람이 약하다</b>고 하고 4 이상 9 m/s 미만일 때는 <b>바람이 약간 강하다</b>고 합니다.<br></li>
+<li>그리고 앞서 데이터를 뭉개버렸던 9 m/s 이상 구간이 <b>바람이 강하다</b>고 되어 있습니다.</li>
+<li>구간이 다르니 아래 구간과 같은 색으로 표현하지 않는게 좋겠습니다.<br><br>
+<img src="24_ccmap_09.PNG" alt=""><br></li>
 <li>이 세 구간을 다른 색을 사용해서 표현하겠습니다.</li>
 </ul>
 </li>
-<li><p><b>명도대비</b>와 <b>색상대비</b>를 동시에 활용합니다.</p>
+<li>
+<p><b>명도대비</b>와 <b>색상대비</b>를 동시에 활용합니다.</p>
 <ul>
 <li>바람이 약한 구간과 약간 강한 구간은 지도에서 차지하는 면적이 넓고, 내부의 값 변화도 크기 때문에 <b>다른 색상 안에서 명도대비를 적용합니다.</b></li>
 <li>다만 기상청 강수량 시각화와 달리 데이터 구간이 많지 않고 비교적 온화한, 즉 경각심을 느낄 필요가 없는 구간이므로 <b>심리적으로 부담이 없는 녹색과 청색을 선택합니다</b>.</li>
 <li>파랑이 녹색보단 조금 더 차가운 느낌이므로 위에 올립니다. 바람불면 추우니까요. :)</li>
 <li><b>Greens_r</b>과 <b>Blues_r</b>이 합쳐지는 구간에서 명도를 점프시켜 경계가 잘 보이도록 했습니다.</li>
-<li>viridis에 비해 정량적 표현력이 희생되었지만 구간 표현력은 강화되었습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/L_customs.png"><br></li>
+<li>viridis에 비해 정량적 표현력이 희생되었지만 구간 표현력은 강화되었습니다.<br><br>
+<img src="L_customs.png" alt=""><br></li>
 </ul>
 </li>
-<li><p>9 m&#x2F;s 이상의 바람이 강한 구간은 데이터 양이 매우 적어 잘 안보일 듯 합니다. </p>
+<li>
+<p>9 m/s 이상의 바람이 강한 구간은 데이터 양이 매우 적어 잘 안보일 듯 합니다.</p>
 <ul>
 <li>이를 보완하기 위해 녹색, 청색과 <b>보색</b> 관계에 있는 색을 택합니다.</li>
 <li>그러나 빨강은 흰색 위에 놓이기에 <b>너무 어둡고 경계의 느낌이 매우 강합니다.</b></li>
-<li>명도가 높고 덜 부담스러운 <b>분리 보색<code>split complementary</code></b>, <b>magenta</b>를 선택합니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_11.PNG"><br></li>
+<li>명도가 높고 덜 부담스러운 <b>분리 보색<code>split complementary</code></b>, <b>magenta</b>를 선택합니다.<br><br>
+<img src="24_ccmap_11.PNG" alt=""><br></li>
 </ul>
 </li>
-<li><p>최종 결과물입니다.</p>
+<li>
+<p>최종 결과물입니다.</p>
 <ul>
-<li>바다와 육지가 <b>무채색과 유채색으로 분리</b>되었고 </li>
-<li>풍속 구간에 따라 <b>색상으로 구분</b>되었으며, </li>
+<li>바다와 육지가 <b>무채색과 유채색으로 분리</b>되었고</li>
+<li>풍속 구간에 따라 <b>색상으로 구분</b>되었으며,</li>
 <li>각 구간 내에서는 <b>명도</b>를 이용해 데이터를 읽을 수 있습니다.</li>
-<li>매우 적은 최고풍속구간은 지도와 스케일바에 <b>튀는 색으로 강조</b>되었습니다.<br><br><img src="/2020/08/06/Python-DS-24-custom_colormap/24_ccmap_10.PNG" alt="&quot;연평균 풍속 기준 해안과 산간지방 바람이 약간 강하며, 내륙 평지는 약하다&quot;"><br></li>
+<li>매우 적은 최고풍속구간은 지도와 스케일바에 <b>튀는 색으로 강조</b>되었습니다.<br><br>
+<img src="24_ccmap_10.PNG" alt="&quot;연평균 풍속 기준 해안과 산간지방 바람이 약간 강하며, 내륙 평지는 약하다&quot;"><br></li>
 </ul>
 </li>
 </ul>
@@ -417,7 +469,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/" data-id="cuidC-KP-4NC0zYglOs8lNxj2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/06/Python-DS-24-custom_colormap/" data-id="cuidmrdSU8wNc4MEdONcmljR2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -503,8 +555,9 @@ matplotlib에서 custom colormap을 만들고 적용하는 방법입니다.
 Creating Colormaps in Matplotlib
 
 1. Visual Perception
-Practical Rules for Using Color in Chart",
-        "wordCount": 833
+
+Practical Rules for Using Color in Char",
+        "wordCount": 808
     }
 </script>
 
@@ -601,6 +654,26 @@ Practical Rules for Using Color in Chart",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -675,26 +748,6 @@ Practical Rules for Using Color in Chart",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -228,7 +228,7 @@
 
             
 
-            <p><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_1.png"></p>
+            <p><img src="6_pld_1.png" alt=""></p>
 <ul>
 <li>물을 끓이는 등 상태가 변할 때, 에너지가 흡수되어 온도가 일정하게 유지됩니다.</li>
 <li>위와 같은 그래프에서 평평한 영역을 찾고, 각 구간의 대표점을 추출하겠습니다.</li>
@@ -252,100 +252,136 @@
 <li><b>Visualization</b></li>
 </ol>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/text/usetex.html"><code>r&#39;$ LaTeX_expr $&#39;</code></a>: matplotlib 에서 LaTeX 표현</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/text/usetex.html"><code>r'$ LaTeX_expr $'</code></a>: matplotlib 에서 LaTeX 표현</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.axes.Axes.axhline.html"><code>matplotlib.axes.Axes.axhline</code></a>: 수평선 그리기</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.axes.Axes.axhline.html"><code>matplotlib.axes.Axes.axhline</code></a>: 수평선 그리기</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.axes.Axes.inset_axes.html?highlight=inset_axes#matplotlib.axes.Axes.inset_axes"><code>matplotlib.axes.Axes.inset_axes</code></a>: matplotlib plot에 inset 삽입 </p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.axes.Axes.inset_axes.html?highlight=inset_axes#matplotlib.axes.Axes.inset_axes"><code>matplotlib.axes.Axes.inset_axes</code></a>: matplotlib plot에 inset 삽입</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.axes.Axes.fill_between.html"><code>matplotlib.axes.Axes.fill_between</code></a>: matplotlib plot중 조건에 맞는 구간 칠하기 </p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/api/_as_gen/matplotlib.axes.Axes.fill_between.html"><code>matplotlib.axes.Axes.fill_between</code></a>: matplotlib plot중 조건에 맞는 구간 칠하기</p>
 </li>
-<li><p>아래 글은 요약본이며, 전체 코드는 <a href="6_pld.ipynb">링크를 통해 확인할 수 있습니다</a>.</p>
+<li>
+<p>아래 글은 요약본이며, 전체 코드는 <a href="6_pld.ipynb">링크를 통해 확인할 수 있습니다</a>.</p>
 </li>
 </ul>
-<h3 id="1-Project-Preparation"><a href="#1-Project-Preparation" class="headerlink" title="1. Project Preparation"></a>1. Project Preparation</h3><h4 id="1-1-Import-Libaries"><a href="#1-1-Import-Libaries" class="headerlink" title="1.1. Import Libaries"></a>1.1. Import Libaries</h4><ul>
+<h3 id="1-Project-Preparation">1. Project Preparation</h3>
+<h4 id="1-1-Import-Libaries">1.1. Import Libaries</h4>
+<ul>
 <li>제가 사용한 라이브러리들의 버전을 먼저 확인해보겠습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line"><span class="keyword">import</span> sklearn <span class="keyword">as</span> skl</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;python version: <span class="subst">&#123;sys.version&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;pandas version: <span class="subst">&#123;pd.__version__&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;numpy version: <span class="subst">&#123;np.__version__&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;scipy version: <span class="subst">&#123;sp.__version__&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;sklearn version: <span class="subst">&#123;skl.__version__&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;matplotlib version: <span class="subst">&#123;mpl.__version__&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;seaborn version: <span class="subst">&#123;sns.__version__&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python version: 3.7.4 (default, Aug 13 2019, 20:35:49) </span><br><span class="line">[GCC 7.3.0]</span><br><span class="line">pandas version: 1.0.1</span><br><span class="line">numpy version: 1.17.2</span><br><span class="line">scipy version: 1.3.1</span><br><span class="line">sklearn version: 0.22.2</span><br><span class="line">matplotlib version: 3.1.3</span><br><span class="line">seaborn version: 0.9.0</span><br></pre></td></tr></table></figure></li>
+<li>실행결과:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python version: 3.7.4 (default, Aug 13 2019, 20:35:49) </span><br><span class="line">[GCC 7.3.0]</span><br><span class="line">pandas version: 1.0.1</span><br><span class="line">numpy version: 1.17.2</span><br><span class="line">scipy version: 1.3.1</span><br><span class="line">sklearn version: 0.22.2</span><br><span class="line">matplotlib version: 3.1.3</span><br><span class="line">seaborn version: 0.9.0</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
-<h4 id="1-2-Korean-Font-Settings"><a href="#1-2-Korean-Font-Settings" class="headerlink" title="1.2. Korean Font Settings"></a>1.2. Korean Font Settings</h4><ul>
-<li><a href="https://jehyunlee.github.io/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/">이전 글에서 cell 하나를 복사해서 붙이고 실행합니다.</a><ul>
+<h4 id="1-2-Korean-Font-Settings">1.2. Korean Font Settings</h4>
+<ul>
+<li><a href="https://jehyunlee.github.io/2020/02/13/Python-DS-2-matplotlib_defaults_and_fonts/">이전 글에서 cell 하나를 복사해서 붙이고 실행합니다.</a>
+<ul>
 <li>위 링크에서 <code>system = platform.system()</code>으로 검색하면 나오는 셀입니다.</li>
 <li>Windows와 Linux에 한해서 고민 없이 실행되게 해 두었습니다.</li>
 <li>출력되는 그래프에 한글을 사용하지 않을 것이라면 필요 없습니다.</li>
 </ul>
 </li>
 </ul>
-<h4 id="1-3-Visualization-Settings"><a href="#1-3-Visualization-Settings" class="headerlink" title="1.3. Visualization Settings"></a>1.3. Visualization Settings</h4><ul>
-<li>시각화 전반에 적용할 설정을 세팅합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.style.use(<span class="string">&#x27;seaborn-whitegrid&#x27;</span>)</span><br><span class="line">sns.set_context(<span class="string">&#x27;talk&#x27;</span>)</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=<span class="string">&#x27;NanumGothic&#x27;</span></span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure></li>
+<h4 id="1-3-Visualization-Settings">1.3. Visualization Settings</h4>
+<ul>
+<li>시각화 전반에 적용할 설정을 세팅합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.style.use(<span class="string">&#x27;seaborn-whitegrid&#x27;</span>)</span><br><span class="line">sns.set_context(<span class="string">&#x27;talk&#x27;</span>)</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=<span class="string">&#x27;NanumGothic&#x27;</span></span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="2-Load-Data"><a href="#2-Load-Data" class="headerlink" title="2. Load Data"></a>2. Load Data</h3><h4 id="2-1-데이터-파일-읽어오기"><a href="#2-1-데이터-파일-읽어오기" class="headerlink" title="2.1. 데이터 파일 읽어오기"></a>2.1. 데이터 파일 읽어오기</h4><ul>
+<h3 id="2-Load-Data">2. Load Data</h3>
+<h4 id="2-1-데이터-파일-읽어오기">2.1. 데이터 파일 읽어오기</h4>
+<ul>
 <li><code>pandas</code>를 이용해 <a href="6_pld_data.csv">프로젝트의 데이터</a>를 읽어옵니다.</li>
 <li>본 페이지에 공개된 데이터는 암호화를 위해 가공된 값으로 실제와 다릅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;6_pld_data.csv&#x27;</span>)</span><br><span class="line">df.info()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 490줄짜리 데이터를 읽어왔고, 결측치가 없음을 알 수 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;pandas.core.frame.DataFrame&#x27;</span>&gt;</span><br><span class="line">RangeIndex: 490 entries, 0 to 489</span><br><span class="line">Data columns (total 2 columns):</span><br><span class="line"> <span class="comment">#   Column  Non-Null Count  Dtype  </span></span><br><span class="line">---  ------  --------------  -----  </span><br><span class="line"> 0   X       490 non-null    float64</span><br><span class="line"> 1   Y       490 non-null    float64</span><br><span class="line">dtypes: float64(2)</span><br><span class="line">memory usage: 7.8 KB</span><br></pre></td></tr></table></figure></li>
+<li>실행결과: 490줄짜리 데이터를 읽어왔고, 결측치가 없음을 알 수 있습니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;class <span class="string">&#x27;pandas.core.frame.DataFrame&#x27;</span>&gt;</span><br><span class="line">RangeIndex: 490 entries, 0 to 489</span><br><span class="line">Data columns (total 2 columns):</span><br><span class="line"> <span class="comment">#   Column  Non-Null Count  Dtype  </span></span><br><span class="line">---  ------  --------------  -----  </span><br><span class="line"> 0   X       490 non-null    float64</span><br><span class="line"> 1   Y       490 non-null    float64</span><br><span class="line">dtypes: float64(2)</span><br><span class="line">memory usage: 7.8 KB</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-2-Plot-raw-data"><a href="#2-2-Plot-raw-data" class="headerlink" title="2.2. Plot: raw data"></a>2.2. Plot: raw data</h4><ul>
+<h4 id="2-2-Plot-raw-data">2.2. Plot: raw data</h4>
+<ul>
 <li>데이터 확인을 위해 한번 그려봅니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>,<span class="number">3</span>))</span><br><span class="line">ax.plot(df[<span class="string">&#x27;X&#x27;</span>], df[<span class="string">&#x27;Y&#x27;</span>])</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;X&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Y&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 선명한 plateau도 있고, 단순한 변곡점으로 보이는 곳도 있습니다.</li>
-<li>선명하지 않더라도 꺾이는 지점들은 모두 찾아보겠습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_2.png"></li>
+<li>선명하지 않더라도 꺾이는 지점들은 모두 찾아보겠습니다.<br>
+<img src="6_pld_2.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h3 id="3-Plateau-Detection"><a href="#3-Plateau-Detection" class="headerlink" title="3. Plateau Detection"></a>3. Plateau Detection</h3><ul>
+<h3 id="3-Plateau-Detection">3. Plateau Detection</h3>
+<ul>
 <li>변곡점을 포함한 Plateau는 수학적으로 간결하게 정의됩니다.</li>
 <li>그러나 실제 데이터는 불연속적이고 1차 미분값이 정확히 0이 될 수 없습니다.</li>
-<li>tolerance를 지정하여 0에 가까운 지점들을 찾아야 합니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_3.png"></li>
+<li>tolerance를 지정하여 0에 가까운 지점들을 찾아야 합니다.<br>
+<img src="6_pld_3.png" alt=""></li>
 </ul>
-<h4 id="3-1-1차-2차-3차-도함수-계산"><a href="#3-1-1차-2차-3차-도함수-계산" class="headerlink" title="3.1. 1차, 2차, 3차 도함수 계산"></a>3.1. 1차, 2차, 3차 도함수 계산</h4><ul>
-<li><p>미분함수를 구하고 시각화를 해서 전체적인 범위를 파악합니다.</p>
+<h4 id="3-1-1차-2차-3차-도함수-계산">3.1. 1차, 2차, 3차 도함수 계산</h4>
+<ul>
+<li>
+<p>미분함수를 구하고 시각화를 해서 전체적인 범위를 파악합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">d1 = np.diff(df[<span class="string">&#x27;Y&#x27;</span>])/np.diff(df[<span class="string">&#x27;X&#x27;</span>])       <span class="comment"># 1st derivative</span></span><br><span class="line">d2 = np.diff(d1)/np.diff(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">1</span>])  <span class="comment"># 2nd derivative</span></span><br><span class="line">d3 = np.diff(d2)/np.diff(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">2</span>])  <span class="comment"># 3rd derivative</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Visualization</span></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">3</span>))</span><br><span class="line">ax[<span class="number">0</span>].plot(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">1</span>], d1)</span><br><span class="line">ax[<span class="number">1</span>].plot(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">2</span>], d2)</span><br><span class="line">ax[<span class="number">2</span>].plot(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">3</span>], d3)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&#x27;d1&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&#x27;d2&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_title(<span class="string">&#x27;d3&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_xlabel(<span class="string">&#x27;X&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_xlabel(<span class="string">&#x27;X&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_xlabel(<span class="string">&#x27;X&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: X&#x3D;0 부근의 변동이 커서 다른 값이 잘 보이지 않습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_4.png"></li>
+<li>실행결과: X=0 부근의 변동이 커서 다른 값이 잘 보이지 않습니다.<br>
+<img src="6_pld_4.png" alt=""></li>
 </ul>
 </li>
-<li><p>확대해서 관심 영역을 확인합니다. </p>
+<li>
+<p>확대해서 관심 영역을 확인합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ax[<span class="number">0</span>].set_ylim((-<span class="number">0.15</span>, <span class="number">0.03</span>))</span><br><span class="line">ax[<span class="number">1</span>].set_ylim((-<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax[<span class="number">2</span>].set_ylim((-<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_5.png"></p>
+<p><img src="6_pld_5.png" alt=""></p>
 </li>
 </ul>
-<h4 id="3-2-가로축-변환-X-→-Y"><a href="#3-2-가로축-변환-X-→-Y" class="headerlink" title="3.2. 가로축 변환 (X → Y)"></a>3.2. 가로축 변환 (X → Y)</h4><ul>
-<li><p>그래프 형태가 전반적으로 $$ Y &#x3D; X^{-1} $$ 형태입니다.</p>
+<h4 id="3-2-가로축-변환-X-→-Y">3.2. 가로축 변환 (X → Y)</h4>
+<ul>
+<li>
+<p>그래프 형태가 전반적으로 $$ Y = X^{-1} $$ 형태입니다.</p>
 </li>
-<li><p>좁은 X에 Y가 넓게 분포해 있는데, 이 부분을 자세히 분석할 필요가 있습니다.</p>
+<li>
+<p>좁은 X에 Y가 넓게 분포해 있는데, 이 부분을 자세히 분석할 필요가 있습니다.</p>
 </li>
-<li><p>다행히 그래프가 단조감소하니 가로축을 Y로 설정하는 것만으로 바꿔볼 수 있습니다.</p>
+<li>
+<p>다행히 그래프가 단조감소하니 가로축을 Y로 설정하는 것만으로 바꿔볼 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ax[<span class="number">0</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], d1, lw=<span class="number">1</span>)</span><br><span class="line">ax[<span class="number">1</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], d2, lw=<span class="number">1</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">3</span>], d3, lw=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 관심영역(세로축 ~0)이 잘 보이지 않습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_6.png"></li>
+<li>실행결과: 관심영역(세로축 ~0)이 잘 보이지 않습니다.<br>
+<img src="6_pld_6.png" alt=""></li>
 </ul>
 </li>
-<li><p>세로축 0 부근의 변화가 잘 보이도록 확대합니다.</p>
+<li>
+<p>세로축 0 부근의 변화가 잘 보이도록 확대합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ax[<span class="number">0</span>].set_xlim((<span class="number">0</span>, <span class="number">2</span>))</span><br><span class="line">ax[<span class="number">0</span>].set_ylim((-<span class="number">0.1</span>, <span class="number">0.02</span>))</span><br><span class="line">ax[<span class="number">1</span>].set_ylim((-<span class="number">0.1</span>, <span class="number">0.1</span>))</span><br><span class="line">ax[<span class="number">2</span>].set_ylim((-<span class="number">0.1</span>, <span class="number">0.1</span>))</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 데이터에 노이즈가 상당합니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_7.png"></li>
+<li>실행결과: 데이터에 노이즈가 상당합니다.<br>
+<img src="6_pld_7.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h4 id="3-3-Noise-Reduction"><a href="#3-3-Noise-Reduction" class="headerlink" title="3.3. Noise Reduction"></a>3.3. Noise Reduction</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Window_function">wikipedia: Window function</a><br><a target="_blank" rel="noopener" href="https://scipy-cookbook.readthedocs.io/items/SignalSmooth.html">Numpy smoothing options</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter">Savitzky–Golay filter</a></p>
+<h4 id="3-3-Noise-Reduction">3.3. Noise Reduction</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Window_function">wikipedia: Window function</a><br>
+<a target="_blank" rel="noopener" href="https://scipy-cookbook.readthedocs.io/items/SignalSmooth.html">Numpy smoothing options</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter">Savitzky–Golay filter</a></p>
 </blockquote>
 <ul>
 <li>현재의 데이터로는 미분치의 극값을 구하는 의미가 없습니다.</li>
 <li>수학적인 방식으로 plateau detection을 하려면 그래프가 매끈해야 합니다.</li>
 </ul>
-<h5 id="3-3-1-Algorithms-Test"><a href="#3-3-1-Algorithms-Test" class="headerlink" title="3.3.1. Algorithms Test"></a>3.3.1. Algorithms Test</h5><p><b>(1) Average and Median</b></p>
+<h5 id="3-3-1-Algorithms-Test">3.3.1. Algorithms Test</h5>
+<p><b>(1) Average and Median</b></p>
 <ul>
 <li><code>scipy</code>의 <code>ndimage</code>모듈을 이용합니다.</li>
 <li>signal 외에도 image를 포함한 n-dimensional data에 적용 가능한 기능입니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> ndimage</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">average</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    box = np.ones(box_size)/box_size</span><br><span class="line">    raw_smooth = np.convolve(box, raw, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">median</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    raw_smooth = ndimage.median_filter(raw, box_size)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과(<code>average</code>): box_size가 클수록 노이즈와 함께 다른 데이터도 왜곡됩니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_8.png"> </li>
-<li>실행결과(<code>median</code>): spike noise는 효과적으로 제거하지만 데이터 왜곡이 큽니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_9.png"></li>
+<li>실행결과(<code>average</code>): box_size가 클수록 노이즈와 함께 다른 데이터도 왜곡됩니다.<br>
+<img src="6_pld_8.png" alt=""></li>
+<li>실행결과(<code>median</code>): spike noise는 효과적으로 제거하지만 데이터 왜곡이 큽니다.<br>
+<img src="6_pld_9.png" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -354,107 +390,148 @@
 <li>위 방법은 box 안의 데이터를 모두 동등하게 처리하므로 주변 데이터의 영향이 큽니다.</li>
 <li><code>numpy</code>의 window function을 이용하면 중심부 데이터에 가중치를 줄 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">methods = [<span class="string">&#x27;hanning&#x27;</span>, <span class="string">&#x27;hamming&#x27;</span>, <span class="string">&#x27;bartlett&#x27;</span>, <span class="string">&#x27;blackman&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hanning</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    box = np.hanning(box_size)/np.<span class="built_in">sum</span>(np.hanning(box_size))</span><br><span class="line">    raw_smooth = np.convolve(box, raw, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hamming</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    box = np.hanning(box_size)/np.<span class="built_in">sum</span>(np.hanning(box_size))</span><br><span class="line">    raw_smooth = np.convolve(box, raw, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bartlett</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    box = np.hanning(box_size)/np.<span class="built_in">sum</span>(np.hanning(box_size))</span><br><span class="line">    raw_smooth = np.convolve(box, raw, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">blackman</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    box = np.hanning(box_size)/np.<span class="built_in">sum</span>(np.hanning(box_size))</span><br><span class="line">    raw_smooth = np.convolve(box, raw, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">np_smooth</span>(<span class="params">raw, method, box_size</span>):</span><br><span class="line">    w=<span class="built_in">eval</span>(<span class="string">f&#x27;np.<span class="subst">&#123;method&#125;</span>(box_size)&#x27;</span>)</span><br><span class="line">    raw_smooth = np.convolve(w/w.<span class="built_in">sum</span>(), raw, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> method <span class="keyword">in</span> methods:</span><br><span class="line">    fig, ax = plt.subplots(ncols=<span class="number">1</span>, figsize=(<span class="number">7</span>, <span class="number">3</span>))</span><br><span class="line">    ax.plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], d1, lw=<span class="number">1</span>, c=<span class="string">&#x27;lightgray&#x27;</span>, label=<span class="string">&#x27;raw&#x27;</span>)</span><br><span class="line">    ax.plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], np_smooth(d1, method, <span class="number">5</span>), lw=<span class="number">1</span>, c=<span class="string">&#x27;#9999FF&#x27;</span>, label=<span class="string">f&#x27;<span class="subst">&#123;method&#125;</span> (5)&#x27;</span>)</span><br><span class="line">    ax.plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], np_smooth(d1, method, <span class="number">15</span>), lw=<span class="number">1</span>, c=<span class="string">&#x27;#6666FF&#x27;</span>, label=<span class="string">f&#x27;<span class="subst">&#123;method&#125;</span> (15)&#x27;</span>)</span><br><span class="line">    ax.plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], np_smooth(d1, method, <span class="number">21</span>), lw=<span class="number">1</span>, c=<span class="string">&#x27;#0000FF&#x27;</span>, label=<span class="string">f&#x27;<span class="subst">&#123;method&#125;</span> (21)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    ax.set_xlim((<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">    ax.set_ylim((-<span class="number">0.1</span>, <span class="number">0.01</span>))</span><br><span class="line"></span><br><span class="line">    ax.set_title(<span class="string">f&#x27;d1 (<span class="subst">&#123;method&#125;</span>)&#x27;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">&#x27;Y&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    plt.legend(loc=[<span class="number">1</span>, <span class="number">0.1</span>])</span><br><span class="line">    plt.tight_layout()      </span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과(<code>hanning</code>, <code>hamming</code>, <code>bartlett</code>, <code>blackman</code>)<br>average, median 보다는 낫지만 만족스럽지는 않습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_10_hanning.png"><br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_10_hamming.png"><br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_10_bartlett.png"><br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_10_blackman.png"></li>
+<li>실행결과(<code>hanning</code>, <code>hamming</code>, <code>bartlett</code>, <code>blackman</code>)<br>
+average, median 보다는 낫지만 만족스럽지는 않습니다.<br>
+<img src="6_pld_10_hanning.png" alt=""><br>
+<img src="6_pld_10_hamming.png" alt=""><br>
+<img src="6_pld_10_bartlett.png" alt=""><br>
+<img src="6_pld_10_blackman.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<p><b>(3) Savitzky-Golay filter</b>  </p>
+<p><b>(3) Savitzky-Golay filter</b></p>
 <ul>
 <li><code>Savitzky-Golay</code> filter는 box 내부의 데이터에 polynomial fitting을 적용하는 방식으로 노이즈를 제거합니다.</li>
-<li>convolution operation을 수행할 box 크기와 다항식의 차수를 입력 인자로 넣어줍니다.<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lissage_sg3_anim.gif/400px-Lissage_sg3_anim.gif"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.signal <span class="keyword">import</span> savgol_filter <span class="keyword">as</span> sg</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">savgol</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    raw_smooth = sg(raw, box_size, <span class="number">2</span>, mode=<span class="string">&#x27;nearest&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br></pre></td></tr></table></figure>
+<li>convolution operation을 수행할 box 크기와 다항식의 차수를 입력 인자로 넣어줍니다.<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lissage_sg3_anim.gif/400px-Lissage_sg3_anim.gif" alt=""><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.signal <span class="keyword">import</span> savgol_filter <span class="keyword">as</span> sg</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">savgol</span>(<span class="params">raw, box_size</span>):</span><br><span class="line">    raw_smooth = sg(raw, box_size, <span class="number">2</span>, mode=<span class="string">&#x27;nearest&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> raw_smooth</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과(<code>savgol</code>): noise는 억제되고 signal은 거의 그대로 유지되었습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_10_sg.png"></li>
+<li>실행결과(<code>savgol</code>): noise는 억제되고 signal은 거의 그대로 유지되었습니다.<br>
+<img src="6_pld_10_sg.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h5 id="3-3-2-Savitzky-Golay-filter-application"><a href="#3-3-2-Savitzky-Golay-filter-application" class="headerlink" title="3.3.2. Savitzky-Golay filter application"></a>3.3.2. Savitzky-Golay filter application</h5><ul>
+<h5 id="3-3-2-Savitzky-Golay-filter-application">3.3.2. Savitzky-Golay filter application</h5>
+<ul>
 <li>1차, 2차, 3차 도함수에 savgol filter를 적용합니다.</li>
 <li>원본 데이터를 회색으로, smoothing한 데이터를 푸른 색으로 오버랩했습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Smoothing</span></span><br><span class="line">d1s = savgol(d1, <span class="number">15</span>)    <span class="comment"># smoothing on 1st derivative</span></span><br><span class="line">d2s_0 = np.diff(d1s)/np.diff(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">1</span>])   <span class="comment"># 2nd derivative</span></span><br><span class="line">d2s = savgol(d2s_0, <span class="number">15</span>) <span class="comment"># smoothing on 2nd derivative</span></span><br><span class="line">d3s_0 = np.diff(d2s_0)/np.diff(df[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">2</span>]) <span class="comment"># 3rd derivative</span></span><br><span class="line">d3s = savgol(d3s_0, <span class="number">15</span>) <span class="comment"># smoothing on 3rd derivative</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Visualization</span></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">3</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#- raw data</span></span><br><span class="line">ax[<span class="number">0</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], d1, lw=<span class="number">1</span>, c=<span class="string">&#x27;lightgray&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], d2, lw=<span class="number">1</span>, c=<span class="string">&#x27;lightgray&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">3</span>], d3, lw=<span class="number">1</span>, c=<span class="string">&#x27;lightgray&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#- smooth data</span></span><br><span class="line">ax[<span class="number">0</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], d1s, lw=<span class="number">1</span>)</span><br><span class="line">ax[<span class="number">1</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], d2s, lw=<span class="number">1</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(df[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">3</span>], d3s, lw=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 전반적으로 노이즈가 효과적으로 제거되었지만, d3에서는 여전합니다.<br>savgol filter로 처리하기 곤란할 정도의 노이즈가 있다고 판단됩니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_11.png"></li>
+<li>실행결과: 전반적으로 노이즈가 효과적으로 제거되었지만, d3에서는 여전합니다.<br>
+savgol filter로 처리하기 곤란할 정도의 노이즈가 있다고 판단됩니다.<br>
+<img src="6_pld_11.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h5 id="3-3-3-Data-Quality-Refinement"><a href="#3-3-3-Data-Quality-Refinement" class="headerlink" title="3.3.3. Data Quality Refinement"></a>3.3.3. Data Quality Refinement</h5><ul>
-<li><p>데이터를 정제해봅니다. </p>
+<h5 id="3-3-3-Data-Quality-Refinement">3.3.3. Data Quality Refinement</h5>
+<ul>
+<li>
+<p>데이터를 정제해봅니다.</p>
 </li>
-<li><p>미분값에 노이즈를 유발하는 중복 X 데이터를 제거합니다.  </p>
+<li>
+<p>미분값에 노이즈를 유발하는 중복 X 데이터를 제거합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;data size (raw)=<span class="subst">&#123;df.shape[<span class="number">0</span>]&#125;</span>&#x27;</span>)</span><br><span class="line">df_xu = df.groupby(df[<span class="string">&#x27;X&#x27;</span>]).nth(<span class="number">0</span>).reset_index()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;data size (refined)=<span class="subst">&#123;df_xu.shape[<span class="number">0</span>]&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 기존의 490행이 430행으로 줄어들었습니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data size (raw)=490</span><br><span class="line">data size (refined)=430</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>2차, 3차 도함수에 average와 median을 추가해 데이터를 정제합니다.</p>
+<li>
+<p>2차, 3차 도함수에 average와 median을 추가해 데이터를 정제합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">d1s_0 = np.diff(df_xu[<span class="string">&#x27;Y&#x27;</span>])/np.diff(df_xu[<span class="string">&#x27;X&#x27;</span>])</span><br><span class="line">d1s = savgol(d1s_0, <span class="number">15</span>)</span><br><span class="line">d2s_0 = np.diff(d1s)/np.diff(df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">1</span>])</span><br><span class="line">d2s = median(average(savgol(d2s_0, <span class="number">15</span>), <span class="number">9</span>), <span class="number">3</span>)</span><br><span class="line">d3s_0 = np.diff(d2s_0)/np.diff(df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[:-<span class="number">2</span>])</span><br><span class="line">d3s = median(average(savgol(d3s_0, <span class="number">15</span>), <span class="number">3</span>), <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 노이즈가 만족할만한 수준으로 제거되었습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_12.png"></li>
+<li>실행결과: 노이즈가 만족할만한 수준으로 제거되었습니다.<br>
+<img src="6_pld_12.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h4 id="3-4-Plateau-Detection"><a href="#3-4-Plateau-Detection" class="headerlink" title="3.4. Plateau Detection"></a>3.4. Plateau Detection</h4><ul>
-<li>데이터가 깨끗하게 정제되었으므로 이제 본격적으로 plateau를 찾아봅시다.<br>(이제까지 데이터와 씨름하다 이제서야 데이터에 손을 댄다는 사실에 주목할 필요가 있습니다)</li>
+<h4 id="3-4-Plateau-Detection">3.4. Plateau Detection</h4>
+<ul>
+<li>데이터가 깨끗하게 정제되었으므로 이제 본격적으로 plateau를 찾아봅시다.<br>
+(이제까지 데이터와 씨름하다 이제서야 데이터에 손을 댄다는 사실에 주목할 필요가 있습니다)</li>
 <li>편의상 d1, d2, d3로 표시했던 도함수도 <code>LaTeX</code>를 이용해서 본격적으로 제대로 표시해 봅시다.</li>
-<li>LaTeX 표현을 위해 관련 폰트를 설정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&#x27;cm&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&#x27;it&#x27;</span>  </span><br><span class="line">font_title = &#123;<span class="string">&#x27;fontsize&#x27;</span>: <span class="number">30</span>,</span><br><span class="line">              <span class="string">&#x27;fontweight&#x27;</span> : plt.rcParams[<span class="string">&#x27;axes.titleweight&#x27;</span>],</span><br><span class="line">              <span class="string">&#x27;verticalalignment&#x27;</span>: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;horizontalalignment&#x27;</span>: <span class="string">&#x27;center&#x27;</span>&#125;</span><br></pre></td></tr></table></figure></li>
+<li>LaTeX 표현을 위해 관련 폰트를 설정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&#x27;cm&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&#x27;it&#x27;</span>  </span><br><span class="line">font_title = &#123;<span class="string">&#x27;fontsize&#x27;</span>: <span class="number">30</span>,</span><br><span class="line">              <span class="string">&#x27;fontweight&#x27;</span> : plt.rcParams[<span class="string">&#x27;axes.titleweight&#x27;</span>],</span><br><span class="line">              <span class="string">&#x27;verticalalignment&#x27;</span>: <span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;horizontalalignment&#x27;</span>: <span class="string">&#x27;center&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h5 id="3-4-1-Data-Screening"><a href="#3-4-1-Data-Screening" class="headerlink" title="3.4.1. Data Screening"></a>3.4.1. Data Screening</h5><ul>
-<li><p>data로부터 plateau를 걸러내기 위한 tolerance도 설정합니다.</p>
+<h5 id="3-4-1-Data-Screening">3.4.1. Data Screening</h5>
+<ul>
+<li>
+<p>data로부터 plateau를 걸러내기 위한 tolerance도 설정합니다.</p>
 </li>
-<li><p>physical meaning에 근거한 tolerance를 잡는 것이 바람직합니다.</p>
+<li>
+<p>physical meaning에 근거한 tolerance를 잡는 것이 바람직합니다.</p>
 </li>
-<li><p>여기서는 눈에 보이는 plateau를 모두 포함하는 tolerances를 선택했습니다.</p>
+<li>
+<p>여기서는 눈에 보이는 plateau를 모두 포함하는 tolerances를 선택했습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d1tol=<span class="number">0.02</span></span><br><span class="line">d2tol=<span class="number">1e-4</span></span><br><span class="line">d3tol=<span class="number">5e-6</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>tolerance를 graph 상에 오버랩하여 내가 적절한 수치를 선택했는지 확인하며 진행합니다.</p>
+<li>
+<p>tolerance를 graph 상에 오버랩하여 내가 적절한 수치를 선택했는지 확인하며 진행합니다.</p>
 </li>
-<li><p>선택한 tolerance에 수평선을 긋고, 그래프가 tolerance를 만족하는 부분을 색상으로 표시합니다.</p>
+<li>
+<p>선택한 tolerance에 수평선을 긋고, 그래프가 tolerance를 만족하는 부분을 색상으로 표시합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. Visualization: Line</span></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">3</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#- 1st derivative</span></span><br><span class="line">ax[<span class="number">0</span>].plot(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], d1s, lw=<span class="number">1</span>, zorder=<span class="number">2</span>)</span><br><span class="line">ax[<span class="number">0</span>].axhline(y=d1tol, c=<span class="string">&#x27;orange&#x27;</span>)</span><br><span class="line">ax[<span class="number">0</span>].axhline(y=-d1tol, c=<span class="string">&#x27;orange&#x27;</span>)</span><br><span class="line">ax[<span class="number">0</span>].fill_between(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], -d1tol, d1tol, </span><br><span class="line">                   where=<span class="built_in">abs</span>(d1s) &lt;= d1tol,</span><br><span class="line">                   facecolor=<span class="string">&#x27;yellow&#x27;</span>, interpolate=<span class="literal">True</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax[<span class="number">1</span>].fill_between(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], -d1tol, d1tol, </span><br><span class="line">                   where=<span class="built_in">abs</span>(d1s) &lt;= d1tol,</span><br><span class="line">                   facecolor=<span class="string">&#x27;yellow&#x27;</span>, interpolate=<span class="literal">True</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax[<span class="number">2</span>].fill_between(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], -d1tol, d1tol, </span><br><span class="line">                   where=<span class="built_in">abs</span>(d1s) &lt;= d1tol,</span><br><span class="line">                   facecolor=<span class="string">&#x27;yellow&#x27;</span>, interpolate=<span class="literal">True</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#- 2nd derivative</span></span><br><span class="line">ax[<span class="number">1</span>].plot(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], d2s, lw=<span class="number">1</span>, zorder=<span class="number">2</span>)</span><br><span class="line">ax[<span class="number">1</span>].axhline(y=-d2tol, c=<span class="string">&#x27;cyan&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].axhline(y=d2tol, c=<span class="string">&#x27;cyan&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].fill_between(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], -d2tol, d2tol, </span><br><span class="line">                   where=<span class="built_in">abs</span>(d2s) &lt;= d2tol,</span><br><span class="line">                   facecolor=<span class="string">&#x27;cyan&#x27;</span>, interpolate=<span class="literal">True</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax[<span class="number">2</span>].fill_between(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], -d2tol, d2tol, </span><br><span class="line">                   where=<span class="built_in">abs</span>(d2s) &lt;= d2tol,</span><br><span class="line">                   facecolor=<span class="string">&#x27;cyan&#x27;</span>, interpolate=<span class="literal">True</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#- 3rd derivative</span></span><br><span class="line">ax[<span class="number">2</span>].plot(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">3</span>], d3s, lw=<span class="number">1</span>, zorder=<span class="number">2</span>)</span><br><span class="line">ax[<span class="number">2</span>].axhline(y=d3tol, c=<span class="string">&#x27;magenta&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].fill_between(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">3</span>], -<span class="number">100</span>, d3tol, </span><br><span class="line">                   where=d3s &lt;= d3tol,</span><br><span class="line">                   facecolor=<span class="string">&#x27;magenta&#x27;</span>, interpolate=<span class="literal">True</span>, alpha=<span class="number">0.3</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 1차, 2차, 3차 도함수의 선택 영역이 각기 yellow, cyan, magenta로 표현되었습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_13.png"></li>
+<li>실행결과: 1차, 2차, 3차 도함수의 선택 영역이 각기 yellow, cyan, magenta로 표현되었습니다.<br>
+<img src="6_pld_13.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h5 id="3-4-2-Plateau-Detection"><a href="#3-4-2-Plateau-Detection" class="headerlink" title="3.4.2. Plateau Detection"></a>3.4.2. Plateau Detection</h5><ul>
+<h5 id="3-4-2-Plateau-Detection">3.4.2. Plateau Detection</h5>
+<ul>
 <li>전체 곡선 중 위에서 선택한 데이터를 분리합니다.</li>
 <li>python의 <code>list comprehension</code> 기능을 사용하면 편리합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen1 = np.where(<span class="built_in">abs</span>(d1s) &lt; d1tol)[<span class="number">0</span>]</span><br><span class="line">screen2 = np.where(<span class="built_in">abs</span>(d2s) &lt; d2tol)[<span class="number">0</span>]</span><br><span class="line">screen3 = np.where(d3s &lt;= d3tol)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">plateau = np.array([i <span class="keyword">for</span> i <span class="keyword">in</span> screen1 <span class="keyword">if</span> i <span class="keyword">in</span> screen2 <span class="keyword">and</span> i <span class="keyword">in</span> screen3])</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: plateau 영역이 1차, 2차, 3차 도함수상에 표시되었습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_14.png"></li>
+<li>실행결과: plateau 영역이 1차, 2차, 3차 도함수상에 표시되었습니다.<br>
+<img src="6_pld_14.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h5 id="3-4-3-Clustering"><a href="#3-4-3-Clustering" class="headerlink" title="3.4.3. Clustering"></a>3.4.3. Clustering</h5><ul>
-<li><p>plateau를 찾아내기는 했지만, 변곡점을 하나하나 찾기 위해서는 plateau를 구간별로 분리해야 합니다.</p>
+<h5 id="3-4-3-Clustering">3.4.3. Clustering</h5>
+<ul>
+<li>
+<p>plateau를 찾아내기는 했지만, 변곡점을 하나하나 찾기 위해서는 plateau를 구간별로 분리해야 합니다.</p>
 </li>
-<li><p>unsupervised learning 중 clustering 기법이 사용될 수 있으며,<br>데이터 사이의 거리가 아닌 클러스터 사이의 거리를 기준으로 나누는 <code>DBSCAN</code>기법이 적절합니다.</p>
+<li>
+<p>unsupervised learning 중 clustering 기법이 사용될 수 있으며,<br>
+데이터 사이의 거리가 아닌 클러스터 사이의 거리를 기준으로 나누는 <code>DBSCAN</code>기법이 적절합니다.</p>
 </li>
-<li><p>일정 거리(<code>eps</code>) 안에 특정 개수(<code>min_samples</code>)이상의 데이터가 있으면 하나의 클러스터로 인식합니다.</p>
+<li>
+<p>일정 거리(<code>eps</code>) 안에 특정 개수(<code>min_samples</code>)이상의 데이터가 있으면 하나의 클러스터로 인식합니다.</p>
 </li>
-<li><p>각 클러스터마다 1차 도함수의 절대값이 가장 작은 지점을 대표점으로 추출합니다.</p>
+<li>
+<p>각 클러스터마다 1차 도함수의 절대값이 가장 작은 지점을 대표점으로 추출합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> DBSCAN</span><br><span class="line"></span><br><span class="line">eps=<span class="number">3e-2</span></span><br><span class="line">min_samples=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 clustering하기 좋은 형태로 변형합니다.</span></span><br><span class="line">pl = np.array(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[plateau]).reshape((-<span class="number">1</span>,<span class="number">1</span>))  </span><br><span class="line"></span><br><span class="line"><span class="comment"># DBSCAN clustering을 수행합니다. </span></span><br><span class="line">clusters = DBSCAN(eps=eps, min_samples=min_samples, n_jobs=-<span class="number">1</span>).fit(pl)</span><br><span class="line">ncluster = <span class="built_in">len</span>(np.unique(clusters.labels_))</span><br><span class="line"></span><br><span class="line"><span class="comment"># cluster representation point 추출</span></span><br><span class="line">phase_trs = []</span><br><span class="line"><span class="keyword">for</span> cluster <span class="keyword">in</span> <span class="built_in">range</span>(ncluster):</span><br><span class="line">    cl_idx = plateau[clusters.labels_ == cluster][<span class="number">0</span>]</span><br><span class="line">    phase_tr = cl_idx + <span class="built_in">abs</span>(d1s[plateau][clusters.labels_ == cluster]).argmin()</span><br><span class="line">    phase_trs.append(phase_tr)</span><br><span class="line"></span><br><span class="line">phase_trs = np.array(phase_trs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Visualization: clusters</span></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">3</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].plot(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">1</span>], d1s, lw=<span class="number">1</span>, zorder=<span class="number">2</span>)</span><br><span class="line">ax[<span class="number">1</span>].plot(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">2</span>], d2s, lw=<span class="number">1</span>, zorder=<span class="number">2</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[:-<span class="number">3</span>], d3s, lw=<span class="number">1</span>, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cluster <span class="keyword">in</span> <span class="built_in">range</span>(ncluster):</span><br><span class="line">    cl_idx = plateau[clusters.labels_ == cluster]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># clusters</span></span><br><span class="line">    ax[<span class="number">0</span>].scatter(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[cl_idx], d1s[cl_idx], s=<span class="number">30</span>)</span><br><span class="line">    ax[<span class="number">1</span>].scatter(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[cl_idx], d2s[cl_idx], s=<span class="number">30</span>)</span><br><span class="line">    ax[<span class="number">2</span>].scatter(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[cl_idx], d3s[cl_idx], s=<span class="number">30</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># phase transition points</span></span><br><span class="line">    ph_idx = phase_trs[cluster]</span><br><span class="line">    ax[<span class="number">0</span>].scatter(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[ph_idx], d1s[ph_idx], s=<span class="number">30</span>, c=<span class="string">&#x27;w&#x27;</span>, ec=<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">    ax[<span class="number">1</span>].scatter(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[ph_idx], d2s[ph_idx], s=<span class="number">30</span>, c=<span class="string">&#x27;w&#x27;</span>, ec=<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">    ax[<span class="number">2</span>].scatter(df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[ph_idx], d3s[ph_idx], s=<span class="number">30</span>, c=<span class="string">&#x27;w&#x27;</span>, ec=<span class="string">&#x27;k&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: plateau 영역이 여러 색상으로, 대표점이 하얀 점으로 표시되었습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_15.png"></li>
+<li>실행결과: plateau 영역이 여러 색상으로, 대표점이 하얀 점으로 표시되었습니다.<br>
+<img src="6_pld_15.png" alt=""></li>
 </ul>
 </li>
-<li><p>마지막으로, <code>LaTeX</code>를 이용해서 title과 label을 설정합니다.</p>
+<li>
+<p>마지막으로, <code>LaTeX</code>를 이용해서 title과 label을 설정합니다.</p>
 </li>
-<li><p>matplotlib의 text 입력 부분에 <code>&#39;&#39;</code> 대신 <code>r&#39;$ $&#39;</code>를 넣고 속에 <code>LaTeX</code> 문법을 써주면 됩니다.</p>
+<li>
+<p>matplotlib의 text 입력 부분에 <code>''</code> 대신 <code>r'$ $'</code>를 넣고 속에 <code>LaTeX</code> 문법을 써주면 됩니다.</p>
 </li>
-<li><p>간단한 수식 외에도 화학식 등을 그래프상에 표기할 수 있습니다.</p>
+<li>
+<p>간단한 수식 외에도 화학식 등을 그래프상에 표기할 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">r&#x27;$ \mathit&#123;\frac&#123;dY&#125;&#123;dX&#125;&#125; $&#x27;</span>, fontdict=font_title, pad=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">r&#x27;$ \mathit&#123;\frac&#123;d^2Y&#125;&#123;dX^2&#125;&#125; $&#x27;</span>, fontdict=font_title, pad=<span class="number">30</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_title(<span class="string">r&#x27;$ \mathit&#123;\frac&#123;d^3Y&#125;&#123;dX^3&#125;&#125; $&#x27;</span>, fontdict=font_title, pad=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_xlabel(<span class="string">r&#x27;$ Y $&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_xlabel(<span class="string">r&#x27;$ Y $&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_xlabel(<span class="string">r&#x27;$ Y $&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_16.png"></p>
+<p><img src="6_pld_16.png" alt=""></p>
 </li>
 </ul>
-<h4 id="3-5-Summary"><a href="#3-5-Summary" class="headerlink" title="3.5. Summary"></a>3.5. Summary</h4><h5 id="3-5-1-Visualization"><a href="#3-5-1-Visualization" class="headerlink" title="3.5.1. Visualization"></a>3.5.1. Visualization</h5><ul>
+<h4 id="3-5-Summary">3.5. Summary</h4>
+<h5 id="3-5-1-Visualization">3.5.1. Visualization</h5>
+<ul>
 <li>본 프로젝트의 목적인 $$ X-Y $$ plot 상 plateau detection을 표현하겠습니다.</li>
 <li>그래프의 일부 부분을 확대해서 원 그래프 안에 넣기도 하는데, 이를 보통 inset이라고 표현합니다.</li>
 <li>matplotlib에서는 <code>inset_axis</code>를 이용해 inset을 삽입할 수 있습니다.</li>
 <li>line과 scatter 등 그래프를 겹쳐 그릴 때 어떤 그래프가 위에 오게 할 지는 <code>zorder</code>로 결정합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mpl_toolkits.axes_grid1.inset_locator <span class="keyword">import</span> inset_axes</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>,<span class="number">5</span>))</span><br><span class="line">axin = inset_axes(ax, width=<span class="number">1.8</span>, height=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">ax.plot(df_xu[<span class="string">&#x27;X&#x27;</span>], df_xu[<span class="string">&#x27;Y&#x27;</span>], c=<span class="string">&#x27;gray&#x27;</span>, zorder=<span class="number">1</span>)</span><br><span class="line">axin.plot(df_xu[<span class="string">&#x27;X&#x27;</span>], df_xu[<span class="string">&#x27;Y&#x27;</span>], c=<span class="string">&#x27;gray&#x27;</span>, zorder=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cluster <span class="keyword">in</span> <span class="built_in">range</span>(ncluster):</span><br><span class="line">    <span class="comment"># clusters</span></span><br><span class="line">    cl_idx = plateau[clusters.labels_ == cluster]</span><br><span class="line">    ax.scatter(df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[cl_idx], df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[cl_idx], s=<span class="number">50</span>, c=<span class="string">f&#x27;C<span class="subst">&#123;cluster&#125;</span>&#x27;</span>, alpha=<span class="number">0.3</span>, zorder=<span class="number">2</span>)</span><br><span class="line">    axin.scatter(df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[cl_idx], df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[cl_idx], s=<span class="number">50</span>, alpha=<span class="number">0.3</span>, zorder=<span class="number">2</span>)</span><br><span class="line">  </span><br><span class="line">    <span class="comment"># phase transition points</span></span><br><span class="line">    ph_idx = phase_trs[cluster]</span><br><span class="line">    ax.scatter(df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[ph_idx], df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[ph_idx], s=<span class="number">50</span>, c=<span class="string">&#x27;w&#x27;</span>, ec=<span class="string">&#x27;k&#x27;</span>, zorder=<span class="number">2</span>)</span><br><span class="line">    axin.scatter(df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[ph_idx], df_xu[<span class="string">&#x27;Y&#x27;</span>].iloc[ph_idx], s=<span class="number">50</span>, c=<span class="string">&#x27;w&#x27;</span>, ec=<span class="string">&#x27;k&#x27;</span>, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">ax.set_xlim((-<span class="number">10</span>, <span class="number">400</span>))    </span><br><span class="line">ax.set_ylim((<span class="number">0</span>, <span class="number">2.5</span>))    </span><br><span class="line">ax.set_xlabel(<span class="string">r&#x27;$ X $&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">r&#x27;$ Y $&#x27;</span>, rotation=<span class="number">0</span>, labelpad=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">axin.set_xlim((<span class="number">0</span>, <span class="number">70</span>))    </span><br><span class="line">axin.set_ylim((<span class="number">1</span>, <span class="number">2</span>))  </span><br></pre></td></tr></table></figure>
-<img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_17.png"></li>
+<img src="6_pld_17.png" alt=""></li>
 </ul>
-<h5 id="3-5-2-Summary-to-csv"><a href="#3-5-2-Summary-to-csv" class="headerlink" title="3.5.2. Summary to .csv"></a>3.5.2. Summary to .csv</h5><ul>
+<h5 id="3-5-2-Summary-to-csv">3.5.2. Summary to .csv</h5>
+<ul>
 <li>추출한 cluster의 대표점들을 .csv 파일로 출력합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;trX&#x27;</span>: df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[phase_trs], </span><br><span class="line">     <span class="string">&#x27;trY&#x27;</span>: df_xu[<span class="string">&#x27;X&#x27;</span>].iloc[phase_trs]&#125;</span><br><span class="line">summary = pd.DataFrame(data = d).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">summary.to_csv(<span class="string">&#x27;6_pld_summary.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과: 지정한 파일 이름으로 저장되었습니다.<br><img src="/2020/03/20/Python-DS-6-plateau_detection/6_pld_18.png"></li>
+<li>실행결과: 지정한 파일 이름으로 저장되었습니다.<br>
+<img src="6_pld_18.png" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -475,7 +552,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/03/20/Python-DS-6-plateau_detection/" data-id="cuidWUJZ2ctJE4OxwoEmDDIzl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/03/20/Python-DS-6-plateau_detection/" data-id="cuidcgF8y_5sHQXkshpFaTCFu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -565,7 +642,7 @@ Noise Reduction
 
 scipy.ndimage: signal averaging, median
 np.hanning, n",
-        "wordCount": 3228
+        "wordCount": 3128
     }
 </script>
 
@@ -662,6 +739,26 @@ np.hanning, n",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -736,26 +833,6 @@ np.hanning, n",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="gis,qgis,object minimum bounding box,minimum oriented rectangle" />
     
-    <meta name="description" content="QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.  References  QGIS  1. shapefile 읽기 QGIS에서 shapefile을 읽어옵니다. 건물 형상이 반영되어 곳곳이 울퉁불퉁합니다">
+    <meta name="description" content="QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.  References  QGIS  1. shapefile 읽기  QGIS에서 shapefile을 읽어옵니다. 건물 형상이 반영되어 곳곳이 울퉁불퉁합니">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Minimum Oriented Rectangle">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.  References  QGIS  1. shapefile 읽기 QGIS에서 shapefile을 읽어옵니다. 건물 형상이 반영되어 곳곳이 울퉁불퉁합니다">
+<meta property="og:description" content="QGIS에서 최소 경계 도형(minimum oriented rectangle)을 생성하고 중심점을 추가하여 csv로 출력하는 방법을 정리합니다. 사용한 QGIS의 버전은 3.10.9-A Coruña 입니다.  References  QGIS  1. shapefile 읽기  QGIS에서 shapefile을 읽어옵니다. 건물 형상이 반영되어 곳곳이 울퉁불퉁합니">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-QGIS/2_ombb_0.png">
 <meta property="article:published_time" content="2020-09-13T22:23:00.000Z">
@@ -237,62 +237,90 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://qgis.org/ko/site/">QGIS</a></p>
 </blockquote>
-<h3 id="1-shapefile-읽기"><a href="#1-shapefile-읽기" class="headerlink" title="1. shapefile 읽기"></a>1. shapefile 읽기</h3><ul>
+<h3 id="1-shapefile-읽기">1. shapefile 읽기</h3>
+<ul>
 <li>QGIS에서 <b>shapefile</b>을 읽어옵니다.</li>
-<li>건물 형상이 반영되어 곳곳이 울퉁불퉁합니다.<br><br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_1.png"><br></li>
+<li>건물 형상이 반영되어 곳곳이 울퉁불퉁합니다.<br><br>
+<img src="2_ombb_1.png" alt=""><br></li>
 </ul>
-<h3 id="2-대상-도형-선택"><a href="#2-대상-도형-선택" class="headerlink" title="2. 대상 도형 선택"></a>2. 대상 도형 선택</h3><ul>
+<h3 id="2-대상-도형-선택">2. 대상 도형 선택</h3>
+<ul>
 <li>형상을 단순화 할 <b>대상들을 선택</b>합니다.</li>
-<li>전체 도형을 대상으로 할 것이므로 전체를 선택합니다.<br><br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_2.png"><br></li>
+<li>전체 도형을 대상으로 할 것이므로 전체를 선택합니다.<br><br>
+<img src="2_ombb_2.png" alt=""><br></li>
 </ul>
-<h3 id="3-최소경계도형-옵션-선택"><a href="#3-최소경계도형-옵션-선택" class="headerlink" title="3. 최소경계도형 옵션 선택"></a>3. 최소경계도형 옵션 선택</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.qgis.org/2.18/en/docs/user_manual/processing_algs/qgis/vector_general_tools.html#id73">QGIS: Oriented minimum bounding box</a><br><a target="_blank" rel="noopener" href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#minimum-bounding-geometry">QGIS: 최소 경계 도형</a></p>
+<h3 id="3-최소경계도형-옵션-선택">3. 최소경계도형 옵션 선택</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.qgis.org/2.18/en/docs/user_manual/processing_algs/qgis/vector_general_tools.html#id73">QGIS: Oriented minimum bounding box</a><br>
+<a target="_blank" rel="noopener" href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#minimum-bounding-geometry">QGIS: 최소 경계 도형</a></p>
 </blockquote>
 <ul>
-<li><p><b>공간 처리<code>Processing</code> &gt; 툴박스<code>Toolbox</code> &gt; 최소 경계 도형<code>Minimum Bounding Geometry</code></b>을 실행합니다.<br><br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_3.png"><br></p>
+<li>
+<p><b>공간 처리<code>Processing</code> &gt; 툴박스<code>Toolbox</code> &gt; 최소 경계 도형<code>Minimum Bounding Geometry</code></b>을 실행합니다.<br><br>
+<img src="2_ombb_3.png" alt=""><br></p>
 </li>
-<li><p><b>[선택한 객체만]</b>을 선택합니다.</p>
+<li>
+<p><b>[선택한 객체만]</b>을 선택합니다.</p>
 </li>
-<li><p><b>[필드]</b>에서 개체식별자를 선택합니다.</p>
+<li>
+<p><b>[필드]</b>에서 개체식별자를 선택합니다.</p>
 <ul>
 <li>개별 건물을 구분하는 <code>BD_MGT_SN</code>을 선택합니다.</li>
 <li>선택이 되지 않을 경우 전체를 뭉뚱그리는 도형이 생성됩니다.</li>
 </ul>
 </li>
-<li><p><b>[도형 유형]</b>을 선택합니다.<br><br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_6.png"><br></p>
+<li>
+<p><b>[도형 유형]</b>을 선택합니다.<br><br>
+<img src="2_ombb_6.png" alt=""><br></p>
 </li>
-<li><p><b>[실행]</b>을 선택하여 최소경계도형을 생성합니다.<br></p>
+<li>
+<p><b>[실행]</b>을 선택하여 최소경계도형을 생성합니다.<br></p>
 </li>
 </ul>
-<p><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_8.png"><br></p>
-<h3 id="4-최소경계도형-중심점-추출"><a href="#4-최소경계도형-중심점-추출" class="headerlink" title="4. 최소경계도형 중심점 추출"></a>4. 최소경계도형 중심점 추출</h3><blockquote>
+<p><img src="2_ombb_8.png" alt=""><br></p>
+<h3 id="4-최소경계도형-중심점-추출">4. 최소경계도형 중심점 추출</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#centroids">QGIS: 중심</a></p>
 </blockquote>
 <ul>
-<li><p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 중심점<code>Polygon Centroid</code></b>을 실행합니다.</p>
+<li>
+<p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 중심점<code>Polygon Centroid</code></b>을 실행합니다.</p>
 </li>
-<li><p><b>[각각의 파트별로 중심점 생성]</b>을 체크합니다.<br><br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_4.png"><br></p>
+<li>
+<p><b>[각각의 파트별로 중심점 생성]</b>을 체크합니다.<br><br>
+<img src="2_ombb_4.png" alt=""><br></p>
 </li>
-<li><p><b>[실행]</b>을 선택하여 최소경계도형에서 중심점을 추출합니다.<br></p>
+<li>
+<p><b>[실행]</b>을 선택하여 최소경계도형에서 중심점을 추출합니다.<br></p>
 </li>
 </ul>
-<h3 id="5-최소경계도형-중심점-속성-추가"><a href="#5-최소경계도형-중심점-속성-추가" class="headerlink" title="5. 최소경계도형 + 중심점 속성 추가"></a>5. 최소경계도형 + 중심점 속성 추가</h3><blockquote>
+<h3 id="5-최소경계도형-중심점-속성-추가">5. 최소경계도형 + 중심점 속성 추가</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://docs.qgis.org/3.10/ko/docs/user_manual/processing_algs/qgis/vectorgeometry.html#add-geometry-attributes">QGIS: 도형 속성 추가</a></p>
 </blockquote>
 <ul>
-<li><p>활용을 위해 최소경계도형에 중심점을 추가해야 합니다.</p>
+<li>
+<p>활용을 위해 최소경계도형에 중심점을 추가해야 합니다.</p>
 </li>
-<li><p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 도형 속성 추가<code>Expand/Add Geometry</code></b>를 실행합니다.<br><br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_5.png"><br></p>
+<li>
+<p><b>벡터<code>Vector</code> &gt; 도형 도구<code>Geometry Tools</code> &gt; 도형 속성 추가<code>Expand/Add Geometry</code></b>를 실행합니다.<br><br>
+<img src="2_ombb_5.png" alt=""><br></p>
 </li>
-<li><p>중심점 좌표가 <code>xcoord</code>, <code>ycoord</code>로 붙어 있습니다.</p>
+<li>
+<p>중심점 좌표가 <code>xcoord</code>, <code>ycoord</code>로 붙어 있습니다.</p>
 </li>
 </ul>
-<h3 id="6-파일로-저장"><a href="#6-파일로-저장" class="headerlink" title="6. 파일로 저장"></a>6. 파일로 저장</h3><ul>
-<li><p><b>레이어<code>Layer</code> &gt; 다른 이름으로 저장<code>Save As...</code><b>에서 저장합니다.<br><img src="/2020/09/14/GIS-QGIS-2-OMBB/2_ombb_7.png"><br></p>
+<h3 id="6-파일로-저장">6. 파일로 저장</h3>
+<ul>
+<li>
+<p><b>레이어<code>Layer</code> &gt; 다른 이름으로 저장<code>Save As...</code><b>에서 저장합니다.<br>
+<img src="2_ombb_7.png" alt=""><br></p>
 </li>
-<li><p><b>shapefile : <code>ESRI shapefile</code></b></p>
+<li>
+<p><b>shapefile : <code>ESRI shapefile</code></b></p>
 </li>
-<li><p><b>csvfile : <code>쉼표로 구분된 값 [CSV]</code></b></p>
+<li>
+<p><b>csvfile : <code>쉼표로 구분된 값 [CSV]</code></b></p>
 </li>
 </ul>
 
@@ -312,7 +340,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/" data-id="cuidCrmLFCzgDbTtnOUbBTdB9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-QGIS-2-OMBB/" data-id="cuidkjmtksEUWxZzH9wLCTh1D" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -399,9 +427,10 @@ References
 QGIS
 
 1. shapefile 읽기
+
 QGIS에서 shapefile을 읽어옵니다.
-건물 형상이 반영되어 곳곳이 울퉁불퉁합니다",
-        "wordCount": 198
+건물 형상이 반영되어 곳곳이 울퉁불퉁합니",
+        "wordCount": 170
     }
 </script>
 
@@ -498,6 +527,26 @@ QGIS에서 shapefile을 읽어옵니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -572,26 +621,6 @@ QGIS에서 shapefile을 읽어옵니다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

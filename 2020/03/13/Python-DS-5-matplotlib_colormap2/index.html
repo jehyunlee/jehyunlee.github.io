@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,color,colormap" />
     
-    <meta name="description" content="지난 글에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.  이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.  본 글은 공식 홈페이지의 번역과 요약을 토대">
+    <meta name="description" content="지난 글에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.   이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.   본 글은 공식 홈페이지의 번역과 요약을">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib Colormap (2)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="지난 글에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.  이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.  본 글은 공식 홈페이지의 번역과 요약을 토대">
+<meta property="og:description" content="지난 글에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.   이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.   본 글은 공식 홈페이지의 번역과 요약을">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/5_cmap2_4.png">
 <meta property="article:published_time" content="2020-03-13T05:47:00.000Z">
@@ -231,133 +231,183 @@
             
 
             <ul>
-<li><p><a href="https://jehyunlee.github.io/2020/03/01/Python-DS-4-matplotlib_colormap/">지난 글</a>에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.</p>
+<li>
+<p><a href="https://jehyunlee.github.io/2020/03/01/Python-DS-4-matplotlib_colormap/">지난 글</a>에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.</p>
 </li>
-<li><p>이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.</p>
+<li>
+<p>이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.</p>
 </li>
-<li><p>본 글은 공식 홈페이지의 번역과 요약을 토대로 작성되었습니다.</p>
+<li>
+<p>본 글은 공식 홈페이지의 번역과 요약을 토대로 작성되었습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="built_in">print</span>(mpl.__version__)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행결과: 버전은 3.1.3. 기준입니다.</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;3.1.3&#x27;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;3.1.3&#x27;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <p><b> References </b></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py">Matplotlib 3.1.3 (Usage Guide)</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py">Matplotlib 3.1.3 (Usage Guide)</a></p>
 </blockquote>
-<h3 id="2-Colormap-선정"><a href="#2-Colormap-선정" class="headerlink" title="2. Colormap 선정"></a>2. Colormap 선정</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#sphx-glr-tutorials-colors-colormaps-py">Choosing Colormaps in Matplotlib</a><br><a target="_blank" rel="noopener" href="https://jiffyclub.github.io/palettable/">Palettable</a><br><a target="_blank" rel="noopener" href="https://colorcet.holoviz.org/">Colorcet</a></p>
+<h3 id="2-Colormap-선정">2. Colormap 선정</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#sphx-glr-tutorials-colors-colormaps-py">Choosing Colormaps in Matplotlib</a><br>
+<a target="_blank" rel="noopener" href="https://jiffyclub.github.io/palettable/">Palettable</a><br>
+<a target="_blank" rel="noopener" href="https://colorcet.holoviz.org/">Colorcet</a></p>
 </blockquote>
 <ul>
 <li>Matplotlib은 자체적으로 <a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#sphx-glr-tutorials-colors-colormaps-py">상당히 많은 colormap</a>을 제공하고 있습니다.</li>
 <li>그러나 언제 어떤 colormap을 사용할지 선택하는 것은 별개의 문제입니다.</li>
 <li>데이터를 목적에 맞게 전달해야 하고, 아름다워야 하고, 때로는 흑백 버전에서도 구분되어야 합니다.</li>
 </ul>
-<h4 id="2-1-Overview"><a href="#2-1-Overview" class="headerlink" title="2.1. Overview"></a>2.1. Overview</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="http://ccom.unh.edu/sites/default/files/publications/Ware_1988_CGA_Color_sequences_univariate_maps.pdf">Color Sequences for Univariate Maps: Theory, Experiments, and Principles</a><br><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/480803">A rule-based tool for assisting colormap selection</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELAB, Wikipedia</a></p>
+<h4 id="2-1-Overview">2.1. Overview</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://ccom.unh.edu/sites/default/files/publications/Ware_1988_CGA_Color_sequences_univariate_maps.pdf">Color Sequences for Univariate Maps: Theory, Experiments, and Principles</a><br>
+<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/480803">A rule-based tool for assisting colormap selection</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELAB, Wikipedia</a></p>
 </blockquote>
 <ul>
-<li>colormap 선정에 앞서 다음 사항을 고려해야 합니다.<ol>
+<li>
+<p>colormap 선정에 앞서 다음 사항을 고려해야 합니다.</p>
+<ol>
 <li><b>표현의 대상:</b> 데이터의 형태(form)인지, 아니면 수치(metric)인지.</li>
 <li><b>데이터에 대한 지식:</b> 강조해야 할 특정 값이 있는지?</li>
 <li><b>직관성:</b> 데이터를 직관적으로 전달하는 색상이 있는지?</li>
-<li><b>보편성:</b> 해당 분야에서 보편적으로 의미를 가지고 통용되는 색상이 있는지?</li>
+<li><b>보편성:</b> 해당 분야에서 보편적으로 의미를 가지고 통용되는 색상이 있는지?<br>
+<br></li>
 </ol>
 </li>
-</ul>
-<br>
-
+<li>
+<p>일반적으로는, 동일 색조의 <b>균등한(uniform) colormap</b>이 최상의 선택입니다.</p>
 <ul>
-<li>일반적으로는, 동일 색조의 <b>균등한(uniform) colormap</b>이 최상의 선택입니다.<ul>
 <li>사람의 뇌는 색의 명도(brightness)변화를 색상(hue)변화보다 더 잘 받아들이기 때문입니다.</li>
-<li>미국 인구밀도 분포 예시를 보겠습니다 (colormap: <code>hot</code>)<br><img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_2.png" alt=" "></li>
+<li>미국 인구밀도 분포 예시를 보겠습니다 (colormap: <code>hot</code>)<br>
+<img src="5_cmap2_2.png" alt=" "></li>
 <li><code>fire</code> 적용시 <code>hot</code>보다 데이터의 디테일을 잘 살립니다.</li>
-<li>표현 가능한 색상의 범위가 더 넓고, 시각적으로 균일(perpetually uniform)하기 때문입니다.<br><img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_3.png" alt=" "></li>
+<li>표현 가능한 색상의 범위가 더 넓고, 시각적으로 균일(perpetually uniform)하기 때문입니다.<br>
+<img src="5_cmap2_3.png" alt=" "><br>
+<br></li>
 </ul>
 </li>
-</ul>
-<br>
-
+<li>
+<p>색상을 표현하는 방법엔 여러 가지가 있습니다.</p>
+</li>
+<li>
+<p>그 중 CIELAB 방식은 인간의 색채 지각에 대한 연구를 바탕으로 다음과 같이 정의합니다.</p>
 <ul>
-<li>색상을 표현하는 방법엔 여러 가지가 있습니다.</li>
-<li>그 중 CIELAB 방식은 인간의 색채 지각에 대한 연구를 바탕으로 다음과 같이 정의합니다.<ul>
-<li>$ L^* $ : <b>Lightness</b> (0&#x3D;black, 100&#x3D;white)</li>
+<li>$ L^* $ : <b>Lightness</b> (0=black, 100=white)</li>
 <li>$ a^* $ : <b>Position between Magenta and Green</b> (-: Green, +: Magenta)</li>
 <li>$ b^* $ : <b>Position between Yellow and Blue</b> (-: Blue, +: Yellow)</li>
 </ul>
 </li>
-<li>matplotlib은 $ L^* $ 를 이용해 시각적 전달력을 높이는 전략을 채택하고 있습니다.</li>
+<li>
+<p>matplotlib은 $ L^* $ 를 이용해 시각적 전달력을 높이는 전략을 채택하고 있습니다.</p>
+</li>
 </ul>
-<h4 id="2-2-Colormap-종류"><a href="#2-2-Colormap-종류" class="headerlink" title="2.2. Colormap 종류"></a>2.2. Colormap 종류</h4><blockquote>
+<h4 id="2-2-Colormap-종류">2.2. Colormap 종류</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="http://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf">Diverging Color Maps for Scientific Visualization</a></p>
 </blockquote>
 <ul>
-<li><p>colormap은 기능에 따라 크게 4가지로 나눌 수 있습니다.</p>
+<li>
+<p>colormap은 기능에 따라 크게 4가지로 나눌 수 있습니다.</p>
 <ol>
-<li><b>Sequential:</b> 주로 밝기나 채도를 점진적으로 변화시키는 방식입니다.<br>  단일 색상을 사용하기도 하는데, (수치 등) 순서가 있는 데이터라면 필수입니다.</li>
-<li><b>Diverging:</b> Sequantial이 적용된 두 colormap을 중간값에서 무채색으로 연결합니다.<br>  Pearson 상관계수처럼 중간값이 특별한 의미를 가질 때 사용합니다.  </li>
-<li><b>Cyclic:</b> 둘 이상의 색상을 양 극단과 중간값 등에서 연결합니다.<br>  각도나 풍향, 시간처럼 주기성이 있는 데이터에 사용합니다.</li>
+<li><b>Sequential:</b> 주로 밝기나 채도를 점진적으로 변화시키는 방식입니다.<br>
+단일 색상을 사용하기도 하는데, (수치 등) 순서가 있는 데이터라면 필수입니다.</li>
+<li><b>Diverging:</b> Sequantial이 적용된 두 colormap을 중간값에서 무채색으로 연결합니다.<br>
+Pearson 상관계수처럼 중간값이 특별한 의미를 가질 때 사용합니다.</li>
+<li><b>Cyclic:</b> 둘 이상의 색상을 양 극단과 중간값 등에서 연결합니다.<br>
+각도나 풍향, 시간처럼 주기성이 있는 데이터에 사용합니다.</li>
 <li><b>Qualitative:</b> 범주형(categorical) 데이터처럼 각각이 독립된 의미를 가질 때 사용합니다.</li>
 </ol>
 </li>
-<li><p>matplotlib이 가지고 있는 네 가지 부류의 colormap을 하나씩 살펴보겠습니다.</p>
+<li>
+<p>matplotlib이 가지고 있는 네 가지 부류의 colormap을 하나씩 살펴보겠습니다.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#ware">소스코드는 여기에 있습니다.</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.1.3/tutorials/colors/colormaps.html#ware">소스코드는 여기에 있습니다.</a></p>
 </li>
 </ul>
-<h5 id="2-2-1-Sequential"><a href="#2-2-1-Sequential" class="headerlink" title="2.2.1. Sequential"></a>2.2.1. Sequential</h5><ul>
-<li><p>Sequential colormap은 대체로 Lightness가 단조증가합니다.</p>
+<h5 id="2-2-1-Sequential">2.2.1. Sequential</h5>
 <ul>
-<li>일부는 $ L^* $의 범위가 0~100이지만, 일부는 20부터 시작합니다.<br><b>범위가 작으면 표현 범위가 줄어듭니다.</b></li>
-<li>$ L^* $가 시각적으로 선형(perpetually linear)인 것도 있고, 곡선을 취하는 것도 있습니다.<br><b>곡선이 된다는 의미는 특정 영역이 강조되고 특정 영역이 뭉개질 수 있다는 의미입니다.</b></li>
-<li><b>[ 주의 ] Sequential (2)</b> 에 속하는 colormap은 $ L^* $이 심하게 꺾이거나 반전되어 있습니다.<br><b>흑백 인쇄물에서 데이터 왜곡이 발생할 수 있으니 사용시 주의바랍니다.</b></li>
+<li>
+<p>Sequential colormap은 대체로 Lightness가 단조증가합니다.</p>
+<ul>
+<li>일부는 $ L^* $의 범위가 0~100이지만, 일부는 20부터 시작합니다.<br>
+<b>범위가 작으면 표현 범위가 줄어듭니다.</b></li>
+<li>$ L^* $가 시각적으로 선형(perpetually linear)인 것도 있고, 곡선을 취하는 것도 있습니다.<br>
+<b>곡선이 된다는 의미는 특정 영역이 강조되고 특정 영역이 뭉개질 수 있다는 의미입니다.</b></li>
+<li><b>[ 주의 ] Sequential (2)</b> 에 속하는 colormap은 $ L^* $이 심하게 꺾이거나 반전되어 있습니다.<br>
+<b>흑백 인쇄물에서 데이터 왜곡이 발생할 수 있으니 사용시 주의바랍니다.</b></li>
 </ul>
 </li>
-<li><p>Matplotlib이 제공하는 Sequential colormap은 다음과 같습니다.</p>
+<li>
+<p>Matplotlib이 제공하는 Sequential colormap은 다음과 같습니다.</p>
 <ul>
-<li><b>Perpetually Uniform Sequential:</b> <code>viridis</code>, <code>plasma</code>, <code>inferno</code>, <code>magma</code>, <code>cividis</code><br><img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_008.png"></li>
-<li><b>Sequential:</b> <code>Greys</code>, <code>Purples</code>, <code>Blues</code>, <code>Greens</code>, <code>Oranges</code>, <code>Reds</code>, <code>YlOrBr</code>, <code>YlOrRd</code>, <code>OrRd</code>, <code>PuRd</code>, <code>RdPu</code>, <code>BuPu</code>, <code>GnBu</code>, <code>PuBu</code>, <code>YlGnBu</code>, <code>PuBuGn</code>, <code>BuGn</code>, <code>YlGn</code><br><img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_009.png"></li>
-<li><b>Sequential (2):</b> <code>binary</code>, <code>gist_yarg</code>, <code>gist_gray</code>, <code>gray</code>, <code>bone</code>, <code>pink</code>, <code>spring</code>, <code>summer</code>, <code>autumn</code>, <code>winter</code>, <code>cool</code>, <code>Wistia</code>, <code>hot</code>, <code>afmhot</code>, <code>gist_heat</code>, <code>copper</code><br><img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_010.png"></li>
+<li><b>Perpetually Uniform Sequential:</b> <code>viridis</code>, <code>plasma</code>, <code>inferno</code>, <code>magma</code>, <code>cividis</code><br>
+<img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_008.png" alt=""></li>
+<li><b>Sequential:</b> <code>Greys</code>, <code>Purples</code>, <code>Blues</code>, <code>Greens</code>, <code>Oranges</code>, <code>Reds</code>, <code>YlOrBr</code>, <code>YlOrRd</code>, <code>OrRd</code>, <code>PuRd</code>, <code>RdPu</code>, <code>BuPu</code>, <code>GnBu</code>, <code>PuBu</code>, <code>YlGnBu</code>, <code>PuBuGn</code>, <code>BuGn</code>, <code>YlGn</code><br>
+<img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_009.png" alt=""></li>
+<li><b>Sequential (2):</b> <code>binary</code>, <code>gist_yarg</code>, <code>gist_gray</code>, <code>gray</code>, <code>bone</code>, <code>pink</code>, <code>spring</code>, <code>summer</code>, <code>autumn</code>, <code>winter</code>, <code>cool</code>, <code>Wistia</code>, <code>hot</code>, <code>afmhot</code>, <code>gist_heat</code>, <code>copper</code><br>
+<img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_010.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h5 id="2-2-2-Diverging"><a href="#2-2-2-Diverging" class="headerlink" title="2.2.2. Diverging"></a>2.2.2. Diverging</h5><ul>
-<li><p>Diverging은 두 개의 Sequential colormap이 $ L^* &#x3D; 100 $ 부근에서 만나는 형태로 꺾여있습니다.</p>
+<h5 id="2-2-2-Diverging">2.2.2. Diverging</h5>
 <ul>
-<li>양 극단의 $ L^* $ 값이 비슷하면 데이터를 알아보기 좋은데, <code>BrBG</code>나 <code>RdBu</code>가 이 점에서 좋습니다.  </li>
+<li>
+<p>Diverging은 두 개의 Sequential colormap이 $ L^* = 100 $ 부근에서 만나는 형태로 꺾여있습니다.</p>
+<ul>
+<li>양 극단의 $ L^* $ 값이 비슷하면 데이터를 알아보기 좋은데, <code>BrBG</code>나 <code>RdBu</code>가 이 점에서 좋습니다.</li>
 <li><code>coolwarm</code>도 좋은 선택이지만 표현되는 $ L^* $ 범위가 좁다는 단점이 있습니다.</li>
 </ul>
 </li>
-<li><p>Matplotlib이 제공하는 Diverging colormap은 다음과 같습니다.<br><code>PiYG</code>, <code>PRGn</code>, <code>BrBG</code>, <code>PuOr</code>, <code>RdGy</code>, <code>RdBu</code>, <code>RdYlBu</code>, <code>RdYlGn</code>, <code>Spectral</code>, <code>coolwarm</code>, <code>bwr</code>, <code>seismic</code><br><img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_011.png"></p>
+<li>
+<p>Matplotlib이 제공하는 Diverging colormap은 다음과 같습니다.<br>
+<code>PiYG</code>, <code>PRGn</code>, <code>BrBG</code>, <code>PuOr</code>, <code>RdGy</code>, <code>RdBu</code>, <code>RdYlBu</code>, <code>RdYlGn</code>, <code>Spectral</code>, <code>coolwarm</code>, <code>bwr</code>, <code>seismic</code><br>
+<img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_011.png" alt=""></p>
 </li>
 </ul>
-<h5 id="2-2-3-Cyclic"><a href="#2-2-3-Cyclic" class="headerlink" title="2.2.3. Cyclic"></a>2.2.3. Cyclic</h5><blockquote>
+<h5 id="2-2-3-Cyclic">2.2.3. Cyclic</h5>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1509.03700">Good Colour Maps: How to Design Them</a></p>
 </blockquote>
 <ul>
-<li><p>Cyclic은 시작과 끝의 색상과 $ L^* $ 이 동일해야 합니다. </p>
+<li>
+<p>Cyclic은 시작과 끝의 색상과 $ L^* $ 이 동일해야 합니다.</p>
 <ul>
 <li>Diverging처럼 단조증가와 단조증가를 반복할 수도 있고,: <code>twilight</code>, <code>twilight_shifted</code></li>
-<li>HSV 공간에서 색상을 변화시키는 방식도 있습니다: <code>hsv</code><br><b>[ 주의 ] HSV 방식은 $ L^* $ 이 오르내리기 때문에 흑백 인쇄시 데이터를 알아보기 어렵습니다.</b></li>
+<li>HSV 공간에서 색상을 변화시키는 방식도 있습니다: <code>hsv</code><br>
+<b>[ 주의 ] HSV 방식은 $ L^* $ 이 오르내리기 때문에 흑백 인쇄시 데이터를 알아보기 어렵습니다.</b></li>
 </ul>
 </li>
-<li><p>Matplotlib이 제공하는 Cyclic colormap입니다.<br><img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_012.png"></p>
+<li>
+<p>Matplotlib이 제공하는 Cyclic colormap입니다.<br>
+<img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_012.png" alt=""></p>
 </li>
 </ul>
-<h5 id="2-2-4-Qualitative"><a href="#2-2-4-Qualitative" class="headerlink" title="2.2.4. Qualitative"></a>2.2.4. Qualitative</h5><ul>
-<li><p>독립적인 데이터를 시각화하는 목적이기 때문에 $ L^* $ 제약도 없습니다.</p>
+<h5 id="2-2-4-Qualitative">2.2.4. Qualitative</h5>
+<ul>
+<li>
+<p>독립적인 데이터를 시각화하는 목적이기 때문에 $ L^* $ 제약도 없습니다.</p>
 </li>
-<li><p>연속적인 데이터를 시각화할 때는 사용해서는 안됩니다.</p>
+<li>
+<p>연속적인 데이터를 시각화할 때는 사용해서는 안됩니다.</p>
 </li>
-<li><p>Matplotlib에서는 다음과 같은 Qualitative colormap을 제공하고 있습니다.<br><code>Pastel1</code>, <code>Pastel2</code>, <code>Paired</code>, <code>Accent</code>, <code>Dark2</code>, <code>Set1</code>, <code>Set2</code>, <code>Set3</code>, <code>tab10</code>, <code>tab20</code>, <code>tab20b</code>, <code>tab20c</code><br><img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_4.png"></p>
+<li>
+<p>Matplotlib에서는 다음과 같은 Qualitative colormap을 제공하고 있습니다.<br>
+<code>Pastel1</code>, <code>Pastel2</code>, <code>Paired</code>, <code>Accent</code>, <code>Dark2</code>, <code>Set1</code>, <code>Set2</code>, <code>Set3</code>, <code>tab10</code>, <code>tab20</code>, <code>tab20b</code>, <code>tab20c</code><br>
+<img src="5_cmap2_4.png" alt=""></p>
 </li>
 </ul>
-<h5 id="2-2-5-Miscellaneous"><a href="#2-2-5-Miscellaneous" class="headerlink" title="2.2.5. Miscellaneous"></a>2.2.5. Miscellaneous</h5><blockquote>
+<h5 id="2-2-5-Miscellaneous">2.2.5. Miscellaneous</h5>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://mycarta.wordpress.com/2012/05/29/the-rainbow-is-dead-long-live-the-rainbow-series-outline/">The rainbow is dead… Long live the rainow!</a></p>
 </blockquote>
 <ul>
-<li><p>이름 그대로, 특정 목적을 가지고 만들어진 ‘여러 가지’ colormap입니다.</p>
+<li>
+<p>이름 그대로, 특정 목적을 가지고 만들어진 ‘여러 가지’ colormap입니다.</p>
 <ul>
 <li>예를 들면 <code>gist_earth</code>, <code>ocean</code>, <code>terrain</code>은 <b>지리정보시스템(GIS)</b>에서 사용됩니다.</li>
 <li>지형을 녹색과 갈색으로 표현하고 바다의 깊이를 파랑으로 표현하는 식입니다.</li>
@@ -365,53 +415,69 @@
 <li><code>cubehelix</code>는 <b>밝기와 색상을 동시에 부드럽게 전환하기 위해</b> 만들어진 colormap입니다.</li>
 </ul>
 </li>
-<li><p>가장 많이 사용되는 <code>jet</code>와 <code>rainbow</code>도 여기에 속해있습니다.</p>
+<li>
+<p>가장 많이 사용되는 <code>jet</code>와 <code>rainbow</code>도 여기에 속해있습니다.</p>
 <ul>
 <li>matplotlib colormap 예제에 있어서이고 무지개색이라는 점이 친숙해서 <b>아무데나</b> 많이 쓰입니다.</li>
 <li>그러나 직관적 이해도와 직결된 $ L^* $ 분포 관점에서 볼 때 <b>바람직한 선택은 아닙니다.</b></li>
 </ul>
 </li>
-<li><p>Matplotlib에서 제공하는 Miscellaneous colormap 명단은 다음과 같습니다.<br><code>flag</code>, <code>prism</code>, <code>ocean</code>, <code>gist_earth</code>, <code>terrain</code>, <code>gist_stern</code>, <code>gnuplot</code>, <code>gnuplot2</code>, <code>CMRmap</code>, <code>cubehelix</code>, <code>brg</code>, <code>gist_rainbow</code>, <code>rainbow</code>, <code>jet</code>, <code>nipy_spectral</code>, <code>gist_ncar</code>  </p>
+<li>
+<p>Matplotlib에서 제공하는 Miscellaneous colormap 명단은 다음과 같습니다.<br>
+<code>flag</code>, <code>prism</code>, <code>ocean</code>, <code>gist_earth</code>, <code>terrain</code>, <code>gist_stern</code>, <code>gnuplot</code>, <code>gnuplot2</code>, <code>CMRmap</code>, <code>cubehelix</code>, <code>brg</code>, <code>gist_rainbow</code>, <code>rainbow</code>, <code>jet</code>, <code>nipy_spectral</code>, <code>gist_ncar</code></p>
 <ul>
-<li>색상을 주루룩 늘어놓으면 이렇게 보이는데,<br><img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_5.png"></li>
-<li>$ L^* $ 값과 함께 보면 이렇습니다.<br><img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_014.png"></li>
+<li>색상을 주루룩 늘어놓으면 이렇게 보이는데,<br>
+<img src="5_cmap2_5.png" alt=""></li>
+<li>$ L^* $ 값과 함께 보면 이렇습니다.<br>
+<img src="https://matplotlib.org/3.1.3/_images/sphx_glr_colormaps_014.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h4 id="2-3-Color-Vision-Deficiencies"><a href="#2-3-Color-Vision-Deficiencies" class="headerlink" title="2.3. Color Vision Deficiencies"></a>2.3. Color Vision Deficiencies</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.color-blindness.com/">Color Blindness- learn all about it</a><br><a target="_blank" rel="noopener" href="https://www.color-blindness.com/2008/12/23/15-tools-color-blindness/">15 Tools If You Are (Not) Colorblind</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/tutorial/color_palettes.html">Seaborn, Building color palettes</a></p>
+<h4 id="2-3-Color-Vision-Deficiencies">2.3. Color Vision Deficiencies</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.color-blindness.com/">Color Blindness- learn all about it</a><br>
+<a target="_blank" rel="noopener" href="https://www.color-blindness.com/2008/12/23/15-tools-color-blindness/">15 Tools If You Are (Not) Colorblind</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/tutorial/color_palettes.html">Seaborn, Building color palettes</a></p>
 </blockquote>
 <ul>
-<li><p><b>“형, 저 사실 색약이예요. 좀 심해요.”</b></p>
+<li>
+<p><b>“형, 저 사실 색약이예요. 좀 심해요.”</b></p>
 <ul>
 <li>그래프를 그릴 때마다 선배에게 혼나던 후배가 있었습니다.</li>
 <li>선배가 한참 혼낸 후, 저더러 좀 가르쳐주라고 보냈길래 커피 한 잔을 먼저 마시려는데 저 말을 하더군요.</li>
 <li>미안함과 난감함이 교차했습니다. 위로를 하기도 뭐하고 어떻게 가르칠지는 더 그랬구요.</li>
 </ul>
 </li>
-<li><p>색약, 색맹인 분들도 디지털의 도움을 빌려 어려움을 어느 정도 해소할 수 있습니다.</p>
+<li>
+<p>색약, 색맹인 분들도 디지털의 도움을 빌려 어려움을 어느 정도 해소할 수 있습니다.</p>
 <ul>
 <li>보통 빨강과 녹색을 구분하지 못하는 적녹색맹이 많습니다.</li>
 <li>이들 중 하나만 다른 색상으로 치환해도 알아보기 훨씬 편하다고 합니다.</li>
 <li>이 글을 보는 분께서 색상 구분으로 인한 어려움을 겪으신다면 <a target="_blank" rel="noopener" href="https://www.color-blindness.com/2008/12/23/15-tools-color-blindness/">이 링크</a>를 참고해보세요.</li>
 </ul>
 </li>
-<li><p>matplotlib에서도 <b>Red와 Green이 함께 포함된 colormap 사용을 피하는 것</b>을 권합니다.</p>
+<li>
+<p>matplotlib에서도 <b>Red와 Green이 함께 포함된 colormap 사용을 피하는 것</b>을 권합니다.</p>
 <ul>
-<li>matplotlib 기반인 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/">seaborn</a>에서는 이런 분들을 위한 color palette를 제공하고 있습니다.<br><img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_8.png"></li>
+<li>matplotlib 기반인 <a target="_blank" rel="noopener" href="https://seaborn.pydata.org/">seaborn</a>에서는 이런 분들을 위한 color palette를 제공하고 있습니다.<br>
+<img src="5_cmap2_8.png" alt=""></li>
 <li>색상 구별에 어려움을 겪는 분들께서 그림을 알아보기 조금 수월해진다고 합니다.</li>
 <li>seaborn <code>colorblind</code> colormap 호출</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">current_palette = sns.color_palette(<span class="string">&#x27;colorblind&#x27;</span>)</span><br><span class="line">sns.palplot(current_palette)</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>실행결과<br>  <img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_6.png"></p>
+<li>
+<p>실행결과<br>
+<img src="5_cmap2_6.png" alt=""></p>
 </li>
-<li><p>matplotlib 형식 graph 작성</p>
+<li>
+<p>matplotlib 형식 graph 작성</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.plot([<span class="number">0</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">1</span>], lw=<span class="number">3</span>)</span><br><span class="line">ax.plot([<span class="number">0</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">2</span>], lw=<span class="number">3</span>)</span><br><span class="line">ax.plot([<span class="number">0</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">3</span>], lw=<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행결과<br>  <img src="/2020/03/13/Python-DS-5-matplotlib_colormap2/5_cmap2_7.png"></li>
+<li>실행결과<br>
+<img src="5_cmap2_7.png" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -432,7 +498,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/" data-id="cuidlta9qGmRGTTEoRH5s0bmy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/" data-id="cuidsXAWLG2V0C8pav_8D2fSr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -511,12 +577,15 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/03/13/Python-DS-5-matplotlib_colormap2/",
         "description": "
+
 지난 글에서, scatter plot에 colormap을 입히고 colorbar를 제어하는 방법, 그리고 흑백 이미지에 colormap을 입히는 방법을 알아보았습니다.
+
 
 이번 글에서는 어떤 colormap을 선택하는 것이 적절할지, 그리고 colormap 자체를 제어하고 활용하는 방법을 알아보도록 하겠습니다.
 
-본 글은 공식 홈페이지의 번역과 요약을 토대",
-        "wordCount": 950
+
+본 글은 공식 홈페이지의 번역과 요약을",
+        "wordCount": 902
     }
 </script>
 
@@ -613,6 +682,26 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -687,26 +776,6 @@
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,pandas,annotate" />
     
-    <meta name="description" content="Contributor  김동윤님   지난 글에서 spines, grid, legend를 정리했습니다. grid를 넣으려고 minor tick도 설정해 보았구요. 기본 데이터는 다 그렸는데, 이걸로는 아쉽습니다. 메시지를 추출해서 전달해봅시다.  5. 토달기 : annotate  지원자 수는 수능을 보겠다고 원서를 제출한 사람 수고 응시자 수는 실제로 가서">
+    <meta name="description" content="Contributor  김동윤님   지난 글에서 spines, grid, legend를 정리했습니다. grid를 넣으려고 minor tick도 설정해 보았구요. 기본 데이터는 다 그렸는데, 이걸로는 아쉽습니다. 메시지를 추출해서 전달해봅시다.  5. 토달기 : annotate   지원자 수는 수능을 보겠다고 원서를 제출한 사람 수고 응시자 수는 실제로 가서">
 <meta property="og:type" content="article">
 <meta property="og:title" content="수능 Trend Visualization (3)">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/12/24/Python-DS-50-suneung3/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Contributor  김동윤님   지난 글에서 spines, grid, legend를 정리했습니다. grid를 넣으려고 minor tick도 설정해 보았구요. 기본 데이터는 다 그렸는데, 이걸로는 아쉽습니다. 메시지를 추출해서 전달해봅시다.  5. 토달기 : annotate  지원자 수는 수능을 보겠다고 원서를 제출한 사람 수고 응시자 수는 실제로 가서">
+<meta property="og:description" content="Contributor  김동윤님   지난 글에서 spines, grid, legend를 정리했습니다. grid를 넣으려고 minor tick도 설정해 보았구요. 기본 데이터는 다 그렸는데, 이걸로는 아쉽습니다. 메시지를 추출해서 전달해봅시다.  5. 토달기 : annotate   지원자 수는 수능을 보겠다고 원서를 제출한 사람 수고 응시자 수는 실제로 가서">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/50_sn_0.png">
 <meta property="article:published_time" content="2020-12-23T20:41:00.000Z">
@@ -240,169 +240,210 @@
 <li>기본 데이터는 다 그렸는데, 이걸로는 아쉽습니다.</li>
 <li>메시지를 추출해서 전달해봅시다.</li>
 </ul>
-<h2 id="5-토달기-annotate"><a href="#5-토달기-annotate" class="headerlink" title="5. 토달기 : annotate"></a>5. 토달기 : annotate</h2><p><img src="/2020/12/24/Python-DS-50-suneung3/48_sn_21.png" alt="지난 글 마지막 그림"><br></p>
+<h2 id="5-토달기-annotate">5. 토달기 : annotate</h2>
+<p><img src="48_sn_21.png" alt="지난 글 마지막 그림"><br></p>
 <ul>
 <li><b>지원자 수</b>는 수능을 보겠다고 원서를 제출한 사람 수고</li>
 <li><b>응시자 수</b>는 실제로 가서 수능시험을 치른 사람 수입니다.</li>
 <li>원서를 내놓고 보신 분들이 적지 않습니다. 심지어 늘어납니다.</li>
 <li>비율로 한번 구해봅시다.</li>
 </ul>
-<h3 id="5-1-파생변수-만들기-응시율"><a href="#5-1-파생변수-만들기-응시율" class="headerlink" title="5.1. 파생변수 만들기 : 응시율"></a>5.1. 파생변수 만들기 : 응시율</h3><ul>
+<h3 id="5-1-파생변수-만들기-응시율">5.1. 파생변수 만들기 : 응시율</h3>
+<ul>
 <li>응시율을 이렇게 정의합니다 : <code>응시율 = 응시자 수 / 지원자 수 * 100</code></li>
 <li>어차피 퍼센트로 표시할 것이라 처음부터 100을 곱했습니다.</li>
 <li>우리가 가지고 있는 pandas dataframe에 추가해 줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 응시율 = 응시자 수 / 지원자 수</span></span><br><span class="line">df_sn[<span class="string">&quot;num_test_rate&quot;</span>] = df_sn[<span class="string">&quot;num_test&quot;</span>]/df_sn[<span class="string">&quot;num_total&quot;</span>]*<span class="number">100</span></span><br><span class="line">df_sn.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_1.png"><br></p>
+<p><img src="50_sn_1.png" alt=""><br></p>
 <ul>
 <li>맨 오른쪽에 <b>num_test_rate</b>가 생겼습니다.</li>
 </ul>
-<h3 id="5-2-응시율-붙이기"><a href="#5-2-응시율-붙이기" class="headerlink" title="5.2. 응시율 붙이기"></a>5.2. 응시율 붙이기</h3><blockquote>
+<h3 id="5-2-응시율-붙이기">5.2. 응시율 붙이기</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.annotate.html?highlight=annotate#matplotlib.axes.Axes.annotate">matplotlib.axes.Axes.annotate</a></p>
 </blockquote>
 <ul>
-<li><p>데이터에 글자를 붙일 때는 <code>.annotate()</code>를 사용합니다.</p>
+<li>
+<p>데이터에 글자를 붙일 때는 <code>.annotate()</code>를 사용합니다.</p>
 </li>
-<li><p>문법은 이렇습니다 : <code>Axes.annotate(self, text, xy, *args, **kwargs)</code></p>
+<li>
+<p>문법은 이렇습니다 : <code>Axes.annotate(self, text, xy, *args, **kwargs)</code></p>
 </li>
-<li><p>들어가는 인자가 제법 많습니다. 자칫 복잡하게 느껴질 수 있으므로 몇 개만 봅시다.</p>
+<li>
+<p>들어가는 인자가 제법 많습니다. 자칫 복잡하게 느껴질 수 있으므로 몇 개만 봅시다.</p>
 </li>
-<li><p>다른 인자는 다음 기회에 보고, 이만큼만 사용해서 그립니다.</p>
+<li>
+<p>다른 인자는 다음 기회에 보고, 이만큼만 사용해서 그립니다.</p>
 <ul>
-<li><b>self : </b>클래스 배울 때 나오죠? 뭐 넣으라는 뜻이 아니라 instance method라는 뜻입니다. </li>
-<li><b>text : </b>표시될 글자입니다. </li>
-<li><b>xy : </b>글자가 가리킬 지점의 좌표입니다.<br>  <b>A ← B</b>를 넣는다면, <b>A</b>에 해당하는 지점입니다.</li>
-<li><b>xytext : </b>(옵션) 글자가 위치할 지점의 좌표입니다.<br>  <b>A ← B</b>를 넣는다면, <b>B</b>에 해당하는 지점입니다.</li>
-<li><b>arrowprops : </b>(옵션) 화살표를 어떻게 그릴지 정합니다.<br>  <b>A ← B</b>를 넣는다면, <b>←</b>에 해당하는 인자입니다.</li>
+<li><b>self : </b>클래스 배울 때 나오죠? 뭐 넣으라는 뜻이 아니라 instance method라는 뜻입니다.</li>
+<li><b>text : </b>표시될 글자입니다.</li>
+<li><b>xy : </b>글자가 가리킬 지점의 좌표입니다.<br>
+<b>A ← B</b>를 넣는다면, <b>A</b>에 해당하는 지점입니다.</li>
+<li><b>xytext : </b>(옵션) 글자가 위치할 지점의 좌표입니다.<br>
+<b>A ← B</b>를 넣는다면, <b>B</b>에 해당하는 지점입니다.</li>
+<li><b>arrowprops : </b>(옵션) 화살표를 어떻게 그릴지 정합니다.<br>
+<b>A ← B</b>를 넣는다면, <b>←</b>에 해당하는 인자입니다.</li>
 </ul>
 </li>
-<li><p><code>.plot()</code>같은 명령은 설정 한번에 plot 전체에 적용됩니다.</p>
+<li>
+<p><code>.plot()</code>같은 명령은 설정 한번에 plot 전체에 적용됩니다.</p>
 </li>
-<li><p>하지만 <code>.annotate()</code>는 하나하나 그려줘야 합니다. </p>
+<li>
+<p>하지만 <code>.annotate()</code>는 하나하나 그려줘야 합니다.</p>
 </li>
-<li><p>손이 많이 갑니다. for loop을 사용합시다.</p>
+<li>
+<p>손이 많이 갑니다. for loop을 사용합시다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 응시율 붙이기 1: 데이터 순서 사용하기</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, df_sn.shape[<span class="number">0</span>], <span class="number">2</span>):                      <span class="comment"># 데이터 순서 기준 하나 건너 하나에 적용</span></span><br><span class="line">    ax.annotate(<span class="string">f&#x27;<span class="subst">&#123;df_sn[<span class="string">&quot;num_test_rate&quot;</span>].iloc[i]:<span class="number">.0</span>f&#125;</span>%&#x27;</span>,  <span class="comment"># 글자 : 응시율. 소수점 떼고.</span></span><br><span class="line">                xy=(i, df_sn[ <span class="string">&quot;num_total&quot;</span>].iloc[i]+<span class="number">10000</span>), <span class="comment"># A : 응시자 수 + 10000 지점</span></span><br><span class="line">                xytext=(i,<span class="number">950000</span>),                         <span class="comment"># B : 여백. 950만명 지점</span></span><br><span class="line">                arrowprops=&#123;<span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;gray&quot;</span>&#125;,           <span class="comment"># ← : 회색.</span></span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>,              <span class="comment"># 글자 : 가운데 정렬</span></span><br><span class="line">                fontsize=<span class="number">16</span>, color=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.8</span>)         <span class="comment"># 글자 크기=16, 색상=검정, 불투명도=0.8</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_2.png"><br></p>
+<p><img src="50_sn_2.png" alt=""><br></p>
 <ul>
-<li><p>응시율이 숫자로 붙었습니다.</p>
+<li>
+<p>응시율이 숫자로 붙었습니다.</p>
 </li>
-<li><p>방금 데이터를 하나 건너 하나 붙일 때, <code>for i in range(0, df_sn.shape[0], 2):</code> 라고 했습니다.</p>
+<li>
+<p>방금 데이터를 하나 건너 하나 붙일 때, <code>for i in range(0, df_sn.shape[0], 2):</code> 라고 했습니다.</p>
 </li>
-<li><p>데이터의 순서를 사용하는 방법입니다. index가 점프하거나 중복될 때 사용하기 좋습니다.</p>
+<li>
+<p>데이터의 순서를 사용하는 방법입니다. index가 점프하거나 중복될 때 사용하기 좋습니다.</p>
 </li>
-<li><p>index 기준으로 하나씩 건너뛰고 싶다면, 이렇게 고치면 됩니다.</p>
+<li>
+<p>index 기준으로 하나씩 건너뛰고 싶다면, 이렇게 고치면 됩니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df_sn.index.values[::<span class="number">2</span>]::                         <span class="comment"># index 기준 하나 건너 하나에 적용</span></span><br><span class="line">    ax.annotate(<span class="string">f&#x27;<span class="subst">&#123;df_sn.loc[i, <span class="string">&quot;num_test_rate&quot;</span>]:<span class="number">.0</span>f&#125;</span>%&#x27;</span>,</span><br><span class="line">                xy=(i, df_sn.loc[i, <span class="string">&quot;num_total&quot;</span>]+<span class="number">10000</span>), </span><br><span class="line">                xytext=(i,<span class="number">950000</span>), </span><br><span class="line">                arrowprops=&#123;<span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;gray&quot;</span>&#125;,</span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">                fontsize=<span class="number">16</span>, color=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.8</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>결과물은 정확히 동일합니다.</li>
 </ul>
-<h2 id="5-annotate에-legend-붙이기-text"><a href="#5-annotate에-legend-붙이기-text" class="headerlink" title="5. annotate에 legend 붙이기 : text"></a>5. annotate에 legend 붙이기 : text</h2><blockquote>
+<h2 id="5-annotate에-legend-붙이기-text">5. annotate에 legend 붙이기 : text</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.patches.FancyBboxPatch.html#matplotlib.patches.FancyBboxPatch">matplotlib.patches.FancyBboxPatch</a></p>
 </blockquote>
 <ul>
-<li><p>응시율을 넣었으니 이게 응시율인 줄 알게 해야 합니다.</p>
+<li>
+<p>응시율을 넣었으니 이게 응시율인 줄 알게 해야 합니다.</p>
 </li>
-<li><p>비어있는 오른쪽 위 공간에 legend를 넣읍시다.</p>
+<li>
+<p>비어있는 오른쪽 위 공간에 legend를 넣읍시다.</p>
 </li>
-<li><p><code>.text()</code>를 사용하면 간단하게 넣을 수 있습니다.</p>
+<li>
+<p><code>.text()</code>를 사용하면 간단하게 넣을 수 있습니다.</p>
 </li>
-<li><p>text에 다양한 형태의 윤곽선을 두를 수 있다는 사실을 잘 모르는 분들이 많습니다.</p>
+<li>
+<p>text에 다양한 형태의 윤곽선을 두를 수 있다는 사실을 잘 모르는 분들이 많습니다.</p>
 </li>
-<li><p><code>ax.text(bbox={&quot;boxstyle&quot;:스타일})</code>에서 <b>스타일</b>에 해당하는 부분을 바꾸는 것으로 되는데 말입니다.</p>
+<li>
+<p><code>ax.text(bbox={&quot;boxstyle&quot;:스타일})</code>에서 <b>스타일</b>에 해당하는 부분을 바꾸는 것으로 되는데 말입니다.</p>
 </li>
-<li><p>총 9가지 스타일을 제공합니다.</p>
+<li>
+<p>총 9가지 스타일을 제공합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">position = [<span class="number">0.2</span>, <span class="number">0.5</span>, <span class="number">0.8</span>]  <span class="comment"># 글자가 표시될 x 좌표</span></span><br><span class="line">positions = <span class="built_in">list</span>(product(position, position[::-<span class="number">1</span>])) <span class="comment"># x, y 좌표 만들기</span></span><br><span class="line"></span><br><span class="line">font_text = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;0.2&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;  <span class="comment"># text font 설정</span></span><br><span class="line">style = [<span class="string">&quot;circle&quot;</span>, <span class="string">&quot;square&quot;</span>, <span class="string">&quot;darrow&quot;</span>, <span class="string">&quot;larrow&quot;</span>, <span class="string">&quot;rarrow&quot;</span>, <span class="string">&quot;round&quot;</span>, <span class="string">&quot;round4&quot;</span>, <span class="string">&quot;roundtooth&quot;</span>, <span class="string">&quot;sawtooth&quot;</span>]  <span class="comment"># matplotlib에서 제공하는 bounding box style</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 지정된 위치마다 text 삽입</span></span><br><span class="line"><span class="keyword">for</span> i, (p, s) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(positions, style), <span class="number">1</span>):</span><br><span class="line">    ax.text(p[<span class="number">0</span>], p[<span class="number">1</span>], <span class="string">f&quot;text<span class="subst">&#123;i&#125;</span>: <span class="subst">&#123;s&#125;</span>&quot;</span>, fontdict=font_text,</span><br><span class="line">            bbox=&#123;<span class="string">&quot;boxstyle&quot;</span>:s, <span class="string">&quot;pad&quot;</span>:<span class="number">0.4</span>, <span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;edgecolor&quot;</span>:<span class="string">&quot;lightgray&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_4.png"><br></p>
+<p><img src="50_sn_4.png" alt=""><br></p>
 <ul>
-<li><p><b>fontdict</b>를 설정해서 전체적인 font를 제어합니다.</p>
+<li>
+<p><b>fontdict</b>를 설정해서 전체적인 font를 제어합니다.</p>
 </li>
-<li><p>text가 삽입되는 지점을 일일이 넣어주기보다 <code>product</code>를 이용해서 간단하게 만들어 줍니다.</p>
+<li>
+<p>text가 삽입되는 지점을 일일이 넣어주기보다 <code>product</code>를 이용해서 간단하게 만들어 줍니다.</p>
 </li>
-<li><p><code>round</code>를 선택해서 text로 legend를 만들어줍니다.</p>
+<li>
+<p><code>round</code>를 선택해서 text로 legend를 만들어줍니다.</p>
 </li>
-<li><p>간만에 전체 코드를 한번 적어봅니다.</p>
+<li>
+<p>간만에 전체 코드를 한번 적어봅니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">df_sn[[<span class="string">&quot;year&quot;</span>, <span class="string">&quot;num_M&quot;</span>, <span class="string">&quot;num_F&quot;</span>]].plot.bar(x=<span class="string">&quot;year&quot;</span>, y=[<span class="string">&quot;num_M&quot;</span>, <span class="string">&quot;num_F&quot;</span>], ax=ax, </span><br><span class="line">                                           color=&#123;<span class="string">&quot;num_M&quot;</span>: color_M, <span class="string">&quot;num_F&quot;</span>: color_F&#125;)</span><br><span class="line"></span><br><span class="line">ax.plot(df_sn[<span class="string">&quot;num_total&quot;</span>], <span class="string">&#x27;o-&#x27;</span>, color=color_total, label=<span class="string">&quot;지원자 수&quot;</span>)</span><br><span class="line">ax.plot(df_sn[<span class="string">&quot;num_test&quot;</span>], <span class="string">&#x27;o:&#x27;</span>, color=color_test, label=<span class="string">&quot;응시자 수&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 응시율 붙이기 : 데이터 순서 사용하기</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, df_sn.shape[<span class="number">0</span>], <span class="number">2</span>):</span><br><span class="line">    ax.annotate(<span class="string">f&#x27;<span class="subst">&#123;df_sn[<span class="string">&quot;num_test_rate&quot;</span>].iloc[i]:<span class="number">.0</span>f&#125;</span>%&#x27;</span>,</span><br><span class="line">                xy=(i, df_sn[ <span class="string">&quot;num_total&quot;</span>].iloc[i]+<span class="number">10000</span>), </span><br><span class="line">                xytext=(i,<span class="number">950000</span>), </span><br><span class="line">                arrowprops=&#123;<span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;gray&quot;</span>&#125;,</span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">                fontsize=<span class="number">16</span>, color=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.8</span>)</span><br><span class="line"></span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">1000000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># yticks major/minor 설정</span></span><br><span class="line">ax.yaxis.set_major_locator(MultipleLocator(<span class="number">200000</span>))</span><br><span class="line">ax.yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:.0f&#125;&#x27;</span>)</span><br><span class="line">ax.yaxis.set_minor_locator(MultipleLocator(<span class="number">100000</span>))</span><br><span class="line">ax.yaxis.set_minor_formatter(<span class="string">&#x27;&#123;x:.0f&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># yticks: major</span></span><br><span class="line">yticks = ax.get_yticks()</span><br><span class="line">ax.set_yticks(yticks[<span class="number">1</span>:-<span class="number">1</span>])</span><br><span class="line">yticklabels = ax.get_yticklabels()</span><br><span class="line">ax.set_yticklabels([<span class="string">f&quot;<span class="subst">&#123;y//<span class="number">10000</span>:<span class="number">.0</span>f&#125;</span>만명&quot;</span> <span class="keyword">for</span> y <span class="keyword">in</span> yticks[<span class="number">1</span>:-<span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># yticks: minor</span></span><br><span class="line">yticks_minor = ax.get_yticks(minor=<span class="literal">True</span>)</span><br><span class="line">ax.set_yticks(yticks_minor[<span class="number">1</span>:-<span class="number">1</span>], minor=<span class="literal">True</span>)</span><br><span class="line">yticklabels = ax.get_yticklabels(minor=<span class="literal">True</span>)</span><br><span class="line">ax.set_yticklabels([], minor=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">xticks = ax.get_xticks()</span><br><span class="line">ax.set_xticks(xticks)</span><br><span class="line">xticklabels = [<span class="string">f&quot;&#x27;<span class="subst">&#123;x.get_text()[<span class="number">2</span>:]&#125;</span>&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> ax.get_xticklabels()]</span><br><span class="line">xticklabels[<span class="number">0</span>] = xticklabels[<span class="number">0</span>] + <span class="string">&quot;\n(1)&quot;</span></span><br><span class="line">xticklabels[<span class="number">1</span>] = xticklabels[<span class="number">1</span>] + <span class="string">&quot;\n(2)&quot;</span></span><br><span class="line">ax.set_xticklabels(xticklabels, rotation=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># spines</span></span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># major grid</span></span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;minor&quot;</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># legend (1) 남성, 여성</span></span><br><span class="line">handles, labels = ax.get_legend_handles_labels()</span><br><span class="line">legend0 = ax.legend(handles=handles[<span class="number">2</span>:], labels=[<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>], ncol=<span class="number">2</span>,</span><br><span class="line">                    loc=<span class="string">&quot;lower left&quot;</span>, bbox_to_anchor=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend (2) 지원자 수, 응시자 수</span></span><br><span class="line">legend1 = ax.legend(handles=handles[:<span class="number">2</span>], labels=labels[:<span class="number">2</span>], ncol=<span class="number">2</span>,</span><br><span class="line">                    loc=<span class="string">&quot;lower center&quot;</span>, bbox_to_anchor=(<span class="number">0.5</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend (3) 응시율</span></span><br><span class="line">ax.text(<span class="number">1</span>, <span class="number">1.04</span>, <span class="string">&quot;지원자 중 응시자 비율&quot;</span>, transform=ax.transAxes,</span><br><span class="line">        fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;0.2&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;right&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;bottom&quot;</span>&#125;,</span><br><span class="line">        bbox=&#123;<span class="string">&quot;boxstyle&quot;</span>:<span class="string">&quot;round&quot;</span>, <span class="string">&quot;pad&quot;</span>:<span class="number">0.4</span>, <span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;edgecolor&quot;</span>:<span class="string">&quot;lightgray&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ax.add_artist(legend0)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_3.png"><br></p>
+<p><img src="50_sn_3.png" alt=""><br></p>
 <ul>
-<li><p>10학번 무렵부터 <b>응시율이 떨어지는 추세</b>가 보입니다.</p>
+<li>
+<p>10학번 무렵부터 <b>응시율이 떨어지는 추세</b>가 보입니다.</p>
 </li>
-<li><p><b>2021학년도 응시율이 수능 역사상 최저</b>를 기록했습니다.</p>
+<li>
+<p><b>2021학년도 응시율이 수능 역사상 최저</b>를 기록했습니다.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://news.joins.com/article/23936596">코로나 영향으로 인해 결시율 최고</a>라는 기사가 있지만, 최근 몇년간 추세를 보면 꼭 코로나 탓은 아닌 것 같습니다.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://news.joins.com/article/23936596">코로나 영향으로 인해 결시율 최고</a>라는 기사가 있지만, 최근 몇년간 추세를 보면 꼭 코로나 탓은 아닌 것 같습니다.</p>
 </li>
-<li><p>수시 등의 영향으로 <b>수능을 볼 필요가 없어지는 수험생이 안전장치로 지원은 해 놓는 탓</b>에 응시율이 떨어지는 것이 아닌가 싶네요.</p>
+<li>
+<p>수시 등의 영향으로 <b>수능을 볼 필요가 없어지는 수험생이 안전장치로 지원은 해 놓는 탓</b>에 응시율이 떨어지는 것이 아닌가 싶네요.</p>
 </li>
-<li><p><b>결시자 중 수시 전형 비율</b>데이터가 있으면 더 명확할 것 같습니다.</p>
+<li>
+<p><b>결시자 중 수시 전형 비율</b>데이터가 있으면 더 명확할 것 같습니다.</p>
 </li>
 </ul>
-<h2 id="6-성비-구하기"><a href="#6-성비-구하기" class="headerlink" title="6. 성비 구하기"></a>6. 성비 구하기</h2><h3 id="6-1-여성-지원자-1인당-남성-지원자-수"><a href="#6-1-여성-지원자-1인당-남성-지원자-수" class="headerlink" title="6.1. 여성 지원자 1인당 남성 지원자 수"></a>6.1. 여성 지원자 1인당 남성 지원자 수</h3><ul>
+<h2 id="6-성비-구하기">6. 성비 구하기</h2>
+<h3 id="6-1-여성-지원자-1인당-남성-지원자-수">6.1. 여성 지원자 1인당 남성 지원자 수</h3>
+<ul>
 <li>응시율 저하 외에도 <b>남녀 성비의 변화</b>가 눈에 띕니다.</li>
 <li>일반적으로 성비를 <code>여성 1인당 남성의 수</code>로 정의합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 성비 = 남성 수 / 여성 수</span></span><br><span class="line">df_sn[<span class="string">&quot;num_M_rate&quot;</span>] = df_sn[<span class="string">&quot;num_M&quot;</span>]/df_sn[<span class="string">&quot;num_F&quot;</span>]</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>응시율과 같은 요령으로 성비를 넣어봅시다.</li>
 <li>응시율을 넣던 for loop에 성비를 같이 넣습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, df_sn.shape[<span class="number">0</span>], <span class="number">2</span>):</span><br><span class="line">    <span class="comment"># 응시율</span></span><br><span class="line">    ax.annotate(<span class="string">f&#x27;<span class="subst">&#123;df_sn[<span class="string">&quot;num_test_rate&quot;</span>].iloc[i]:<span class="number">.0</span>f&#125;</span>%&#x27;</span>,</span><br><span class="line">                xy=(i, df_sn[ <span class="string">&quot;num_total&quot;</span>].iloc[i]+<span class="number">10000</span>), </span><br><span class="line">                xytext=(i,<span class="number">950000</span>), </span><br><span class="line">                arrowprops=&#123;<span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;gray&quot;</span>&#125;,</span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">                fontsize=<span class="number">16</span>, color=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.8</span>)</span><br><span class="line">    <span class="comment"># 성비       </span></span><br><span class="line">    ax.annotate(<span class="string">f&#x27;<span class="subst">&#123;df_sn.loc[i, <span class="string">&quot;num_M_rate&quot;</span>]:<span class="number">.2</span>f&#125;</span>&#x27;</span>,</span><br><span class="line">                xy=(i, df_sn.loc[i, <span class="string">&quot;num_M&quot;</span>]), </span><br><span class="line">                xytext=(i, df_sn.loc[i, <span class="string">&quot;num_M&quot;</span>]+<span class="number">30000</span>),</span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>,</span><br><span class="line">                fontsize=<span class="number">16</span>, color=<span class="string">&quot;darkgoldenrod&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>legend도 추가합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># legend (4) 성비 (남성 : 여성)</span></span><br><span class="line">ax.text(<span class="number">0.01</span>, <span class="number">0.57</span>, <span class="string">&quot;성비 (남성:여성)&quot;</span>, transform=ax.transAxes,</span><br><span class="line">        fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;darkgoldenrod&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;left&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;bottom&quot;</span>&#125;,</span><br><span class="line">        bbox=&#123;<span class="string">&quot;boxstyle&quot;</span>:<span class="string">&quot;square&quot;</span>, <span class="string">&quot;pad&quot;</span>:<span class="number">0.4</span>, <span class="string">&quot;facecolor&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;edgecolor&quot;</span>:<span class="string">&quot;lightgray&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/48_sn_23.png"></p>
-<h3 id="6-2-남성-지원자-1인당-여성-지원자-수"><a href="#6-2-남성-지원자-1인당-여성-지원자-수" class="headerlink" title="6.2. 남성 지원자 1인당 여성 지원자 수"></a>6.2. 남성 지원자 1인당 여성 지원자 수</h3><ul>
-<li><p>1.4를 넘어가던 성비가 차츰 줄어서 1.06이 됩니다.</p>
+<p><img src="48_sn_23.png" alt=""></p>
+<h3 id="6-2-남성-지원자-1인당-여성-지원자-수">6.2. 남성 지원자 1인당 여성 지원자 수</h3>
+<ul>
+<li>
+<p>1.4를 넘어가던 성비가 차츰 줄어서 1.06이 됩니다.</p>
 </li>
-<li><p><b>여성의 대학 진학 시도가 더 많아진다</b>고 볼 수 있을 것 같습니다.</p>
+<li>
+<p><b>여성의 대학 진학 시도가 더 많아진다</b>고 볼 수 있을 것 같습니다.</p>
 </li>
-<li><p>여성 재수생 비율이 늘어나는 것인지는 현재로서는 알 수 없지만, 그렇다고 해도 재수를 허용하는 비율이 증가한다고도 볼 수 있을 테니까요.</p>
+<li>
+<p>여성 재수생 비율이 늘어나는 것인지는 현재로서는 알 수 없지만, 그렇다고 해도 재수를 허용하는 비율이 증가한다고도 볼 수 있을 테니까요.</p>
 </li>
-<li><p><b>여성 1인당</b> 기준을 <b>남성 1인당</b>으로 바꿔봅니다.</p>
+<li>
+<p><b>여성 1인당</b> 기준을 <b>남성 1인당</b>으로 바꿔봅니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_sn[<span class="string">&quot;num_F_rate&quot;</span>] = df_sn[<span class="string">&quot;num_F&quot;</span>]/df_sn[<span class="string">&quot;num_M&quot;</span>]</span><br><span class="line">df_sn[<span class="string">&quot;num_F_rate&quot;</span>].plot()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_7.png"></p>
+<p><img src="50_sn_7.png" alt=""></p>
 <ul>
 <li>10년차와 20년차의 두 단계 점프가 선명합니다.</li>
 <li>이제까지 그린 그림의 배경으로 깔아보겠습니다.</li>
 <li>아래 코드를 추가합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 여성비 </span></span><br><span class="line">ax_F = ax.twinx()  <span class="comment"># x축을 공유하면서 오른쪽 y축을 다른 스케일로 사용하는 axes 선언</span></span><br><span class="line">ax_F.fill_between(df_sn.index, df_sn[<span class="string">&quot;num_F_rate&quot;</span>], <span class="number">0</span>, facecolor=<span class="string">&quot;yellow&quot;</span>, alpha=<span class="number">0.3</span>, zorder=<span class="number">0</span>)  <span class="comment"># 넓이 그리기</span></span><br><span class="line">ax_F.plot(df_sn.index, df_sn[<span class="string">&quot;num_F_rate&quot;</span>], color=<span class="string">&quot;orange&quot;</span>)  <span class="comment"># 윤곽선 강조</span></span><br><span class="line">ax_F.set_ylim(<span class="number">0</span>, <span class="number">1.1</span>) <span class="comment"># y 범위 설정</span></span><br><span class="line">ax_F.axis(<span class="literal">False</span>)      <span class="comment"># 모든 spines를 보이지 않게</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 여성비 눈금이 없는 대신, 시작과 끝 지점 데이터로 정량정보 전달.</span></span><br><span class="line">r_1994 = df_sn[<span class="string">&quot;num_F_rate&quot;</span>].iloc[<span class="number">0</span>]  <span class="comment"># 1994학년도 1차시</span></span><br><span class="line">r_2021 = df_sn[<span class="string">&quot;num_F_rate&quot;</span>].iloc[-<span class="number">1</span>] <span class="comment"># 2021학년도</span></span><br><span class="line"><span class="keyword">for</span> idx, r, ha <span class="keyword">in</span> <span class="built_in">zip</span>([<span class="number">0</span>, df_sn.shape[<span class="number">0</span>]-<span class="number">1</span>], [r_1994, r_2021], [<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>]): <span class="comment"># 데이터 삽입</span></span><br><span class="line">    ax_F.text(idx, r+<span class="number">0.02</span>, <span class="string">f&#x27;<span class="subst">&#123;r:<span class="number">.2</span>f&#125;</span>&#x27;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;brown&quot;</span>, <span class="string">&quot;ha&quot;</span>:ha, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;bottom&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 새로 삽입된 데이터에 대한 정보 전달</span></span><br><span class="line">ax_F.text(<span class="number">2</span>, df_sn[<span class="string">&quot;num_F_rate&quot;</span>].iloc[<span class="number">0</span>], <span class="string">&quot;여성비 (여성 지원자 : 남성 지원자)&quot;</span>, </span><br><span class="line">          fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;brown&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;left&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes 순서</span></span><br><span class="line">ax_F.set_zorder(<span class="number">0</span>)  <span class="comment"># 여성비 데이터를 뒤로</span></span><br><span class="line">ax.set_zorder(<span class="number">1</span>)    <span class="comment"># 다른 데이터를 앞으로</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_6.png"></p>
-<h3 id="6-3-강조점-변경"><a href="#6-3-강조점-변경" class="headerlink" title="6.3. 강조점 변경"></a>6.3. 강조점 변경</h3><ul>
-<li><p>처음에는 단순히 수능 년도별 인원을 그려봤는데, <b>응시율</b>과 <b>여성비</b>를 도출했습니다.</p>
+<p><img src="50_sn_6.png" alt=""></p>
+<h3 id="6-3-강조점-변경">6.3. 강조점 변경</h3>
+<ul>
+<li>
+<p>처음에는 단순히 수능 년도별 인원을 그려봤는데, <b>응시율</b>과 <b>여성비</b>를 도출했습니다.</p>
 </li>
-<li><p>이번 plot의 주인공을 이것으로 해 봅시다.</p>
+<li>
+<p>이번 plot의 주인공을 이것으로 해 봅시다.</p>
 </li>
-<li><p>전체 plot에서 이 둘을 부각시키고, 나머지를 부가 요소로 돌립니다.</p>
+<li>
+<p>전체 plot에서 이 둘을 부각시키고, 나머지를 부가 요소로 돌립니다.</p>
 </li>
-<li><p>다음과 같은 과정을 거쳐 강조점을 변경하려고 합니다.</p>
+<li>
+<p>다음과 같은 과정을 거쳐 강조점을 변경하려고 합니다.</p>
 <ol>
 <li><b>응시율, 여성비</b>만 밝게, 나머지 어둡게</li>
 <li>응시율과 여성비 <b>legend</b>를 강조, 나머지는 숨기기</li>
 <li>전체 그림에서 응시율, 여성비 외 <b>면적 비중 축소</b></li>
 </ol>
 </li>
-<li><p>그 결과, 다음과 같은 그림을 얻었습니다.<br><br><img src="/2020/12/24/Python-DS-50-suneung3/50_sn_8.png"><br></p>
+<li>
+<p>그 결과, 다음과 같은 그림을 얻었습니다.<br><br>
+<img src="50_sn_8.png" alt=""><br></p>
 </li>
-<li><p>코드는 다음과 같습니다.</p>
+<li>
+<p>코드는 다음과 같습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">20</span>, <span class="number">9</span>), sharey=<span class="literal">True</span>)</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;0.2&quot;</span>)</span><br><span class="line">ax.set_facecolor(<span class="string">&quot;none&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 여성비 </span></span><br><span class="line">ax_F = ax.twinx()</span><br><span class="line">ax_F.fill_between(df_sn.index, df_sn[<span class="string">&quot;num_F_rate&quot;</span>], <span class="number">0</span>, facecolor=<span class="string">&quot;gold&quot;</span>, edgecolor=<span class="string">&quot;none&quot;</span>, zorder=<span class="number">0</span>)</span><br><span class="line">ax_F.set_ylim(<span class="number">0</span>, <span class="number">1.05</span>)</span><br><span class="line">ax_F.axis(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">r_1994 = df_sn[<span class="string">&quot;num_F_rate&quot;</span>].iloc[<span class="number">0</span>]</span><br><span class="line">r_2021 = df_sn[<span class="string">&quot;num_F_rate&quot;</span>].iloc[-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">for</span> idx, r, ha <span class="keyword">in</span> <span class="built_in">zip</span>([<span class="number">0</span>, df_sn.shape[<span class="number">0</span>]-<span class="number">1</span>], [r_1994, r_2021], [<span class="string">&quot;right&quot;</span>, <span class="string">&quot;left&quot;</span>]):</span><br><span class="line">    ax_F.text(idx, r+<span class="number">0.02</span>, <span class="string">f&#x27; <span class="subst">&#123;r:<span class="number">.2</span>f&#125;</span> &#x27;</span>, </span><br><span class="line">              fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gold&quot;</span>, <span class="string">&quot;ha&quot;</span>:ha, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">ax_F.text(df_sn.shape[<span class="number">0</span>]-<span class="number">1.1</span>, <span class="number">1.02</span>, <span class="string">&quot;여성비 (여성 지원자 : 남성 지원자)&quot;</span>, </span><br><span class="line">          fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">20</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gold&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;right&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># axes 순서</span></span><br><span class="line">ax_F.set_zorder(<span class="number">0</span>)</span><br><span class="line">ax.set_zorder(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 응시율</span></span><br><span class="line">ax_F.fill_between(df_sn.index, df_sn[<span class="string">&quot;num_test_rate&quot;</span>]/<span class="number">100</span>, <span class="number">0</span>, </span><br><span class="line">                  facecolor=<span class="string">&quot;1&quot;</span>, edgecolor=<span class="string">&quot;none&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">tr_1994 = df_sn[<span class="string">&quot;num_test_rate&quot;</span>].iloc[<span class="number">0</span>]/<span class="number">100</span></span><br><span class="line">tr_2021 = df_sn[<span class="string">&quot;num_test_rate&quot;</span>].iloc[-<span class="number">1</span>]/<span class="number">100</span></span><br><span class="line"><span class="keyword">for</span> idx, tr, ha <span class="keyword">in</span> <span class="built_in">zip</span>([<span class="number">0</span>, df_sn.shape[<span class="number">0</span>]-<span class="number">1</span>], [tr_1994, tr_2021], [<span class="string">&quot;right&quot;</span>, <span class="string">&quot;left&quot;</span>]):</span><br><span class="line">    ax_F.text(idx, tr+<span class="number">0.02</span>, <span class="string">f&#x27; <span class="subst">&#123;tr*<span class="number">100</span>:<span class="number">.0</span>f&#125;</span>% &#x27;</span>, </span><br><span class="line">              fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;ha&quot;</span>:ha, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">ax_F.text(<span class="number">0.1</span>, <span class="number">1.02</span>, <span class="string">&quot;응시율 (총 응시자 : 총 지원자)&quot;</span>, </span><br><span class="line">          fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">20</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;left&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 남녀 지원자</span></span><br><span class="line">df_sn[[<span class="string">&quot;year&quot;</span>, <span class="string">&quot;num_M&quot;</span>, <span class="string">&quot;num_F&quot;</span>]].plot.bar(x=<span class="string">&quot;year&quot;</span>, y=[<span class="string">&quot;num_M&quot;</span>, <span class="string">&quot;num_F&quot;</span>], ax=ax, </span><br><span class="line">                                           color=&#123;<span class="string">&quot;num_M&quot;</span>: color_M, <span class="string">&quot;num_F&quot;</span>: color_F&#125;, zorder=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">ax.plot(df_sn[<span class="string">&quot;num_total&quot;</span>], <span class="string">&#x27;o-&#x27;</span>, color=color_total, label=<span class="string">&quot;지원자 수&quot;</span>, zorder=<span class="number">1</span>)</span><br><span class="line">ax.plot(df_sn[<span class="string">&quot;num_test&quot;</span>], <span class="string">&#x27;o:&#x27;</span>, color=<span class="string">&#x27;darkgray&#x27;</span>, label=<span class="string">&quot;응시자 수&quot;</span>, zorder=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y축 범위</span></span><br><span class="line">ax.set_xlim(-<span class="number">1</span>, df_sn.shape[<span class="number">0</span>])</span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">1150000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># yticks major/minor 설정</span></span><br><span class="line">ax.yaxis.set_major_locator(MultipleLocator(<span class="number">200000</span>))</span><br><span class="line">ax.yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:.0f&#125;&#x27;</span>)</span><br><span class="line">ax.yaxis.set_minor_locator(MultipleLocator(<span class="number">100000</span>))</span><br><span class="line">ax.yaxis.set_minor_formatter(<span class="string">&#x27;&#123;x:.0f&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># major grid</span></span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>, color=<span class="string">&quot;0.2&quot;</span>, alpha=<span class="number">0.5</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;minor&quot;</span>, color=<span class="string">&quot;0.2&quot;</span>, alpha=<span class="number">0.5</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># yticks: major</span></span><br><span class="line">yticks = ax.get_yticks()</span><br><span class="line">ax.set_yticks(yticks[<span class="number">1</span>:-<span class="number">1</span>])</span><br><span class="line">yticklabels = ax.get_yticklabels()</span><br><span class="line">ax.set_yticklabels([<span class="string">f&quot;<span class="subst">&#123;y//<span class="number">10000</span>:<span class="number">.0</span>f&#125;</span>만명&quot;</span> <span class="keyword">for</span> y <span class="keyword">in</span> yticks[<span class="number">1</span>:-<span class="number">1</span>]], </span><br><span class="line">                   fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;aquamarine&quot;</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;right&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;)</span><br><span class="line">ax.set_yticklabels([], minor=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># xticks</span></span><br><span class="line">xticks = ax.get_xticks()</span><br><span class="line">ax.set_xticks(xticks)</span><br><span class="line">xticklabels = [<span class="string">f&quot;&#x27;<span class="subst">&#123;x.get_text()[<span class="number">2</span>:]&#125;</span>&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> ax.get_xticklabels()]</span><br><span class="line">xticklabels[<span class="number">0</span>] = xticklabels[<span class="number">0</span>] + <span class="string">&quot;\n(1)&quot;</span></span><br><span class="line">xticklabels[<span class="number">1</span>] = xticklabels[<span class="number">1</span>] + <span class="string">&quot;\n(2)&quot;</span></span><br><span class="line">ax.set_xticklabels(xticklabels, rotation=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">ax.set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># spines</span></span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;bottom&quot;</span>].set_color(<span class="string">&quot;aquamarine&quot;</span>)</span><br><span class="line">ax.tick_params(axis=<span class="string">&#x27;both&#x27;</span>, colors=<span class="string">&#x27;aquamarine&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend (1) 남성, 여성</span></span><br><span class="line">handles, labels = ax.get_legend_handles_labels()</span><br><span class="line">legend0 = ax.legend(handles=handles[<span class="number">2</span>:], labels=[<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>], ncol=<span class="number">2</span>,</span><br><span class="line">                    loc=<span class="string">&quot;lower left&quot;</span>, bbox_to_anchor=(<span class="number">0.035</span>, <span class="number">0.45</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># legend (2) 지원자 수, 응시자 수</span></span><br><span class="line">legend1 = ax.legend(handles=handles[:<span class="number">2</span>], labels=labels[:<span class="number">2</span>], ncol=<span class="number">2</span>,</span><br><span class="line">                    loc=<span class="string">&quot;lower left&quot;</span>, bbox_to_anchor=(<span class="number">0.035</span>, <span class="number">0.53</span>))</span><br><span class="line"></span><br><span class="line">ax.add_artist(legend0)</span><br><span class="line"></span><br><span class="line">fig.tight_layout(rect=[<span class="number">0.05</span>,<span class="number">0.05</span>,<span class="number">0.95</span>,<span class="number">0.95</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
 <p><b></b></p>
 
         </div>
@@ -421,7 +462,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/12/24/Python-DS-50-suneung3/" data-id="cuidr3gY5s4XOPhr5qAwTO-LA" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/12/24/Python-DS-50-suneung3/" data-id="cuid4csitnF8P88WVaoanj6f0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -511,9 +552,10 @@ grid를 넣으려고 minor tick도 설정해 보았구요.
 
 5. 토달기 : annotate
 
+
 지원자 수는 수능을 보겠다고 원서를 제출한 사람 수고
-응시자 수는 실제로 가서 ",
-        "wordCount": 3097
+응시자 수는 실제로 가서",
+        "wordCount": 3042
     }
 </script>
 
@@ -610,6 +652,26 @@ grid를 넣으려고 minor tick도 설정해 보았구요.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -684,26 +746,6 @@ grid를 넣으려고 minor tick도 설정해 보았구요.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

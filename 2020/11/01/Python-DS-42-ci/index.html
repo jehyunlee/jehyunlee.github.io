@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,seaborn,statistics,uncertainty,error bar,confidence interval,get_data,get_lines" />
     
-    <meta name="description" content="데이터의 불확실성을 함께 보여주는 방법 중 하나로 오차 막대나 신뢰 구간을 사용합니다. 오차 막대는 데이터 하나 하나에 붙여서, 신뢰 구간은 전체적인 범위를 보여줍니다. matplotlib과 seaborn으로 불확실성을 도시하는 방법을 정리했습니다.  0. 데이터 생성 평균이 0이고 표준편차가 1인 데이터를 100개씩 21쌍을 만듭니다. numpy.ran">
+    <meta name="description" content="데이터의 불확실성을 함께 보여주는 방법 중 하나로 오차 막대나 신뢰 구간을 사용합니다. 오차 막대는 데이터 하나 하나에 붙여서, 신뢰 구간은 전체적인 범위를 보여줍니다. matplotlib과 seaborn으로 불확실성을 도시하는 방법을 정리했습니다.  0. 데이터 생성  평균이 0이고 표준편차가 1인 데이터를 100개씩 21쌍을 만듭니다. numpy.ra">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Visualization of Uncertainty">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/11/01/Python-DS-42-ci/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="데이터의 불확실성을 함께 보여주는 방법 중 하나로 오차 막대나 신뢰 구간을 사용합니다. 오차 막대는 데이터 하나 하나에 붙여서, 신뢰 구간은 전체적인 범위를 보여줍니다. matplotlib과 seaborn으로 불확실성을 도시하는 방법을 정리했습니다.  0. 데이터 생성 평균이 0이고 표준편차가 1인 데이터를 100개씩 21쌍을 만듭니다. numpy.ran">
+<meta property="og:description" content="데이터의 불확실성을 함께 보여주는 방법 중 하나로 오차 막대나 신뢰 구간을 사용합니다. 오차 막대는 데이터 하나 하나에 붙여서, 신뢰 구간은 전체적인 범위를 보여줍니다. matplotlib과 seaborn으로 불확실성을 도시하는 방법을 정리했습니다.  0. 데이터 생성  평균이 0이고 표준편차가 1인 데이터를 100개씩 21쌍을 만듭니다. numpy.ra">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/42_ci_0.png">
 <meta property="article:published_time" content="2020-11-01T07:34:00.000Z">
@@ -240,23 +240,28 @@
 <li>오차 막대는 데이터 하나 하나에 붙여서, 신뢰 구간은 전체적인 범위를 보여줍니다.</li>
 <li>matplotlib과 seaborn으로 불확실성을 도시하는 방법을 정리했습니다.</li>
 </ul>
-<h3 id="0-데이터-생성"><a href="#0-데이터-생성" class="headerlink" title="0. 데이터 생성"></a>0. 데이터 생성</h3><ul>
+<h3 id="0-데이터-생성">0. 데이터 생성</h3>
+<ul>
 <li>평균이 0이고 표준편차가 1인 데이터를 100개씩 21쌍을 만듭니다.</li>
 <li><code>numpy.random.normal()</code>를 이용해서 데이터 프레임으로 한번에 만들 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_test = pd.DataFrame(&#123;<span class="string">&quot;X&quot;</span>:np.concatenate([[i]*<span class="number">100</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">21</span>)]), <span class="string">&quot;Y&quot;</span>:np.random.normal(size=<span class="number">2100</span>)&#125;)</span><br><span class="line">df_test.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_6.png"></p>
+<p><img src="42_ci_6.png" alt=""></p>
 <ul>
 <li>데이터 100개씩의 평균과 표준편차를 구합니다.</li>
 <li>로우 데이터와 별도의 데이터프레임이 하나 생겼습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df_gX_mean = df_test.groupby(<span class="string">&quot;X&quot;</span>).mean().reset_index()</span><br><span class="line">df_gX_std = df_test.groupby(<span class="string">&quot;X&quot;</span>).std().reset_index()</span><br><span class="line">df_gX = df_gX_mean.merge(df_gX_std, left_on=<span class="string">&quot;X&quot;</span>, right_on=<span class="string">&quot;X&quot;</span>, suffixes=(<span class="string">&quot;_mean&quot;</span>, <span class="string">&quot;_std&quot;</span>))</span><br><span class="line">df_gX.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_7.png"></p>
-<h3 id="1-오차-막대-error-bar-그리기"><a href="#1-오차-막대-error-bar-그리기" class="headerlink" title="1. 오차 막대 error bar 그리기"></a>1. 오차 막대 <code>error bar</code> 그리기</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.pyplot.errorbar.html">matplotlib.pyplot.errorbar</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.axes.Axes.errorbar.html?highlight=axes%20errorbar#matplotlib.axes.Axes.errorbar">matplotlib.axes.Axes.errorbar</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html">seaborn.lineplot</a></p>
+<p><img src="42_ci_7.png" alt=""></p>
+<h3 id="1-오차-막대-error-bar-그리기">1. 오차 막대 <code>error bar</code> 그리기</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.pyplot.errorbar.html">matplotlib.pyplot.errorbar</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/_as_gen/matplotlib.axes.Axes.errorbar.html?highlight=axes%20errorbar#matplotlib.axes.Axes.errorbar">matplotlib.axes.Axes.errorbar</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html">seaborn.lineplot</a></p>
 </blockquote>
 <ul>
-<li><p>오차 막대는 <b>matplotlib의 <code>errorbar</code>명령</b>으로 표현할 수 있습니다.</p>
+<li>
+<p>오차 막대는 <b>matplotlib의 <code>errorbar</code>명령</b>으로 표현할 수 있습니다.</p>
 <ul>
 <li>scatter plot과 line plot을 모두 그릴 수 있는 <code>plot()</code>함수의 확장형으로 생각해도 무방합니다.</li>
 <li>오차 막대를 표현할 수 있는 옵션을 담고 있기 때문에 인자가 훨씬 많습니다.</li>
@@ -264,19 +269,22 @@
 <li>그러나 <b>객체지향 방식 페이지에서 제공하는 예제가 훨씬 다양하고 많습니다</b>.</li>
 </ul>
 </li>
-<li><p>같은 데이터에 다른 옵션으로 그려봅니다.</p>
+<li>
+<p>같은 데이터에 다른 옵션으로 그려봅니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>,<span class="number">3</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].errorbar(x=df_gX[<span class="string">&quot;X&quot;</span>], y=df_gX[<span class="string">&quot;Y_mean&quot;</span>], yerr=df_gX[<span class="string">&quot;Y_std&quot;</span>], label=<span class="string">&quot;case I&quot;</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;default settings&quot;</span>)</span><br><span class="line">axs[<span class="number">0</span>].legend()</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].errorbar(x=df_gX[<span class="string">&quot;X&quot;</span>], y=df_gX[<span class="string">&quot;Y_mean&quot;</span>], yerr=df_gX[<span class="string">&quot;Y_std&quot;</span>], </span><br><span class="line">                fmt=<span class="string">&quot;ro&quot;</span>, elinewidth=<span class="number">0.5</span>, capsize=<span class="number">2</span>, label=<span class="string">&quot;case II&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;fmt, elinewith, capsize&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].legend(loc=<span class="string">&quot;upper right&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">2</span>].errorbar(x=df_gX[<span class="string">&quot;X&quot;</span>], y=df_gX[<span class="string">&quot;Y_mean&quot;</span>], yerr=df_gX[<span class="string">&quot;Y_std&quot;</span>], </span><br><span class="line">                ls=<span class="string">&quot;none&quot;</span>, marker=<span class="string">&quot;s&quot;</span>, mec=<span class="string">&quot;k&quot;</span>, mfc=<span class="string">&quot;w&quot;</span>, elinewidth=<span class="number">0.5</span>, capsize=<span class="number">2</span>,</span><br><span class="line">                ecolor=<span class="string">&quot;magenta&quot;</span>, errorevery=<span class="number">3</span>, label=<span class="string">&quot;case III&quot;</span>)</span><br><span class="line">axs[<span class="number">2</span>].set_title(<span class="string">&quot;ls, marker, ecolor, errorevery&quot;</span>)</span><br><span class="line">axs[<span class="number">2</span>].legend(loc=<span class="string">&quot;upper right&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_5.png"></p>
+<p><img src="42_ci_5.png" alt=""></p>
 <ul>
-<li><p><b>Case I : 기본 설정</b> </p>
+<li>
+<p><b>Case I : 기본 설정</b></p>
 <ul>
 <li>line plot에 error bar가 line 형태로 붙어 있습니다.</li>
 <li>간결해서 보기 좋기도 하지만 제 분야에서 일반적으로 쓰는 모양은 아니라 어색합니다.</li>
 </ul>
 </li>
-<li><p><b>Case II : <code>fmt</code>, <code>elinewidth</code>, <code>capsize</code></b> </p>
+<li>
+<p><b>Case II : <code>fmt</code>, <code>elinewidth</code>, <code>capsize</code></b></p>
 <ul>
 <li>scatter plot에 error bar가 $\text{I}$자 형태로 붙어 있습니다.</li>
 <li><b><code>fmt</code>(format)</b> 인자로 형태를 제어합니다.</li>
@@ -284,7 +292,8 @@
 <li>평소에 자주 보는 형식이라 익숙합니다.</li>
 </ul>
 </li>
-<li><p><b>Case III : line(<code>ls</code>, <code>c</code>), marker(<code>marker</code>, <code>mec</code>, <code>mfc</code>)</b> </p>
+<li>
+<p><b>Case III : line(<code>ls</code>, <code>c</code>), marker(<code>marker</code>, <code>mec</code>, <code>mfc</code>)</b></p>
 <ul>
 <li>scatter + line plot에 error bar가 $\text{I}$ 형태로 붙어 있습니다.</li>
 <li>line과 marker를 <b>별도로 제어</b>합니다.</li>
@@ -292,7 +301,8 @@
 <li>목적에 맞는 그래프로 만들 수 있습니다.</li>
 </ul>
 </li>
-<li><p><b>seaborn</b>에서도 <b><code>seaborn.lineplot()</code></b>명령어를 이용해 오차 막대를 표현할 수 있습니다.</p>
+<li>
+<p><b>seaborn</b>에서도 <b><code>seaborn.lineplot()</code></b>명령어를 이용해 오차 막대를 표현할 수 있습니다.</p>
 <ul>
 <li>그러나 사실상 matplotlib의 errorbar를 쓰는 것과 별반 다르지 않습니다.</li>
 <li><code>err_kws</code>인자에 dictionary 형식으로 error bar 관련 인자들을 집어넣어 줘야 하는데, 여기 사용되는 인자들이 seaborn 내부에서 matplotlib의 <code>errorbar()</code>에 전달될 인자이기 때문입니다.</li>
@@ -300,28 +310,37 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-오차-밴드"><a href="#2-오차-밴드" class="headerlink" title="2. 오차 밴드"></a>2. 오차 밴드</h3><ul>
+<h3 id="2-오차-밴드">2. 오차 밴드</h3>
+<ul>
 <li>데이터마다 오차 막대를 붙이는 대신 전체적으로 오차 범위를 밴드로 표시하기도 합니다.</li>
 <li>다수의 선을 하나의 면으로 표현하기 때문에 시각적으로 덜 번잡하여 최근 많이 선호되는 방법입니다.</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Confidence_interval">wikipedia: confidence interval</a><br><a target="_blank" rel="noopener" href="https://support.minitab.com/ko-kr/minitab/18/help-and-how-to/statistics/basic-statistics/supporting-topics/basics/what-is-a-confidence-interval/">minitab: 신뢰 구간의 정의</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Confidence_interval">wikipedia: confidence interval</a><br>
+<a target="_blank" rel="noopener" href="https://support.minitab.com/ko-kr/minitab/18/help-and-how-to/statistics/basic-statistics/supporting-topics/basics/what-is-a-confidence-interval/">minitab: 신뢰 구간의 정의</a></p>
 </blockquote>
 <ul>
-<li><p><b>오차 막대는 표준 편차</b>를 보여준다면, <b>오차 밴드</b>는 <b>신뢰 구간(ci: confidence interval)</b>을 주로 표현합니다.</p>
+<li>
+<p><b>오차 막대는 표준 편차</b>를 보여준다면, <b>오차 밴드</b>는 <b>신뢰 구간(ci: confidence interval)</b>을 주로 표현합니다.</p>
 </li>
-<li><p>신뢰 구간은 표본으로 눈에 보이지 않는 모수를 추정할 때 얼마나 믿을 수 있을지를 표현합니다.</p>
+<li>
+<p>신뢰 구간은 표본으로 눈에 보이지 않는 모수를 추정할 때 얼마나 믿을 수 있을지를 표현합니다.</p>
 </li>
-<li><p>예를 들어 신뢰 구간이 <b>95%</b>라면 <b>“표본을 20번 뽑았을 때 이 중 19번은 모집단의 모수를 포함할 것이다”라는 의미</b>입니다.<br><img src="/2020/11/01/Python-DS-42-ci/confidence_interval_def.gif" alt="신뢰구간의 정의. 이미지&#x3D;minitab"><br></p>
+<li>
+<p>예를 들어 신뢰 구간이 <b>95%</b>라면 <b>&quot;표본을 20번 뽑았을 때 이 중 19번은 모집단의 모수를 포함할 것이다&quot;라는 의미</b>입니다.<br>
+<img src="confidence_interval_def.gif" alt="신뢰구간의 정의. 이미지=minitab"><br></p>
 </li>
-<li><p>신뢰 구간은 다음과 같이 <b>Z-Score $Z$</b>와 <b>표본의 표준편차 $s$</b>, 그리고 <b>표본의 수 $n$</b>에 따라 결정됩니다.<br><br><img src="/2020/11/01/Python-DS-42-ci/42_ci_8.png"></p>
+<li>
+<p>신뢰 구간은 다음과 같이 <b>Z-Score $Z$</b>와 <b>표본의 표준편차 $s$</b>, 그리고 <b>표본의 수 $n$</b>에 따라 결정됩니다.<br><br>
+<img src="42_ci_8.png" alt=""></p>
 </li>
 </ul>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.2/api/_as_gen/matplotlib.lines.Line2D.html">matplotlib.lines.Line2D</a></p>
 </blockquote>
 <ul>
-<li>앞에서 만든 데이터를 오차 밴드로 표현해봅시다.<ul>
+<li>앞에서 만든 데이터를 오차 밴드로 표현해봅시다.
+<ul>
 <li>maplotlib은 <b><code>fill_between()</code></b>을 사용합니다.</li>
 <li>seaborn은 <b><code>lineplot()</code></b>을 사용합니다.</li>
 <li>두 라이브러리의 기본값이 다른 점에 유의해서 봅니다.</li>
@@ -329,23 +348,29 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">cis = [<span class="number">95</span>, <span class="string">&quot;sd&quot;</span>]</span><br><span class="line">font_title = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">12</span>&#125;</span><br><span class="line">titles = [<span class="string">&quot;ci=95 (seaborn default)&quot;</span>, <span class="string">&quot;ci=\&quot;sd\&quot; (standard deviation)&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">10</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, ci, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs[<span class="number">1</span>:], cis, titles[:<span class="number">2</span>]):</span><br><span class="line">    sns.lineplot(x=<span class="string">&quot;X&quot;</span>, y=<span class="string">&quot;Y&quot;</span>, data=df_test, ci=ci, ax=ax)</span><br><span class="line">    ax.set_title(title, fontdict=font_title)</span><br><span class="line">    ax.axhline(<span class="number">0</span>, c=<span class="string">&quot;green&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax.set_xlim(<span class="number">0</span>,<span class="number">20</span>)</span><br><span class="line">    ax.set_ylim(-<span class="number">1.25</span>, <span class="number">1.25</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">21</span>):</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">5</span>:</span><br><span class="line">        color = <span class="string">&quot;k&quot;</span></span><br><span class="line">        alpha = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        color = <span class="string">f&quot;C<span class="subst">&#123;i&#125;</span>&quot;</span></span><br><span class="line">        alpha = <span class="number">0.2</span></span><br><span class="line">        </span><br><span class="line">    df_test.loc[<span class="number">100</span>*i:<span class="number">100</span>*(i+<span class="number">1</span>), <span class="string">&quot;Y&quot;</span>].plot.kde(ax=axs[<span class="number">0</span>], c=color, legend=<span class="literal">False</span>, alpha=alpha, zorder=<span class="number">2</span>)</span><br><span class="line">    axs[<span class="number">0</span>].set_xlim(-<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">    axs[<span class="number">0</span>].set_ylim(<span class="number">0</span>, <span class="number">0.5</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">5</span>:</span><br><span class="line">        axs[<span class="number">0</span>].axvline(<span class="number">0</span>, c=<span class="string">&quot;green&quot;</span>, alpha=<span class="number">0.5</span>, zorder=<span class="number">3</span>)</span><br><span class="line">        std = df_test.loc[<span class="number">100</span>*i:<span class="number">100</span>*(i+<span class="number">1</span>), <span class="string">&quot;Y&quot;</span>].std()</span><br><span class="line">        ci95 = <span class="number">1.96</span> * std/np.sqrt(<span class="number">100</span>)</span><br><span class="line">        mean = df_test.loc[<span class="number">100</span>*i:<span class="number">100</span>*(i+<span class="number">1</span>), <span class="string">&quot;Y&quot;</span>].mean()</span><br><span class="line">        line_mean = axs[<span class="number">0</span>].plot([mean, mean], [<span class="number">0</span>, <span class="number">0.36</span>], <span class="string">&quot;:&quot;</span>, c=<span class="string">&quot;k&quot;</span>, label=<span class="string">&quot;no.7 mean&quot;</span>, zorder=<span class="number">2.5</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Line plot에서 데이터 가져오기</span></span><br><span class="line">        X_, Y_ = axs[<span class="number">0</span>].get_lines()[i].get_data(orig=<span class="literal">True</span>)</span><br><span class="line">        axs[<span class="number">0</span>].fill_between(X_[(X_ &gt;= mean-ci95) &amp; (X_ &lt; mean+ci95)], Y_[(X_ &gt;= mean-ci95) &amp; (X_ &lt; mean+ci95)], fc=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>, zorder=<span class="number">2.4</span>)</span><br><span class="line">        </span><br><span class="line">        fig.text(<span class="number">0.31</span>, <span class="number">0.65</span>, <span class="string">f&quot;No. <span class="subst">&#123;i&#125;</span>\nmean : <span class="subst">&#123;mean:<span class="number">0.2</span>f&#125;</span>\nst.dev :  <span class="subst">&#123;std:<span class="number">0.2</span>f&#125;</span>\nci (95%) :  <span class="subst">&#123;ci95:<span class="number">0.2</span>f&#125;</span>&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">10</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;, ha=<span class="string">&quot;right&quot;</span>) <span class="comment">#, transform=ax.transAxes)</span></span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_4.png"></p>
+<p><img src="42_ci_4.png" alt=""></p>
 <ul>
-<li><p>세 칸의 그림 중 맨 왼쪽에는 <b>21쌍 데이터의 분포</b>를 <code>seaborn.kdeplot</code>으로 그렸습니다.</p>
+<li>
+<p>세 칸의 그림 중 맨 왼쪽에는 <b>21쌍 데이터의 분포</b>를 <code>seaborn.kdeplot</code>으로 그렸습니다.</p>
 <ul>
 <li>0을 중심으로 21개의 분포가 퍼져 있는 가운데 5번째 데이터를 굵게 그렸습니다.</li>
-<li>평균이 -0.22로 크게 벗어나 있고, ci(95%)가 0.19입니다.<br>평균 참값 0이 ci (-0.41 ~ -0.03)안에 들어와 있지 않습니다.</li>
-<li>kdeplot의 데이터를 가져오는데 <code>.get_lines()</code>와 <code>.get_data()</code>를 사용했습니다.<br>관련 내용은 추후 기회가 되면 자세히 다루겠습니다.</li>
+<li>평균이 -0.22로 크게 벗어나 있고, ci(95%)가 0.19입니다.<br>
+평균 참값 0이 ci (-0.41 ~ -0.03)안에 들어와 있지 않습니다.</li>
+<li>kdeplot의 데이터를 가져오는데 <code>.get_lines()</code>와 <code>.get_data()</code>를 사용했습니다.<br>
+관련 내용은 추후 기회가 되면 자세히 다루겠습니다.</li>
 </ul>
 </li>
-<li><p>가운데 그림에 <b>21쌍 데이터의 평균과 ci를 연속적으로 표현</b>했습니다.</p>
+<li>
+<p>가운데 그림에 <b>21쌍 데이터의 평균과 ci를 연속적으로 표현</b>했습니다.</p>
 <ul>
 <li>21개 경우 중 한 가지 경우에서 모수의 평균을 제대로 추정하지 못했습니다.</li>
-<li>확률로 95%에 가깝습니다. 그러나 21가지라는 제한적인 시도의 결과입니다.<br>여러 번 반복 수행하면 결과가 달라집니다.</li>
+<li>확률로 95%에 가깝습니다. 그러나 21가지라는 제한적인 시도의 결과입니다.<br>
+여러 번 반복 수행하면 결과가 달라집니다.</li>
 <li><code>seaborn.lineplot()</code>으로 그렸습니다. 기본적으로 ci를 보여줍니다.</li>
 </ul>
 </li>
-<li><p>맨 오른쪽에는 같은 데이터의 <b>오차 범위를 표준 편차</b>로 그렸습니다.</p>
+<li>
+<p>맨 오른쪽에는 같은 데이터의 <b>오차 범위를 표준 편차</b>로 그렸습니다.</p>
 <ul>
 <li>훨씬 넓어집니다.</li>
 <li>정확히는 가운데 그림이 표준편차에 Z-Score와 표본의 수가 반영된 만큼 폭이 바뀐 것입니다.</li>
@@ -354,60 +379,80 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-실제-데이터-적용"><a href="#3-실제-데이터-적용" class="headerlink" title="3. 실제 데이터 적용"></a>3. 실제 데이터 적용</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://usys.ethz.ch/en/news-events/news/archive/2020/09/new-study-of-ocean-salinity-finds-substantial-amplification-of-the-global-water-cycle.html">Ocean salinity: Climate change is also changing the water cycle</a><br><a target="_blank" rel="noopener" href="https://journals.ametsoc.org/jcli/article/doi/10.1175/JCLI-D-20-0366.1/354497/Improved-estimates-of-changes-in-upper-ocean">Cheng L., K. E. Trenberth, N. Gruber, J. P. Abraham, J. Fasullo, G. Li, M. E. Mann, X. Zhao, Jiang Zhu, 2020: Improved estimates of changes in upper ocean salinity and the hydrological cycle. Journal of Climate. In press, doi: https://doi.org/10.1175/JCLI-D-20-0366.1.</a></p>
+<h3 id="3-실제-데이터-적용">3. 실제 데이터 적용</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://usys.ethz.ch/en/news-events/news/archive/2020/09/new-study-of-ocean-salinity-finds-substantial-amplification-of-the-global-water-cycle.html">Ocean salinity: Climate change is also changing the water cycle</a><br>
+<a target="_blank" rel="noopener" href="https://journals.ametsoc.org/jcli/article/doi/10.1175/JCLI-D-20-0366.1/354497/Improved-estimates-of-changes-in-upper-ocean">Cheng L., K. E. Trenberth, N. Gruber, J. P. Abraham, J. Fasullo, G. Li, M. E. Mann, X. Zhao, Jiang Zhu, 2020: Improved estimates of changes in upper ocean salinity and the hydrological cycle. Journal of Climate. In press, doi: https://doi.org/10.1175/JCLI-D-20-0366.1.</a></p>
 </blockquote>
 <ul>
-<li><p>1960년 이후 해수의 염도 변화를 나타낸 그래프입니다.</p>
+<li>
+<p>1960년 이후 해수의 염도 변화를 나타낸 그래프입니다.</p>
 </li>
-<li><p>데이터의 <b>평균값</b>과 <b>표준편차</b>로 나타낸 오차값이 표현되어 있습니다.<br><br><img src="/2020/11/01/Python-DS-42-ci/42_ci_1.png" alt="Figure 3. Increasing salinity-​contrast in the world’s ocean. Figure shows Salinity-​contrast time series from 1960 to 2017 at upper 2000m. Background Photograph: Xilin Wang."></p>
+<li>
+<p>데이터의 <b>평균값</b>과 <b>표준편차</b>로 나타낸 오차값이 표현되어 있습니다.<br><br>
+<img src="42_ci_1.png" alt="Figure 3. Increasing salinity-​contrast in the world’s ocean. Figure shows Salinity-​contrast time series from 1960 to 2017 at upper 2000m. Background Photograph: Xilin Wang."></p>
 </li>
-<li><p>이 그림을 배경 사진을 제외하고 재현해 보겠습니다.</p>
+<li>
+<p>이 그림을 배경 사진을 제외하고 재현해 보겠습니다.</p>
 </li>
-<li><p>저자들이 올린 데이터를 형식만 수정하여 사용합니다.</p>
+<li>
+<p>저자들이 올린 데이터를 형식만 수정하여 사용합니다.</p>
 </li>
-<li><p><a href="data_2000.txt">여기에서 다운로드</a>받을 수 있습니다.</p>
+<li>
+<p><a href="data_2000.txt">여기에서 다운로드</a>받을 수 있습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&quot;data_2000.txt&quot;</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_9.png"></p>
+<p><img src="42_ci_9.png" alt=""></p>
 <ul>
 <li>컬럼 이름이 너무 길어서 어렵습니다. 짧게 줄여줍시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cols_0 = data.columns</span><br><span class="line">cols_1 = [<span class="string">&quot;year&quot;</span>, <span class="string">&quot;mean&quot;</span>, <span class="string">&quot;2std&quot;</span>, <span class="string">&quot;mean_240&quot;</span>]</span><br><span class="line">data = data.rename(columns=<span class="built_in">dict</span>(<span class="built_in">zip</span>(cols_0, cols_1)))</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_11.png"></p>
-<h4 id="3-1-Matplotlib으로-그리기"><a href="#3-1-Matplotlib으로-그리기" class="headerlink" title="3.1. Matplotlib으로 그리기"></a>3.1. Matplotlib으로 그리기</h4><ul>
+<p><img src="42_ci_11.png" alt=""></p>
+<h4 id="3-1-Matplotlib으로-그리기">3.1. Matplotlib으로 그리기</h4>
+<ul>
 <li><b>오차 범위로 사용할 데이터</b>가 필요합니다.</li>
 <li>평균에서 표준편차를 더하고 뺀 값을 추가해줍니다.</li>
 <li>이 구간 사이를 오차범위로 도시할 것입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&quot;+2s&quot;</span>] = data[<span class="string">&quot;mean&quot;</span>] + data[<span class="string">&quot;2std&quot;</span>]</span><br><span class="line">data[<span class="string">&quot;-2s&quot;</span>] = data[<span class="string">&quot;mean&quot;</span>] - data[<span class="string">&quot;2std&quot;</span>]</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_10.png"></p>
+<p><img src="42_ci_10.png" alt=""></p>
 <ul>
-<li><p>결과물을 먼저 보여드리겠습니다.<br><br><img src="/2020/11/01/Python-DS-42-ci/42_ci_2.png"><br></p>
+<li>
+<p>결과물을 먼저 보여드리겠습니다.<br><br>
+<img src="42_ci_2.png" alt=""><br></p>
 </li>
-<li><p>이렇게 그렸습니다.<br></p>
+<li>
+<p>이렇게 그렸습니다.<br></p>
 <ol>
 <li><b>배경색 :</b> <code>fig.set_facecolor()</code>, <code>ax.set_facecolor()</code>를 사용합니다.<br></li>
-<li><b>공간 분할 :</b> 그래프 아래에 글자를 넣다가 layout이 망가지기 쉽습니다.<br>  애초에 subplot을 위와 아래에 두 개 만들고 아래는 그래프 대신 글자를 넣으면 안정적입니다.<br>  비대칭 공간 분할은 <code>gridspec_kw</code>를 이용합니다.<br></li>
-<li><b>오차 밴드 :</b> “+2s”와 “-2s” 사이를 <code>fill_between()</code>으로 채웁니다.<br></li>
-<li><b>Legend :</b> <code>ax.legend()</code> 대신 <code>ax.text()</code>를 사용했습니다.<br>  하늘색 사각형은 <code>patches.Rectangle()</code>을 <code>ax.add_patch()</code>했습니다.<br></li>
-<li><b>labels 제외 글자들 :</b> <code>ax.text()</code>를 사용했습니다.<br>  텍스트 위치를 <code>axes</code> 내부 상대좌표로 잡으면 편합니다. <code>transform=ax.transAxes</code>를 사용하면 됩니다.<br></li>
-<li><b>아래 글자 :</b> <code>fig.text()</code>를 사용했습니다.<br>  그래프에 관계 없이 전체 그림을 보고 위치를 잡는 게 좋기 때문입니다.</li>
+<li><b>공간 분할 :</b> 그래프 아래에 글자를 넣다가 layout이 망가지기 쉽습니다.<br>
+애초에 subplot을 위와 아래에 두 개 만들고 아래는 그래프 대신 글자를 넣으면 안정적입니다.<br>
+비대칭 공간 분할은 <code>gridspec_kw</code>를 이용합니다.<br></li>
+<li><b>오차 밴드 :</b> &quot;+2s&quot;와 “-2s” 사이를 <code>fill_between()</code>으로 채웁니다.<br></li>
+<li><b>Legend :</b> <code>ax.legend()</code> 대신 <code>ax.text()</code>를 사용했습니다.<br>
+하늘색 사각형은 <code>patches.Rectangle()</code>을 <code>ax.add_patch()</code>했습니다.<br></li>
+<li><b>labels 제외 글자들 :</b> <code>ax.text()</code>를 사용했습니다.<br>
+텍스트 위치를 <code>axes</code> 내부 상대좌표로 잡으면 편합니다. <code>transform=ax.transAxes</code>를 사용하면 됩니다.<br></li>
+<li><b>아래 글자 :</b> <code>fig.text()</code>를 사용했습니다.<br>
+그래프에 관계 없이 전체 그림을 보고 위치를 잡는 게 좋기 때문입니다.</li>
 </ol>
 </li>
 </ul>
-<h4 id="3-2-Seaborn으로-그리기"><a href="#3-2-Seaborn으로-그리기" class="headerlink" title="3.2. Seaborn으로 그리기"></a>3.2. Seaborn으로 그리기</h4><ul>
+<h4 id="3-2-Seaborn으로-그리기">3.2. Seaborn으로 그리기</h4>
+<ul>
 <li><code>seaborn.lineplot</code>은 오차 범위가 필요하지 않습니다.</li>
 <li><b>해당 범위의 오차를 만드는 데이터</b>가 필요합니다.</li>
 <li>각 지점마다 1000개의 데이터를 주어진 오차에 따라 만들어 주었습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">random</span>(<span class="params">loc, scale, size=<span class="number">100</span></span>):</span><br><span class="line">    <span class="keyword">return</span> np.random.normal(loc=loc, scale=scale, size=[size]*loc.size)</span><br><span class="line"></span><br><span class="line">data_ = deepcopy(data)    </span><br><span class="line">data_[<span class="string">&quot;generated&quot;</span>] = data_.apply(<span class="keyword">lambda</span> x: random(x[<span class="string">&quot;mean&quot;</span>], x[<span class="string">&quot;2std&quot;</span>], <span class="number">1000</span>), axis=<span class="number">1</span>)</span><br><span class="line">data1 = data_.explode(<span class="string">&quot;generated&quot;</span>)</span><br><span class="line">data1[<span class="string">&quot;generated&quot;</span>] = data1[<span class="string">&quot;generated&quot;</span>].astype(<span class="string">&quot;float&quot;</span>)</span><br><span class="line">data1.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/11/01/Python-DS-42-ci/42_ci_12.png"></p>
+<p><img src="42_ci_12.png" alt=""></p>
 <ul>
-<li>그러면, matplotlib과 똑같은 그래프를 그릴 수 있습니다.<br><br><img src="/2020/11/01/Python-DS-42-ci/42_ci_3.png"><br></li>
+<li>그러면, matplotlib과 똑같은 그래프를 그릴 수 있습니다.<br><br>
+<img src="42_ci_3.png" alt=""><br></li>
 </ul>
-<h4 id="3-3-Visualization-code"><a href="#3-3-Visualization-code" class="headerlink" title="3.3. Visualization code"></a>3.3. Visualization code</h4><ul>
+<h4 id="3-3-Visualization-code">3.3. Visualization code</h4>
+<ul>
 <li>소스 코드는 다음과 같습니다.</li>
 <li>matplotlib과 seaborn으로 그릴 때 각기 activate 하는 부분만 다릅니다.</li>
 </ul>
@@ -428,7 +473,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/11/01/Python-DS-42-ci/" data-id="cuidSdRrSleDYGaICiFs31NdP" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/11/01/Python-DS-42-ci/" data-id="cuidMXJPHPspdQhLpC83IIvLr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -512,9 +557,10 @@
 matplotlib과 seaborn으로 불확실성을 도시하는 방법을 정리했습니다.
 
 0. 데이터 생성
+
 평균이 0이고 표준편차가 1인 데이터를 100개씩 21쌍을 만듭니다.
-numpy.ran",
-        "wordCount": 1885
+numpy.ra",
+        "wordCount": 1844
     }
 </script>
 
@@ -611,6 +657,26 @@ numpy.ran",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -685,26 +751,6 @@ numpy.ran",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

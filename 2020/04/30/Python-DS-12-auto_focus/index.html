@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,signal processing" />
     
-    <meta name="description" content="matplotlib.axes.Axes.set_xlimnumpy.histogram   그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.  matplotlib의 object oriented API는 .set_xlim()과 .set_ylim()을 제공해 줍니다.  jupyter notebook에서 %matplotlib qt로 선언했다면 GU">
+    <meta name="description" content="matplotlib.axes.Axes.set_xlim numpy.histogram    그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.   matplotlib의 object oriented API는 .set_xlim()과 .set_ylim()을 제공해 줍니다.   jupyter notebook에서 %matplotlib qt로 선언했다">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Automated Focusing">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="matplotlib.axes.Axes.set_xlimnumpy.histogram   그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.  matplotlib의 object oriented API는 .set_xlim()과 .set_ylim()을 제공해 줍니다.  jupyter notebook에서 %matplotlib qt로 선언했다면 GU">
+<meta property="og:description" content="matplotlib.axes.Axes.set_xlim numpy.histogram    그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.   matplotlib의 object oriented API는 .set_xlim()과 .set_ylim()을 제공해 줍니다.   jupyter notebook에서 %matplotlib qt로 선언했다">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/12_af_1.png">
 <meta property="article:published_time" content="2020-04-29T22:37:00.000Z">
@@ -229,24 +229,34 @@
             
 
             <blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_xlim.html">matplotlib.axes.Axes.set_xlim</a><br><a target="_blank" rel="noopener" href="https://numpy.org/doc/1.18/reference/generated/numpy.histogram.html">numpy.histogram</a></p>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.set_xlim.html">matplotlib.axes.Axes.set_xlim</a><br>
+<a target="_blank" rel="noopener" href="https://numpy.org/doc/1.18/reference/generated/numpy.histogram.html">numpy.histogram</a></p>
 </blockquote>
 <ul>
-<li><p>그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.</p>
+<li>
+<p>그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.</p>
 </li>
-<li><p>matplotlib의 object oriented API는 <code>.set_xlim()</code>과 <code>.set_ylim()</code>을 제공해 줍니다.</p>
+<li>
+<p>matplotlib의 object oriented API는 <code>.set_xlim()</code>과 <code>.set_ylim()</code>을 제공해 줍니다.</p>
 </li>
-<li><p>jupyter notebook에서 <code>%matplotlib qt</code>로 선언했다면 GUI로 자유롭게 지정할 수도 있습니다.<br><br><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_2.png"></p>
+<li>
+<p>jupyter notebook에서 <code>%matplotlib qt</code>로 선언했다면 GUI로 자유롭게 지정할 수도 있습니다.<br><br>
+<img src="12_af_2.png" alt=""></p>
 </li>
-<li><p>그러나 잘 보이지도 않는 영역을 찾기 위해 반복적으로 영역을 설정하는 일은 지루합니다.</p>
+<li>
+<p>그러나 잘 보이지도 않는 영역을 찾기 위해 반복적으로 영역을 설정하는 일은 지루합니다.</p>
 </li>
-<li><p>데이터 숫자라도 많으면 다시 그릴때마다 기다려야 하는 과정이 결코 즐겁지 않습니다.</p>
+<li>
+<p>데이터 숫자라도 많으면 다시 그릴때마다 기다려야 하는 과정이 결코 즐겁지 않습니다.</p>
 </li>
-<li><p>데이터의 분포를 이용해 관심영역(Region of Interest)를 자동으로 확대하는 함수를 만들겠습니다.</p>
+<li>
+<p>데이터의 분포를 이용해 관심영역(Region of Interest)를 자동으로 확대하는 함수를 만들겠습니다.</p>
 </li>
 </ul>
-<h3 id="1-sample-data"><a href="#1-sample-data" class="headerlink" title="1. sample data"></a>1. sample data</h3><ul>
-<li>예제 데이터는 <code>xs=[x1, x2, x3, x4, x5]</code>, <code>ys=[y1, y2, y3, y4, y5]</code>로 미리 정의되었습니다.<ul>
+<h3 id="1-sample-data">1. sample data</h3>
+<ul>
+<li>예제 데이터는 <code>xs=[x1, x2, x3, x4, x5]</code>, <code>ys=[y1, y2, y3, y4, y5]</code>로 미리 정의되었습니다.
+<ul>
 <li><a href="xy.zip">여기에서 다운로드</a> 받으실 수 있습니다.</li>
 </ul>
 </li>
@@ -254,110 +264,126 @@
 <li>첫 번째와 마지막을 제외하면 y값이 특정 범위에 몰려 있음을 알 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">6</span>): <span class="comment"># 변수 이름을 동적으로 할당</span></span><br><span class="line">    <span class="built_in">globals</span>()[<span class="string">f&#x27;x<span class="subst">&#123;i&#125;</span>&#x27;</span>] = np.loadtxt(<span class="string">f&#x27;x<span class="subst">&#123;i&#125;</span>.csv&#x27;</span>)</span><br><span class="line">    <span class="built_in">globals</span>()[<span class="string">f&#x27;y<span class="subst">&#123;i&#125;</span>&#x27;</span>] = np.loadtxt(<span class="string">f&#x27;y<span class="subst">&#123;i&#125;</span>.csv&#x27;</span>)</span><br><span class="line"></span><br><span class="line">xs = [x1, x2, x3, x4, x5]</span><br><span class="line">ys = [y1, y2, y3, y4, y5]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그림그리기    </span></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">5</span>, figsize=(<span class="number">12</span>,<span class="number">3</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    ax[i].plot(xs[i], ys[i])</span><br><span class="line">    </span><br><span class="line">fig.tight_layout()        </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_3.png"><br></p>
+<p><img src="12_af_3.png" alt=""><br></p>
 <ul>
 <li>몇 차례의 iteration을 통해 얻은 최적 범위로 그림을 그리면 이렇게 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ax[<span class="number">1</span>].set_ylim(-<span class="number">0.015</span>,<span class="number">0</span>)    <span class="comment"># iteration 3회 결과</span></span><br><span class="line">ax[<span class="number">2</span>].set_ylim(-<span class="number">2e-3</span>, <span class="number">2e-3</span>) <span class="comment"># iteration 4회 결과</span></span><br><span class="line">ax[<span class="number">3</span>].set_ylim(-<span class="number">7e-4</span>,<span class="number">7e-4</span>)  <span class="comment"># iteration 4회 결과</span></span><br><span class="line"></span><br><span class="line">ax[<span class="number">1</span>].set_xlim(<span class="number">2</span>, <span class="number">3.5</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_xlim(<span class="number">2</span>, <span class="number">3.5</span>)</span><br><span class="line">ax[<span class="number">3</span>].set_xlim(<span class="number">2</span>, <span class="number">3.5</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_4.png"><br></p>
+<p><img src="12_af_4.png" alt=""><br></p>
 <ul>
 <li>두 번째 ~ 네 번째 그래프에서 전체 범위에 묻혀있던 관심영역이 잘 드러났습니다.</li>
 <li>첫 번째와 마지막 그래프는 전체가 관심영역이므로 가려지면 안 됩니다.</li>
 <li>이런 범위 설정 작업을 반복하지 않도록 자동화하고 싶습니다.</li>
 </ul>
-<h3 id="2-data-distribution"><a href="#2-data-distribution" class="headerlink" title="2. data distribution"></a>2. data distribution</h3><ul>
+<h3 id="2-data-distribution">2. data distribution</h3>
+<ul>
 <li>두 번째 ~ 네 번째 그래프에서 관심영역 외 부분이 단조증가 또는 감소하고 있습니다.</li>
 <li>데이터의 빈도를 이용해 이 부분을 제거하고 관심영역에 집중합시다.</li>
 <li><code>numpy.histogram()</code>으로 y 데이터의 구간별 데이터 수를 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">res = <span class="number">1000</span>   </span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">5</span>, figsize=(<span class="number">12</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, y <span class="keyword">in</span> <span class="built_in">enumerate</span>(ys):</span><br><span class="line">    ymin, ymax = y.<span class="built_in">min</span>(), y.<span class="built_in">max</span>()   </span><br><span class="line">    yhist, ybins = np.histogram(y, bins=res)  <span class="comment"># 1000개 구간별 데이터 수를 셉니다.</span></span><br><span class="line"></span><br><span class="line">    ax[i].plot(ybins[:-<span class="number">1</span>], yhist)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_5.png"><br></p>
+<p><img src="12_af_5.png" alt=""><br></p>
 <ul>
 <li>두 번째 이후의 그래프에서, 진동하는 구간에 많은 데이터가 몰린 것을 확인할 수 있습니다.</li>
 <li>1000개 구간으로 충분히 잘게 나누었기 때문에 데이터가 없는 구간도 있습니다.</li>
 </ul>
-<h3 id="3-setting-y-range-by-bin-filtering"><a href="#3-setting-y-range-by-bin-filtering" class="headerlink" title="3. setting $$y$$ range by bin filtering"></a>3. setting $$y$$ range by bin filtering</h3><ul>
+<h3 id="3-setting-y-range-by-bin-filtering">3. setting $$y$$ range by bin filtering</h3>
+<ul>
 <li>구간별 데이터 수가 일정(<code>yth</code>) 이상인 구간만 추립니다.</li>
 <li>그러나 첫 번째 그래프처럼 데이터 수는 적어도 전체를 다 보여줘야 하는 경우가 있습니다.</li>
 <li>이럴 때를 대비하여 관심영역이 딱히 없다면 전체 구간을 잡도록 예외처리합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">res = <span class="number">1000</span>   </span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">5</span>, figsize=(<span class="number">12</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, y <span class="keyword">in</span> <span class="built_in">enumerate</span>(ys):</span><br><span class="line">    ymin, ymax = y.<span class="built_in">min</span>(), y.<span class="built_in">max</span>()   </span><br><span class="line">    yhist, ybins = np.histogram(y, bins=res)  <span class="comment"># 1000개 구간별 데이터 수를 셉니다.</span></span><br><span class="line">    yfoc = ybins[np.where(yhist &gt; yth)[<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(yfoc) &gt;= <span class="number">2</span>:  <span class="comment"># 관심영역이 없을 경우 예외처리</span></span><br><span class="line">            ymin, ymax = yfoc.<span class="built_in">min</span>(), yfoc.<span class="built_in">max</span>() </span><br><span class="line">            </span><br><span class="line">    ax[i].plot(xs[i], ys[i])</span><br><span class="line">    ax[i].set_ylim(ymin, ymax)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_8.png"><br></p>
+<p><img src="12_af_8.png" alt=""><br></p>
 <ul>
 <li>y 범위가 너무 빡빡하게 잡혔네요. 여유를 좀 줍시다.</li>
 <li>y range를 계산해서, 사전에 정의된 여유분(<code>ymargin</code>) 비율만큼 위아래로 더해줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">res = <span class="number">1000</span>   </span><br><span class="line">ymargin = <span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">5</span>, figsize=(<span class="number">12</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, y <span class="keyword">in</span> <span class="built_in">enumerate</span>(ys):</span><br><span class="line">    ymin, ymax = y.<span class="built_in">min</span>(), y.<span class="built_in">max</span>()   </span><br><span class="line">    yhist, ybins = np.histogram(y, bins=res)  </span><br><span class="line">    yfoc = ybins[np.where(yhist &gt; yth)[<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(yfoc) &gt;= <span class="number">2</span>:</span><br><span class="line">            ymin, ymax = yfoc.<span class="built_in">min</span>(), yfoc.<span class="built_in">max</span>() </span><br><span class="line">    </span><br><span class="line">    yrange = ymax-ymin      <span class="comment"># y data의 범위를 계산합니다.</span></span><br><span class="line">    <span class="comment"># ymargin 만큼 최대 최소 범위를 확장합니다.</span></span><br><span class="line">    ymin -= yrange*ymargin  </span><br><span class="line">    ymax += yrange*ymargin</span><br><span class="line">    </span><br><span class="line">    ax[i].plot(xs[i], ys[i])</span><br><span class="line">    ax[i].set_ylim(ymin, ymax)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_9.png"><br></p>
-<h3 id="4-setting-x-range-by-y-range"><a href="#4-setting-x-range-by-y-range" class="headerlink" title="4. setting $$x$$ range by $$y$$ range"></a>4. setting $$x$$ range by $$y$$ range</h3><ul>
-<li><p>두 번째 ~ 네 번째 그래프 오른쪽이 비어있습니다.</p>
+<p><img src="12_af_9.png" alt=""><br></p>
+<h3 id="4-setting-x-range-by-y-range">4. setting $$x$$ range by $$y$$ range</h3>
+<ul>
+<li>
+<p>두 번째 ~ 네 번째 그래프 오른쪽이 비어있습니다.</p>
 </li>
-<li><p>관심영역이 왼쪽으로 치우친 탓입니다. x 범위도 다시 설정해서 그림을 꽉 차게 만들어줍시다.</p>
+<li>
+<p>관심영역이 왼쪽으로 치우친 탓입니다. x 범위도 다시 설정해서 그림을 꽉 차게 만들어줍시다.</p>
 </li>
-<li><p>위에서 만든 코드를 다시 사용하기 좋도록 함수로 정의하겠습니다. 주석도 달고요.</p>
+<li>
+<p>위에서 만든 코드를 다시 사용하기 좋도록 함수로 정의하겠습니다. 주석도 달고요.</p>
 </li>
-<li><p>(2020.05.24) 버그를 발견하여 <a href="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/"><b>Bresenham’s line algorithm</b></a>을 추가했습니다.</p>
+<li>
+<p>(2020.05.24) 버그를 발견하여 <a href="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/"><b>Bresenham’s line algorithm</b></a>을 추가했습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">bresenham</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, start, end</span>):</span><br><span class="line">        <span class="variable language_">self</span>.start = <span class="built_in">list</span>(start)</span><br><span class="line">        <span class="variable language_">self</span>.end = <span class="built_in">list</span>(end)</span><br><span class="line">        <span class="variable language_">self</span>.path = []</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.steep = <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>]-<span class="variable language_">self</span>.start[<span class="number">1</span>]) &gt; <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">0</span>]-<span class="variable language_">self</span>.start[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.steep:</span><br><span class="line">            <span class="variable language_">self</span>.start = <span class="variable language_">self</span>.swap(<span class="variable language_">self</span>.start[<span class="number">0</span>],<span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">            <span class="variable language_">self</span>.end = <span class="variable language_">self</span>.swap(<span class="variable language_">self</span>.end[<span class="number">0</span>],<span class="variable language_">self</span>.end[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.start[<span class="number">0</span>] &gt; <span class="variable language_">self</span>.end[<span class="number">0</span>]:</span><br><span class="line">            _x0 = <span class="built_in">int</span>(<span class="variable language_">self</span>.start[<span class="number">0</span>])</span><br><span class="line">            _x1 = <span class="built_in">int</span>(<span class="variable language_">self</span>.end[<span class="number">0</span>])</span><br><span class="line">            <span class="variable language_">self</span>.start[<span class="number">0</span>] = _x1</span><br><span class="line">            <span class="variable language_">self</span>.end[<span class="number">0</span>] = _x0</span><br><span class="line"></span><br><span class="line">            _y0 = <span class="built_in">int</span>(<span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">            _y1 = <span class="built_in">int</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>])</span><br><span class="line">            <span class="variable language_">self</span>.start[<span class="number">1</span>] = _y1</span><br><span class="line">            <span class="variable language_">self</span>.end[<span class="number">1</span>] = _y0</span><br><span class="line"></span><br><span class="line">        dx = <span class="variable language_">self</span>.end[<span class="number">0</span>] - <span class="variable language_">self</span>.start[<span class="number">0</span>]</span><br><span class="line">        dy = <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>] - <span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">        error = <span class="number">0</span></span><br><span class="line">        derr = dy/<span class="built_in">float</span>(dx)</span><br><span class="line"></span><br><span class="line">        ystep = <span class="number">0</span></span><br><span class="line">        y = <span class="variable language_">self</span>.start[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.start[<span class="number">1</span>] &lt; <span class="variable language_">self</span>.end[<span class="number">1</span>]: ystep = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>: ystep = -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.start[<span class="number">0</span>],<span class="variable language_">self</span>.end[<span class="number">0</span>]+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.steep:</span><br><span class="line">                <span class="variable language_">self</span>.path.append([y,x])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="variable language_">self</span>.path.append([x,y])</span><br><span class="line"></span><br><span class="line">            error += derr</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> error &gt;= <span class="number">0.5</span>:</span><br><span class="line">                y += ystep</span><br><span class="line">                error -= <span class="number">1.0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.steep <span class="keyword">and</span> <span class="variable language_">self</span>.start[<span class="number">1</span>] &gt; <span class="variable language_">self</span>.end[<span class="number">1</span>]:</span><br><span class="line">            <span class="variable language_">self</span>.path = <span class="built_in">list</span>(<span class="built_in">reversed</span>(<span class="variable language_">self</span>.path))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">swap</span>(<span class="params">self,n1,n2</span>):</span><br><span class="line">        <span class="keyword">return</span> np.array([n2,n1])</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_focus</span>(<span class="params">x, y, yth=<span class="number">3</span>, xmargin=<span class="number">0.1</span>, ymargin=<span class="number">0.2</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    automatically adjust range to of interest.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    x, y       : (numpy.ndarray)</span></span><br><span class="line"><span class="string">    yth        : (int) default=1.</span></span><br><span class="line"><span class="string">                 select data bins if its size equals to or larger than yth</span></span><br><span class="line"><span class="string">    x(y)margin : (float) default= 0.1 (10%).</span></span><br><span class="line"><span class="string">                 expand x(y)-directional limits to x(y) range * xmargin   </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    ------------------------</span></span><br><span class="line"><span class="string">    xmin, xmax, ymin, ymax : (floats)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">scale_inv</span>(<span class="params">xscaled, x_num, x_arr</span>):</span><br><span class="line">        <span class="keyword">return</span> xscaled/x_num * (x_arr.<span class="built_in">max</span>()-x_arr.<span class="built_in">min</span>()) + x_arr.<span class="built_in">min</span>()</span><br><span class="line"></span><br><span class="line">    res_x = <span class="built_in">len</span>(x)*<span class="number">4</span></span><br><span class="line">    res_y = <span class="built_in">int</span>((y.<span class="built_in">max</span>()-y.<span class="built_in">min</span>())*<span class="number">10000</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 1. digitize</span></span><br><span class="line">    xd = np.digitize(x, np.linspace(x.<span class="built_in">min</span>(), x.<span class="built_in">max</span>(), res_x))</span><br><span class="line">    yd = np.digitize(y, np.linspace(y.<span class="built_in">min</span>(), y.<span class="built_in">max</span>(), res_y))</span><br><span class="line">    points = <span class="built_in">list</span>(<span class="built_in">zip</span>(xd, yd))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. apply bresenham</span></span><br><span class="line">    x_interp = []</span><br><span class="line">    y_interp = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(points)-<span class="number">1</span>):</span><br><span class="line">        l = bresenham(points[i], points[i+<span class="number">1</span>])</span><br><span class="line">        path_ = np.array(l.path).T</span><br><span class="line">        x_interp_ = path_[<span class="number">0</span>]</span><br><span class="line">        y_interp_ = path_[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i != <span class="built_in">len</span>(points)-<span class="number">2</span>:</span><br><span class="line">            x_interp = np.append(x_interp, x_interp_[:-<span class="number">1</span>])</span><br><span class="line">            y_interp = np.append(y_interp, y_interp_[:-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x_interp = np.append(x_interp, x_interp_)</span><br><span class="line">            y_interp = np.append(y_interp, y_interp_)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. inversion of digitization</span></span><br><span class="line">    x_inv = scale_inv(x_interp, res_x, x)</span><br><span class="line">    y_inv = scale_inv(y_interp, res_y, y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4. focusing on ROI</span></span><br><span class="line">    ymin, ymax = y.<span class="built_in">min</span>(), y.<span class="built_in">max</span>()</span><br><span class="line">    xmin, xmax = x.<span class="built_in">min</span>(), x.<span class="built_in">max</span>()</span><br><span class="line">    </span><br><span class="line">    yhist, ybins = np.histogram(y_inv, bins=res_y)</span><br><span class="line">    yfoc = ybins[np.where(yhist &gt; yth)[<span class="number">0</span>]]</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(yfoc) &gt;= <span class="number">2</span>:</span><br><span class="line">        ymin, ymax = yfoc.<span class="built_in">min</span>(), yfoc.<span class="built_in">max</span>() </span><br><span class="line">        xfoc = x_inv[(y_inv&gt;=ymin) &amp; (y_inv&lt;=ymax)]    <span class="comment"># select x in y range only</span></span><br><span class="line">        xmin, xmax = <span class="built_in">min</span>(xfoc), <span class="built_in">max</span>(xfoc)</span><br><span class="line">        </span><br><span class="line">    xrange = <span class="built_in">abs</span>(xmax-xmin)    </span><br><span class="line">    yrange = <span class="built_in">abs</span>(ymax-ymin)</span><br><span class="line">    </span><br><span class="line">    xmin -=  xrange*xmargin</span><br><span class="line">    xmax += xrange*xmargin</span><br><span class="line">    ymin -= yrange*ymargin</span><br><span class="line">    ymax += yrange*ymargin</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> xmin, xmax, ymin, ymax</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>이렇게 함수를 만들어두면 본 코드가 매우 짧아집니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">5</span>, figsize=(<span class="number">12</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, x, y <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">zip</span>(axes, xs, ys)):  </span><br><span class="line">    ax.plot(x, y)</span><br><span class="line">    </span><br><span class="line">    xmin, xmax, ymin, ymax = get_focus(x, y)</span><br><span class="line">    </span><br><span class="line">    ax.set_xlim(xmin, xmax)</span><br><span class="line">    ax.set_ylim(ymin, ymax)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_6.png"><br></p>
+<p><img src="12_af_6.png" alt=""><br></p>
 <ul>
-<li><p>모든 그림이 관심영역에 집중되었습니다.</p>
+<li>
+<p>모든 그림이 관심영역에 집중되었습니다.</p>
 </li>
-<li><p>그러나 네번째 그림이 위쪽에 치우친 것이 영 마음에 걸리네요. </p>
+<li>
+<p>그러나 네번째 그림이 위쪽에 치우친 것이 영 마음에 걸리네요.</p>
 </li>
-<li><p>데이터 수로 구간을 설정해서 네 번째 데이터 우측의 진동이 잡혀버렸습니다.</p>
+<li>
+<p>데이터 수로 구간을 설정해서 네 번째 데이터 우측의 진동이 잡혀버렸습니다.</p>
 </li>
-<li><p>네 번째 그래프에만 인자를 다르게 설정해서 가운데로 옮깁시다.</p>
+<li>
+<p>네 번째 그래프에만 인자를 다르게 설정해서 가운데로 옮깁시다.</p>
 </li>
-<li><p>훨씬 엄격한 조건(<code>yth=3</code>)과 관대한 여백(<code>ymargin=0.2</code>)을 조합합니다.</p>
+<li>
+<p>훨씬 엄격한 조건(<code>yth=3</code>)과 관대한 여백(<code>ymargin=0.2</code>)을 조합합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">5</span>, figsize=(<span class="number">12</span>,<span class="number">3</span>))</span><br><span class="line">  </span><br><span class="line">count = <span class="number">0</span> <span class="comment"># 그림 번호입니다.   </span></span><br><span class="line"><span class="keyword">for</span> ax, x, y <span class="keyword">in</span> <span class="built_in">list</span>(<span class="built_in">zip</span>(axes, xs, ys)):</span><br><span class="line">    </span><br><span class="line">    yth, ymargin = <span class="number">1</span>, <span class="number">0.1</span>    <span class="comment"># 기본 파라미터를 설정하고</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">3</span>:           <span class="comment"># 4번째 그림만 다른 파라미터를 입력합니다.</span></span><br><span class="line">        yth, ymargin = <span class="number">3</span>, <span class="number">0.2</span></span><br><span class="line">    </span><br><span class="line">    ax.plot(x, y, c=<span class="string">f&#x27;C<span class="subst">&#123;count+<span class="number">1</span>&#125;</span>&#x27;</span>)  <span class="comment"># 마지막 그림이니 색깔도 바꿔봅니다. :)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 파라미터를 입력받도록 인자를 살려서 함수를 실행합니다.</span></span><br><span class="line">    xmin, xmax, ymin, ymax = get_focus(x, y, yth=yth, ymargin=ymargin)  </span><br><span class="line">    </span><br><span class="line">    ax.set_xlim(xmin, xmax)</span><br><span class="line">    ax.set_ylim(ymin, ymax)</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">fig.tight_layout()    </span><br><span class="line">plt.show()    </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_7.png"><br></p>
+<p><img src="12_af_7.png" alt=""><br></p>
 <ul>
 <li>이제 웬만한 그래프는 자동으로 관심영역을 확대할 수 있습니다.</li>
-<li>그러나 관심영역 밖에 중요한 메시지가 있을 수 있습니다. </li>
+<li>그러나 관심영역 밖에 중요한 메시지가 있을 수 있습니다.</li>
 <li><b>반드시 전체를 먼저 확인한 후에 확대하고, 확대 후에도 제대로 됐는지 확인합시다.</b></li>
 </ul>
-<h3 id="5-Bug-fix-missing-bins-2020-05-24"><a href="#5-Bug-fix-missing-bins-2020-05-24" class="headerlink" title="5. Bug fix : missing bins (2020.05.24.)"></a>5. Bug fix : missing bins (2020.05.24.)</h3><ul>
+<h3 id="5-Bug-fix-missing-bins-2020-05-24">5. Bug fix : missing bins (2020.05.24.)</h3>
+<ul>
 <li>간혹 아래와 같이 전혀 의도치 않은 구간으로 확대되는 경우가 있었습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(-<span class="number">2.25</span>, <span class="number">2.25</span>, <span class="number">61</span>)</span><br><span class="line">y = (x-<span class="number">2.5</span>)*(x-<span class="number">2</span>)*(x-<span class="number">1.5</span>)*(x-<span class="number">1</span>)*(x-<span class="number">1</span>)*x*(x+<span class="number">0.5</span>)*(x+<span class="number">1</span>)*(x+<span class="number">1.5</span>)*(x+<span class="number">2</span>)*(x+<span class="number">2.5</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>,<span class="number">3</span>))</span><br><span class="line">ax[<span class="number">0</span>].plot(x, y, <span class="string">&#x27;o-&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].plot(x, y, <span class="string">&#x27;o-&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(x, y, <span class="string">&#x27;o-&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># expected</span></span><br><span class="line">ax[<span class="number">1</span>].set_ylim(-<span class="number">40</span>,<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># get_focuse()</span></span><br><span class="line">xmin, xmax, ymin, ymax = get_focus(x, y, yth=<span class="number">1</span>, ymargin=<span class="number">0.2</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_xlim(xmin, xmax)</span><br><span class="line">ax[<span class="number">2</span>].set_ylim(ymin, ymax)</span><br><span class="line"></span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&#x27;full range&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&#x27;expected&#x27;</span>)</span><br><span class="line">ax[<span class="number">2</span>].set_title(<span class="string">&#x27;improper focusing&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_10.png"><br></p>
+<p><img src="12_af_10.png" alt=""><br></p>
 <ul>
 <li>데이터를 선그래프로 표현하면 점과 점 사이가 이어져 데이터가 밀집한 구간을 히스토그램으로 처리할 수 있을 듯 하지만, 실제로 선에 해당하는 구간은 데이터가 존재하지 않아 빈도 측정시 관심영역으로 감지될 수 없습니다.</li>
 <li>데이터가 교묘하게(?) 조금씩 위아래로 어긋나있을 때 이런 일들이 발생하는데, 이를 방지하기 위해 선을 전부 데이터로 채워주었습니다.</li>
 <li>무한한 경우의 수를 모두 채울 수는 없으므로 공간을 적당히 이산화하고, 여기에 <a href="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/">Bresenham’s line algorithm</a>을 차용하였습니다.</li>
 </ul>
-<h4 id="5-1-Data-quantization-in-different-scales"><a href="#5-1-Data-quantization-in-different-scales" class="headerlink" title="5.1. Data quantization in different scales"></a>5.1. Data quantization in different scales</h4><ul>
+<h4 id="5-1-Data-quantization-in-different-scales">5.1. Data quantization in different scales</h4>
+<ul>
 <li>데이터를 정수 공간으로 매핑합니다: x, y scale이 달라졌습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xd = np.digitize(x, np.linspace(x.<span class="built_in">min</span>(), x.<span class="built_in">max</span>(), <span class="built_in">len</span>(x)))</span><br><span class="line">yd = np.digitize(y, np.linspace(y.<span class="built_in">min</span>(), y.<span class="built_in">max</span>(), <span class="number">10000</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_11.png"><br></p>
-<h4 id="5-2-Application-of-Bresenham’s-line-algorithm"><a href="#5-2-Application-of-Bresenham’s-line-algorithm" class="headerlink" title="5.2. Application of Bresenham’s line algorithm"></a>5.2. Application of Bresenham’s line algorithm</h4><ul>
+<p><img src="12_af_11.png" alt=""><br></p>
+<h4 id="5-2-Application-of-Bresenham’s-line-algorithm">5.2. Application of Bresenham’s line algorithm</h4>
+<ul>
 <li>정수 공간에서 점 사이를 메웁니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">points = <span class="built_in">list</span>(<span class="built_in">zip</span>(xd, yd))</span><br><span class="line"></span><br><span class="line">x_interp = []</span><br><span class="line">y_interp = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(points)-<span class="number">1</span>):</span><br><span class="line">    l = bresenham(points[i], points[i+<span class="number">1</span>])</span><br><span class="line">    path = np.array(l.path).T</span><br><span class="line">    x_interp_ = path[<span class="number">0</span>]</span><br><span class="line">    y_interp_ = path[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i != <span class="built_in">len</span>(points)-<span class="number">2</span>:</span><br><span class="line">        x_interp = np.append(x_interp, x_interp_[:-<span class="number">1</span>])</span><br><span class="line">        y_interp = np.append(y_interp, y_interp_[:-<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        x_interp = np.append(x_interp, x_interp_)</span><br><span class="line">        y_interp = np.append(y_interp, y_interp_)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_12.png"><br></p>
-<h4 id="5-3-Map-to-Original-scale"><a href="#5-3-Map-to-Original-scale" class="headerlink" title="5.3. Map to Original scale"></a>5.3. Map to Original scale</h4><ul>
+<p><img src="12_af_12.png" alt=""><br></p>
+<h4 id="5-3-Map-to-Original-scale">5.3. Map to Original scale</h4>
+<ul>
 <li>정수 공간에 메워진 데이터를 다시 원래의 공간으로 가져옵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">scale_inv</span>(<span class="params">xscaled, x_num, x_arr</span>):</span><br><span class="line">    <span class="keyword">return</span> xscaled/x_num * (x_arr.<span class="built_in">max</span>()-x_arr.<span class="built_in">min</span>()) + x_arr.<span class="built_in">min</span>()</span><br><span class="line"></span><br><span class="line">x_inv = scale_inv(x_interp, <span class="built_in">len</span>(x), x)</span><br><span class="line">y_inv = scale_inv(y_interp, <span class="number">10000</span>, y)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_13.png"><br></p>
-<h4 id="5-4-apply-previous-get-focus"><a href="#5-4-apply-previous-get-focus" class="headerlink" title="5.4. apply (previous) get_focus()"></a>5.4. apply (previous) get_focus()</h4><ul>
+<p><img src="12_af_13.png" alt=""><br></p>
+<h4 id="5-4-apply-previous-get-focus">5.4. apply (previous) get_focus()</h4>
+<ul>
 <li>변환된 데이터에 앞의 <code>get_focus()</code>를 그대로 적용합니다.</li>
 <li>기대한 그래프(expected)와 비교했을 때 상당히 합리적인 범위로 조정되었음을 알 수 있습니다.</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ax[3].plot(x, y, &#x27;o-&#x27;, c=&#x27;g&#x27;)</span><br><span class="line"></span><br><span class="line">xmin, xmax, ymin, ymax = get_focus(x_inv, y_inv, yth=1, ymargin=0.2)</span><br><span class="line">ax[3].set_xlim(xmin, xmax)</span><br><span class="line">ax[3].set_ylim(ymin, ymax)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/04/30/Python-DS-12-auto_focus/12_af_14.png"><br></p>
-<h4 id="6-summary"><a href="#6-summary" class="headerlink" title="6. summary"></a>6. summary</h4><ul>
+<p><img src="12_af_14.png" alt=""><br></p>
+<h4 id="6-summary">6. summary</h4>
+<ul>
 <li>위 <b>5.1.~5.4.</b>를 <code>get_focus()</code> 안에 모두 탑재하였습니다.</li>
 <li>본 기능을 사용하실 때는 <code>class bresenham</code>과 함께 <code>get_focus()</code>를 그대로 사용하시면 됩니다.</li>
 </ul>
@@ -378,7 +404,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/" data-id="cuidBpcUFkTjyPC3gc9zkVCnP" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/" data-id="cuid-6twdZ6OWH7JDafbzRldp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -457,15 +483,19 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/",
         "description": "
-matplotlib.axes.Axes.set_xlimnumpy.histogram
+matplotlib.axes.Axes.set_xlim
+numpy.histogram
+
 
 
 그래프에서 중요한 값들이 특정 범위에 몰려있으면 확대를 해야 합니다.
 
+
 matplotlib의 object oriented API는 .set_xlim()과 .set_ylim()을 제공해 줍니다.
 
-jupyter notebook에서 %matplotlib qt로 선언했다면 GU",
-        "wordCount": 3362
+
+jupyter notebook에서 %matplotlib qt로 선언했다",
+        "wordCount": 3303
     }
 </script>
 
@@ -562,6 +592,26 @@ jupyter notebook에서 %matplotlib qt로 선언했다면 GU",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -636,26 +686,6 @@ jupyter notebook에서 %matplotlib qt로 선언했다면 GU",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

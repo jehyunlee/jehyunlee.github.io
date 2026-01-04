@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,batch normalization,seaborn,image" />
     
-    <meta name="description" content="연산 결과를 그림으로 표현하다보면, 표현 가능한 범위를 넘어설 때가 있습니다. 이럴 때 어쩔 수 없이 표현 가능한 범위로 우겨넣어 표현하지만, 오해를 유발합니다. 최대한 오해를 방지하려는 노력으로 이해해 주시면 좋겠습니다.   Pega Devlog: tf.keras BatchNormalization  1. 지난 글에 이어서 지난 글에 이런 부분이 있습니다">
+    <meta name="description" content="연산 결과를 그림으로 표현하다보면, 표현 가능한 범위를 넘어설 때가 있습니다. 이럴 때 어쩔 수 없이 표현 가능한 범위로 우겨넣어 표현하지만, 오해를 유발합니다. 최대한 오해를 방지하려는 노력으로 이해해 주시면 좋겠습니다.   Pega Devlog: tf.keras BatchNormalization  1. 지난 글에 이어서   지난 글에 이런 부분이 있습">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Visualization of Image Exceeding Limitation">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/12/03/Python-DS-46-bnvis/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="연산 결과를 그림으로 표현하다보면, 표현 가능한 범위를 넘어설 때가 있습니다. 이럴 때 어쩔 수 없이 표현 가능한 범위로 우겨넣어 표현하지만, 오해를 유발합니다. 최대한 오해를 방지하려는 노력으로 이해해 주시면 좋겠습니다.   Pega Devlog: tf.keras BatchNormalization  1. 지난 글에 이어서 지난 글에 이런 부분이 있습니다">
+<meta property="og:description" content="연산 결과를 그림으로 표현하다보면, 표현 가능한 범위를 넘어설 때가 있습니다. 이럴 때 어쩔 수 없이 표현 가능한 범위로 우겨넣어 표현하지만, 오해를 유발합니다. 최대한 오해를 방지하려는 노력으로 이해해 주시면 좋겠습니다.   Pega Devlog: tf.keras BatchNormalization  1. 지난 글에 이어서   지난 글에 이런 부분이 있습">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/46_bnvis_0.png">
 <meta property="article:published_time" content="2020-12-03T04:01:00.000Z">
@@ -239,93 +239,111 @@
 <blockquote>
 <p><a href="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/">Pega Devlog: tf.keras BatchNormalization</a></p>
 </blockquote>
-<h3 id="1-지난-글에-이어서"><a href="#1-지난-글에-이어서" class="headerlink" title="1. 지난 글에 이어서"></a>1. 지난 글에 이어서</h3><ul>
-<li><p>지난 글에 이런 부분이 있습니다.<br><br><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_11.png"><br></p>
+<h3 id="1-지난-글에-이어서">1. 지난 글에 이어서</h3>
+<ul>
+<li>
+<p>지난 글에 이런 부분이 있습니다.<br><br>
+<img src="46-bnvis_11.png" alt=""><br></p>
 </li>
-<li><p>상황을 다시 설명하면 이렇습니다.</p>
+<li>
+<p>상황을 다시 설명하면 이렇습니다.</p>
 <ol>
-<li>데이터의 범위가 <b>0<del>1</b>에서 <b>-2</del>2 정도</b>로 바뀝니다.</li>
+<li>데이터의 범위가 <b>0~1</b>에서 <b>-2~2 정도</b>로 바뀝니다.</li>
 <li>이미지로는 <b>0~1</b> 밖을 표현할 수 없습니다.</li>
 <li>그래서 <b>min-max scaling</b>으로 <b>0~1</b>로 강제합니다.</li>
 <li>결과적으로 <b>채도가 낮아집니다.</b></li>
 </ol>
 </li>
-<li><p>결과만 보면 <b>BN은 데이터 값의 범위를 좁히는 것이라고 오해</b>하기 너무 좋습니다.</p>
+<li>
+<p>결과만 보면 <b>BN은 데이터 값의 범위를 좁히는 것이라고 오해</b>하기 너무 좋습니다.</p>
 </li>
-<li><p>아쉬운 마음에 <b>밀도함수</b>도 같이 그려봤지만 x 범위가 달라 <b>오해를 키웁니다.</b></p>
+<li>
+<p>아쉬운 마음에 <b>밀도함수</b>도 같이 그려봤지만 x 범위가 달라 <b>오해를 키웁니다.</b></p>
 </li>
-<li><p>이번 글에서는 앞 글에서 유발한 오해를 주워담아보겠습니다.</p>
+<li>
+<p>이번 글에서는 앞 글에서 유발한 오해를 주워담아보겠습니다.</p>
 </li>
 </ul>
-<h3 id="2-시각화-설계"><a href="#2-시각화-설계" class="headerlink" title="2. 시각화 설계"></a>2. 시각화 설계</h3><blockquote>
+<h3 id="2-시각화-설계">2. 시각화 설계</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.3/tutorials/intermediate/gridspec.html">matplotlib tutorial: Customizing Figure Layouts Using Gridspec and Other Functions</a></p>
 </blockquote>
 <ul>
-<li><p>위 그림은 사실 matplotlib으로 저장한 파일들을 파워포인트에서 조합한 것입니다.</p>
+<li>
+<p>위 그림은 사실 matplotlib으로 저장한 파일들을 파워포인트에서 조합한 것입니다.</p>
 </li>
-<li><p>파워포인트의 효율성이 좋아서 종종 쓰는 방법이지만 제대로 다시 그려봅니다.<br><br><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_12.png"><br></p>
+<li>
+<p>파워포인트의 효율성이 좋아서 종종 쓰는 방법이지만 제대로 다시 그려봅니다.<br><br>
+<img src="46-bnvis_12.png" alt=""><br></p>
 </li>
-<li><p>matplotlib으로 이런 그림을 그릴 때는 <b>gridspec</b>이 좋습니다.</p>
+<li>
+<p>matplotlib으로 이런 그림을 그릴 때는 <b>gridspec</b>이 좋습니다.</p>
 <ol>
 <li>합쳐질 그림들을 포함해서 <b>3행 6열</b>의 자리를 만듭니다.</li>
 <li>밀도함수가 들어올 자리 6개는 <b>자리 하나당 subplot 하나</b>를 만듭니다.</li>
 <li>이미지가 들어올 자리 3개는 <b>자리 4개당 subplot 하나</b>를 만듭니다.</li>
 </ol>
 </li>
-<li><p>코드로 표현하면 이렇습니다.<br></p>
+<li>
+<p>코드로 표현하면 이렇습니다.<br></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3행 6열 자리 만들기</span></span><br><span class="line">gridsize = (<span class="number">3</span>, <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># kdeplot이 들어올 자리: 1 x 1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    ax_kde = plt.subplot2grid(gridsize, (<span class="number">0</span>, i))</span><br><span class="line"></span><br><span class="line"><span class="comment"># image가 들어올 자리: 2 x 2    </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    ax_img = plt.subplot2grid(gridsize, (<span class="number">1</span>, <span class="number">2</span>*i), rowspan=<span class="number">2</span>, colspan=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_6.png"><br></p>
-<h3 id="3-batch-normalization-수행"><a href="#3-batch-normalization-수행" class="headerlink" title="3. batch normalization 수행"></a>3. batch normalization 수행</h3><ul>
+<p><img src="46-bnvis_6.png" alt=""><br></p>
+<h3 id="3-batch-normalization-수행">3. batch normalization 수행</h3>
+<ul>
 <li>자리가 생겼으니, 이제 자리를 채울 그림들을 다듬어봅니다.</li>
 <li>같은 그림들을 읽어서 batch normalization을 수행합니다.</li>
 <li><a href="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/">이전 글</a>과 정확히 동일한 코드입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"></span><br><span class="line"><span class="comment"># 원본 파일 읽기</span></span><br><span class="line">img0 = plt.imread(<span class="string">&quot;./4-bn_0.jpg&quot;</span>)</span><br><span class="line">img1 = plt.imread(<span class="string">&quot;./4-bn_1.jpg&quot;</span>)</span><br><span class="line">img2 = plt.imread(<span class="string">&quot;./4-bn_2.jpg&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그림 높이 저장</span></span><br><span class="line">img_shape = img0.shape</span><br><span class="line"></span><br><span class="line"><span class="comment"># vectorization</span></span><br><span class="line">imgs = np.zeros((<span class="number">3</span>, ) + img_shape)</span><br><span class="line">imgs[<span class="number">0</span>] = img0/<span class="number">255.0</span></span><br><span class="line">imgs[<span class="number">1</span>] = img1/<span class="number">255.0</span></span><br><span class="line">imgs[<span class="number">2</span>] = img2/<span class="number">255.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 이미지를 텐서로 변환</span></span><br><span class="line">imgs_tensor = tf.convert_to_tensor(imgs, dtype=<span class="string">&quot;float32&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># BN 적용을 위한 모델 구축</span></span><br><span class="line">model = Sequential([</span><br><span class="line">    layers.BatchNormalization()</span><br><span class="line">])</span><br><span class="line">model.<span class="built_in">compile</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># BN 적용</span></span><br><span class="line">bn1 = model(imgs_tensor, training=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># numpy 형태로 데이터 변환</span></span><br><span class="line">bn1_numpy = bn1.numpy()</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-데이터-분포-시각화"><a href="#4-데이터-분포-시각화" class="headerlink" title="4. 데이터 분포 시각화"></a>4. 데이터 분포 시각화</h3><ul>
+<h3 id="4-데이터-분포-시각화">4. 데이터 분포 시각화</h3>
+<ul>
 <li>시각화 코드를 준비합니다.</li>
 <li><a href="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/">지난번</a>엔 밀도함수와 이미지를 따로 그렸지만 이번엔 <b>한번에 출력</b>되도록 하겠습니다.</li>
 <li>axes도 함께 출력해서 출력된 그림을 수정하기 좋게 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot</span>(<span class="params">imgs, xlim=<span class="literal">None</span>, suptitle=<span class="literal">None</span></span>):</span><br><span class="line">    fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">8</span>))</span><br><span class="line">    axs = axes.ravel()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># image visualization</span></span><br><span class="line">    <span class="keyword">for</span> ax, img <span class="keyword">in</span> <span class="built_in">zip</span>(axs[:<span class="number">3</span>], imgs):</span><br><span class="line">        ax.imshow(img)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># kdeplot visualization</span></span><br><span class="line">    xlim_ = <span class="number">0</span> <span class="comment"># x 범위 설정을 위한 준비</span></span><br><span class="line">    <span class="keyword">for</span> ax, img <span class="keyword">in</span> <span class="built_in">zip</span>(axs[<span class="number">3</span>:], imgs):</span><br><span class="line">        colors = [<span class="string">&quot;r&quot;</span>, <span class="string">&quot;g&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line">        [sns.kdeplot(img[:,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=ax) <span class="keyword">for</span> (ch, c) <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), colors)]</span><br><span class="line">        xlim_ax = ax.get_xlim()</span><br><span class="line">        xlim_ = <span class="built_in">max</span>(xlim_, <span class="built_in">max</span>(-xlim_ax[<span class="number">0</span>], xlim_ax[<span class="number">1</span>]))        </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> xlim == <span class="literal">None</span>:  <span class="comment"># x 범위를 대칭으로 만들기</span></span><br><span class="line">        axs[<span class="number">3</span>].set_xlim(-xlim_, xlim_)</span><br><span class="line">        axs[<span class="number">4</span>].set_xlim(-xlim_, xlim_)</span><br><span class="line">        axs[<span class="number">5</span>].set_xlim(-xlim_, xlim_)</span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># 외부 입력 범위 사용</span></span><br><span class="line">        axs[<span class="number">3</span>].set_xlim(-xlim, xlim)</span><br><span class="line">        axs[<span class="number">4</span>].set_xlim(-xlim, xlim)</span><br><span class="line">        axs[<span class="number">5</span>].set_xlim(-xlim, xlim)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 제목 삽입</span></span><br><span class="line">    <span class="keyword">if</span> suptitle != <span class="literal">None</span>:</span><br><span class="line">        fig.suptitle(suptitle, fontsize=<span class="number">24</span>)</span><br><span class="line">    </span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    <span class="keyword">return</span> fig, axes</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-1-입력-데이터"><a href="#4-1-입력-데이터" class="headerlink" title="4.1. 입력 데이터"></a>4.1. 입력 데이터</h4><ul>
+<h4 id="4-1-입력-데이터">4.1. 입력 데이터</h4>
+<ul>
 <li>입력 이미지와 채널별 데이터 분포를 그려봅니다.</li>
 <li>batch normalization 결과와 비교하기 위해 밀도함수 범위를 넓게 잡습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plot(imgs, <span class="number">3.5</span>, <span class="string">&quot;original images&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_1.png"><br></p>
+<p><img src="46-bnvis_1.png" alt=""><br></p>
 <ul>
 <li>데이터를 255로 나누어 넣었기 때문에 데이터가 0~1 사이에 분포하고 있습니다.</li>
-<li>matplotlib은 이미지 데이터로 <b>int를 받으면 0<del>255를 기준</b>으로 그림을 표시하고, <b>float를 받으면 0</del>1 기준</b>으로 표시합니다.</li>
+<li>matplotlib은 이미지 데이터로 <b>int를 받으면 0~255를 기준</b>으로 그림을 표시하고, <b>float를 받으면 0~1 기준</b>으로 표시합니다.</li>
 <li>x 범위를 넓게 잡았기 때문에 분포 범위가 매우 좁게 그려졌습니다.</li>
 </ul>
-<h4 id="4-2-Batch-Normalization-데이터"><a href="#4-2-Batch-Normalization-데이터" class="headerlink" title="4.2. Batch Normalization 데이터"></a>4.2. Batch Normalization 데이터</h4><ul>
+<h4 id="4-2-Batch-Normalization-데이터">4.2. Batch Normalization 데이터</h4>
+<ul>
 <li>batch normalization 결과를 그려봅니다.</li>
 <li>0~1 외의 범위는 그림으로 표현되지 않기 때문에, 밀도함수를 살짝 가려서 <b>그림으로 안보이는 부분</b>이라는 표시를 했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plot(bn1_numpy, <span class="number">3.5</span>, <span class="string">&quot;batch normalized images&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes[<span class="number">1</span>, :]:</span><br><span class="line">    <span class="comment"># 음영 표시</span></span><br><span class="line">    ax.axvspan(-<span class="number">3.5</span>, <span class="number">0</span>, facecolor=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax.axvspan(<span class="number">1</span>, <span class="number">3.5</span>, facecolor=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    <span class="comment"># text 출력</span></span><br><span class="line">    ax.text(<span class="number">0.05</span>, <span class="number">0.8</span>, <span class="string">&quot;unseen\n(black)&quot;</span>, transform=ax.transAxes, fontsize=<span class="number">16</span>)</span><br><span class="line">    ax.text(<span class="number">0.7</span>, <span class="number">0.8</span>, <span class="string">&quot;unseen\n(white)&quot;</span>, transform=ax.transAxes, fontsize=<span class="number">16</span>, color=<span class="string">&quot;w&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_13.png"><br><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_2.png"><br></p>
+<p><img src="46-bnvis_13.png" alt=""><br>
+<img src="46-bnvis_2.png" alt=""><br></p>
 <ul>
 <li><b>일부 데이터가 표현되지 않는다는 경고 메시지</b>가 뜹니다.</li>
-<li><a href="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/">이전 글</a>과는 다르게 눈이 쨍한 그림이 나옵니다.<br><b>min-max scaling을 하지 않았기 때문</b>입니다. </li>
+<li><a href="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/">이전 글</a>과는 다르게 눈이 쨍한 그림이 나옵니다.<br>
+<b>min-max scaling을 하지 않았기 때문</b>입니다.</li>
 <li><b>밀도함수의 범위가 확 넓어진 것</b>이 눈에 뜨입니다.</li>
 <li>이미지에 시커먼 부분과 새하얀 부분이 있는데, <b>시각화 범위를 벗어난 곳</b>입니다.</li>
 </ul>
-<h4 id="4-3-min-max-scaling"><a href="#4-3-min-max-scaling" class="headerlink" title="4.3. min-max scaling"></a>4.3. min-max scaling</h4><ul>
+<h4 id="4-3-min-max-scaling">4.3. min-max scaling</h4>
+<ul>
 <li>이미지에서 놓치는 부분 없이 표현하기 위해 min-max scaling을 합니다.</li>
 <li>여기서 얻은 <b>밀도함수</b>는 원본과 <b>정성비교만 가능</b>합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bn_min, bn_max = bn1_numpy.<span class="built_in">min</span>(), bn1_numpy.<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># min-max scaling</span></span><br><span class="line">bn_mm = (bn1_numpy - bn_min)/(bn_max - bn_min)</span><br><span class="line"></span><br><span class="line">fig, axes = plot(bn_mm, <span class="number">3.5</span>, <span class="string">&quot;batch normalized + min-max scaled images&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_3.png"><br></p>
+<p><img src="46-bnvis_3.png" alt=""><br></p>
 <ul>
 <li>이미지의 채도가 떨어졌습니다.</li>
 <li>min-max scaling 전에는 범위가 넓어 드러나지 않았지만, <b>데이터 분포가 중앙으로 몰리면서 R, G, B 값들이 비슷해져 회색조에 가까워진 것</b>으로 추정됩니다.</li>
 </ul>
-<h4 id="4-4-밀도함수-정성비교"><a href="#4-4-밀도함수-정성비교" class="headerlink" title="4.4. 밀도함수 정성비교"></a>4.4. 밀도함수 정성비교</h4><blockquote>
+<h4 id="4-4-밀도함수-정성비교">4.4. 밀도함수 정성비교</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html">seaborn.kdeplot</a></p>
 </blockquote>
 <ul>
@@ -334,33 +352,42 @@
 <li>밀도함수만 그리면 어떤 이미지에서 나왔는지 알 수 없기 때문에, 이미지를 작게 삽입합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> patches</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">8</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>,</span><br><span class="line">                        gridspec_kw=&#123;<span class="string">&quot;hspace&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># RGB 세 채널을 각기 빨강, 녹색, 파랑으로 표기</span></span><br><span class="line">colors = [<span class="string">&quot;r&quot;</span>, <span class="string">&quot;g&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 원본 이미지 채널별 밀도함수</span></span><br><span class="line"><span class="keyword">for</span> ax, img <span class="keyword">in</span> <span class="built_in">zip</span>(axes[<span class="number">0</span>], imgs):</span><br><span class="line">    <span class="comment"># list comprehension 사용 RGB 채널별 밀도함수 그리기 </span></span><br><span class="line">    [sns.kdeplot(img[:,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=ax) <span class="keyword">for</span> (ch, c) <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), colors)]</span><br><span class="line">    <span class="comment"># 원본 그림 삽입</span></span><br><span class="line">    ax_inset = ax.inset_axes([<span class="number">0.02</span>, <span class="number">0.69</span>, <span class="number">0.3</span>, <span class="number">0.3</span>])</span><br><span class="line">    ax_inset.imshow(img)</span><br><span class="line">    ax_inset.set_xticks([])</span><br><span class="line">    ax_inset.set_yticks([])</span><br><span class="line"></span><br><span class="line"><span class="comment"># batch normalization 후 이미지 채널별 밀도함수</span></span><br><span class="line"><span class="keyword">for</span> ax, b <span class="keyword">in</span> <span class="built_in">zip</span>(axes[<span class="number">1</span>], bn_mm):</span><br><span class="line">    [sns.kdeplot(b[:,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=ax) <span class="keyword">for</span> (ch, c) <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), colors)]</span><br><span class="line">    ax_inset = ax.inset_axes([<span class="number">0.02</span>, <span class="number">0.69</span>, <span class="number">0.3</span>, <span class="number">0.3</span>])</span><br><span class="line">    ax_inset.imshow(b)</span><br><span class="line">    ax_inset.set_xticks([])</span><br><span class="line">    ax_inset.set_yticks([])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 제목 붙이기</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].set_title(<span class="string">&quot;before batch normalization&quot;</span>, fontsize=<span class="number">24</span>, pad=<span class="number">12</span>)</span><br><span class="line">axes[<span class="number">1</span>, <span class="number">1</span>].set_title(<span class="string">&quot;after batch normalization&quot;</span>, fontsize=<span class="number">24</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 범례 그리기</span></span><br><span class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(colors):</span><br><span class="line">    x = <span class="number">0.7</span></span><br><span class="line">    y = <span class="number">0.85</span> - <span class="number">0.1</span>*i</span><br><span class="line">    Rectangle = patches.Rectangle((x, y), <span class="number">0.12</span>, <span class="number">0.05</span>, color=c, alpha=<span class="number">0.5</span>, transform=axes[<span class="number">0</span>, <span class="number">2</span>].transAxes)</span><br><span class="line">    axes[<span class="number">0</span>, <span class="number">2</span>].add_patch(Rectangle)</span><br><span class="line">    axes[<span class="number">0</span>, <span class="number">2</span>].text(x+<span class="number">0.2</span>, y, c.upper(), fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;, ha=<span class="string">&quot;center&quot;</span>, transform=axes[<span class="number">0</span>, <span class="number">2</span>].transAxes)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_5.png"><br></p>
+<p><img src="46-bnvis_5.png" alt=""><br></p>
 <ul>
-<li><p>데이터의 존재 범위가 <b>채널별로 독립적으로 변화</b>되었습니다.</p>
+<li>
+<p>데이터의 존재 범위가 <b>채널별로 독립적으로 변화</b>되었습니다.</p>
 </li>
-<li><p><b>다른 이미지의 데이터 분포에 의해 서로 영향을 받았습니다.</b></p>
+<li>
+<p><b>다른 이미지의 데이터 분포에 의해 서로 영향을 받았습니다.</b></p>
 </li>
-<li><p>예를 들어, 맨 오른쪽 이미지에서 B 채널과 G 채널이 가운데로 심하게 쏠렸는데 앞 두 이미지에서 두 색상이 쌍봉을 그리며 양 극단에 위치한 영향으로 보입니다.</p>
+<li>
+<p>예를 들어, 맨 오른쪽 이미지에서 B 채널과 G 채널이 가운데로 심하게 쏠렸는데 앞 두 이미지에서 두 색상이 쌍봉을 그리며 양 극단에 위치한 영향으로 보입니다.</p>
 </li>
-<li><p><b>seaborn의 kdeplot은 <code>hue</code>인자 외에는 범례를 생성해주지 않습니다.</b></p>
+<li>
+<p><b>seaborn의 kdeplot은 <code>hue</code>인자 외에는 범례를 생성해주지 않습니다.</b></p>
 </li>
-<li><p>객체를 받아 <code>ax.legend()</code>명령으로 넣으려고 하면 <code>Legend does not support &lt;AxesSubplot:ylabel=&#39;Density&#39;&gt; instances.</code> 경고가 발생합니다.</p>
+<li>
+<p>객체를 받아 <code>ax.legend()</code>명령으로 넣으려고 하면 <code>Legend does not support &lt;AxesSubplot:ylabel='Density'&gt; instances.</code> 경고가 발생합니다.</p>
 </li>
-<li><p><b>부족한 기능을 수동으로 메웠습니다: 네모 상자와 텍스트</b>를 넣어 보완했습니다.</p>
+<li>
+<p><b>부족한 기능을 수동으로 메웠습니다: 네모 상자와 텍스트</b>를 넣어 보완했습니다.</p>
 </li>
-<li><p>만족스러운 그림을 얻었습니다.</p>
+<li>
+<p>만족스러운 그림을 얻었습니다.</p>
 </li>
-<li><p>최종 그림에 이 분포들을 삽입하기로 하고, 이제 이미지로 넘어갑니다.</p>
+<li>
+<p>최종 그림에 이 분포들을 삽입하기로 하고, 이제 이미지로 넘어갑니다.</p>
 </li>
 </ul>
-<h3 id="5-이미지-시각화"><a href="#5-이미지-시각화" class="headerlink" title="5. 이미지 시각화"></a>5. 이미지 시각화</h3><blockquote>
+<h3 id="5-이미지-시각화">5. 이미지 시각화</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html">numpy.concatenate</a></p>
 </blockquote>
 <ul>
 <li>원본 이미지 하나를 그려봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(imgs[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_7.png"><br></p>
+<p><img src="46-bnvis_7.png" alt=""><br></p>
 <ul>
 <li>원본 이미지에서 왼쪽 반을, batch normalization된 이미지에서 오른쪽 반을 가져옵니다.</li>
 <li>의도적으로 min-max scaling되지 않은 이미지를 사용하겠습니다.</li>
@@ -368,19 +395,20 @@
 <li>마찬가지로 <b>이미지의 오른쪽</b>은 두 번째 차원이 절반 이상이라는 의미입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img_half = img_shape[<span class="number">0</span>]//<span class="number">2</span>              <span class="comment"># 이미지를 자를 좌표.</span></span><br><span class="line">img1_org = imgs[<span class="number">1</span>][:, :img_half, :]     <span class="comment"># 왼쪽 절반 원본 이미지</span></span><br><span class="line">img1_bn = bn1_numpy[<span class="number">1</span>][:, img_half:, :] <span class="comment"># 오른쪽 절반 batch normalization된 이미지</span></span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>)</span><br><span class="line">axs[<span class="number">0</span>].imshow(img1_org)</span><br><span class="line">axs[<span class="number">1</span>].imshow(img1_bn)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_8.png"><br></p>
+<p><img src="46-bnvis_8.png" alt=""><br></p>
 <ul>
 <li>이 둘을 합치겠습니다.</li>
 <li>numpy array를 붙이는 명령은 <code>numpy.concatenate()</code>입니다.</li>
 <li>경계선에 점선도 하나 그어줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">img1_c = np.concatenate((img1_org, img1_bn), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.imshow(img1_c)</span><br><span class="line">ax.axvline(<span class="number">128</span>, ls=<span class="string">&quot;--&quot;</span>, c=<span class="string">&quot;k&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_9.png"><br></p>
-<h3 id="6-집대성"><a href="#6-집대성" class="headerlink" title="6. 집대성"></a>6. 집대성</h3><ul>
+<p><img src="46-bnvis_9.png" alt=""><br></p>
+<h3 id="6-집대성">6. 집대성</h3>
+<ul>
 <li>위에서 그린 부분 기술들을 한데 모았습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3행 6열 자리 준비</span></span><br><span class="line">gridsize = (<span class="number">3</span>, <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 윗줄 : 밀도함수</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    <span class="comment"># 한 자리에 그림 하나</span></span><br><span class="line">    ax_kde = plt.subplot2grid(gridsize, (<span class="number">0</span>, i))</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 홀수 자리 : 원본 이미지 데이터 분포</span></span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>: <span class="comment"># original image kdeplot</span></span><br><span class="line">        colors = [<span class="string">&quot;r&quot;</span>, <span class="string">&quot;g&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line">        [sns.kdeplot(imgs[i//<span class="number">2</span>, :,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=ax_kde) <span class="keyword">for</span> (ch, c) <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), colors)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 제목 붙이기        </span></span><br><span class="line">        ax_kde.set_title(<span class="string">&quot;original&quot;</span>, fontsize=<span class="number">20</span>, pad=<span class="number">12</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 짝수 자리 : batch normalization된 이미지 데이터 분포</span></span><br><span class="line">    <span class="keyword">else</span>: <span class="comment"># batch normalized image kdeplot</span></span><br><span class="line">        colors = [<span class="string">&quot;r&quot;</span>, <span class="string">&quot;g&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line">        [sns.kdeplot(bn1_numpy[i//<span class="number">2</span>, :,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=ax_kde) <span class="keyword">for</span> (ch, c) <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">3</span>), colors)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 시각화 불가능 영역을 음영으로 표시</span></span><br><span class="line">        ax_kde.axvspan(-<span class="number">3.5</span>, <span class="number">0</span>, facecolor=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.2</span>)</span><br><span class="line">        ax_kde.axvspan(<span class="number">1</span>, <span class="number">3.5</span>, facecolor=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 제목 붙이기</span></span><br><span class="line">        ax_kde.set_title(<span class="string">&quot;batch norm.&quot;</span>, fontsize=<span class="number">20</span>, pad=<span class="number">12</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># x축 범위 설정</span></span><br><span class="line">    ax_kde.set_xlim(-<span class="number">3.5</span>, <span class="number">3.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 맨 왼쪽에만 y축에 &quot;Density&quot; 붙이기    </span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        ax_kde.set_ylabel(<span class="string">&quot;Density&quot;</span>, fontsize=<span class="number">20</span>, labelpad=<span class="number">12</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ax_kde.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 원본과 batch normalization된 그림을 붙이는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">img_c</span>(<span class="params">img0, img1</span>):</span><br><span class="line">    img0_ = img0[:, :img_half, :]</span><br><span class="line">    img1_ = img1[:, img_half:, :]</span><br><span class="line">    <span class="keyword">return</span> np.concatenate((img0_, img1_), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 이미지 부분 출력    </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    <span class="comment"># 4 자리에 그림 하나</span></span><br><span class="line">    ax_img = plt.subplot2grid(gridsize, (<span class="number">1</span>, <span class="number">2</span>*i), rowspan=<span class="number">2</span>, colspan=<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 그림 출력</span></span><br><span class="line">    ax_img.imshow(img_c(imgs[i], bn1_numpy[i]))</span><br><span class="line">    <span class="comment"># 그림 사이 경계선 삽입</span></span><br><span class="line">    ax_img.axvline(<span class="number">128</span>, ls=<span class="string">&quot;--&quot;</span>, c=<span class="string">&quot;k&quot;</span>)    </span><br><span class="line"></span><br><span class="line">fig.tight_layout()    </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/03/Python-DS-46-bnvis/46-bnvis_10.png"><br></p>
+<p><img src="46-bnvis_10.png" alt=""><br></p>
 
         </div>
 		<p>
@@ -398,7 +426,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/12/03/Python-DS-46-bnvis/" data-id="cuidetcPmhWdPfTxbo6F49gDJ" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/12/03/Python-DS-46-bnvis/" data-id="cuidfvcw6nr_qh2rpyXq86VV4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -485,8 +513,10 @@
 Pega Devlog: tf.keras BatchNormalization
 
 1. 지난 글에 이어서
-지난 글에 이런 부분이 있습니다",
-        "wordCount": 2453
+
+
+지난 글에 이런 부분이 있습",
+        "wordCount": 2411
     }
 </script>
 
@@ -583,6 +613,26 @@ Pega Devlog: tf.keras BatchNormalization
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -657,26 +707,6 @@ Pega Devlog: tf.keras BatchNormalization
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -238,19 +238,26 @@
 </ul>
 <p><b>contributor</b></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/jryoungw">장령우님: 조건부확률 implementation 관련 조언 제공</a><br><a target="_blank" rel="noopener" href="https://github.com/SuminBae97">배수민님: Gibbs Sampling module 공동 개발</a><br><a target="_blank" rel="noopener" href="https://github.com/subinium">안수빈님: 원본과 Gibbs Sampling 구분 시각화 아이디어 제공</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jryoungw">장령우님: 조건부확률 implementation 관련 조언 제공</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/SuminBae97">배수민님: Gibbs Sampling module 공동 개발</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/subinium">안수빈님: 원본과 Gibbs Sampling 구분 시각화 아이디어 제공</a></p>
 </blockquote>
-<h1 id="1-Gibbs-Sampling"><a href="#1-Gibbs-Sampling" class="headerlink" title="1. Gibbs Sampling"></a>1. Gibbs Sampling</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://ratsgo.github.io/statistics/2017/05/31/gibbs/">ratsgo’s blog: Gibbs Sampling</a><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/can-you-do-better-sampling-strategies-with-an-emphasis-on-gibbs-sampling-practicals-and-code-c97730d54ebc">Sampling distributions with an emphasis on Gibbs sampling, practicals and code</a><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/gibbs-sampling-8e4844560ae5">Gibbs Sampling</a></p>
+<h1>1. Gibbs Sampling</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://ratsgo.github.io/statistics/2017/05/31/gibbs/">ratsgo’s blog: Gibbs Sampling</a><br>
+<a target="_blank" rel="noopener" href="https://towardsdatascience.com/can-you-do-better-sampling-strategies-with-an-emphasis-on-gibbs-sampling-practicals-and-code-c97730d54ebc">Sampling distributions with an emphasis on Gibbs sampling, practicals and code</a><br>
+<a target="_blank" rel="noopener" href="https://towardsdatascience.com/gibbs-sampling-8e4844560ae5">Gibbs Sampling</a></p>
 </blockquote>
 <ul>
 <li>Gibbs Sampling은 <b>기존 데이터의 분포를 재현</b>하는 마르코프 체인 몬테카를로(MCMC: Markov-Chain Monte Carlo)방식의 일환입니다.</li>
 </ul>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/MultivariateNormal.png/793px-MultivariateNormal.png" alt="wikipedia: multivariate normal distribution"><br></p>
 <ul>
-<li><p>위 그림처럼 $p(X, Y)$로 표현되는 다변수함수를 모사한다고 합시다.</p>
+<li>
+<p>위 그림처럼 $p(X, Y)$로 표현되는 다변수함수를 모사한다고 합시다.</p>
 </li>
-<li><p>$X$와 $Y$의 상관관계는 조건부 확률 $p(X|Y)$과 $p(Y|X)$로부터 구할 수 있습니다.</p>
+<li>
+<p>$X$와 $Y$의 상관관계는 조건부 확률 $p(X|Y)$과 $p(Y|X)$로부터 구할 수 있습니다.</p>
 <ol>
 <li>시작점 $(X_0, Y_0)$을 지정하고, <br></li>
 <li>$p(X|Y_0)$로부터 다음 데이터의 $X$인 $X_1$을 랜덤으로 추출,<br></li>
@@ -259,63 +266,83 @@
 <li>이 작업을 n번 반복해서 $(X_n, Y_n)$을 구합니다.<br></li>
 </ol>
 </li>
-<li><p>이 작업을 영상으로 표현하면 다음과 같습니다.<br><img src="http://i.imgur.com/91TeFpu.gif"></p>
+<li>
+<p>이 작업을 영상으로 표현하면 다음과 같습니다.<br>
+<img src="http://i.imgur.com/91TeFpu.gif" alt=""></p>
 </li>
-<li><p>N차원 데이터라면 $(X_{0,N}, X_{1,N}, X_{2,N}, \ldots , X_{n,N})$에 대해 적용합니다.</p>
+<li>
+<p>N차원 데이터라면 $(X_{0,N}, X_{1,N}, X_{2,N}, \ldots , X_{n,N})$에 대해 적용합니다.</p>
 </li>
-<li><p>조건부 확률을 구하기 위해서 확률분포가 <b>수식</b>으로 주어지거나 <b>공분산</b>을 알 수 있으면 좋습니다.</p>
+<li>
+<p>조건부 확률을 구하기 위해서 확률분포가 <b>수식</b>으로 주어지거나 <b>공분산</b>을 알 수 있으면 좋습니다.</p>
 </li>
-<li><p>하지만 많은 경우 공간상에 흩뿌려져있기 때문에, 이를 해결하고자 맡바닥부터 코딩을 해봤습니다.</p>
+<li>
+<p>하지만 많은 경우 공간상에 흩뿌려져있기 때문에, 이를 해결하고자 맡바닥부터 코딩을 해봤습니다.</p>
 </li>
-<li><p><a href="gibbs_sampling.py">소스코드는 여기에서</a> 받을 수 있습니다.</p>
+<li>
+<p><a href="gibbs_sampling.py">소스코드는 여기에서</a> 받을 수 있습니다.</p>
 </li>
-<li><p>하지만 아직 <b>충분히 테스트가 이루어지지 않았기 때문에 다운로드를 권하지는 않습니다.</b></p>
+<li>
+<p>하지만 아직 <b>충분히 테스트가 이루어지지 않았기 때문에 다운로드를 권하지는 않습니다.</b></p>
 </li>
-<li><p>정리되면 pypi를 통해 공개하고자 합니다.</p>
+<li>
+<p>정리되면 pypi를 통해 공개하고자 합니다.</p>
 </li>
 </ul>
-<h1 id="2-Discrete-Data"><a href="#2-Discrete-Data" class="headerlink" title="2. Discrete Data"></a>2. Discrete Data</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.histogramdd.html">numpy.histogramdd</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.imshow.html">matplotlib.axes.Axes.imshow</a></p>
+<h1>2. Discrete Data</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/generated/numpy.histogramdd.html">numpy.histogramdd</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.imshow.html">matplotlib.axes.Axes.imshow</a></p>
 </blockquote>
 <ul>
 <li>매개변수 t를 이용해서 불균일한 예제 데이터를 만듭니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> pearsonr</span><br><span class="line"></span><br><span class="line"><span class="comment"># normal distribution - scatter plot</span></span><br><span class="line">t = np.power(np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1000</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">x = t + np.random.normal(size=<span class="number">1000</span>)</span><br><span class="line">y = <span class="number">10</span>*np.sin(t/<span class="number">30</span>) + np.random.normal(size=<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># pearson coefficient</span></span><br><span class="line">pcc, pv = pearsonr(x,y)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.scatter(x, y, c=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">ax.text(<span class="number">0.6</span>, <span class="number">0.3</span>, <span class="string">f&quot;pcc = <span class="subst">&#123;pcc:<span class="number">0.3</span>f&#125;</span>\np-value = <span class="subst">&#123;pv:<span class="number">0.3</span>f&#125;</span>&quot;</span>, transform=ax.transAxes, </span><br><span class="line">        fontsize=<span class="number">14</span>, va=<span class="string">&quot;top&quot;</span>, ha=<span class="string">&quot;right&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_1.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_1.png"><br></p>
+<p><img src="69_gs_1.png" alt=""><br></p>
 <ul>
 <li>데이터가 왼쪽에 몰려있지만 scatter plot으로는 잘 보이지 않습니다.</li>
 <li>matplotlib의<code>hist2d()</code>명령으로 2D histogram을 그립니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.hist2d(x, y, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_2.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_2.png"><br></p>
+<p><img src="69_gs_2.png" alt=""><br></p>
 <ul>
 <li>그림 뿐 아니라 히스토그램의 구간과 데이터 수를 구하고 싶다면 이렇게 할 수도 있습니다.</li>
 <li><code>numpy.histogramdd()</code>를 사용해 데이터를 분할하고 이미지를 출력하는 <code>imshow()</code>로 그림을 그립니다.</li>
 <li>x와 y 범위를 index가 아닌 데이터 값으로 표현하기 위해 extent 매개변수를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">xy_H, xy_edges = np.histogramdd((x, y), bins=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.imshow(xy_H.T, cmap=<span class="string">&quot;Greys&quot;</span>,</span><br><span class="line">          extent=[xy_edges[<span class="number">0</span>][<span class="number">0</span>], xy_edges[<span class="number">0</span>][-<span class="number">1</span>], xy_edges[<span class="number">1</span>][-<span class="number">1</span>], xy_edges[<span class="number">1</span>][<span class="number">0</span>]])</span><br><span class="line">ax.invert_yaxis()</span><br><span class="line">ax.set_aspect(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_3.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_3.png"><br></p>
-<h1 id="3-matplotlib-Subplot-Mosaic"><a href="#3-matplotlib-Subplot-Mosaic" class="headerlink" title="3. matplotlib: Subplot Mosaic"></a>3. matplotlib: Subplot Mosaic</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subfigures.html">matplotlib tutorials: Complex and semantic figure composition</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/users/whats_new.html?highlight=subfigure#new-subfigure-functionality">matplotlib: what’s new in Matplotlib 3.4.0</a><br><a href="https://jehyunlee.github.io/2020/10/03/Python-DS-35-seaborn_matplotlib2/">Pega Devlog: Seaborn with Matplotlib (2)</a></p>
+<p><img src="69_gs_3.png" alt=""><br></p>
+<h1>3. matplotlib: Subplot Mosaic</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subfigures.html">matplotlib tutorials: Complex and semantic figure composition</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/stable/users/whats_new.html?highlight=subfigure#new-subfigure-functionality">matplotlib: what’s new in Matplotlib 3.4.0</a><br>
+<a href="https://jehyunlee.github.io/2020/10/03/Python-DS-35-seaborn_matplotlib2/">Pega Devlog: Seaborn with Matplotlib (2)</a></p>
 </blockquote>
 <ul>
-<li><p>특정 지점에서의 $P(X|Y_0)$와 $P(Y|X_0)$를 도시합니다.</p>
+<li>
+<p>특정 지점에서의 $P(X|Y_0)$와 $P(Y|X_0)$를 도시합니다.</p>
 </li>
-<li><p>seabron의 jointplot과 유사한 그림을 matplotlib으로 그려보겠습니다.</p>
+<li>
+<p>seabron의 jointplot과 유사한 그림을 matplotlib으로 그려보겠습니다.</p>
 </li>
-<li><p><a href="https://jehyunlee.github.io/2020/10/03/Python-DS-35-seaborn_matplotlib2/">기존 기능만 사용해도 그릴 수 있지만</a> matplotlib 3.4 버전에 새로 도입된 <code>subplot_mosaic()</code>를 사용합니다.</p>
+<li>
+<p><a href="https://jehyunlee.github.io/2020/10/03/Python-DS-35-seaborn_matplotlib2/">기존 기능만 사용해도 그릴 수 있지만</a> matplotlib 3.4 버전에 새로 도입된 <code>subplot_mosaic()</code>를 사용합니다.</p>
 </li>
-<li><p><code>subplot_mosaic()</code>는 기존 방법과 달리 axes가 dictionary 형식으로 관리되기 때문에 <b>이름</b>으로 부를 수 있습니다.</p>
+<li>
+<p><code>subplot_mosaic()</code>는 기존 방법과 달리 axes가 dictionary 형식으로 관리되기 때문에 <b>이름</b>으로 부를 수 있습니다.</p>
 </li>
-<li><p>단순 나열 데이터가 아닌, 위치별로 기능이 다를때 유용합니다.</p>
+<li>
+<p>단순 나열 데이터가 아닌, 위치별로 기능이 다를때 유용합니다.</p>
 </li>
-<li><p><b>2차원 리스트</b>로 모양을 잡아주고, <b>empty_sentinel 매개변수</b>로 비울 영역을 지정합니다. </p>
+<li>
+<p><b>2차원 리스트</b>로 모양을 잡아주고, <b>empty_sentinel 매개변수</b>로 비울 영역을 지정합니다.</p>
 </li>
-<li><p>원래 있던 기능인 <b>gridspec_kw</b>를 사용하면 크기 비율을 지정할 수 있습니다.</p>
+<li>
+<p>원래 있던 기능인 <b>gridspec_kw</b>를 사용하면 크기 비율을 지정할 수 있습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">axd = fig.subplot_mosaic(</span><br><span class="line">    [[<span class="string">&quot;dist_x&quot;</span>, <span class="string">&quot;BLANK&quot;</span>], </span><br><span class="line">     [<span class="string">&quot;hist2d&quot;</span>, <span class="string">&quot;dist_y&quot;</span>]], </span><br><span class="line">    empty_sentinel=<span class="string">&quot;BLANK&quot;</span>,</span><br><span class="line">    gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>: [<span class="number">1</span>, <span class="number">5</span>], <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">5</span>, <span class="number">1</span>]&#125;)</span><br><span class="line"></span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_4.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_4.png"><br></p>
+<p><img src="69_gs_4.png" alt=""><br></p>
 <ul>
 <li>히스토그램으로 데이터 밀도가 가장 높은 지점을 찾습니다.</li>
 </ul>
@@ -324,20 +351,19 @@
 <li>실행 결과:</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index of maxmum count: (0, 4)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
-<li>“hist2d”에 2D 히스토그램을 그리고 데이터 밀도가 가장 높은 지점에 가로세로 선을 긋습니다.</li>
-<li>“dist_x”, “dist_y”에 각기 $P(X|Y_0)$와 $P(Y|X_0)$를 히스토그램으로 표현합니다.</li>
+<li>&quot;hist2d&quot;에 2D 히스토그램을 그리고 데이터 밀도가 가장 높은 지점에 가로세로 선을 긋습니다.</li>
+<li>“dist_x”, &quot;dist_y&quot;에 각기 $P(X|Y_0)$와 $P(Y|X_0)$를 히스토그램으로 표현합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">5</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">axd = fig.subplot_mosaic(</span><br><span class="line">    [[<span class="string">&quot;dist_x&quot;</span>, <span class="string">&quot;BLANK&quot;</span>], [<span class="string">&quot;hist2d&quot;</span>, <span class="string">&quot;dist_y&quot;</span>]],</span><br><span class="line">    empty_sentinel=<span class="string">&quot;BLANK&quot;</span>,</span><br><span class="line">    gridspec_kw=&#123;<span class="string">&quot;height_ratios&quot;</span>: [<span class="number">1</span>, <span class="number">5</span>], <span class="string">&quot;width_ratios&quot;</span>: [<span class="number">5</span>, <span class="number">1</span>]&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hist2d</span></span><br><span class="line">y_pos = y_coord</span><br><span class="line">axd[<span class="string">&quot;hist2d&quot;</span>].hist2d(x, y, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)</span><br><span class="line">axd[<span class="string">&quot;hist2d&quot;</span>].axhline(y_coord, c=<span class="string">&quot;r&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">axd[<span class="string">&quot;hist2d&quot;</span>].axvline(x_coord, c=<span class="string">&quot;b&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">axd[<span class="string">&quot;hist2d&quot;</span>].scatter(x_coord, y_coord, c=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, s=<span class="number">50</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># kdeplot (dist_x)</span></span><br><span class="line">sns.histplot(x[np.where((y &lt; y_coord+bin_delta_yhalf) &amp; (y &gt; y_coord-bin_delta_yhalf))], </span><br><span class="line">             color=<span class="string">&quot;r&quot;</span>, fill=<span class="literal">True</span>, bins=xy_edges[<span class="number">0</span>], ax=axd[<span class="string">&quot;dist_x&quot;</span>])</span><br><span class="line">axd[<span class="string">&quot;dist_x&quot;</span>].spines[[<span class="string">&quot;top&quot;</span>, <span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">axd[<span class="string">&quot;dist_x&quot;</span>].set_xlim(axd[<span class="string">&quot;hist2d&quot;</span>].get_xlim())</span><br><span class="line">axd[<span class="string">&quot;dist_x&quot;</span>].set_xticklabels([])</span><br><span class="line">axd[<span class="string">&quot;dist_x&quot;</span>].set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># kdeplot (dist_y)</span></span><br><span class="line">sns.histplot(y=y[np.where((x &lt; x_coord+bin_delta_xhalf) &amp; (x &gt; x_coord-bin_delta_xhalf))], </span><br><span class="line">             color=<span class="string">&quot;b&quot;</span>, fill=<span class="literal">True</span>, bins=xy_edges[<span class="number">1</span>], ax=axd[<span class="string">&quot;dist_y&quot;</span>])</span><br><span class="line">axd[<span class="string">&quot;dist_y&quot;</span>].spines[[<span class="string">&quot;top&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">False</span>)</span><br><span class="line">axd[<span class="string">&quot;dist_y&quot;</span>].set_ylim(axd[<span class="string">&quot;hist2d&quot;</span>].get_ylim())</span><br><span class="line">axd[<span class="string">&quot;dist_y&quot;</span>].set_yticklabels([])</span><br><span class="line">axd[<span class="string">&quot;dist_y&quot;</span>].set_xlabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_5.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_5.png"><br></p>
+<p><img src="69_gs_5.png" alt=""><br></p>
 <ul>
 <li>이번에 만든 코드에서는 이 지점을 시작으로 Gibbs Sampling을 수행합니다.</li>
 <li>조건부 확률은 N-Dimensional 히스토그램으로부터 계산합니다.</li>
 <li>Gibbs Sampling 수행 과정은 이 글에서는 생략하겠습니다.</li>
 </ul>
-<h1 id="4-Gibbs-Sampling-for-2-Dimensional-Data"><a href="#4-Gibbs-Sampling-for-2-Dimensional-Data" class="headerlink" title="4. Gibbs Sampling for 2-Dimensional Data"></a>4. Gibbs Sampling for 2-Dimensional Data</h1><ul>
+<h1>4. Gibbs Sampling for 2-Dimensional Data</h1>
+<ul>
 <li>모듈을 import하고 기본 데이터를 넣습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gibbs_sampling <span class="keyword">import</span> GibbsSampling</span><br><span class="line"></span><br><span class="line"><span class="comment"># pandas DataFrame 형식으로 입력받습니다.</span></span><br><span class="line">df_xy = pd.DataFrame(&#123;<span class="string">&quot;x&quot;</span>:x, <span class="string">&quot;y&quot;</span>:y&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터가 분포한 모든 차원을 20개의 구간으로 나누고,</span></span><br><span class="line"><span class="comment"># 1만개의 데이터를 생성하겠다고 선언합니다.</span></span><br><span class="line">gibbs = GibbsSampling(<span class="number">10000</span>, df_xy, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 생성합니다.</span></span><br><span class="line">gibbs_xy = gibbs.sampling()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# type: <span class="subst">&#123;<span class="built_in">type</span>(gibbs_xy)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# shape: <span class="subst">&#123;gibbs_xy.shape&#125;</span>&quot;</span>)</span><br><span class="line">gibbs_x = gibbs_xy[<span class="number">0</span>]</span><br><span class="line">gibbs_y = gibbs_xy[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
@@ -345,9 +371,8 @@
 <li>실행 결과: (2, 10000)의 <code>numpy.ndarray</code>가 생성됩니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># type: &lt;class &#x27;numpy.ndarray&#x27;&gt;</span></span><br><span class="line"><span class="comment"># shape: (2, 10000)</span></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="5-matplotlib-subfigure"><a href="#5-matplotlib-subfigure" class="headerlink" title="5. matplotlib: subfigure"></a>5. matplotlib: subfigure</h1><blockquote>
+<h1>5. matplotlib: subfigure</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subfigures.html">matplotlib: Figure subfigures</a></p>
 </blockquote>
 <ul>
@@ -356,32 +381,32 @@
 <li>axes를 원하는 대로 배치하기 좋고, 특정 구역에만 배경색을 깔기도 좋습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### figure 생성</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 1행 2열 subfigures 생성      </span></span><br><span class="line">sfigs = fig.subfigures(<span class="number">1</span>, <span class="number">2</span>, width_ratios=[<span class="number">2</span>, <span class="number">1</span>], wspace=<span class="number">0.05</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># left subfigure: 원본과 gibbs sampled data의 2D histogram</span></span><br><span class="line">sfigs[<span class="number">0</span>].suptitle(<span class="string">&quot;2D histogram&quot;</span>, fontsize=<span class="number">16</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># left subfigure 소속 axes</span></span><br><span class="line">axsL = sfigs[<span class="number">0</span>].subplots(ncols=<span class="number">2</span>, nrows=<span class="number">1</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">axsL[<span class="number">0</span>].hist2d(x, y, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)               <span class="comment"># original</span></span><br><span class="line">axsL[<span class="number">1</span>].hist2d(gibbs_x, gibbs_y, cmap=<span class="string">&quot;Greens&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled</span></span><br><span class="line"></span><br><span class="line">font_title = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>&#125;</span><br><span class="line">axsL[<span class="number">0</span>].set_title(<span class="string">&quot;original&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">1</span>].set_title(<span class="string">&quot;gibbs sampled&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Gibbs Sampled 그림 spines 색상 변경</span></span><br><span class="line">axsL[<span class="number">1</span>].spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;bottom&quot;</span>]].set_color(<span class="string">&quot;#00DD00&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># right subfigure: 전체 데이터의 x, y방향 분포</span></span><br><span class="line">sfigs[<span class="number">1</span>].suptitle(<span class="string">&quot;1D histogram&quot;</span>, fontsize=<span class="number">16</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">sfigs[<span class="number">1</span>].set_facecolor(<span class="string">&quot;beige&quot;</span>)  <span class="comment"># 오른쪽 subfigure에만 배경색 적용</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># right subfigure 소속 axes</span></span><br><span class="line">axsR = sfigs[<span class="number">1</span>].subplots(ncols=<span class="number">1</span>, nrows=<span class="number">2</span>, squeeze=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axsR[<span class="number">1</span>].set_title(<span class="string">&quot;x-distribution&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">sns.kdeplot(x, color=<span class="string">&quot;gray&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;original&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_x, color=<span class="string">&quot;#00DD00&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;gibbs sampled&quot;</span>)</span><br><span class="line">axsR[<span class="number">1</span>].legend(fontsize=<span class="number">14</span>)</span><br><span class="line"></span><br><span class="line">axsR[<span class="number">0</span>].set_title(<span class="string">&quot;y-distribution&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">sns.kdeplot(y, color=<span class="string">&quot;gray&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line">sns.kdeplot(gibbs_y, color=<span class="string">&quot;green&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_6.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_6.png"><br></p>
+<p><img src="69_gs_6.png" alt=""><br></p>
 <ul>
 <li>한번 저장된 원본 데이터의 정보를 이용해 반복 생성이 가능합니다.</li>
 <li>생성 데이터 수에 따른 분포를 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">9</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sfigs = fig.subfigures(<span class="number">1</span>, <span class="number">2</span>, width_ratios=[<span class="number">2</span>, <span class="number">1</span>], wspace=<span class="number">0.05</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D histogram</span></span><br><span class="line">sfigs[<span class="number">0</span>].suptitle(<span class="string">&quot;2D histogram&quot;</span>, fontsize=<span class="number">16</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line"></span><br><span class="line">axesL = sfigs[<span class="number">0</span>].subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">axsL = axesL.ravel()</span><br><span class="line">axsL[<span class="number">0</span>].hist2d(x, y, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)               <span class="comment"># original</span></span><br><span class="line">axsL[<span class="number">1</span>].hist2d(gibbs_x1, gibbs_y1, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled1</span></span><br><span class="line">axsL[<span class="number">2</span>].hist2d(gibbs_x2, gibbs_y2, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled2</span></span><br><span class="line">axsL[<span class="number">3</span>].hist2d(gibbs_x3, gibbs_y3, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled3</span></span><br><span class="line"></span><br><span class="line">font_title = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>&#125;</span><br><span class="line">axsL[<span class="number">0</span>].set_title(<span class="string">&quot;original&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">1</span>].set_title(<span class="string">&quot;gibbs sampled (100)&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">2</span>].set_title(<span class="string">&quot;gibbs sampled (1000)&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">3</span>].set_title(<span class="string">&quot;gibbs sampled (10000)&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, scolor <span class="keyword">in</span> <span class="built_in">zip</span>(axsL, [<span class="string">&quot;k&quot;</span>, <span class="string">&quot;#D00&quot;</span>, <span class="string">&quot;#0D0&quot;</span>, <span class="string">&quot;#00D&quot;</span>]):</span><br><span class="line">    ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;bottom&quot;</span>]].set_color(scolor)</span><br><span class="line">    ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;bottom&quot;</span>]].set_linewidth(<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 1D histogram</span></span><br><span class="line">sfigs[<span class="number">1</span>].suptitle(<span class="string">&quot;1D histogram&quot;</span>, fontsize=<span class="number">16</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">sfigs[<span class="number">1</span>].set_facecolor(<span class="string">&quot;beige&quot;</span>)</span><br><span class="line">axsR = sfigs[<span class="number">1</span>].subplots(ncols=<span class="number">1</span>, nrows=<span class="number">2</span>, squeeze=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axsR[<span class="number">1</span>].set_title(<span class="string">&quot;x-distribution&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">sns.kdeplot(x, color=<span class="string">&quot;k&quot;</span>, linewidth=<span class="number">3</span>, fill=<span class="literal">False</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], zorder=<span class="number">2</span>, label=<span class="string">&quot;original&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_x1, color=<span class="string">&quot;red&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;sampled (100)&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_x2, color=<span class="string">&quot;green&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;sampled (1000)&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_x3, color=<span class="string">&quot;blue&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;sampled (10000)&quot;</span>)</span><br><span class="line">axsR[<span class="number">1</span>].legend(fontsize=<span class="number">14</span>)</span><br><span class="line"></span><br><span class="line">axsR[<span class="number">0</span>].set_title(<span class="string">&quot;y-distribution&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">sns.kdeplot(y, color=<span class="string">&quot;k&quot;</span>, linewidth=<span class="number">3</span>, fill=<span class="literal">False</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>], zorder=<span class="number">2</span>)</span><br><span class="line">sns.kdeplot(gibbs_y1, color=<span class="string">&quot;red&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line">sns.kdeplot(gibbs_y2, color=<span class="string">&quot;green&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line">sns.kdeplot(gibbs_y3, color=<span class="string">&quot;blue&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_7.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_7.png"><br></p>
+<p><img src="69_gs_7.png" alt=""><br></p>
 <ul>
 <li>원본 데이터는 1000개로 구성되어 있습니다.</li>
 <li>한참 못미치는 100개는 원본 데이터의 분포와 많이 어긋나는 것을 알 수 있습니다.</li>
 <li>1000개와 10000개를 생성하면 원본 데이터와 상당히 유사한 분포를 재현할 수 있습니다.</li>
 <li>하지만 데이터가 많다고 항상 원본에 더 근접한 것은 아니지만 신뢰할만한 수준의 분포를 얻을 수 있었습니다.</li>
 </ul>
-<h1 id="6-Gibbs-Sampling의-한계-분리된-데이터"><a href="#6-Gibbs-Sampling의-한계-분리된-데이터" class="headerlink" title="6. Gibbs Sampling의 한계: 분리된 데이터"></a>6. Gibbs Sampling의 한계: 분리된 데이터</h1><ul>
+<h1>6. Gibbs Sampling의 한계: 분리된 데이터</h1>
+<ul>
 <li>Gibbs Sampling은 조건부 확률을 사용해 데이터를 생성합니다.</li>
 <li>따라서 데이터가 섬처럼 끊겨 있는 경우에는 그 지점을 생성할 수 없습니다.</li>
-<li>제 코드에서는 이 점을 보완하기 위해 <b>생성할 데이터의 수를 kfold로 나누어</b> 일부를 생성한 뒤,</li>
+<li>제 코드에서는 이 점을 보완하기 위해 <b>생성할 데이터의 수를 kfold로 나누어</b> 일부를 생성한 뒤,<br>
+<b>앞으로 생성해야 할 데이터 기준</b>으로 <b>조건부 확률과 시작점을 업데이트</b>하도록 했습니다.</li>
 </ul>
-<p> <b>앞으로 생성해야 할 데이터 기준</b>으로 <b>조건부 확률과 시작점을 업데이트</b>하도록 했습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 분리 데이터 생성</span></span><br><span class="line">sx1 = np.random.normal(loc=<span class="number">0</span>, size=<span class="number">1000</span>)</span><br><span class="line">sy1 = np.random.normal(loc=<span class="number">0</span>, size=<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">sx2 = np.random.normal(loc=<span class="number">10</span>, size=<span class="number">1000</span>)</span><br><span class="line">sy2 = np.random.normal(loc=<span class="number">10</span>, size=<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 결합</span></span><br><span class="line">sx = np.concatenate([sx1, sx2])</span><br><span class="line">sy = np.concatenate([sy1, sy2])</span><br><span class="line"></span><br><span class="line"><span class="comment"># scatter plot 시각화</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">ax.scatter(sx, sy, c=<span class="string">&quot;lightgray&quot;</span>, ec=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_8.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_8.png"><br></p>
+<p><img src="69_gs_8.png" alt=""><br></p>
 <ul>
 <li><b>kfold를 1, 3, 5로 나누어 영향을 확인</b>합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df_sep = pd.DataFrame(&#123;<span class="string">&quot;x&quot;</span>: sx, <span class="string">&quot;y&quot;</span>: sy&#125;)</span><br><span class="line">gibbs_sep = GibbsSampling(<span class="number">10000</span>, df_sep, <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">gibbs_sx1, gibbs_sy1 = gibbs_sep.sampling(kfold=<span class="number">1</span>)</span><br><span class="line">gibbs_sx2, gibbs_sy2 = gibbs_sep.sampling(kfold=<span class="number">3</span>)</span><br><span class="line">gibbs_sx3, gibbs_sy3 = gibbs_sep.sampling(kfold=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>시각화 코드는 반복이 많아 숨겨둡니다. 클릭하면 펼쳐집니다.</li>
 <li><b>kfold가 1일 때는 한 그룹의 데이터만 생성</b>된 것을 볼 수 있습니다.</li>
@@ -389,12 +414,13 @@
 <details>
     <summary>코드 보기/접기</summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">9</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">sfigs = fig.subfigures(<span class="number">1</span>, <span class="number">2</span>, width_ratios=[<span class="number">2</span>, <span class="number">1</span>], wspace=<span class="number">0.05</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D histogram</span></span><br><span class="line">sfigs[<span class="number">0</span>].suptitle(<span class="string">&quot;2D histogram&quot;</span>, fontsize=<span class="number">16</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line"></span><br><span class="line">axesL = sfigs[<span class="number">0</span>].subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">axsL = axesL.ravel()</span><br><span class="line">axsL[<span class="number">0</span>].hist2d(sx, sy, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)               <span class="comment"># original</span></span><br><span class="line">axsL[<span class="number">1</span>].hist2d(gibbs_sx1, gibbs_sy1, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled1</span></span><br><span class="line">axsL[<span class="number">2</span>].hist2d(gibbs_sx2, gibbs_sy2, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled2</span></span><br><span class="line">axsL[<span class="number">3</span>].hist2d(gibbs_sx3, gibbs_sy3, cmap=<span class="string">&quot;Greys&quot;</span>, bins=<span class="number">20</span>)  <span class="comment"># gibbs sampled3</span></span><br><span class="line"></span><br><span class="line">font_title = &#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">16</span>&#125;</span><br><span class="line">axsL[<span class="number">0</span>].set_title(<span class="string">&quot;original&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">1</span>].set_title(<span class="string">&quot;gibbs sampled (kfold=1)&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">2</span>].set_title(<span class="string">&quot;gibbs sampled (kfold=3)&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">axsL[<span class="number">3</span>].set_title(<span class="string">&quot;gibbs sampled (kfold=5)&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, scolor <span class="keyword">in</span> <span class="built_in">zip</span>(axsL, [<span class="string">&quot;k&quot;</span>, <span class="string">&quot;#D00&quot;</span>, <span class="string">&quot;#0D0&quot;</span>, <span class="string">&quot;#00D&quot;</span>]):</span><br><span class="line">    ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;bottom&quot;</span>]].set_color(scolor)</span><br><span class="line">    ax.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;bottom&quot;</span>]].set_linewidth(<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 1D histogram</span></span><br><span class="line">sfigs[<span class="number">1</span>].suptitle(<span class="string">&quot;1D histogram&quot;</span>, fontsize=<span class="number">16</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">axsR = sfigs[<span class="number">1</span>].subplots(ncols=<span class="number">1</span>, nrows=<span class="number">2</span>, squeeze=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axsR[<span class="number">1</span>].set_title(<span class="string">&quot;x-distribution&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">sns.kdeplot(sx, color=<span class="string">&quot;k&quot;</span>, linewidth=<span class="number">3</span>, fill=<span class="literal">False</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], zorder=<span class="number">2</span>, label=<span class="string">&quot;original&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_sx1, color=<span class="string">&quot;red&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;sampled (kfold=1)&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_sx2, color=<span class="string">&quot;green&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;sampled (kfold=3)&quot;</span>)</span><br><span class="line">sns.kdeplot(gibbs_sx3, color=<span class="string">&quot;blue&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">1</span>], label=<span class="string">&quot;sampled (kfold=5)&quot;</span>)</span><br><span class="line">axsR[<span class="number">1</span>].legend(fontsize=<span class="number">14</span>)</span><br><span class="line"></span><br><span class="line">axsR[<span class="number">0</span>].set_title(<span class="string">&quot;y-distribution&quot;</span>, fontdict=font_title, pad=<span class="number">12</span>)</span><br><span class="line">sns.kdeplot(sy, color=<span class="string">&quot;k&quot;</span>, linewidth=<span class="number">3</span>, fill=<span class="literal">False</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>], zorder=<span class="number">2</span>)</span><br><span class="line">sns.kdeplot(gibbs_sy1, color=<span class="string">&quot;red&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line">sns.kdeplot(gibbs_sy2, color=<span class="string">&quot;green&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line">sns.kdeplot(gibbs_sy3, color=<span class="string">&quot;blue&quot;</span>, fill=<span class="literal">True</span>, cut=<span class="number">0</span>, ax=axsR[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_19.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_19.png"><br></p>
-<h1 id="7-부가-기능"><a href="#7-부가-기능" class="headerlink" title="7. 부가 기능"></a>7. 부가 기능</h1><ul>
+<p><img src="69_gs_19.png" alt=""><br></p>
+<h1>7. 부가 기능</h1>
+<ul>
 <li>활용성을 높이기 위해 몇 가지 부가 기능을 내장하고 있습니다.</li>
 </ul>
-<h2 id="7-1-생성데이터-저장"><a href="#7-1-생성데이터-저장" class="headerlink" title="7.1. 생성데이터 저장"></a>7.1. 생성데이터 저장</h2><ul>
+<h2 id="7-1-생성데이터-저장">7.1. 생성데이터 저장</h2>
+<ul>
 <li>생성된 데이터를 <code>pandas.DataFrame</code>으로 저장할 수 있습니다.</li>
 <li><code>.to_df()</code> 명령이며, 기본적으로 pickle(.pkl)로 저장하지만 파일 이름에 <code>.csv</code>를 명시하면 csv 형식으로 저장됩니다.</li>
 </ul>
@@ -403,53 +429,62 @@
 <li>실행 결과</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (default) exporting as pickle</span></span><br><span class="line"><span class="comment"># Sampling data export complete: gibbs1D.pkl</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="7-2-데이터-시각화-1D"><a href="#7-2-데이터-시각화-1D" class="headerlink" title="7.2. 데이터 시각화 (1D)"></a>7.2. 데이터 시각화 (1D)</h2><ul>
+<h2 id="7-2-데이터-시각화-1D">7.2. 데이터 시각화 (1D)</h2>
+<ul>
 <li>원본과 생성된 데이터를 한 눈에 보는 기능을 제공합니다.</li>
 <li><code>plot()</code>을 사용합니다. filename 매개변수를 사용하면 저장도 됩니다.</li>
 <li>1D data로 간단히 확인해보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gibbs1D.plot(filename=<span class="string">&quot;gibbs1D_plot.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/gibbs1D_plot.png"></p>
-<h2 id="7-3-파일-입력"><a href="#7-3-파일-입력" class="headerlink" title="7.3. 파일 입력"></a>7.3. 파일 입력</h2><ul>
+<p><img src="gibbs1D_plot.png" alt=""></p>
+<h2 id="7-3-파일-입력">7.3. 파일 입력</h2>
+<ul>
 <li>데이터 파일로부터 직접 데이터를 생성할 수 있습니다.</li>
 <li>GibbsSampling() 명령의 데이터 자리에 파일명을 대신 넣으면 됩니다.</li>
 <li>방금 저장한 데이터를 읽어서 10개의 구간으로 샘플링한 후 함께 그려보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gibbs1D_2nd = GibbsSampling(<span class="number">10000</span>, <span class="string">&quot;gibbs1D.pkl&quot;</span>, bins=<span class="number">10</span>)</span><br><span class="line">gibbs1D_2nd.plot(filename=<span class="string">&quot;gibbs1D_input.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/gibbs1D_input.png"></p>
-<h2 id="7-4-N-Dimensional-Gibbs-Sampling-시각화"><a href="#7-4-N-Dimensional-Gibbs-Sampling-시각화" class="headerlink" title="7.4. N-Dimensional Gibbs Sampling 시각화"></a>7.4. N-Dimensional Gibbs Sampling 시각화</h2><ul>
+<p><img src="gibbs1D_input.png" alt=""></p>
+<h2 id="7-4-N-Dimensional-Gibbs-Sampling-시각화">7.4. N-Dimensional Gibbs Sampling 시각화</h2>
+<ul>
 <li>1차원 데이터는 좌우에 나란히 보여주기 좋지만, 차원이 커지면 시각화가 어려워집니다.</li>
 <li>이런 점을 보완하기 위해 2차원 이상의 시각화는 2D 히스토그램을 여럿 활용합니다.</li>
 <li><code>ori=True</code>를 하면 원본 데이터가, False(기본값)로 놓으면 생성된 데이터가 그려집니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3차원 데이터를 만들고</span></span><br><span class="line">z = <span class="number">10</span>*np.log(t+<span class="number">1</span>) + np.random.normal(size=<span class="number">1000</span>)</span><br><span class="line">df_3d = pd.DataFrame(&#123;<span class="string">&quot;x&quot;</span>:x, <span class="string">&quot;y&quot;</span>:y, <span class="string">&quot;z&quot;</span>:z&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 생성합니다.</span></span><br><span class="line"><span class="comment"># 인자별로 구간의 수를 조절할 수 있습니다. 메모리 문제를 해결하고자 넣었습니다.</span></span><br><span class="line">gibbs_3d = GibbsSampling(<span class="number">3000</span>, df_3d, bins=[<span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 시각화합니다.</span></span><br><span class="line"><span class="comment"># figsize 매개변수로 그림 크기를 지정할 수 있습니다.</span></span><br><span class="line"><span class="comment"># 원본 데이터를 먼저 그립니다.</span></span><br><span class="line">gibbs_3d.plot(cmap=<span class="string">&quot;Greys&quot;</span>, figsize=(<span class="number">8</span>, <span class="number">8</span>), org=<span class="literal">True</span>, filename=<span class="string">&quot;69_gs_9.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_9.png" alt="원본 데이터"><br></p>
+<p><img src="69_gs_9.png" alt="원본 데이터"><br></p>
 <ul>
 <li>생성 데이터도 그려봅니다.</li>
 <li>GibbsSampling의 <code>plot()</code> 메소드는 fig를 return 하기 때문에 추가 처리도 가능합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig = gibbs_3d.plot(cmap=<span class="string">&quot;Greys&quot;</span>, figsize=(<span class="number">8</span>, <span class="number">8</span>), org=<span class="literal">False</span>, filename=<span class="string">&quot;69_gs_10.png&quot;</span>)</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;#DDF&quot;</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;69_gs_10.png&quot;</span>)</span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_10.png" alt="Gibbs Sampling 데이터"><br></p>
-<h1 id="8-Matplotlib-3D-Rotation-Animation"><a href="#8-Matplotlib-3D-Rotation-Animation" class="headerlink" title="8. Matplotlib: 3D Rotation Animation"></a>8. Matplotlib: 3D Rotation Animation</h1><blockquote>
+<p><img src="69_gs_10.png" alt="Gibbs Sampling 데이터"><br></p>
+<h1>8. Matplotlib: 3D Rotation Animation</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/animation_api.html">matplotlib.animation</a></p>
 </blockquote>
 <ul>
-<li><p>3차원 공간을 2차원에 표현하는데는 한계가 있습니다.</p>
+<li>
+<p>3차원 공간을 2차원에 표현하는데는 한계가 있습니다.</p>
 </li>
-<li><p>3차원으로 그려도 시선 방향으로 정사영(projection)한 그림밖에 보이지 않습니다.</p>
+<li>
+<p>3차원으로 그려도 시선 방향으로 정사영(projection)한 그림밖에 보이지 않습니다.</p>
 </li>
-<li><p>이럴 때 interactive와 함께 좋은 방법은 그림을 빙빙 돌리며 애니메이션으로 보는 것입니다.</p>
+<li>
+<p>이럴 때 interactive와 함께 좋은 방법은 그림을 빙빙 돌리며 애니메이션으로 보는 것입니다.</p>
 </li>
-<li><p>matplotlib의 <b><code>FuncAnimation</code></b>을 활용합니다.</p>
+<li>
+<p>matplotlib의 <b><code>FuncAnimation</code></b>을 활용합니다.</p>
 </li>
-<li><p>사용자 정의한 <code>animate()</code>함수 안에 frame마다 달라지는 그림을 iteration 매개변수 i를 사용해 그립니다.</p>
+<li>
+<p>사용자 정의한 <code>animate()</code>함수 안에 frame마다 달라지는 그림을 iteration 매개변수 i를 사용해 그립니다.</p>
 </li>
-<li><p><b>return 값에 쉼표(,)를 붙여서 tuple 형태로 바꿔줘야 한다는 점</b>을 주의해야 합니다.</p>
+<li>
+<p><b>return 값에 쉼표(,)를 붙여서 tuple 형태로 바꿔줘야 한다는 점</b>을 주의해야 합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation </span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init</span>():</span><br><span class="line">    axs[<span class="number">0</span>].scatter(x, y, z, marker=<span class="string">&#x27;o&#x27;</span>, s=<span class="number">30</span>, c=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.6</span>)</span><br><span class="line">    axs[<span class="number">1</span>].scatter(*gibbs_3d_data, marker=<span class="string">&#x27;o&#x27;</span>, s=<span class="number">30</span>, c=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;blue&quot;</span>, alpha=<span class="number">0.6</span>)</span><br><span class="line">    </span><br><span class="line">    axs[<span class="number">0</span>].set_title(<span class="string">&quot;original&quot;</span>, fontsize=<span class="number">16</span>, pad=<span class="number">8</span>)</span><br><span class="line">    axs[<span class="number">1</span>].set_title(<span class="string">&quot;Gibbs Sampled&quot;</span>, fontsize=<span class="number">16</span>, pad=<span class="number">8</span>)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">animate</span>(<span class="params">i</span>):</span><br><span class="line">    axs[<span class="number">0</span>].view_init(elev=<span class="number">10.</span>, azim=i)</span><br><span class="line">    axs[<span class="number">1</span>].view_init(elev=<span class="number">10.</span>, azim=i)</span><br><span class="line">    <span class="keyword">return</span> fig,</span><br><span class="line"></span><br><span class="line"><span class="comment"># Animate</span></span><br><span class="line">anim = animation.FuncAnimation(fig, animate, init_func=init,</span><br><span class="line">                               frames=<span class="number">360</span>, interval=<span class="number">20</span>, blit=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># Save</span></span><br><span class="line">anim.save(<span class="string">&#x27;69_gs_11.gif&#x27;</span>, fps=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/20/Python-DS-69-gibbsampling/69_gs_11.gif"></p>
+<p><img src="69_gs_11.gif" alt=""></p>
 <ul>
 <li>코드는 버그를 확인하고 완성도를 높여 추후 공개하겠습니다.</li>
 </ul>
@@ -470,7 +505,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/04/20/Python-DS-69-gibbsampling/" data-id="cuidu3tuds17JyOkwD8xQAlm6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/04/20/Python-DS-69-gibbsampling/" data-id="cuidCgR-9ZS0A1Rdzp4xoKa1w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -555,7 +590,7 @@ matplotlib 3.4. 버전에서 추가된 subfigure와 subplot_mosaic 기능도 실
 matplotlib을 이용해 3D plot 애니메이션도 만들어 봅니다.
 
 contri",
-        "wordCount": 3096
+        "wordCount": 3027
     }
 </script>
 
@@ -652,6 +687,26 @@ contri",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -726,26 +781,6 @@ contri",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

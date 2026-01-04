@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,cognitive science,spines,grid" />
     
-    <meta name="description" content="착시를 줄여주는 축과 격자를 설정하는 방법입니다. matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What">
+    <meta name="description" content="착시를 줄여주는 축과 격자를 설정하는 방법입니다. matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free) Colin Ware “데이터 시각화, 인지과학을 만나다” White Paper-Principles of Data Visualization-Wha">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spines &amp; Grids">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="착시를 줄여주는 축과 격자를 설정하는 방법입니다. matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What">
+<meta property="og:description" content="착시를 줄여주는 축과 격자를 설정하는 방법입니다. matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free) Colin Ware “데이터 시각화, 인지과학을 만나다” White Paper-Principles of Data Visualization-Wha">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/28_mpl_spines_0.png">
 <meta property="article:published_time" content="2020-08-26T22:38:00.000Z">
@@ -236,19 +236,25 @@
 <li>matplotlib에서는 <code>Axes.spines</code>와 <code>Axes.grid</code> 객체를 통해 제어합니다.</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br><a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62616251">Colin Ware “데이터 시각화, 인지과학을 만나다”</a><br><a target="_blank" rel="noopener" href="https://www.fusioncharts.com/resources/whitepapers/principles-of-data-visualization">White Paper-Principles of Data Visualization-What we see in a Visual</a></p>
+<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br>
+<a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62616251">Colin Ware “데이터 시각화, 인지과학을 만나다”</a><br>
+<a target="_blank" rel="noopener" href="https://www.fusioncharts.com/resources/whitepapers/principles-of-data-visualization">White Paper-Principles of Data Visualization-What we see in a Visual</a></p>
 </blockquote>
-<h3 id="1-착시"><a href="#1-착시" class="headerlink" title="1. 착시"></a>1. 착시</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Optical_illusion">wikipedia: optical illusion</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lateral_inhibition">wikipedia: Lateral inhibition</a></p>
+<h3 id="1-착시">1. 착시</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Optical_illusion">wikipedia: optical illusion</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lateral_inhibition">wikipedia: Lateral inhibition</a></p>
 </blockquote>
 <ul>
-<li><p><b>우리 눈은 사물을 있는 그대로 보지 않습니다.</b></p>
+<li>
+<p><b>우리 눈은 사물을 있는 그대로 보지 않습니다.</b></p>
 <ul>
 <li>주변과 견주어보기도 하고, 우리가 알고 있는 지식에 비추어 보기도 합니다.</li>
 <li>이런 과정에서 있는 그대로 보지 못하는 착시가 발생합니다.</li>
 </ul>
 </li>
-<li><p>착시는 <b>생물학적 이유</b>로 발생하기도 하는데, 예로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Mach_bands">Mach Bands</a>가 있습니다.</p>
+<li>
+<p>착시는 <b>생물학적 이유</b>로 발생하기도 하는데, 예로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Mach_bands">Mach Bands</a>가 있습니다.</p>
 <ul>
 <li>선이 점점 두꺼워지다 다른 선과 닿는 순간 <b>경계 지점에 그림자</b>가 보입니다.</li>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lateral_inhibition"><b>측면 억제<code>lateral inhibition</code></b></a>라는 현상이 있습니다. 경계를 명확히 인지하기 위해 이렇게 진화한 것으로 생각되는데, 자극을 강하게 받은 신경 세포는 이웃한 신경세포에 억제성 신경전달 물질을 전달해서 활성화를 억제합니다.</li>
@@ -257,38 +263,49 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/Mach_bands_-_animation.gif" alt="Mach Bands"></p>
+<p><img src="Mach_bands_-_animation.gif" alt="Mach Bands"></p>
 <ul>
-<li>한편으로 <b>인지 방식</b>에 의해 일어나기도 합니다.<ul>
+<li>한편으로 <b>인지 방식</b>에 의해 일어나기도 합니다.
+<ul>
 <li>우리는 배경에 비추어 물체를 인식하고 크기를 판단하기 때문입니다.</li>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ponzo_illusion"><b>폰조 착시<code>Ponzo Illusion</code></b></a>가 대표입니다.</li>
 <li>철길 그림 위의 두 막대기는 <b>멀리 있는 것이 길어보입니다</b>.</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/Ponzo_illusion.gif" alt="Ponzo Illusion"></p>
+<p><img src="Ponzo_illusion.gif" alt="Ponzo Illusion"></p>
 <ul>
-<li><p>착시는 누구나 겪는 일이지만, 간단히 벗어날 수 있습니다.</p>
+<li>
+<p>착시는 누구나 겪는 일이지만, 간단히 벗어날 수 있습니다.</p>
 <ul>
-<li>이미 위 그림에서 선들이 닿기 전 <b>배경선이 보일 때</b>, </li>
+<li>이미 위 그림에서 선들이 닿기 전 <b>배경선이 보일 때</b>,</li>
 <li>그리고 철길 위에 빨간 <b>보조선</b>을 그었을 때</li>
 <li>우리는 착시에서 벗어나는 경험을 했습니다.</li>
 </ul>
 </li>
-<li><p>matplotlib에서는 <b><code>spines</code></b>와 <b><code>grid</code></b>의 도움을 받을 수 있습니다.</p>
+<li>
+<p>matplotlib에서는 <b><code>spines</code></b>와 <b><code>grid</code></b>의 도움을 받을 수 있습니다.</p>
 </li>
 </ul>
-<h3 id="2-윤곽선-spines"><a href="#2-윤곽선-spines" class="headerlink" title="2. 윤곽선 spines"></a>2. 윤곽선 <code>spines</code></h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/spines_api.html">matplotlib: matplotlib.spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/_modules/matplotlib/spines.html">matplotlib: Source code for matplotlib.spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spines.html">matplotlib: Spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spines_dropped.html">matplotlib: Dropped spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spine_placement_demo.html">matplotlib: Spine Placement Demo</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/recipes/centered_spines_with_arrows.html">matplotlib: Centered spines with arrows</a></p>
+<h3 id="2-윤곽선-spines">2. 윤곽선 <code>spines</code></h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/spines_api.html">matplotlib: matplotlib.spines</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/_modules/matplotlib/spines.html">matplotlib: Source code for matplotlib.spines</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spines.html">matplotlib: Spines</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spines_dropped.html">matplotlib: Dropped spines</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spine_placement_demo.html">matplotlib: Spine Placement Demo</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/recipes/centered_spines_with_arrows.html">matplotlib: Centered spines with arrows</a></p>
 </blockquote>
 <ul>
-<li><p>matplotlib에서 부르는 이름은 조금 낯설지만 생각해보면 은근 직관적입니다.</p>
+<li>
+<p>matplotlib에서 부르는 이름은 조금 낯설지만 생각해보면 은근 직관적입니다.</p>
 <ul>
 <li>제가 <b>축공간</b>이라고 부르는, 그림이 그려지는 공간은 <b><code>axes</code></b>이고</li>
 <li>눈금이 붙는 부분의 이름은 <b><code>spines</code></b>입니다.</li>
 </ul>
 </li>
-<li><p><b>데이터 시각화 교과서</b>에는 spine에 대한 언급이 별로 없습니다.</p>
+<li>
+<p><b>데이터 시각화 교과서</b>에는 spine에 대한 언급이 별로 없습니다.</p>
 <ul>
 <li>보여주고자 하는 데이터의 종류에 따라 다르고</li>
 <li>특히 그림의 종류에 따라 적절히 변형되어 사용되고 있습니다.</li>
@@ -296,44 +313,45 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_1.png" alt="데이터 시각화 교과서에 수록된 그림들"></p>
+<p><img src="28_mpl_spines_1.png" alt="데이터 시각화 교과서에 수록된 그림들"></p>
 <ul>
 <li>matplotlib의 object oriented interface에서, spine은 <b><code>ax.spines</code></b>로 제어됩니다.</li>
 <li><a href="https://jehyunlee.github.io/2020/08/26/Python-DS-27-mpl_focus/">지난 글</a>에 있는 코드를 그대로 활용하고, <code>ax.spines</code> 활용에 집중하기 위해 시각화 코드를 함수로 만들어 버립니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_example</span>(<span class="params">ax, zorder=<span class="number">0</span></span>):</span><br><span class="line">    ax.bar(tips_day[<span class="string">&quot;day&quot;</span>], tips_day[<span class="string">&quot;tip&quot;</span>], color=<span class="string">&quot;lightgray&quot;</span>, zorder=zorder)</span><br><span class="line">    ax.set_title(<span class="string">&quot;tip (mean)&quot;</span>, fontsize=<span class="number">16</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Values</span></span><br><span class="line">    h_pad = <span class="number">0.1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">        fontweight = <span class="string">&quot;normal&quot;</span></span><br><span class="line">        color = <span class="string">&quot;k&quot;</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">3</span>:</span><br><span class="line">            fontweight = <span class="string">&quot;bold&quot;</span></span><br><span class="line">            color = <span class="string">&quot;darkred&quot;</span></span><br><span class="line"></span><br><span class="line">        ax.text(i, tips_day[<span class="string">&quot;tip&quot;</span>].loc[i] + h_pad, <span class="string">f&quot;<span class="subst">&#123;tips_day[<span class="string">&#x27;tip&#x27;</span>].loc[i]:<span class="number">0.2</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                horizontalalignment=<span class="string">&#x27;center&#x27;</span>, fontsize=<span class="number">12</span>, fontweight=fontweight, color=color)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Sunday</span></span><br><span class="line">    ax.patches[<span class="number">3</span>].set_facecolor(<span class="string">&quot;darkred&quot;</span>)</span><br><span class="line">    ax.patches[<span class="number">3</span>].set_edgecolor(<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># set_range</span></span><br><span class="line">    ax.set_ylim(<span class="number">0</span>, <span class="number">4</span>)</span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>object oriented 방식은 이런 식의 호출이 가능합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/27_mpl_focus_10.png"></p>
+<p><img src="27_mpl_focus_10.png" alt=""></p>
 <ul>
 <li><code>spines</code>의 정체를 확인해봅시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>(ax.spines)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_2.png"></p>
+<p><img src="28_mpl_spines_2.png" alt=""></p>
 <ul>
 <li><code>OrderedDict</code>객체입니다. <code>dictionary</code>의 일종이네요.</li>
 <li>그럼 key와 value는 어떤 것들일까요?</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> ax.spines.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;spines[<span class="subst">&#123;k&#125;</span>] = <span class="subst">&#123;v&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_3.png"></p>
+<p><img src="28_mpl_spines_3.png" alt=""></p>
 <ul>
 <li>key는 <code>&quot;left&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;top&quot;</code>이네요. <b>네 개의 테두리</b>입니다.</li>
 <li>value가 뭔지 잘 모르겠습니다. 다시 정체를 파악해봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.spines.values()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_4.png"></p>
+<p><img src="28_mpl_spines_4.png" alt=""></p>
 <ul>
-<li><code>matplotlib.spines.Spine</code> 객체입니다.<ul>
+<li><code>matplotlib.spines.Spine</code> 객체입니다.
+<ul>
 <li><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/api/spines_api.html">공식문서</a>에 따르면 <code>Spine</code>은 <b><code>Patch</code>의 subclass</b>이고</li>
 <li><code>set_patch_circle</code>, <code>set_patch_arc</code>가 호출되면 <b>원이나 호</b>를 그리기도 한답니다.</li>
 <li>선을 그리는 <code>set_patch_line</code>이 기본값입니다.</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-1-spine-숨기기-set-visible-False"><a href="#2-1-spine-숨기기-set-visible-False" class="headerlink" title="2.1. spine 숨기기 : .set_visible(False)"></a>2.1. spine 숨기기 : <code>.set_visible(False)</code></h4><blockquote>
+<h4 id="2-1-spine-숨기기-set-visible-False">2.1. spine 숨기기 : <code>.set_visible(False)</code></h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/axes_api.html">matplotlib.axes</a></p>
 </blockquote>
 <ul>
@@ -341,79 +359,97 @@
 <li><b><code>set_visible(False)</code></b> 명령을 사용하면 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_5.png" alt="bottom spine만 남기기"></p>
+<p><img src="28_mpl_spines_5.png" alt="bottom spine만 남기기"></p>
 <ul>
-<li>사족을 하나 붙이면, <code>set_visible()</code>은 spine에만 적용되는 명령이 아닙니다.<ul>
+<li>사족을 하나 붙이면, <code>set_visible()</code>은 spine에만 적용되는 명령이 아닙니다.
+<ul>
 <li><b>General Artist Properties</b>라고 해서 <b>모든 객체</b>에 적용 가능한 명령입니다.</li>
 <li>위 예시에선 spine에 사용했을 뿐입니다.</li>
 <li><a href="https://jehyunlee.github.io/2020/08/26/Python-DS-27-mpl_focus/">이전 글</a>에서 설명했듯 bar 객체에도 적용 가능합니다.</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-2-spine-범위-지정하기-set-bounds-min-max"><a href="#2-2-spine-범위-지정하기-set-bounds-min-max" class="headerlink" title="2.2. spine 범위 지정하기 : .set_bounds(min, max)"></a>2.2. spine 범위 지정하기 : <code>.set_bounds(min, max)</code></h4><ul>
+<h4 id="2-2-spine-범위-지정하기-set-bounds-min-max">2.2. spine 범위 지정하기 : <code>.set_bounds(min, max)</code></h4>
+<ul>
 <li>spine을 일부 영역만 보여주고 싶을 수 있습니다.</li>
 <li>왼쪽 spine을 안보이게 하는 대신 가운데만 그려봅시다.</li>
 <li><code>set_bounds(min, max)</code>를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_bounds(<span class="number">1</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_6.png" alt="left spine 범위 지정하기"></p>
-<h4 id="2-3-spine-위치-지정하기-set-position-direction-distance"><a href="#2-3-spine-위치-지정하기-set-position-direction-distance" class="headerlink" title="2.3. spine 위치 지정하기 : .set_position((direction, distance))"></a>2.3. spine 위치 지정하기 : <code>.set_position((direction, distance))</code></h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/spines_api.html?highlight=set_position#matplotlib.spines.Spine.set_position">matplotlib.spines</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.axes.Axes.set_position.html#matplotlib.axes.Axes.set_position">matplotlib.axes.Axes.set_position</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spine_placement_demo.html">matplotlib: Spine placement demo</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/recipes/centered_spines_with_arrows.html">matplotlib: Centered spines with arrows</a></p>
+<p><img src="28_mpl_spines_6.png" alt="left spine 범위 지정하기"></p>
+<h4 id="2-3-spine-위치-지정하기-set-position-direction-distance">2.3. spine 위치 지정하기 : <code>.set_position((direction, distance))</code></h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/spines_api.html?highlight=set_position#matplotlib.spines.Spine.set_position">matplotlib.spines</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.axes.Axes.set_position.html#matplotlib.axes.Axes.set_position">matplotlib.axes.Axes.set_position</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/ticks_and_spines/spine_placement_demo.html">matplotlib: Spine placement demo</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/recipes/centered_spines_with_arrows.html">matplotlib: Centered spines with arrows</a></p>
 </blockquote>
 <ul>
-<li><p><a href="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/">지난번 글</a>에서 이런 그림을 그렸습니다.</p>
+<li>
+<p><a href="https://jehyunlee.github.io/2020/08/10/Python-DS-25-custom_colormap_code/">지난번 글</a>에서 이런 그림을 그렸습니다.</p>
 </li>
-<li><p>가로와 세로축을 원래 위치에서 밖으로 살짝 밀어서 <b>공간을 확보</b>하고 <b>여유를 연출</b>했습니다.<br><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/L_rainbow.png"></p>
+<li>
+<p>가로와 세로축을 원래 위치에서 밖으로 살짝 밀어서 <b>공간을 확보</b>하고 <b>여유를 연출</b>했습니다.<br>
+<img src="L_rainbow.png" alt=""></p>
 </li>
-<li><p><b><code>set_position((direction, distance))</code></b>을 사용해서 할 수 있습니다.</p>
+<li>
+<p><b><code>set_position((direction, distance))</code></b>을 사용해서 할 수 있습니다.</p>
 </li>
-<li><p>먼저, <b><code>get_position()</code></b>을 사용해서 <code>spines[&quot;left&quot;]</code>가 어떻게 설정돼있나 보겠습니다.</p>
+<li>
+<p>먼저, <b><code>get_position()</code></b>을 사용해서 <code>spines[&quot;left&quot;]</code>가 어떻게 설정돼있나 보겠습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].get_position()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_7.png" alt="left spine 이동"></p>
+<p><img src="28_mpl_spines_7.png" alt="left spine 이동"></p>
 <ul>
 <li>밖으로(“outward”) 0만큼 나가있다고 합니다.</li>
 <li><b><code>set_position((&quot;outward&quot;, 10))</code></b>을 설정해서 조금 간격을 띄워보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_8.png"></p>
+<p><img src="28_mpl_spines_8.png" alt=""></p>
 <ul>
-<li>“outward”를 넣을 수 있으니 거꾸로 할 때는 “inward”를 쓰면 될 것 같습니다.</li>
+<li>&quot;outward&quot;를 넣을 수 있으니 거꾸로 할 때는 &quot;inward&quot;를 쓰면 될 것 같습니다.</li>
 <li>그렇지 않습니다. 대신 <b>거리를 음수</b>로 넣으면 됩니다.</li>
 <li>“outward” 대신 <b>“axes”</b>, <b>“data”</b>를 넣을 수 있고, 의미는 다음과 같습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i])</span><br><span class="line">    ax[i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : spine을 data 영역에서 지정된 거리만큼 이동  </span></span><br><span class="line">ax[<span class="number">0</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, -<span class="number">50</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : spine을 axes의 지정된 위치에 설정</span></span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;axes&quot;</span>, <span class="number">0.3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : spine을 data의 지정된 위치에 설정</span></span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">2.5</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_9.png" alt="좌로부터 outward+음수, axes, data"></p>
+<p><img src="28_mpl_spines_9.png" alt="좌로부터 outward+음수, axes, data"></p>
 <ul>
-<li>“axes”와 “data”도 음수를 함께 사용할 수 있습니다.</li>
+<li>&quot;axes&quot;와 &quot;data&quot;도 음수를 함께 사용할 수 있습니다.</li>
 <li>이 기능을 이용하면 <b>수학시간에 많이 보던 형태의 그래프</b>를 그릴 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## data</span></span><br><span class="line">x = np.linspace(-np.pi, np.pi, <span class="number">100</span>)</span><br><span class="line">y = <span class="number">2</span> * np.sin(x)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## normal plot</span></span><br><span class="line">ax[<span class="number">0</span>].plot(x, y)</span><br><span class="line">ax[<span class="number">0</span>].set_title(<span class="string">&quot;normal plot&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## textbook (1)</span></span><br><span class="line">ax[<span class="number">1</span>].plot(x, y)</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">&quot;textbook (1)&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"><span class="comment"># top, right 는 안보이게</span></span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># left, bottom은 (0, 0)을 지나가게</span></span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line">ax[<span class="number">1</span>].spines[<span class="string">&quot;bottom&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## textbook (2)</span></span><br><span class="line">ax[<span class="number">2</span>].plot(x, y)</span><br><span class="line">ax[<span class="number">2</span>].set_title(<span class="string">&quot;textbook (2)&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"><span class="comment"># top, right 는 안보이게</span></span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># left, bottom은 (0, 0)을 지나가게</span></span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line">ax[<span class="number">2</span>].spines[<span class="string">&quot;bottom&quot;</span>].set_position((<span class="string">&quot;data&quot;</span>, <span class="number">0</span>))</span><br><span class="line"><span class="comment"># 화살표 추가</span></span><br><span class="line">ax[<span class="number">2</span>].plot(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;&gt;k&quot;</span>, transform=ax[<span class="number">2</span>].get_yaxis_transform(), clip_on=<span class="literal">False</span>)</span><br><span class="line">ax[<span class="number">2</span>].plot(<span class="number">0</span>, <span class="number">1</span>, <span class="string">&quot;^k&quot;</span>, transform=ax[<span class="number">2</span>].get_xaxis_transform(), clip_on=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_10.png"></p>
+<p><img src="28_mpl_spines_10.png" alt=""></p>
 <ul>
-<li>자주 사용할 것들은 이렇게 간단히 사용할 수 있습니다.<ul>
+<li>자주 사용할 것들은 이렇게 간단히 사용할 수 있습니다.
+<ul>
 <li><b><code>set_position((&quot;axes&quot;, 0.5&quot;))</code></b> 대신 <b><code>set_position(&quot;center&quot;)</code></b></li>
 <li><b><code>set_position((&quot;data&quot;, 0.0&quot;))</code></b> 대신 <b><code>set_position(&quot;zero&quot;)</code></b></li>
 </ul>
 </li>
 </ul>
-<h3 id="3-격자grid"><a href="#3-격자grid" class="headerlink" title="3. 격자grid"></a>3. 격자<code>grid</code></h3><blockquote>
+<h3 id="3-격자grid">3. 격자<code>grid</code></h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.grid.html">matplotlib.axes.Axes.grid</a></p>
 </blockquote>
 <ul>
-<li><p>spines를 적절히 잡아주면 데이터를 읽기 좋아집니다.</p>
+<li>
+<p>spines를 적절히 잡아주면 데이터를 읽기 좋아집니다.</p>
 </li>
-<li><p>그러나 데이터간 크기를 더 잘 비교하려면, 그림에 <b>grid</b>를 깔아주면 더 좋습니다.</p>
+<li>
+<p>그러나 데이터간 크기를 더 잘 비교하려면, 그림에 <b>grid</b>를 깔아주면 더 좋습니다.</p>
 </li>
-<li><p><b><code>.grid(True)</code></b> 메소드로 격자를 그릴 수 있습니다.</p>
+<li>
+<p><b><code>.grid(True)</code></b> 메소드로 격자를 그릴 수 있습니다.</p>
 </li>
-<li><p><b>axis&#x3D;{“both”, “x”, “y”}</b> 인자로 방향을 지정합니다.</p>
+<li>
+<p><b>axis={“both”, “x”, “y”}</b> 인자로 방향을 지정합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i])</span><br><span class="line">    ax[i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[<span class="number">0</span>].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, <span class="number">10</span>))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : x, y 둘 다 </span></span><br><span class="line">ax[<span class="number">0</span>].grid(axis=<span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : x축에서만</span></span><br><span class="line">ax[<span class="number">1</span>].grid(axis=<span class="string">&quot;x&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : y축에서만</span></span><br><span class="line">ax[<span class="number">2</span>].grid(axis=<span class="string">&quot;y&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_11.png">  </p>
-<h4 id="3-1-major-and-minor-ticks"><a href="#3-1-major-and-minor-ticks" class="headerlink" title="3.1. major and minor ticks"></a>3.1. major and minor ticks</h4><blockquote>
+<p><img src="28_mpl_spines_11.png" alt=""></p>
+<h4 id="3-1-major-and-minor-ticks">3.1. major and minor ticks</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.1/gallery/ticks_and_spines/major_minor_demo.html">matplotlib: major and minor ticks</a></p>
 </blockquote>
 <ul>
@@ -421,21 +457,22 @@
 <li>먼저, major와 minor tick을 설정합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> (MultipleLocator, AutoMinorLocator)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># top, right, left spines 안보이기</span></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y축 tick 설정</span></span><br><span class="line">ax.yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))    <span class="comment"># major tick을 1 단위로 설정</span></span><br><span class="line">ax.yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:0.2f&#125;&#x27;</span>)          <span class="comment"># major tick format 지정 (오류가 나면 matplotlib upgrade)</span></span><br><span class="line">ax.yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))  <span class="comment"># minor tick을 0.5 단위로 지정</span></span><br><span class="line"></span><br><span class="line">plt.plot()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_12.png"> </p>
-<h4 id="3-2-major-grid-only"><a href="#3-2-major-grid-only" class="headerlink" title="3.2. major grid only"></a>3.2. major grid only</h4><ul>
+<p><img src="28_mpl_spines_12.png" alt=""></p>
+<h4 id="3-2-major-grid-only">3.2. major grid only</h4>
+<ul>
 <li>major와 minor ticks가 구분되면, 한쪽을 선택해서 그릴 수 있습니다.</li>
 <li>major와 minor grid를 구분해서 지정할 수 있습니다.</li>
 <li>따라서, 색상이나 선 스타일 등을 구분해서 변화시키기 좋습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>): <span class="comment"># 그래프 세개 한번에 그리기</span></span><br><span class="line">    ax[i] = plot_example(ax[i], zorder=<span class="number">2</span>) <span class="comment"># zorder: bar를 grid 앞으로.</span></span><br><span class="line">    ax[i].spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax[i].spines[<span class="string">&quot;left&quot;</span>].set_position((<span class="string">&quot;outward&quot;</span>, <span class="number">10</span>))</span><br><span class="line">    ax[i].yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line">    ax[i].yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:0.2f&#125;&#x27;</span>)</span><br><span class="line">    ax[i].yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># ax[0] : major, minor 둘 다</span></span><br><span class="line">ax[<span class="number">0</span>].grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;both&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[1] : major만</span></span><br><span class="line">ax[<span class="number">1</span>].grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ax[2] : major만 + 여러 옵션</span></span><br><span class="line">ax[<span class="number">2</span>].grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>, color=<span class="string">&quot;r&quot;</span>, ls=<span class="string">&quot;:&quot;</span>, lw=<span class="number">0.5</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_13.png"> </p>
+<p><img src="28_mpl_spines_13.png" alt=""></p>
 <ul>
 <li>최종적으로 다음과 같은 결과물을 얻을 수 있습니다.</li>
-<li>불필요한 spine을 제거해서 <b>시선 분산</b>을 막고, </li>
+<li>불필요한 spine을 제거해서 <b>시선 분산</b>을 막고,</li>
 <li>grid를 추가해서 데이터들을 <b>옆에 있는 숫자</b>들과 비교하기 좋게 했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax = plot_example(ax, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    </span><br><span class="line">ax.yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line">ax.yaxis.set_major_formatter(<span class="string">&#x27;&#123;x:0.2f&#125;&#x27;</span>)</span><br><span class="line">ax.yaxis.set_minor_locator(MultipleLocator(<span class="number">0.5</span>))</span><br><span class="line"></span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;major&quot;</span>, color=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">ax.grid(axis=<span class="string">&quot;y&quot;</span>, which=<span class="string">&quot;minor&quot;</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/08/27/Python-DS-28-mpl_spines_grids/28_mpl_spines_0.png" alt="bar plot의 높이 차이가 잘 드러납니다."></p>
+<p><img src="28_mpl_spines_0.png" alt="bar plot의 높이 차이가 잘 드러납니다."></p>
 
         </div>
 		<p>
@@ -453,7 +490,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/" data-id="cuid3VlwyCu1dx3TKUzq7vxC-" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/" data-id="cuid2zuqvJPwRXlO1-9ZBCIxI" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -536,8 +573,10 @@
 matplotlib에서는 Axes.spines와 Axes.grid 객체를 통해 제어합니다.
 
 
-Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Visualization-What ",
-        "wordCount": 1821
+Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)
+Colin Ware “데이터 시각화, 인지과학을 만나다”
+White Paper-Principles of Data Visualization-Wha",
+        "wordCount": 1774
     }
 </script>
 
@@ -634,6 +673,26 @@ Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “�
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -708,26 +767,6 @@ Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “�
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

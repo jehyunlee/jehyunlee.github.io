@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,seaborn,datetime" />
     
-    <meta name="description" content="seaborn의 heatmap은 매우 강력한 도구입니다. 한 줄의 명령으로 colormap과 annotation, colorbar가 붙은 정돈된 그림이 나옵니다. 그런데 colorbar를 조금 고치고 싶다면, 어떻게 할까요?  1. Seaborn Heatmap1.1. 예제 데이터 만들기 Seaborn에 내장된 펭귄 데이터셋을 사용합시다.  12345678">
+    <meta name="description" content="seaborn의 heatmap은 매우 강력한 도구입니다. 한 줄의 명령으로 colormap과 annotation, colorbar가 붙은 정돈된 그림이 나옵니다. 그런데 colorbar를 조금 고치고 싶다면, 어떻게 할까요?  1. Seaborn Heatmap 1.1. 예제 데이터 만들기  Seaborn에 내장된 펭귄 데이터셋을 사용합시다.  123456">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Seaborn Heatmap &amp; Colorbar Control">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/07/01/Python-DS-78-heatmapcolorbar/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="seaborn의 heatmap은 매우 강력한 도구입니다. 한 줄의 명령으로 colormap과 annotation, colorbar가 붙은 정돈된 그림이 나옵니다. 그런데 colorbar를 조금 고치고 싶다면, 어떻게 할까요?  1. Seaborn Heatmap1.1. 예제 데이터 만들기 Seaborn에 내장된 펭귄 데이터셋을 사용합시다.  12345678">
+<meta property="og:description" content="seaborn의 heatmap은 매우 강력한 도구입니다. 한 줄의 명령으로 colormap과 annotation, colorbar가 붙은 정돈된 그림이 나옵니다. 그런데 colorbar를 조금 고치고 싶다면, 어떻게 할까요?  1. Seaborn Heatmap 1.1. 예제 데이터 만들기  Seaborn에 내장된 펭귄 데이터셋을 사용합시다.  123456">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/78_heatmapcolorbar_0.png">
 <meta property="article:published_time" content="2021-07-01T01:55:00.000Z">
@@ -235,124 +235,146 @@
 <li>한 줄의 명령으로 colormap과 annotation, colorbar가 붙은 정돈된 그림이 나옵니다.</li>
 <li>그런데 colorbar를 조금 고치고 싶다면, 어떻게 할까요?</li>
 </ul>
-<h1 id="1-Seaborn-Heatmap"><a href="#1-Seaborn-Heatmap" class="headerlink" title="1. Seaborn Heatmap"></a>1. Seaborn Heatmap</h1><h2 id="1-1-예제-데이터-만들기"><a href="#1-1-예제-데이터-만들기" class="headerlink" title="1.1. 예제 데이터 만들기"></a>1.1. 예제 데이터 만들기</h2><ul>
+<h1>1. Seaborn Heatmap</h1>
+<h2 id="1-1-예제-데이터-만들기">1.1. 예제 데이터 만들기</h2>
+<ul>
 <li>Seaborn에 내장된 펭귄 데이터셋을 사용합시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-PCA"><a href="#1-2-PCA" class="headerlink" title="1.2. PCA"></a>1.2. PCA</h2><ul>
+<h2 id="1-2-PCA">1.2. PCA</h2>
+<ul>
 <li>데이터에 PCA를 적용합니다.</li>
 <li>주성분분석후 인자별 기여도 분석을 진행합니다.</li>
 <li>예제 데이터라도 standard scaling은 잊지 맙시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">cols_num = [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>, <span class="string">&quot;body_mass_g&quot;</span>]</span><br><span class="line">peng_std = ss.fit_transform(df_peng[cols_num].dropna())</span><br><span class="line">peng_std</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_01.png"><br></p>
+<p><img src="78_heatmapcolorbar_01.png" alt=""><br></p>
 <ul>
 <li>PCA를 수행합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA()</span><br><span class="line">peng_pca = pca.fit_transform(peng_std)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>인자별 주성분 기여도를 heatmap으로 표현합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ticklabels = [<span class="string">f&quot;PC<span class="subst">&#123;i+<span class="number">1</span>&#125;</span>&quot;</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(peng_pca.shape[<span class="number">1</span>])]</span><br><span class="line"></span><br><span class="line">sns.heatmap(pca.components_, annot=<span class="literal">True</span>, cmap=<span class="string">&quot;RdBu_r&quot;</span>, </span><br><span class="line">            xticklabels=cols_num, yticklabels=ticklabels)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_02.png"><br></p>
+<p><img src="78_heatmapcolorbar_02.png" alt=""><br></p>
 <ul>
 <li><code>sns.heatmap()</code> 한 줄로 멋진 그림을 그렸습니다.</li>
 <li>이 그림을 기본으로 조금씩 고쳐보겠습니다.</li>
 </ul>
-<h2 id="1-3-범위-컬러바-조정"><a href="#1-3-범위-컬러바-조정" class="headerlink" title="1.3. 범위, 컬러바 조정"></a>1.3. 범위, 컬러바 조정</h2><ul>
+<h2 id="1-3-범위-컬러바-조정">1.3. 범위, 컬러바 조정</h2>
+<ul>
 <li>여기서 우리는 주성분에 대한 각 인자의 기여도가 중요하지 방향은 중요하지 않다고 가정합니다.</li>
 <li>인자별 중요도가 담긴 pca.components_에 절대값을 취하고, colorbar도 거기에 맞게 한쪽 방향으로 발산하는 inferno를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pca_comp_abs = <span class="built_in">abs</span>(pca.components_)</span><br><span class="line">sns.heatmap(pca_comp_abs, annot=<span class="literal">True</span>, cmap=<span class="string">&quot;inferno&quot;</span>, vmin=<span class="number">0</span>, vmax=<span class="number">1</span>,</span><br><span class="line">            xticklabels=cols_num, yticklabels=ticklabels)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_03.png"><br></p>
+<p><img src="78_heatmapcolorbar_03.png" alt=""><br></p>
 <ul>
 <li>seaborn heatmap을 그리면 함께 출력되는 메시지가 있습니다.</li>
 <li><a href="AxesSubplot:">AxesSubplot:</a> 인데, <code>sns.heatmap()</code>명령의 출력이 Matplotlib의 AxesSubplot 객체라는 의미입니다.</li>
 </ul>
-<h2 id="1-4-annotation-불투명도-조정"><a href="#1-4-annotation-불투명도-조정" class="headerlink" title="1.4. annotation 불투명도 조정"></a>1.4. annotation 불투명도 조정</h2><ul>
+<h2 id="1-4-annotation-불투명도-조정">1.4. annotation 불투명도 조정</h2>
+<ul>
 <li>heatmap 위의 글자가 너무 강렬하다면 불투명도를 조정할 수 있습니다.</li>
 <li>seaborn heatmap의 annotation은 딕셔너리 형태의 <code>annot_kws</code> 인자로 제어 가능합니다.</li>
 <li>명령 안에 <code>annot_kws={&quot;alpha&quot;: 0.3}</code>을 입력하면 불투명도가 0.3으로 내려가 색이 더 잘 들어옵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ax = sns.heatmap(pca_comp_abs, annot=<span class="literal">True</span>, cmap=<span class="string">&quot;inferno&quot;</span>, vmin=<span class="number">0</span>, vmax=<span class="number">1</span>,</span><br><span class="line">                 xticklabels=cols_num, yticklabels=ticklabels, annot_kws=&#123;<span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line">fig = ax.figure</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fig.get_children())</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_04.png"><br></p>
+<p><img src="78_heatmapcolorbar_04.png" alt=""><br></p>
 <ul>
-<li><p>이번에는 <code>sns.heatmap()</code> 앞에 ax&#x3D;를 붙여서 heatmap 객체를 ax 변수에 저장했습니다.</p>
+<li>
+<p>이번에는 <code>sns.heatmap()</code> 앞에 ax=를 붙여서 heatmap 객체를 ax 변수에 저장했습니다.</p>
 </li>
-<li><p>그리고 <code>fig = ax.figure</code> 명령으로 ax가 속한 figure를 fig 변수에 저장했습니다.</p>
+<li>
+<p>그리고 <code>fig = ax.figure</code> 명령으로 ax가 속한 figure를 fig 변수에 저장했습니다.</p>
 </li>
-<li><p><code>fig, ax = plt.subplots()</code>에 이어서 <code>sns.heatmap(어쩌구, ax=ax)</code>한 것과 같은 효과입니다.</p>
+<li>
+<p><code>fig, ax = plt.subplots()</code>에 이어서 <code>sns.heatmap(어쩌구, ax=ax)</code>한 것과 같은 효과입니다.</p>
 </li>
-<li><p><code>fig.get_children()</code>명령으로 fig의 구성요소를 확인하면, 맨 마지막에 colorbar가 있습니다.</p>
+<li>
+<p><code>fig.get_children()</code>명령으로 fig의 구성요소를 확인하면, 맨 마지막에 colorbar가 있습니다.</p>
 </li>
-<li><p>ax와 fig는 이제 변수에 저장되었으니 마음껏 가지고 놀 수 있습니다.</p>
+<li>
+<p>ax와 fig는 이제 변수에 저장되었으니 마음껏 가지고 놀 수 있습니다.</p>
 </li>
-<li><p>colorbar도 마찬가지로 다뤄봅니다.</p>
+<li>
+<p>colorbar도 마찬가지로 다뤄봅니다.</p>
 </li>
 </ul>
-<h1 id="2-Colorbar"><a href="#2-Colorbar" class="headerlink" title="2. Colorbar"></a>2. Colorbar</h1><h2 id="2-1-colorbar-객체-분리"><a href="#2-1-colorbar-객체-분리" class="headerlink" title="2.1. colorbar 객체 분리"></a>2.1. colorbar 객체 분리</h2><ul>
+<h1>2. Colorbar</h1>
+<h2 id="2-1-colorbar-객체-분리">2.1. colorbar 객체 분리</h2>
+<ul>
 <li>colorbar 객체를 figure에서 떼어냅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cbar = fig.get_children()[-<span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(cbar))</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_11.png"><br></p>
+<p><img src="78_heatmapcolorbar_11.png" alt=""><br></p>
 <ul>
 <li>타입을 확인해보니 AxesSubplot입니다.</li>
 <li>앞에서 heatmap의 타입도 AxesSubplot이었습니다.</li>
 <li>정리하면, 데이터가 표기되는 부분이나 colorbar가 표기되는 부분이나 Matplotlib 구조적으로는 동일하다는 뜻입니다.</li>
 <li>그렇다면 데이터를 그리는 Axes에 적용하는 명령어를 colorbar에도 사용할 수 있겠습니다.</li>
 </ul>
-<h2 id="2-2-y눈금-수정"><a href="#2-2-y눈금-수정" class="headerlink" title="2.2. y눈금 수정"></a>2.2. y눈금 수정</h2><ul>
+<h2 id="2-2-y눈금-수정">2.2. y눈금 수정</h2>
+<ul>
 <li>0부터 1까지 0.2 단위로 찍힌 현재의 눈금을 0, 0.5, 1 세개만 남기고자 합니다.</li>
 <li>일반 plot에서는 <code>set_yticks()</code>로 위치를 잡고 <code>set_yticklabels()</code>로 눈금을 입혔습니다.</li>
 <li>한번 <code>set_yticks()</code>를 실험해 봅니다.</li>
 <li>아까 그린 그림에서 colorbar만 수정한 후 그림을 그리라<code>display(fig)</code>명령으로 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cbar.set_yticks([-<span class="number">0.5</span>, <span class="number">0</span>, <span class="number">0.5</span>])</span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_12.png"><br></p>
+<p><img src="78_heatmapcolorbar_12.png" alt=""><br></p>
 <ul>
 <li>바뀌지 않습니다.</li>
 <li>colorbar는 축을 지정한 후 <code>set_ticks()</code>를 사용하라고 합니다.</li>
 <li>고분고분 말을 듣습니다. <code>cbar.yaxis</code>로 y축 지정 후 <code>set_ticks()</code>를 적용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cbar.yaxis.set_ticks([<span class="number">0</span>, <span class="number">0.5</span>, <span class="number">1</span>])</span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_06.png"><br></p>
+<p><img src="78_heatmapcolorbar_06.png" alt=""><br></p>
 <ul>
-<li><p>y축 눈금이 변경되었습니다.</p>
+<li>
+<p>y축 눈금이 변경되었습니다.</p>
 </li>
-<li><p>y축 눈금은 다른 방식으로도 바꿀 수 있습니다.</p>
+<li>
+<p>y축 눈금은 다른 방식으로도 바꿀 수 있습니다.</p>
 </li>
-<li><p>Matplotlib의 MultipleLocator를 사용하면, 눈금 간격을 지정할 수 있습니다.</p>
+<li>
+<p>Matplotlib의 MultipleLocator를 사용하면, 눈금 간격을 지정할 수 있습니다.</p>
 </li>
-<li><p>이번엔 그림을 처음부터 다시 그려봅니다.</p>
+<li>
+<p>이번엔 그림을 처음부터 다시 그려봅니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> MultipleLocator</span><br><span class="line"></span><br><span class="line">ax = sns.heatmap(pca_comp_abs, annot=<span class="literal">True</span>, cmap=<span class="string">&quot;inferno&quot;</span>, vmin=<span class="number">0</span>, vmax=<span class="number">1</span>,</span><br><span class="line">                 xticklabels=cols_num, yticklabels=ticklabels, annot_kws=&#123;<span class="string">&quot;alpha&quot;</span>:<span class="number">0.3</span>&#125;)</span><br><span class="line">fig = ax.figure</span><br><span class="line">cbar = fig.get_children()[-<span class="number">1</span>]</span><br><span class="line">cbar.yaxis.set_major_locator(MultipleLocator(<span class="number">0.5</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_07.png"><br></p>
+<p><img src="78_heatmapcolorbar_07.png" alt=""><br></p>
 <ul>
 <li>동일한 효과가 반영되었습니다.</li>
 </ul>
-<h2 id="2-3-colorbar-위-눈금"><a href="#2-3-colorbar-위-눈금" class="headerlink" title="2.3. colorbar 위 눈금"></a>2.3. colorbar 위 눈금</h2><ul>
+<h2 id="2-3-colorbar-위-눈금">2.3. colorbar 위 눈금</h2>
+<ul>
 <li>가끔 colorbar 옆에 달린 눈금이 colorbar까지 이어지면 좋겠다 싶기도 합니다.</li>
 <li>colorbar의 정체는 Axes이므로, Axes의 수평선 명령 <code>axhline()</code>을 사용합니다.</li>
 <li>-0.5, 0, 0.5 세 군데에 선을 그려봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cbar.axhline(-<span class="number">0.5</span>, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">cbar.axhline(<span class="number">0</span>, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">cbar.axhline(<span class="number">0.5</span>, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">    </span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_08.png"><br></p>
+<p><img src="78_heatmapcolorbar_08.png" alt=""><br></p>
 <ul>
-<li><p>0.5에는 그려지지만 0과 1에는 그려지지 않았습니다.</p>
+<li>
+<p>0.5에는 그려지지만 0과 1에는 그려지지 않았습니다.</p>
 </li>
-<li><p>colorbar 위 아래 한계선에 딱 걸려서 그렇습니다.</p>
+<li>
+<p>colorbar 위 아래 한계선에 딱 걸려서 그렇습니다.</p>
 </li>
-<li><p>이럴 때는 테두리를 그려버리면 됩니다.</p>
+<li>
+<p>이럴 때는 테두리를 그려버리면 됩니다.</p>
 </li>
-<li><p>내친 김에 heatmap에도 그립니다.</p>
+<li>
+<p>내친 김에 heatmap에도 그립니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ax.spines[[<span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>, <span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>]].set_visible(<span class="literal">True</span>)</span><br><span class="line">cbar.spines[[<span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_visible(<span class="literal">True</span>)</span><br><span class="line">cbar.spines[[<span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_color(<span class="string">&quot;k&quot;</span>)</span><br><span class="line">cbar.axhline(<span class="number">0</span>, c=<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line">display(fig)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/07/01/Python-DS-78-heatmapcolorbar/78_heatmapcolorbar_09.png"><br></p>
-<h1 id="3-정리"><a href="#3-정리" class="headerlink" title="3. 정리"></a>3. 정리</h1><ul>
+<p><img src="78_heatmapcolorbar_09.png" alt=""><br></p>
+<h1>3. 정리</h1>
+<ul>
 <li>오늘의 글은 딱 한 문장으로 요약됩니다.</li>
 <li><b>colorbar도 Axes다.</b></li>
 <li>괜히 겁먹지 맙시다.</li>
@@ -374,7 +396,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/07/01/Python-DS-78-heatmapcolorbar/" data-id="cuidVwAdsXDPETptULUmKUhUP" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/07/01/Python-DS-78-heatmapcolorbar/" data-id="cuidSIT0cnMNZGQc8MAuRXgvl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -457,11 +479,13 @@ seaborn의 heatmap은 매우 강력한 도구입니다.
 한 줄의 명령으로 colormap과 annotation, colorbar가 붙은 정돈된 그림이 나옵니다.
 그런데 colorbar를 조금 고치고 싶다면, 어떻게 할까요?
 
-1. Seaborn Heatmap1.1. 예제 데이터 만들기
+1. Seaborn Heatmap
+1.1. 예제 데이터 만들기
+
 Seaborn에 내장된 펭귄 데이터셋을 사용합시다.
 
-12345678",
-        "wordCount": 778
+123456",
+        "wordCount": 733
     }
 </script>
 
@@ -558,6 +582,26 @@ Seaborn에 내장된 펭귄 데이터셋을 사용합시다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -632,26 +676,6 @@ Seaborn에 내장된 펭귄 데이터셋을 사용합시다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

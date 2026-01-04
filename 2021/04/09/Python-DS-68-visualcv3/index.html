@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,sklearn,machine learning" />
     
-    <meta name="description" content="데이터 불균형으로 인해 train, validation, test dataset의 결과가 따로 놉니다. 층화추출로 데이터를 최대한 균등하게 분할합시다. hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.  6. Validation set 고정 새로운 노트북을 만들어 데이터를 불러옵니다.  123456789101112131415%matpl">
+    <meta name="description" content="데이터 불균형으로 인해 train, validation, test dataset의 결과가 따로 놉니다. 층화추출로 데이터를 최대한 균등하게 분할합시다. hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.  6. Validation set 고정  새로운 노트북을 만들어 데이터를 불러옵니다.  123456789101112131415%matp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Validation with Visualization (3)">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/04/09/Python-DS-68-visualcv3/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="데이터 불균형으로 인해 train, validation, test dataset의 결과가 따로 놉니다. 층화추출로 데이터를 최대한 균등하게 분할합시다. hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.  6. Validation set 고정 새로운 노트북을 만들어 데이터를 불러옵니다.  123456789101112131415%matpl">
+<meta property="og:description" content="데이터 불균형으로 인해 train, validation, test dataset의 결과가 따로 놉니다. 층화추출로 데이터를 최대한 균등하게 분할합시다. hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.  6. Validation set 고정  새로운 노트북을 만들어 데이터를 불러옵니다.  123456789101112131415%matp">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/68_vcv3_0.png">
 <meta property="article:published_time" content="2021-04-09T07:04:00.000Z">
@@ -235,12 +235,13 @@
 <li>층화추출로 데이터를 최대한 균등하게 분할합시다.</li>
 <li>hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.</li>
 </ul>
-<h1 id="6-Validation-set-고정"><a href="#6-Validation-set-고정" class="headerlink" title="6. Validation set 고정"></a>6. Validation set 고정</h1><ul>
+<h1>6. Validation set 고정</h1>
+<ul>
 <li>새로운 노트북을 만들어 데이터를 불러옵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;Pastel1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 불러오기</span></span><br><span class="line">df_vcv = pd.read_csv(<span class="string">&quot;df_vcv.csv&quot;</span>)</span><br><span class="line">df_vcv.head()</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-1-랜덤추출"><a href="#6-1-랜덤추출" class="headerlink" title="6.1. 랜덤추출"></a>6.1. 랜덤추출</h2><blockquote>
+<h2 id="6-1-랜덤추출">6.1. 랜덤추출</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">sklearn.model_selection.train_test_split</a></p>
 </blockquote>
 <ul>
@@ -248,7 +249,6 @@
 <li>편하게 sklearn의 <code>train_test_split()</code>을 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># data split</span></span><br><span class="line">df_trainval, df_test = train_test_split(df_vcv, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line">df_train, df_val = train_test_split(df_trainval, train_size=<span class="number">0.75</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># index</span></span><br><span class="line">idx_train = df_train.index</span><br><span class="line">idx_val = df_val.index</span><br><span class="line">idx_test = df_test.index</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>데이터가 잘 분할되었는지 확인합니다.</li>
 <li><a href="https://jehyunlee.github.io/2021/04/02/Python-DS-66-visualcv/">지난번 글</a>에 있는 코드를 고쳐서 train, validation, test set의 분포를 그립니다.</li>
@@ -257,51 +257,59 @@
 <details>
     <summary><b>코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_distribution</span>(<span class="params">df, idx_train, idx_val, idx_test, filename</span>):</span><br><span class="line">    fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">8</span>))</span><br><span class="line">    axs = axes.ravel()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ax, col <span class="keyword">in</span> <span class="built_in">zip</span>(axs, df.columns):</span><br><span class="line">        <span class="keyword">if</span> col != <span class="string">&quot;target&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> df[col].dtype == <span class="string">&quot;O&quot;</span>: <span class="comment"># categorical</span></span><br><span class="line">                df_train = df.loc[idx_train, col].value_counts().reset_index()</span><br><span class="line">                df_val = df.loc[idx_val, col].value_counts().reset_index()</span><br><span class="line">                df_test = df.loc[idx_test, col].value_counts().reset_index()</span><br><span class="line"></span><br><span class="line">                width_cat = <span class="number">0.8</span>/<span class="number">3</span></span><br><span class="line">                ax.bar(df_train.index-width_cat, df_train[col]/<span class="built_in">len</span>(idx_train), width=width_cat, ec=<span class="string">&quot;g&quot;</span>, fc=<span class="string">&quot;#AAFFAADD&quot;</span>)</span><br><span class="line">                ax.bar(df_val.index, df_val[col]/<span class="built_in">len</span>(idx_val), width=width_cat, ec=<span class="string">&quot;c&quot;</span>, fc=<span class="string">&quot;#AAFFFFDD&quot;</span>)</span><br><span class="line">                ax.bar(df_test.index+width_cat, df_test[col]/<span class="built_in">len</span>(idx_test), width=width_cat, ec=<span class="string">&quot;m&quot;</span>, fc=<span class="string">&quot;#FFAAFFDD&quot;</span>)</span><br><span class="line">                ax.set_xticks(<span class="built_in">list</span>(<span class="built_in">range</span>(df_train.shape[<span class="number">0</span>])))</span><br><span class="line">                ax.set_xticklabels(df_train[<span class="string">&quot;index&quot;</span>].values)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>: <span class="comment"># numerical</span></span><br><span class="line">                bins = np.linspace(df[col].<span class="built_in">min</span>(), df[col].<span class="built_in">max</span>(), <span class="number">10</span>)</span><br><span class="line">                bins_center = (bins[:-<span class="number">1</span>] + bins[<span class="number">1</span>:])/<span class="number">2</span></span><br><span class="line">                bins_delta = bins[<span class="number">1</span>] - bins[<span class="number">0</span>]</span><br><span class="line">                counts_train, bins_train = np.histogram(df.loc[idx_train, col], bins=bins)</span><br><span class="line">                counts_val, bins_val = np.histogram(df.loc[idx_val, col], bins=bins)</span><br><span class="line">                counts_test, bins_test = np.histogram(df.loc[idx_test, col], bins=bins)</span><br><span class="line"></span><br><span class="line">                width_num = bins_delta/<span class="number">3</span></span><br><span class="line">                ax.bar(bins_center-width_num, counts_train/<span class="built_in">len</span>(idx_train), width=width_num, ec=<span class="string">&quot;g&quot;</span>, fc=<span class="string">&quot;#AAFFAADD&quot;</span>)</span><br><span class="line">                ax.bar(bins_center, counts_val/<span class="built_in">len</span>(idx_val), width=width_num, ec=<span class="string">&quot;g&quot;</span>, fc=<span class="string">&quot;#AAFFFFDD&quot;</span>)</span><br><span class="line">                ax.bar(bins_center+width_num, counts_test/<span class="built_in">len</span>(idx_test), width=width_num, ec=<span class="string">&quot;m&quot;</span>, fc=<span class="string">&quot;#FFAAFFDD&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sns.kdeplot(df.loc[idx_train, col], color=<span class="string">&quot;g&quot;</span>, fill=<span class="literal">True</span>, ax=ax, label=<span class="string">&quot;train&quot;</span>)</span><br><span class="line">            sns.kdeplot(df.loc[idx_val, col], color=<span class="string">&quot;c&quot;</span>, fill=<span class="literal">True</span>, ax=ax, label=<span class="string">&quot;val.&quot;</span>)</span><br><span class="line">            sns.kdeplot(df.loc[idx_test, col], color=<span class="string">&quot;m&quot;</span>, fill=<span class="literal">True</span>, ax=ax, label=<span class="string">&quot;test&quot;</span>)</span><br><span class="line">            ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> col <span class="keyword">in</span> [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;D&quot;</span>]:</span><br><span class="line">            coltype = <span class="string">&quot;categorical&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            coltype = <span class="string">&quot;numerical&quot;</span></span><br><span class="line"></span><br><span class="line">        ax.set_title(<span class="string">f&quot;<span class="subst">&#123;col&#125;</span> (<span class="subst">&#123;coltype&#125;</span>)&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">    handles, labels = axs[<span class="number">5</span>].get_legend_handles_labels()</span><br><span class="line">    axs[<span class="number">2</span>].legend(handles, labels, loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>,<span class="number">0.9</span>))    </span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">    fig.savefig(filename)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>matplotlib은 <b>bar plot을 나란히 놓기가 영 성가신 것이 사실</b>입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_distribution(df_vcv, idx_train, idx_val, idx_test, <span class="string">&quot;68_vcv_1.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_1.png"><br></p>
+<p><img src="68_vcv_1.png" alt=""><br></p>
 <ul>
 <li>categorical은 그나마 좀 나은데 numerical들이 울퉁불퉁합니다.</li>
 <li>이 데이터들을 최대한 균등하게 나누어 봅시다.</li>
 </ul>
-<h2 id="6-2-층화추출-stratified-sampling"><a href="#6-2-층화추출-stratified-sampling" class="headerlink" title="6.2. 층화추출: stratified sampling"></a>6.2. 층화추출: stratified sampling</h2><ul>
+<h2 id="6-2-층화추출-stratified-sampling">6.2. 층화추출: stratified sampling</h2>
+<ul>
 <li>층화추출은 <code>train_test_split()</code>에 <code>stratify=</code> 매개변수를 넣으면 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stratify split fail</span></span><br><span class="line">df_trainval, df_test = train_test_split(df_vcv, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_vcv[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;E&quot;</span>]])</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_0.png"><br></p>
+<p><img src="68_vcv_0.png" alt=""><br></p>
 <ul>
-<li><p>그런데 에러가 납니다.</p>
+<li>
+<p>그런데 에러가 납니다.</p>
 <ul>
 <li>층화추출은 데이터의 종류에 따라 경우의 수가 결정됩니다.</li>
-<li>B x C x E &#x3D; 5 x 5 x 4 &#x3D; <b>100개</b>는 되어야 하는데,</li>
-<li>test dataset이 400 x 0.2 &#x3D; <b>80개</b>밖에 안됩니다.</li>
+<li>B x C x E = 5 x 5 x 4 = <b>100개</b>는 되어야 하는데,</li>
+<li>test dataset이 400 x 0.2 = <b>80개</b>밖에 안됩니다.</li>
 <li>욕심을 줄이고 B와 C에만 층화추출을 적용합니다.</li>
 </ul>
 </li>
-<li><p>1차로 train + val : test set을 8:2로 나누고</p>
+<li>
+<p>1차로 train + val : test set을 8:2로 나누고</p>
 </li>
-<li><p>2차로 train : val 을 3:1로 나눕니다.</p>
+<li>
+<p>2차로 train : val 을 3:1로 나눕니다.</p>
 </li>
-<li><p>최종적으로 <b>train : val : test &#x3D; 3 : 1 : 1</b> 로 나눕니다.</p>
+<li>
+<p>최종적으로 <b>train : val : test = 3 : 1 : 1</b> 로 나눕니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stratify split success</span></span><br><span class="line">df_trainval, df_test = train_test_split(df_vcv, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_vcv[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]])</span><br><span class="line">df_train, df_val = train_test_split(df_trainval, train_size=<span class="number">0.75</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_trainval[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># index</span></span><br><span class="line">idx_train = df_train.index</span><br><span class="line">idx_val = df_val.index</span><br><span class="line">idx_test = df_test.index</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">plot_distribution(df_vcv, idx_train, idx_val, idx_test, <span class="string">&quot;68_vcv_2.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_2.png"><br></p>
+<p><img src="68_vcv_2.png" alt=""><br></p>
 <ul>
 <li>분포가 한결 균일해집니다.</li>
 </ul>
-<h2 id="6-3-더-층화추출"><a href="#6-3-더-층화추출" class="headerlink" title="6.3. 더 층화추출"></a>6.3. 더 층화추출</h2><ul>
-<li><p>B와 C에 비해 E가 덜 균일한 것이 영 아쉽습니다.</p>
+<h2 id="6-3-더-층화추출">6.3. 더 층화추출</h2>
+<ul>
+<li>
+<p>B와 C에 비해 E가 덜 균일한 것이 영 아쉽습니다.</p>
 </li>
-<li><p>B를 절반으로 나누어서라도 층화추출을 적용해 봅니다.</p>
+<li>
+<p>B를 절반으로 나누어서라도 층화추출을 적용해 봅니다.</p>
 </li>
-<li><p>E의 범위를 측정해서 절반으로 자릅니다</p>
+<li>
+<p>E의 범위를 측정해서 절반으로 자릅니다</p>
 </li>
-<li><p><code>np.quantile()</code>을 사용합니다.</p>
+<li>
+<p><code>np.quantile()</code>을 사용합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># quantizing E</span></span><br><span class="line"></span><br><span class="line">qbins = np.quantile(df_vcv[<span class="string">&quot;E&quot;</span>], np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line">qbins[<span class="number">0</span>] = -np.inf</span><br><span class="line">qbins[-<span class="number">1</span>] = np.inf</span><br><span class="line"><span class="built_in">print</span>(qbins)</span><br><span class="line"></span><br><span class="line">qlabels = np.arange(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(qlabels)</span><br></pre></td></tr></table></figure>
@@ -309,47 +317,45 @@
 <li>실행결과 :</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[-inf  <span class="number">2.5</span>  inf]</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>2.5를 중심으로 나눈 기준을 이용해 0과 1로 인코딩을 합니다.</li>
 <li><code>pd.cut()</code>을 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_vcv[<span class="string">&quot;E_cat&quot;</span>] = pd.cut(df_vcv[<span class="string">&quot;E&quot;</span>], bins=qbins, labels=qlabels)</span><br><span class="line">df_vcv.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_01.png"><br></p>
+<p><img src="68_vcv_01.png" alt=""><br></p>
 <ul>
 <li>B, C에 E_cat까지 이용해 나눕니다.</li>
 <li>실제 사용할 데이터가 아니더라도 층화추출에 적용할 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stratify split success</span></span><br><span class="line">df_trainval, df_test = train_test_split(df_vcv, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_vcv[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;E_cat&quot;</span>]])</span><br><span class="line">df_train, df_val = train_test_split(df_trainval, train_size=<span class="number">0.75</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_trainval[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;E_cat&quot;</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># index</span></span><br><span class="line">idx_train = df_train.index</span><br><span class="line">idx_val = df_val.index</span><br><span class="line">idx_test = df_test.index</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">plot_distribution(df_vcv, idx_train, idx_val, idx_test, <span class="string">&quot;68_vcv_3.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_3.png"><br></p>
+<p><img src="68_vcv_3.png" alt=""><br></p>
 <ul>
 <li>왠지 오히려 더 안좋습니다.</li>
 <li>아까 나누었던 B, C 층화추출을 채택하고, train, val, test set을 만듭니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stratify split success</span></span><br><span class="line">df_trainval, df_test = train_test_split(df_vcv, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_vcv[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]])</span><br><span class="line">df_train, df_val = train_test_split(df_trainval, train_size=<span class="number">0.75</span>, random_state=<span class="number">42</span>,</span><br><span class="line">                                        stratify=df_trainval[[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># index</span></span><br><span class="line">idx_train = df_train.index</span><br><span class="line">idx_val = df_val.index</span><br><span class="line">idx_test = df_test.index</span><br><span class="line"></span><br><span class="line"><span class="comment"># dataset</span></span><br><span class="line">X = df_vcv[[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;E&quot;</span>]]</span><br><span class="line">y = df_vcv[<span class="string">&quot;target&quot;</span>]</span><br><span class="line"></span><br><span class="line">X_train, X_val, X_test = X.loc[idx_train], X.loc[idx_val], X.loc[idx_test]</span><br><span class="line">y_train, y_val, y_test = y[idx_train], y[idx_val], y[idx_test]</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="7-머신러닝"><a href="#7-머신러닝" class="headerlink" title="7. 머신러닝"></a>7. 머신러닝</h1><h2 id="7-1-사전-준비"><a href="#7-1-사전-준비" class="headerlink" title="7.1. 사전 준비"></a>7.1. 사전 준비</h2><ul>
+<h1>7. 머신러닝</h1>
+<h2 id="7-1-사전-준비">7.1. 사전 준비</h2>
+<ul>
 <li>지난 글까지와 달리 이번 글에서는 고정된 validation set을 사용합니다.</li>
 <li>한편 hyperparameter는 이것저것 바꿔 넣을 것입니다.</li>
 <li>사용된 함수들을 일부 수정합니다. 자세한 설명은 생략합니다.</li>
 </ul>
-<h3 id="7-1-1-pipeline"><a href="#7-1-1-pipeline" class="headerlink" title="7.1.1. pipeline"></a>7.1.1. pipeline</h3><ul>
+<h3 id="7-1-1-pipeline">7.1.1. pipeline</h3>
+<ul>
 <li>파이프라인을 구축합니다.</li>
 <li>학습과 예측에 필요한 데이터와 하이퍼파라미터만 넣으면 되도록 만듭니다.</li>
 </ul>
 <details>
     <summary><b>코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoder</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line"></span><br><span class="line"><span class="comment"># machine learning models</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</span><br><span class="line"></span><br><span class="line"><span class="comment"># pipeline</span></span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line"></span><br><span class="line"><span class="comment"># machine learning models</span></span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVR</span><br><span class="line"><span class="keyword">from</span> sklearn.kernel_ridge <span class="keyword">import</span> KernelRidge</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsRegressor</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_model</span>(<span class="params">method=<span class="string">&quot;svr&quot;</span>, param=<span class="literal">None</span></span>):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># categorical and numerical features</span></span><br><span class="line">    cat_features = [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;D&quot;</span>]</span><br><span class="line">    cat_transformer = OneHotEncoder(sparse=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    num_features = [<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;E&quot;</span>]</span><br><span class="line">    num_transformer = Pipeline(steps=[(<span class="string">&quot;scaler&quot;</span>, StandardScaler()),</span><br><span class="line">                                      (<span class="string">&quot;polynomial&quot;</span>, PolynomialFeatures(include_bias=<span class="literal">True</span>))])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># preprocessor</span></span><br><span class="line">    preprocessor = ColumnTransformer(transformers=[(<span class="string">&quot;num&quot;</span>, num_transformer, num_features),</span><br><span class="line">                                                   (<span class="string">&quot;cat&quot;</span>, cat_transformer, cat_features)</span><br><span class="line">                                                  ])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># modeling</span></span><br><span class="line">    <span class="keyword">if</span> method == <span class="string">&quot;svr&quot;</span>:</span><br><span class="line">        model = Pipeline(steps=[(<span class="string">&quot;preprocessor&quot;</span>, preprocessor), </span><br><span class="line">                                (<span class="string">&quot;svr&quot;</span>, SVR())</span><br><span class="line">                               ])</span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&quot;kridge&quot;</span>:</span><br><span class="line">        model = Pipeline(steps=[(<span class="string">&quot;preprocessor&quot;</span>, preprocessor), </span><br><span class="line">                                (<span class="string">&quot;kridge&quot;</span>, KernelRidge())</span><br><span class="line">                               ])</span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&quot;knr&quot;</span>:</span><br><span class="line">        model = Pipeline(steps=[(<span class="string">&quot;preprocessor&quot;</span>, preprocessor), </span><br><span class="line">                                (<span class="string">&quot;knr&quot;</span>, KNeighborsRegressor())</span><br><span class="line">                               ])</span><br><span class="line">        </span><br><span class="line">    model.set_params(**param)</span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>예제 hyperparameter를 입력해서 모델이 잘 생성되는지 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example: svr</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># hyperparameter</span></span><br><span class="line">param = &#123;<span class="string">&#x27;preprocessor__num__polynomial__degree&#x27;</span>: <span class="number">3</span>, </span><br><span class="line">         <span class="string">&#x27;svr__kernel&#x27;</span>: <span class="string">&#x27;rbf&#x27;</span>, <span class="string">&#x27;svr__C&#x27;</span>: <span class="number">100</span>, <span class="string">&#x27;svr__gamma&#x27;</span>: <span class="number">0.01</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># model</span></span><br><span class="line">model = get_model(method=<span class="string">&quot;svr&quot;</span>, param=param)</span><br><span class="line"></span><br><span class="line"><span class="comment"># visualize</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> set_config</span><br><span class="line"></span><br><span class="line">set_config(display=<span class="string">&#x27;diagram&#x27;</span>)  </span><br><span class="line">display(model)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_4.png"><br></p>
-<h3 id="7-1-2-evaluation"><a href="#7-1-2-evaluation" class="headerlink" title="7.1.2. evaluation"></a>7.1.2. evaluation</h3><ul>
+<p><img src="68_vcv_4.png" alt=""><br></p>
+<h3 id="7-1-2-evaluation">7.1.2. evaluation</h3>
+<ul>
 <li>모델 평가를 위한 함수를 마련합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># evaluation metrics</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error <span class="keyword">as</span> mae_</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error <span class="keyword">as</span> mse_</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score <span class="keyword">as</span> r2_</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_metrics</span>(<span class="params">model, X, y</span>):</span><br><span class="line">    y_pred = model.predict(X)</span><br><span class="line">    mae = mae_(y, y_pred)</span><br><span class="line">    rmse = mse_(y, y_pred, squared=<span class="literal">False</span>)</span><br><span class="line">    r2 = r2_(y, y_pred)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> y_pred, mae, rmse, r2</span><br><span class="line">    </span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line">y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;#  mae_val : <span class="subst">&#123;mae_val:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;# rmse_val : <span class="subst">&#123;rmse_val:<span class="number">.3</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;#   r2_val : <span class="subst">&#123;r2_val:<span class="number">.3</span>f&#125;</span>&quot;</span>)    </span><br></pre></td></tr></table></figure>
@@ -357,9 +363,8 @@
 <li>실행 결과 :</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  mae_val : 0.296</span></span><br><span class="line"><span class="comment"># rmse_val : 0.437</span></span><br><span class="line"><span class="comment">#   r2_val : 0.513</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="7-1-3-parity-plots"><a href="#7-1-3-parity-plots" class="headerlink" title="7.1.3. parity plots"></a>7.1.3. parity plots</h3><ul>
+<h3 id="7-1-3-parity-plots">7.1.3. parity plots</h3>
+<ul>
 <li>평가 결과를 scatter plot과 함께 시각화하는 함수를 만듭니다.</li>
 <li>지난 글에 있던 코드를 수정해서 확장성을 높였습니다.</li>
 <li>tran &amp; val만 볼 수도, train &amp; val &amp; test도 가능합니다.</li>
@@ -367,8 +372,6 @@
 <details>
     <summary><b>코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># single parity plot</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_parity</span>(<span class="params">true, predict, c=<span class="string">&quot;c&quot;</span>, mae=<span class="literal">None</span>, rmse=<span class="literal">None</span>, r2=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                equal=<span class="literal">True</span>, title=<span class="literal">None</span>, xlabel=<span class="string">&quot;true&quot;</span>, ylabel=<span class="string">&quot;predict&quot;</span>, ax=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># if axes not defined, create one.</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># scatter plot</span></span><br><span class="line">    ax.scatter(true, predict, c=c, s=<span class="number">10</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y limits</span></span><br><span class="line">    min_ = <span class="built_in">min</span>(ax.get_xbound()[<span class="number">0</span>], ax.get_ybound()[<span class="number">0</span>])</span><br><span class="line">    max_ = <span class="built_in">max</span>(ax.get_xbound()[<span class="number">1</span>], ax.get_ybound()[<span class="number">1</span>])</span><br><span class="line">    ax.set_xlim(min_, max_)</span><br><span class="line">    ax.set_ylim(min_, max_)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y ticks</span></span><br><span class="line">    lb, ub = ax.get_ybound()</span><br><span class="line">    </span><br><span class="line">    ticks =[x <span class="keyword">for</span> x <span class="keyword">in</span> ax.get_xticks() <span class="keyword">if</span> x &gt;= lb <span class="keyword">and</span> x &lt;= ub]</span><br><span class="line">    ax.set_xticks(ticks)</span><br><span class="line">    ax.set_xticklabels(ticks)</span><br><span class="line">    ax.set_yticks(ticks)</span><br><span class="line">    ax.set_yticklabels(ticks)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># grids</span></span><br><span class="line">    ax.set_aspect(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">    ax.grid(axis=<span class="string">&quot;both&quot;</span>, c=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> equal:</span><br><span class="line">        ax.plot([lb, ub], [lb, ub], c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y labels and title</span></span><br><span class="line">    ax.set_xlabel(xlabel, fontsize=<span class="number">16</span>, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontsize=<span class="number">16</span>, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_title(title, fontsize=<span class="number">16</span>, pad=<span class="number">8</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># metrics</span></span><br><span class="line">    <span class="keyword">if</span> mae:</span><br><span class="line">        ax.text(<span class="number">0.95</span>, <span class="number">0.3</span>, <span class="string">f&quot; MAE =<span class="subst">&#123;mae:<span class="number">0.3</span>f&#125;</span>&quot;</span>,</span><br><span class="line">                transform=ax.transAxes, fontsize=<span class="number">16</span>, ha=<span class="string">&quot;right&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> rmse:</span><br><span class="line">        ax.text(<span class="number">0.95</span>, <span class="number">0.22</span>, <span class="string">f&quot;RMSE =<span class="subst">&#123;rmse:<span class="number">0.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontsize=<span class="number">16</span>, ha=<span class="string">&quot;right&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> r2:</span><br><span class="line">        ax.text(<span class="number">0.95</span>, <span class="number">0.14</span>, <span class="string">f&quot;R2 =<span class="subst">&#123;r2:<span class="number">0.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontsize=<span class="number">16</span>, ha=<span class="string">&quot;right&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ax</span><br><span class="line">    </span><br><span class="line"><span class="comment"># multiple parity plots    </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_parities</span>(<span class="params">model, X_train, y_train, X_val=<span class="literal">None</span>, y_val=<span class="literal">None</span>, X_test=<span class="literal">None</span>, y_test=<span class="literal">None</span>, title=<span class="literal">None</span>, train=<span class="literal">False</span></span>):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># validataion and test</span></span><br><span class="line">    vis_val = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> (X_val <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>) <span class="keyword">and</span> (y_val <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>):</span><br><span class="line">        vis_val = <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">    vis_test = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> (X_test <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>) <span class="keyword">and</span> (y_test <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>):</span><br><span class="line">        vis_test = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># train</span></span><br><span class="line">    <span class="keyword">if</span> train:</span><br><span class="line">        model.fit(X_train, y_train)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># prediction and get_metrics</span></span><br><span class="line">    y_pred_train, mae_train, rmse_train, r2_train = get_metrics(model, X_train, y_train)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> vis_val:</span><br><span class="line">        y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> vis_test:</span><br><span class="line">        X_trainval = pd.concat([X_train, X_val], axis=<span class="number">0</span>)</span><br><span class="line">        y_trainval = pd.concat([y_train, y_val], axis=<span class="number">0</span>)</span><br><span class="line">        model.fit(X_trainval, y_trainval)</span><br><span class="line">        y_pred_test, mae_test, rmse_test, r2_test = get_metrics(model, X_test, y_test)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># figure preparation</span></span><br><span class="line">    ncols = <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> vis_val:</span><br><span class="line">        ncols += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> vis_test:</span><br><span class="line">        ncols += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    ax_width = <span class="number">5</span></span><br><span class="line">    <span class="keyword">if</span> ncols &gt; <span class="number">1</span>:</span><br><span class="line">        ax_width = <span class="number">4</span></span><br><span class="line">    </span><br><span class="line">    fig, axs = plt.subplots(ncols=ncols, figsize=(ax_width*ncols, <span class="number">5</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(axs, np.ndarray):</span><br><span class="line">        axs = [axs]</span><br><span class="line">    </span><br><span class="line">    c_train, c_val, c_test = <span class="string">&quot;g&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;m&quot;</span></span><br><span class="line">    </span><br><span class="line">    axs[<span class="number">0</span>] = plot_parity(y_train, y_pred_train, c=c_train, mae=mae_train, rmse=rmse_train, r2=r2_train, </span><br><span class="line">                         title=<span class="string">&quot;train&quot;</span>, ax=axs[<span class="number">0</span>])</span><br><span class="line">    mins = [axs[<span class="number">0</span>].get_xbound()[<span class="number">0</span>]]</span><br><span class="line">    maxs = [axs[<span class="number">0</span>].get_xbound()[<span class="number">1</span>]]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> vis_val:</span><br><span class="line">        axs[<span class="number">1</span>] = plot_parity(y_val, y_pred_val, c=c_val, mae=mae_val, rmse=rmse_val, r2=r2_val, </span><br><span class="line">                             ylabel=<span class="literal">None</span>, title=<span class="string">&quot;validation&quot;</span>, ax=axs[<span class="number">1</span>])</span><br><span class="line">        mins.append(axs[<span class="number">1</span>].get_xbound()[<span class="number">0</span>])</span><br><span class="line">        maxs.append(axs[<span class="number">1</span>].get_xbound()[<span class="number">1</span>])   </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> vis_test:</span><br><span class="line">        axs[<span class="number">2</span>] = plot_parity(y_test, y_pred_test, c=c_test, mae=mae_test, rmse=rmse_test, r2=r2_test, </span><br><span class="line">                             ylabel=<span class="literal">None</span>, title=<span class="string">&quot;test (train by full trainset)&quot;</span>, ax=axs[<span class="number">2</span>])</span><br><span class="line">        mins.append(axs[<span class="number">2</span>].get_xbound()[<span class="number">0</span>])</span><br><span class="line">        maxs.append(axs[<span class="number">2</span>].get_xbound()[<span class="number">1</span>])</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># suptitle</span></span><br><span class="line">    <span class="keyword">if</span> title:</span><br><span class="line">        fig.suptitle(title, fontsize=<span class="number">20</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> title:</span><br><span class="line">        fig.savefig(<span class="string">f&quot;<span class="subst">&#123;title.replace(<span class="string">&#x27;(&#x27;</span>, <span class="string">&#x27;_&#x27;</span>).replace(<span class="string">&#x27;)&#x27;</span>, <span class="string">&#x27;_&#x27;</span>).replace(<span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;_&#x27;</span>)&#125;</span>.png&quot;</span>)    </span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li><b>train 후 validation을 출력</b>하고,</li>
 <li><b>train set과 validation set을 합쳐 다시 학습</b>합니다.</li>
@@ -377,12 +380,14 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot_parities(model, X_train, y_train, X_val, y_val, X_test, y_test, </span><br><span class="line">              title=<span class="string">&quot;test: SVR&quot;</span>, train=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <p>![](test_ SVR.png)<br></p>
-<h2 id="7-2-hyperparameter-optimization"><a href="#7-2-hyperparameter-optimization" class="headerlink" title="7.2. hyperparameter optimization"></a>7.2. hyperparameter optimization</h2><ul>
+<h2 id="7-2-hyperparameter-optimization">7.2. hyperparameter optimization</h2>
+<ul>
 <li>이제 hyperparameter 최적화에 들어갑니다.</li>
 <li>모든 변수의 조합을 탐색하는 <b>grid search</b>와</li>
 <li>앞선 결과를 바탕으로 최적 탐색을 하는 <b>bayesian search</b>를 해 봅니다.</li>
 </ul>
-<h3 id="7-2-1-grid-search"><a href="#7-2-1-grid-search" class="headerlink" title="7.2.1. grid search"></a>7.2.1. grid search</h3><ul>
+<h3 id="7-2-1-grid-search">7.2.1. grid search</h3>
+<ul>
 <li>준비된 데이터셋을 모두 넣으면 grid search를 수행해서 결과를 출력하게 합니다.</li>
 <li><a href="https://jehyunlee.github.io/2021/04/04/Python-DS-67-visualcv2/">지난 글</a>과 다른 형식으로 출력해 봅니다.</li>
 <li>grid search를 수행해서 DataFrame 형식으로 출력합니다.</li>
@@ -390,8 +395,6 @@
 <details>
     <summary><b>코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gs_model</span>(<span class="params">X_train, y_train, X_val, y_val, method=<span class="string">&quot;svr&quot;</span>, param_grid=<span class="literal">None</span></span>):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># param_grid</span></span><br><span class="line">    param_ks = param_grid.keys()</span><br><span class="line">    param_vs = <span class="built_in">list</span>(product(*param_grid.values()))</span><br><span class="line">    </span><br><span class="line">    df = pd.DataFrame(columns=<span class="built_in">list</span>(param_ks)</span><br><span class="line">                      + [<span class="string">&quot;mae_train&quot;</span>, <span class="string">&quot;mae_val&quot;</span>, <span class="string">&quot;rmse_train&quot;</span>, <span class="string">&quot;rmse_val&quot;</span>, <span class="string">&quot;r2_train&quot;</span>, <span class="string">&quot;r2_val&quot;</span>]</span><br><span class="line">                      + [<span class="string">&quot;y_pred_train&quot;</span>, <span class="string">&quot;y_pred_val&quot;</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i, vs <span class="keyword">in</span> <span class="built_in">enumerate</span>(param_vs):</span><br><span class="line">        param = <span class="built_in">dict</span>(<span class="built_in">zip</span>(param_ks, vs))</span><br><span class="line">        </span><br><span class="line">        model = get_model(method=method, param=param)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># train</span></span><br><span class="line">        model.fit(X_train, y_train)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># evaluation</span></span><br><span class="line">        y_pred_train, mae_train, rmse_train, r2_train = get_metrics(model, X_train, y_train)</span><br><span class="line">        y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># output</span></span><br><span class="line">        df.loc[i] = <span class="built_in">list</span>(vs) + [mae_train, mae_val, </span><br><span class="line">                                rmse_train, rmse_val, </span><br><span class="line">                                r2_train, r2_val, </span><br><span class="line">                                y_pred_train, y_pred_val]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li><code>gs_model()</code>를 이용해서 모든 결과를 출력하는 함수를 만듭니다.</li>
 <li><code>gs_model()</code> 결과물의 dataframe index에 따라 평가 결과를 출력합니다.</li>
@@ -399,15 +402,14 @@
 <details>
     <summary><b>코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_gs</span>(<span class="params">X_train, y_train, X_val, y_val, method=<span class="string">&quot;svr&quot;</span>, param_grid=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span><br><span class="line">    df = gs_model(X_train, y_train, X_val, y_val, method=method, param_grid=param_grid)</span><br><span class="line">    df_sort = df.sort_values(<span class="string">&quot;r2_val&quot;</span>, ascending=<span class="literal">False</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># best params</span></span><br><span class="line">    best_params = df_sort[<span class="built_in">list</span>(param_grid.keys())].iloc[<span class="number">0</span>].to_dict()</span><br><span class="line">    best_params_idx = df_sort.index[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(best_params)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># train vs validation plot</span></span><br><span class="line">    ax = df_svr[[<span class="string">&quot;r2_train&quot;</span>, <span class="string">&quot;r2_val&quot;</span>]].plot(figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line">    ax.axvline(best_params_idx, c=<span class="string">&quot;g&quot;</span>, ls=<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    fig = ax.figure</span><br><span class="line">    fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.savefig(filename)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> best_params</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>hyperparameter 범위를 설정하고 grid search를 수행합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hyperparameter space</span></span><br><span class="line">param_grid = &#123;<span class="string">&#x27;preprocessor__num__polynomial__degree&#x27;</span>: [<span class="number">2</span>],</span><br><span class="line">              <span class="string">&#x27;svr__kernel&#x27;</span>: [<span class="string">&#x27;rbf&#x27;</span>], <span class="comment">#[&#x27;linear&#x27;, &#x27;poly&#x27;, &#x27;rbf&#x27;, &#x27;sigmoid&#x27;],</span></span><br><span class="line">              <span class="string">&#x27;svr__C&#x27;</span>: np.logspace(-<span class="number">2</span>, <span class="number">2</span>, <span class="number">11</span>),</span><br><span class="line">              <span class="string">&#x27;svr__gamma&#x27;</span>: np.linspace(<span class="number">0.01</span>, <span class="number">0.1</span>, <span class="number">11</span>),</span><br><span class="line">              <span class="string">&#x27;svr__coef0&#x27;</span>: [<span class="number">0</span>]&#125;</span><br><span class="line">              </span><br><span class="line"><span class="comment"># grid search &amp; visualization 수행              </span></span><br><span class="line">best_params = plot_gs(X_train, y_train, X_val, y_val, method=<span class="string">&quot;svr&quot;</span>, param_grid=param_grid, filename=<span class="string">&quot;68_vcv_6.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_6.png"><br></p>
+<p><img src="68_vcv_6.png" alt=""><br></p>
 <ul>
-<li><p><b>재미있는 현상</b>이 나타났습니다.</p>
+<li>
+<p><b>재미있는 현상</b>이 나타났습니다.</p>
 <ul>
 <li>validation set의 <b>r2가 가장 큰 지점(점선)</b>을 기준으로,</li>
 <li>왼쪽에선 <b>train과 val 곡선이 비슷합니다</b></li>
@@ -415,20 +417,26 @@
 <li>validation r2가 증가하다 감소하는걸 볼 때 <b>underfitting에서 overfitting으로 꺾이는 지점</b>이 관측되었다고 볼 수 있습니다.</li>
 </ul>
 </li>
-<li><p>최적조건으로 학습시켜 test set 평가까지 봅니다.</p>
+<li>
+<p>최적조건으로 학습시켜 test set 평가까지 봅니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model = get_model(method=<span class="string">&quot;svr&quot;</span>, param=best_params)</span><br><span class="line">plot_parities(model, X_train, y_train, X_val, y_val, X_test, y_test, </span><br><span class="line">              title=<span class="string">&quot;SVR: rbf (deg=2)&quot;</span>, train=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p>![](SVR_ rbf _deg&#x3D;2_.png)</p>
+<p>![](SVR_ rbf <em>deg=2</em>.png)</p>
 <ul>
-<li><b>test set의 R2가 0.7을 넘었습니다!</b><ul>
+<li><b>test set의 R2가 0.7을 넘었습니다!</b>
+<ul>
 <li>train set과 val set의 R2도 비슷하네요.</li>
 <li>층화추출 덕에 안정적인 성능이 나오는 것 같습니다.</li>
 </ul>
 </li>
 </ul>
-<h3 id="7-2-2-Bayesian-Search"><a href="#7-2-2-Bayesian-Search" class="headerlink" title="7.2.2. Bayesian Search"></a>7.2.2. Bayesian Search</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="http://hyperopt.github.io/">hyperopt</a><br><a target="_blank" rel="noopener" href="https://optuna.org/">optuna</a><br><a target="_blank" rel="noopener" href="https://scikit-optimize.github.io/">scikit-optimize</a><br><a target="_blank" rel="noopener" href="https://medium.com/@vincent.kr18/hyper-parameter-tuning-using-bayesian-optimisation-code-b50e0e8abe20">medium: hyperparameter tuning using bayesian optimisation code</a></p>
+<h3 id="7-2-2-Bayesian-Search">7.2.2. Bayesian Search</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://hyperopt.github.io/">hyperopt</a><br>
+<a target="_blank" rel="noopener" href="https://optuna.org/">optuna</a><br>
+<a target="_blank" rel="noopener" href="https://scikit-optimize.github.io/">scikit-optimize</a><br>
+<a target="_blank" rel="noopener" href="https://medium.com/@vincent.kr18/hyper-parameter-tuning-using-bayesian-optimisation-code-b50e0e8abe20">medium: hyperparameter tuning using bayesian optimisation code</a></p>
 </blockquote>
 <ul>
 <li>그런데 모든 변수를 다 탐색하는 과정이 번거롭습니다.</li>
@@ -436,20 +444,14 @@
 <li>다음 명령어로 설치할 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install scikit-optimize</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>필요한 모듈을 불러옵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hyperparameter 탐색 범위 설정에 사용합니다.</span></span><br><span class="line"><span class="keyword">from</span> skopt.space <span class="keyword">import</span> Real, Integer, Categorical</span><br><span class="line"></span><br><span class="line"><span class="comment"># objective function에 들어갈 parameter를 keyword arguments로 입력하게 해줍니다.</span></span><br><span class="line"><span class="keyword">from</span> skopt.utils <span class="keyword">import</span> use_named_args</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>탐색 공간을 정의합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">space = [Integer(<span class="number">1</span>, <span class="number">2</span>, name=<span class="string">&quot;preprocessor__num__polynomial__degree&quot;</span>),</span><br><span class="line">         Categorical([<span class="string">&quot;rbf&quot;</span>], name=<span class="string">&quot;svr__kernel&quot;</span>),</span><br><span class="line">         Real(<span class="number">0.01</span>, <span class="number">100</span>, <span class="string">&quot;log-uniform&quot;</span>, name=<span class="string">&quot;svr__C&quot;</span>),</span><br><span class="line">         Real(<span class="number">0.01</span>, <span class="number">0.1</span>, <span class="string">&quot;uniform&quot;</span>, name=<span class="string">&quot;svr__gamma&quot;</span>),</span><br><span class="line">         Integer(<span class="number">0</span>, <span class="number">1</span>, name=<span class="string">&quot;svr__coef0&quot;</span>)</span><br><span class="line">        ]</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>목표 함수(objective function)을 정의합니다.</li>
 <li><code>@use_named_args</code>를 사용해서 keyword argument로 입력합니다.</li>
@@ -457,7 +459,6 @@
 <li>출력은 r2_val 값으로 하고, 마이너스를 붙여 더 큰 값이 더 작게 출력되도록 했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@use_named_args(<span class="params">space</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">objective</span>(<span class="params">**params</span>):</span><br><span class="line">    model = get_model(method=<span class="string">&quot;svr&quot;</span>, param=params)</span><br><span class="line">    model.fit(X_train, y_train)</span><br><span class="line">    y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> -r2_val</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><b>gaussian process로 최적화</b>합니다.</li>
 <li><code>gp_minimize()</code>명령을 사용합니다.</li>
@@ -467,8 +468,6 @@
 <li>실행 결과:</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">best score = -0.6193</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>최적 파라미터는 <code>model_gp.x</code>에 저장됩니다.</li>
 </ul>
@@ -477,44 +476,46 @@
 <li>실행 결과:</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2, <span class="string">&#x27;rbf&#x27;</span>, 0.7740303218260096, 0.1, 1]</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>제법 괜찮은 결과를 얻은 것 같긴 한데, 수렴했는지 확인해봅니다.</li>
 <li><code>plot_converge()</code>를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> skopt.plots <span class="keyword">import</span> plot_convergence</span><br><span class="line"></span><br><span class="line">ax = plot_convergence(model_gp)</span><br><span class="line">fig = ax.figure</span><br><span class="line">fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">fig.set_figheight(<span class="number">5</span>)</span><br><span class="line">fig.set_figwidth(<span class="number">12</span>)</span><br><span class="line">fig.savefig(<span class="string">&quot;68_vcv_7.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/68_vcv_7.png"><br></p>
+<p><img src="68_vcv_7.png" alt=""><br></p>
 <ul>
 <li>약 <b>20회</b>만에 최적 조건에 수렴했습니다.</li>
 <li>해당 조건이 테스트셋에선 어떤 결과를 내는지 확인해봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 최적 파라미터 key와 value 결합</span></span><br><span class="line">param_keys = [s.name <span class="keyword">for</span> s <span class="keyword">in</span> space]</span><br><span class="line">best_params = <span class="built_in">dict</span>(<span class="built_in">zip</span>(param_keys, model_gp.x))</span><br><span class="line"><span class="built_in">print</span>(best_params)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 최적 파라미터로 모델 학습, 시각화</span></span><br><span class="line">model = get_model(method=<span class="string">&quot;svr&quot;</span>, param=best_params)</span><br><span class="line">plot_parities(model, X_train, y_train, X_val, y_val, X_test, y_test, </span><br><span class="line">              title=<span class="string">&quot;SVR: scikit-learn opt.&quot;</span>, train=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p>![](SVR_ scikit-learn opt..png)</p>
+<p>![](SVR_ scikit-learn opt…png)</p>
 <ul>
-<li><p><b>R2가 다시 0.7을 넘었습니다</b></p>
+<li>
+<p><b>R2가 다시 0.7을 넘었습니다</b></p>
 </li>
-<li><p>이번 업무의 목표가 0.7인데 SVR에서 0.7이 넘어서 상향 조정해도 될 것 같습니다.</p>
+<li>
+<p>이번 업무의 목표가 0.7인데 SVR에서 0.7이 넘어서 상향 조정해도 될 것 같습니다.</p>
 </li>
-<li><p>자주 사용할 수 있도록 앞에서 파편화된 함수들을 하나로 모읍니다.</p>
+<li>
+<p>자주 사용할 수 있도록 앞에서 파편화된 함수들을 하나로 모읍니다.</p>
 </li>
-<li><p>local minima에 빠지지 않도록 seed를 흔들어 여러 번 시도합니다.</p>
+<li>
+<p>local minima에 빠지지 않도록 seed를 흔들어 여러 번 시도합니다.</p>
 </li>
-<li><p><b><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wKkcBPp3F1Y">Andrew Ng 교수님이 Caviar approach</a></b>라고 말씀하신 방법입니다.</p>
+<li>
+<p><b><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wKkcBPp3F1Y">Andrew Ng 교수님이 Caviar approach</a></b>라고 말씀하신 방법입니다.</p>
 </li>
-<li><p>뭐 하나 잘 걸리라는 느낌입니다.</p>
+<li>
+<p>뭐 하나 잘 걸리라는 느낌입니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run_skopt</span>(<span class="params">objective, space, method=<span class="string">&quot;svr&quot;</span>, n_calls=<span class="number">30</span>, iternum=<span class="number">10</span>, random_state_base=<span class="number">0</span>,</span></span><br><span class="line"><span class="params">              filename_conv=<span class="literal">None</span>, filename_parity=<span class="literal">None</span>, figsize=(<span class="params"><span class="number">12</span>, <span class="number">5</span></span>)</span>):</span><br><span class="line">    </span><br><span class="line">    fig, ax = plt.subplots(figsize=figsize)</span><br><span class="line">    fig.set_facecolor(<span class="string">&quot;w&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    best_score = np.inf</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># scikit optimization</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iternum):</span><br><span class="line">        model_gp = gp_minimize(objective, space, n_calls=n_calls, random_state=i*<span class="number">100</span>+random_state_base)</span><br><span class="line">        best_score_ = model_gp.fun</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;best score #<span class="subst">&#123;i+<span class="number">1</span>&#125;</span> = <span class="subst">&#123;best_score_:<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># convergence plot</span></span><br><span class="line">        ax = plot_convergence(model_gp, ax=ax)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># best parameters</span></span><br><span class="line">        <span class="keyword">if</span> best_score_ &lt; best_score:</span><br><span class="line">            best_score = best_score_</span><br><span class="line">            param_keys = [s.name <span class="keyword">for</span> s <span class="keyword">in</span> space]</span><br><span class="line">            best_params = <span class="built_in">dict</span>(<span class="built_in">zip</span>(param_keys, model_gp.x))</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;best parameters= <span class="subst">&#123;best_params&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    fig.savefig(filename_conv)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># train, val and test result </span></span><br><span class="line">    best_model = get_model(method=method, param=best_params)</span><br><span class="line">    plot_parities(best_model, X_train, y_train, X_val, y_val, X_test, y_test, </span><br><span class="line">                  title=filename_parity, train=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;filename_parity&#125;</span>.pkl&quot;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        pickle.dump(best_model, f)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> best_model, best_params</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>사용할 때는 위의 space, objective와 함께 세트로 사용합니다.</li>
 <li>@<b>use_named_args(space)</b> 데커레이터로 인해 space를 먼저 정의해야 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#space</span></span><br><span class="line">space = [Integer(<span class="number">1</span>, <span class="number">2</span>, name=<span class="string">&quot;preprocessor__num__polynomial__degree&quot;</span>),</span><br><span class="line">         Categorical([<span class="string">&quot;rbf&quot;</span>], name=<span class="string">&quot;svr__kernel&quot;</span>),</span><br><span class="line">         Real(<span class="number">0.001</span>, <span class="number">1000</span>, <span class="string">&quot;log-uniform&quot;</span>, name=<span class="string">&quot;svr__C&quot;</span>),</span><br><span class="line">         Real(<span class="number">1e-3</span>, <span class="number">10</span>, <span class="string">&quot;log-uniform&quot;</span>, name=<span class="string">&quot;svr__gamma&quot;</span>),</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line"><span class="comment">#objective</span></span><br><span class="line"><span class="meta">@use_named_args(<span class="params">space</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">objective</span>(<span class="params">**params</span>):</span><br><span class="line">    model = get_model(method=<span class="string">&quot;svr&quot;</span>, param=params)</span><br><span class="line">    model.fit(X_train, y_train)</span><br><span class="line">    y_pred_val, mae_val, rmse_val, r2_val = get_metrics(model, X_val, y_val)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> -r2_val        </span><br><span class="line">    </span><br><span class="line"><span class="comment"># optimize</span></span><br><span class="line">best_svr_rbf, best_params = run_skopt(objective, space, method=<span class="string">&quot;svr&quot;</span>, n_calls=<span class="number">50</span>, </span><br><span class="line">                                      filename_conv=<span class="string">&quot;68_vcv_8.png&quot;</span>, </span><br><span class="line">                                      filename_parity=<span class="string">&quot;SVR_rbf_opt&quot;</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/04/09/Python-DS-68-visualcv3/69_vcv_2.png"><br><img src="/2021/04/09/Python-DS-68-visualcv3/SVR_rbf_opt.png"><br></p>
+<p><img src="69_vcv_2.png" alt=""><br>
+<img src="SVR_rbf_opt.png" alt=""><br></p>
 <ul>
 <li>이제 마음껏 실전에 투입합니다. :)</li>
 </ul>
@@ -535,7 +536,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/04/09/Python-DS-68-visualcv3/" data-id="cuidGH74-Ut2lDlaQ_BIlpPQM" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/04/09/Python-DS-68-visualcv3/" data-id="cuidCThh6dyf6nVunWfI8K0zw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -619,10 +620,11 @@
 hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.
 
 6. Validation set 고정
+
 새로운 노트북을 만들어 데이터를 불러옵니다.
 
-123456789101112131415%matpl",
-        "wordCount": 6368
+123456789101112131415%matp",
+        "wordCount": 6318
     }
 </script>
 
@@ -719,6 +721,26 @@ hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -793,26 +815,6 @@ hyperparameter도 라이브러리를 사용해 편리하게 피팅합시다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="visualization,pytorch,sklearn,pipeline,neural network,callback" />
     
-    <meta name="description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.  학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.  skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.  skorch도 PyTorch callback을 이용할 수 있습니다.  글이 길어 세 개로 나눕니다.   세 번째로">
+    <meta name="description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.   학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.   skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.   skorch도 PyTorch callback을 이용할 수 있습니다.   글이 길어 세 개로 나눕니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="skorch callbacks (3) ML Pipeline">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/06/09/Python-DL-10-skorch_callback3/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.  학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.  skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.  skorch도 PyTorch callback을 이용할 수 있습니다.  글이 길어 세 개로 나눕니다.   세 번째로">
+<meta property="og:description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.   학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.   skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.   skorch도 PyTorch callback을 이용할 수 있습니다.   글이 길어 세 개로 나눕니다.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/10_sc_00.png">
 <meta property="article:published_time" content="2022-06-09T10:50:00.000Z">
@@ -232,22 +232,30 @@
             
 
             <ul>
-<li><p>PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.</p>
+<li>
+<p>PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.</p>
 </li>
-<li><p>학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.</p>
+<li>
+<p>학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.</p>
 </li>
-<li><p>skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.</p>
+<li>
+<p>skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.</p>
 </li>
-<li><p>skorch도 PyTorch callback을 이용할 수 있습니다.</p>
+<li>
+<p>skorch도 PyTorch callback을 이용할 수 있습니다.</p>
 </li>
-<li><p>글이 길어 세 개로 나눕니다. </p>
+<li>
+<p>글이 길어 세 개로 나눕니다.</p>
 </li>
-<li><p>세 번째로, skorch를 사용해 ML Pipeline을 완성합니다.</p>
+<li>
+<p>세 번째로, skorch를 사용해 ML Pipeline을 완성합니다.</p>
 </li>
-<li><p>여러 callback으로 자세한 설정을 반영합니다.</p>
+<li>
+<p>여러 callback으로 자세한 설정을 반영합니다.</p>
 </li>
 </ul>
-<h2 id="3-2-skorch"><a href="#3-2-skorch" class="headerlink" title="3.2. skorch"></a>3.2. skorch</h2><blockquote>
+<h2 id="3-2-skorch">3.2. skorch</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Colab code: skorch callbacks</a></p>
 </blockquote>
 <ul>
@@ -255,25 +263,31 @@
 <li>간단한 명령으로 skorch를 설치합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install skorch</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="3-2-1-preprocessor-포함-pipeline-작성"><a href="#3-2-1-preprocessor-포함-pipeline-작성" class="headerlink" title="3.2.1. preprocessor 포함 pipeline 작성"></a>3.2.1. preprocessor 포함 pipeline 작성</h3><blockquote>
+<h3 id="3-2-1-preprocessor-포함-pipeline-작성">3.2.1. preprocessor 포함 pipeline 작성</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/regressor.html">skorch: skorch.regressor</a></p>
 </blockquote>
 <ul>
-<li><p>앞에서 만든 <code>get_preprocessor()</code>함수는 전처리 Pipeline을 출력합니다.</p>
+<li>
+<p>앞에서 만든 <code>get_preprocessor()</code>함수는 전처리 Pipeline을 출력합니다.</p>
 </li>
-<li><p>Pipeline을 연장해 이 뒤에 PyTorch로 만든 Neural Network를 덧붙입니다.</p>
+<li>
+<p>Pipeline을 연장해 이 뒤에 PyTorch로 만든 Neural Network를 덧붙입니다.</p>
 </li>
-<li><p>우리가 푸는 문제는 펭귄의 체중을 구하는 <b>regression</b>문제입니다.</p>
+<li>
+<p>우리가 푸는 문제는 펭귄의 체중을 구하는 <b>regression</b>문제입니다.</p>
 </li>
-<li><p>skorch에서 제공하는 <a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/regressor.html"><code>NeuralNetRegressor()</code></a>로 PyTorch 신경망을 감쌉니다.</p>
+<li>
+<p>skorch에서 제공하는 <a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/regressor.html"><code>NeuralNetRegressor()</code></a>로 PyTorch 신경망을 감쌉니다.</p>
 </li>
-<li><p>loss function, optimizer 등은 <code>NeuralNetRegressor()</code> 안에 <code>criterion</code>, <code>optimizer</code> 등의 매개변수를 사용해 입력합니다.</p>
+<li>
+<p>loss function, optimizer 등은 <code>NeuralNetRegressor()</code> 안에 <code>criterion</code>, <code>optimizer</code> 등의 매개변수를 사용해 입력합니다.</p>
 </li>
-<li><p><code>optimizer=optim.Adam</code>으로 Adam을 선택했습니다. </p>
+<li>
+<p><code>optimizer=optim.Adam</code>으로 Adam을 선택했습니다.</p>
 </li>
-<li><p>PyTorch에서 Adam()안에 들어가던 매개변수 <code>lr=1e-3</code>은 <code>optimizer__lr=1e-3</code>으로 바뀌어 들어갑니다.</p>
+<li>
+<p>PyTorch에서 Adam()안에 들어가던 매개변수 <code>lr=1e-3</code>은 <code>optimizer__lr=1e-3</code>으로 바뀌어 들어갑니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> skorch</span><br><span class="line"><span class="keyword">from</span> skorch <span class="keyword">import</span> NeuralNetRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># skorch로 PyTorch neural network wrapping</span></span><br><span class="line">net_sk = NeuralNetRegressor(Net(), device=device, verbose=<span class="number">1</span>,</span><br><span class="line">                            criterion=RMSELoss,         <span class="comment"># loss function</span></span><br><span class="line">                            optimizer=optim.Adam,       <span class="comment"># optimizer</span></span><br><span class="line">                            optimizer__lr=<span class="number">1e-3</span>)         <span class="comment"># learning rate of the optimizer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># training</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">300</span>):</span><br><span class="line">    net_sk.fit(X_train_np, y_train.astype(np.float32).values.reshape(-<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
@@ -282,48 +296,60 @@
 <li>또는, <code>verbose=1</code>을 <code>verbose=0</code>으로 바꾸시는 것도 방법입니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">... (생략) ...</span><br><span class="line"></span><br><span class="line">     10      271.1115      286.5908  0.0111</span><br><span class="line">Re-initializing module.</span><br><span class="line">Re-initializing criterion.</span><br><span class="line">Re-initializing optimizer.</span><br><span class="line">  epoch    train_loss    valid_loss     dur</span><br><span class="line">-------  ------------  ------------  ------</span><br><span class="line">      1      272.8632      286.3571  0.0108</span><br><span class="line">      2      267.6815      285.4084  0.0145</span><br><span class="line">      3      268.0632      284.9375  0.0106</span><br><span class="line">      4      269.3830      284.9683  0.0104</span><br><span class="line">      5      270.7425      285.2378  0.0101</span><br><span class="line">      6      271.6377      285.5552  0.0108</span><br><span class="line">      7      271.9493      285.8589  0.0082</span><br><span class="line">      8      271.8214      286.1465  0.0080</span><br><span class="line">      9      271.4798      286.4032  0.0087</span><br><span class="line">     10      271.1165      286.5942  0.0088</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p><b>학습이 <code>model.fit()</code>으로 잘 됩니다.</b></p>
+<li>
+<p><b>학습이 <code>model.fit()</code>으로 잘 됩니다.</b></p>
 </li>
-<li><p><code>NeuralNetRegressor</code>로 한 번 감싼 것 만으로 scikit-learn API를 사용할 수 있게 되었습니다.</p>
+<li>
+<p><code>NeuralNetRegressor</code>로 한 번 감싼 것 만으로 scikit-learn API를 사용할 수 있게 되었습니다.</p>
 </li>
-<li><p><code>X_train</code>대신 전처리를 거친 <code>X_train_np</code>를 입력했습니다.</p>
+<li>
+<p><code>X_train</code>대신 전처리를 거친 <code>X_train_np</code>를 입력했습니다.</p>
 </li>
-<li><p><code>y_train</code>대신으로는 <code>y_train.astype(np.float32).values.reshape(-1, 1)</code>이 들어갔습니다.</p>
+<li>
+<p><code>y_train</code>대신으로는 <code>y_train.astype(np.float32).values.reshape(-1, 1)</code>이 들어갔습니다.</p>
 </li>
-<li><p>pandas Series에서 데이터 타입을 바꾸고, 값을 추출해서, shape을 바꾼 것입니다.</p>
+<li>
+<p>pandas Series에서 데이터 타입을 바꾸고, 값을 추출해서, shape을 바꾼 것입니다.</p>
 </li>
-<li><p><b>예측도 <code>model.forward()</code> 대신 <code>model.predict()</code>로 진행합니다.</b></p>
+<li>
+<p><b>예측도 <code>model.forward()</code> 대신 <code>model.predict()</code>로 진행합니다.</b></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prediction</span></span><br><span class="line">y_pred_train = net_sk.predict(X_train_np)</span><br><span class="line">y_pred_val = net_sk.predict(X_val_np)</span><br><span class="line">y_pred_test = net_sk.predict(X_test_np)</span><br><span class="line"></span><br><span class="line"><span class="comment"># parity plot</span></span><br><span class="line">plot_parity3(net_sk, Xs=[X_train_np, X_val_np, X_test_np])</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_01.png"><br></p>
-<h3 id="3-2-2-ML-pipeline-작성"><a href="#3-2-2-ML-pipeline-작성" class="headerlink" title="3.2.2. ML pipeline 작성"></a>3.2.2. ML pipeline 작성</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/callbacks.html?highlight=input_dim#skorch.callbacks.InputShapeSetter">skorch: skorch.callbacks.InputShapeSetter</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/60005715/how-to-pass-input-dim-from-fit-method-to-skorch-wrapper/60170023#60170023">stackoverflow: How to pass input dim from fit method to skorch wrapper?</a></p>
+<p><img src="10_sc_01.png" alt=""><br></p>
+<h3 id="3-2-2-ML-pipeline-작성">3.2.2. ML pipeline 작성</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/callbacks.html?highlight=input_dim#skorch.callbacks.InputShapeSetter">skorch: skorch.callbacks.InputShapeSetter</a><br>
+<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/60005715/how-to-pass-input-dim-from-fit-method-to-skorch-wrapper/60170023#60170023">stackoverflow: How to pass input dim from fit method to skorch wrapper?</a></p>
 </blockquote>
 <ul>
-<li><p>앞에서 만든 전처리기, <code>get_preprocessor()</code>를 포함하는 Pipeline을 만듭니다.</p>
+<li>
+<p>앞에서 만든 전처리기, <code>get_preprocessor()</code>를 포함하는 Pipeline을 만듭니다.</p>
 </li>
-<li><p><code>method</code>매개변수로 neural network 뿐 아니라 linear regression, random forest를 선택할 수 있게 합니다.</p>
+<li>
+<p><code>method</code>매개변수로 neural network 뿐 아니라 linear regression, random forest를 선택할 수 있게 합니다.</p>
 </li>
-<li><p>Neural network는 이들 방법들과 달리 <b>input dimension이 중요</b>합니다. </p>
+<li>
+<p>Neural network는 이들 방법들과 달리 <b>input dimension이 중요</b>합니다.</p>
 </li>
-<li><p>신경망 구조를 만들 때 필요한 변수이기 때문입니다.</p>
+<li>
+<p>신경망 구조를 만들 때 필요한 변수이기 때문입니다.</p>
 </li>
-<li><p>callback은 여러 설정을 지정할 수 있는 방법입니다. <code>InputShapeSetter</code>를 callback에 기본값으로 박아 넣습니다.</p>
+<li>
+<p>callback은 여러 설정을 지정할 수 있는 방법입니다. <code>InputShapeSetter</code>를 callback에 기본값으로 박아 넣습니다.</p>
 </li>
-<li><p>그 외에 여러 keyword arguments를 입력할 수 있도록 <b><code>**kwargs</code></b>를 <code>NeuralNetRegressor()</code>에 추가합니다.</p>
+<li>
+<p>그 외에 여러 keyword arguments를 입력할 수 있도록 <b><code>**kwargs</code></b>를 <code>NeuralNetRegressor()</code>에 추가합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># machine learning models</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># embedding pytorch model in scikit-learn Pipeline</span></span><br><span class="line"><span class="keyword">from</span> skorch <span class="keyword">import</span> NeuralNetRegressor</span><br><span class="line"><span class="keyword">from</span> skorch.helper <span class="keyword">import</span> predefined_split</span><br><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> Callback</span><br><span class="line"></span><br><span class="line"><span class="comment"># dynamic input size of the PyTorch module</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">InputShapeSetter</span>(<span class="title class_ inherited__">Callback</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">on_train_begin</span>(<span class="params">self, net, X, y</span>):</span><br><span class="line">        net.set_params(module__ninput=X.shape[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_model</span>(<span class="params">method=<span class="string">&quot;lr&quot;</span>, device=device, cols_cat=cols_cat, cols_num=cols_num, degree=<span class="number">1</span>, </span></span><br><span class="line"><span class="params">              callbacks=[InputShapeSetter(<span class="params"></span>)], **kwargs</span>):</span><br><span class="line">    <span class="keyword">if</span> method == <span class="string">&quot;lr&quot;</span>:</span><br><span class="line">        ml = LinearRegression(fit_intercept=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&quot;rf&quot;</span>:</span><br><span class="line">        ml = RandomForestRegressor(random_state=rng)</span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&quot;nn&quot;</span>:</span><br><span class="line">        ml = NeuralNetRegressor(Net(), device=device, callbacks=callbacks, **kwargs)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;# &#x27;method&#x27; should be in [&#x27;lr&#x27;, &#x27;rf&#x27;, &#x27;nn&#x27;].&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    preprocessor = get_preprocessor(cols_cat=cols_cat, cols_num=cols_num, degree=degree)</span><br><span class="line">    model = Pipeline([(<span class="string">&quot;preprocessor&quot;</span>, preprocessor), </span><br><span class="line">                      (<span class="string">&quot;ml&quot;</span>, ml)])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>이제 <code>get_model()</code>을 사용해 ML pipeline을 제작할 수 있습니다.</li>
 <li><code>method</code>에 입력하는 값에 따라 선형 회귀, 앙상블 트리, 신경망을 선택할 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = get_model(<span class="string">&quot;nn&quot;</span>, max_epochs=epochs, verbose=<span class="number">1</span>, criterion=RMSELoss, optimizer=optim.Adam, optimizer__lr = <span class="number">1e-3</span>)</span><br><span class="line">model</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_02.png"><br></p>
+<p><img src="10_sc_02.png" alt=""><br></p>
 <ul>
 <li>웬만한 매개변수는 모두 <code>NeuralNetRegressor()</code>에 들어갑니다.</li>
 <li>어떤 매개변수들이 있는지 출력해서 확인합니다.</li>
@@ -333,8 +359,8 @@
 <li>실행 결과</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;_kwargs&#x27;</span>: &#123;<span class="string">&#x27;optimizer__lr&#x27;</span>: 0.001&#125;,</span><br><span class="line"> <span class="string">&#x27;batch_size&#x27;</span>: 128,</span><br><span class="line"> <span class="string">&#x27;callbacks&#x27;</span>: [&lt;__main__.InputShapeSetter at 0x7f4911406cd0&gt;],</span><br><span class="line"> <span class="string">&#x27;callbacks__epoch_timer&#x27;</span>: &lt;skorch.callbacks.logging.EpochTimer at 0x7f49745b2a50&gt;,</span><br><span class="line"> <span class="string">&#x27;callbacks__print_log&#x27;</span>: &lt;skorch.callbacks.logging.PrintLog at 0x7f49701261d0&gt;,</span><br><span class="line"> <span class="string">&#x27;callbacks__print_log__floatfmt&#x27;</span>: <span class="string">&#x27;.4f&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;callbacks__print_log__keys_ignored&#x27;</span>: None,</span><br><span class="line"> <span class="string">&#x27;callbacks__print_log__sink&#x27;</span>: &lt;<span class="keyword">function</span> <span class="built_in">print</span>&gt;,</span><br><span class="line"> <span class="string">&#x27;callbacks__print_log__stralign&#x27;</span>: <span class="string">&#x27;right&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;callbacks__print_log__tablefmt&#x27;</span>: <span class="string">&#x27;simple&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;callbacks__train_loss&#x27;</span>: &lt;skorch.callbacks.scoring.PassthroughScoring at 0x7f49745b2450&gt;,</span><br><span class="line"> <span class="string">&#x27;callbacks__train_loss__lower_is_better&#x27;</span>: True,</span><br><span class="line"> <span class="string">&#x27;callbacks__train_loss__name&#x27;</span>: <span class="string">&#x27;train_loss&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;callbacks__train_loss__on_train&#x27;</span>: True,</span><br><span class="line"> <span class="string">&#x27;callbacks__valid_loss&#x27;</span>: &lt;skorch.callbacks.scoring.PassthroughScoring at 0x7f49745b24d0&gt;,</span><br><span class="line"> <span class="string">&#x27;callbacks__valid_loss__lower_is_better&#x27;</span>: True,</span><br><span class="line"> <span class="string">&#x27;callbacks__valid_loss__name&#x27;</span>: <span class="string">&#x27;valid_loss&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;callbacks__valid_loss__on_train&#x27;</span>: False,</span><br><span class="line"> <span class="string">&#x27;criterion&#x27;</span>: __main__.RMSELoss,</span><br><span class="line"> <span class="string">&#x27;dataset&#x27;</span>: skorch.dataset.Dataset,</span><br><span class="line"> <span class="string">&#x27;device&#x27;</span>: <span class="string">&#x27;cuda:0&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;iterator_train&#x27;</span>: torch.utils.data.dataloader.DataLoader,</span><br><span class="line"> <span class="string">&#x27;iterator_valid&#x27;</span>: torch.utils.data.dataloader.DataLoader,</span><br><span class="line"> <span class="string">&#x27;lr&#x27;</span>: 0.01,</span><br><span class="line"> <span class="string">&#x27;max_epochs&#x27;</span>: 1000,</span><br><span class="line"> <span class="string">&#x27;module&#x27;</span>: Net(</span><br><span class="line">   (layer0): Linear(in_features=12, out_features=16, bias=True)</span><br><span class="line">   (layer1): Linear(in_features=16, out_features=16, bias=True)</span><br><span class="line">   (layer2): Linear(in_features=16, out_features=12, bias=True)</span><br><span class="line">   (layer3): Linear(in_features=12, out_features=8, bias=True)</span><br><span class="line">   (layer4): Linear(in_features=8, out_features=1, bias=True)</span><br><span class="line">   (activation): ReLU()</span><br><span class="line"> ),</span><br><span class="line"> <span class="string">&#x27;optimizer&#x27;</span>: torch.optim.adam.Adam,</span><br><span class="line"> <span class="string">&#x27;optimizer__lr&#x27;</span>: 0.001,</span><br><span class="line"> <span class="string">&#x27;predict_nonlinearity&#x27;</span>: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;train_split&#x27;</span>: &lt;skorch.dataset.ValidSplit object at 0x7f497434cc90&gt;,</span><br><span class="line"> <span class="string">&#x27;verbose&#x27;</span>: 1,</span><br><span class="line"> <span class="string">&#x27;warm_start&#x27;</span>: False&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-3-train-and-validate-self"><a href="#3-2-3-train-and-validate-self" class="headerlink" title="3.2.3. train and validate (self)"></a>3.2.3. train and validate (self)</h3><blockquote>
+<h3 id="3-2-3-train-and-validate-self">3.2.3. train and validate (self)</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/user/neuralnet.html#train-split">skorch: NeuralNet#train_split</a></p>
 </blockquote>
 <ul>
@@ -345,29 +371,35 @@
 <li>실행 결과</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Re-initializing module because the following parameters were re-set: module__ninput.</span><br><span class="line">Re-initializing criterion.</span><br><span class="line">Re-initializing optimizer.</span><br><span class="line">  epoch    train_loss    valid_loss     dur</span><br><span class="line">-------  ------------  ------------  ------</span><br><span class="line">      1     4280.8532     4388.5093  0.0188</span><br><span class="line">      2     4280.8443     4388.4990  0.0129</span><br><span class="line">      </span><br><span class="line">      ... (생략) ...</span><br><span class="line">      </span><br><span class="line">    998      295.5285      270.6504  0.0106</span><br><span class="line">    999      295.5276      270.6288  0.0153</span><br><span class="line">   1000      295.5247      270.6030  0.0102</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>validation set을 입력하지 않았음에도 valid_loss가 출력됩니다.</p>
+<li>
+<p>validation set을 입력하지 않았음에도 valid_loss가 출력됩니다.</p>
 </li>
-<li><p><b>train data의 20%를 validation set으로 따로 떼어 놓기 때문입니다.</b></p>
+<li>
+<p><b>train data의 20%를 validation set으로 따로 떼어 놓기 때문입니다.</b></p>
 </li>
-<li><p><a href="https://jehyunlee.github.io/2022/06/09/Python-DL-8-skorch_callback/">맨 처음</a> 전체 데이터의 60%만 train set으로 지정했습니다.</p>
+<li>
+<p><a href="https://jehyunlee.github.io/2022/06/09/Python-DL-8-skorch_callback/">맨 처음</a> 전체 데이터의 60%만 train set으로 지정했습니다.</p>
 </li>
-<li><p>여기서 다시 80%만 학습에 투입되었으니 <b>총 48%.</b> 반도 안되는 데이터로 학습한 셈입니다.</p>
+<li>
+<p>여기서 다시 80%만 학습에 투입되었으니 <b>총 48%.</b> 반도 안되는 데이터로 학습한 셈입니다.</p>
 </li>
-<li><p><code>train_split=None</code>을 입력하면 모든 데이터를 다 학습에 투입하지만 validation 결과가 출력되지 않습니다.</p>
+<li>
+<p><code>train_split=None</code>을 입력하면 모든 데이터를 다 학습에 투입하지만 validation 결과가 출력되지 않습니다.</p>
 </li>
-<li><p><b>learning curve</b>는 신경망에서 <b><code>.history</code></b> 속성을 추출해 확인할 수 있습니다.</p>
+<li>
+<p><b>learning curve</b>는 신경망에서 <b><code>.history</code></b> 속성을 추출해 확인할 수 있습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">history = model[<span class="string">&quot;ml&quot;</span>].history</span><br><span class="line">train_loss = history[:, <span class="string">&quot;train_loss&quot;</span>]</span><br><span class="line">valid_loss = history[:, <span class="string">&quot;valid_loss&quot;</span>]</span><br><span class="line"></span><br><span class="line">plot_epoch(train_loss, valid_loss)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_03.png"><br></p>
+<p><img src="10_sc_03.png" alt=""><br></p>
 <ul>
 <li>학습도 정상적으로 이루어졌습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_parity3(model)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_04.png"><br></p>
-<h3 id="3-2-4-train-and-validate-predefined-validation-set"><a href="#3-2-4-train-and-validate-predefined-validation-set" class="headerlink" title="3.2.4. train and validate (predefined validation set)"></a>3.2.4. train and validate (predefined validation set)</h3><blockquote>
+<p><img src="10_sc_04.png" alt=""><br></p>
+<h3 id="3-2-4-train-and-validate-predefined-validation-set">3.2.4. train and validate (predefined validation set)</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/dataset.html">skorch: skorch.dataset.Dataset</a></p>
 </blockquote>
 <ul>
@@ -380,20 +412,21 @@
 <li>실행 결과</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Re-initializing module because the following parameters were re-set: module__ninput.</span><br><span class="line">Re-initializing criterion.</span><br><span class="line">Re-initializing optimizer.</span><br><span class="line">  epoch    train_loss    valid_loss     dur</span><br><span class="line">-------  ------------  ------------  ------</span><br><span class="line">      1     4302.1941     4250.5781  0.0160</span><br><span class="line">      2     4302.1851     4250.5693  0.0175</span><br><span class="line">      </span><br><span class="line">      ... (생략) ...</span><br><span class="line">      </span><br><span class="line">    998      280.9618      267.7317  0.0121</span><br><span class="line">    999      280.9596      267.7302  0.0122</span><br><span class="line">   1000      280.9580      267.7280  0.0141</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><b>learning curve</b>를 확인합니다.</li>
 <li>여기서 얻은 learning curve를 reference로 사용하겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">history = model[<span class="string">&quot;ml&quot;</span>].history</span><br><span class="line">train_loss_0 = history[:, <span class="string">&quot;train_loss&quot;</span>]</span><br><span class="line">valid_loss_0 = history[:, <span class="string">&quot;valid_loss&quot;</span>]</span><br><span class="line"></span><br><span class="line">plot_epoch(train_loss_0, valid_loss_0)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_05.png"><br></p>
+<p><img src="10_sc_05.png" alt=""><br></p>
 <ul>
 <li><b>parity plot</b>도 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_parity3(model)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_06.png"><br></p>
-<h3 id="3-2-5-learning-rate-scheduler"><a href="#3-2-5-learning-rate-scheduler" class="headerlink" title="3.2.5. learning rate scheduler"></a>3.2.5. learning rate scheduler</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/user/callbacks.html#learning-rate-schedulers">skorch: Learning rate schedulers</a><br><a href="https://jehyunlee.github.io/2020/03/28/Python-DL-3-1cycle-learning-rate-policy/">Pega Devlog: Fast.ai의 fit_one_cycle 방법론 이해</a></p>
+<p><img src="10_sc_06.png" alt=""><br></p>
+<h3 id="3-2-5-learning-rate-scheduler">3.2.5. learning rate scheduler</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/user/callbacks.html#learning-rate-schedulers">skorch: Learning rate schedulers</a><br>
+<a href="https://jehyunlee.github.io/2020/03/28/Python-DL-3-1cycle-learning-rate-policy/">Pega Devlog: Fast.ai의 fit_one_cycle 방법론 이해</a></p>
 </blockquote>
 <ul>
 <li>callbacks에 learning late scheduler를 추가해 learning rate를 조정할 수 있습니다.</li>
@@ -401,19 +434,19 @@
 <li>이를 삭제하지 않도록 유의하면서 learning rate scheduler를 추가합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> LRScheduler</span><br><span class="line"></span><br><span class="line">model = get_model(<span class="string">&quot;nn&quot;</span>, max_epochs=epochs, verbose=<span class="number">1</span>, criterion=RMSELoss, optimizer=optim.Adam, optimizer__lr = <span class="number">1e-3</span>,</span><br><span class="line">                  train_split=predefined_split(valid_dataset),               <span class="comment"># predefined validataion set                </span></span><br><span class="line">                  callbacks=[<span class="comment"># input dimension setter</span></span><br><span class="line">                             (<span class="string">&quot;input_shape_setter&quot;</span>, InputShapeSetter()),</span><br><span class="line">                             </span><br><span class="line">                             <span class="comment"># LR scheduler</span></span><br><span class="line">                             (<span class="string">&quot;lr_scheduler&quot;</span>, LRScheduler(policy=OneCycleLR, <span class="comment"># LR scheduler</span></span><br><span class="line">                                                         max_lr=<span class="number">0.1</span>,</span><br><span class="line">                                                         total_steps=epochs))])</span><br><span class="line">model.fit(X_train, y_train_np)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>학습 과정은 생략하고 learning curve를 비교해서 봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ax = plot_epoch(train_loss_0, valid_loss_0)</span><br><span class="line">lines = ax.lines</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    line.set_alpha(<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">history = model[<span class="string">&quot;ml&quot;</span>].history</span><br><span class="line">train_loss = history[:, <span class="string">&quot;train_loss&quot;</span>]</span><br><span class="line">valid_loss = history[:, <span class="string">&quot;valid_loss&quot;</span>]</span><br><span class="line"></span><br><span class="line">ax = plot_epoch(train_loss, valid_loss, ax=ax)</span><br><span class="line">handles, labels = ax.get_legend_handles_labels()</span><br><span class="line">ax.legend(handles=handles, labels=labels, ncol=<span class="number">2</span>, title=<span class="string">&quot;base      OneCycleLR&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_07.png"><br></p>
+<p><img src="10_sc_07.png" alt=""><br></p>
 <ul>
 <li>learning rate scheduler가 적용되어 학습 양상이 바뀌었습니다.</li>
 <li>parity plot도 여전히 좋습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_parity3(model)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_08.png"><br></p>
-<h3 id="3-2-6-early-stopping"><a href="#3-2-6-early-stopping" class="headerlink" title="3.2.6. early stopping"></a>3.2.6. early stopping</h3><blockquote>
+<p><img src="10_sc_08.png" alt=""><br></p>
+<h3 id="3-2-6-early-stopping">3.2.6. early stopping</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/callbacks.html#skorch.callbacks.EarlyStopping">skorch: skorch.callbacks.EarlyStopping</a></p>
 </blockquote>
 <ul>
@@ -422,41 +455,40 @@
 <li>valid_loss가 20번 줄어들지 않으면 학습을 중단하도록 <code>monitor=&quot;valid_loss&quot;</code>, <code>patience=20</code>을 설정했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> EarlyStopping</span><br><span class="line"></span><br><span class="line">model = get_model(<span class="string">&quot;nn&quot;</span>, max_epochs=epochs, verbose=<span class="number">1</span>, criterion=RMSELoss, optimizer=optim.Adam, optimizer__lr = <span class="number">1e-3</span>,</span><br><span class="line">                  train_split=predefined_split(valid_dataset),               <span class="comment"># predefined validataion set        </span></span><br><span class="line"></span><br><span class="line">                  callbacks=[<span class="comment"># input dimension setter</span></span><br><span class="line">                             (<span class="string">&quot;input_shape_setter&quot;</span>, InputShapeSetter()),</span><br><span class="line"></span><br><span class="line">                             <span class="comment"># LR scheduler</span></span><br><span class="line">                             (<span class="string">&quot;lr_scheduler&quot;</span>, LRScheduler(policy=OneCycleLR, </span><br><span class="line">                                                         max_lr=<span class="number">0.1</span>,</span><br><span class="line">                                                         total_steps=epochs)),</span><br><span class="line"></span><br><span class="line">                             <span class="comment"># early stopping</span></span><br><span class="line">                             (<span class="string">&quot;early_stopping&quot;</span>, EarlyStopping(monitor=<span class="string">&quot;valid_loss&quot;</span>,</span><br><span class="line">                                                              patience=<span class="number">20</span>))])</span><br><span class="line">model.fit(X_train, y_train.values.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.float32))</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><b>learning curve</b>를 비교합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ax = plot_epoch(train_loss_0, valid_loss_0)</span><br><span class="line">lines = ax.lines</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    line.set_alpha(<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">history = model[<span class="string">&quot;ml&quot;</span>].history</span><br><span class="line">train_loss = history[:, <span class="string">&quot;train_loss&quot;</span>]</span><br><span class="line">valid_loss = history[:, <span class="string">&quot;valid_loss&quot;</span>]</span><br><span class="line"></span><br><span class="line">ax = plot_epoch(train_loss, valid_loss, ax=ax)</span><br><span class="line">handles, labels = ax.get_legend_handles_labels()</span><br><span class="line">ax.legend(handles=handles, labels=labels, ncol=<span class="number">2</span>, title=<span class="string">&quot;base      LRS+ES&quot;</span>)</span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">200</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_09.png"><br></p>
+<p><img src="10_sc_09.png" alt=""><br></p>
 <ul>
 <li>parity plot도 정상적입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_parity3(model)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_10.png"><br></p>
-<h3 id="3-2-7-Saving-and-Loading-manual"><a href="#3-2-7-Saving-and-Loading-manual" class="headerlink" title="3.2.7. Saving and Loading (manual)"></a>3.2.7. Saving and Loading (manual)</h3><blockquote>
+<p><img src="10_sc_10.png" alt=""><br></p>
+<h3 id="3-2-7-Saving-and-Loading-manual">3.2.7. Saving and Loading (manual)</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/user/save_load.html">skorch: Saving and Loading</a></p>
 </blockquote>
 <ul>
 <li>모델 파라미터를 pickle 형식으로 저장하고 불러올 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save parameters</span></span><br><span class="line">model[<span class="string">&quot;ml&quot;</span>].save_params(f_params=<span class="string">&quot;nn_params.pkl&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>모델을 새로 만들면 paramter를 불러오기 전에 초기화하는 과정이 필요합니다.</li>
 <li><code>.initialize()</code>를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># load parameters</span></span><br><span class="line">model_new = get_model(method=<span class="string">&quot;nn&quot;</span>)</span><br><span class="line">model_new[<span class="string">&quot;ml&quot;</span>].initialize()</span><br><span class="line">model_new[<span class="string">&quot;ml&quot;</span>].load_params(f_params=<span class="string">&quot;nn_params.pkl&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>새로 만든 모델에 parameter를 불러와서 적용합니다.</li>
 <li>단, 신경망 parameter에만 해당하는 상황이므로 preprocessor는 기존 모델의 preprocessor를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check reproducibility</span></span><br><span class="line">y_pred_train = model_new[<span class="string">&quot;ml&quot;</span>].predict(model[<span class="string">&quot;preprocessor&quot;</span>].transform(X_train))</span><br><span class="line">y_pred_val = model_new[<span class="string">&quot;ml&quot;</span>].predict(model[<span class="string">&quot;preprocessor&quot;</span>].transform(X_val))</span><br><span class="line">y_pred_test = model_new[<span class="string">&quot;ml&quot;</span>].predict(model[<span class="string">&quot;preprocessor&quot;</span>].transform(X_test))</span><br><span class="line"></span><br><span class="line">plot_parity3(model_new, preds=[y_pred_train, y_pred_val, y_pred_test])</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_11.png"></p>
+<p><img src="10_sc_11.png" alt=""></p>
 <ul>
 <li>학습을 하지 않았음에도 parity plot이 똑같이 재현되었습니다.</li>
 </ul>
-<h3 id="3-2-8-Saving-and-Loading-callbacks"><a href="#3-2-8-Saving-and-Loading-callbacks" class="headerlink" title="3.2.8. Saving and Loading (callbacks)"></a>3.2.8. Saving and Loading (callbacks)</h3><blockquote>
+<h3 id="3-2-8-Saving-and-Loading-callbacks">3.2.8. Saving and Loading (callbacks)</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/user/save_load.html#using-callbacks">skorch: Saving and Loading Using Callbacks</a></p>
 </blockquote>
 <ul>
@@ -469,21 +501,25 @@
 <li>실행 결과</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Re-initializing module because the following parameters were re-set: module__ninput.</span><br><span class="line">Re-initializing criterion.</span><br><span class="line">Re-initializing optimizer.</span><br><span class="line">  epoch    train_loss    valid_loss    <span class="built_in">cp</span>      lr     dur</span><br><span class="line">-------  ------------  ------------  ----  ------  ------</span><br><span class="line">      1     4301.9097     4250.2661     +  0.0040  0.0093</span><br><span class="line">      2     4301.8677     4250.2241     +  0.0040  0.0107</span><br><span class="line">      3     4301.8278     4250.1914     +  0.0040  0.0083</span><br><span class="line">      4     4301.7949     4250.1577     +  0.0040  0.0111</span><br><span class="line">      </span><br><span class="line">      ... (생략) ...</span><br><span class="line">      </span><br><span class="line">     96      294.3520      265.7108        0.0260  0.0112</span><br><span class="line">     97      296.6454      273.7495        0.0264  0.0098</span><br><span class="line">     98      290.3884      289.0570        0.0268  0.0071</span><br><span class="line">     99      289.6089      273.4566        0.0273  0.0093</span><br><span class="line">    100      284.6194      261.8893     +  0.0277  0.0092</span><br><span class="line">    101      290.8631      262.4448        0.0281  0.0107</span><br><span class="line">    102      289.3116      275.2869        0.0286  0.0077</span><br><span class="line">    103      286.5198      278.3972        0.0290  0.0075</span><br><span class="line">    104      283.5437      266.5125        0.0295  0.0106</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p><b>cp</b>라는 열이 하나 생겼고, 여기 +가 붙은 곳들이 있습니다.</p>
+<li>
+<p><b>cp</b>라는 열이 하나 생겼고, 여기 +가 붙은 곳들이 있습니다.</p>
 </li>
-<li><p>valid_loss가 기존 기록보다 작아진 지점입니다.</p>
+<li>
+<p>valid_loss가 기존 기록보다 작아진 지점입니다.</p>
 </li>
-<li><p>History도 파일에서 불러와서 그립니다.</p>
+<li>
+<p>History도 파일에서 불러와서 그립니다.</p>
 </li>
-<li><p>부를 때는 <code>skorch.history.History</code>를 사용합니다.</p>
+<li>
+<p>부를 때는 <code>skorch.history.History</code>를 사용합니다.</p>
 </li>
-<li><p>세 개의 learning curve를 겹쳐 그리느라 코드가 다소 복잡해졌습니다.</p>
+<li>
+<p>세 개의 learning curve를 겹쳐 그리느라 코드가 다소 복잡해졌습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> skorch.history <span class="keyword">import</span> History</span><br><span class="line"></span><br><span class="line"><span class="comment"># base plot</span></span><br><span class="line">ax = plot_epoch(train_loss_0, valid_loss_0)</span><br><span class="line">lines = ax.lines</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">    line.set_alpha(<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># history</span></span><br><span class="line">history = History().from_file(<span class="string">&quot;./exp1/history.json&quot;</span>)</span><br><span class="line">train_loss = history[:, <span class="string">&quot;train_loss&quot;</span>]</span><br><span class="line">valid_loss = history[:, <span class="string">&quot;valid_loss&quot;</span>]</span><br><span class="line">ax = plot_epoch(train_loss, valid_loss, ax=ax)</span><br><span class="line"></span><br><span class="line"><span class="comment"># event_cp : cp == True</span></span><br><span class="line">epoch = history[:, <span class="string">&quot;epoch&quot;</span>]</span><br><span class="line">event_cp = history[:, <span class="string">&quot;event_cp&quot;</span>]</span><br><span class="line">df_cp = pd.DataFrame(&#123;<span class="string">&quot;epoch&quot;</span>:epoch, <span class="string">&quot;event_cp&quot;</span>:event_cp, <span class="string">&quot;train_loss&quot;</span>:train_loss, <span class="string">&quot;valid_loss&quot;</span>:valid_loss&#125;)</span><br><span class="line">df_cp = df_cp.loc[df_cp[<span class="string">&quot;event_cp&quot;</span>]==<span class="literal">True</span>]</span><br><span class="line"></span><br><span class="line">ax.scatter(df_cp[<span class="string">&quot;epoch&quot;</span>], df_cp[<span class="string">&quot;train_loss&quot;</span>], fc=c_train, alpha=<span class="number">0.5</span>, label=<span class="string">&quot;train_cp&quot;</span>)</span><br><span class="line">ax.scatter(df_cp[<span class="string">&quot;epoch&quot;</span>], df_cp[<span class="string">&quot;valid_loss&quot;</span>], fc=c_val, alpha=<span class="number">0.5</span>, label=<span class="string">&quot;valid_cp&quot;</span>)</span><br><span class="line"></span><br><span class="line">ax.legend(ncol=<span class="number">3</span>, title=<span class="string">&quot;base      LRS+ES           checkpoint&quot;</span>, loc=<span class="string">&quot;center right&quot;</span>)</span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">200</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_12.png"><br></p>
+<p><img src="10_sc_12.png" alt=""><br></p>
 <ul>
 <li>희미하게 그려진 것은 skorch에 validation set을 사용한 base line입니다.</li>
 <li>그리고 Learning Rate Scheduler와 Early Stopping을 적용한 것을 LRS + ES로 표기했습니다.</li>
@@ -491,86 +527,101 @@
 <li>그리고 이 중 <b>checkpoint가 적용된 것</b>을 scatter plot으로 표현했습니다.</li>
 <li>one-cycle-fit의 영향으로 learning curve가 요동치는 와중에서도 train과 valid에서 단조 감소하는 모습만이 기록되었습니다.</li>
 </ul>
-<h3 id="3-2-9-valid-loss가-가장-적었던-checkpoint-불러서-learning-rate-낮추기"><a href="#3-2-9-valid-loss가-가장-적었던-checkpoint-불러서-learning-rate-낮추기" class="headerlink" title="3.2.9. valid loss가 가장 적었던 checkpoint 불러서 learning rate 낮추기"></a>3.2.9. valid loss가 가장 적었던 checkpoint 불러서 learning rate 낮추기</h3><blockquote>
+<h3 id="3-2-9-valid-loss가-가장-적었던-checkpoint-불러서-learning-rate-낮추기">3.2.9. valid loss가 가장 적었던 checkpoint 불러서 learning rate 낮추기</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/callbacks.html#skorch.callbacks.LoadInitState">skorch: skorch.callbacks.LoadInitState</a></p>
 </blockquote>
 <ul>
-<li><p>각 checkpoint에서는 history 외에도 criterion, optimizer, parameter 등의 상태를 저장합니다.</p>
+<li>
+<p>각 checkpoint에서는 history 외에도 criterion, optimizer, parameter 등의 상태를 저장합니다.</p>
 </li>
-<li><p>Colab 왼쪽의 폴더 모양을 클릭해 저장한 파일을 확인하면 볼 수 있습니다.<br><br><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_13.png"><br></p>
+<li>
+<p>Colab 왼쪽의 폴더 모양을 클릭해 저장한 파일을 확인하면 볼 수 있습니다.<br><br>
+<img src="10_sc_13.png" alt=""><br></p>
 </li>
-<li><p>학습이 과하게 진행되어 overfitting이 되면 지나가버린 과거의 최적점이 아쉽습니다.</p>
+<li>
+<p>학습이 과하게 진행되어 overfitting이 되면 지나가버린 과거의 최적점이 아쉽습니다.</p>
 </li>
-<li><p>지나친 최적점을 불러와서 훨씬 낮은 learning rate로 살살 학습시키면 더 좋을 것 같습니다.</p>
+<li>
+<p>지나친 최적점을 불러와서 훨씬 낮은 learning rate로 살살 학습시키면 더 좋을 것 같습니다.</p>
 </li>
-<li><p>이 때 skorch에서 제공하는 <a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/callbacks.html#skorch.callbacks.LoadInitState">LoadInitState</a>를 사용할 수 있습니다.</p>
+<li>
+<p>이 때 skorch에서 제공하는 <a target="_blank" rel="noopener" href="https://skorch.readthedocs.io/en/stable/callbacks.html#skorch.callbacks.LoadInitState">LoadInitState</a>를 사용할 수 있습니다.</p>
 </li>
-<li><p><code>cp = Checkpoint()</code>로 저장된 위치를 지정하고,</p>
+<li>
+<p><code>cp = Checkpoint()</code>로 저장된 위치를 지정하고,</p>
 </li>
-<li><p><code>load_state = LoadInitState(cp)</code>로 불러와 상태를 불러옵니다.</p>
+<li>
+<p><code>load_state = LoadInitState(cp)</code>로 불러와 상태를 불러옵니다.</p>
 </li>
-<li><p>마지막으로 <code>callbacks</code>에 <code>cp</code>와 <code>load_state</code>를 추가합니다.</p>
+<li>
+<p>마지막으로 <code>callbacks</code>에 <code>cp</code>와 <code>load_state</code>를 추가합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> LoadInitState</span><br><span class="line"></span><br><span class="line">cp = Checkpoint(dirname=<span class="string">&#x27;exp1&#x27;</span>)</span><br><span class="line">load_state = LoadInitState(cp)</span><br><span class="line"></span><br><span class="line">model = get_model(<span class="string">&quot;nn&quot;</span>, max_epochs=epochs, verbose=<span class="number">1</span>, criterion=RMSELoss, optimizer=optim.Adam, </span><br><span class="line">                  <span class="comment"># learning rate 조정</span></span><br><span class="line">                  optimizer__lr = <span class="number">1e-5</span>,</span><br><span class="line"></span><br><span class="line">                  <span class="comment"># predefined validataion set</span></span><br><span class="line">                  train_split=predefined_split(valid_dataset),                               </span><br><span class="line"></span><br><span class="line">                  callbacks=[<span class="comment"># input dimension setter</span></span><br><span class="line">                             (<span class="string">&quot;input_shape_setter&quot;</span>, InputShapeSetter()),</span><br><span class="line"></span><br><span class="line">                             <span class="comment"># early stopping</span></span><br><span class="line">                             (<span class="string">&quot;early_stopping&quot;</span>, EarlyStopping(monitor=<span class="string">&quot;valid_loss&quot;</span>,</span><br><span class="line">                                                              patience=<span class="number">100</span>)),</span><br><span class="line">                             </span><br><span class="line">                             <span class="comment"># Checkpoints</span></span><br><span class="line">                             (<span class="string">&quot;checkpoint&quot;</span>, cp),</span><br><span class="line">                             (<span class="string">&quot;load_initial_state&quot;</span>, load_state)</span><br><span class="line">                             ])</span><br><span class="line">model.fit(X_train, y_train.values.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.float32))</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-10-Saving-and-Loading-model-itself"><a href="#3-2-10-Saving-and-Loading-model-itself" class="headerlink" title="3.2.10. Saving and Loading (model itself)"></a>3.2.10. Saving and Loading (model itself)</h3><ul>
+<h3 id="3-2-10-Saving-and-Loading-model-itself">3.2.10. Saving and Loading (model itself)</h3>
+<ul>
 <li>모델 전체를 저장할 때는 pickle을 권장하고 있습니다.</li>
 <li><code>pickle.dump()</code>와 <code>pickle.load()</code>를 사용해 모델을 읽고 씁니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># saving</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;skorch_dl.pkl&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(model, f)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># loading</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;skorch_dl.pkl&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    model_pkl = pickle.load(f)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>저장한 모델을 불러오면서 이름을 model_pkl로 바꿨습니다.</li>
 <li>이 모델의 parity plot을 그려서 잘 저장되었고 불러졌는지 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check reproducibility</span></span><br><span class="line">plot_parity3(model=model_pkl)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_14.png"><br></p>
+<p><img src="10_sc_14.png" alt=""><br></p>
 <ul>
 <li>추가 학습 없이도 원래의 성능이 확인되었습니다.</li>
 </ul>
-<h1 id="4-정리-skorch-ML-pipeline"><a href="#4-정리-skorch-ML-pipeline" class="headerlink" title="4. 정리 : skorch ML pipeline"></a>4. 정리 : skorch ML pipeline</h1><ul>
-<li><p>이제까지 세 편의 글에 걸쳐 데이터를 정리한 후,</p>
+<h1>4. 정리 : skorch ML pipeline</h1>
+<ul>
+<li>
+<p>이제까지 세 편의 글에 걸쳐 데이터를 정리한 후,</p>
 </li>
-<li><p><b>scikit-learn preprocessor</b>를 만들고,</p>
+<li>
+<p><b>scikit-learn preprocessor</b>를 만들고,</p>
 </li>
-<li><p><b>PyTorch neural network</b>를 구축한 후,</p>
+<li>
+<p><b>PyTorch neural network</b>를 구축한 후,</p>
 </li>
-<li><p><b>skorch로 이들을 엮은 뒤 callbacks로 여러 옵션을 뿌렸습니다.</b></p>
+<li>
+<p><b>skorch로 이들을 엮은 뒤 callbacks로 여러 옵션을 뿌렸습니다.</b></p>
 </li>
-<li><p>최종적으로 사용한 코드가 여기 저기 흩뿌려져 있어 활용이 어려울 듯도 싶습니다.</p>
+<li>
+<p>최종적으로 사용한 코드가 여기 저기 흩뿌려져 있어 활용이 어려울 듯도 싶습니다.</p>
 </li>
-<li><p>skorch ML pipeline 코드를 아래에 정리합니다.</p>
+<li>
+<p>skorch ML pipeline 코드를 아래에 정리합니다.</p>
 </li>
-<li><p><b>목적은 Ctrl+C&#x2F;V</b>와 약간의 수정으로 사용하는 것입니다.</p>
+<li>
+<p><b>목적은 Ctrl+C/V</b>와 약간의 수정으로 사용하는 것입니다.</p>
 </li>
 </ul>
-<h2 id="4-1-skorch-ML-pipeline"><a href="#4-1-skorch-ML-pipeline" class="headerlink" title="4.1. skorch ML pipeline"></a>4.1. skorch ML pipeline</h2><ul>
+<h2 id="4-1-skorch-ML-pipeline">4.1. skorch ML pipeline</h2>
+<ul>
 <li>scikit-learn preprocessor</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># preprocessors</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> FunctionTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</span><br><span class="line"></span><br><span class="line"><span class="comment"># pipeline</span></span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> BaseEstimator, TransformerMixin</span><br><span class="line"></span><br><span class="line"><span class="comment"># Preprocessings for Categorical and Numerical features</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_concat</span>(<span class="params">cols_cat=cols_cat, cols_num=cols_num, degree=<span class="number">1</span></span>):</span><br><span class="line">    <span class="comment"># categorical features: one-hot encoding</span></span><br><span class="line">    cat_features = cols_cat</span><br><span class="line">    cat_transformer = OneHotEncoder(sparse=<span class="literal">False</span>, handle_unknown=<span class="string">&quot;ignore&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># numerical features: standard scaling &amp; polynomial features</span></span><br><span class="line">    num_features = cols_num</span><br><span class="line">    num_transformer = Pipeline(steps=[(<span class="string">&quot;polynomial&quot;</span>, PolynomialFeatures(degree=degree)),</span><br><span class="line">                                      (<span class="string">&quot;scaler&quot;</span>, StandardScaler())])</span><br><span class="line">    </span><br><span class="line">    numcat = ColumnTransformer(transformers=[(<span class="string">&quot;categorical&quot;</span>, cat_transformer, cat_features),</span><br><span class="line">                                          (<span class="string">&quot;numerical&quot;</span>, num_transformer, num_features)])</span><br><span class="line">    <span class="keyword">return</span> numcat</span><br><span class="line"></span><br><span class="line"><span class="comment"># Float64 to Float32 for PyTorch</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FloatTransformer</span>(BaseEstimator, TransformerMixin):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fit</span>(<span class="params">self, X, y=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">transform</span>(<span class="params">self, X</span>):</span><br><span class="line">        <span class="keyword">return</span> np.array(X, dtype=np.float32)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># preprocessing Pipeline</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_preprocessor</span>(<span class="params">cols_cat=cols_cat, cols_num=cols_num, degree=<span class="number">1</span></span>):</span><br><span class="line">    concat = get_concat(cols_cat=cols_cat, cols_num=cols_num, degree=degree)</span><br><span class="line">    ft = FloatTransformer()</span><br><span class="line"></span><br><span class="line">    pipeline= Pipeline(steps=[(<span class="string">&quot;concat&quot;</span>, concat), </span><br><span class="line">                              (<span class="string">&quot;float64to32&quot;</span>, ft)])</span><br><span class="line">    <span class="keyword">return</span> pipeline</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>PyTorch Neural Network</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># neural network: ninput(12)-16-16-12-8-1</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, ninput=<span class="number">12</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.layer0 = nn.Linear(ninput, <span class="number">16</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layer1 = nn.Linear(<span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layer2 = nn.Linear(<span class="number">16</span>, <span class="number">12</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layer3 = nn.Linear(<span class="number">12</span>, <span class="number">8</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layer4 = nn.Linear(<span class="number">8</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.activation = nn.ReLU()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.activation(<span class="variable language_">self</span>.layer0(x))</span><br><span class="line">        x = <span class="variable language_">self</span>.activation(<span class="variable language_">self</span>.layer1(x))</span><br><span class="line">        x = <span class="variable language_">self</span>.activation(<span class="variable language_">self</span>.layer2(x))</span><br><span class="line">        x = <span class="variable language_">self</span>.activation(<span class="variable language_">self</span>.layer3(x))</span><br><span class="line">        x = <span class="variable language_">self</span>.layer4(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss: RMSE</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RMSELoss</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, eps=<span class="number">1e-6</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.mse = nn.MSELoss()</span><br><span class="line">        <span class="variable language_">self</span>.eps = eps</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, true, pred</span>):</span><br><span class="line">        loss = torch.sqrt(<span class="variable language_">self</span>.mse(true, pred) + <span class="variable language_">self</span>.eps)</span><br><span class="line">        <span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>skorch ML Pipeline</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># machine learning models</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># embedding pytorch model in scikit-learn Pipeline</span></span><br><span class="line"><span class="keyword">from</span> skorch <span class="keyword">import</span> NeuralNetRegressor</span><br><span class="line"><span class="keyword">from</span> skorch.helper <span class="keyword">import</span> predefined_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># callbacks</span></span><br><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> Callback</span><br><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> LRScheduler</span><br><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> EarlyStopping</span><br><span class="line"><span class="keyword">from</span> skorch.callbacks <span class="keyword">import</span> Checkpoint, TrainEndCheckpoint</span><br><span class="line"></span><br><span class="line"><span class="comment"># dynamic input size of the PyTorch module</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">InputShapeSetter</span>(<span class="title class_ inherited__">Callback</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">on_train_begin</span>(<span class="params">self, net, X, y</span>):</span><br><span class="line">        net.set_params(module__ninput=X.shape[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># save the model parameters, optimizer, and history</span></span><br><span class="line">cp = Checkpoint(dirname=<span class="string">&#x27;exp_test&#x27;</span>)</span><br><span class="line">train_end_cp = TrainEndCheckpoint(dirname=<span class="string">&#x27;exp_test&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># skorch ML pipeline</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_model</span>(<span class="params">method=<span class="string">&quot;lr&quot;</span>, device=device, cols_cat=cols_cat, cols_num=cols_num, degree=<span class="number">1</span>, </span></span><br><span class="line"><span class="params">              callbacks=[(<span class="params"><span class="string">&quot;input_shape_setter&quot;</span>, InputShapeSetter(<span class="params"></span>)</span>),</span></span><br><span class="line"><span class="params">                         (<span class="params"><span class="string">&quot;lr_scheduler&quot;</span>, LRScheduler(<span class="params">policy=OneCycleLR, max_lr=<span class="number">0.1</span>, total_steps=epochs</span>)</span>),</span></span><br><span class="line"><span class="params">                         (<span class="params"><span class="string">&quot;early_stopping&quot;</span>, EarlyStopping(<span class="params">monitor=<span class="string">&quot;valid_loss&quot;</span>, patience=<span class="number">20</span></span>)</span>),</span></span><br><span class="line"><span class="params">                         (<span class="params"><span class="string">&quot;checkpoint&quot;</span>, cp</span>), (<span class="params"><span class="string">&quot;train_end_checkpoint&quot;</span>, train_end_cp</span>)], </span></span><br><span class="line"><span class="params">              **kwargs</span>):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> method == <span class="string">&quot;lr&quot;</span>:</span><br><span class="line">        ml = LinearRegression(fit_intercept=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&quot;rf&quot;</span>:</span><br><span class="line">        ml = RandomForestRegressor(random_state=rng)</span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&quot;nn&quot;</span>:</span><br><span class="line">        ml = NeuralNetRegressor(Net(), device=device, callbacks=callbacks, **kwargs)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;# &#x27;method&#x27; should be in [&#x27;lr&#x27;, &#x27;rf&#x27;, &#x27;nn&#x27;].&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    preprocessor = get_preprocessor(cols_cat=cols_cat, cols_num=cols_num, degree=degree)</span><br><span class="line">    model = Pipeline([(<span class="string">&quot;preprocessor&quot;</span>, preprocessor), </span><br><span class="line">                      (<span class="string">&quot;ml&quot;</span>, ml)])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2-Visualizations"><a href="#4-2-Visualizations" class="headerlink" title="4.2. Visualizations"></a>4.2. Visualizations</h2><ul>
+<h2 id="4-2-Visualizations">4.2. Visualizations</h2>
+<ul>
 <li>learning curve</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_epoch</span>(<span class="params">history=<span class="literal">None</span>, loss_trains=<span class="literal">None</span>, loss_vals=<span class="literal">None</span>, ax=<span class="literal">None</span></span>):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">any</span>([history, loss_trains]) == <span class="literal">False</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;# one of &#x27;history&#x27; and &#x27;loss_trains&#x27; has to be used!&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> ax</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ax == <span class="literal">None</span>:</span><br><span class="line">        fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> loss_trains == <span class="literal">None</span>:</span><br><span class="line">        loss_trains = history[:, <span class="string">&quot;train_loss&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> history != <span class="literal">None</span> <span class="keyword">and</span> loss_vals == <span class="literal">None</span>:</span><br><span class="line">        loss_vals = history[:, <span class="string">&quot;valid_loss&quot;</span>]</span><br><span class="line"></span><br><span class="line">    ax.plot(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(loss_trains)+<span class="number">1</span>)), loss_trains, c=c_train, label=<span class="string">&quot;train&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> loss_vals != <span class="literal">None</span>:</span><br><span class="line">        ax.plot(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(loss_vals)+<span class="number">1</span>)), loss_vals, c=c_val, label=<span class="string">&quot;valid&quot;</span>)</span><br><span class="line">    ax.grid(axis=<span class="string">&quot;y&quot;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;epochs&quot;</span>, fontdict=font_label)</span><br><span class="line">    ax.legend()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>parity plots</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_parity3</span>(<span class="params">model, target=[<span class="string">&quot;train&quot;</span>, <span class="string">&quot;val&quot;</span>, <span class="string">&quot;test&quot;</span>], figsize=(<span class="params"><span class="number">10</span>, <span class="number">4</span></span>),</span></span><br><span class="line"><span class="params">                 Xs=<span class="literal">None</span>, trues=<span class="literal">None</span>, preds=<span class="literal">None</span>, colors=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> Xs:</span><br><span class="line">        Xs = [<span class="built_in">eval</span>(<span class="string">f&quot;X_<span class="subst">&#123;t&#125;</span>&quot;</span>) <span class="keyword">for</span> t <span class="keyword">in</span> target]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> trues:</span><br><span class="line">        trues = [<span class="built_in">eval</span>(<span class="string">f&quot;y_<span class="subst">&#123;t&#125;</span>&quot;</span>) <span class="keyword">for</span> t <span class="keyword">in</span> target]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> preds:</span><br><span class="line">        preds = [model.predict(X) <span class="keyword">for</span> X <span class="keyword">in</span> Xs]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> colors:</span><br><span class="line">        colors = [<span class="built_in">eval</span>(<span class="string">f&quot;c_<span class="subst">&#123;t&#125;</span>&quot;</span>) <span class="keyword">for</span> t <span class="keyword">in</span> target]</span><br><span class="line"></span><br><span class="line">    fig, axs = plt.subplots(ncols=<span class="built_in">len</span>(target), figsize=figsize, constrained_layout=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> ax, true, pred, c, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, trues, preds, colors, titles):</span><br><span class="line">        plot_parity(true, pred, ax=ax, scatter_kws=&#123;<span class="string">&quot;fc&quot;</span>:c, <span class="string">&quot;ec&quot;</span>:c, <span class="string">&quot;alpha&quot;</span>:<span class="number">0.5</span>&#125;, title=title)</span><br><span class="line">        <span class="keyword">if</span> ax != axs[<span class="number">0</span>]:</span><br><span class="line">            ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-3-test-run"><a href="#4-3-test-run" class="headerlink" title="4.3. test run"></a>4.3. test run</h2><ul>
+<h2 id="4-3-test-run">4.3. test run</h2>
+<ul>
 <li>정의한 함수들로 예제를 돌려봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># predefined validation set</span></span><br><span class="line">preprocessor = get_preprocessor()</span><br><span class="line">X_val_pp = preprocessor.fit(X_train).transform(X_val)</span><br><span class="line">valid_dataset = Dataset(X_val_pp, y_val_np)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ML pipeline preparation</span></span><br><span class="line">model_test = get_model(<span class="string">&quot;nn&quot;</span>, max_epochs=epochs, verbose=<span class="number">1</span>, criterion=RMSELoss, optimizer=optim.Adam, optimizer__lr = <span class="number">1e-3</span>,</span><br><span class="line">                       train_split=predefined_split(valid_dataset))</span><br><span class="line">model_test.fit(X_train, y_train_np)</span><br><span class="line"></span><br><span class="line"><span class="comment"># learning curve</span></span><br><span class="line">history = History().from_file(<span class="string">&quot;./exp_test/history.json&quot;</span>)</span><br><span class="line">ax = plot_epoch(history)</span><br><span class="line"></span><br><span class="line"><span class="comment"># parity plots</span></span><br><span class="line">plot_parity3(model_test)</span><br></pre></td></tr></table></figure>
@@ -578,7 +629,8 @@
 <li>실행 결과</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Re-initializing module because the following parameters were re-set: module__ninput.</span><br><span class="line">Re-initializing criterion.</span><br><span class="line">Re-initializing optimizer.</span><br><span class="line">  epoch    train_loss    valid_loss    <span class="built_in">cp</span>      lr     dur</span><br><span class="line">-------  ------------  ------------  ----  ------  ------</span><br><span class="line">      1     4301.9874     4250.3501     +  0.0040  0.0135</span><br><span class="line">      2     4301.9537     4250.3169     +  0.0040  0.0139</span><br><span class="line">      </span><br><span class="line">      ... (생략) ...</span><br><span class="line">      </span><br><span class="line">    110      283.9839      270.7625        0.0322  0.0108</span><br><span class="line">    111      282.3574      270.6689        0.0326  0.0145</span><br><span class="line">Stopping since valid_loss has not improved <span class="keyword">in</span> the last 20 epochs.</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_15.png"><br><img src="/2022/06/09/Python-DL-10-skorch_callback3/10_sc_16.png"></p>
+<p><img src="10_sc_15.png" alt=""><br>
+<img src="10_sc_16.png" alt=""></p>
 <ul>
 <li><b>잘 돌아갑니다. :)</b></li>
 <li>전체를 실행해볼 수 있는 코드는 여기 있습니다: <a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Notebook</a></li>
@@ -600,7 +652,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/06/09/Python-DL-10-skorch_callback3/" data-id="cuidELdArY-1RHljEKl6B9ts5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/06/09/Python-DL-10-skorch_callback3/" data-id="cuidRnOWPrTtWQ8ZXlinPZaTm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -679,18 +731,24 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/06/09/Python-DL-10-skorch_callback3/",
         "description": "
+
 PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.
+
 
 학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.
 
+
 skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.
+
 
 skorch도 PyTorch callback을 이용할 수 있습니다.
 
-글이 길어 세 개로 나눕니다. 
 
-세 번째로",
-        "wordCount": 7567
+글이 길어 세 개로 나눕니다.
+
+
+",
+        "wordCount": 7478
     }
 </script>
 
@@ -787,6 +845,26 @@ skorch도 PyTorch callback을 이용할 수 있습니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -861,26 +939,6 @@ skorch도 PyTorch callback을 이용할 수 있습니다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

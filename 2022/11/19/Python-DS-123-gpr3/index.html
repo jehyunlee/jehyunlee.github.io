@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,gaussian process,bayesian,scikit-learn" />
     
-    <meta name="description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 주의사항을 알려드립니다. Gaussian Process는 경계조건에 매우 취약합니다.  1. Gaussian Process의 한계 scikit-learn: Gaussian Process Regression: basic introductory examp">
+    <meta name="description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 주의사항을 알려드립니다. Gaussian Process는 경계조건에 매우 취약합니다.  1. Gaussian Process의 한계  scikit-learn: Gaussian Process Regression: basic introductory exam">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gaussian Process Practice (3) Beware Boundaries">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/11/19/Python-DS-123-gpr3/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 주의사항을 알려드립니다. Gaussian Process는 경계조건에 매우 취약합니다.  1. Gaussian Process의 한계 scikit-learn: Gaussian Process Regression: basic introductory examp">
+<meta property="og:description" content="Gaussian Process 연습입니다. scikit-learn을 비롯한 예제를 재구성하여 연습합니다. 주의사항을 알려드립니다. Gaussian Process는 경계조건에 매우 취약합니다.  1. Gaussian Process의 한계  scikit-learn: Gaussian Process Regression: basic introductory exam">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/123_gpr3_00.png">
 <meta property="article:published_time" content="2022-11-19T08:35:00.000Z">
@@ -235,80 +235,115 @@
 <li>scikit-learn을 비롯한 예제를 재구성하여 연습합니다.</li>
 <li>주의사항을 알려드립니다. Gaussian Process는 경계조건에 매우 취약합니다.</li>
 </ul>
-<h1 id="1-Gaussian-Process의-한계"><a href="#1-Gaussian-Process의-한계" class="headerlink" title="1. Gaussian Process의 한계"></a>1. Gaussian Process의 한계</h1><blockquote>
+<h1>1. Gaussian Process의 한계</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/auto_examples/gaussian_process/plot_gpr_noisy_targets.html#sphx-glr-auto-examples-gaussian-process-plot-gpr-noisy-targets-py">scikit-learn: Gaussian Process Regression: basic introductory example</a></p>
 </blockquote>
 <ul>
-<li><p>Gaussian Process는 적은 데이터로도 꽤 믿을만한 결과를 출력합니다.</p>
+<li>
+<p>Gaussian Process는 적은 데이터로도 꽤 믿을만한 결과를 출력합니다.</p>
 </li>
-<li><p>심지어 신뢰 구간까지 알 수 있어서 매우 정직해 보입니다.</p>
+<li>
+<p>심지어 신뢰 구간까지 알 수 있어서 매우 정직해 보입니다.</p>
 </li>
-<li><p>하지만 치명적인 단점이 있습니다.</p>
+<li>
+<p>하지만 치명적인 단점이 있습니다.</p>
 </li>
-<li><p><a href="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/">지난 글</a>과 같은 예제를 사용합니다.<br><img src="/2022/11/19/Python-DS-123-gpr3/123_gpr3_3.png"><br></p>
+<li>
+<p><a href="https://jehyunlee.github.io/2022/11/16/Python-DS-121-gpr1/">지난 글</a>과 같은 예제를 사용합니다.<br>
+<img src="123_gpr3_3.png" alt=""><br></p>
 </li>
-<li><p>모든 것이 정상으로 보입니다.</p>
+<li>
+<p>모든 것이 정상으로 보입니다.</p>
 </li>
-<li><p>합리적인 범위의 평균값(<code>GP prediction (mean)</code>)과 신뢰 구간(<code>95% CI</code>)을 보이고 있습니다.</p>
+<li>
+<p>합리적인 범위의 평균값(<code>GP prediction (mean)</code>)과 신뢰 구간(<code>95% CI</code>)을 보이고 있습니다.</p>
 </li>
-<li><p>하지만 오른쪽 끄트머리를 보면, 조금 미심쩍습니다.</p>
+<li>
+<p>하지만 오른쪽 끄트머리를 보면, 조금 미심쩍습니다.</p>
 </li>
-<li><p><b>참값이 신뢰 구간의 바닥에 겨우 걸려있습니다.</b><br><br><img src="/2022/11/19/Python-DS-123-gpr3/123_gpr3_8.png" alt="개그콘서트, &quot;불편한 진실&quot; "><br></p>
+<li>
+<p><b>참값이 신뢰 구간의 바닥에 겨우 걸려있습니다.</b><br><br>
+<img src="123_gpr3_8.png" alt="개그콘서트, &quot;불편한 진실&quot; "><br></p>
 </li>
-<li><p>극단적인 경우를 살펴봅니다.</p>
+<li>
+<p>극단적인 경우를 살펴봅니다.</p>
 </li>
-<li><p><b>X 값의 범위</b>로 참값의 좌우에 50씩을 보태 <b>-50 ~ 60을 입력</b>합니다.</p>
+<li>
+<p><b>X 값의 범위</b>로 참값의 좌우에 50씩을 보태 <b>-50 ~ 60을 입력</b>합니다.</p>
 </li>
-<li><p>평균이 0, 95% 신뢰구간이 무려 10에 가까운 커다란 밴드가 생겼습니다.</p>
+<li>
+<p>평균이 0, 95% 신뢰구간이 무려 10에 가까운 커다란 밴드가 생겼습니다.</p>
 </li>
-<li><p>다항회귀를 해도 이렇지는 않을 것 같습니다.<br><br><img src="/2022/11/19/Python-DS-123-gpr3/123_gpr3_7.png"><br></p>
+<li>
+<p>다항회귀를 해도 이렇지는 않을 것 같습니다.<br><br>
+<img src="123_gpr3_7.png" alt=""><br></p>
 </li>
-<li><p><b>Gaussian Process의 원리</b>에 답이 있습니다.</p>
+<li>
+<p><b>Gaussian Process의 원리</b>에 답이 있습니다.</p>
 </li>
-<li><p>Gaussian 분포를 prior로 놓기 때문에 평균이 0입니다.</p>
+<li>
+<p>Gaussian 분포를 prior로 놓기 때문에 평균이 0입니다.</p>
 </li>
-<li><p>학습 데이터(evidence)가 반영된 구간 안쪽은 그나마 괜찮지만 바깥쪽이 문제입니다.</p>
+<li>
+<p>학습 데이터(evidence)가 반영된 구간 안쪽은 그나마 괜찮지만 바깥쪽이 문제입니다.</p>
 </li>
-<li><p><b>안쪽에서 학습을 시켜봐야 바깥쪽의 중심값이 0이라고 가정되어 있기 때문에 저런 일이 벌어집니다.</b></p>
-</li>
-</ul>
-<h1 id="2-비교"><a href="#2-비교" class="headerlink" title="2. 비교"></a>2. 비교</h1><ul>
-<li><p>조금 더 확실하게 확인합니다.</p>
-</li>
-<li><p>위의 예제에 <b>offset &#x3D; $\pm 5$</b>를 해서 <b>새로운 참값</b>을 만듭니다.</p>
-</li>
-<li><p>그리고, 여기서 같은 X 좌표의 데이터들을 학습용으로 추출합니다.<br><br><img src="/2022/11/19/Python-DS-123-gpr3/123_gpr3_4.png"><br></p>
-</li>
-<li><p>여기에 똑같은 RBF 커널을 적용한 Gaussian Process를 적용하면 아래와 같은 결과가 나옵니다.</p>
-</li>
-<li><p>좌우 그림에서 <b>파란 선</b>으로 표시한 평균값의 양 끝이 향하는 방향이 반대입니다.<br></p>
-</li>
-<li><p><b>offset&#x3D;+5</b>인 왼쪽 그림은 양 끝이 아래를 향하고 있고,</p>
-</li>
-<li><p><b>offset&#x3D;-5</b>인 오른쪽 그림은 양 끝이 기를 쓰고 고개를 들려고 하고 있습니다.</p>
-</li>
-<li><p>모두 <b>0을 향하고 있습니다.</b><br><br><img src="/2022/11/19/Python-DS-123-gpr3/123_gpr3_5.png"><br></p>
-</li>
-<li><p>양 끝만 영향을 받는 것이 아닙니다.</p>
-</li>
-<li><p>X &#x3D; 6~8 사이 구간도 offset에 따라 달라집니다.</p>
-</li>
-<li><p>0에서 먼 왼쪽 그림은 신뢰 구간이 비교적 얇은 반면 오른쪽은 두텁고 mean 값도 참값과 더 벌어져 있습니다.</p>
+<li>
+<p><b>안쪽에서 학습을 시켜봐야 바깥쪽의 중심값이 0이라고 가정되어 있기 때문에 저런 일이 벌어집니다.</b></p>
 </li>
 </ul>
-<h1 id="3-Solution"><a href="#3-Solution" class="headerlink" title="3. Solution"></a>3. Solution</h1><ul>
+<h1>2. 비교</h1>
+<ul>
+<li>
+<p>조금 더 확실하게 확인합니다.</p>
+</li>
+<li>
+<p>위의 예제에 <b>offset = $\pm 5$</b>를 해서 <b>새로운 참값</b>을 만듭니다.</p>
+</li>
+<li>
+<p>그리고, 여기서 같은 X 좌표의 데이터들을 학습용으로 추출합니다.<br><br>
+<img src="123_gpr3_4.png" alt=""><br></p>
+</li>
+<li>
+<p>여기에 똑같은 RBF 커널을 적용한 Gaussian Process를 적용하면 아래와 같은 결과가 나옵니다.</p>
+</li>
+<li>
+<p>좌우 그림에서 <b>파란 선</b>으로 표시한 평균값의 양 끝이 향하는 방향이 반대입니다.<br></p>
+</li>
+<li>
+<p><b>offset=+5</b>인 왼쪽 그림은 양 끝이 아래를 향하고 있고,</p>
+</li>
+<li>
+<p><b>offset=-5</b>인 오른쪽 그림은 양 끝이 기를 쓰고 고개를 들려고 하고 있습니다.</p>
+</li>
+<li>
+<p>모두 <b>0을 향하고 있습니다.</b><br><br>
+<img src="123_gpr3_5.png" alt=""><br></p>
+</li>
+<li>
+<p>양 끝만 영향을 받는 것이 아닙니다.</p>
+</li>
+<li>
+<p>X = 6~8 사이 구간도 offset에 따라 달라집니다.</p>
+</li>
+<li>
+<p>0에서 먼 왼쪽 그림은 신뢰 구간이 비교적 얇은 반면 오른쪽은 두텁고 mean 값도 참값과 더 벌어져 있습니다.</p>
+</li>
+</ul>
+<h1>3. Solution</h1>
+<ul>
 <li>해결 방법은 생각보다 간단합니다.</li>
 <li>외삽(extrapolation)이 문제라면 외삽을 하지 않으면 됩니다.</li>
 <li>학습 데이터에 데이터 범위의 양 끝을 추가하면 모든 범위가 내삽이 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample including ends</span></span><br><span class="line">training_indices += [<span class="number">0</span>, <span class="number">999</span>]</span><br><span class="line">Xp_train1, Xm_train1 = Xp[training_indices], Xm[training_indices]</span><br><span class="line">yp_train1, ym_train1 = yp[training_indices], ym[training_indices]</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>그리고 같은 학습을 시키면 offset에 관계 없이 동일한 결과를 얻을 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">kernel = <span class="number">1</span>*RBF(length_scale=<span class="number">1.0</span>, length_scale_bounds=(<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">6</span>, <span class="number">3</span>), constrained_layout=<span class="literal">True</span>, sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X, y, X_train, y_train, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [Xp, Xm], [yp, ym], </span><br><span class="line">                                             [Xp_train1, Xm_train1], [yp_train1, ym_train1], </span><br><span class="line">                                             [<span class="string">&quot;offset = +5&quot;</span>, <span class="string">&quot;offset = -5&quot;</span>]):</span><br><span class="line">    <span class="comment"># Gaussian Process</span></span><br><span class="line">    gpr = GaussianProcessRegressor(kernel, n_restarts_optimizer=<span class="number">9</span>, random_state=<span class="number">0</span>)</span><br><span class="line">    gpr.fit(X_train, y_train)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># prediction</span></span><br><span class="line">    y_pred_mean, y_pred_std = gpr.predict(X, return_std=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    ax.plot(X, y, c=<span class="string">&quot;0.5&quot;</span>, label=<span class="string">&quot;true&quot;</span>)</span><br><span class="line">    ax.scatter(X_train, y_train, label=<span class="string">&quot;sample&quot;</span>)</span><br><span class="line">    ax.plot(X.ravel(), y_pred_mean, c=<span class="string">&quot;b&quot;</span>, label=<span class="string">&quot;GP prediction (mean)&quot;</span>)</span><br><span class="line">    ax.fill_between(X.ravel(), y_pred_mean-<span class="number">1.96</span>*y_pred_std, y_pred_mean+<span class="number">1.96</span>*y_pred_std, alpha=<span class="number">0.5</span>, fc=<span class="string">&quot;cornflowerblue&quot;</span>, label=<span class="string">&quot;95% CI&quot;</span>)</span><br><span class="line">    ax.axhline(<span class="number">0</span>, c=<span class="string">&quot;g&quot;</span>, lw=<span class="number">1</span>)</span><br><span class="line">    ax.set_title(title, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">axs[<span class="number">0</span>].legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/11/19/Python-DS-123-gpr3/123_gpr3_6.png"><br></p>
-<h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
+<p><img src="123_gpr3_6.png" alt=""><br></p>
+<h1>4. 결론</h1>
+<ul>
 <li>머신 러닝 기법들이 모두 그렇지만 외삽은 주의해야 합니다.</li>
 <li>Gaussian Process는 prior의 존재로 인해 외삽에 더 취약할 수 있으니 각별히 주의해야 합니다.</li>
 <li>본 글에 사용된 코드는 <b><a href="gpr3.ipynb">여기에서 다운받으실 수 있습니다.</a></b></li>
@@ -330,7 +365,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/11/19/Python-DS-123-gpr3/" data-id="cuidcaxzUIzI1DeTQ5ca31DGf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/11/19/Python-DS-123-gpr3/" data-id="cuidL81km4a5myHDiUQQ_1fyV" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -414,8 +449,9 @@ scikit-learn을 비롯한 예제를 재구성하여 연습합니다.
 주의사항을 알려드립니다. Gaussian Process는 경계조건에 매우 취약합니다.
 
 1. Gaussian Process의 한계
-scikit-learn: Gaussian Process Regression: basic introductory examp",
-        "wordCount": 621
+
+scikit-learn: Gaussian Process Regression: basic introductory exam",
+        "wordCount": 604
     }
 </script>
 
@@ -512,6 +548,26 @@ scikit-learn: Gaussian Process Regression: basic introductory examp",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -586,26 +642,6 @@ scikit-learn: Gaussian Process Regression: basic introductory examp",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

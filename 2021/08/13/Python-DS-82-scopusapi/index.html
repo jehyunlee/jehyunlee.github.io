@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,scopus,sciencedirect" />
     
-    <meta name="description" content="연구자라면 논문 검색이 일상입니다. 매년 출간되는 논문의 편 수는 기하급수적으로 늘고 있습니다. 새로운 논문을 찾거나 전체적인 트렌드를 파악하기가 점점 어려워집니다. elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받고 정리합시다.  1. ElsevierElsevierElsevier Developers 1.1. 계정 Elsevier에 가">
+    <meta name="description" content="연구자라면 논문 검색이 일상입니다. 매년 출간되는 논문의 편 수는 기하급수적으로 늘고 있습니다. 새로운 논문을 찾거나 전체적인 트렌드를 파악하기가 점점 어려워집니다. elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받고 정리합시다.  1. Elsevier Elsevier Elsevier Developers 1.1. 계정  Elsevier">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Paper Search using ScopusAPI">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/08/13/Python-DS-82-scopusapi/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="연구자라면 논문 검색이 일상입니다. 매년 출간되는 논문의 편 수는 기하급수적으로 늘고 있습니다. 새로운 논문을 찾거나 전체적인 트렌드를 파악하기가 점점 어려워집니다. elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받고 정리합시다.  1. ElsevierElsevierElsevier Developers 1.1. 계정 Elsevier에 가">
+<meta property="og:description" content="연구자라면 논문 검색이 일상입니다. 매년 출간되는 논문의 편 수는 기하급수적으로 늘고 있습니다. 새로운 논문을 찾거나 전체적인 트렌드를 파악하기가 점점 어려워집니다. elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받고 정리합시다.  1. Elsevier Elsevier Elsevier Developers 1.1. 계정  Elsevier">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/82_scopusapi_0.png">
 <meta property="article:published_time" content="2021-08-13T07:05:00.000Z">
@@ -235,30 +235,49 @@
 <li>새로운 논문을 찾거나 전체적인 트렌드를 파악하기가 점점 어려워집니다.</li>
 <li>elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받고 정리합시다.</li>
 </ul>
-<h1 id="1-Elsevier"><a href="#1-Elsevier" class="headerlink" title="1. Elsevier"></a>1. Elsevier</h1><p><a target="_blank" rel="noopener" href="https://www.elsevier.com/">Elsevier</a><br><a target="_blank" rel="noopener" href="https://dev.elsevier.com/">Elsevier Developers</a></p>
-<h2 id="1-1-계정"><a href="#1-1-계정" class="headerlink" title="1.1. 계정"></a>1.1. 계정</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.elsevier.com/">Elsevier</a>에 가입하고 로그인합니다.<br><br><img src="/2021/08/13/Python-DS-82-scopusapi/82_scopusapi_1.png"><br></li>
+<h1>1. Elsevier</h1>
+<p><a target="_blank" rel="noopener" href="https://www.elsevier.com">Elsevier</a><br>
+<a target="_blank" rel="noopener" href="https://dev.elsevier.com/">Elsevier Developers</a></p>
+<h2 id="1-1-계정">1.1. 계정</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.elsevier.com">Elsevier</a>에 가입하고 로그인합니다.<br><br>
+<img src="82_scopusapi_1.png" alt=""><br></li>
 </ul>
-<h2 id="1-2-API-획득"><a href="#1-2-API-획득" class="headerlink" title="1.2. API 획득"></a>1.2. API 획득</h2><ul>
-<li><p>데이터를 받아오려면 API key가 필요합니다.</p>
+<h2 id="1-2-API-획득">1.2. API 획득</h2>
+<ul>
+<li>
+<p>데이터를 받아오려면 API key가 필요합니다.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://dev.elsevier.com/">https://dev.elsevier.com/</a>에서 API key를 신청합니다.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://dev.elsevier.com/">https://dev.elsevier.com/</a>에서 API key를 신청합니다.</p>
 </li>
-<li><p><b>I want an API Key</b>를 눌러 들어갑니다.<br><br><img src="/2021/08/13/Python-DS-82-scopusapi/82_scopusapi_3.png"><br></p>
+<li>
+<p><b>I want an API Key</b>를 눌러 들어갑니다.<br><br>
+<img src="82_scopusapi_3.png" alt=""><br></p>
 </li>
-<li><p><b>Create API Key</b>를 눌러 API Key 생성 모드로 들어갑니다.</p>
+<li>
+<p><b>Create API Key</b>를 눌러 API Key 생성 모드로 들어갑니다.</p>
 </li>
-<li><p>Label과 Website URL에는 적당히 넣어줍니다.</p>
+<li>
+<p>Label과 Website URL에는 적당히 넣어줍니다.</p>
 </li>
-<li><p>그리고 스크롤을 내려 하단의 <b>API Service Checkbox</b>와 <b>Elsevier Provisions for Text and Data Mining (TDM)</b>에 동의 후 <b>submit</b>을 누릅니다.<br><br><img src="/2021/08/13/Python-DS-82-scopusapi/82_scopusapi_6.png" alt="API Key를 다섯 개 받았습니다."><br></p>
+<li>
+<p>그리고 스크롤을 내려 하단의 <b>API Service Checkbox</b>와 <b>Elsevier Provisions for Text and Data Mining (TDM)</b>에 동의 후 <b>submit</b>을 누릅니다.<br><br>
+<img src="82_scopusapi_6.png" alt="API Key를 다섯 개 받았습니다."><br></p>
 </li>
-<li><p>API Key마다 1주일간 한도가 있습니다. 많은게 좋습니다.</p>
+<li>
+<p>API Key마다 1주일간 한도가 있습니다. 많은게 좋습니다.</p>
 </li>
-<li><p>속도 제한도 있으니 참고합니다.<br><img src="/2021/08/13/Python-DS-82-scopusapi/82_scopusapi_9.png"><br></p>
+<li>
+<p>속도 제한도 있으니 참고합니다.<br>
+<img src="82_scopusapi_9.png" alt=""><br></p>
 </li>
 </ul>
-<h1 id="2-Pybliometrics-Pandas-DataFrame"><a href="#2-Pybliometrics-Pandas-DataFrame" class="headerlink" title="2. Pybliometrics &amp; Pandas DataFrame"></a>2. Pybliometrics &amp; Pandas DataFrame</h1><h2 id="2-1-Pybliometrics로-검색결과-받아오기"><a href="#2-1-Pybliometrics로-검색결과-받아오기" class="headerlink" title="2.1. Pybliometrics로 검색결과 받아오기"></a>2.1. Pybliometrics로 검색결과 받아오기</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S2352711019300573">M. Rose et al. “pybliometrics:ScriptablebibliometricsusingaPythoninterfacetoScopus”, Software X 10 100263 (2019)</a><br><a target="_blank" rel="noopener" href="https://pybliometrics.readthedocs.io/en/stable/">pybliometrics</a></p>
+<h1>2. Pybliometrics &amp; Pandas DataFrame</h1>
+<h2 id="2-1-Pybliometrics로-검색결과-받아오기">2.1. Pybliometrics로 검색결과 받아오기</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S2352711019300573">M. Rose et al. “pybliometrics:ScriptablebibliometricsusingaPythoninterfacetoScopus”, Software X 10 100263 (2019)</a><br>
+<a target="_blank" rel="noopener" href="https://pybliometrics.readthedocs.io/en/stable/">pybliometrics</a></p>
 </blockquote>
 <ul>
 <li><b>파이썬을 사용해 Scopus 검색과 초록, 참고문헌 등을 받아올 수 있는 라이브러리</b>입니다.</li>
@@ -270,17 +289,21 @@
 <li>실행 결과:</li>
 </ul>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Downloading results <span class="keyword">for</span> query <span class="string">&quot; TITLE-ABS-KEY ( machine  AND learning  OR  deep  AND learning )  AND                   TITLE-ABS-KEY ( city )&quot;</span>:</span><br><span class="line">Progress: |██████████████████████████████████████████████████| 100.00% Complete</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>처음 실행한다면 <b>API Key를 넣으라는 작은 입력창</b>이 뜰 것입니다.</p>
+<li>
+<p>처음 실행한다면 <b>API Key를 넣으라는 작은 입력창</b>이 뜰 것입니다.</p>
 </li>
-<li><p>아까 받은 API Key를 여기에 복사해서 넣으면 됩니다.</p>
+<li>
+<p>아까 받은 API Key를 여기에 복사해서 넣으면 됩니다.</p>
 </li>
-<li><p>여러 개의 API Key를 이어서 사용하고 싶다면 더 좋은 방법이 있습니다.</p>
+<li>
+<p>여러 개의 API Key를 이어서 사용하고 싶다면 더 좋은 방법이 있습니다.</p>
 </li>
-<li><p><b><code>~/.scopus/</code>에 있는 <code>config.ini</code>파일</b>에 <b>API Key를 쉼표(,)로 띄워서 넣어두면</b> 자동으로 불러옵니다.</p>
+<li>
+<p><b><code>~/.scopus/</code>에 있는 <code>config.ini</code>파일</b>에 <b>API Key를 쉼표(,)로 띄워서 넣어두면</b> 자동으로 불러옵니다.</p>
 </li>
-<li><p>몇 편이나 검색됐는지 확인합니다.</p>
+<li>
+<p>몇 편이나 검색됐는지 확인합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.get_results_size()</span><br></pre></td></tr></table></figure>
@@ -288,16 +311,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5275</span><br></pre></td></tr></table></figure>
 </code></pre>
 <ul>
-<li><b>5275편</b>의 논문 정보를 받았습니다. </li>
+<li><b>5275편</b>의 논문 정보를 받았습니다.</li>
 <li>scopus.com에서 검색을 해도 같은 숫자가 보일겁니다.</li>
 <li>그러나 <b>웹 검색으로는 이만큼 못가져옵니다.</b></li>
 <li>API의 진가는 매우 다양한 정보를 한데 가져와서 처리할 수 있다는 데 있습니다.</li>
 </ul>
-<h2 id="2-2-Pandas로-검색결과-정리하기"><a href="#2-2-Pandas로-검색결과-정리하기" class="headerlink" title="2.2. Pandas로 검색결과 정리하기"></a>2.2. Pandas로 검색결과 정리하기</h2><ul>
+<h2 id="2-2-Pandas로-검색결과-정리하기">2.2. Pandas로 검색결과 정리하기</h2>
+<ul>
 <li>받아온 정보를 데이터프레임에 넣습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df_s = pd.DataFrame(s.results)</span><br><span class="line">df_s.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/08/13/Python-DS-82-scopusapi/82_scopusapi_10.png"><br></p>
+<p><img src="82_scopusapi_10.png" alt=""><br></p>
 <ul>
 <li>column이 34개나 있다고 합니다.</li>
 <li>맨 위 논문을 가지고 column의 이름과 내용을 살펴봅니다.</li>
@@ -327,13 +351,14 @@
 <pre><code>* 실행 결과: 년도별 출간 건수입니다.
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array([[  1,   1,   1,   2,   1,   1,   2,   1,   1,   1,   1,   5,   4,</span><br><span class="line">          9,   7,  12,  21,  13,  18,  36,  49,  71, 113, 256, 457, 724,</span><br><span class="line">        696,   1]])</span><br></pre></td></tr></table></figure>
 </code></pre>
-<h2 id="2-3-Matplotlib으로-출판-추세-그리기"><a href="#2-3-Matplotlib으로-출판-추세-그리기" class="headerlink" title="2.3. Matplotlib으로 출판 추세 그리기"></a>2.3. Matplotlib으로 출판 추세 그리기</h2><ul>
+<h2 id="2-3-Matplotlib으로-출판-추세-그리기">2.3. Matplotlib으로 출판 추세 그리기</h2>
+<ul>
 <li>Matplotlib을 이용해서 간단히 <b>년도별 출판 건 수</b>를 그려봅니다.</li>
 <li><b>리뷰 논문에 하나씩 있는 그 그림</b>입니다.</li>
 <li>2010년 이전엔 논문 수가 많이 적어서 안보이기에 확대를 했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line">ax.bar(df_pubyear.index, df_pubyear[<span class="string">&quot;num_pub&quot;</span>], fc=<span class="string">&quot;orange&quot;</span>, ec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;Number of Publication&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c_inset = <span class="string">&quot;brown&quot;</span></span><br><span class="line">ax_inset = fig.add_axes([<span class="number">0.15</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.5</span>])</span><br><span class="line">ax_inset.bar(df_pubyear.index, df_pubyear[<span class="string">&quot;num_pub&quot;</span>], fc=<span class="string">&quot;goldenrod&quot;</span>, ec=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">ax_inset.set_xlim(df_pubyear.index.<span class="built_in">min</span>()-<span class="number">1</span>, <span class="number">2010</span>)</span><br><span class="line">ax_inset.set_ylim(<span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">ax_inset.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_edgecolor(c_inset)</span><br><span class="line">ax_inset.spines[[<span class="string">&quot;left&quot;</span>, <span class="string">&quot;right&quot;</span>, <span class="string">&quot;bottom&quot;</span>, <span class="string">&quot;top&quot;</span>]].set_linewidth(<span class="number">3</span>)</span><br><span class="line">ax_inset.tick_params(color=c_inset, labelcolor=c_inset)</span><br><span class="line"></span><br><span class="line">ax.axvspan(df_pubyear.index.<span class="built_in">min</span>(), <span class="number">2010</span>, fc=c_inset, alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;Number of Publication&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line">ax.set_xlim(df_pubyear.index.<span class="built_in">min</span>(), )</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/08/13/Python-DS-82-scopusapi/82_scopusapi_11.png"><br></p>
+<p><img src="82_scopusapi_11.png" alt=""><br></p>
 <ul>
 <li>다음 글에서는 API를 이용한 추가 분석을 이어가겠습니다.</li>
 </ul>
@@ -354,7 +379,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/08/13/Python-DS-82-scopusapi/" data-id="cuidfZ8H0IZ9PdkFde4xBV0_J" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/08/13/Python-DS-82-scopusapi/" data-id="cuid6iuP1W6a9lSx02dWKmnxi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -438,10 +463,13 @@
 새로운 논문을 찾거나 전체적인 트렌드를 파악하기가 점점 어려워집니다.
 elsevier사가 제공하는 API를 사용해서 파이썬으로 데이터를 받고 정리합시다.
 
-1. ElsevierElsevierElsevier Developers
+1. Elsevier
+Elsevier
+Elsevier Developers
 1.1. 계정
-Elsevier에 가",
-        "wordCount": 2532
+
+Elsevier",
+        "wordCount": 2495
     }
 </script>
 
@@ -538,6 +566,26 @@ Elsevier에 가",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -612,26 +660,6 @@ Elsevier에 가",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

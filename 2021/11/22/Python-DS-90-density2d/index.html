@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,scatter-density" />
     
-    <meta name="description" content="2차원 공간의 데이터 분포를 표현합니다. 많이 사용하는 기능이면서도 막상 쓰려면 디테일에 발목을 잡힙니다. Matplotlib, seaborn에 이어 mpl-scatter-density도 알아봅니다.  1. 2D data distribution 데이터가 2차원으로 분포하는 경우는 매우 흔합니다.  N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우">
+    <meta name="description" content="2차원 공간의 데이터 분포를 표현합니다. 많이 사용하는 기능이면서도 막상 쓰려면 디테일에 발목을 잡힙니다. Matplotlib, seaborn에 이어 mpl-scatter-density도 알아봅니다.  1. 2D data distribution   데이터가 2차원으로 분포하는 경우는 매우 흔합니다.   N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2D distribution">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/11/22/Python-DS-90-density2d/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="2차원 공간의 데이터 분포를 표현합니다. 많이 사용하는 기능이면서도 막상 쓰려면 디테일에 발목을 잡힙니다. Matplotlib, seaborn에 이어 mpl-scatter-density도 알아봅니다.  1. 2D data distribution 데이터가 2차원으로 분포하는 경우는 매우 흔합니다.  N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우">
+<meta property="og:description" content="2차원 공간의 데이터 분포를 표현합니다. 많이 사용하는 기능이면서도 막상 쓰려면 디테일에 발목을 잡힙니다. Matplotlib, seaborn에 이어 mpl-scatter-density도 알아봅니다.  1. 2D data distribution   데이터가 2차원으로 분포하는 경우는 매우 흔합니다.   N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/90_density2d_00.png">
 <meta property="article:published_time" content="2021-11-22T11:50:00.000Z">
@@ -233,90 +233,114 @@
 <li>많이 사용하는 기능이면서도 막상 쓰려면 디테일에 발목을 잡힙니다.</li>
 <li>Matplotlib, seaborn에 이어 mpl-scatter-density도 알아봅니다.</li>
 </ul>
-<h1 id="1-2D-data-distribution"><a href="#1-2D-data-distribution" class="headerlink" title="1. 2D data distribution"></a>1. 2D data distribution</h1><ul>
-<li><p>데이터가 2차원으로 분포하는 경우는 매우 흔합니다.</p>
+<h1>1. 2D data distribution</h1>
+<ul>
+<li>
+<p>데이터가 2차원으로 분포하는 경우는 매우 흔합니다.</p>
 </li>
-<li><p>N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우도 많고</p>
+<li>
+<p>N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우도 많고</p>
 </li>
-<li><p>머신러닝 모델의 예측 성능을 평가하는 parity plot도 그렇습니다.</p>
+<li>
+<p>머신러닝 모델의 예측 성능을 평가하는 parity plot도 그렇습니다.</p>
 </li>
-<li><p>먼저 필수 라이브러리를 불러오고</p>
+<li>
+<p>먼저 필수 라이브러리를 불러오고</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>2차원에 분포한 데이터를 만듭니다.</li>
-<li>$y &#x3D; x^2$를 사용해서 막대기같은 데이터보다는 조금 보기 좋은 모양을 만듭니다.</li>
+<li>$y = x^2$를 사용해서 막대기같은 데이터보다는 조금 보기 좋은 모양을 만듭니다.</li>
 <li>데이터는 1만개입니다. 0이 많은 숫자를 쓸 때 천 단위로 _를 넣어주면 읽기 좋습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">10_000</span>) + np.random.normal(<span class="number">0</span>, <span class="number">1</span>, <span class="number">10_000</span>)</span><br><span class="line">y = np.power(x, <span class="number">2</span>)/<span class="number">14</span> + np.random.normal(<span class="number">0</span>, <span class="number">1</span>, <span class="number">10_000</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-정석-scatter-plot"><a href="#2-정석-scatter-plot" class="headerlink" title="2. 정석, scatter plot"></a>2. 정석, scatter plot</h1><ul>
+<h1>2. 정석, scatter plot</h1>
+<ul>
 <li>x, y 공간에 분포한 데이터 시각화의 정석은 scatter plot입니다.</li>
 <li>경험으로부터 좁은 공간에 밀집한 점은 서로를 가린다는 것을 알고 있습니다.</li>
 <li><code>alpha=0.1</code>로 투명도 90%를 설정해서 겹친 점이 보이게 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), </span><br><span class="line">                        gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0.1</span>, <span class="string">&quot;hspace&quot;</span>:<span class="number">0.1</span>&#125;,</span><br><span class="line">                        sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># scatter plot</span></span><br><span class="line">axs[<span class="number">0</span>].scatter(x, y, s=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># scatter plot with transparancy</span></span><br><span class="line">axs[<span class="number">1</span>].scatter(x, y, s=<span class="number">3</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># titles</span></span><br><span class="line">titles = [<span class="string">&quot;Matplotlib scatter (alpha=1)&quot;</span>, <span class="string">&quot;Matplotlib scatter (alpha=0.1)&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, titles):</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;x-large&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/22/Python-DS-90-density2d/90_density2d_01.png"><br></p>
+<p><img src="90_density2d_01.png" alt=""><br></p>
 <ul>
 <li>반투명이 적용되지 않은 왼쪽은 데이터의 위치는 보이지만 밀도가 보이지 않습니다.</li>
 <li>반투명을 90% 적용한 오른쪽은 데이터의 밀도는 보이지만 경계가 잘 보이지 않습니다.</li>
 <li>고급 방법이 필요합니다.</li>
 </ul>
-<h1 id="3-2D-histogram-hexbin-KDE-plot"><a href="#3-2D-histogram-hexbin-KDE-plot" class="headerlink" title="3. 2D histogram, hexbin, KDE plot"></a>3. 2D histogram, hexbin, KDE plot</h1><ul>
-<li><p>1D에서 많이 쓰는 histogram과 KDE plot은 2D에도 적용 가능합니다.</p>
+<h1>3. 2D histogram, hexbin, KDE plot</h1>
+<ul>
+<li>
+<p>1D에서 많이 쓰는 histogram과 KDE plot은 2D에도 적용 가능합니다.</p>
 </li>
-<li><p>2D 공간을 육각으로 나누는 hexbin도 사용할 만 합니다.</p>
+<li>
+<p>2D 공간을 육각으로 나누는 hexbin도 사용할 만 합니다.</p>
 </li>
-<li><p>조금 색다른 colormap을 사용합시다.</p>
+<li>
+<p>조금 색다른 colormap을 사용합시다.</p>
 </li>
-<li><p><a href="https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/">전에 작성한 글에서 <b>cmocean</b>이라는 colormap set을 소개했습니다.</a></p>
+<li>
+<p><a href="https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/">전에 작성한 글에서 <b>cmocean</b>이라는 colormap set을 소개했습니다.</a></p>
 </li>
-<li><p>얼음을 정말 그럴듯하게 표현하는 <b>ice</b> colormap이 있습니다.<br><img src="https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/giphy.gif"><br></p>
+<li>
+<p>얼음을 정말 그럴듯하게 표현하는 <b>ice</b> colormap이 있습니다.<br>
+<img src="https://jehyunlee.github.io/2020/12/28/Python-DS-51-cmocean/giphy.gif" alt=""><br></p>
 </li>
-<li><p>ice colormap을 cmap이라는 변수에 넣어서 사용하기로 합니다.</p>
+<li>
+<p>ice colormap을 cmap이라는 변수에 넣어서 사용하기로 합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cmocean.cm <span class="keyword">as</span> cmo</span><br><span class="line">cmap = cmo.ice</span><br><span class="line">cmap</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/22/Python-DS-90-density2d/90_density2d_06.png"><br></p>
+<p><img src="90_density2d_06.png" alt=""><br></p>
 <ul>
 <li>Matplotlib의 <b>hist2d</b>, <b>hexbin</b>,</li>
 <li>seaborn의 <b>kdeplot</b>에 ice colormap을 입혀 사용합니다.</li>
 <li><code>sns.kdeplot()</code>은 <code>fill=True</code>를 추가하면 등고선이 아니라 면을 칠합니다.</li>
 <li><code>levels</code>에 충분히 큰 값을 넣어서 매끄러운 그라데이션을 구현합니다.</li>
-<li>바탕이 텅 비어버리므로 <code>set_facecolor(&#39;k&#39;)</code>를 넣어서 배경을 검게 한번 더 칠합니다.</li>
+<li>바탕이 텅 비어버리므로 <code>set_facecolor('k')</code>를 넣어서 배경을 검게 한번 더 칠합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">8</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0.1</span>, <span class="string">&quot;hspace&quot;</span>:<span class="number">0.1</span>&#125;,</span><br><span class="line">                         sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D histogram</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">0</span>].hist2d(x, y, cmap=cmap, bins=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexbin</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].hexbin(x, y, cmap=cmap, gridsize=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D KDE plot (contour)</span></span><br><span class="line">sns.kdeplot(x, y, cmap=cmap, ax=axes[<span class="number">1</span>, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D KDE plot (fill)</span></span><br><span class="line">sns.kdeplot(x, y, cmap=cmap, fill=<span class="literal">True</span>, thread=<span class="number">0</span>, levels=<span class="number">20</span>, ax=axes[<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">axes[<span class="number">1</span>, <span class="number">1</span>].set_facecolor(<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># titles</span></span><br><span class="line">titles = [<span class="string">&quot;Matplotlib hist2d&quot;</span>, <span class="string">&quot;Matplotlib hexbin&quot;</span>, <span class="string">&quot;seaborn kdeplot&quot;</span>, <span class="string">&quot;seaborn kdeplot(fill=True)&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axes.ravel(), titles):</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;x-large&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/22/Python-DS-90-density2d/90_density2d_02.png"><br></p>
+<p><img src="90_density2d_02.png" alt=""><br></p>
 <ul>
 <li>코딩을 한 보람이 비로소 느껴집니다.</li>
 </ul>
-<h1 id="4-colorbar-달기"><a href="#4-colorbar-달기" class="headerlink" title="4. colorbar 달기"></a>4. colorbar 달기</h1><ul>
-<li><p>데이터의 밀도를 표현하는 그림에서 색이 나타내는 데이터의 수나 밀도는 중요하지 않을 지도 모릅니다.</p>
+<h1>4. colorbar 달기</h1>
+<ul>
+<li>
+<p>데이터의 밀도를 표현하는 그림에서 색이 나타내는 데이터의 수나 밀도는 중요하지 않을 지도 모릅니다.</p>
 </li>
-<li><p>그러나 교양 삼아 colorbar를 붙이는 방법을 짚고 넘어갑시다.</p>
+<li>
+<p>그러나 교양 삼아 colorbar를 붙이는 방법을 짚고 넘어갑시다.</p>
 </li>
-<li><p>필요할 때 붙이려면 은근히 안 붙습니다.</p>
+<li>
+<p>필요할 때 붙이려면 은근히 안 붙습니다.</p>
 </li>
-<li><p><b><code>Matplotlib hist2d</code></b>은 return하는 여러 값 중 맨 마지막이 그림입니다.</p>
+<li>
+<p><b><code>Matplotlib hist2d</code></b>은 return하는 여러 값 중 맨 마지막이 그림입니다.</p>
 </li>
-<li><p>맨 마지막만 <code>im0</code>라는 이름으로 받아서 이를 <code>plt.colorbar()</code>에 넣습니다.</p>
+<li>
+<p>맨 마지막만 <code>im0</code>라는 이름으로 받아서 이를 <code>plt.colorbar()</code>에 넣습니다.</p>
 </li>
-<li><p><b><code>Matplotlib hexbin</code></b>은 곧장 그림을 return합니다.</p>
+<li>
+<p><b><code>Matplotlib hexbin</code></b>은 곧장 그림을 return합니다.</p>
 </li>
-<li><p>그대로 <code>im1</code>로 받아서 넣습니다.</p>
+<li>
+<p>그대로 <code>im1</code>로 받아서 넣습니다.</p>
 </li>
-<li><p>Matplotlib에서 만든 colorbar는 <code>set_label</code>로 이름을 추가할 수 있습니다.</p>
+<li>
+<p>Matplotlib에서 만든 colorbar는 <code>set_label</code>로 이름을 추가할 수 있습니다.</p>
 </li>
-<li><p><b><code>seaborn KDE plot</code></b>은 자체에 colorbar 출력을 결정하는 매개변수가 있습니다.</p>
+<li>
+<p><b><code>seaborn KDE plot</code></b>은 자체에 colorbar 출력을 결정하는 매개변수가 있습니다.</p>
 </li>
-<li><p><code>cbar=True</code>로 놓고 <code>cbar_kws</code>에 속성을 결정하는 키워드를 딕셔너리 형식으로 추가합니다.</p>
+<li>
+<p><code>cbar=True</code>로 놓고 <code>cbar_kws</code>에 속성을 결정하는 키워드를 딕셔너리 형식으로 추가합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">7</span>), </span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0.1</span>, <span class="string">&quot;hspace&quot;</span>:<span class="number">0.1</span>&#125;,</span><br><span class="line">                         sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>, constrained_layout=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D histogram</span></span><br><span class="line">_, _, _, im0 = axs[<span class="number">0</span>].hist2d(x, y, cmap=cmap, bins=<span class="number">30</span>)</span><br><span class="line">cbar0 = plt.colorbar(im0, ax=axs[<span class="number">0</span>])</span><br><span class="line">cbar0.set_label(<span class="string">&quot;data counts&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexbin</span></span><br><span class="line">im1 = axs[<span class="number">1</span>].hexbin(x, y, cmap=cmap, gridsize=<span class="number">30</span>)</span><br><span class="line">cbar1 = plt.colorbar(im1, ax=axs[<span class="number">1</span>])</span><br><span class="line">cbar1.set_label(<span class="string">&quot;data counts&quot;</span>, fontsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D KDE plot (contour)</span></span><br><span class="line">sns.kdeplot(x, y, cmap=cmap, ax=axs[<span class="number">2</span>], </span><br><span class="line">            cbar=<span class="literal">True</span>, cbar_kws=&#123;<span class="string">&quot;label&quot;</span>:<span class="string">&quot;data density&quot;</span>, <span class="string">&quot;format&quot;</span>:<span class="string">&quot;%.3f&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2D KDE plot (fill)</span></span><br><span class="line">sns.kdeplot(x, y, cmap=cmap, fill=<span class="literal">True</span>, thresh=<span class="number">0</span>, levels=<span class="number">20</span>, ax=axs[<span class="number">3</span>], </span><br><span class="line">            cbar=<span class="literal">True</span>, cbar_kws=&#123;<span class="string">&quot;label&quot;</span>:<span class="string">&quot;data density&quot;</span>, <span class="string">&quot;format&quot;</span>:<span class="string">&quot;%.3f&quot;</span>&#125;)</span><br><span class="line">axs[<span class="number">3</span>].set_facecolor(<span class="string">&quot;k&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># titles</span></span><br><span class="line">titles = [<span class="string">&quot;Matplotlib hist2d&quot;</span>, <span class="string">&quot;Matplotlib hexbin&quot;</span>, <span class="string">&quot;seaborn kdeplot&quot;</span>, <span class="string">&quot;seaborn kdeplot(fill=True)&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axes.ravel(), titles):</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;x-large&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/22/Python-DS-90-density2d/90_density2d_03.png"><br></p>
-<h1 id="5-mpl-scatter-density"><a href="#5-mpl-scatter-density" class="headerlink" title="5. mpl-scatter-density"></a>5. mpl-scatter-density</h1><blockquote>
+<p><img src="90_density2d_03.png" alt=""><br></p>
+<h1>5. mpl-scatter-density</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://pypi.org/project/mpl-scatter-density/">mpl-scatter-density</a></p>
 </blockquote>
 <ul>
@@ -326,27 +350,27 @@
 <li>먼저, 노트북 셀 안에서 설치합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install mpl-scatter-density</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>공식 홈페이지에 나온 설명을 따라 그립니다.</li>
-<li>공식 홈페이지에는 Figure와 Axes를 따로 그리면서 <code>ax = fig.add_subplot(1, 1, 1, projection=&#39;scatter_density&#39;)</code>를 사용했습니다.</li>
+<li>공식 홈페이지에는 Figure와 Axes를 따로 그리면서 <code>ax = fig.add_subplot(1, 1, 1, projection='scatter_density')</code>를 사용했습니다.</li>
 <li><code>plt.subplots()</code>를 사용할 때는 <code>subplot_kw={&quot;projection&quot;:&quot;scatter_density&quot;}</code>를 추가하면 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mpl_scatter_density</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">3</span>), subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;scatter_density&quot;</span>&#125;,</span><br><span class="line">                        gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0.1</span>&#125;, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># scatter plot with transparancy</span></span><br><span class="line">axs[<span class="number">0</span>].scatter(x, y, s=<span class="number">3</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># scatter density</span></span><br><span class="line">axs[<span class="number">1</span>].scatter_density(x, y, cmap=cmap, dpi=<span class="number">36</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># scatter density with colormap</span></span><br><span class="line">im2 = axs[<span class="number">2</span>].scatter_density(x, y, cmap=cmap, dpi=<span class="number">36</span>)</span><br><span class="line">plt.colorbar(im2, ax=axs[<span class="number">2</span>], shrink=<span class="number">0.86</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># titles</span></span><br><span class="line">titles = [<span class="string">&quot;Matplotlib scatter (alpha=0.1)&quot;</span>, <span class="string">&quot;scatter_density&quot;</span>, <span class="string">&quot;scatter_density with colorbar&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, titles):</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;x-large&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    ax.set_aspect(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/22/Python-DS-90-density2d/90_density2d_04.png"><br></p>
+<p><img src="90_density2d_04.png" alt=""><br></p>
 <ul>
 <li>scatter plot과 비슷한 명령이면서도 점의 밀도에 따라 밝기가 달라졌습니다.</li>
 <li>위 코드를 보면 해상도를 의미하는 <b><code>dpi</code></b>라는 매개변수가 사용되었습니다.</li>
 <li><b>Axes를 가로세로 구간으로 나누어 각 구간 안에 들어오는 점의 수를 세는 것</b>입니다.</li>
 <li><b>음? Matplotlib hist2d랑 같은 것 아닌가 모르겠습니다?</b></li>
 </ul>
-<h1 id="6-Matplotlib-hist2d-vs-mpl-scatter-density"><a href="#6-Matplotlib-hist2d-vs-mpl-scatter-density" class="headerlink" title="6. Matplotlib hist2d vs mpl-scatter-density"></a>6. Matplotlib hist2d vs mpl-scatter-density</h1><ul>
+<h1>6. Matplotlib hist2d vs mpl-scatter-density</h1>
+<ul>
 <li><b>Matplotlib hist2d와 1:1로 비교</b>합니다.</li>
 <li>Matplotlib hist2d는 <code>bins</code> 매개변수로 해상도를 조절합니다.</li>
 <li>두 명령을 번갈아 사용하며 다양한 <code>bins</code>와 <code>dpi</code> 매개변수를 적용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">4</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>), subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;scatter_density&quot;</span>&#125;,</span><br><span class="line">                         sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>,</span><br><span class="line">                         gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0.1</span>, <span class="string">&quot;hspace&quot;</span>:<span class="number">0.15</span>&#125;, constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hist2d</span></span><br><span class="line">axs_h2 = axes[<span class="number">0</span>, :]</span><br><span class="line">bins = [<span class="number">20</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">160</span>]</span><br><span class="line"><span class="keyword">for</span> ax, b <span class="keyword">in</span> <span class="built_in">zip</span>(axs_h2, bins):</span><br><span class="line">    ax.hist2d(x, y, bins=b, cmap=cmap)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;\n\nbins=<span class="subst">&#123;b&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span>)</span><br><span class="line">fig.text(<span class="number">0.5</span>, <span class="number">0.95</span>, <span class="string">&quot;Matplotlib hist2d&quot;</span>, ha=<span class="string">&quot;center&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># scatter_density</span></span><br><span class="line">axs_sd = axes[<span class="number">1</span>, :]</span><br><span class="line">dpis = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">60</span>]</span><br><span class="line"><span class="keyword">for</span> ax, d <span class="keyword">in</span> <span class="built_in">zip</span>(axs_sd, dpis):</span><br><span class="line">    ax.scatter_density(x, y, dpi=d, cmap=cmap)</span><br><span class="line">    ax.set_title(<span class="string">f&quot;\ndpi=<span class="subst">&#123;d&#125;</span>&quot;</span>, fontsize=<span class="string">&quot;x-large&quot;</span>)</span><br><span class="line">fig.text(<span class="number">0.5</span>, <span class="number">0.45</span>, <span class="string">&quot;scatter-density&quot;</span>, ha=<span class="string">&quot;center&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/11/22/Python-DS-90-density2d/90_density2d_05.png"><br></p>
+<p><img src="90_density2d_05.png" alt=""><br></p>
 <ul>
 <li><b>두 명령의 결과가 거의 동일합니다</b></li>
 <li>원리가 같기 때문에 당연한 결과입니다. 실행 시간도 체감할 수 없을만큼 차이가 나지 않습니다.</li>
@@ -357,8 +381,6 @@
 <li>실행 결과</li>
 </ul>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;matplotlib.collections.QuadMesh at 0x7f1d06764510&gt;</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>이번에는 scatter-density 입니다.</li>
 </ul>
@@ -370,7 +392,8 @@
 <ul>
 <li>별도의 라이브러리를 사용하고 projection을 따로 지정하는 만큼 별도의 객체를 생성하고 있습니다.</li>
 </ul>
-<h1 id="7-결론"><a href="#7-결론" class="headerlink" title="7. 결론"></a>7. 결론</h1><ul>
+<h1>7. 결론</h1>
+<ul>
 <li>scatter-density는 원리와 출력물의 외관이 Matplotlib hist2d와 같은 결과물을 내놓습니다.</li>
 <li>라이브러리가 크게 부담스럽지 않아 추가로 설치하는 것은 괜찮습니다.</li>
 <li>그러나 함수의 매개변수가 적어 표현력이 제한되어 있고 결과물이 Matplotlib 표준이 아니라는 점이 아쉽습니다.</li>
@@ -393,7 +416,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/11/22/Python-DS-90-density2d/" data-id="cuido2Zkzw0zdZ90QSrjlJMzN" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/11/22/Python-DS-90-density2d/" data-id="cuidoyG1m9c8S_7EQErDIoFEe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -477,10 +500,13 @@
 Matplotlib, seaborn에 이어 mpl-scatter-density도 알아봅니다.
 
 1. 2D data distribution
+
+
 데이터가 2차원으로 분포하는 경우는 매우 흔합니다.
 
-N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우",
-        "wordCount": 1625
+
+N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는",
+        "wordCount": 1585
     }
 </script>
 
@@ -577,6 +603,26 @@ N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -651,26 +697,6 @@ N차원으로 분포하는 데이터의 두 차원만 떼어 보여주는 경우
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

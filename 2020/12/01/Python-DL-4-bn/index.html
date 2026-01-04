@@ -239,15 +239,15 @@
 <li>tensorflow에 탑재된 keras의 <code>BatchNormalization()</code>이 어떤 결과를 만들어내는지에 집중합니다.</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1502.03167">Sergey Ioffe, Christian Szegedy, “Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”, ICML2015</a><br><a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization">tf.keras.layers.BatchNormalization</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1502.03167">Sergey Ioffe, Christian Szegedy, “Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”, ICML2015</a><br>
+<a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization">tf.keras.layers.BatchNormalization</a></p>
 </blockquote>
-<h3 id="1-예제-데이터-가져오기"><a href="#1-예제-데이터-가져오기" class="headerlink" title="1. 예제 데이터 가져오기"></a>1. 예제 데이터 가져오기</h3><ul>
+<h3 id="1-예제-데이터-가져오기">1. 예제 데이터 가져오기</h3>
+<ul>
 <li>실제 상황에서는 많은 이미지를 학습시키겠지만, 3장으로 테스트해봅니다.</li>
 <li>입력 이미지와 히스토그램의 분포 변화를 그려봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">img0 = plt.imread(<span class="string">&quot;./4-bn_0.jpg&quot;</span>)</span><br><span class="line">img1 = plt.imread(<span class="string">&quot;./4-bn_1.jpg&quot;</span>)</span><br><span class="line">img2 = plt.imread(<span class="string">&quot;./4-bn_2.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>불러온 이미지를 numpy vector로 만들어 줍니다.</li>
 <li>하나의 numpy array에 이미지를 모두 탑재합니다.</li>
@@ -257,86 +257,94 @@
 <li>실행결과 : 256 x 256 크기의 3 channel image입니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(256, 256, 3)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>이미지를 눈으로 확인합니다.</li>
 <li>앞으로 자주 사용할 기능이니 figure를 리턴하는 함수로 만듭니다.</li>
 <li>연산을 거친 이미지가 <b>그림으로 출력되기 어려운 범위로 환산될 것을 대비</b>하여 이미지 minmax scaling을 미리 수행합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_img</span>(<span class="params">imgs</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 이미지 minmax scaling</span></span><br><span class="line">    <span class="keyword">if</span> imgs.<span class="built_in">min</span>() &lt; <span class="number">0</span>:</span><br><span class="line">        imgs = imgs - imgs.<span class="built_in">min</span>()</span><br><span class="line">    <span class="keyword">if</span> imgs.<span class="built_in">max</span>() &gt; <span class="number">1</span>:</span><br><span class="line">        imgs = imgs/imgs.<span class="built_in">max</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 시각화</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=<span class="built_in">len</span>(imgs), figsize=(<span class="number">3</span>*<span class="built_in">len</span>(imgs), <span class="number">3</span>))</span><br><span class="line">    <span class="keyword">for</span> img, ax <span class="keyword">in</span> <span class="built_in">zip</span>(imgs, axs):</span><br><span class="line">        ax.imshow(img)</span><br><span class="line"></span><br><span class="line">    fig.tight_layout()    </span><br><span class="line">    <span class="keyword">return</span> fig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 시각화</span></span><br><span class="line">fig = plot_img(imgs)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/01/Python-DL-4-bn/4-bn_3.png"><br></p>
-<h3 id="2-데이터-분포-확인하기"><a href="#2-데이터-분포-확인하기" class="headerlink" title="2. 데이터 분포 확인하기"></a>2. 데이터 분포 확인하기</h3><ul>
+<p><img src="4-bn_3.png" alt=""><br></p>
+<h3 id="2-데이터-분포-확인하기">2. 데이터 분포 확인하기</h3>
+<ul>
 <li>데이터의 분포를 그림으로 그려서 확인합니다.</li>
 <li>컬러 이미지이므로 <b>R, G, B</b> 세 개의 채널이 있습니다.</li>
 <li>세 채널을 각기 <b>빨강, 녹색, 파랑</b>의 밀도함수로 표현합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_kde</span>(<span class="params">imgs, symmetry=<span class="literal">False</span></span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 시각화</span></span><br><span class="line">    fig, axs = plt.subplots(ncols=<span class="built_in">len</span>(imgs), figsize=(<span class="number">3</span>*<span class="built_in">len</span>(imgs), <span class="number">3</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> img, ax <span class="keyword">in</span> <span class="built_in">zip</span>(imgs, axs):</span><br><span class="line">        channel = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">        color = [<span class="string">&quot;r&quot;</span>, <span class="string">&quot;g&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line">        <span class="comment"># R, G, B 채널 분포 시각화. </span></span><br><span class="line">        <span class="comment"># 오해가 발생하지 않도록 실제 데이터 범위에만 분포 시각화</span></span><br><span class="line">        [sns.kdeplot(img[:,:,ch].flatten(), color=c, fill=<span class="literal">True</span>, ax=ax, cut=<span class="number">0</span>) <span class="keyword">for</span> ch, c <span class="keyword">in</span> <span class="built_in">zip</span>(channel, color)]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x축 범위 설정. </span></span><br><span class="line">    <span class="comment"># 필요시 x축을 0 중심으로 대칭이 되도록 설정할 수 있도록.</span></span><br><span class="line">    xlim = ax.get_xlim()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> symmetry==<span class="literal">True</span>:</span><br><span class="line">        xlim = [-<span class="built_in">max</span>(<span class="built_in">abs</span>(xlim)), <span class="built_in">max</span>(<span class="built_in">abs</span>(xlim))]</span><br><span class="line">        axs[<span class="number">0</span>].set_xlim(xlim)</span><br><span class="line">    </span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 나중에 분포를 겹쳐 그리기 위해 fig 외에도 axes를 함께 리턴합니다.</span></span><br><span class="line">    <span class="keyword">return</span> fig, axs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 분포 시각화</span></span><br><span class="line">fig, axs = plot_kde(imgs)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/01/Python-DL-4-bn/4-bn_4.png"><br></p>
-<h3 id="3-Batch-Normalization-적용-1-직접"><a href="#3-Batch-Normalization-적용-1-직접" class="headerlink" title="3. Batch Normalization 적용 (1) 직접"></a>3. Batch Normalization 적용 (1) 직접</h3><ul>
+<p><img src="4-bn_4.png" alt=""><br></p>
+<h3 id="3-Batch-Normalization-적용-1-직접">3. Batch Normalization 적용 (1) 직접</h3>
+<ul>
 <li><a href="https://jehyunlee.github.io/2020/11/29/Python-DL-1-conv2d/">앞선 글</a>에서 Conv2D만 따로 적용했습니다.</li>
 <li>이번에도 학습과정 없이 <code>BatchNormalization()</code>만 적용해 보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">imgs_tensor = tf.convert_to_tensor(imgs, dtype=<span class="string">&quot;float32&quot;</span>)</span><br><span class="line">bn0 = layers.BatchNormalization(trainable=<span class="literal">True</span>)(imgs_tensor)</span><br><span class="line">bn0_numpy = bn0.numpy()</span><br><span class="line"></span><br><span class="line">fig1 = plot_img(bn0_numpy)</span><br><span class="line">fig2, _ = plot_kde(bn0_numpy)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/01/Python-DL-4-bn/4-bn_5.png"><br><img src="/2020/12/01/Python-DL-4-bn/4-bn_6.png"><br></p>
+<p><img src="4-bn_5.png" alt=""><br>
+<img src="4-bn_6.png" alt=""><br></p>
 <ul>
 <li>바뀐 것이 없습니다.</li>
 <li>Batch Normalization은 Conv2D와 달리 <b>학습 과정에서 데이터의 분포를 파악하여 적용</b>하도록 설계되어 있기 때문에 이런 방식으로는 작동하지 않습니다.</li>
 </ul>
-<h3 id="4-Batch-Normalization-적용-2-학습"><a href="#4-Batch-Normalization-적용-2-학습" class="headerlink" title="4. Batch Normalization 적용 (2) 학습"></a>4. Batch Normalization 적용 (2) 학습</h3><ul>
+<h3 id="4-Batch-Normalization-적용-2-학습">4. Batch Normalization 적용 (2) 학습</h3>
+<ul>
 <li>학습을 위한 최소한의 모델을 만듭니다.</li>
 <li>BatchNormalization 레이어 외에는 아무것도 없습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"></span><br><span class="line">model = Sequential([</span><br><span class="line">    layers.BatchNormalization()</span><br><span class="line">])</span><br><span class="line">model.<span class="built_in">compile</span>()</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>모델에 데이터를 투입하여 학습을 시킵니다.</li>
 <li>이 때, numpy array를 텐서로 변환하여 입력해야 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bn1 = model(imgs_tensor, training=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>잘 적용되었을까요? 확인합시다.</li>
 <li>다시 numpy array로 바꾸어서 이미지와 분포를 그려봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bn1_numpy = bn1.numpy()</span><br><span class="line"></span><br><span class="line">fig1 = plot_img(bn1_numpy)</span><br><span class="line">fig2, _ = plot_kde(bn1_numpy)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/01/Python-DL-4-bn/4-bn_7.png"><br><img src="/2020/12/01/Python-DL-4-bn/4-bn_8.png"><br></p>
+<p><img src="4-bn_7.png" alt=""><br>
+<img src="4-bn_8.png" alt=""><br></p>
 <ul>
-<li><p>Batch Normalization 이전과 이후를 나란히 놓아봅시다.<br><br><img src="/2020/12/01/Python-DL-4-bn/4-bn_13.png" alt="Batch Normalization 이전과 이후 비교"><br></p>
+<li>
+<p>Batch Normalization 이전과 이후를 나란히 놓아봅시다.<br><br>
+<img src="4-bn_13.png" alt="Batch Normalization 이전과 이후 비교"><br></p>
 </li>
-<li><p><b>원본에 비해 색이 흐려진 것</b>이 느껴집니다.</p>
+<li>
+<p><b>원본에 비해 색이 흐려진 것</b>이 느껴집니다.</p>
 </li>
-<li><p>이미지는 데이터를 그림으로 표현하기 위해 minmax scaling이 된 것입니다.</p>
+<li>
+<p>이미지는 데이터를 그림으로 표현하기 위해 minmax scaling이 된 것입니다.</p>
 </li>
-<li><p>실제 데이터의 분포는 아래에 있는 밀도함수를 통해 알 수 있습니다.</p>
+<li>
+<p>실제 데이터의 분포는 아래에 있는 밀도함수를 통해 알 수 있습니다.</p>
 </li>
-<li><p>원본에서 0<del>1 사이에 있던 값의 분포가 -2</del>2 사이로 변환되었습니다.</p>
+<li>
+<p>원본에서 0~1 사이에 있던 값의 분포가 -2~2 사이로 변환되었습니다.</p>
 </li>
-<li><p><b>RGB 채널이 각기 독립적으로 normalization</b> 되었습니다.</p>
+<li>
+<p><b>RGB 채널이 각기 독립적으로 normalization</b> 되었습니다.</p>
 </li>
 </ul>
 <p><b>※ CNN에서 Batch Normalization은 대개 Convolution layer와 activation layer 사이에 위치합니다</b></p>
 <ul>
 <li>Convolution을 거친 이미지는 Batch Normalization에 의해 고르게 분포됩니다.</li>
 <li>잘못된 초기화로 인해 학습이 어려워지는 문제를 해결할 수 있습니다.</li>
-<li>결과적으로 <b>학습이 안정적으로 빠르게 이루어집니다.</b></li>
+<li>결과적으로 <b>학습이 안정적으로 빠르게 이루어집니다.</b><br>
+<br></li>
 </ul>
-<br>
-
 <p><b>※(추가) 위 그림이 BN효과를 오해할 소지가 있다고 생각되어 수정했습니다.</b></p>
 <ul>
 <li>자세한 고민은 다음 글을 읽어보세요: <a href="https://jehyunlee.github.io/2020/12/03/Python-DS-46-bnvis/">Visualization of Image Exceeding Limitation</a></li>
-<li>기록 차원에서 본 글의 미리보기는 수정하지 않았습니다.<br><br><img src="/2020/12/01/Python-DL-4-bn/46-bnvis_10.png"><br></li>
+<li>기록 차원에서 본 글의 미리보기는 수정하지 않았습니다.<br><br>
+<img src="46-bnvis_10.png" alt=""><br></li>
 </ul>
-<h3 id="4-보너스-toy-model"><a href="#4-보너스-toy-model" class="headerlink" title="4. 보너스 - toy model"></a>4. 보너스 - toy model</h3><ul>
+<h3 id="4-보너스-toy-model">4. 보너스 - toy model</h3>
+<ul>
 <li>Batch Normalization은 <b>데이터의 평균을 0, 분산을 1로 조정합니다.</b></li>
 <li>간단한 예제 데이터를 통해서 정말 그런지 살펴봅니다.</li>
 <li>numpy array 형태의 예제 데이터를 만듭니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 예제 데이터 생성</span></span><br><span class="line">ex_img0 = np.random.normal(loc=-<span class="number">0.5</span>, scale=<span class="number">0.01</span>, size=<span class="number">256</span>*<span class="number">256</span>*<span class="number">3</span>).reshape((<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>))</span><br><span class="line">ex_img1 = np.random.normal(loc=<span class="number">0.5</span>, scale=<span class="number">0.01</span>, size=<span class="number">256</span>*<span class="number">256</span>*<span class="number">3</span>).reshape((<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>))</span><br><span class="line">ex_img2 = np.random.normal(loc=-<span class="number">0.5</span>, scale=<span class="number">0.01</span>, size=<span class="number">256</span>*<span class="number">256</span>*<span class="number">3</span>).reshape((<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예제 데이터 vectorization</span></span><br><span class="line">ex_imgs = np.zeros((<span class="number">3</span>, ) + ex_img0.shape)</span><br><span class="line">ex_imgs[<span class="number">0</span>] = ex_img0</span><br><span class="line">ex_imgs[<span class="number">1</span>] = ex_img1</span><br><span class="line">ex_imgs[<span class="number">2</span>] = ex_img2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 시각화</span></span><br><span class="line">fig1 = plot_img(ex_imgs)</span><br><span class="line">fig2, _ = plot_kde(ex_imgs)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/01/Python-DL-4-bn/4-bn_9.png"><br><img src="/2020/12/01/Python-DL-4-bn/4-bn_10.png"><br></p>
+<p><img src="4-bn_9.png" alt=""><br>
+<img src="4-bn_10.png" alt=""><br></p>
 <ul>
 <li>평균이 각기 -0.5, 0.5, -0.5이고 표준편차가 0.01인 데이터가 만들어졌습니다.</li>
 </ul>
@@ -350,26 +358,29 @@
 <li>데이터를 텐서로 만들어 적용하고, 시각화를 위해 다시 numpy로 변환합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ex_imgs_tensor = tf.convert_to_tensor(ex_imgs, dtype=<span class="string">&quot;float32&quot;</span>)</span><br><span class="line">ex_bn1 = model(ex_imgs_tensor, training=<span class="literal">True</span>)</span><br><span class="line">ex_bn1_numpy = ex_bn1.numpy()</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>변환 결과를 그림으로 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> patches</span><br><span class="line"></span><br><span class="line">fig1 = plot_img(ex_bn1_numpy)</span><br><span class="line"></span><br><span class="line">fig2, axs = plot_kde(ex_bn1_numpy, symmetry=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> ax, ex_img <span class="keyword">in</span> <span class="built_in">zip</span>(axs, ex_imgs):</span><br><span class="line">    sns.kdeplot(ex_img.flatten(), ax=ax, color=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line"></span><br><span class="line">Rectangle0 = patches.Rectangle((<span class="number">0.45</span>, <span class="number">0.9</span>), <span class="number">0.12</span>, <span class="number">0.05</span>, color=<span class="string">&quot;lightgray&quot;</span>, transform=axs[<span class="number">0</span>].transAxes)</span><br><span class="line">axs[<span class="number">0</span>].add_patch(Rectangle0)</span><br><span class="line">axs[<span class="number">0</span>].text(<span class="number">0.6</span>, <span class="number">0.9</span>, <span class="string">&quot;before BN&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">12</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;, transform=axs[<span class="number">0</span>].transAxes)</span><br><span class="line">Rectangle1 = patches.Rectangle((<span class="number">0.45</span>, <span class="number">0.8</span>), <span class="number">0.12</span>, <span class="number">0.05</span>, color=<span class="string">&quot;navy&quot;</span>, transform=axs[<span class="number">0</span>].transAxes)</span><br><span class="line">axs[<span class="number">0</span>].add_patch(Rectangle1)</span><br><span class="line">axs[<span class="number">0</span>].text(<span class="number">0.6</span>, <span class="number">0.8</span>, <span class="string">&quot;after BN&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">12</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;, transform=axs[<span class="number">0</span>].transAxes)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/12/01/Python-DL-4-bn/4-bn_11.png"><br><img src="/2020/12/01/Python-DL-4-bn/4-bn_12.png"><br></p>
+<p><img src="4-bn_11.png" alt=""><br>
+<img src="4-bn_12.png" alt=""><br></p>
 <ul>
-<li><p>그림으로 봐서는 모르겠습니다. minmax scaling이 적용되었기 때문입니다.</p>
+<li>
+<p>그림으로 봐서는 모르겠습니다. minmax scaling이 적용되었기 때문입니다.</p>
 </li>
-<li><p>그러나 분포를 보면, -0.5와 0.5에 분포했던 데이터가 각기 -1과 1 방향으로 이동한 것을 알 수 있습니다.</p>
+<li>
+<p>그러나 분포를 보면, -0.5와 0.5에 분포했던 데이터가 각기 -1과 1 방향으로 이동한 것을 알 수 있습니다.</p>
 </li>
-<li><p>정확한 값을 추측해봅시다.</p>
+<li>
+<p>정확한 값을 추측해봅시다.</p>
 <ul>
 <li>-0.5, 0.5, -0.5의 평균은 $$\frac{-1}{6}$$, 표준편차는 $$\frac{\sqrt{2}}{3}$$입니다.</li>
 <li>따라서 -0.5, 0.5, -0.5의 Batch Normalization 결과는 $$\frac{-1}{\sqrt{2}}, \frac{2}{\sqrt{2}}, \frac{-1}{\sqrt{2}}$$가 될 것입니다.</li>
 <li>정말 그런지 확인해봅시다.</li>
 </ul>
 </li>
-<li><p>평균값을 확인합니다.</p>
+<li>
+<p>평균값을 확인합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>([ex_bn1_numpy[i].mean() <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)])</span><br></pre></td></tr></table></figure>
@@ -377,8 +388,6 @@
 <li>실행결과 : $$\frac{-1}{\sqrt{2}}, \frac{2}{\sqrt{2}}, \frac{-1}{\sqrt{2}}$$입니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[-0.7053814, 1.4107242, -0.70534563]</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>mini-batch의 평균과 variance를 구합니다.</li>
 <li>model의 layer에 데이터가 저장되어 있습니다.</li>
@@ -405,7 +414,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/" data-id="cuidimi0cwcPNjCbGHHdUTMoQ" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/12/01/Python-DL-4-bn/" data-id="cuidIMR6Nm1MhQ8w7Uv0m8XcC" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -491,7 +500,7 @@
 CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
 배치 정규화batch normalization는 그레이디언트 소실gradient vanishing과 폭주exploding 문제를 해결하기 위해 제안되었습니다.
 본 글에서는 배치 정규화의 이론적 내용을",
-        "wordCount": 1413
+        "wordCount": 1389
     }
 </script>
 
@@ -588,6 +597,26 @@ CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -662,26 +691,6 @@ CNN에서 batch normalization은 Convolution layer를 따라다닙니다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

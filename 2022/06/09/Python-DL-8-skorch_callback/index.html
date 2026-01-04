@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="visualization,pytorch,sklearn,pipeline,neural network,callback" />
     
-    <meta name="description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.  학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.  skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.  skorch도 PyTorch callback을 이용할 수 있습니다.  글이 길어 세 개로 나눕니다.   첫 번째로">
+    <meta name="description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.   학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.   skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.   skorch도 PyTorch callback을 이용할 수 있습니다.   글이 길어 세 개로 나눕니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="skorch callbacks (1) dataset preparation">
 <meta property="og:url" content="https://jehyunlee.github.io/2022/06/09/Python-DL-8-skorch_callback/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.  학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.  skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.  skorch도 PyTorch callback을 이용할 수 있습니다.  글이 길어 세 개로 나눕니다.   첫 번째로">
+<meta property="og:description" content="PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.   학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.   skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.   skorch도 PyTorch callback을 이용할 수 있습니다.   글이 길어 세 개로 나눕니다.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DL/8_sc_00.png">
 <meta property="article:published_time" content="2022-06-08T21:16:00.000Z">
@@ -232,36 +232,54 @@
             
 
             <ul>
-<li><p>PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.</p>
+<li>
+<p>PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.</p>
 </li>
-<li><p>학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.</p>
+<li>
+<p>학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.</p>
 </li>
-<li><p>skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.</p>
+<li>
+<p>skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.</p>
 </li>
-<li><p>skorch도 PyTorch callback을 이용할 수 있습니다.</p>
+<li>
+<p>skorch도 PyTorch callback을 이용할 수 있습니다.</p>
 </li>
-<li><p>글이 길어 세 개로 나눕니다. </p>
+<li>
+<p>글이 길어 세 개로 나눕니다.</p>
 </li>
-<li><p>첫 번째로, 데이터를 준비하는 과정입니다. 분할까지 확인합니다.</p>
+<li>
+<p>첫 번째로, 데이터를 준비하는 과정입니다. 분할까지 확인합니다.</p>
 </li>
 </ul>
-<h1 id="1-환경-설정"><a href="#1-환경-설정" class="headerlink" title="1. 환경 설정"></a>1. 환경 설정</h1><h2 id="1-1-Colab-환경-설정"><a href="#1-1-Colab-환경-설정" class="headerlink" title="1.1. Colab 환경 설정"></a>1.1. Colab 환경 설정</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/">Google Colaboratory</a><br><a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Colab code: skorch callbacks</a></p>
+<h1>1. 환경 설정</h1>
+<h2 id="1-1-Colab-환경-설정">1.1. Colab 환경 설정</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/">Google Colaboratory</a><br>
+<a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Colab code: skorch callbacks</a></p>
 </blockquote>
 <ul>
-<li><p>먼저, Google Colab에 접속하셔서 노트북을 만들고 <b>GPU 사용 설정</b>을 합니다.</p>
+<li>
+<p>먼저, Google Colab에 접속하셔서 노트북을 만들고 <b>GPU 사용 설정</b>을 합니다.</p>
 </li>
-<li><p>메뉴에서 <b>[런타임] ▶ [런타임 유형 변경] ▶ [하드웨어 가속기]: GPU 설정</b>을 선택합니다.<br><br><img src="/2022/06/09/Python-DL-8-skorch_callback/8_sc_02.png"><br></p>
+<li>
+<p>메뉴에서 <b>[런타임] ▶ [런타임 유형 변경] ▶ [하드웨어 가속기]: GPU 설정</b>을 선택합니다.<br><br>
+<img src="8_sc_02.png" alt=""><br></p>
 </li>
-<li><p>간혹 <b>GPU를 할당할 수 없다</b>는 메시지가 나오기도 하지만 <b>GPU 없이 사용</b>을 선택해도 됩니다.</p>
+<li>
+<p>간혹 <b>GPU를 할당할 수 없다</b>는 메시지가 나오기도 하지만 <b>GPU 없이 사용</b>을 선택해도 됩니다.</p>
 </li>
-<li><p>데이터셋과 우리가 만들 딥러닝 구조가 깊지 않아 CPU로도 충분히 빠른 결과를 볼 수 있기 때문입니다.<br><br><img src="/2022/06/09/Python-DL-8-skorch_callback/8_sc_06.png"><br></p>
+<li>
+<p>데이터셋과 우리가 만들 딥러닝 구조가 깊지 않아 CPU로도 충분히 빠른 결과를 볼 수 있기 때문입니다.<br><br>
+<img src="8_sc_06.png" alt=""><br></p>
 </li>
-<li><p>이 밖에, Colab에서는 크게 두 가지 설정을 합니다.</p>
+<li>
+<p>이 밖에, Colab에서는 크게 두 가지 설정을 합니다.</p>
 </li>
-<li><p>Matplotlib 버전을 3.2.2에서 3.5.x로 업그레이드를 하고,</p>
+<li>
+<p>Matplotlib 버전을 3.2.2에서 3.5.x로 업그레이드를 하고,</p>
 </li>
-<li><p>한글을 쓸 수 있도록 설정을 합니다.</p>
+<li>
+<p>한글을 쓸 수 있도록 설정을 합니다.</p>
 </li>
 </ul>
 <details>
@@ -269,23 +287,19 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Step 1. Matplotlib 업그레이드</span></span><br><span class="line">!pip install matplotlib -U </span><br><span class="line">!pip install seaborn -U</span><br><span class="line">!pip install pandas -U</span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 2. 한글 설치 및 사용 설정</span></span><br><span class="line">!apt-get -qq install -y fonts-nanum</span><br><span class="line">!fc-cache -fv  </span><br><span class="line">!rm ~/.cache/matplotlib -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 3. 셀 실행 후 런타임 재시작</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Step 4. seaborn 환경 설정</span></span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;ticks&quot;</span>)</span><br><span class="line">sns.set_palette(<span class="string">&quot;colorblind&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 5. 한글 글꼴 설정</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=[<span class="string">&#x27;NanumGothic&#x27;</span>, <span class="string">&#x27;sans-serif&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 한글 설정 확인</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;한글 테스트&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <img src="8_sc_03.png">
-
-
-<h2 id="1-2-필수-라이브러리-시각화-기본-설정"><a href="#1-2-필수-라이브러리-시각화-기본-설정" class="headerlink" title="1.2. 필수 라이브러리 &amp; 시각화 기본 설정"></a>1.2. 필수 라이브러리 &amp; 시각화 기본 설정</h2><ul>
+<h2 id="1-2-필수-라이브러리-시각화-기본-설정">1.2. 필수 라이브러리 &amp; 시각화 기본 설정</h2>
+<ul>
 <li>numpy를 비롯한 필수 라이브러리를 불러옵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> tqdm.auto <span class="keyword">import</span> tqdm</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>시각화 관련 설정도 미리 합니다.</li>
 <li>label과 title 등에 들어갈 font 속성을 미리 설정하고,</li>
 <li>이후 train, validation, test 데이터와 결과 출력 단계에서 사용할 색을 지정합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># font properties</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;mathtext.fontset&quot;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line">font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>&#125;</span><br><span class="line">font_title = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;k&quot;</span>&#125;</span><br><span class="line">font_metrics = &#123;<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;fontsize&#x27;</span>:<span class="string">&quot;medium&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># colors</span></span><br><span class="line">c_train = <span class="string">&quot;green&quot;</span></span><br><span class="line">c_val = <span class="string">&quot;orange&quot;</span></span><br><span class="line">c_test = <span class="string">&quot;magenta&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="1-3-PyTorch-사용-준비-Random-Seed"><a href="#1-3-PyTorch-사용-준비-Random-Seed" class="headerlink" title="1.3. PyTorch 사용 준비 &amp; Random Seed"></a>1.3. PyTorch 사용 준비 &amp; Random Seed</h2><blockquote>
+<h2 id="1-3-PyTorch-사용-준비-Random-Seed">1.3. PyTorch 사용 준비 &amp; Random Seed</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/common_pitfalls.html">scikit-learn Common pitfalls and recommended practices</a></p>
 </blockquote>
 <ul>
@@ -298,73 +312,79 @@
 <li>실행 결과: GPU로 <b>Tesla T4</b>가 할당되었습니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DEVICE 0: Tesla T4</span></span><br><span class="line">- Memory Usage:</span><br><span class="line">  Allocated: 0.0 GB</span><br><span class="line">  Cached:    0.0 GB</span><br></pre></td></tr></table></figure>
-
-
 <ul>
-<li>Random Seed도 미리 설정합니다. </li>
+<li>Random Seed도 미리 설정합니다.</li>
 <li>재현성을 결정하는 <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/common_pitfalls.html">생각보다 중요한 단계</a>이므로 주의깊게 챙깁니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rng = np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">torch.manual_seed(<span class="number">0</span>)</span><br><span class="line">torch.cuda.manual_seed(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-Data"><a href="#2-Data" class="headerlink" title="2. Data"></a>2. Data</h1><p><img src="/2022/06/09/Python-DL-8-skorch_callback/8_sc_01.png"></p>
+<h1>2. Data</h1>
+<p><img src="8_sc_01.png" alt=""></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://rpubs.com/julianlavila/penguins">penguins dataset</a><br><a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Colab code: skorch callbacks</a></p>
+<p><a target="_blank" rel="noopener" href="https://rpubs.com/julianlavila/penguins">penguins dataset</a><br>
+<a target="_blank" rel="noopener" href="https://bit.ly/3xxznt8">Colab code: skorch callbacks</a></p>
 </blockquote>
 <ul>
 <li>펭귄의 종<code>species</code>, 서식지<code>island</code>, 성별<code>sex</code>을 비롯해</li>
 <li>세 가지 신체 치수<code>bill length</code>, <code>bill depth</code>, <code>flipper length</code>로 체중<code>body_mass</code>을 예측하는 문제를 풀어보겠습니다.</li>
 <li>이번에는 GPU를 사용하는 법을 포함하여 Colab에서 실행합니다.</li>
 </ul>
-<h2 id="2-1-Dataset-불러오기"><a href="#2-1-Dataset-불러오기" class="headerlink" title="2.1. Dataset 불러오기"></a>2.1. Dataset 불러오기</h2><ul>
+<h2 id="2-1-Dataset-불러오기">2.1. Dataset 불러오기</h2>
+<ul>
 <li>seaborn에 내장된 데이터를 사용합니다.</li>
 <li>결측치를 미리 제거합니다.</li>
 <li>여기서는 생략했지만 <b>실전에서는 결측치, 중복치, 이상치를 모두 따져봐야 합니다!</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_peng = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)  <span class="comment"># 펭귄 데이터셋</span></span><br><span class="line">df_peng = df_peng.dropna()              <span class="comment"># 결측치 제거</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-X-y-분할-y-body-mass-g"><a href="#2-2-X-y-분할-y-body-mass-g" class="headerlink" title="2.2. $X$, $y$ 분할: $y$ &#x3D; body_mass_g"></a>2.2. $X$, $y$ 분할: $y$ &#x3D; <code>body_mass_g</code></h2><ul>
+<h2 id="2-2-X-y-분할-y-body-mass-g">2.2. $X$, $y$ 분할: $y$ = <code>body_mass_g</code></h2>
+<ul>
 <li>문제에 맞게 펭귄 체중을 $y$로 놓고 데이터를 분할합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = df_peng[<span class="string">&quot;body_mass_g&quot;</span>]</span><br><span class="line">X = df_peng.drop(<span class="string">&quot;body_mass_g&quot;</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-training-validataion-testing-set-분할"><a href="#2-3-training-validataion-testing-set-분할" class="headerlink" title="2.3. training, validataion, testing set 분할"></a>2.3. training, validataion, testing set 분할</h2><blockquote>
+<h2 id="2-3-training-validataion-testing-set-분할">2.3. training, validataion, testing set 분할</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">scikit-learn: sklearn.model_selection.train_test_split</a></p>
 </blockquote>
 <ul>
 <li>훈련, 검증, 시험에 쓰일 데이터를 각기 3:1:1로 분할합니다.</li>
 <li>scikit-learn의 <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split</code></a>기능을 사용하는데, 두 덩어리로만 나눌 수 있으므로 두 번에 걸쳐 나누어줍니다.</li>
-<li>먼저 Train : test를 4:1로 나누고, 다시 Train을 train : val &#x3D; 3:1로 나눕니다.</li>
+<li>먼저 Train : test를 4:1로 나누고, 다시 Train을 train : val = 3:1로 나눕니다.</li>
 <li><code>random_state=rng</code>를 넣어서 재현성을 확보하는 것을 잊지 맙시다.</li>
 <li><code>_train</code>, <code>_val</code>, <code>_test</code>가 붙은 세 가지 목적의 $X$, $y$ 데이터셋이 마련되었습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">X_Train, X_test, y_Train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=rng, </span><br><span class="line">                                                    stratify=X[[<span class="string">&quot;species&quot;</span>, <span class="string">&quot;island&quot;</span>, <span class="string">&quot;sex&quot;</span>]])</span><br><span class="line">X_train, X_val, y_train, y_val = train_test_split(X_Train, y_Train, test_size=<span class="number">0.25</span>, random_state=rng, </span><br><span class="line">                                                    stratify=X_Train[[<span class="string">&quot;species&quot;</span>, <span class="string">&quot;island&quot;</span>, <span class="string">&quot;sex&quot;</span>]])</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>stratify</code> 매개변수에 <code>[[&quot;species&quot;, &quot;island&quot;, &quot;sex&quot;]]</code>를 넣어 층화 추출을 구현했습니다.</li>
 <li><b>층화 추출은 데이터를 분할할 때 categorical data의 class비율을 반영해 나누는 것을 의미합니다.</b></li>
 <li>특정 class가 한 쪽에 쏠려 너무 많거나 적어지는 현상을 방지합니다.</li>
-<li><b>categorical features&#96;</b>가 잘 분할되었는지 살펴봅니다.</li>
+<li><b>categorical features`</b>가 잘 분할되었는지 살펴봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">cols_cat = [<span class="string">&quot;species&quot;</span>, <span class="string">&quot;island&quot;</span>, <span class="string">&quot;sex&quot;</span>]</span><br><span class="line">df_tmp = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i, (X, col) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>([X_train, X_val, X_test], [<span class="string">&quot;train&quot;</span>, <span class="string">&quot;valid&quot;</span>, <span class="string">&quot;test&quot;</span>])):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(df_tmp, <span class="built_in">int</span>):</span><br><span class="line">        df_tmp = pd.DataFrame(X[cols_cat].value_counts(), columns=[col]).sort_index()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        df_tmp = pd.concat([df_tmp, pd.DataFrame(X[cols_cat].value_counts(), columns=[col]).sort_index()], axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">df_tmp.plot.barh(ax=ax, color=&#123;<span class="string">&quot;train&quot;</span>:c_train, <span class="string">&quot;valid&quot;</span>:c_val, <span class="string">&quot;test&quot;</span>:c_test&#125;).invert_yaxis()</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-8-skorch_callback/8_sc_04.png"><br></p>
+<p><img src="8_sc_04.png" alt=""><br></p>
 <ul>
-<li><p>y축 눈금에 species, island, sex 조합이 나열되어 있습니다.</p>
+<li>
+<p>y축 눈금에 species, island, sex 조합이 나열되어 있습니다.</p>
 </li>
-<li><p>모든 섬에 살고 있는 Adelie 펭귄과 Dream에만 살고 있는 Chinstrap, Biscoe에만 살고 있는 Gentoo 펭귄이 보입니다.</p>
+<li>
+<p>모든 섬에 살고 있는 Adelie 펭귄과 Dream에만 살고 있는 Chinstrap, Biscoe에만 살고 있는 Gentoo 펭귄이 보입니다.</p>
 </li>
-<li><p>각 조합에서 valid와 test가 거의 비슷하고 train은 이들의 3배입니다. </p>
+<li>
+<p>각 조합에서 valid와 test가 거의 비슷하고 train은 이들의 3배입니다.</p>
 </li>
-<li><p>3:1:1로 골고루 잘 나뉘었습니다.</p>
+<li>
+<p>3:1:1로 골고루 잘 나뉘었습니다.</p>
 </li>
-<li><p>이번에는 <b>numerical features</b> <code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code>, <code>body_mass_g</code>분포를 살핍니다.</p>
+<li>
+<p>이번에는 <b>numerical features</b> <code>bill_length_mm</code>, <code>bill_depth_mm</code>, <code>flipper_length_mm</code>, <code>body_mass_g</code>분포를 살핍니다.</p>
 </li>
-<li><p>KDE plot을 통해서 전반적인 분포를 대략적으로 비교합니다.</p>
+<li>
+<p>KDE plot을 통해서 전반적인 분포를 대략적으로 비교합니다.</p>
 </li>
-<li><p>$X$에 3개의 numerical feature가 있고 $y$에 하나가 있습니다. 한데 모아 보여줍니다.</p>
+<li>
+<p>$X$에 3개의 numerical feature가 있고 $y$에 하나가 있습니다. 한데 모아 보여줍니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), constrained_layout=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">cols_num = [<span class="string">&quot;bill_length_mm&quot;</span>, <span class="string">&quot;bill_depth_mm&quot;</span>, <span class="string">&quot;flipper_length_mm&quot;</span>]</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="comment"># numerical X features</span></span><br><span class="line"><span class="keyword">for</span> ax, col <span class="keyword">in</span> <span class="built_in">zip</span>(axes.ravel(), cols_num):</span><br><span class="line">    <span class="keyword">for</span> X, c <span class="keyword">in</span> <span class="built_in">zip</span>([X_train, X_val, X_test], [c_train, c_val, c_test]):</span><br><span class="line">        sns.kdeplot(x=col, data=X, ax=ax, fill=<span class="literal">True</span>, alpha=<span class="number">0.3</span>, color=c)</span><br><span class="line">        ax.set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y feature</span></span><br><span class="line"><span class="keyword">for</span> y, c <span class="keyword">in</span> <span class="built_in">zip</span>([y_train, y_val, y_test], [c_train, c_val, c_test]):</span><br><span class="line">    sns.kdeplot(y, ax=axes[<span class="number">1</span>, <span class="number">1</span>], fill=<span class="literal">True</span>, alpha=<span class="number">0.3</span>, color=c)</span><br><span class="line">    axes[<span class="number">1</span>, <span class="number">1</span>].set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].legend(handles=axes[<span class="number">1</span>, <span class="number">1</span>].collections, labels=[<span class="string">&quot;train&quot;</span>, <span class="string">&quot;valid&quot;</span>, <span class="string">&quot;test&quot;</span>],</span><br><span class="line">                  loc=<span class="string">&quot;upper left&quot;</span>, bbox_to_anchor=(<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/06/09/Python-DL-8-skorch_callback/8_sc_05.png"><br></p>
+<p><img src="8_sc_05.png" alt=""><br></p>
 <ul>
 <li>training, validation, testing set에 모든 변수가 비슷하게 분포하여 크게 치우친 면이 없습니다.</li>
 <li>이정도 되면 웬만큼 믿고 학습에 투입할 수 있을 듯 합니다.</li>
@@ -387,7 +407,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2022/06/09/Python-DL-8-skorch_callback/" data-id="cuidP23p70q7jsmevVg7a7ZIh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2022/06/09/Python-DL-8-skorch_callback/" data-id="cuidmQTRHi5142tPFK7R7fwNK" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -466,18 +486,24 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2022/06/09/Python-DL-8-skorch_callback/",
         "description": "
+
 PyTorch는 현재 가장 인기있는 딥러닝 라이브러리 중 하나입니다.
+
 
 학습 세부 사항을 지정하기 위해 Callback으로 다양한 기능을 지원합니다.
 
+
 skorch는 PyTorch를 scikit-learn과 함께 사용할 수 있게 해 줍니다.
+
 
 skorch도 PyTorch callback을 이용할 수 있습니다.
 
-글이 길어 세 개로 나눕니다. 
 
-첫 번째로",
-        "wordCount": 1456
+글이 길어 세 개로 나눕니다.
+
+
+",
+        "wordCount": 1401
     }
 </script>
 
@@ -574,6 +600,26 @@ skorch도 PyTorch callback을 이용할 수 있습니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -648,26 +694,6 @@ skorch도 PyTorch callback을 이용할 수 있습니다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

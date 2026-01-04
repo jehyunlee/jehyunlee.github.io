@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,data sampling,visualization,machine learning,statistics" />
     
-    <meta name="description" content="Contributor  김승욱님, dane님  References  wikipedia: Stratified SamplingWhen should you choose Stratified sampling over random sampling?핸즈온 머신러닝 (2판)핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook  1. Int">
+    <meta name="description" content="Contributor  김승욱님, dane님  References  wikipedia: Stratified Sampling When should you choose Stratified sampling over random sampling? 핸즈온 머신러닝 (2판) 핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook  1.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stratified Sampling">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/05/11/Python-DS-13-stratified_sampling/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Contributor  김승욱님, dane님  References  wikipedia: Stratified SamplingWhen should you choose Stratified sampling over random sampling?핸즈온 머신러닝 (2판)핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook  1. Int">
+<meta property="og:description" content="Contributor  김승욱님, dane님  References  wikipedia: Stratified Sampling When should you choose Stratified sampling over random sampling? 핸즈온 머신러닝 (2판) 핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook  1.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/13_strat_0.png">
 <meta property="article:published_time" content="2020-05-10T21:24:00.000Z">
@@ -236,16 +236,21 @@
 </blockquote>
 <p><b>References</b></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stratified_sampling">wikipedia: Stratified Sampling</a><br><a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/185229/when-should-you-choose-stratified-sampling-over-random-sampling">When should you choose Stratified sampling over random sampling?</a><br><a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/89959711?Acode=101">핸즈온 머신러닝 (2판)</a><br><a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/02_end_to_end_machine_learning_project.ipynb">핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stratified_sampling">wikipedia: Stratified Sampling</a><br>
+<a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/185229/when-should-you-choose-stratified-sampling-over-random-sampling">When should you choose Stratified sampling over random sampling?</a><br>
+<a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/89959711?Acode=101">핸즈온 머신러닝 (2판)</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/02_end_to_end_machine_learning_project.ipynb">핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook</a></p>
 </blockquote>
-<h2 id="1-Introduction-to-Stratified-Sampling"><a href="#1-Introduction-to-Stratified-Sampling" class="headerlink" title="1. Introduction to Stratified Sampling"></a>1. Introduction to Stratified Sampling</h2><ul>
+<h2 id="1-Introduction-to-Stratified-Sampling">1. Introduction to Stratified Sampling</h2>
+<ul>
 <li>데이터 분석을 위해 일부의 데이터를 가져오는 것을 추출(sampling)이라 합니다.</li>
 <li>인위적인 편향을 방지하기 위해 아무렇게나 가져오는 임의추출(random sampling)을 사용합니다.</li>
 <li>그러나 임의추출은 데이터의 비율을 반영하지 못한다는 단점이 있어, 층화추출(stratified sampling)이 권장됩니다.</li>
 <li><b>적절한 층화추출은 임의추출보다 항상 좋다</b>는 것이 <a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/185229/when-should-you-choose-stratified-sampling-over-random-sampling">증명되어 있다고 합니다.</a><br></li>
 </ul>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_0.png" alt="데이터의 부분에서 전체가 보여야 합니다. 프랙탈처럼."></p>
-<h3 id="1-1-층화추출-적용-과정"><a href="#1-1-층화추출-적용-과정" class="headerlink" title="1.1. 층화추출 적용 과정"></a>1.1. 층화추출 적용 과정</h3><ul>
+<p><img src="13_strat_0.png" alt="데이터의 부분에서 전체가 보여야 합니다. 프랙탈처럼."></p>
+<h3 id="1-1-층화추출-적용-과정">1.1. 층화추출 적용 과정</h3>
+<ul>
 <li>층화추출을 적용하려면 여러 기법을 함께 사용해야 합니다.</li>
 </ul>
 <p><b>(1). 층화추출은 범주형(categorical) 데이터에 적용하는 기법입니다.</b></p>
@@ -259,87 +264,93 @@
 <li>훈련 세트에 없는 항목이 테스트 세트에 들어올 경우 오류를 내고 중지를 하거나 (오류를 감안하고) 무시하고 진행해야 하는데, 그럴려면 훈련 세트의 인코딩 정보를 기억하고 테스트 세트에 적용할 장치가 필요합니다.</li>
 <li>기계적으로 <code>pandas.get_dummies()</code>를 훈련 세트, 테스트 세트에 따로 적용하면 안 된다는 말씀입니다.<br></li>
 </ul>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_8.png"></p>
+<p><img src="13_strat_8.png" alt=""></p>
 <ul>
 <li>훈련 데이터 기준으로 전처리기(preprocessor)를 세팅하고 머신러닝 모델을 학습해야 합니다.</li>
 </ul>
-<h3 id="1-2-층화추출-지원-함수"><a href="#1-2-층화추출-지원-함수" class="headerlink" title="1.2. 층화추출 지원 함수"></a>1.2. 층화추출 지원 함수</h3><ul>
-<li><p><code>scikit-learn</code>은 지정된 변수에 대한 층화추출을 여러 방식으로 지원합니다.</p>
+<h3 id="1-2-층화추출-지원-함수">1.2. 층화추출 지원 함수</h3>
+<ul>
+<li>
+<p><code>scikit-learn</code>은 지정된 변수에 대한 층화추출을 여러 방식으로 지원합니다.</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html"><code>StratifiedShuffleSplit()</code></a> : 층화추출 후 index를 반환합니다.</li>
 <li><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html"><code>StratifiedKFold()</code></a> : K Fold를 만든 후 index를 반환합니다.</li>
 <li><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split()</code></a> : 비율대로 분할한 데이터셋을 반환합니다.</li>
 </ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/89959711?Acode=101">핸즈온 머신러닝</a>의 캘리포니아 주택 가격 예제를 통해 Stratified Sampling 과 Random Sampling을 비교해보겠습니다.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/89959711?Acode=101">핸즈온 머신러닝</a>의 캘리포니아 주택 가격 예제를 통해 Stratified Sampling 과 Random Sampling을 비교해보겠습니다.</p>
 <ul>
 <li>핸즈온 머신러닝에서는 <code>StratifiedShuffleSplit()</code>을 사용했습니다.</li>
 <li>그러나 사용해보면 아시겠지만 <code>train_test_split()</code>이 더 편합니다.</li>
-<li>왜 굳이 <code>StratifiedShuffleSplit</code>을 쓴걸까 궁금했는데 이런 히스토리가 있었네요.<br><br><a target="_blank" rel="noopener" href="https://github.com/ageron/handson-ml/issues/385"><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_1.png" alt="집필 당시에는 train_test_split에 stratify가 없었답니다."></a></li>
+<li>왜 굳이 <code>StratifiedShuffleSplit</code>을 쓴걸까 궁금했는데 이런 히스토리가 있었네요.<br><br>
+<a target="_blank" rel="noopener" href="https://github.com/ageron/handson-ml/issues/385"><img src="13_strat_1.png" alt="집필 당시에는 train_test_split에 stratify가 없었답니다."></a></li>
 </ul>
 </li>
 </ul>
-<h2 id="2-Data-Load-and-Sampling"><a href="#2-Data-Load-and-Sampling" class="headerlink" title="2. Data Load and Sampling"></a>2. Data Load and Sampling</h2><ul>
+<h2 id="2-Data-Load-and-Sampling">2. Data Load and Sampling</h2>
+<ul>
 <li>글이 지나치게 길어지는 것을 막고자 데이터 로드 부분은 생갹하겠습니다.</li>
 <li>전체 코드는 <a href="13_sampling_10.ipynb">여기에서 받아보실 수 있습니다.</a></li>
 <li>핸즈온 책의 역자, <a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/02_end_to_end_machine_learning_project.ipynb">박해선님이 올려주신 colab 코드</a>를 보셔도 좋습니다.</li>
 </ul>
-<h3 id="2-1-Data-Load"><a href="#2-1-Data-Load" class="headerlink" title="2.1. Data Load"></a>2.1. Data Load</h3><ul>
+<h3 id="2-1-Data-Load">2.1. Data Load</h3>
+<ul>
 <li>원본 데이터에서 이상치에 해당하는 부분을 제거한 뒤의 비율은 다음과 같습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">housing_r = housing.copy()</span><br><span class="line">housing_r = housing_r[housing_r[<span class="string">&quot;housing_median_age&quot;</span>] &lt; housing_r[<span class="string">&quot;housing_median_age&quot;</span>].<span class="built_in">max</span>()]</span><br><span class="line">housing_r = housing_r[housing_r[<span class="string">&quot;median_house_value&quot;</span>] &lt; housing_r[<span class="string">&quot;median_house_value&quot;</span>].<span class="built_in">max</span>()]</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">5</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">15</span>,<span class="number">6</span>))</span><br><span class="line">ax = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, axi <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax):</span><br><span class="line">    axi.hist(housing_r[housing_r.columns[i]], bins=<span class="number">50</span>)</span><br><span class="line">    axi.set_title(housing_r.columns[i])</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_2.png"></p>
+<p><img src="13_strat_2.png" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">housing_r[<span class="string">&#x27;ocean_proximity&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_3.png"></p>
+<p><img src="13_strat_3.png" alt=""></p>
 <ul>
 <li>target 변수인 <code>median_house_value</code>와 가장 연관성이 높은 변수는 <code>median_income</code>입니다.</li>
 <li>아래 <code>fig, ax = plt.subplots()</code> 하단 대신 <code>sns.heatmap(cor, annot=True)</code> 한방이면 더 쉽게 변수별 연관성을 볼 수 있지만 bar plot으로 표현해 보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">columns = <span class="built_in">list</span>(housing_r)</span><br><span class="line">columns.reverse()</span><br><span class="line"></span><br><span class="line">cor = housing_r[columns].corr()</span><br><span class="line"></span><br><span class="line"><span class="comment"># sns.heatmap(cor, annot=True)</span></span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">sns.barplot(cor[<span class="string">&#x27;median_house_value&#x27;</span>], cor.index, ax=ax)</span><br><span class="line"></span><br><span class="line">xlim_min = np.inf</span><br><span class="line">xlim_max = -np.inf</span><br><span class="line"><span class="keyword">for</span> patch <span class="keyword">in</span> ax.patches:</span><br><span class="line">    <span class="keyword">if</span> patch.get_width() &gt;= <span class="number">0</span>:</span><br><span class="line">        text_x = patch.get_width()+<span class="number">0.06</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        text_x = patch.get_width()-<span class="number">0.08</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> text_x &gt; xlim_max:</span><br><span class="line">        xlim_max = text_x</span><br><span class="line">    <span class="keyword">if</span> text_x &lt; xlim_min:</span><br><span class="line">        xlim_min = text_x</span><br><span class="line">    text_y = patch.get_y()+<span class="number">0.5</span></span><br><span class="line">    text = <span class="string">f&#x27;<span class="subst">&#123;patch.get_width():<span class="number">0.2</span>f&#125;</span>&#x27;</span></span><br><span class="line">    ax.text(text_x, text_y, text, ha=<span class="string">&#x27;center&#x27;</span>)</span><br><span class="line">ax.set_xlim(xlim_min-<span class="number">0.1</span>, xlim_max+<span class="number">0.1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_4.png"></p>
-<h3 id="2-2-Data-Sampling"><a href="#2-2-Data-Sampling" class="headerlink" title="2.2. Data Sampling"></a>2.2. Data Sampling</h3><ul>
-<li>훈련&#x2F;테스트 세트를 나눌 때, 주요 변수인 <code>median_income</code>에 층화추출을 적용하겠습니다.</li>
+<p><img src="13_strat_4.png" alt=""></p>
+<h3 id="2-2-Data-Sampling">2.2. Data Sampling</h3>
+<ul>
+<li>훈련/테스트 세트를 나눌 때, 주요 변수인 <code>median_income</code>에 층화추출을 적용하겠습니다.</li>
 <li>그리고 <code>ocean_proximity</code>에도 함께 적용해서 층화추출 변수 추가 효과를 보겠습니다.</li>
 </ul>
-<h4 id="2-2-1-Data-Quantization-‘median-income’"><a href="#2-2-1-Data-Quantization-‘median-income’" class="headerlink" title="2.2.1. Data Quantization: ‘median_income’"></a>2.2.1. Data Quantization: ‘median_income’</h4><ul>
+<h4 id="2-2-1-Data-Quantization-‘median-income’">2.2.1. Data Quantization: ‘median_income’</h4>
+<ul>
 <li>층화추출 적용에 앞서 데이터 계층화를 수행합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">bins = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, np.inf]</span><br><span class="line">qlabels = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">housing_r[<span class="string">&#x27;income_cat&#x27;</span>] = pd.cut(</span><br><span class="line">    housing_r[<span class="string">&#x27;median_income&#x27;</span>], </span><br><span class="line">    bins=qbins, labels=qlabels</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">housing_r[<span class="string">&#x27;income_cat&#x27;</span>].hist(bins=np.linspace(-<span class="number">0.5</span>, <span class="number">10.5</span>, <span class="built_in">len</span>(qbins)*<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_5.png"></p>
-<h4 id="2-2-2-Data-Sampling-Random-and-Stratified-Sampling"><a href="#2-2-2-Data-Sampling-Random-and-Stratified-Sampling" class="headerlink" title="2.2.2. Data Sampling: Random and Stratified Sampling"></a>2.2.2. Data Sampling: Random and Stratified Sampling</h4><ul>
+<p><img src="13_strat_5.png" alt=""></p>
+<h4 id="2-2-2-Data-Sampling-Random-and-Stratified-Sampling">2.2.2. Data Sampling: Random and Stratified Sampling</h4>
+<ul>
 <li>먼저 임의추출을 수행해 봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">train_random, test_random = train_test_split(housing_r, test_size=<span class="number">0.3</span>,</span><br><span class="line">                                             random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>이번엔 층화추출을 수행합니다.</li>
 <li><code>train_test_split()</code>에 <code>stratify=변수명</code>을 넣어주면 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train_strat, test_strat = train_test_split(housing_r, test_size=<span class="number">0.3</span>, </span><br><span class="line">                                           random_state=<span class="number">42</span>, </span><br><span class="line">                                           stratify=housing_r[<span class="string">&#x27;income_cat&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>random seed를 고정해서 반복수행에도 동일한 결과가 나오도록 하였습니다.</li>
 <li>추출 결과를 비교해 보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">income_cat_proportions</span>(<span class="params">housing_r</span>):</span><br><span class="line">    <span class="keyword">return</span> housing_r[<span class="string">&quot;income_cat&quot;</span>].value_counts() / <span class="built_in">len</span>(housing_r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">compare_props = pd.DataFrame(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;Random&quot;</span>: test_random[<span class="string">&quot;income_cat&quot;</span>].value_counts(),</span><br><span class="line">        <span class="string">&quot;Stratified&quot;</span>: test_strat[<span class="string">&quot;income_cat&quot;</span>].value_counts(),</span><br><span class="line">        <span class="string">&quot;Overall (%)&quot;</span>: income_cat_proportions(housing_r) * <span class="number">100</span>,</span><br><span class="line">        <span class="string">&quot;Random (%)&quot;</span>: income_cat_proportions(test_random) * <span class="number">100</span>,</span><br><span class="line">        <span class="string">&quot;Stratified (%)&quot;</span>: income_cat_proportions(test_strat) * <span class="number">100</span>,</span><br><span class="line">    &#125;</span><br><span class="line">).sort_index()</span><br><span class="line"></span><br><span class="line">compare_props[<span class="string">&quot;Random %err&quot;</span>] = (</span><br><span class="line">    <span class="number">100</span> * compare_props[<span class="string">&quot;Random (%)&quot;</span>] / compare_props[<span class="string">&quot;Overall (%)&quot;</span>] - <span class="number">100</span></span><br><span class="line">)</span><br><span class="line">compare_props[<span class="string">&quot;Stratified %err&quot;</span>] = (</span><br><span class="line">    <span class="number">100</span> * compare_props[<span class="string">&quot;Stratified (%)&quot;</span>] / compare_props[<span class="string">&quot;Overall (%)&quot;</span>] - <span class="number">100</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">compare_props</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_6.png"><br></p>
+<p><img src="13_strat_6.png" alt=""><br></p>
 <ul>
 <li>random state가 동일함에도 불구하고 두 결과가 살짝 다릅니다.</li>
 <li>층화추출이 전체 데이터의 비율을 더 잘 반영하고 있습니다.</li>
 <li>아까 만든 income_cat 데이터는 용도를 다 했으니 지웁니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train_random = train_random.drop(<span class="string">&quot;income_cat&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">test_random = test_random.drop(<span class="string">&quot;income_cat&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">train_strat = train_strat.drop(<span class="string">&quot;income_cat&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">test_strat = test_strat.drop(<span class="string">&quot;income_cat&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">housing_r = housing_r.drop(<span class="string">&quot;income_cat&quot;</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>입력 인자(X)와 목표값(Y)을 분리합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Y_train_random = train_random[<span class="string">&#x27;median_house_value&#x27;</span>]</span><br><span class="line">X_train_random = train_random.drop(<span class="string">&#x27;median_house_value&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">Y_train_strat = train_strat[<span class="string">&#x27;median_house_value&#x27;</span>]</span><br><span class="line">X_train_strat = train_strat.drop(<span class="string">&#x27;median_house_value&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">Y_test_random = test_random[<span class="string">&#x27;median_house_value&#x27;</span>]</span><br><span class="line">X_test_random = test_random.drop(<span class="string">&#x27;median_house_value&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">Y_test_strat = test_strat[<span class="string">&#x27;median_house_value&#x27;</span>]</span><br><span class="line">X_test_strat = test_strat.drop(<span class="string">&#x27;median_house_value&#x27;</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>많은 코드에서 전체 데이터를 X와 Y로 먼저 분리한 후 <code>train_test_split()</code>을 이용해 훈련 세트와 테스트 세트를 만들지만 층화추출을 적용하려면 훈련&#x2F;테스트 세트를 먼저 분할해야 합니다.</li>
+<li>많은 코드에서 전체 데이터를 X와 Y로 먼저 분리한 후 <code>train_test_split()</code>을 이용해 훈련 세트와 테스트 세트를 만들지만 층화추출을 적용하려면 훈련/테스트 세트를 먼저 분할해야 합니다.</li>
 <li>이제 이 데이터를 이용한 머신러닝의 결과를 비교해 보겠습니다.</li>
 </ul>
-<h3 id="2-3-Preprocessing-Pipeline"><a href="#2-3-Preprocessing-Pipeline" class="headerlink" title="2.3. Preprocessing Pipeline"></a>2.3. Preprocessing Pipeline</h3><ul>
+<h3 id="2-3-Preprocessing-Pipeline">2.3. Preprocessing Pipeline</h3>
+<ul>
 <li>앞에서 범주형 변수를 처리하기 위해 인코딩을 한다고 말씀 드렸습니다.</li>
 <li>훈련 세트에 적용된 기준을 저장했다가 테스트 세트에 적용해야 한다고도 말씀 드렸습니다.</li>
 <li>이럴 때 사용하기 좋은 것이 <code>Pipeline()</code>입니다.</li>
@@ -352,24 +363,24 @@
 <li>범주형 데이터에 원핫 인코딩을 적용합니다.</li>
 </ol>
 <ul>
-<li><code>handle_unknown=&#39;ignore&#39;</code>: 테스트 세트에서 새로운 클래스를 만날 때 무시하라는 의미입니다.<br>  기본값인 ‘error’는 오류를 내면서 중지하라는 의미입니다.</li>
+<li><code>handle_unknown='ignore'</code>: 테스트 세트에서 새로운 클래스를 만날 때 무시하라는 의미입니다.<br>
+기본값인 'error’는 오류를 내면서 중지하라는 의미입니다.</li>
 <li><code>drop=None</code>: [0, 0, …, 0]으로 표기될 테스트 클래스의 새로운 클래스가 기존 클래스와 혼동되지 않도록 조치를 취합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">num_pipeline = Pipeline([(<span class="string">&quot;imputer&quot;</span>, SimpleImputer(strategy=<span class="string">&quot;median&quot;</span>)),</span><br><span class="line">                         (<span class="string">&quot;attribs_adder&quot;</span>, CombinedAttributesAdder()),</span><br><span class="line">                         (<span class="string">&quot;std_scaler&quot;</span>, StandardScaler()),])  </span><br><span class="line">cat_pipeline = Pipeline([(<span class="string">&quot;onehotencoder&quot;</span>, OneHotEncoder(handle_unknown=<span class="string">&#x27;ignore&#x27;</span>, drop=<span class="literal">None</span>))])</span><br><span class="line">full_pipeline = ColumnTransformer(</span><br><span class="line">    [(<span class="string">&quot;num&quot;</span>, num_pipeline, numcols), (<span class="string">&quot;cat&quot;</span>, cat_pipeline, catcols)]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>fit_transform()</code>으로 훈련 데이터를 이용한 인코더 설정<code>fit()</code>과 변수 변환<code>transform()</code>을 동시에 합니다.</li>
 <li>테스트 데이터는 훈련 데이터 기준으로 변환해야 하므로 <code>fit()</code>이 없는 <code>transform()</code>만 해야 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pipeline_random = deepcopy(full_pipeline)</span><br><span class="line">X_train_random_pre = pipeline_random.fit_transform(X_train_random)</span><br><span class="line">X_test_random_pre = pipeline_random.transform(X_test_random)</span><br><span class="line"></span><br><span class="line">pipeline_strat = deepcopy(full_pipeline)</span><br><span class="line">X_train_strat_pre = pipeline_strat.fit_transform(X_train_strat)</span><br><span class="line">X_test_strat_pre = pipeline_strat.transform(X_test_strat)</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Machine-Learning"><a href="#3-Machine-Learning" class="headerlink" title="3. Machine Learning"></a>3. Machine Learning</h2><ul>
+<h2 id="3-Machine-Learning">3. Machine Learning</h2>
+<ul>
 <li>본 글에선 머신러닝 모델링은 최소한의 노력으로 수행하겠습니다.</li>
 <li>모델은 hyperparameter를 고정한 <code>RandomForestRegressor</code>를, 평가 방식은 root mean squared error를 사용하겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-1-Overall-data"><a href="#3-1-Overall-data" class="headerlink" title="3.1. Overall data"></a>3.1. Overall data</h3><ul>
+<h3 id="3-1-Overall-data">3.1. Overall data</h3>
+<ul>
 <li>임의추출 방식</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rf_random = RandomForestRegressor(n_estimators=<span class="number">30</span>, max_features=<span class="number">8</span>, random_state=<span class="number">42</span>)</span><br><span class="line">rf_random.fit(X_train_random_pre, Y_train_random)</span><br><span class="line"></span><br><span class="line">Y_pred_random = rf_random.predict(X_test_random_pre)</span><br><span class="line">rmse_random = np.sqrt(mean_squared_error(Y_pred_random, Y_test_random))</span><br><span class="line"><span class="built_in">print</span>(rmse_random)</span><br></pre></td></tr></table></figure>
@@ -380,102 +391,139 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rf_strat = RandomForestRegressor(n_estimators=<span class="number">30</span>, max_features=<span class="number">8</span>, random_state=<span class="number">42</span>)</span><br><span class="line">rf_strat.fit(X_train_strat_pre, Y_train_strat)</span><br><span class="line"></span><br><span class="line">Y_pred_strat = rf_strat.predict(X_test_strat_pre)</span><br><span class="line">rmse_strat = np.sqrt(mean_squared_error(Y_pred_strat, Y_test_strat))</span><br><span class="line"><span class="built_in">print</span>(rmse_strat)</span><br></pre></td></tr></table></figure>
 <p>44743.58037848807<br></p>
 <ul>
-<li><p>층화추출 방식의 에러가 조금 더 적습니다.</p>
+<li>
+<p>층화추출 방식의 에러가 조금 더 적습니다.</p>
 </li>
-<li><p>그림으로 비교해 보면 어떨까요? </p>
+<li>
+<p>그림으로 비교해 보면 어떨까요?</p>
 </li>
-<li><p>코드는 생략합니다. <a href="13_sampling_10.ipynb">전체 코드</a>를 참고해주세요.<br><br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_comp_10.png"><br></p>
+<li>
+<p>코드는 생략합니다. <a href="13_sampling_10.ipynb">전체 코드</a>를 참고해주세요.<br><br>
+<img src="13_comp_10.png" alt=""><br></p>
 </li>
-<li><p>차이가 있는 듯 없는 듯 합니다.</p>
+<li>
+<p>차이가 있는 듯 없는 듯 합니다.</p>
 </li>
-<li><p>앞서 소득을 10개의 구간으로 세분화했으므로, 구간별 예측력을 살펴봅시다.</p>
+<li>
+<p>앞서 소득을 10개의 구간으로 세분화했으므로, 구간별 예측력을 살펴봅시다.</p>
 </li>
 </ul>
-<h3 id="3-2-data-by-bins"><a href="#3-2-data-by-bins" class="headerlink" title="3.2. data by bins"></a>3.2. data by bins</h3><ul>
+<h3 id="3-2-data-by-bins">3.2. data by bins</h3>
+<ul>
 <li>소득(<code>median_income</code>) 구간별 예측력을 분석해 보겠습니다.</li>
 <li>구간별 데이터를 <code>DataFrame</code>의 index로 접근해야 하니 리셋부터 해줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X_test_random.reset_index(drop=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">X_test_strat.reset_index(drop=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>그리고 구간별로 데이터를 따로따로 모아 분리해 줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Y_pred_random_bin = []</span><br><span class="line">Y_test_random_bin = []</span><br><span class="line">RMSE_random = []</span><br><span class="line"></span><br><span class="line">Y_pred_strat_bin = []</span><br><span class="line">Y_test_strat_bin = []</span><br><span class="line">RMSE_strat = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> qbin <span class="keyword">in</span> qbins:</span><br><span class="line">    <span class="keyword">if</span> qbin == qbins[-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        qbin_index = X_test_random.loc[X_test_random[<span class="string">&#x27;median_income&#x27;</span>] &gt;= qbin].loc[X_test_random[<span class="string">&#x27;median_income&#x27;</span>] &lt; qbin+<span class="number">1</span>].index</span><br><span class="line">        Y_pred_random_bin.append(Y_pred_random[qbin_index])</span><br><span class="line">        Y_test_random_bin.append(Y_test_random.iloc[qbin_index])</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(qbin_index) &gt; <span class="number">0</span>:</span><br><span class="line">            RMSE_random.append(np.sqrt(mean_squared_error(Y_pred_random_bin[-<span class="number">1</span>], Y_test_random_bin[-<span class="number">1</span>])))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            RMSE_random.append(np.inf)</span><br><span class="line">        </span><br><span class="line">        qbin_index = X_test_strat.loc[X_test_strat[<span class="string">&#x27;median_income&#x27;</span>] &gt;= qbin].loc[X_test_strat[<span class="string">&#x27;median_income&#x27;</span>] &lt; qbin+<span class="number">1</span>].index</span><br><span class="line">        Y_pred_strat_bin.append(Y_pred_strat[qbin_index])</span><br><span class="line">        Y_test_strat_bin.append(Y_test_strat.iloc[qbin_index])</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(qbin_index) &gt; <span class="number">0</span>:</span><br><span class="line">            RMSE_strat.append(np.sqrt(mean_squared_error(Y_pred_strat_bin[-<span class="number">1</span>], Y_test_strat_bin[-<span class="number">1</span>])))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            RMSE_strat.append(np.inf)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>seaborn에서 bar plot을 그릴 수 있도록 데이터프레임으로 묶어줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">df_RMSE_random = pd.DataFrame(&#123;<span class="string">&#x27;RMSE&#x27;</span>: RMSE_random,</span><br><span class="line">                               <span class="string">&#x27;sampling&#x27;</span>: [<span class="string">&#x27;random&#x27;</span>] * <span class="built_in">len</span>(RMSE_random),</span><br><span class="line">                               <span class="string">&#x27;bin&#x27;</span>: qlabels</span><br><span class="line">                              &#125;)</span><br><span class="line">df_RMSE_strat = pd.DataFrame(&#123;<span class="string">&#x27;RMSE&#x27;</span>: RMSE_strat,</span><br><span class="line">                              <span class="string">&#x27;sampling&#x27;</span>: [<span class="string">&#x27;stratified&#x27;</span>] * <span class="built_in">len</span>(RMSE_strat),</span><br><span class="line">                              <span class="string">&#x27;bin&#x27;</span>: qlabels</span><br><span class="line">                              &#125;)</span><br><span class="line">df_RMSE = pd.concat([df_RMSE_random, df_RMSE_strat], axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">df_sampling_random = pd.DataFrame(&#123;<span class="string">&#x27;sampling&#x27;</span>: [<span class="string">&#x27;random&#x27;</span>]*compare_props.shape[<span class="number">0</span>],</span><br><span class="line">                               <span class="string">&#x27;error(%)&#x27;</span>: compare_props[<span class="string">&quot;Random %err&quot;</span>],</span><br><span class="line">                               <span class="string">&#x27;bin&#x27;</span>: qlabels</span><br><span class="line">                              &#125;)</span><br><span class="line">df_sampling_strat = pd.DataFrame(&#123;<span class="string">&#x27;sampling&#x27;</span>: [<span class="string">&#x27;stratified&#x27;</span>]*compare_props.shape[<span class="number">0</span>],</span><br><span class="line">                              <span class="string">&#x27;error(%)&#x27;</span>: compare_props[<span class="string">&quot;Stratified %err&quot;</span>],</span><br><span class="line">                              <span class="string">&#x27;bin&#x27;</span>: qlabels</span><br><span class="line">                              &#125;)</span><br><span class="line">df_sampling = pd.concat([df_sampling_random, df_sampling_strat], axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>), sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sns.barplot(x=compare_props.index, y=<span class="string">&quot;Overall (%)&quot;</span>, data=compare_props, ax=ax[<span class="number">0</span>], color=<span class="string">&#x27;C3&#x27;</span>)</span><br><span class="line">sns.barplot(x=<span class="string">&quot;bin&quot;</span>, y=<span class="string">&quot;error(%)&quot;</span>, hue=<span class="string">&quot;sampling&quot;</span>, data=df_sampling, ax=ax[<span class="number">1</span>])</span><br><span class="line">sns.barplot(x=<span class="string">&quot;bin&quot;</span>, y=<span class="string">&quot;RMSE&quot;</span>, hue=<span class="string">&quot;sampling&quot;</span>, data=df_RMSE, ax=ax[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> axi <span class="keyword">in</span> ax:</span><br><span class="line">    axi.set_xlabel(<span class="string">&#x27;bins&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_comp_10_bins.png"><br></p>
+<p><img src="13_comp_10_bins.png" alt=""><br></p>
 <ul>
 <li>가운데 그림에서 앞서 보았던, 층화추출의 적은 추출 오차율이 한눈에 보입니다.</li>
 <li>그러나 무색하게도 맨 오른쪽 그림을 보면, 첫번째와 9번째 구간에서 층화추출의 오차가 매우 큽니다. 층화추출 결과가 눈에 띄게 좋은 구간은 10번째 구간 뿐이고 나머지는 비슷비슷하네요.</li>
 </ul>
-<h2 id="4-Statistical-Analysis"><a href="#4-Statistical-Analysis" class="headerlink" title="4. Statistical Analysis"></a>4. Statistical Analysis</h2><ul>
-<li><p>편한 임의추출 방식을 놔두고 층화추출을 했는데 에러가 커지니 속이 상합니다.</p>
+<h2 id="4-Statistical-Analysis">4. Statistical Analysis</h2>
+<ul>
+<li>
+<p>편한 임의추출 방식을 놔두고 층화추출을 했는데 에러가 커지니 속이 상합니다.</p>
 </li>
-<li><p>혹시 <code>train_test_split()</code>에 사용된 <code>random_state</code>에 따라 왔다갔다 하는 건 아닐까요? 층화추출이 전체 데이터의 비율을 더 잘 반영하는 것은 자명하니, 임의추출에서 어쩌다 <b>무의미한</b> 높은 성능이 나온 것은 아닐까요?</p>
+<li>
+<p>혹시 <code>train_test_split()</code>에 사용된 <code>random_state</code>에 따라 왔다갔다 하는 건 아닐까요? 층화추출이 전체 데이터의 비율을 더 잘 반영하는 것은 자명하니, 임의추출에서 어쩌다 <b>무의미한</b> 높은 성능이 나온 것은 아닐까요?</p>
 </li>
-<li><p><code>random_state</code>만 바꿔가면서 100번 돌려서, 층화추출을 1개 변수(<code>median_income</code>)와 2개 변수(<code>median_income</code>, <code>ocean_proximity</code>)에 적용한 경우를 비교해 봤습니다.</p>
+<li>
+<p><code>random_state</code>만 바꿔가면서 100번 돌려서, 층화추출을 1개 변수(<code>median_income</code>)와 2개 변수(<code>median_income</code>, <code>ocean_proximity</code>)에 적용한 경우를 비교해 봤습니다.</p>
 </li>
-<li><p>여기, 층화추출시 한 가지 주의사항이 더 붙습니다.</p>
+<li>
+<p>여기, 층화추출시 한 가지 주의사항이 더 붙습니다.</p>
 </li>
-<li><p>변수 하나만 층화추출할 때는 그래도 괜찮은데 : <code>median_income</code><br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_9.png"><br></p>
+<li>
+<p>변수 하나만 층화추출할 때는 그래도 괜찮은데 : <code>median_income</code><br>
+<img src="13_strat_9.png" alt=""><br></p>
 </li>
-<li><p>변수 두 개로 층화추출을 실시하면 and 조건으로 인해 원소가 매우 작은 집합이 생깁니다.</p>
+<li>
+<p>변수 두 개로 층화추출을 실시하면 and 조건으로 인해 원소가 매우 작은 집합이 생깁니다.</p>
 </li>
-<li><p>이러면 <code>train_test_split()</code>같은 scikit-learn 제공 분할 메소드에서 에러를 낼 수 있습니다.</p>
+<li>
+<p>이러면 <code>train_test_split()</code>같은 scikit-learn 제공 분할 메소드에서 에러를 낼 수 있습니다.</p>
 </li>
-<li><p><b>원소가 최소 두 개는 되어야 한다</b>면서 프로그램이 다운되어 버립니다.<br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_10.png"><br></p>
+<li>
+<p><b>원소가 최소 두 개는 되어야 한다</b>면서 프로그램이 다운되어 버립니다.<br>
+<img src="13_strat_10.png" alt=""><br></p>
 </li>
 </ul>
-<h3 id="4-1-Visualization"><a href="#4-1-Visualization" class="headerlink" title="4.1. Visualization"></a>4.1. Visualization</h3><ul>
+<h3 id="4-1-Visualization">4.1. Visualization</h3>
+<ul>
 <li>violin plot을 split 할 때 seaborn을 사용하면 편리하지만 numpy 버전이 14 이상일 경우 작동되지 않는 버그가 발생하기도 합니다.</li>
 <li>다소 성가시지만 matplotlib을 이용해 수동으로 구현했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.patches <span class="keyword">as</span> mpatches</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">violin</span>(<span class="params">df1, df2, filename, title</span>):</span><br><span class="line">    fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    labels = []</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add_label</span>(<span class="params">violin, label</span>):</span><br><span class="line">        color = violin[<span class="string">&quot;bodies&quot;</span>][<span class="number">0</span>].get_facecolor().flatten()</span><br><span class="line">        labels.append((mpatches.Patch(color=color), label))</span><br><span class="line">    </span><br><span class="line">    parts1 = ax.violinplot([df1[col] <span class="keyword">for</span> col <span class="keyword">in</span> df1.columns], showextrema=<span class="literal">False</span>, positions=qlabels)</span><br><span class="line">    <span class="keyword">for</span> i, pc <span class="keyword">in</span> <span class="built_in">enumerate</span>(parts1[<span class="string">&#x27;bodies&#x27;</span>]):</span><br><span class="line">        m = np.mean(pc.get_paths()[<span class="number">0</span>].vertices[:, <span class="number">0</span>])</span><br><span class="line">        pc.get_paths()[<span class="number">0</span>].vertices[:, <span class="number">0</span>] = np.clip(pc.get_paths()[<span class="number">0</span>].vertices[:, <span class="number">0</span>], -np.inf, m)</span><br><span class="line">        pc.set_facecolor(<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">        pc.set_edgecolor(<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    ax.errorbar(x=np.array(qlabels)-<span class="number">0.1</span>, y=df1.mean(axis=<span class="number">0</span>), yerr = df1.std(axis=<span class="number">0</span>), </span><br><span class="line">                fmt=<span class="string">&#x27;o&#x27;</span>, mec=<span class="string">&#x27;b&#x27;</span>, mew=<span class="number">2</span>, mfc=<span class="string">&#x27;w&#x27;</span>, ms=<span class="number">5</span>, lw=<span class="number">2</span>, c=<span class="string">&#x27;b&#x27;</span></span><br><span class="line">               )</span><br><span class="line">    </span><br><span class="line">    parts2 = ax.violinplot([df2[col] <span class="keyword">for</span> col <span class="keyword">in</span> df2.columns], showextrema=<span class="literal">False</span>, positions=qlabels)</span><br><span class="line">    <span class="keyword">for</span> i, pc <span class="keyword">in</span> <span class="built_in">enumerate</span>(parts2[<span class="string">&#x27;bodies&#x27;</span>]):</span><br><span class="line">        m = np.mean(pc.get_paths()[<span class="number">0</span>].vertices[:, <span class="number">0</span>])</span><br><span class="line">        pc.get_paths()[<span class="number">0</span>].vertices[:, <span class="number">0</span>] = np.clip(pc.get_paths()[<span class="number">0</span>].vertices[:, <span class="number">0</span>], m, np.inf)</span><br><span class="line">        pc.set_facecolor(<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">        pc.set_edgecolor(<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">    ax.errorbar(x=np.array(qlabels)+<span class="number">0.1</span>, y=df2.mean(axis=<span class="number">0</span>), yerr = df2.std(axis=<span class="number">0</span>), </span><br><span class="line">                fmt=<span class="string">&#x27;o&#x27;</span>, mec=<span class="string">&#x27;r&#x27;</span>, mew=<span class="number">2</span>, mfc=<span class="string">&#x27;w&#x27;</span>, ms=<span class="number">5</span>, lw=<span class="number">2</span>, c=<span class="string">&#x27;r&#x27;</span></span><br><span class="line">               )</span><br><span class="line">    </span><br><span class="line">    ax.set_xticks(qlabels)</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;bins&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;RMSE&quot;</span>)</span><br><span class="line">    ax.set_title(title, pad=<span class="number">10</span>)</span><br><span class="line">    </span><br><span class="line">    add_label(parts1, <span class="string">&quot;random&quot;</span>)  </span><br><span class="line">    add_label(parts2, <span class="string">&quot;stratify&quot;</span>)  </span><br><span class="line">    ax.legend(*<span class="built_in">zip</span>(*labels), loc=<span class="number">9</span>)</span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    fig.savefig(filename)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_11.png" alt="1변수 층화추출"><br></p>
-<p><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_12.png" alt="2변수 층화추출"><br></p>
-<h3 id="4-2-Test-on-Variances-and-Means"><a href="#4-2-Test-on-Variances-and-Means" class="headerlink" title="4.2. Test on Variances and Means"></a>4.2. Test on Variances and Means</h3><ul>
+<p><img src="13_strat_11.png" alt="1변수 층화추출"><br></p>
+<p><img src="13_strat_12.png" alt="2변수 층화추출"><br></p>
+<h3 id="4-2-Test-on-Variances-and-Means">4.2. Test on Variances and Means</h3>
+<ul>
 <li>육안으로는 차이를 구분하기 힘듭니다만 임의추출과 층화추출간 평균과 분산이 같은지 확인해 보겠습니다.</li>
 <li>분산 비교는 <code>scipy.stats</code>에 포함된 3가지의 등분산 검정-<code>bartlett()</code>, <code>fligner()</code>, <code>levene()</code>을, 평균 비교는 T 검정 중 독립표본 T 검정-<code>ttest_inds()</code>을 이용하겠습니다.<br></li>
 <li>p-value가 0.05 미만일 경우 분산 또는 평균이 다르다고 가정하여, 0.05를 기준으로 DataFrame의 글자 색상을 다르게 넣어주도록 했습니다. 동일하면 빨간색, 다르면 파란색.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> stats</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">color_test</span>(<span class="params">val</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Takes a scalar and returns a string with</span></span><br><span class="line"><span class="string">    the css property `&#x27;color: red&#x27;` for negative</span></span><br><span class="line"><span class="string">    strings, black otherwise.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    color = <span class="string">&#x27;blue&#x27;</span> <span class="keyword">if</span> val &lt; <span class="number">0.05</span> <span class="keyword">else</span> <span class="string">&#x27;red&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;color: %s&#x27;</span> % color</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">vartest</span>(<span class="params">df1, df2</span>):</span><br><span class="line">    columns = df1.columns</span><br><span class="line">    df_var = pd.DataFrame(columns=columns)</span><br><span class="line"></span><br><span class="line">    bartlett = [stats.bartlett(df1[col], df2[col])[<span class="number">1</span>] <span class="keyword">for</span> col <span class="keyword">in</span> columns]</span><br><span class="line">    fligner = [stats.fligner(df1[col], df2[col])[<span class="number">1</span>] <span class="keyword">for</span> col <span class="keyword">in</span> columns]</span><br><span class="line">    levene = [stats.levene(df1[col], df2[col])[<span class="number">1</span>] <span class="keyword">for</span> col <span class="keyword">in</span> columns] </span><br><span class="line"></span><br><span class="line">    df_var.loc[<span class="string">&#x27;bartlett&#x27;</span>] = bartlett</span><br><span class="line">    df_var.loc[<span class="string">&#x27;fligner&#x27;</span>] = fligner</span><br><span class="line">    df_var.loc[<span class="string">&#x27;levene&#x27;</span>] = levene</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df_var</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">meantest</span>(<span class="params">df1, df2, equal_var</span>):</span><br><span class="line">    columns = df1.columns</span><br><span class="line">    df_mean = pd.DataFrame(columns=columns)</span><br><span class="line"></span><br><span class="line">    ttest = [stats.ttest_ind(df1[col], df2[col], equal_var=equal_var)[<span class="number">1</span>] <span class="keyword">for</span> col <span class="keyword">in</span> columns]</span><br><span class="line"> </span><br><span class="line">    df_mean.loc[<span class="string">&#x27;ttest_ind&#x27;</span>] = ttest</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> df_mean</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-2-1-1변수-층화추출"><a href="#4-2-1-1변수-층화추출" class="headerlink" title="4.2.1. 1변수 층화추출"></a>4.2.1. 1변수 층화추출</h4><ul>
-<li><p>등분산 검정결과<br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_13.png"><br></p>
+<h4 id="4-2-1-1변수-층화추출">4.2.1. 1변수 층화추출</h4>
+<ul>
+<li>
+<p>등분산 검정결과<br>
+<img src="13_strat_13.png" alt=""><br></p>
 </li>
-<li><p>T 검정 결과<br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_14.png"><br></p>
+<li>
+<p>T 검정 결과<br>
+<img src="13_strat_14.png" alt=""><br></p>
 </li>
-<li><p>평균과 분산 모두 임의추출과 층화추출이 동일하다는 결론입니다.</p>
-</li>
-</ul>
-<h4 id="4-2-2-2변수-층화추출"><a href="#4-2-2-2변수-층화추출" class="headerlink" title="4.2.2. 2변수 층화추출"></a>4.2.2. 2변수 층화추출</h4><ul>
-<li><p>등분산 검정결과<br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_15.png"><br></p>
-</li>
-<li><p>T 검정 결과<br><img src="/2020/05/11/Python-DS-13-stratified_sampling/13_strat_16.png"><br></p>
-</li>
-<li><p>마찬가지로 추출 방식에 무관하다는 결론입니다.</p>
+<li>
+<p>평균과 분산 모두 임의추출과 층화추출이 동일하다는 결론입니다.</p>
 </li>
 </ul>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><ul>
-<li><p>결과적으로, 본 예제에서는 임의추출과 층화추출간 유의차를 발견하기 힘듭니다.</p>
+<h4 id="4-2-2-2변수-층화추출">4.2.2. 2변수 층화추출</h4>
+<ul>
+<li>
+<p>등분산 검정결과<br>
+<img src="13_strat_15.png" alt=""><br></p>
 </li>
-<li><p>때로는 임의추출과 유의차가 없다는 것 또한 배움이겠죠. :)</p>
+<li>
+<p>T 검정 결과<br>
+<img src="13_strat_16.png" alt=""><br></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://medium.com/@dhivyarao94/stratified-sampling-machine-learning-b622189ae77">비슷한 비교를 한 다른 분</a>의 결과에서도 층화추출의 예측력이 증대되지는 않았다는 결과가 있으나, 재밌게도 여기서는 <b>층화추출의 경우 훈련과 학습에 소요되는 시간이 줄어들었다</b>고 합니다.</p>
+<li>
+<p>마찬가지로 추출 방식에 무관하다는 결론입니다.</p>
 </li>
-<li><p>층화추출은 높은 점수보다는 <b>결과에 대한 신뢰성</b>을 위해 사용하는 방법입니다.</p>
+</ul>
+<h2 id="5-Conclusion">5. Conclusion</h2>
+<ul>
+<li>
+<p>결과적으로, 본 예제에서는 임의추출과 층화추출간 유의차를 발견하기 힘듭니다.</p>
 </li>
-<li><p>임의추출도 데이터 비율을 상당히 반영하기 때문에 신뢰성이 없다고 할 수 없지만 층화추출만큼 체계적이라 말하기 힘듭니다.</p>
+<li>
+<p>때로는 임의추출과 유의차가 없다는 것 또한 배움이겠죠. :)</p>
 </li>
-<li><p>임의추출에서 층화추출과 유사한 결과를 얻었다 하더라도, 직접적으로 비교를 하지 않는 이상 개선의 여지가 있어 보이는 우연으로 느껴질 수 밖에요.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@dhivyarao94/stratified-sampling-machine-learning-b622189ae77">비슷한 비교를 한 다른 분</a>의 결과에서도 층화추출의 예측력이 증대되지는 않았다는 결과가 있으나, 재밌게도 여기서는 <b>층화추출의 경우 훈련과 학습에 소요되는 시간이 줄어들었다</b>고 합니다.</p>
 </li>
-<li><p>파이프라인에 익숙하지 않으신 분이라면 층화추출 과정이 번거롭다고 느껴질 수 있겠지만 임의추출이라고 계층화 정도가 생략될 뿐, 과정이 달라지지는 않습니다.</p>
+<li>
+<p>층화추출은 높은 점수보다는 <b>결과에 대한 신뢰성</b>을 위해 사용하는 방법입니다.</p>
 </li>
-<li><p>테스트세트를 가린 채 훈련 세트의 데이터 분포 기준으로 테스트 세트에도 동일한 기준의 전처리를 해야 하고, 그러자면 파이프라인만큼 효과적인 것이 없기에 <b>파이프라인 구축은 습관을 들여야 합니다</b>.</p>
+<li>
+<p>임의추출도 데이터 비율을 상당히 반영하기 때문에 신뢰성이 없다고 할 수 없지만 층화추출만큼 체계적이라 말하기 힘듭니다.</p>
+</li>
+<li>
+<p>임의추출에서 층화추출과 유사한 결과를 얻었다 하더라도, 직접적으로 비교를 하지 않는 이상 개선의 여지가 있어 보이는 우연으로 느껴질 수 밖에요.</p>
+</li>
+<li>
+<p>파이프라인에 익숙하지 않으신 분이라면 층화추출 과정이 번거롭다고 느껴질 수 있겠지만 임의추출이라고 계층화 정도가 생략될 뿐, 과정이 달라지지는 않습니다.</p>
+</li>
+<li>
+<p>테스트세트를 가린 채 훈련 세트의 데이터 분포 기준으로 테스트 세트에도 동일한 기준의 전처리를 해야 하고, 그러자면 파이프라인만큼 효과적인 것이 없기에 <b>파이프라인 구축은 습관을 들여야 합니다</b>.</p>
 </li>
 </ul>
 
@@ -495,7 +543,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/05/11/Python-DS-13-stratified_sampling/" data-id="cuidkIRMDn-m5t09KRzp8PYog" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/05/11/Python-DS-13-stratified_sampling/" data-id="cuidJn_5soHYVPqGXqPqf_tHC" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -579,10 +627,13 @@
 
 References
 
-wikipedia: Stratified SamplingWhen should you choose Stratified sampling over random sampling?핸즈온 머신러닝 (2판)핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook
+wikipedia: Stratified Sampling
+When should you choose Stratified sampling over random sampling?
+핸즈온 머신러닝 (2판)
+핸즈온 머신러닝 (2판): 2장 - 머신러닝 프로젝트 처음부터 끝까지 notebook
 
-1. Int",
-        "wordCount": 3655
+1. ",
+        "wordCount": 3563
     }
 </script>
 
@@ -679,6 +730,26 @@ wikipedia: Stratified SamplingWhen should you choose Stratified sampling over ra
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -753,26 +824,6 @@ wikipedia: Stratified SamplingWhen should you choose Stratified sampling over ra
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,class" />
     
-    <meta name="description" content="시각화의 대상은 데이터만이 아닙니다. 데이터를 비롯해 이름, 단위를 써줘야 하고 데이터를의 분석결과를 함께, 또는 따로 강조해서 그려야 합니다. 데이터마다 붙는 꼬리표와 파생변수를 클래스를 이용해서 정리해 봅시다.  1. 데이터 10만개 정도의 상자 데이터가 있습니다. 길이(length), 너비(width), 높이(height)가 있고, 여기로부터 입체">
+    <meta name="description" content="시각화의 대상은 데이터만이 아닙니다. 데이터를 비롯해 이름, 단위를 써줘야 하고 데이터를의 분석결과를 함께, 또는 따로 강조해서 그려야 합니다. 데이터마다 붙는 꼬리표와 파생변수를 클래스를 이용해서 정리해 봅시다.  1. 데이터  10만개 정도의 상자 데이터가 있습니다. 길이(length), 너비(width), 높이(height)가 있고, 여기로부터 입체">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Plot with Variable Class">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/01/28/Python-DS-59-plot_class/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="시각화의 대상은 데이터만이 아닙니다. 데이터를 비롯해 이름, 단위를 써줘야 하고 데이터를의 분석결과를 함께, 또는 따로 강조해서 그려야 합니다. 데이터마다 붙는 꼬리표와 파생변수를 클래스를 이용해서 정리해 봅시다.  1. 데이터 10만개 정도의 상자 데이터가 있습니다. 길이(length), 너비(width), 높이(height)가 있고, 여기로부터 입체">
+<meta property="og:description" content="시각화의 대상은 데이터만이 아닙니다. 데이터를 비롯해 이름, 단위를 써줘야 하고 데이터를의 분석결과를 함께, 또는 따로 강조해서 그려야 합니다. 데이터마다 붙는 꼬리표와 파생변수를 클래스를 이용해서 정리해 봅시다.  1. 데이터  10만개 정도의 상자 데이터가 있습니다. 길이(length), 너비(width), 높이(height)가 있고, 여기로부터 입체">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/59_plot_class_0.png">
 <meta property="article:published_time" content="2021-01-27T23:18:00.000Z">
@@ -235,45 +235,50 @@
 <li>데이터를의 분석결과를 함께, 또는 따로 강조해서 그려야 합니다.</li>
 <li>데이터마다 붙는 꼬리표와 파생변수를 클래스를 이용해서 정리해 봅시다.</li>
 </ul>
-<h1 id="1-데이터"><a href="#1-데이터" class="headerlink" title="1. 데이터"></a>1. 데이터</h1><ul>
+<h1>1. 데이터</h1>
+<ul>
 <li><a href="box.pkl">10만개 정도의 상자 데이터</a>가 있습니다.</li>
 <li><b>길이(length)</b>, <b>너비(width)</b>, <b>높이(height)</b>가 있고,</li>
 <li>여기로부터 <b>입체 대각선(diagonal)</b>, <b>표면적(area)의 역수</b>, <b>부피(area)의 역수</b>가 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;paper&quot;</span>)</span><br><span class="line"></span><br><span class="line">df = pd.read_pickle(<span class="string">&quot;box.pkl&quot;</span>)</span><br><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/01/28/Python-DS-59-plot_class/59_plot_class_1.png"></p>
-<h1 id="2-시각화"><a href="#2-시각화" class="headerlink" title="2. 시각화"></a>2. 시각화</h1><ul>
+<p><img src="59_plot_class_1.png" alt=""></p>
+<h1>2. 시각화</h1>
+<ul>
 <li>데이터의 분포를 확인합니다.</li>
 <li><b>x축 이름</b>을 제대로 써주고, <b>단위</b>까지 달아줍니다.</li>
 </ul>
-<h2 id="2-1-기존-방식"><a href="#2-1-기존-방식" class="headerlink" title="2.1. 기존 방식"></a>2.1. 기존 방식</h2><ul>
+<h2 id="2-1-기존-방식">2.1. 기존 방식</h2>
+<ul>
 <li><b>이름</b>과 <b>단위</b>를 list로 받아서 for loop에 axes와 함께 <code>zip</code>으로 넣어주는 것이 가장 효과적입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># general</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">9</span>, <span class="number">6</span>), sharey=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line">names = [<span class="string">&quot;Length&quot;</span>, <span class="string">&quot;Width&quot;</span>, <span class="string">&quot;Height&quot;</span>, <span class="string">&quot;Diagonal&quot;</span>, <span class="string">&quot;Volume$^&#123;-1&#125;$&quot;</span>, <span class="string">&quot;Diagonal&quot;</span>]</span><br><span class="line">units = [<span class="string">&quot;$cm$&quot;</span>, <span class="string">&quot;$cm$&quot;</span>, <span class="string">&quot;$cm$&quot;</span>, <span class="string">&quot;$cm$&quot;</span>, <span class="string">&quot;$cm^&#123;-2&#125;$&quot;</span>, <span class="string">&quot;$cm^&#123;-3&#125;$&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, col, name, unit <span class="keyword">in</span> <span class="built_in">zip</span>(axs, df.columns, names, units):</span><br><span class="line">    ax.hist(df[col], facecolor=<span class="string">&quot;skyblue&quot;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span> [<span class="subst">&#123;unit&#125;</span>]&quot;</span>)</span><br><span class="line">    </span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/01/28/Python-DS-59-plot_class/59_hist1D_general.png"><br></p>
+<p><img src="59_hist1D_general.png" alt=""><br></p>
 <ul>
-<li><p>나름 깔끔하다고 볼 수 있지만, 위험이 있습니다.</p>
+<li>
+<p>나름 깔끔하다고 볼 수 있지만, 위험이 있습니다.</p>
 <ol>
 <li><b>데이터 종류</b>가 많아지면 names와 units에서 적절한걸 찾아가기 힘듭니다.</li>
 <li><b>데이터 순서</b>가 바뀌면 names와 units 배열 순서를 바꿔야 합니다. 헷갈립니다.</li>
-<li>for loop 안에 <b>데이터프레임</b>과 names, units가 함께 돌고 있습니다.<br>  나쁘지 않지만 머리 속에 <b>세 가지</b>를 넣어야 합니다.</li>
+<li>for loop 안에 <b>데이터프레임</b>과 names, units가 함께 돌고 있습니다.<br>
+나쁘지 않지만 머리 속에 <b>세 가지</b>를 넣어야 합니다.</li>
 </ol>
 </li>
-<li><p>혼동을 줄이고 코드를 깔끔하게 보완해 봅시다.</p>
+<li>
+<p>혼동을 줄이고 코드를 깔끔하게 보완해 봅시다.</p>
 </li>
 </ul>
-<h2 id="2-2-class-사용"><a href="#2-2-class-사용" class="headerlink" title="2.2. class 사용"></a>2.2. <code>class</code> 사용</h2><ul>
+<h2 id="2-2-class-사용">2.2. <code>class</code> 사용</h2>
+<ul>
 <li>python의 class는 장점이 많습니다.</li>
 <li>인스턴스 하나 안에 여러 속성을 담을 수 있고, 점(.)으로 접근하기 쉽습니다.</li>
 <li><b>Feature</b>라는 클래스를 만들어 변수들을 담아봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Feature</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name=<span class="literal">None</span>, data=<span class="literal">None</span>, unit=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.name = name  <span class="comment"># str</span></span><br><span class="line">        <span class="variable language_">self</span>.data = data  <span class="comment"># numpy.array</span></span><br><span class="line">        <span class="variable language_">self</span>.unit = unit  <span class="comment"># str</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_name</span>(<span class="params">self, name</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name = name</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_data</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_unit</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="variable language_">self</span>.unit = unit</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>클래스를 사용해서 인스턴스를 찍어내 봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 인스턴스 만들기. name과 unit은 생성시 설정</span></span><br><span class="line">X0 = Feature(<span class="string">&quot;Length&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X1 = Feature(<span class="string">&quot;Width&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X2 = Feature(<span class="string">&quot;Height&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X3 = Feature(<span class="string">&quot;Diagonal&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X4 = Feature(<span class="string">&quot;Surf.Area$^&#123;-1&#125;$&quot;</span>, unit=<span class="string">&quot;$cm^&#123;-2&#125;$&quot;</span>)</span><br><span class="line">X5 = Feature(<span class="string">&quot;Volume$^&#123;-1&#125;$&quot;</span>, unit=<span class="string">&quot;$cm^&#123;-3&#125;$&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인스턴스 관리를 위한 list 생성</span></span><br><span class="line">Xs = [X0, X1, X2, X3, X4, X5] </span><br><span class="line"></span><br><span class="line"><span class="comment"># 인스턴스 list를 이용해서 데이터 담기</span></span><br><span class="line"><span class="keyword">for</span> X, col <span class="keyword">in</span> <span class="built_in">zip</span>(Xs, df.columns):</span><br><span class="line">    X.set_data(df[col].values)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>의도대로 잘 들어갔는지 확인합니다.</li>
 </ul>
@@ -286,38 +291,40 @@
 <li>색깔만 바꾸어 그립니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># class</span></span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, nrows=<span class="number">2</span>, figsize=(<span class="number">9</span>, <span class="number">6</span>), sharey=<span class="literal">True</span>)</span><br><span class="line">axs = axes.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, X <span class="keyword">in</span> <span class="built_in">zip</span>(axs, Xs):</span><br><span class="line">    ax.hist(X.data, facecolor=<span class="string">&quot;orange&quot;</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">f&quot;<span class="subst">&#123;X.name&#125;</span> [<span class="subst">&#123;X.unit&#125;</span>]&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/01/28/Python-DS-59-plot_class/59_hist1D.png"><br></p>
+<p><img src="59_hist1D.png" alt=""><br></p>
 <ul>
 <li>섞여있던 데이터프레임과 units, names 리스트가 <b>Feature class X를 중심으로 정리되었습니다.</b></li>
 </ul>
-<h1 id="3-클래스-활용-데이터-전처리"><a href="#3-클래스-활용-데이터-전처리" class="headerlink" title="3. 클래스 활용 데이터 전처리"></a>3. 클래스 활용 데이터 전처리</h1><ul>
+<h1>3. 클래스 활용 데이터 전처리</h1>
+<ul>
 <li>클래스 안에서 함수를 사용할 수 있습니다.</li>
 <li>바꾸어 말하면, <b>데이터를 넣는 순간 인자 추출과 같은 간단한 전처리가 가능</b>하다는 뜻입니다.</li>
 </ul>
-<h2 id="3-1-데이터-전처리-함수-추가"><a href="#3-1-데이터-전처리-함수-추가" class="headerlink" title="3.1. 데이터 전처리 함수 추가"></a>3.1. 데이터 전처리 함수 추가</h2><ul>
+<h2 id="3-1-데이터-전처리-함수-추가">3.1. 데이터 전처리 함수 추가</h2>
+<ul>
 <li>클래스 함수를 조금 바꿔봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_stats</span>(<span class="params">data</span>):</span><br><span class="line">    minval = data.<span class="built_in">min</span>()</span><br><span class="line">    maxval = data.<span class="built_in">max</span>()</span><br><span class="line">    rangeval = maxval - minval</span><br><span class="line">    leftval = minval - <span class="number">0.1</span>*rangeval</span><br><span class="line">    rightval = maxval + <span class="number">0.1</span>*rangeval</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> minval, maxval, rangeval, leftval, rightval</span><br><span class="line">        </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Feature</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name=<span class="literal">None</span>, data=<span class="literal">None</span>, unit=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.name = name  <span class="comment"># str</span></span><br><span class="line">        <span class="variable language_">self</span>.data = data  <span class="comment"># numpy.array</span></span><br><span class="line">        <span class="variable language_">self</span>.unit = unit  <span class="comment"># str</span></span><br><span class="line">        <span class="comment"># simple statistics</span></span><br><span class="line">        <span class="keyword">if</span> data:</span><br><span class="line">            <span class="variable language_">self</span>.<span class="built_in">min</span>, <span class="variable language_">self</span>.<span class="built_in">max</span>, <span class="variable language_">self</span>.<span class="built_in">range</span>, <span class="variable language_">self</span>.left, <span class="variable language_">self</span>.right = get_stats(<span class="variable language_">self</span>.data)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_name</span>(<span class="params">self, name</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name = name</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_data</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = data</span><br><span class="line">        <span class="variable language_">self</span>.<span class="built_in">min</span>, <span class="variable language_">self</span>.<span class="built_in">max</span>, <span class="variable language_">self</span>.<span class="built_in">range</span>, <span class="variable language_">self</span>.left, <span class="variable language_">self</span>.right = get_stats(<span class="variable language_">self</span>.data)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_unit</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="variable language_">self</span>.unit = unit</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>set_data</code>부분이 바뀌었습니다.</li>
 <li>데이터를 읽어들이면 <code>get_stats()</code>함수가 적용되어 최소값, 최대값, 범위에 이어 <b>10% 마진 포함한 범위</b>가 계산됩니다.</li>
 <li>아까와 똑같이 데이터를 읽어주고,</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 인스턴스 만들기. name과 unit은 생성시 설정</span></span><br><span class="line">X0 = Feature(<span class="string">&quot;Length&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X1 = Feature(<span class="string">&quot;Width&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X2 = Feature(<span class="string">&quot;Height&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X3 = Feature(<span class="string">&quot;Diagonal&quot;</span>, unit=<span class="string">&quot;$cm$&quot;</span>)</span><br><span class="line">X4 = Feature(<span class="string">&quot;Surf.Area$^&#123;-1&#125;$&quot;</span>, unit=<span class="string">&quot;$cm^&#123;-2&#125;$&quot;</span>)</span><br><span class="line">X5 = Feature(<span class="string">&quot;Volume$^&#123;-1&#125;$&quot;</span>, unit=<span class="string">&quot;$cm^&#123;-3&#125;$&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 인스턴스 관리를 위한 list 생성</span></span><br><span class="line">Xs = [X0, X1, X2, X3, X4, X5] </span><br><span class="line"></span><br><span class="line"><span class="comment"># 인스턴스 list를 이용해서 데이터 담기</span></span><br><span class="line"><span class="keyword">for</span> X, col <span class="keyword">in</span> <span class="built_in">zip</span>(Xs, df.columns):</span><br><span class="line">    X.set_data(df[col].values)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>간단한 통계처리 결과를 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#simple statistics</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;X2.min = <span class="subst">&#123;X2.<span class="built_in">min</span>&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;X2.max = <span class="subst">&#123;X2.<span class="built_in">max</span>&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;X2.range = <span class="subst">&#123;X2.<span class="built_in">range</span>&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;X2.left = <span class="subst">&#123;X2.left&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;X2.right = <span class="subst">&#123;X2.right&#125;</span>&quot;</span>)</span><br><span class="line">````</span><br><span class="line">    * 실행 결과: 데이터를 넣기만 했는데 추가인자가 추출되었습니다.</span><br><span class="line">    ```bash</span><br><span class="line">    X2.<span class="built_in">min</span> = <span class="number">88.0199983215</span></span><br><span class="line">    X2.<span class="built_in">max</span> = <span class="number">219.97999786399998</span></span><br><span class="line">    X2.<span class="built_in">range</span> = <span class="number">131.9599995425</span></span><br><span class="line">    X2.left = <span class="number">74.82399836725</span></span><br><span class="line">    X2.right = <span class="number">233.17599781824998</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-1-자동-전처리-활용-시각화"><a href="#3-1-자동-전처리-활용-시각화" class="headerlink" title="3.1. 자동 전처리 활용 시각화"></a>3.1. 자동 전처리 활용 시각화</h2><ul>
+<h2 id="3-1-자동-전처리-활용-시각화">3.1. 자동 전처리 활용 시각화</h2>
+<ul>
 <li>matplotlib은 그림을 그리면 어느 정도 자동으로 x, y 범위를 설정합니다.</li>
 <li>하지만 내 목적에 따라 일일이 범위를 지정해줘야 할 때가 있습니다.</li>
 <li><b>클래스에서 뽑아놓은 범위(10% 마진)를 적용합시다.</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">9</span>, <span class="number">4</span>), constrained_layout=<span class="literal">True</span>) <span class="comment">#, gridspec_kw=&#123;&quot;width_ratios&quot;:[8,8,8,1]&#125;)</span></span><br><span class="line"></span><br><span class="line">xs = [X3, X4, X5]</span><br><span class="line">ys = [X4, X5, X3]</span><br><span class="line">c = X2</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax, x, y <span class="keyword">in</span> <span class="built_in">zip</span>(axs[:<span class="number">3</span>], xs, ys):</span><br><span class="line">    </span><br><span class="line">    im = ax.scatter(x.data, y.data, c=c.data, cmap=<span class="string">&quot;Reds&quot;</span>, s=<span class="number">10</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">f&quot;<span class="subst">&#123;x.name&#125;</span> [<span class="subst">&#123;x.unit&#125;</span>]&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">f&quot;<span class="subst">&#123;y.name&#125;</span> [<span class="subst">&#123;y.unit&#125;</span>]&quot;</span>)</span><br><span class="line">    ax.set_xlim(x.left, x.right)</span><br><span class="line">    ax.set_ylim(y.left, y.right)</span><br><span class="line"></span><br><span class="line">cbar = fig.colorbar(im, ax=axs, location=<span class="string">&quot;top&quot;</span>, aspect=<span class="number">40</span>, shrink=<span class="number">1</span>)</span><br><span class="line">cbar.set_label(<span class="string">f&quot;<span class="subst">&#123;c.name&#125;</span> [<span class="subst">&#123;c.unit&#125;</span>]&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/01/28/Python-DS-59-plot_class/59_scatter.png"><br></p>
-<h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
+<p><img src="59_scatter.png" alt=""><br></p>
+<h1>4. 결론</h1>
+<ul>
 <li><b>인자마다 비슷한 처리를 반복해야 한다면</b> 클래스가 좋은 해법일 수 있습니다.</li>
 <li>히스토그램 범위와 구간 경계 추출, 잡음 제거(smoothing), 미분과 적분 등 활용처는 무궁무진합니다.</li>
 <li>각자 용도에 맞게 잘 사용하시면 좋겠습니다.</li>
@@ -339,7 +346,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/01/28/Python-DS-59-plot_class/" data-id="cuidzBVCFy6mAiOnSw8870u__" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/01/28/Python-DS-59-plot_class/" data-id="cuidscJCCmq6U9kk80O6aKUiB" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -424,10 +431,11 @@
 데이터마다 붙는 꼬리표와 파생변수를 클래스를 이용해서 정리해 봅시다.
 
 1. 데이터
+
 10만개 정도의 상자 데이터가 있습니다.
 길이(length), 너비(width), 높이(height)가 있고,
-여기로부터 입체 ",
-        "wordCount": 1551
+여기로부터 입체",
+        "wordCount": 1506
     }
 </script>
 
@@ -524,6 +532,26 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -598,26 +626,6 @@
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

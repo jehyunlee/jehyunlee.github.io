@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,3D" />
     
-    <meta name="description" content="자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다. 어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다. 저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다. 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.  1. 데이터 준비 wikipedia: Spherical co">
+    <meta name="description" content="자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다. 어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다. 저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다. 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.  1. 데이터 준비  wikipedia: Spherical c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3D curved surfaces">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다. 어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다. 저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다. 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.  1. 데이터 준비 wikipedia: Spherical co">
+<meta property="og:description" content="자주 있는 일은 아니지만 3차원 곡면을 그릴 때가 있습니다. 어떤 분은 원자를 표현하느라, 또는 쇠구슬을 표현하느라 구가 필요할지도 모릅니다. 저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다. 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.  1. 데이터 준비  wikipedia: Spherical c">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/84_sphere_0.png">
 <meta property="article:published_time" content="2021-09-03T08:42:00.000Z">
@@ -234,31 +234,41 @@
 <li>저는 업무상 태양이 하늘에 떠 있는 지점을 고민할 때가 많아서 반구가 필요합니다.</li>
 <li>과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.</li>
 </ul>
-<h1 id="1-데이터-준비"><a href="#1-데이터-준비" class="headerlink" title="1. 데이터 준비"></a>1. 데이터 준비</h1><blockquote>
+<h1>1. 데이터 준비</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Spherical_coordinate_system">wikipedia: Spherical coordinate system</a></p>
 </blockquote>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_00.png" alt="wikipedia: 구면 좌표계"><br></p>
+<p><img src="84_sphere_00.png" alt="wikipedia: 구면 좌표계"><br></p>
 <ul>
 <li>구나 반구를 그리려면 구면 좌표계로 정의된 데이터가 필요합니다.</li>
 <li>간단한 삼각함수를 사용해서 구면 데이터를 만듭니다.</li>
 <li><b>방위각</b>(azimuthal angle, $\theta$)과 <b>극고도각</b>(polar angle, $\varphi$)을 나열한 뒤 여기에 아래 수식을 적용합니다.</li>
 </ul>
-<p>$$<br>\begin{aligned}<br>x &amp;&#x3D; r \cos{\varphi} \sin{\theta}\\<br>y &amp;&#x3D; r \sin{\varphi} \sin{\theta}\\<br>z &amp;&#x3D; r \cos{\theta}<br>\end{aligned}$$</p>
+<p>$$<br>
+\begin{aligned}<br>
+x &amp;= r \cos{\varphi} \sin{\theta}\\<br>
+y &amp;= r \sin{\varphi} \sin{\theta}\\<br>
+z &amp;= r \cos{\theta}<br>
+\end{aligned}$$</p>
 <ul>
 <li>코드로는 이렇게 정리됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># angles</span></span><br><span class="line">polars = np.linspace(<span class="number">0</span>, <span class="number">180</span>, <span class="number">19</span>)</span><br><span class="line">azimuths = np.linspace(<span class="number">0</span>, <span class="number">360</span>, <span class="number">37</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># points</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(product(polars, azimuths), columns=[<span class="string">&quot;azi&quot;</span>, <span class="string">&quot;polar&quot;</span>])</span><br><span class="line">df[<span class="string">&quot;x&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;y&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.sin(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;z&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
 <ul>
-<li>실행 결과<br><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_05.png"><br></li>
+<li>실행 결과<br>
+<img src="84_sphere_05.png" alt=""><br></li>
 </ul>
-<h1 id="2-3D-곡면-도형-그리기"><a href="#2-3D-곡면-도형-그리기" class="headerlink" title="2. 3D 곡면 도형 그리기"></a>2. 3D 곡면 도형 그리기</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/mplot3d/surface3d.html">matplotlib: 3D surface (colormap)</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html?highlight=plot_surface#mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface">matplotlib: mpl_toolkits.mplot3d.axes3d.Axes3D</a></p>
+<h1>2. 3D 곡면 도형 그리기</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/mplot3d/surface3d.html">matplotlib: 3D surface (colormap)</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html?highlight=plot_surface#mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface">matplotlib: mpl_toolkits.mplot3d.axes3d.Axes3D</a></p>
 </blockquote>
 <ul>
 <li>주어진 데이터로 만들어지는 3D 표면 형상을 만드는데는 <code>.plot_surface()</code>가 적격입니다.</li>
 <li>앞서 만든 데이터로 구(sphere)와 반구(hemisphere)를 만들어봅시다.</li>
 </ul>
-<h2 id="2-1-sphere"><a href="#2-1-sphere" class="headerlink" title="2.1. sphere"></a>2.1. sphere</h2><ul>
+<h2 id="2-1-sphere">2.1. sphere</h2>
+<ul>
 <li>우리가 만든 좌표가 이미 구의 좌표입니다.</li>
 <li>방위각 $\varphi$를 0도에서 360도, 극고도각 $\theta$를 0도에서 180도까지 변화시켰고, 이는 3차원 공간의 모든 방향에 해당되기 때문입니다.</li>
 <li>그렇다면 남은 일은, DataFrame에 1차원으로 들어있는 각각의 좌표를 차원에 맞게 2차원으로 바꿔주는 것 뿐입니다.</li>
@@ -266,7 +276,7 @@
 <li>matplotlib은 구면좌표계가 아니라 직교좌표계를 사용합니다. x, y, z로 변환합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_06.png"><br></p>
+<p><img src="84_sphere_06.png" alt=""><br></p>
 <ul>
 <li>구가 그려졌습니다.</li>
 <li>그런데 z축 방향으로 조금 찌그러져서 납작한 느낌이 나네요.</li>
@@ -274,37 +284,40 @@
 <li>matplotlib 3차원 Axes(<code>Axes3D</code>)에서 aspect ratio를 지정하는 명령은 <code>.set_box_aspect()</code>입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_07.png"><br></p>
-<h2 id="2-2-partial-sphere"><a href="#2-2-partial-sphere" class="headerlink" title="2.2. partial sphere"></a>2.2. partial sphere</h2><ul>
+<p><img src="84_sphere_07.png" alt=""><br></p>
+<h2 id="2-2-partial-sphere">2.2. partial sphere</h2>
+<ul>
 <li>극좌표계를 사용해서 구의 일부를 쪼개볼 수도 있습니다.</li>
 <li><code>plot_surface()</code>안에 넣는 x, y, z에다 slicing을 추가하면 됩니다.</li>
 <li><b>극고도각은 전체 범위를 사용하고 방위각은 마지막 9개를 사용하지 않겠다</b>고 하면 이런 그림이 그려집니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_08.png"><br></p>
-<h2 id="2-3-선-색깔-조정"><a href="#2-3-선-색깔-조정" class="headerlink" title="2.3. 선 색깔 조정"></a>2.3. 선 색깔 조정</h2><ul>
+<p><img src="84_sphere_08.png" alt=""><br></p>
+<h2 id="2-3-선-색깔-조정">2.3. 선 색깔 조정</h2>
+<ul>
 <li>우리는 지금 <b>면</b>을 그리고 있습니다.</li>
 <li>따라서 <b><code>edgecolor</code> (<code>ec</code>)</b>, <b><code>linestyle</code> (<code>ls</code>)</b>, <b><code>linewidth</code> (<code>lw</code>)</b>가 적용됩니다.</li>
 <li>불필요한 axis도 지워버립시다. 명령은 똑같이 <code>ax.axis(False)</code>입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>, ls=<span class="string">&quot;:&quot;</span>,</span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_09.png"><br></p>
+<p><img src="84_sphere_09.png" alt=""><br></p>
 <ul>
 <li>아까보다 한결 깔끔해 보입니다.</li>
 </ul>
-<h2 id="2-4-면-색깔-조정"><a href="#2-4-면-색깔-조정" class="headerlink" title="2.4. 면 색깔 조정"></a>2.4. 면 색깔 조정</h2><ul>
+<h2 id="2-4-면-색깔-조정">2.4. 면 색깔 조정</h2>
+<ul>
 <li>면 색깔을 지정하는 매개변수는 <code>color</code>입니다.</li>
 <li><code>colors=&quot;g&quot;</code>처럼 색상을 의미하는 약어나 숫자를 넣으면 적용됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>, ls=<span class="string">&quot;:&quot;</span>,</span><br><span class="line">                color=<span class="string">&quot;g&quot;</span>,</span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_10.png"><br></p>
+<p><img src="84_sphere_10.png" alt=""><br></p>
 <ul>
 <li>조명 방향도 바꿀 수 있습니다.</li>
 <li><code>matplotlib.colors</code>의 <code>LightSource</code> 클래스를 사용해 조명 방향을 지정합니다.</li>
 <li>두 개의 인자로 방위각과 극고도각을 도(degree) 단위로 입력합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.colors <span class="keyword">import</span> LightSource</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>,</span><br><span class="line">                        figsize=(<span class="number">15</span>, <span class="number">5</span>), </span><br><span class="line">                        constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">lightsources = [LightSource(<span class="number">30</span>, <span class="number">30</span>), LightSource(-<span class="number">30</span>, <span class="number">60</span>), LightSource(<span class="number">0</span>, <span class="number">0</span>)]</span><br><span class="line">titles = [<span class="string">&quot;azi: 30, polar: 30&quot;</span>, <span class="string">&quot;azi: -30, polar: 60&quot;</span>, <span class="string">&quot;azi: 0, polar: 0&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> ax, ls, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, lightsources, titles):</span><br><span class="line">    ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                    ec=<span class="string">&quot;none&quot;</span>, lw=<span class="number">0</span>, ls=<span class="string">&quot;-&quot;</span>,</span><br><span class="line">                    color=<span class="string">&quot;w&quot;</span>, lightsource=ls,</span><br><span class="line">                    alpha=<span class="number">1</span>)</span><br><span class="line">    ax.set_title(title, fontsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line">    ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_12.png"><br></p>
+<p><img src="84_sphere_12.png" alt=""><br></p>
 <ul>
 <li>멋진 그라데이션을 입히고 싶다면 <code>cmap</code> 매개변수를 사용할 수 있습니다.</li>
 <li>z축 방향 값에 따른 그라데이션이 매겨집니다.</li>
@@ -312,24 +325,26 @@
 <li>다만 <b><code>cmap</code></b>과 <b><code>lightsource</code></b>는 <b>함께 쓰일 수 없으니</b> 유의해야 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">5</span>, <span class="number">5</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                       subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line">ax.plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>))[:,:-<span class="number">9</span>], </span><br><span class="line">                ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>, ls=<span class="string">&quot;:&quot;</span>,</span><br><span class="line">                cmap=<span class="string">&quot;inferno&quot;</span>,</span><br><span class="line">                alpha=<span class="number">0.3</span>)</span><br><span class="line">ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_11.png"><br></p>
-<h1 id="3-응용"><a href="#3-응용" class="headerlink" title="3. 응용"></a>3. 응용</h1><h2 id="3-1-구와-반구"><a href="#3-1-구와-반구" class="headerlink" title="3.1. 구와 반구"></a>3.1. 구와 반구</h2><blockquote>
+<p><img src="84_sphere_11.png" alt=""><br></p>
+<h1>3. 응용</h1>
+<h2 id="3-1-구와-반구">3.1. 구와 반구</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16488182/removing-axes-margins-in-3d-plot">stackoverflow: Axes3D 여백 없애기</a></p>
 </blockquote>
 <ul>
 <li>구와 반구를 동시에 그려봅니다.</li>
-<li>구는 위에서 만든 코드를 그대로 사용하면 되고, </li>
+<li>구는 위에서 만든 코드를 그대로 사용하면 되고,</li>
 <li>반구는 극고도각을 절반만 사용하면 됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, </span><br><span class="line">                        figsize=(<span class="number">10</span>, <span class="number">5</span>), </span><br><span class="line">                        constrained_layout=<span class="literal">True</span>, </span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># sphere</span></span><br><span class="line">axs[<span class="number">0</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hemisphere</span></span><br><span class="line">axs[<span class="number">1</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.5</span>))</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;hemisphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;X&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;Y&quot;</span>)</span><br><span class="line">    ax.set_zlabel(<span class="string">&quot;Z&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_01.png"><br></p>
+<p><img src="84_sphere_01.png" alt=""><br></p>
 <ul>
 <li>X, Y, Z축 범위가 -1~1을 약간 벗어나 있습니다.</li>
 <li>matplotlib 기본 설정 문제입니다.</li>
 <li>이를 해결하려면 위 코드에서 fig, axs를 생성한 뒤에 짧은 코드를 추가합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d.axis3d <span class="keyword">import</span> Axis</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(Axis, <span class="string">&quot;_get_coord_info_old&quot;</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_coord_info_new</span>(<span class="params">self, renderer</span>):</span><br><span class="line">        mins, maxs, centers, deltas, tc, highs = <span class="variable language_">self</span>._get_coord_info_old(renderer)</span><br><span class="line">        mins += deltas / <span class="number">4</span></span><br><span class="line">        maxs -= deltas / <span class="number">4</span></span><br><span class="line">        <span class="keyword">return</span> mins, maxs, centers, deltas, tc, highs</span><br><span class="line">    Axis._get_coord_info_old = Axis._get_coord_info  </span><br><span class="line">    Axis._get_coord_info = _get_coord_info_new</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_02.png"><br></p>
+<p><img src="84_sphere_02.png" alt=""><br></p>
 <ul>
 <li>동서남북, 그리고 상하를 잇는 수직선을 그립니다.</li>
 <li>좌표 원점이라고 봐도 됩니다.</li>
@@ -339,51 +354,66 @@
 <li>동서남북을 나타내는 N, E, W, S도 적당한 위치에 넣어줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, </span><br><span class="line">                        figsize=(<span class="number">10</span>, <span class="number">5</span>), </span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Axes3D 딱 붙이기</span></span><br><span class="line"><span class="comment"># https://stackoverflow.com/questions/16488182/removing-axes-margins-in-3d-plot</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d.axis3d <span class="keyword">import</span> Axis</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(Axis, <span class="string">&quot;_get_coord_info_old&quot;</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_coord_info_new</span>(<span class="params">self, renderer</span>):</span><br><span class="line">        mins, maxs, centers, deltas, tc, highs = <span class="variable language_">self</span>._get_coord_info_old(renderer)</span><br><span class="line">        mins += deltas / <span class="number">4</span></span><br><span class="line">        maxs -= deltas / <span class="number">4</span></span><br><span class="line">        <span class="keyword">return</span> mins, maxs, centers, deltas, tc, highs</span><br><span class="line">    Axis._get_coord_info_old = Axis._get_coord_info  </span><br><span class="line">    Axis._get_coord_info = _get_coord_info_new</span><br><span class="line"></span><br><span class="line"><span class="comment"># sphere</span></span><br><span class="line">axs[<span class="number">0</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].values.reshape((<span class="number">19</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.1</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line">axs[<span class="number">0</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;sphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># hemisphere</span></span><br><span class="line">axs[<span class="number">1</span>].plot_surface(df[<span class="string">&quot;x&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;y&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    df[<span class="string">&quot;z&quot;</span>].iloc[:<span class="number">370</span>].values.reshape((<span class="number">10</span>, <span class="number">37</span>)), </span><br><span class="line">                    cmap=<span class="string">&quot;viridis&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.1</span>, </span><br><span class="line">                    alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">1</span>].set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">0.5</span>))</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;hemisphere&quot;</span>, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    ax.set_xlabel(<span class="string">&quot;X&quot;</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">&quot;Y&quot;</span>)</span><br><span class="line">    ax.set_zlabel(<span class="string">&quot;Z&quot;</span>)</span><br><span class="line">    ax.view_init(azim=<span class="number">235</span>)</span><br><span class="line">    <span class="comment"># make margins</span></span><br><span class="line">    ax.margins(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># center axis</span></span><br><span class="line">    zmin = -<span class="number">1</span> <span class="keyword">if</span> ax == axs[<span class="number">0</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    ax.plot([-<span class="number">1.1</span>, <span class="number">1.1</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.plot([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [-<span class="number">1.1</span>, <span class="number">1.1</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.plot([<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [zmin, <span class="number">1</span>], c=<span class="string">&quot;k&quot;</span>, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.plot([<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1.1</span>], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ax == axs[<span class="number">0</span>]:</span><br><span class="line">        ax.plot([-<span class="number">1</span>, -<span class="number">1.1</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">3</span>)</span><br><span class="line">        ax.plot([<span class="number">0</span>, <span class="number">0</span>], [-<span class="number">1</span>, -<span class="number">1.1</span>], [<span class="number">0</span>, <span class="number">0</span>], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">3</span>)</span><br><span class="line">     </span><br><span class="line">    <span class="comment"># 동서남북 표시</span></span><br><span class="line">    font_text = &#123;<span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="number">15</span>, <span class="string">&quot;ha&quot;</span>:<span class="string">&quot;center&quot;</span>, <span class="string">&quot;va&quot;</span>:<span class="string">&quot;center&quot;</span>&#125;</span><br><span class="line">    ax.text(-<span class="number">1.4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;W&quot;</span>, transform=ax.transData, fontdict=font_text)</span><br><span class="line">    ax.text(<span class="number">1.4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;E&quot;</span>, transform=ax.transData, fontdict=font_text)</span><br><span class="line">    ax.text(<span class="number">0</span>, <span class="number">1.4</span>, <span class="number">0</span>, <span class="string">&quot;N&quot;</span>, transform=ax.transData, fontdict=font_text, zorder=-<span class="number">10</span>)</span><br><span class="line">    ax.text(<span class="number">0</span>, -<span class="number">1.4</span>, <span class="number">0</span>, <span class="string">&quot;S&quot;</span>, transform=ax.transData, fontdict=font_text)</span><br><span class="line">    ax.axis(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_04.png"><br></p>
-<h2 id="3-2-magnetocrystalline-anisotropy"><a href="#3-2-magnetocrystalline-anisotropy" class="headerlink" title="3.2. magnetocrystalline anisotropy"></a>3.2. magnetocrystalline anisotropy</h2><blockquote>
+<p><img src="84_sphere_04.png" alt=""><br></p>
+<h2 id="3-2-magnetocrystalline-anisotropy">3.2. magnetocrystalline anisotropy</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy">wikipedia: magnetocrystalline anisotropy</a></p>
 </blockquote>
 <ul>
-<li><p>결정자기이방성(magnetocrystalline anisotropy)이라는 말을 들어보신 분은 거의 없으실 겁니다.</p>
+<li>
+<p>결정자기이방성(magnetocrystalline anisotropy)이라는 말을 들어보신 분은 거의 없으실 겁니다.</p>
 </li>
-<li><p>자성(magnetism)을 공부할 때 나오는 용어인데, <b>방위에 따라 다른 에너지</b>라고 대충 넘어가셔도 좋습니다.</p>
+<li>
+<p>자성(magnetism)을 공부할 때 나오는 용어인데, <b>방위에 따라 다른 에너지</b>라고 대충 넘어가셔도 좋습니다.</p>
 </li>
-<li><p>중요한 것은 이번엔 <b>구나 반구가 아니라 울퉁불퉁한 모양</b>을 만들 것이라는 점입니다.</p>
+<li>
+<p>중요한 것은 이번엔 <b>구나 반구가 아니라 울퉁불퉁한 모양</b>을 만들 것이라는 점입니다.</p>
 </li>
-<li><p>원리는 간단합니다.</p>
+<li>
+<p>원리는 간단합니다.</p>
 </li>
-<li><p>이 글의 처음에서 구면좌표계는 다음과 같은 식으로 표현된다고 했습니다.</p>
+<li>
+<p>이 글의 처음에서 구면좌표계는 다음과 같은 식으로 표현된다고 했습니다.</p>
 </li>
 </ul>
-<p>$$<br>\begin{aligned}<br>x &amp;&#x3D; r \cos{\varphi} \sin{\theta}\\<br>y &amp;&#x3D; r \sin{\varphi} \sin{\theta}\\<br>z &amp;&#x3D; r \cos{\theta}<br>\end{aligned}$$</p>
+<p>$$<br>
+\begin{aligned}<br>
+x &amp;= r \cos{\varphi} \sin{\theta}\\<br>
+y &amp;= r \sin{\varphi} \sin{\theta}\\<br>
+z &amp;= r \cos{\theta}<br>
+\end{aligned}$$</p>
 <ul>
-<li><p>앞에서는 $r &#x3D; 1$로 두었지만, 여기서는 $r &#x3D; f(\varphi, \theta)$입니다.</p>
+<li>
+<p>앞에서는 $r = 1$로 두었지만, 여기서는 $r = f(\varphi, \theta)$입니다.</p>
 </li>
-<li><p>방위각과 극고도각을 이용해서 물질마다 다르게 r을 정의합니다.</p>
+<li>
+<p>방위각과 극고도각을 이용해서 물질마다 다르게 r을 정의합니다.</p>
 </li>
-<li><p>모양이 울퉁불퉁한만큼 아까 10도 단위로 쪼갠 공간을 이번엔 5도 단위로 쪼갭니다.</p>
+<li>
+<p>모양이 울퉁불퉁한만큼 아까 10도 단위로 쪼갠 공간을 이번엔 5도 단위로 쪼갭니다.</p>
 </li>
-<li><p>자세한 설명은 생략하고 결과 그림과 코드만 간략히 보여드리겠습니다.</p>
+<li>
+<p>자세한 설명은 생략하고 결과 그림과 코드만 간략히 보여드리겠습니다.</p>
 </li>
-<li><p>5도 단위로 공간 분할</p>
+<li>
+<p>5도 단위로 공간 분할</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># angles</span></span><br><span class="line">polars = np.linspace(<span class="number">0</span>, <span class="number">179</span>, <span class="number">37</span>)</span><br><span class="line">azimuths = np.linspace(<span class="number">0</span>, <span class="number">360</span>, <span class="number">73</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># points</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(product(polars, azimuths), columns=[<span class="string">&quot;azi&quot;</span>, <span class="string">&quot;polar&quot;</span>])</span><br><span class="line">df[<span class="string">&quot;x&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;y&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.sin(np.deg2rad(x[<span class="number">1</span>]))*np.sin(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br><span class="line">df[<span class="string">&quot;z&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: np.cos(np.deg2rad(x[<span class="number">0</span>])), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>방향에 따른 $r$ 계산: 자기이방성 에너지</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 자기이방성 계수 K1, K2</span></span><br><span class="line">K1_Co = <span class="number">45</span></span><br><span class="line">K2_Co = <span class="number">15</span></span><br><span class="line"></span><br><span class="line">K1_Fe = <span class="number">4.8</span></span><br><span class="line">K2_Fe = <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">K1_Ni = -<span class="number">0.5</span> </span><br><span class="line">K2_Ni = -<span class="number">0.2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 방향에 따른 자기이방성 에너지 계산.</span></span><br><span class="line"><span class="comment"># 그림을 그리는 것이 목적이므로 보기 좋도록 적절히 스케일링</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calc_uni</span>(<span class="params">K1, K2, df</span>):</span><br><span class="line">    <span class="keyword">return</span> K1*(df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span> + df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calc_cubic</span>(<span class="params">K1, K2, df</span>):</span><br><span class="line">    <span class="keyword">return</span> K1*(df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span> + \</span><br><span class="line">               df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;z&quot;</span>]**<span class="number">2</span> + \</span><br><span class="line">               df[<span class="string">&quot;z&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span>) + \</span><br><span class="line">           K2*(df[<span class="string">&quot;x&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;y&quot;</span>]**<span class="number">2</span> * df[<span class="string">&quot;z&quot;</span>]**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;E_Co&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: calc_uni(K1_Co, K2_Co, x), axis=<span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">df[<span class="string">&quot;E_Fe&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: calc_cubic(K1_Fe, K2_Fe, x), axis=<span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">df[<span class="string">&quot;E_Ni&quot;</span>] = df.apply(<span class="keyword">lambda</span> x: calc_cubic(K1_Ni, K2_Ni, x), axis=<span class="number">1</span>)*<span class="number">3</span> +<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 극좌표계를 직교좌표계로 변환</span></span><br><span class="line">df[<span class="string">&quot;x_Co&quot;</span>] = df[<span class="string">&quot;E_Co&quot;</span>] * df[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;y_Co&quot;</span>] = df[<span class="string">&quot;E_Co&quot;</span>] * df[<span class="string">&quot;y&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;z_Co&quot;</span>] = df[<span class="string">&quot;E_Co&quot;</span>] * df[<span class="string">&quot;z&quot;</span>]</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;x_Fe&quot;</span>] = df[<span class="string">&quot;E_Fe&quot;</span>] * df[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;y_Fe&quot;</span>] = df[<span class="string">&quot;E_Fe&quot;</span>] * df[<span class="string">&quot;y&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;z_Fe&quot;</span>] = df[<span class="string">&quot;E_Fe&quot;</span>] * df[<span class="string">&quot;z&quot;</span>]</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;x_Ni&quot;</span>] = df[<span class="string">&quot;E_Ni&quot;</span>] * df[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;y_Ni&quot;</span>] = df[<span class="string">&quot;E_Ni&quot;</span>] * df[<span class="string">&quot;y&quot;</span>]</span><br><span class="line">df[<span class="string">&quot;z_Ni&quot;</span>] = df[<span class="string">&quot;E_Ni&quot;</span>] * df[<span class="string">&quot;z&quot;</span>]</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>세 가지 물질(Co, Fe, Ni)의 자기이방성 에너지 시각화</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, </span><br><span class="line">                        figsize=(<span class="number">15</span>, <span class="number">6</span>), </span><br><span class="line">                       constrained_layout=<span class="literal">True</span>,</span><br><span class="line">                        subplot_kw=&#123;<span class="string">&quot;projection&quot;</span>:<span class="string">&quot;3d&quot;</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> ax, mat <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;Co&quot;</span>, <span class="string">&quot;Fe&quot;</span>, <span class="string">&quot;Ni&quot;</span>]):</span><br><span class="line">    ax.plot_surface(df[<span class="string">f&quot;x_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,:-<span class="number">19</span>], </span><br><span class="line">                    df[<span class="string">f&quot;y_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,:-<span class="number">19</span>], </span><br><span class="line">                    df[<span class="string">f&quot;z_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,:-<span class="number">19</span>], </span><br><span class="line">                    ec=<span class="string">&quot;k&quot;</span>, lw=<span class="number">0.2</span>,</span><br><span class="line">                    color=<span class="string">&quot;w&quot;</span>, lightsource=LightSource(<span class="number">0</span>, <span class="number">10</span>),</span><br><span class="line">                    alpha=<span class="number">1</span>)</span><br><span class="line">    ax.plot(df[<span class="string">f&quot;x_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,-<span class="number">20</span>], </span><br><span class="line">            df[<span class="string">f&quot;y_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,-<span class="number">20</span>], </span><br><span class="line">            df[<span class="string">f&quot;z_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,-<span class="number">20</span>], </span><br><span class="line">            c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">    ax.plot(df[<span class="string">f&quot;x_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,<span class="number">0</span>], </span><br><span class="line">            df[<span class="string">f&quot;y_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,<span class="number">0</span>], </span><br><span class="line">            df[<span class="string">f&quot;z_<span class="subst">&#123;mat&#125;</span>&quot;</span>].values.reshape((<span class="number">37</span>, <span class="number">73</span>))[:,<span class="number">0</span>], </span><br><span class="line">            c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">1</span>)</span><br><span class="line">    ax.set_box_aspect((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    ax.axis(<span class="literal">False</span>)</span><br><span class="line">    ax.set_title(mat, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br><span class="line">    </span><br><span class="line">fig.suptitle(<span class="string">&quot;crystalline anisotropy energy surface\n&quot;</span>, </span><br><span class="line">             color=<span class="string">&quot;blue&quot;</span>, fontsize=<span class="string">&quot;xx-large&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_13.png"><br></p>
+<p><img src="84_sphere_13.png" alt=""><br></p>
 <ul>
-<li>제 박사학위 주제와 밀접한 그림입니다. </li>
+<li>제 박사학위 주제와 밀접한 그림입니다.</li>
 <li>교과서 그림을 모방해 학위논문(2011)에도 같은 그림을 그려서 넣었습니다.</li>
-<li>mathematica를 사용해서 그린 그림입니다.<br><br><img src="/2021/09/03/Python-DS-84-sphere/84_sphere_14.png"><br></li>
+<li>mathematica를 사용해서 그린 그림입니다.<br><br>
+<img src="84_sphere_14.png" alt=""><br></li>
 </ul>
 
         </div>
@@ -402,7 +432,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/" data-id="cuidFm_H9-afp9BrxLsaiNQDZ" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/09/03/Python-DS-84-sphere/" data-id="cuidHPOFTE5bCTUNhjOl7O9Q_" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -487,8 +517,9 @@
 과거에는 원자의 3차원 에너지를 표현하느라 이런 그림이 필요했습니다.
 
 1. 데이터 준비
-wikipedia: Spherical co",
-        "wordCount": 4041
+
+wikipedia: Spherical c",
+        "wordCount": 4002
     }
 </script>
 
@@ -585,6 +616,26 @@ wikipedia: Spherical co",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -659,26 +710,6 @@ wikipedia: Spherical co",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

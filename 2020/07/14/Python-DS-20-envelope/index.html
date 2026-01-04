@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,signal processing,savgol" />
     
-    <meta name="description" content="Signal Envelope scipy.signal.hilbertscipy.interpolate.interp1d   복잡한 신호의 전반적인 형상을 파악하기 위해 envelope을 추출합니다. python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 방법을 씁니다.  12x &#x3D; np.arange(0, 20.1, 0">
+    <meta name="description" content="Signal Envelope  scipy.signal.hilbert scipy.interpolate.interp1d   복잡한 신호의 전반적인 형상을 파악하기 위해 envelope을 추출합니다. python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 방법을 씁니다.  12x &#x3D; np.arange(0, 20.1,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Envelope for Least Square Filtering and Smoothing">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/07/14/Python-DS-20-envelope/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Signal Envelope scipy.signal.hilbertscipy.interpolate.interp1d   복잡한 신호의 전반적인 형상을 파악하기 위해 envelope을 추출합니다. python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 방법을 씁니다.  12x &#x3D; np.arange(0, 20.1, 0">
+<meta property="og:description" content="Signal Envelope  scipy.signal.hilbert scipy.interpolate.interp1d   복잡한 신호의 전반적인 형상을 파악하기 위해 envelope을 추출합니다. python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 방법을 씁니다.  12x &#x3D; np.arange(0, 20.1,">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/20_env_0.png">
 <meta property="article:published_time" content="2020-07-13T22:32:00.000Z">
@@ -228,59 +228,74 @@
 
             
 
-            <h3 id="Signal-Envelope"><a href="#Signal-Envelope" class="headerlink" title="Signal Envelope"></a>Signal Envelope</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.hilbert.html">scipy.signal.hilbert</a><br><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html">scipy.interpolate.interp1d</a></p>
+            <h3 id="Signal-Envelope">Signal Envelope</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.hilbert.html">scipy.signal.hilbert</a><br>
+<a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html">scipy.interpolate.interp1d</a></p>
 </blockquote>
 <ul>
 <li>복잡한 신호의 전반적인 형상을 파악하기 위해 envelope을 추출합니다.</li>
 <li>python에서는 <code>scipy.signal.hilbert</code>를 통해 analytic signal을 추출하는 방법을 씁니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">20.1</span>, <span class="number">0.1</span>)</span><br><span class="line">y = <span class="built_in">abs</span>(np.sin(x)) * np.sin(x*<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/14/Python-DS-20-envelope/20_env_06.PNG"><br></p>
+<p><img src="20_env_06.PNG" alt=""><br></p>
 <ul>
 <li>이와 같은 신호에 <code>hilbert</code>를 다음과 같이 적용하면 다음과 같이 숨겨진 sine wave를 찾아냅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.signal <span class="keyword">import</span> hilbert, chirp</span><br><span class="line"></span><br><span class="line">duration = <span class="number">1.0</span></span><br><span class="line">fs = <span class="number">400.0</span></span><br><span class="line">samples = <span class="built_in">int</span>(fs*duration)</span><br><span class="line">t = np.arange(samples) / fs</span><br><span class="line"></span><br><span class="line">analytic_signal = hilbert(y)</span><br><span class="line">amplitude_envelope = np.<span class="built_in">abs</span>(analytic_signal)</span><br><span class="line">instantaneous_phase = np.unwrap(np.angle(analytic_signal))</span><br><span class="line">instantaneous_frequency = np.diff(instantaneous_phase) / (<span class="number">2.0</span>*np.pi) * fs</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(nrows=<span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">ax[<span class="number">0</span>].plot(x, y, c=<span class="string">&quot;b&quot;</span>)</span><br><span class="line">ax[<span class="number">0</span>].plot(x, amplitude_envelope)</span><br><span class="line">ax[<span class="number">1</span>].plot(x[<span class="number">1</span>:], instantaneous_frequency)</span><br><span class="line">ax[<span class="number">1</span>].set_xlabel(<span class="string">&quot;time in seconds&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/14/Python-DS-20-envelope/20_env_08.PNG"><br></p>
+<p><img src="20_env_08.PNG" alt=""><br></p>
 <ul>
 <li>그러나, 위 신호 그대로의 모습을 추출하려면 이론식을 찾는 <code>hilbert</code>는 답답한 면이 있습니다.</li>
 <li>그럴 때는 아래와 같이 그래프의 요철을 감지해서 <a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html"><code>interpolation</code></a> 하는 방법이 직관적입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_envelope_v1</span>(<span class="params">x, y</span>):</span><br><span class="line">    x_list, y_list = <span class="built_in">list</span>(x), <span class="built_in">list</span>(y)</span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(x_list) == <span class="built_in">len</span>(y_list)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># First data</span></span><br><span class="line">    ui, ux, uy = [<span class="number">0</span>], [x_list[<span class="number">0</span>]], [y_list[<span class="number">0</span>]]</span><br><span class="line">    li, lx, ly = [<span class="number">0</span>], [x_list[<span class="number">0</span>]], [y_list[<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Find upper peaks and lower peaks</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(x_list)-<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> y_list[i] &gt;= y_list[i-<span class="number">1</span>] <span class="keyword">and</span> y_list[i] &gt;= y_list[i+<span class="number">1</span>]:</span><br><span class="line">            ui.append(i)</span><br><span class="line">            ux.append(x_list[i])</span><br><span class="line">            uy.append(y_list[i])</span><br><span class="line">        <span class="keyword">if</span> y_list[i] &lt;= y_list[i-<span class="number">1</span>] <span class="keyword">and</span> y_list[i] &lt;= y_list[i+<span class="number">1</span>]:</span><br><span class="line">            li.append(i)</span><br><span class="line">            lx.append(x_list[i])</span><br><span class="line">            ly.append(y_list[i])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Last data</span></span><br><span class="line">    ui.append(<span class="built_in">len</span>(x_list)-<span class="number">1</span>)</span><br><span class="line">    ux.append(x_list[-<span class="number">1</span>])</span><br><span class="line">    uy.append(y_list[-<span class="number">1</span>])</span><br><span class="line">    li.append(<span class="built_in">len</span>(y_list)-<span class="number">1</span>)</span><br><span class="line">    lx.append(x_list[-<span class="number">1</span>])</span><br><span class="line">    ly.append(y_list[-<span class="number">1</span>])  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(ux) == <span class="number">2</span> <span class="keyword">or</span> <span class="built_in">len</span>(lx) == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> [], []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        func_ub = interp1d(ux, uy, kind=<span class="string">&#x27;cubic&#x27;</span>, bounds_error=<span class="literal">False</span>)</span><br><span class="line">        func_lb = interp1d(lx, ly, kind=<span class="string">&#x27;cubic&#x27;</span>, bounds_error=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">        ub, lb = [], []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> x_list:</span><br><span class="line">            ub = func_ub(x_list)</span><br><span class="line">            lb = func_lb(x_list)</span><br><span class="line"></span><br><span class="line">        ub = np.array([y, ub]).<span class="built_in">max</span>(axis=<span class="number">0</span>)</span><br><span class="line">        lb = np.array([y, lb]).<span class="built_in">min</span>(axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ub, lb</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uy, ly = get_envelope_v1(x, y)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.plot(x, y, c=<span class="string">&quot;b&quot;</span>)</span><br><span class="line">ax.plot(x, uy, c=<span class="string">&quot;m&quot;</span>)</span><br><span class="line">ax.plot(x, ly, c=<span class="string">&quot;c&quot;</span>)</span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">20</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/14/Python-DS-20-envelope/20_env_07.PNG"><br></p>
+<p><img src="20_env_07.PNG" alt=""><br></p>
 <ul>
 <li>signal envelope은 보통 전체적인 형상을 추출하는데 사용되지만, smoothing 제어에 사용될 수도 있습니다.</li>
 </ul>
-<h3 id="Least-Squares-Smoothing"><a href="#Least-Squares-Smoothing" class="headerlink" title="Least Squares Smoothing"></a>Least Squares Smoothing</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy-0.15.1/reference/generated/scipy.signal.savgol_filter.html">scipy.signal.savgol_filter</a><br><a target="_blank" rel="noopener" href="https://gregstanleyandassociates.com/whitepapers/FaultDiagnosis/Filtering/LeastSquares-Filter/leastsquares-filter.htm">Least Squares Filtering and Smoothing, including Savitzky-Golay</a><br><a href="https://jehyunlee.github.io/2020/03/20/Python-DS-6-plateau_detection/">Plateau Detection</a></p>
+<h3 id="Least-Squares-Smoothing">Least Squares Smoothing</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy-0.15.1/reference/generated/scipy.signal.savgol_filter.html">scipy.signal.savgol_filter</a><br>
+<a target="_blank" rel="noopener" href="https://gregstanleyandassociates.com/whitepapers/FaultDiagnosis/Filtering/LeastSquares-Filter/leastsquares-filter.htm">Least Squares Filtering and Smoothing, including Savitzky-Golay</a><br>
+<a href="https://jehyunlee.github.io/2020/03/20/Python-DS-6-plateau_detection/">Plateau Detection</a></p>
 </blockquote>
 <ul>
-<li><p>신호와 함께 존재하기 마련인 잡음을 제거하기 위해 smoothing을 적용합니다.</p>
+<li>
+<p>신호와 함께 존재하기 마련인 잡음을 제거하기 위해 smoothing을 적용합니다.</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy-0.15.1/reference/generated/scipy.signal.savgol_filter.html"><code>savinsky-golay filter</code></a>와 같은 least squares filter는 mean이나 median에 비해 신호를 보존하고 잡음을 선택적으로 잘 제거한다는 장점이 있습니다.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy-0.15.1/reference/generated/scipy.signal.savgol_filter.html"><code>savinsky-golay filter</code></a>와 같은 least squares filter는 mean이나 median에 비해 신호를 보존하고 잡음을 선택적으로 잘 제거한다는 장점이 있습니다.</p>
 </li>
-<li><p>그러나 치명적인 단점이 있는데, signal이 크게 바뀔 경우 overshooting이 발생한다는 것입니다.<br><br><img src="/2020/07/14/Python-DS-20-envelope/20_env_02.PNG"><br></p>
+<li>
+<p>그러나 치명적인 단점이 있는데, signal이 크게 바뀔 경우 overshooting이 발생한다는 것입니다.<br><br>
+<img src="20_env_02.PNG" alt=""><br></p>
 </li>
-<li><p>envelope을 이용해 overshooting의 범위를 제한해 보겠습니다.</p>
+<li>
+<p>envelope을 이용해 overshooting의 범위를 제한해 보겠습니다.</p>
 </li>
-<li><p>그러나 데이터가 이렇게 생기면 envelope도 깔끔하진 않습니다.</p>
+<li>
+<p>그러나 데이터가 이렇게 생기면 envelope도 깔끔하진 않습니다.</p>
 </li>
-<li><p>같은 코드를 적용해도, 아래와 같이 envelope의 undershooting이 커서 문제가 됩니다.<br><br><img src="/2020/07/14/Python-DS-20-envelope/20_env_03.PNG"><br></p>
+<li>
+<p>같은 코드를 적용해도, 아래와 같이 envelope의 undershooting이 커서 문제가 됩니다.<br><br>
+<img src="20_env_03.PNG" alt=""><br></p>
 </li>
-<li><p>envelop과 원래 데이터를 다시 비교해서 envelope의 범위를 제어합니다.</p>
+<li>
+<p>envelop과 원래 데이터를 다시 비교해서 envelope의 범위를 제어합니다.</p>
 </li>
-<li><p>위 <code>get_envelope()</code>에 아래 부분을 추가합니다.</p>
+<li>
+<p>위 <code>get_envelope()</code>에 아래 부분을 추가합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># upper through check</span></span><br><span class="line">   ux_chk, uy_chk = [x_list[<span class="number">0</span>]], [y_list[<span class="number">0</span>]]</span><br><span class="line">   <span class="keyword">for</span> ii <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ui)):</span><br><span class="line">       slope = (uy[ii]-uy[ii-<span class="number">1</span>])/(ux[ii]-ux[ii-<span class="number">1</span>])</span><br><span class="line">       intercept = -slope*ux[ii] + uy[ii]</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">for</span> xi <span class="keyword">in</span> <span class="built_in">range</span>(ui[ii-<span class="number">1</span>], ui[ii]):</span><br><span class="line">           y_pred = slope*x_list[xi] + intercept</span><br><span class="line">           <span class="keyword">if</span> y_pred &lt; y_list[xi] <span class="keyword">and</span> (x_list[xi] <span class="keyword">not</span> <span class="keyword">in</span> ux_chk) <span class="keyword">and</span> (y_list[xi] <span class="keyword">not</span> <span class="keyword">in</span> uy_chk):</span><br><span class="line">               ux_chk.append(x_list[xi])</span><br><span class="line">               uy_chk.append(y_list[xi])</span><br><span class="line">       ux_chk.append(x_list[ui[ii]])</span><br><span class="line">       uy_chk.append(y_list[ui[ii]])</span><br><span class="line">       </span><br><span class="line">   <span class="comment"># lower through check</span></span><br><span class="line">   lx_chk, ly_chk = [x_list[<span class="number">0</span>]], [y_list[<span class="number">0</span>]]</span><br><span class="line">   <span class="keyword">for</span> ii <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(li)):</span><br><span class="line">       slope = (ly[ii]-ly[ii-<span class="number">1</span>])/(lx[ii]-lx[ii-<span class="number">1</span>])</span><br><span class="line">       intercept = -slope*lx[ii] + ly[ii]</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">for</span> xi <span class="keyword">in</span> <span class="built_in">range</span>(li[ii-<span class="number">1</span>], li[ii]):</span><br><span class="line">           y_pred = slope*x_list[xi] + intercept</span><br><span class="line">           <span class="keyword">if</span> y_pred &gt; y_list[xi] <span class="keyword">and</span> (x_list[xi] <span class="keyword">not</span> <span class="keyword">in</span> lx_chk) <span class="keyword">and</span> (y_list[xi] <span class="keyword">not</span> <span class="keyword">in</span> ly_chk):</span><br><span class="line">               lx_chk.append(x_list[xi])</span><br><span class="line">               ly_chk.append(y_list[xi])</span><br><span class="line">       lx_chk.append(x_list[li[ii]])</span><br><span class="line">       ly_chk.append(y_list[li[ii]])    </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/14/Python-DS-20-envelope/20_env_04.PNG"><br></p>
+<p><img src="20_env_04.PNG" alt=""><br></p>
 <ul>
 <li>envelope의 범위가 제어되었습니다.</li>
 <li>이제 envelope을 벗어난 signal 대신 envelope을 적용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">savgol</span>(<span class="params">x, y, box_size, recur=<span class="number">1</span></span>):</span><br><span class="line">    ub, lb = get_envelope(x, y)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(recur):</span><br><span class="line">        y = sg(y, box_size, <span class="number">2</span>, mode=<span class="string">&#x27;nearest&#x27;</span>)    </span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(ub) &gt; <span class="number">0</span>:</span><br><span class="line">            y = np.where(y &gt; ub, ub, np.where(y &lt; lb, lb, y))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line">y_savgol = savgol(X, Y, <span class="number">15</span>)    </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/14/Python-DS-20-envelope/20_env_05.PNG"><br></p>
+<p><img src="20_env_05.PNG" alt=""><br></p>
 <ul>
 <li>Savgol filter의 overshooting 문제가 해결되었습니다.</li>
 <li>강제로 집어넣은 부분이 다른 부분에 비해 다소 날카롭습니다.</li>
@@ -304,7 +319,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/14/Python-DS-20-envelope/" data-id="cuidi59yzgSHPDYUUdr3A0ctH" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/14/Python-DS-20-envelope/" data-id="cuidPRMldPNN4mMgO1ryqMA-D" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -383,14 +398,16 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/07/14/Python-DS-20-envelope/",
         "description": "Signal Envelope
-scipy.signal.hilbertscipy.interpolate.interp1d
+
+scipy.signal.hilbert
+scipy.interpolate.interp1d
 
 
 복잡한 신호의 전반적인 형상을 파악하기 위해 envelope을 추출합니다.
 python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 방법을 씁니다.
 
-12x = np.arange(0, 20.1, 0",
-        "wordCount": 1355
+12x = np.arange(0, 20.1,",
+        "wordCount": 1353
     }
 </script>
 
@@ -487,6 +504,26 @@ python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 �
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -561,26 +598,6 @@ python에서는 scipy.signal.hilbert를 통해 analytic signal을 추출하는 �
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,signal processing,bresenham" />
     
-    <meta name="description" content="wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmflags’s github   연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다. 그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮은">
+    <meta name="description" content="wikipedia: Bresenham’s line algorithm wikipedia: Xiaolin Wu’s line algorithm flags’s github   연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다. 그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bresenham&#39;s Line Algorithm">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmflags’s github   연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다. 그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮은">
+<meta property="og:description" content="wikipedia: Bresenham’s line algorithm wikipedia: Xiaolin Wu’s line algorithm flags’s github   연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다. 그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/15_bresenham_0.png">
 <meta property="article:published_time" content="2020-05-24T07:35:00.000Z">
@@ -229,46 +229,66 @@
             
 
             <blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">wikipedia: Bresenham’s line algorithm</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm">wikipedia: Xiaolin Wu’s line algorithm</a><br><a target="_blank" rel="noopener" href="https://gist.github.com/flags/1132363">flags’s github</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">wikipedia: Bresenham’s line algorithm</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm">wikipedia: Xiaolin Wu’s line algorithm</a><br>
+<a target="_blank" rel="noopener" href="https://gist.github.com/flags/1132363">flags’s github</a></p>
 </blockquote>
 <ul>
 <li>연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다.</li>
 <li>그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮은 문제가 됩니다.</li>
 <li>제 경우는 <a href="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/">점들 사이에 벌어진 거리를 메워야 하는 문제를 해결하기 위해</a> 이 고민을 시작했습니다.</li>
 </ul>
-<p><img src="/2020/05/24/Python-DS-15-Bresenham/15_bresenham_0.png" alt="Bresenham&#39;s line algorithm"><br></p>
+<p><img src="15_bresenham_0.png" alt="Bresenham's line algorithm"><br></p>
 <ul>
-<li><p>Brenham’s line algorithm은 위 그림 한 장으로 설명이 가능한 간단한 알고리즘입니다.</p>
+<li>
+<p>Brenham’s line algorithm은 위 그림 한 장으로 설명이 가능한 간단한 알고리즘입니다.</p>
 </li>
-<li><p>1962년에 IBM에서 근무하던 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a>이라는 분이 만들었다고 하는데, 이런 수준(?)의 연구가 출판되던 시대였군요. :)</p>
+<li>
+<p>1962년에 IBM에서 근무하던 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a>이라는 분이 만들었다고 하는데, 이런 수준(?)의 연구가 출판되던 시대였군요. :)</p>
 </li>
-<li><p>간단해 보이지만 이 분 덕택에 유한한 2차원 공간에 다양한 도형을 그릴 수 있게 되었습니다. 감사합니다.</p>
+<li>
+<p>간단해 보이지만 이 분 덕택에 유한한 2차원 공간에 다양한 도형을 그릴 수 있게 되었습니다. 감사합니다.</p>
 </li>
-<li><p>한 단계 업그레이드 된 버전으로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm">Wu’s line algorithm</a>이 있습니다.</p>
+<li>
+<p>한 단계 업그레이드 된 버전으로 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm">Wu’s line algorithm</a>이 있습니다.</p>
 </li>
-<li><p>1991년에 공개된 알고리즘인데 antialiasing을 지원합니다.<br><img src="/2020/05/24/Python-DS-15-Bresenham/15_bresenham_1.gif" alt="Xiaolin_Wu&#39;s_line_algorithm"><br></p>
-</li>
-</ul>
-<h3 id="Bresenham’s-algorithm"><a href="#Bresenham’s-algorithm" class="headerlink" title="Bresenham’s algorithm"></a>Bresenham’s algorithm</h3><ul>
-<li><p>$x, y$ 평면상에 두 점 $$(x_0, y_0)$$과 $$(x_1, y_1)$$이 주어졌을 때, 두 점을 지나는 직선의 방정식은 다음과 같습니다.<br>$$y &#x3D; \frac{y_1 - y_0}{x_1 - x_0} (x - x_0) + y_0$$</p>
-</li>
-<li><p>$x$가 1 증가했을 때 증가하는 $y$의 값(&#x3D;기울기)을 오차로 정해두고, 오차가 0.5를 넘어서면 그 때 $y$를 $y$값 변동 방향으로 1 움직이고, 오차에서는 1을 빼줍니다.</p>
-</li>
-<li><p>pseudocode로는 아래와 같이 정리될 수 있습니다.<br><img src="/2020/05/24/Python-DS-15-Bresenham/15_bresenham_4.png"></p>
+<li>
+<p>1991년에 공개된 알고리즘인데 antialiasing을 지원합니다.<br>
+<img src="15_bresenham_1.gif" alt="Xiaolin_Wu's_line_algorithm"><br></p>
 </li>
 </ul>
-<h3 id="A-Bresenham’s-line-algorithm-python-code"><a href="#A-Bresenham’s-line-algorithm-python-code" class="headerlink" title="A Bresenham’s_line_algorithm python code"></a>A Bresenham’s_line_algorithm python code</h3><ul>
+<h3 id="Bresenham’s-algorithm">Bresenham’s algorithm</h3>
+<ul>
+<li>
+<p>$x, y$ 평면상에 두 점 $$(x_0, y_0)$$과 $$(x_1, y_1)$$이 주어졌을 때, 두 점을 지나는 직선의 방정식은 다음과 같습니다.<br>
+$$y = \frac{y_1 - y_0}{x_1 - x_0} (x - x_0) + y_0$$</p>
+</li>
+<li>
+<p>$x$가 1 증가했을 때 증가하는 $y$의 값(=기울기)을 오차로 정해두고, 오차가 0.5를 넘어서면 그 때 $y$를 $y$값 변동 방향으로 1 움직이고, 오차에서는 1을 빼줍니다.</p>
+</li>
+<li>
+<p>pseudocode로는 아래와 같이 정리될 수 있습니다.<br>
+<img src="15_bresenham_4.png" alt=""></p>
+</li>
+</ul>
+<h3 id="A-Bresenham’s-line-algorithm-python-code">A Bresenham’s_line_algorithm python code</h3>
+<ul>
 <li>구글링을 통해 Bresenham’s line algorithm code를 여럿 찾을 수 있고, <a target="_blank" rel="noopener" href="https://gist.github.com/flags/1132363">그 중 하나</a>를 골랐습니다.</li>
 <li>가파른 구간에서 순서가 바뀌는 문제가 있어 코드를 일부 수정했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">bresenham</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, start, end</span>):</span><br><span class="line">        <span class="variable language_">self</span>.start = <span class="built_in">list</span>(start)</span><br><span class="line">        <span class="variable language_">self</span>.end = <span class="built_in">list</span>(end)</span><br><span class="line">        <span class="variable language_">self</span>.path = []</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.steep = <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>]-<span class="variable language_">self</span>.start[<span class="number">1</span>]) &gt; <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">0</span>]-<span class="variable language_">self</span>.start[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.steep:</span><br><span class="line">            <span class="variable language_">self</span>.start = <span class="variable language_">self</span>.swap(<span class="variable language_">self</span>.start[<span class="number">0</span>],<span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">            <span class="variable language_">self</span>.end = <span class="variable language_">self</span>.swap(<span class="variable language_">self</span>.end[<span class="number">0</span>],<span class="variable language_">self</span>.end[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.start[<span class="number">0</span>] &gt; <span class="variable language_">self</span>.end[<span class="number">0</span>]:</span><br><span class="line">            _x0 = <span class="built_in">int</span>(<span class="variable language_">self</span>.start[<span class="number">0</span>])</span><br><span class="line">            _x1 = <span class="built_in">int</span>(<span class="variable language_">self</span>.end[<span class="number">0</span>])</span><br><span class="line">            <span class="variable language_">self</span>.start[<span class="number">0</span>] = _x1</span><br><span class="line">            <span class="variable language_">self</span>.end[<span class="number">0</span>] = _x0</span><br><span class="line"></span><br><span class="line">            _y0 = <span class="built_in">int</span>(<span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">            _y1 = <span class="built_in">int</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>])</span><br><span class="line">            <span class="variable language_">self</span>.start[<span class="number">1</span>] = _y1</span><br><span class="line">            <span class="variable language_">self</span>.end[<span class="number">1</span>] = _y0</span><br><span class="line"></span><br><span class="line">        dx = <span class="variable language_">self</span>.end[<span class="number">0</span>] - <span class="variable language_">self</span>.start[<span class="number">0</span>]</span><br><span class="line">        dy = <span class="built_in">abs</span>(<span class="variable language_">self</span>.end[<span class="number">1</span>] - <span class="variable language_">self</span>.start[<span class="number">1</span>])</span><br><span class="line">        error = <span class="number">0</span></span><br><span class="line">        derr = dy/<span class="built_in">float</span>(dx)</span><br><span class="line"></span><br><span class="line">        ystep = <span class="number">0</span></span><br><span class="line">        y = <span class="variable language_">self</span>.start[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.start[<span class="number">1</span>] &lt; <span class="variable language_">self</span>.end[<span class="number">1</span>]: ystep = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>: ystep = -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.start[<span class="number">0</span>],<span class="variable language_">self</span>.end[<span class="number">0</span>]+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.steep:</span><br><span class="line">                <span class="variable language_">self</span>.path.append([y,x])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="variable language_">self</span>.path.append([x,y])</span><br><span class="line"></span><br><span class="line">            error += derr</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> error &gt;= <span class="number">0.5</span>:</span><br><span class="line">                y += ystep</span><br><span class="line">                error -= <span class="number">1.0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.steep <span class="keyword">and</span> <span class="variable language_">self</span>.start[<span class="number">1</span>] &gt; <span class="variable language_">self</span>.end[<span class="number">1</span>]:</span><br><span class="line">            <span class="variable language_">self</span>.path = <span class="built_in">list</span>(<span class="built_in">reversed</span>(<span class="variable language_">self</span>.path))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">swap</span>(<span class="params">self,n1,n2</span>):</span><br><span class="line">        <span class="keyword">return</span> np.array([n2,n1])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Application-on-my-case"><a href="#Application-on-my-case" class="headerlink" title="Application on my case"></a>Application on my case</h3><ul>
-<li><p>약간의 수정을 통해 제 <a href="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/">automated focusing</a>에 존재하던 버그를 잡았습니다.</p>
+<h3 id="Application-on-my-case">Application on my case</h3>
+<ul>
+<li>
+<p>약간의 수정을 통해 제 <a href="https://jehyunlee.github.io/2020/04/30/Python-DS-12-auto_focus/">automated focusing</a>에 존재하던 버그를 잡았습니다.</p>
 </li>
-<li><p>기존 코드에서는 아래와 같은 버그가 발생했지만,<br><img src="/2020/05/24/Python-DS-15-Bresenham/15_bresenham_2.png" alt="before applying Bresenham&#39;s line algorithm"><br></p>
+<li>
+<p>기존 코드에서는 아래와 같은 버그가 발생했지만,<br>
+<img src="15_bresenham_2.png" alt="before applying Bresenham's line algorithm"><br></p>
 </li>
-<li><p>Bresenham algorithm을 적용한 후에는 아래와 같이 깔끔하게 나옵니다.<br><img src="/2020/05/24/Python-DS-15-Bresenham/15_bresenham_3.png" alt="after applying Bresenham&#39;s line algorithm"><br></p>
+<li>
+<p>Bresenham algorithm을 적용한 후에는 아래와 같이 깔끔하게 나옵니다.<br>
+<img src="15_bresenham_3.png" alt="after applying Bresenham's line algorithm"><br></p>
 </li>
 </ul>
 
@@ -288,7 +308,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/" data-id="cuidq-XFoffv1FGdJfJRl3YXx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/" data-id="cuidxGpaJYiUnGfJVn1NfUBYv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -367,12 +387,14 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/05/24/Python-DS-15-Bresenham/",
         "description": "
-wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmflags’s github
+wikipedia: Bresenham’s line algorithm
+wikipedia: Xiaolin Wu’s line algorithm
+flags’s github
 
 
 연속된 공간에 있는 두 점과 그 사이에 정의된 선분은 어려운 주제는 아닙니다.
-그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮은 ",
-        "wordCount": 1004
+그러나 이 점들을 비트맵 이미지처럼 유한한 수의 점으로 표현해야 한다면 적절한 위치에 근사하는 것은 아주 귀찮",
+        "wordCount": 989
     }
 </script>
 
@@ -469,6 +491,26 @@ wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmf
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -543,26 +585,6 @@ wikipedia: Bresenham’s line algorithmwikipedia: Xiaolin Wu’s line algorithmf
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

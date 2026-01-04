@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,gis,pysolar" />
     
-    <meta name="description" content="태양 위치 계산은 성가십니다. 날짜별, 시간별, 위치별 태양의 위치를 알고싶다면 pysolar가 편리합니다.   pysolar pypipysolar githubpysolar documentation  1. pysolar 설치 pip로 간단하게 설치할 수 있습니다.  1pip install pysolar  2. pysolar 사용 pysolar를 사용하려면">
+    <meta name="description" content="태양 위치 계산은 성가십니다. 날짜별, 시간별, 위치별 태양의 위치를 알고싶다면 pysolar가 편리합니다.   pysolar pypi pysolar github pysolar documentation  1. pysolar 설치  pip로 간단하게 설치할 수 있습니다.  1pip install pysolar 2. pysolar 사용   pysolar를 사">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pysolar">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/10/13/GIS-Python-4-pysolar/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="태양 위치 계산은 성가십니다. 날짜별, 시간별, 위치별 태양의 위치를 알고싶다면 pysolar가 편리합니다.   pysolar pypipysolar githubpysolar documentation  1. pysolar 설치 pip로 간단하게 설치할 수 있습니다.  1pip install pysolar  2. pysolar 사용 pysolar를 사용하려면">
+<meta property="og:description" content="태양 위치 계산은 성가십니다. 날짜별, 시간별, 위치별 태양의 위치를 알고싶다면 pysolar가 편리합니다.   pysolar pypi pysolar github pysolar documentation  1. pysolar 설치  pip로 간단하게 설치할 수 있습니다.  1pip install pysolar 2. pysolar 사용   pysolar를 사">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/4_pysolar_0.png">
 <meta property="article:published_time" content="2020-10-12T22:46:00.000Z">
@@ -233,55 +233,59 @@
 <li>날짜별, 시간별, 위치별 태양의 위치를 알고싶다면 pysolar가 편리합니다.</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://pypi.org/project/Pysolar/">pysolar pypi</a><br><a target="_blank" rel="noopener" href="https://github.com/pingswept/pysolar">pysolar github</a><br><a target="_blank" rel="noopener" href="https://pysolar.readthedocs.io/en/latest/">pysolar documentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/Pysolar/">pysolar pypi</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/pingswept/pysolar">pysolar github</a><br>
+<a target="_blank" rel="noopener" href="https://pysolar.readthedocs.io/en/latest/">pysolar documentation</a></p>
 </blockquote>
-<h3 id="1-pysolar-설치"><a href="#1-pysolar-설치" class="headerlink" title="1. pysolar 설치"></a>1. pysolar 설치</h3><ul>
+<h3 id="1-pysolar-설치">1. pysolar 설치</h3>
+<ul>
 <li>pip로 간단하게 설치할 수 있습니다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pysolar</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-pysolar-사용"><a href="#2-pysolar-사용" class="headerlink" title="2. pysolar 사용"></a>2. pysolar 사용</h3><ul>
-<li><p>pysolar를 사용하려면 <code>import</code>를 해야 합니다.</p>
+<h3 id="2-pysolar-사용">2. pysolar 사용</h3>
+<ul>
+<li>
+<p>pysolar를 사용하려면 <code>import</code>를 해야 합니다.</p>
 </li>
-<li><p>pysolar를 import 하고 모듈을 확인해보면 뭔가 많습니다.</p>
+<li>
+<p>pysolar를 import 하고 모듈을 확인해보면 뭔가 많습니다.</p>
 </li>
-<li><p>그런데 <a target="_blank" rel="noopener" href="https://pysolar.readthedocs.io/en/latest/">공식문서</a>에 설명이 잘 나와 있지 않아 아쉽습니다.<br><br><img src="/2020/10/13/GIS-Python-4-pysolar/4_pysolar_3.png"></p>
+<li>
+<p>그런데 <a target="_blank" rel="noopener" href="https://pysolar.readthedocs.io/en/latest/">공식문서</a>에 설명이 잘 나와 있지 않아 아쉽습니다.<br><br>
+<img src="4_pysolar_3.png" alt=""></p>
 </li>
-<li><p>일시와 위치를 넣어주면 태양에 대한 정보를 알려줍니다.</p>
+<li>
+<p>일시와 위치를 넣어주면 태양에 대한 정보를 알려줍니다.</p>
 </li>
-<li><p>일시는 <code>datetime</code>을 이용해 설정합니다.</p>
+<li>
+<p>일시는 <code>datetime</code>을 이용해 설정합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">KST = datetime.timezone(datetime.timedelta(hours=<span class="number">9</span>))</span><br><span class="line">date = datetime.datetime(<span class="number">2017</span>, <span class="number">3</span>, <span class="number">21</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">0</span>, tzinfo=KST)</span><br><span class="line">date</span><br></pre></td></tr></table></figure>
-<p>실행결과: </p>
+<p>실행결과:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime.datetime(2017, 3, 21, 13, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=32400)))</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>그리고 태양을 관찰할 지점을 지정합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Daejeon</span></span><br><span class="line">lat = <span class="number">36.3504</span></span><br><span class="line">lon = <span class="number">127.3845</span></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-1-고도altitude"><a href="#2-1-고도altitude" class="headerlink" title="2.1. 고도altitude"></a>2.1. 고도<code>altitude</code></h4><ul>
+<h4 id="2-1-고도altitude">2.1. 고도<code>altitude</code></h4>
+<ul>
 <li>지표면으로부터의 각도입니다.</li>
 <li><code>.get_altitude()</code>를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pysolar.solar <span class="keyword">import</span> get_altitude</span><br><span class="line"></span><br><span class="line">alt = get_altitude(lat, lon, date)</span><br><span class="line">alt</span><br></pre></td></tr></table></figure>
 <p>실행결과: 출력 단위는 degree 입니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">53.57702210048166</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-2-방위각azimuthal-angle"><a href="#2-2-방위각azimuthal-angle" class="headerlink" title="2.2. 방위각azimuthal angle"></a>2.2. 방위각<code>azimuthal angle</code></h4><ul>
+<h4 id="2-2-방위각azimuthal-angle">2.2. 방위각<code>azimuthal angle</code></h4>
+<ul>
 <li>정북 기준 시계방향 각도입니다.</li>
 <li><code>.get_azimuth()</code>를 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pysolar.solar <span class="keyword">import</span> get_azimuth</span><br><span class="line"></span><br><span class="line">azi = get_azimuth(lat, lon, date)</span><br><span class="line">azi</span><br></pre></td></tr></table></figure>
 <p>실행결과: 출력 단위는 degree 입니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">189.44917229657798</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-3-일사량radiation"><a href="#2-3-일사량radiation" class="headerlink" title="2.3. 일사량radiation"></a>2.3. 일사량<code>radiation</code></h3><blockquote>
+<h3 id="2-3-일사량radiation">2.3. 일사량<code>radiation</code></h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://pysolar.readthedocs.io/en/latest/index.html?highlight=get_radiation_direct#">pysolar get_radiation_direct()</a></p>
 </blockquote>
 <ul>
@@ -289,23 +293,24 @@
 <li>이 때 <b>대기모델은 미국 기준</b>이기 때문에 데이터 활용에 주의해야 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pysolar.radiation <span class="keyword">import</span> get_radiation_direct</span><br><span class="line"></span><br><span class="line">rad = get_radiation_direct(date, alt)</span><br><span class="line">rad</span><br></pre></td></tr></table></figure>
-<p>실행결과: 단위는 <b>$W&#x2F;m^2$</b> 입니다.</p>
+<p>실행결과: 단위는 <b>$W/m^2$</b> 입니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">961.3376847317991</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>다음과 같은 수식으로 구성되어 있습니다.</li>
-<li>일사량 $$\textrm{direct radiation} &#x3D; flux \times exp(-1 \times od \times amr) \times daytime$$<ul>
+<li>일사량 $$\textrm{direct radiation} = flux \times exp(-1 \times od \times amr) \times daytime$$
+<ul>
 <li>$$day$$ : <code>datetime.utctimetuple().tm_yday</code></li>
 <li>$$daytime$$ : <code>1 if altitude &gt; 0 else 0</code></li>
-<li>apparent extraterrestrial flux : $$flux &#x3D; 1160+(75\sin( \frac{2 \pi}{365}(day-275)))$$</li>
-<li>optical depth : $$od &#x3D; 0.174+(0.035\sin(\frac{2 \pi}{365}(day-100))$$</li>
-<li>air mass ratio : $$amr &#x3D; 1&#x2F;\sin(altitude)$$</li>
+<li>apparent extraterrestrial flux : $$flux = 1160+(75\sin( \frac{2 \pi}{365}(day-275)))$$</li>
+<li>optical depth : $$od = 0.174+(0.035\sin(\frac{2 \pi}{365}(day-100))$$</li>
+<li>air mass ratio : $$amr = 1/\sin(altitude)$$</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-4-시각화"><a href="#2-4-시각화" class="headerlink" title="2.4. 시각화"></a>2.4. 시각화</h3><ul>
-<li><p>2017년 춘분 다른 위도의 일주운동을 그려봅니다.</p>
+<h3 id="2-4-시각화">2.4. 시각화</h3>
+<ul>
+<li>
+<p>2017년 춘분 다른 위도의 일주운동을 그려봅니다.</p>
 <ol>
 <li><b>방위각</b> vs <b>고도</b></li>
 <li><b>시간</b> vs <b>고도</b></li>
@@ -313,25 +318,29 @@
 <li><b>시간</b> vs <b>사상</b> (projection)</li>
 </ol>
 </li>
-<li><p>극좌표와 직교좌표계를 동시에를 담습니다.</p>
+<li>
+<p>극좌표와 직교좌표계를 동시에를 담습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> MultipleLocator, AutoMinorLocator</span><br><span class="line"></span><br><span class="line">lats = [<span class="number">45</span>, <span class="number">23.5</span>, <span class="number">1</span>, -<span class="number">23.5</span>, -<span class="number">45</span>]</span><br><span class="line">lon = <span class="number">127.3845</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### data</span></span><br><span class="line">nlats = <span class="built_in">len</span>(lats)</span><br><span class="line">alts_lat = &#123;&#125;</span><br><span class="line">azis_lat = &#123;&#125;</span><br><span class="line">date_hr_lat = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">### altitudes and azimuthal angles</span></span><br><span class="line"><span class="keyword">for</span> i, lat <span class="keyword">in</span> <span class="built_in">enumerate</span>(lats, <span class="number">1</span>):</span><br><span class="line">    alts, azis, dates_hr = [], [], []</span><br><span class="line">    <span class="keyword">for</span> hr <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">24</span>):</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">min</span> <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">60</span>, <span class="number">1</span>):</span><br><span class="line">            date_hr = datetime.datetime(<span class="number">2017</span>, <span class="number">3</span>, <span class="number">20</span>, hr, <span class="built_in">min</span>, <span class="number">0</span>, tzinfo=KST)</span><br><span class="line">            dates_hr.append(date_hr)</span><br><span class="line">            alt = get_altitude(lat, lon, date_hr)</span><br><span class="line">            azi = get_azimuth(lat, lon, date_hr)</span><br><span class="line">            alts.append(alt)</span><br><span class="line">            azis.append(azi)</span><br><span class="line"></span><br><span class="line">    date_hr_lat[i] = dates_hr</span><br><span class="line">    alts = np.array(alts)      </span><br><span class="line">    alts_lat[i] = alts</span><br><span class="line">    azis = np.array(azis)</span><br><span class="line">    azis_lat[i] = azis</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment">### Figure</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">30</span>,<span class="number">24</span>))</span><br><span class="line">axs = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, (lat) <span class="keyword">in</span> <span class="built_in">enumerate</span>(lats, <span class="number">1</span>):  </span><br><span class="line">    axs[i] = fig.add_subplot(<span class="number">5</span>, nlats, i, projection=<span class="string">&#x27;polar&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    axs[i].set_theta_zero_location(<span class="string">&quot;N&quot;</span>)</span><br><span class="line">    axs[i].set_theta_direction(-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    axs[i].plot(np.deg2rad(azis_lat[i]), alts_lat[i], c=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">1</span>)</span><br><span class="line">    axs[i].scatter(np.deg2rad(azis_lat[i]), alts_lat[i], c=alts_lat[i], </span><br><span class="line">                   cmap=<span class="string">&quot;inferno&quot;</span>, zorder=<span class="number">2</span>, vmin=<span class="number">0</span>, vmax=<span class="number">90</span>)</span><br><span class="line"></span><br><span class="line">    axs[i].fill(np.deg2rad(azis_lat[i]), [<span class="number">0</span>]*<span class="built_in">len</span>(azis_lat[i]), <span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    axs[i].set_ylim(-<span class="number">80</span>, <span class="number">90</span>)</span><br><span class="line">    axs[i].set_title(<span class="string">f&quot;<span class="subst">&#123;lat&#125;</span>&quot;</span> + <span class="string">&quot; $^&#123;\circ&#125;$&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">32</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, pad=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># azimuth vs altitude</span></span><br><span class="line">hrs = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1440</span>))</span><br><span class="line"><span class="keyword">for</span> i, (lat) <span class="keyword">in</span> <span class="built_in">enumerate</span>(lats, nlats+<span class="number">1</span>):  </span><br><span class="line">    axs[i] = fig.add_subplot(<span class="number">5</span>, nlats, i)</span><br><span class="line">    axs[i].scatter(azis_lat[i-nlats], alts_lat[i-nlats], c=alts_lat[i-nlats], </span><br><span class="line">                   cmap=<span class="string">&quot;inferno&quot;</span>, zorder=<span class="number">2</span>, vmin=<span class="number">0</span>, vmax=<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line">    axs[i].xaxis.set_major_locator(MultipleLocator(<span class="number">180</span>))</span><br><span class="line">    axs[i].xaxis.set_minor_locator(MultipleLocator(<span class="number">60</span>))</span><br><span class="line">    </span><br><span class="line">    axs[i].set_xlim(<span class="number">0</span>, <span class="number">360</span>)</span><br><span class="line">    axs[i].set_ylim(-<span class="number">90</span>, <span class="number">100</span>)</span><br><span class="line">    yticks = [-<span class="number">90</span>, -<span class="number">60</span>, -<span class="number">30</span>, <span class="number">0</span>, <span class="number">30</span>, <span class="number">60</span>, <span class="number">90</span>]</span><br><span class="line">    axs[i].set_yticks(yticks)</span><br><span class="line">    axs[i].set_yticklabels(yticks)</span><br><span class="line">    axs[i].tick_params(axis=<span class="string">&quot;both&quot;</span>, labelsize=<span class="number">20</span>)</span><br><span class="line">    axs[i].fill_between(hrs, -<span class="number">90</span>, <span class="number">0</span>, facecolor=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    axs[i].set_xlabel(<span class="string">&quot;azimuthal angle (deg.)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line">    <span class="keyword">if</span> i == nlats+<span class="number">1</span>:</span><br><span class="line">        axs[i].set_ylabel(<span class="string">&quot;altitude A (deg.)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># time vs altitude</span></span><br><span class="line">hrs = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1440</span>))</span><br><span class="line"><span class="keyword">for</span> i, (lat) <span class="keyword">in</span> <span class="built_in">enumerate</span>(lats, <span class="number">2</span>*nlats+<span class="number">1</span>):  </span><br><span class="line">    axs[i] = fig.add_subplot(<span class="number">5</span>, nlats, i)</span><br><span class="line">    axs[i].scatter(hrs, alts_lat[i-<span class="number">2</span>*nlats], c=alts_lat[i-<span class="number">2</span>*nlats], </span><br><span class="line">                   cmap=<span class="string">&quot;inferno&quot;</span>, zorder=<span class="number">2</span>, vmin=<span class="number">0</span>, vmax=<span class="number">90</span>)</span><br><span class="line">    </span><br><span class="line">    axs[i].xaxis.set_major_locator(MultipleLocator(<span class="number">180</span>))</span><br><span class="line">    axs[i].xaxis.set_minor_locator(MultipleLocator(<span class="number">60</span>))</span><br><span class="line">    </span><br><span class="line">    axs[i].set_xlim(<span class="number">0</span>, <span class="number">1440</span>)</span><br><span class="line">    axs[i].set_ylim(-<span class="number">90</span>, <span class="number">100</span>)</span><br><span class="line">    xticks = [<span class="built_in">int</span>(x//<span class="number">60</span>) <span class="keyword">for</span> x <span class="keyword">in</span> axs[i].get_xticks()]</span><br><span class="line">    axs[i].set_xticklabels(xticks)</span><br><span class="line">    axs[i].set_xlabel(<span class="string">&quot;time (hour)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line">    yticks = [-<span class="number">90</span>, -<span class="number">60</span>, -<span class="number">30</span>, <span class="number">0</span>, <span class="number">30</span>, <span class="number">60</span>, <span class="number">90</span>]</span><br><span class="line">    axs[i].set_yticks(yticks)</span><br><span class="line">    axs[i].set_yticklabels(yticks)</span><br><span class="line">    axs[i].tick_params(axis=<span class="string">&quot;both&quot;</span>, labelsize=<span class="number">20</span>)</span><br><span class="line">    axs[i].fill_between(hrs, -<span class="number">90</span>, <span class="number">0</span>, facecolor=<span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">2</span>*nlats+<span class="number">1</span>:</span><br><span class="line">        axs[i].set_ylabel(<span class="string">&quot;altitude A (deg.)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># irradiation accounting for the scattering of light (by US atmosphere model)     </span></span><br><span class="line"><span class="keyword">for</span> i, lat <span class="keyword">in</span> <span class="built_in">enumerate</span>(lats, <span class="number">3</span>*nlats+<span class="number">1</span>):</span><br><span class="line">    axs[i] = fig.add_subplot(<span class="number">5</span>, nlats, i)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># irradiation by pysolar</span></span><br><span class="line">    irrs_pysolar = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(date_hr_lat[i-(<span class="number">3</span>*nlats)])):</span><br><span class="line">        irr_pysolar = get_radiation_direct(date_hr_lat[i-(<span class="number">3</span>*nlats)][j], </span><br><span class="line">                                           alts_lat[i-(<span class="number">3</span>*nlats)][j])</span><br><span class="line">        irrs_pysolar.append(irr_pysolar)</span><br><span class="line">    </span><br><span class="line">    axs[i].scatter(hrs, irrs_pysolar, c=irrs_pysolar, </span><br><span class="line">                   cmap=<span class="string">&quot;copper&quot;</span>, zorder=<span class="number">2</span>, vmin=<span class="number">0</span>, vmax=<span class="number">1100</span>)</span><br><span class="line">    axs[i].xaxis.set_major_locator(MultipleLocator(<span class="number">180</span>))</span><br><span class="line">    axs[i].xaxis.set_minor_locator(MultipleLocator(<span class="number">60</span>))</span><br><span class="line">    axs[i].set_xlim(<span class="number">0</span>, <span class="number">1440</span>)</span><br><span class="line">    xticks = [<span class="built_in">int</span>(x//<span class="number">60</span>) <span class="keyword">for</span> x <span class="keyword">in</span> axs[i].get_xticks()]</span><br><span class="line">    axs[i].set_xticklabels(xticks)</span><br><span class="line">    axs[i].set_xlabel(<span class="string">&quot;time (hour)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line">    axs[i].tick_params(axis=<span class="string">&quot;both&quot;</span>, labelsize=<span class="number">20</span>)   </span><br><span class="line">    axs[i].set_ylim(<span class="number">0</span>, <span class="number">1100</span>)</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">3</span>*nlats+<span class="number">1</span>:</span><br><span class="line">        axs[i].set_ylabel(<span class="string">&quot;solar irradiation (W/m2)\n incl. diffuse irradiation&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># direct irradiation, above the atmosphere </span></span><br><span class="line"><span class="keyword">for</span> i, lat <span class="keyword">in</span> <span class="built_in">enumerate</span>(lats, <span class="number">4</span>*nlats+<span class="number">1</span>):</span><br><span class="line">    axs[i] = fig.add_subplot(<span class="number">5</span>, nlats, i)</span><br><span class="line">    irradiation = np.sin(np.deg2rad(alts_lat[i-(<span class="number">4</span>*nlats)]))</span><br><span class="line">    axs[i].scatter(hrs, irradiation, c=irradiation, </span><br><span class="line">                   cmap=<span class="string">&quot;copper&quot;</span>, zorder=<span class="number">2</span>, vmin=<span class="number">0</span>, vmax=<span class="number">1</span>)</span><br><span class="line">    axs[i].xaxis.set_major_locator(MultipleLocator(<span class="number">180</span>))</span><br><span class="line">    axs[i].xaxis.set_minor_locator(MultipleLocator(<span class="number">60</span>))</span><br><span class="line">    axs[i].set_xlim(<span class="number">0</span>, <span class="number">1440</span>)</span><br><span class="line">    xticks = [<span class="built_in">int</span>(x//<span class="number">60</span>) <span class="keyword">for</span> x <span class="keyword">in</span> axs[i].get_xticks()]</span><br><span class="line">    axs[i].set_xticklabels(xticks)</span><br><span class="line">    axs[i].set_xlabel(<span class="string">&quot;time (hour)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line">    axs[i].tick_params(axis=<span class="string">&quot;both&quot;</span>, labelsize=<span class="number">20</span>)   </span><br><span class="line">    axs[i].set_ylim(<span class="number">0</span>, <span class="number">1.2</span>)</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">4</span>*nlats+<span class="number">1</span>:</span><br><span class="line">        axs[i].set_ylabel(<span class="string">&quot;projection &quot;</span> + <span class="string">&quot;$cos(A)$&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">24</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, labelpad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">fig.align_ylabels([axs[<span class="number">1</span>], axs[<span class="number">6</span>], axs[<span class="number">11</span>], axs[<span class="number">16</span>], axs[<span class="number">21</span>]])    </span><br><span class="line">fig.tight_layout()      </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/13/GIS-Python-4-pysolar/4_pysolar_1.png" alt="위도에 따라 태양의 움직임이 다릅니다."><br></p>
+<p><img src="4_pysolar_1.png" alt="위도에 따라 태양의 움직임이 다릅니다."><br></p>
 <ul>
-<li><p>일주운동의 연중 변화를 살펴봅니다.</p>
+<li>
+<p>일주운동의 연중 변화를 살펴봅니다.</p>
 </li>
-<li><p>지역은 <b>대전</b>으로 고정하고 날짜만 <b>춘분</b>, <b>하지</b>, <b>추분</b>, <b>동지</b>로 나눕니다.</p>
+<li>
+<p>지역은 <b>대전</b>으로 고정하고 날짜만 <b>춘분</b>, <b>하지</b>, <b>추분</b>, <b>동지</b>로 나눕니다.</p>
 <ol>
 <li><b>방위각</b> vs <b>고도</b></li>
 <li><b>시간</b> vs 높이가 1인 막대기의 <b>그림자 끝 위치</b></li>
 </ol>
 </li>
-<li><p>시각화 코드입니다.</p>
+<li>
+<p>시각화 코드입니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Daejeon</span></span><br><span class="line">lat = <span class="number">36.3504</span></span><br><span class="line">lon = <span class="number">127.3845</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dates</span></span><br><span class="line">months = [<span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">12</span>]</span><br><span class="line">dates = [<span class="number">21</span>, <span class="number">21</span>, <span class="number">23</span>, <span class="number">22</span>]</span><br><span class="line">colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;purple&quot;</span>]</span><br><span class="line">markers = [<span class="string">&quot;x&quot;</span>, <span class="string">&quot;^&quot;</span>, <span class="string">&quot;s&quot;</span>, <span class="string">&quot;o&quot;</span>]</span><br><span class="line"></span><br><span class="line">alts, azis = &#123;&#125;, &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> month, date <span class="keyword">in</span> <span class="built_in">zip</span>(months, dates):</span><br><span class="line">    alts[month], azis[month] = [], []</span><br><span class="line">    <span class="keyword">for</span> hr <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">24</span>):</span><br><span class="line">        <span class="keyword">for</span> minu <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">60</span>, <span class="number">30</span>):</span><br><span class="line">            date_hr = datetime.datetime(<span class="number">2017</span>, month, date, hr, minu, <span class="number">0</span>, tzinfo=KST)</span><br><span class="line">            alt = get_altitude(lat, lon, date_hr)</span><br><span class="line">            azi = get_azimuth(lat, lon, date_hr)</span><br><span class="line">            alts[month].append(alt)</span><br><span class="line">            azis[month].append(azi)</span><br><span class="line">    </span><br><span class="line">    alts[month] = np.array(alts[month])        </span><br><span class="line">    azis[month] = np.array(azis[month])</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line"><span class="comment">### visualziation</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># diurnal motion</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, projection=<span class="string">&#x27;polar&#x27;</span>)</span><br><span class="line">ax1.set_theta_zero_location(<span class="string">&quot;N&quot;</span>)</span><br><span class="line">ax1.set_theta_direction(-<span class="number">1</span>)</span><br><span class="line">ax1.fill(np.deg2rad(azis[<span class="number">3</span>]), [<span class="number">0</span>]*<span class="built_in">len</span>(azis[<span class="number">3</span>]), <span class="string">&quot;gray&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> month, marker, color <span class="keyword">in</span> <span class="built_in">zip</span>(months, markers, colors):</span><br><span class="line">    ax1.plot(np.deg2rad(azis[month]), alts[month], c=color, zorder=<span class="number">1</span>)</span><br><span class="line">    im1 = ax1.scatter(np.deg2rad(azis[month]), alts[month], marker=marker,</span><br><span class="line">                      c=alts[month], ec=color, lw=<span class="number">1</span>, cmap=<span class="string">&quot;inferno&quot;</span>, </span><br><span class="line">                      vmin=<span class="number">0</span>, vmax=<span class="number">90</span>, zorder=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cbar1 = plt.colorbar(im1, ax=ax1, fraction=<span class="number">0.046</span>, pad=<span class="number">0.15</span>, ticks= [<span class="number">0</span>, <span class="number">30</span>, <span class="number">60</span>, <span class="number">90</span>])</span><br><span class="line">cbar1.set_label(<span class="string">&quot;altitude (deg.)&quot;</span>, fontsize=<span class="number">20</span>, labelpad=<span class="number">12</span>)    </span><br><span class="line"></span><br><span class="line">ax1.set_title(<span class="string">&quot;diurnal motion&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">20</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># shadow</span></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, projection=<span class="string">&#x27;polar&#x27;</span>)</span><br><span class="line">ax2.set_theta_zero_location(<span class="string">&quot;N&quot;</span>)</span><br><span class="line">ax2.set_theta_direction(-<span class="number">1</span>)</span><br><span class="line"><span class="comment"># cmaps = [&quot;Reds_r&quot;, &quot;Greens_r&quot;, &quot;Blues_r&quot;, &quot;Purples_r&quot;]</span></span><br><span class="line">time_arr = np.linspace(<span class="number">0</span>, <span class="number">47</span>, <span class="number">48</span>)/<span class="number">2</span></span><br><span class="line">handles = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> month, color, marker <span class="keyword">in</span> <span class="built_in">zip</span>(months, colors, markers):</span><br><span class="line">    shadow_idx = np.where(alts[month]&gt;<span class="number">0</span>)[<span class="number">0</span>]</span><br><span class="line">    shadow_azis_rad = np.deg2rad(azis[month][shadow_idx]+<span class="number">180</span>)</span><br><span class="line">    shadow_lengths = <span class="number">1</span>/np.tan(np.deg2rad(alts[month][shadow_idx]))</span><br><span class="line">    ax2.plot(shadow_azis_rad, shadow_lengths, c=color, zorder=<span class="number">1</span>)</span><br><span class="line">    im2 = ax2.scatter(shadow_azis_rad, shadow_lengths, marker=marker,</span><br><span class="line">                      c=time_arr[shadow_idx], ec=color, lw=<span class="number">1</span>, cmap=<span class="string">&quot;gist_gray&quot;</span>, </span><br><span class="line">                      vmin=<span class="number">0</span>, vmax=<span class="number">23.5</span>, zorder=<span class="number">2</span>)</span><br><span class="line">    handles.append(im2)</span><br><span class="line">    </span><br><span class="line">ax2.set_ylim(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">ax2.yaxis.set_major_locator(MultipleLocator(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">cbar2 = plt.colorbar(im2, ax=ax2, fraction=<span class="number">0.046</span>, pad=<span class="number">0.15</span>, ticks= <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">28</span>, <span class="number">4</span>)))</span><br><span class="line">cbar2.set_label(<span class="string">&quot;time (hour)&quot;</span>, fontsize=<span class="number">20</span>, labelpad=<span class="number">12</span>)    </span><br><span class="line"></span><br><span class="line">ax2.set_title(<span class="string">&quot;shadow motion&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="number">20</span>, <span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;, pad=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">fig.legend(handles=handles, labels=[<span class="string">&quot;spring equinox&quot;</span>, <span class="string">&quot;summer soliste&quot;</span>, <span class="string">&quot;autumn equinox&quot;</span>, <span class="string">&quot;winter soliste&quot;</span>],</span><br><span class="line">           ncol=<span class="number">4</span>, bbox_to_anchor=(<span class="number">0.</span>, <span class="number">0.9</span>, <span class="number">1.</span>, <span class="number">.1</span>), mode=<span class="string">&quot;expand&quot;</span>)</span><br><span class="line">fig.tight_layout(rect=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.9</span>])   </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/13/GIS-Python-4-pysolar/4_pysolar_2.png" alt="계절에 따라 하루 중 태양과 그림자의 움직임이 다릅니다."><br></p>
+<p><img src="4_pysolar_2.png" alt="계절에 따라 하루 중 태양과 그림자의 움직임이 다릅니다."><br></p>
 
         </div>
 		<p>
@@ -349,7 +358,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/10/13/GIS-Python-4-pysolar/" data-id="cuidsFtcgFob6QGoPmqNES4gA" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/10/13/GIS-Python-4-pysolar/" data-id="cuidPmmT8qPySGINXh3I4hVek" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -432,16 +441,20 @@
 날짜별, 시간별, 위치별 태양의 위치를 알고싶다면 pysolar가 편리합니다.
 
 
-pysolar pypipysolar githubpysolar documentation
+pysolar pypi
+pysolar github
+pysolar documentation
 
 1. pysolar 설치
+
 pip로 간단하게 설치할 수 있습니다.
 
 1pip install pysolar
-
 2. pysolar 사용
-pysolar를 사용하려면",
-        "wordCount": 2579
+
+
+pysolar를 사",
+        "wordCount": 2552
     }
 </script>
 
@@ -538,6 +551,26 @@ pysolar를 사용하려면",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -612,26 +645,6 @@ pysolar를 사용하려면",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

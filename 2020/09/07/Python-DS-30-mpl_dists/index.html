@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,seaborn,cognitive science,ridgeplot,calendar" />
     
-    <meta name="description" content="시간의 흐름에 따른 분포 추세 변화를 보여줍니다. matplotlib 혼자만으로는 힘듭니다. seaborn의 도움을 받아봅시다. pandas의 도움을 받을 수도 있습니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Vi">
+    <meta name="description" content="시간의 흐름에 따른 분포 추세 변화를 보여줍니다. matplotlib 혼자만으로는 힘듭니다. seaborn의 도움을 받아봅시다. pandas의 도움을 받을 수도 있습니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free) Colin Ware “데이터 시각화, 인지과학을 만나다” White Paper-Principles of Data">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ridgeline Plot">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="시간의 흐름에 따른 분포 추세 변화를 보여줍니다. matplotlib 혼자만으로는 힘듭니다. seaborn의 도움을 받아봅시다. pandas의 도움을 받을 수도 있습니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Vi">
+<meta property="og:description" content="시간의 흐름에 따른 분포 추세 변화를 보여줍니다. matplotlib 혼자만으로는 힘듭니다. seaborn의 도움을 받아봅시다. pandas의 도움을 받을 수도 있습니다.   Claus Wilke, “데이터 시각화 교과서”, 영문판(Free) Colin Ware “데이터 시각화, 인지과학을 만나다” White Paper-Principles of Data">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/30-mpl_dists_0.png">
 <meta property="article:published_time" content="2020-09-07T00:40:00.000Z">
@@ -238,22 +238,33 @@
 <li>pandas의 도움을 받을 수도 있습니다.</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br><a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62616251">Colin Ware “데이터 시각화, 인지과학을 만나다”</a><br><a target="_blank" rel="noopener" href="https://www.fusioncharts.com/resources/whitepapers/principles-of-data-visualization">White Paper-Principles of Data Visualization-What we see in a Visual</a></p>
+<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br>
+<a target="_blank" rel="noopener" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62616251">Colin Ware “데이터 시각화, 인지과학을 만나다”</a><br>
+<a target="_blank" rel="noopener" href="https://www.fusioncharts.com/resources/whitepapers/principles-of-data-visualization">White Paper-Principles of Data Visualization-What we see in a Visual</a></p>
 </blockquote>
-<h2 id="1-전주의-처리preattentive-processing"><a href="#1-전주의-처리preattentive-processing" class="headerlink" title="1. 전주의 처리preattentive processing"></a>1. 전주의 처리<code>preattentive processing</code></h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Pre-attentive_processing">wikipedia: pre-attentive processing</a><br><a target="_blank" rel="noopener" href="https://eagereyes.org/seminal-papers/treisman-preattentive-processing">Seminal InfoVis Paper: Treisman, Preattentive Processing</a><br><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0734189X85800049">Treisman, “Preattentive processing in vision”, Computer Vision, Graphis, and Image Processing, 31, 157 (1985)</a><br><a target="_blank" rel="noopener" href="https://psycnet.apa.org/doiLanding?doi=10.1037/0033-295X.95.1.15">Treisman and Gormican, “Feature analysis in early vision: Evidence from search asymmetries”, Psychological Review, 95, 15 (1988)</a><br><a target="_blank" rel="noopener" href="https://kathep.com/tools/readings/focus-your-audiences-attention/">Focus Your Audience’s Attention</a></p>
+<h2 id="1-전주의-처리preattentive-processing">1. 전주의 처리<code>preattentive processing</code></h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Pre-attentive_processing">wikipedia: pre-attentive processing</a><br>
+<a target="_blank" rel="noopener" href="https://eagereyes.org/seminal-papers/treisman-preattentive-processing">Seminal InfoVis Paper: Treisman, Preattentive Processing</a><br>
+<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0734189X85800049">Treisman, “Preattentive processing in vision”, Computer Vision, Graphis, and Image Processing, 31, 157 (1985)</a><br>
+<a target="_blank" rel="noopener" href="https://psycnet.apa.org/doiLanding?doi=10.1037%2F0033-295X.95.1.15">Treisman and Gormican, “Feature analysis in early vision: Evidence from search asymmetries”, Psychological Review, 95, 15 (1988)</a><br>
+<a target="_blank" rel="noopener" href="https://kathep.com/tools/readings/focus-your-audiences-attention/">Focus Your Audience’s Attention</a></p>
 </blockquote>
 <ul>
-<li><p><b>우리 눈은 주목<code>attention</code>하기 전에 정보를 처리합니다.</b></p>
+<li>
+<p><b>우리 눈은 주목<code>attention</code>하기 전에 정보를 처리합니다.</b></p>
 <ul>
 <li>정신물리학<code>psychophysics</code>은 인간의 감각 측정에 물리학적 방법을 적용한 기술입니다.</li>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Anne_Treisman">Anne Treisman</a>은 1985년 기념비적인 <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0734189X85800049">논문</a>을 출판합니다.</li>
 <li><b>어떤 물체가 사람의 관심을 끌고 쉽게 발견되는지</b>에 대한 내용입니다.</li>
 </ul>
 </li>
-<li><p>어려운 말들이 갑자기 등장합니다. 예시를 통해 알아봅시다.<br><br><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_5.png" alt="두 그림에서 숫자 9는 몇개일까요?"></p>
+<li>
+<p>어려운 말들이 갑자기 등장합니다. 예시를 통해 알아봅시다.<br><br>
+<img src="30-mpl_dists_5.png" alt="두 그림에서 숫자 9는 몇개일까요?"></p>
 </li>
-<li><p>정답은 좌우 모두 <b>14개</b> 입니다.</p>
+<li>
+<p>정답은 좌우 모두 <b>14개</b> 입니다.</p>
 <ul>
 <li>오른쪽 그림이 왼쪽 그림보다 훨씬 헤아리기 좋습니다.</li>
 <li><b>9</b>만 골라서 굵은 글씨로 표시했기 때문에 찾기도 좋고,</li>
@@ -261,68 +272,85 @@
 <li>우리 뇌가 굵은 글씨를 따로 떼어서 처리하기 때문입니다.</li>
 </ul>
 </li>
-<li><p>Treisman을 비롯한 당시 연구자들은 눈길을 끄는 요소가 있음을 알았습니다.</p>
+<li>
+<p>Treisman을 비롯한 당시 연구자들은 눈길을 끄는 요소가 있음을 알았습니다.</p>
 <ul>
 <li>이를 <b>전주의 요소<code>preattentive attributes</code></b>라고 하며,</li>
 <li>대상을 이렇게 만드는 것을 <b>전주의 처리<code>preattentive processing</code></b>라고 합니다.</li>
-<li><a target="_blank" rel="noopener" href="https://psycnet.apa.org/doiLanding?doi=10.1037/0033-295X.95.1.15">연구</a>에 따르면 전주의 처리된 대상 식별엔 <b>10 ms 미만</b>이 걸리지만,</li>
+<li><a target="_blank" rel="noopener" href="https://psycnet.apa.org/doiLanding?doi=10.1037%2F0033-295X.95.1.15">연구</a>에 따르면 전주의 처리된 대상 식별엔 <b>10 ms 미만</b>이 걸리지만,</li>
 <li>그렇지 않은 대상은 <b>40 ms 이상</b>이 걸렸다고 합니다.</li>
 </ul>
 </li>
-<li><p>전주의 요소의 예시로는 다음과 같은 것들이 있습니다.<br><br><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_4.png">  </p>
+<li>
+<p>전주의 요소의 예시로는 다음과 같은 것들이 있습니다.<br><br>
+<img src="30-mpl_dists_4.png" alt=""></p>
 </li>
-<li><p>우리는 이 중 <b>움직임<code>motion</code></b>을 사용해보려 합니다.</p>
+<li>
+<p>우리는 이 중 <b>움직임<code>motion</code></b>을 사용해보려 합니다.</p>
 </li>
 </ul>
-<h2 id="2-분포distribution-시각화"><a href="#2-분포distribution-시각화" class="headerlink" title="2. 분포distribution 시각화"></a>2. 분포<code>distribution</code> 시각화</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br><a target="_blank" rel="noopener" href="https://github.com/amcquistan/WeatherPredictPythonML">github: WeatherPredictPythonML</a><br><a target="_blank" rel="noopener" href="https://www.wunderground.com/">Weather Underground</a></p>
+<h2 id="2-분포distribution-시각화">2. 분포<code>distribution</code> 시각화</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/amcquistan/WeatherPredictPythonML">github: WeatherPredictPythonML</a><br>
+<a target="_blank" rel="noopener" href="https://www.wunderground.com/">Weather Underground</a></p>
 </blockquote>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_6.png"></p>
+<p><img src="30-mpl_dists_6.png" alt=""></p>
 <ul>
-<li>어떤 데이터가 얼만큼 있는지 알고 싶을 때 <b>분포</b>를 그립니다.<ul>
+<li>어떤 데이터가 얼만큼 있는지 알고 싶을 때 <b>분포</b>를 그립니다.
+<ul>
 <li>18세기부터 시작된 히스토그램<code>histogram</code>이 기본이고</li>
 <li>매끄러워 보기 좋은 밀도 도표<code>density plot</code>도 많이 쓰입니다.</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-1-한-달치-일별-기온-분포-histogram"><a href="#2-1-한-달치-일별-기온-분포-histogram" class="headerlink" title="2.1. 한 달치 일별 기온 분포 : histogram"></a>2.1. 한 달치 일별 기온 분포 : histogram</h3><ul>
-<li><p><b>한달치 일별 평균 기온 분포</b>를 그려봅시다.</p>
+<h3 id="2-1-한-달치-일별-기온-분포-histogram">2.1. 한 달치 일별 기온 분포 : histogram</h3>
+<ul>
+<li>
+<p><b>한달치 일별 평균 기온 분포</b>를 그려봅시다.</p>
 <ul>
 <li>미국 Nebraska 주의 Lincoln 시 데이터를 사용하겠습니다.</li>
 <li><a target="_blank" rel="noopener" href="https://www.wunderground.com/">Weather Underground</a>에서 <a target="_blank" rel="noopener" href="https://github.com/amcquistan/WeatherPredictPythonML/blob/master/Weather%20Underground%20API.ipynb">API</a>로 데이터를 가져올 수 있지만</li>
 <li>편하게, <a href="end-part2_df.csv">다운받아둔 데이터</a>를 이용하겠습니다.</li>
 </ul>
 </li>
-<li><p>데이터를 읽어 <b>2016년</b> 것만 추립니다.</p>
+<li>
+<p>데이터를 읽어 <b>2016년</b> 것만 추립니다.</p>
 </li>
-<li><p>많은 column 중 <code>meantempm</code>이 일별 평균 기온입니다.<br></p>
+<li>
+<p>많은 column 중 <code>meantempm</code>이 일별 평균 기온입니다.<br></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">df_weather = pd.read_csv(<span class="string">&quot;end-part2_df.csv&quot;</span>, index_col=<span class="string">&quot;date&quot;</span>)</span><br><span class="line">df_2016 = df_weather.<span class="built_in">filter</span>(like=<span class="string">&quot;2016&quot;</span>, axis=<span class="number">0</span>)</span><br><span class="line">df_2016.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_8.png"></p>
+<p><img src="30-mpl_dists_8.png" alt=""></p>
 <ul>
 <li><b>1월 데이터</b>만 선택해서 <b>히스토그램</b>을 그립니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df_2016.reset_index(inplace=<span class="literal">True</span>)</span><br><span class="line">df_2016[<span class="string">&quot;month&quot;</span>] = df_2016[<span class="string">&quot;date&quot;</span>].apply(<span class="keyword">lambda</span> s: <span class="built_in">int</span>(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">df_jan = df_2016.query(<span class="string">&quot;month==1&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">hists = ax.hist(df_jan[<span class="string">&quot;meantempm&quot;</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_9.png"></p>
-<h3 id="2-2-한-달치-일별-기온-분포-density-plot"><a href="#2-2-한-달치-일별-기온-분포-density-plot" class="headerlink" title="2.2. 한 달치 일별 기온 분포 : density plot"></a>2.2. 한 달치 일별 기온 분포 : density plot</h3><h4 id="2-2-1-matplotlib-scipy-이렇게-하지-마세요-뒤에-쉬운-길-나옵니다"><a href="#2-2-1-matplotlib-scipy-이렇게-하지-마세요-뒤에-쉬운-길-나옵니다" class="headerlink" title="2.2.1. matplotlib + scipy : 이렇게 하지 마세요. 뒤에 쉬운 길 나옵니다."></a>2.2.1. matplotlib + scipy : 이렇게 하지 마세요. 뒤에 쉬운 길 나옵니다.</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html">scipy.stats.gaussian_kde</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/mlab_api.html?highlight=kde#matplotlib.mlab.GaussianKDE">matplotlib.mlab.GaussianKDE</a></p>
+<p><img src="30-mpl_dists_9.png" alt=""></p>
+<h3 id="2-2-한-달치-일별-기온-분포-density-plot">2.2. 한 달치 일별 기온 분포 : density plot</h3>
+<h4 id="2-2-1-matplotlib-scipy-이렇게-하지-마세요-뒤에-쉬운-길-나옵니다">2.2.1. matplotlib + scipy : 이렇게 하지 마세요. 뒤에 쉬운 길 나옵니다.</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html">scipy.stats.gaussian_kde</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/3.3.0/api/mlab_api.html?highlight=kde#matplotlib.mlab.GaussianKDE">matplotlib.mlab.GaussianKDE</a></p>
 </blockquote>
 <ul>
-<li>분포 범위 -15℃ ~ 5℃, 최빈값 약 -2℃가 선명하게 보입니다.<ul>
+<li>분포 범위 -15℃ ~ 5℃, 최빈값 약 -2℃가 선명하게 보입니다.
+<ul>
 <li>그러나 거친 그림이 왠지 아쉽습니다. <b>밀도 도표</b>는 예쁠 것 같습니다.</li>
 <li>matplotlib으로는 커널 밀도를 그리기 상당히 번거롭다는 것이 문제입니다.</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 1. Gaussian KDE 기능 불러오기</span></span><br><span class="line"><span class="comment">#  scipy의 gaussian_kde 도움을 받아야 합니다.</span></span><br><span class="line"><span class="comment">#  matplotlib의 mlab에 있는 GaussianKDE를 사용할 수도 있습니다.</span></span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> gaussian_kde</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2. Gaussian KDE 적용</span></span><br><span class="line"><span class="comment">#  데이터를 gaussian_kde()에 넣어서 kde 함수를 만듭니다.</span></span><br><span class="line"><span class="comment">#  density plot을 그릴 X를 정의한 후,</span></span><br><span class="line"><span class="comment">#  X를 kde 함수에 넣어 density plot을 그립니다.</span></span><br><span class="line">kde = gaussian_kde(df_jan[<span class="string">&quot;meantempm&quot;</span>])</span><br><span class="line">X = np.linspace(-<span class="number">20</span>, <span class="number">10</span>, <span class="number">301</span>)</span><br><span class="line">Y = kde(X)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 3. 밀도 함수를 그립니다.</span></span><br><span class="line"><span class="comment">#  histogram과 겹쳐 그리기 위해 histogram을 밀도로 그려줍니다.</span></span><br><span class="line"><span class="comment">#  plot() 명령으로 밀도 함수를 선으로 그립니다.</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">hists = ax.hist(df_jan[<span class="string">&quot;meantempm&quot;</span>], density=<span class="literal">True</span>)</span><br><span class="line">ax.plot(X, Y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_10.png"></p>
+<p><img src="30-mpl_dists_10.png" alt=""></p>
 <ul>
 <li><b>대역폭<code>bandwidth</code> 조정</b>이라도 하려면 더 어렵습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 2.5. 대역폭 수정</span></span><br><span class="line"><span class="comment">#  kde.covariance_factor를 조정해주고,</span></span><br><span class="line"><span class="comment">#  kde.covariance를 다시 계산하는 과정을 추가해야 합니다.</span></span><br><span class="line">kde = gaussian_kde(df_jan[<span class="string">&quot;meantempm&quot;</span>])</span><br><span class="line">kde.covariance_factor = <span class="keyword">lambda</span> : <span class="number">.1</span></span><br><span class="line">kde._compute_covariance()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_11.png"></p>
-<h4 id="2-2-2-matplotlib-pandas"><a href="#2-2-2-matplotlib-pandas" class="headerlink" title="2.2.2. matplotlib + pandas"></a>2.2.2. matplotlib + pandas</h4><blockquote>
+<p><img src="30-mpl_dists_11.png" alt=""></p>
+<h4 id="2-2-2-matplotlib-pandas">2.2.2. matplotlib + pandas</h4>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.kde.html">pandas.DataFrame.plot.kde</a></p>
 </blockquote>
 <ul>
@@ -330,34 +358,40 @@
 <li>인자로 <code>matplotlib.pyplot.Axes</code>를 입력받기 때문에 사전 정의된 Axes에 넣을 수도 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line">df_jan[<span class="string">&quot;meantempm&quot;</span>].plot.hist(density=<span class="literal">True</span>, ax=ax[<span class="number">0</span>])</span><br><span class="line">df_jan[<span class="string">&quot;meantempm&quot;</span>].plot.kde(ax=ax[<span class="number">1</span>])</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_12.png"></p>
-<h4 id="2-2-3-matplotlib-seaborn"><a href="#2-2-3-matplotlib-seaborn" class="headerlink" title="2.2.3. matplotlib + seaborn"></a>2.2.3. matplotlib + seaborn</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html">seaborn.kdeplot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.distplot.html">seaborn.distplot</a></p>
+<p><img src="30-mpl_dists_12.png" alt=""></p>
+<h4 id="2-2-3-matplotlib-seaborn">2.2.3. matplotlib + seaborn</h4>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html">seaborn.kdeplot</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.distplot.html">seaborn.distplot</a></p>
 </blockquote>
 <ul>
 <li>seaborn은 더 친절합니다.</li>
 <li>한 줄에 histogram과 density plot을 함께 그릴 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">sns.distplot(df_jan[<span class="string">&quot;meantempm&quot;</span>], kde_kws=&#123;<span class="string">&quot;bw&quot;</span>:<span class="number">1.5</span>&#125;, ax=ax)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_13.png"></p>
-<h3 id="2-3-한-달치-일별-기온-분포-X-12달-ridge-plot"><a href="#2-3-한-달치-일별-기온-분포-X-12달-ridge-plot" class="headerlink" title="2.3. 한 달치 일별 기온 분포 X 12달 : ridge plot"></a>2.3. 한 달치 일별 기온 분포 X 12달 : ridge plot</h3><blockquote>
+<p><img src="30-mpl_dists_13.png" alt=""></p>
+<h3 id="2-3-한-달치-일별-기온-분포-X-12달-ridge-plot">2.3. 한 달치 일별 기온 분포 X 12달 : ridge plot</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="http://m.yes24.com/goods/detail/87631760">Claus Wilke, “데이터 시각화 교과서”</a>, <a target="_blank" rel="noopener" href="https://clauswilke.com/dataviz/">영문판(Free)</a></p>
 </blockquote>
 <ul>
-<li><p>1년은 12달이므로 <b>한 달치 일별 기온 분포를 12개</b> 그려야 합니다.</p>
+<li>
+<p>1년은 12달이므로 <b>한 달치 일별 기온 분포를 12개</b> 그려야 합니다.</p>
 <ul>
-<li>단순히 12개를 나열하기보다, </li>
+<li>단순히 12개를 나열하기보다,</li>
 <li>한 달 한 달이 지나며 기온 분포가 어떻게 바뀌는지 보여주어야 합니다.</li>
 </ul>
 </li>
-<li><p>여러 분포 상태를 도표 하나에 시각화하기 위한 방법들이 있습니다.</p>
+<li>
+<p>여러 분포 상태를 도표 하나에 시각화하기 위한 방법들이 있습니다.</p>
 <ul>
 <li>통계적 분석결과를 담은 <b>박스플롯<code>box plot</code></b></li>
 <li>밀도 함수를 이용한 <b>바이올린 도표<code>violin plot</code></b></li>
 <li>밀도 함수를 순차적으로 늘어놓은 <b>융기선 도표<code>ridge plot</code></b>가 있습니다.</li>
 </ul>
 </li>
-<li><p>이 중 융기선 도표는 <b>시간의 흐름</b>에 따른 변화를 보여주기에 좋습니다.</p>
+<li>
+<p>이 중 융기선 도표는 <b>시간의 흐름</b>에 따른 변화를 보여주기에 좋습니다.</p>
 <ul>
 <li><b>가로축을 데이터값</b>으로 고정하고 <b>세로축을 시간</b>에 따라 배열하면,</li>
 <li>시선이 위아래로 움직이며 자연스럽게 데이터값의 변화를 파악하게 됩니다.</li>
@@ -365,74 +399,87 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_7.png"></p>
+<p><img src="30-mpl_dists_7.png" alt=""></p>
 <ul>
 <li><b><code>matplotlib</code></b>과 <b><code>seaborn</code></b>을 협력시켜 융기선 도표를 그려보겠습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 모든 axes에 동일한 scale 적용 : sharex=True, sharey=True</span></span><br><span class="line">fig, axes = plt.subplots(nrows=<span class="number">12</span>, figsize=(<span class="number">10</span>,<span class="number">7</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(df_2016.query(<span class="string">f&quot;month==<span class="subst">&#123;i&#125;</span>&quot;</span>)[<span class="string">&quot;meantempm&quot;</span>], shade=<span class="literal">True</span>, legend=<span class="literal">False</span>, ax=ax)</span><br><span class="line">    ax.text(-<span class="number">29</span>, <span class="number">0.02</span>, <span class="string">f&quot;month=<span class="subst">&#123;i&#125;</span>&quot;</span>)  <span class="comment"># 좌측 하단에 월 표시</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_14.png"></p>
+<p><img src="30-mpl_dists_14.png" alt=""></p>
 <ul>
-<li>간단하게 융기선 도표가 그려졌지만 많이 아쉽습니다.<ul>
+<li>간단하게 융기선 도표가 그려졌지만 많이 아쉽습니다.
+<ul>
 <li><b>불필요한 인자들 (윤곽선, y값)</b>이 많습니다. → 없앱시다.</li>
 <li>월 이름이 <b>숫자</b>입니다. → <b>이름</b>으로 바꿉시다.</li>
 <li>그림들이 따로 놀고 있습니다. → <b>겹쳐줍시다</b>.</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-3-1-달-이름을-숫자에서-문자로-바꾸기"><a href="#2-3-1-달-이름을-숫자에서-문자로-바꾸기" class="headerlink" title="2.3.1. 달 이름을 숫자에서 문자로 바꾸기"></a>2.3.1. 달 이름을 숫자에서 문자로 바꾸기</h3><blockquote>
+<h3 id="2-3-1-달-이름을-숫자에서-문자로-바꾸기">2.3.1. 달 이름을 숫자에서 문자로 바꾸기</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/calendar.html">calendar</a></p>
 </blockquote>
 <ul>
 <li><b><code>calendar</code></b> 모듈을 사용하면 간단하게 숫자를 영어로 바꿀 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"></span><br><span class="line"><span class="comment">## 숫자(1)를 이름(January)으로 변경</span></span><br><span class="line"><span class="comment">#  약어(Jan)으로 바꾸고 싶을 때는 calendar.month_abbr[i]</span></span><br><span class="line">ax.text(-<span class="number">29</span>, <span class="number">0.02</span>, calendar.month_name[i])    </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_15.png"></p>
-<h3 id="2-3-2-윤곽선-없애기-눈금-넣기"><a href="#2-3-2-윤곽선-없애기-눈금-넣기" class="headerlink" title="2.3.2. 윤곽선 없애기, 눈금 넣기"></a>2.3.2. 윤곽선 없애기, 눈금 넣기</h3><ul>
+<p><img src="30-mpl_dists_15.png" alt=""></p>
+<h3 id="2-3-2-윤곽선-없애기-눈금-넣기">2.3.2. 윤곽선 없애기, 눈금 넣기</h3>
+<ul>
 <li><a href="https://jehyunlee.github.io/2020/08/27/Python-DS-28-mpl_spines_grids/">지난 글</a>의 예시를 따라 spines를 없애고 grid를 넣습니다.</li>
 <li>그리고 없앤 하단 spine 대신 밝은 회색으로 기준선을 깔아줍니다.</li>
 <li>x축 눈금(tick)은 길이를 0으로 만들었고, y축 눈금은 완전히 제거했습니다.</li>
 <li>x축 <b>눈금을 제거할 경우 격자(grid)가 생기지 않기 때문</b>입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">12</span>, figsize=(<span class="number">10</span>,<span class="number">7</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(df_2016.query(<span class="string">f&quot;month==<span class="subst">&#123;i&#125;</span>&quot;</span>)[<span class="string">&quot;meantempm&quot;</span>], </span><br><span class="line">                shade=<span class="literal">True</span>, color=<span class="string">&quot;cornflowerblue&quot;</span>, alpha=<span class="number">1</span>,</span><br><span class="line">                legend=<span class="literal">False</span>, ax=ax)</span><br><span class="line">    ax.set_xlim(-<span class="number">29</span>, <span class="number">40</span>)                       <span class="comment"># x범위 조정</span></span><br><span class="line">    ax.text(-<span class="number">28</span>, <span class="number">0.02</span>, calendar.month_name[i]) <span class="comment"># 월 이름 적용</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 불필요한 윤곽선 없애기</span></span><br><span class="line">    ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">12</span>:</span><br><span class="line">        ax.spines[<span class="string">&quot;bottom&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">        ax.tick_params(axis=<span class="string">&quot;x&quot;</span>, length=<span class="number">0</span>)      <span class="comment"># x축 눈금 없애기. </span></span><br><span class="line">    </span><br><span class="line">    ax.set_yticks([]) <span class="comment"># y축 눈금 없애기</span></span><br><span class="line">    </span><br><span class="line">    ax.grid(axis=<span class="string">&quot;x&quot;</span>) <span class="comment"># x축 눈금을 기준으로 grid 만들기</span></span><br><span class="line">    ax.axhline(<span class="number">0</span>, color=<span class="string">&quot;gray&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_16.png"></p>
-<h3 id="2-3-3-밀도-함수-겹치기"><a href="#2-3-3-밀도-함수-겹치기" class="headerlink" title="2.3.3. 밀도 함수 겹치기"></a>2.3.3. 밀도 함수 겹치기</h3><ul>
-<li><p>밀도 함수를 겹치려면 다음과 같은 조건이 필요합니다.</p>
+<p><img src="30-mpl_dists_16.png" alt=""></p>
+<h3 id="2-3-3-밀도-함수-겹치기">2.3.3. 밀도 함수 겹치기</h3>
+<ul>
+<li>
+<p>밀도 함수를 겹치려면 다음과 같은 조건이 필요합니다.</p>
 <ol>
 <li>위 axes의 하단이 아래 axes의 상단보다 <b>낮게</b> 있을 것</li>
 <li><b>axes의 배경이 투명</b>해서 아래가 비쳐보일 것</li>
 <li>밀도 함수의 <b>윤곽선과 내부 색이 구분</b>될 것</li>
 </ol>
 </li>
-<li><p>그리고, 다음과 같은 명령어로 구현됩니다.</p>
+<li>
+<p>그리고, 다음과 같은 명령어로 구현됩니다.</p>
 <ol>
 <li><b><code>fig.subplots_adjust(hspace=-0.5)</code></b> : fig에 속한 axes들을 절반 겹칩니다.</li>
-<li><b><code>ax.patch.set_alpha(0)</code></b> : axes의 배경을 투명하게 설정합니다.<br>  비슷하게, <b><code>fig.patch.set_alpha(0)</code></b>를 하면 Figure도 투명해집니다.</li>
+<li><b><code>ax.patch.set_alpha(0)</code></b> : axes의 배경을 투명하게 설정합니다.<br>
+비슷하게, <b><code>fig.patch.set_alpha(0)</code></b>를 하면 Figure도 투명해집니다.</li>
 <li><b><code>sns.kdeplot(color=, facecolor=)</code></b> : (line)color와 facecolor의 색을 따로 지정합니다.</li>
 </ol>
 </li>
-<li><p>코드에 적용하면 다음과 같습니다.</p>
+<li>
+<p>코드에 적용하면 다음과 같습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">12</span>, figsize=(<span class="number">10</span>,<span class="number">7</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">fig.patch.set_alpha(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(df_2016.query(<span class="string">f&quot;month==<span class="subst">&#123;i&#125;</span>&quot;</span>)[<span class="string">&quot;meantempm&quot;</span>], </span><br><span class="line">                shade=<span class="literal">True</span>, color=<span class="string">&quot;w&quot;</span>, facecolor=<span class="string">&quot;cornflowerblue&quot;</span>, alpha=<span class="number">1</span>,</span><br><span class="line">                legend=<span class="literal">False</span>, ax=ax)</span><br><span class="line">    ax.set_xlim(-<span class="number">29</span>, <span class="number">40</span>)    </span><br><span class="line">    ax.text(-<span class="number">29</span>, <span class="number">0.01</span>, calendar.month_name[i], fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>&#125;) </span><br><span class="line">    </span><br><span class="line">    ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">12</span>:</span><br><span class="line">        ax.spines[<span class="string">&quot;bottom&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">        ax.tick_params(axis=<span class="string">&quot;x&quot;</span>, length=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ax.tick_params(axis=<span class="string">&quot;x&quot;</span>, labelsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line">        ax.set_xlabel(<span class="string">&quot;Mean Temperature ($^o$C)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    ax.set_yticks([])    </span><br><span class="line">    </span><br><span class="line">    ax.grid(axis=<span class="string">&quot;x&quot;</span>)</span><br><span class="line">    ax.axhline(<span class="number">0</span>, color=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">    ax.patch.set_alpha(<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">fig.subplots_adjust(hspace=-<span class="number">0.5</span>) </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_17.png"></p>
-<h3 id="2-3-4-격자를-데이터-뒤로-옮기기"><a href="#2-3-4-격자를-데이터-뒤로-옮기기" class="headerlink" title="2.3.4. 격자를 데이터 뒤로 옮기기"></a>2.3.4. 격자를 데이터 뒤로 옮기기</h3><ul>
-<li><p>위 그림에서 분포를 가린 격자가 다소 거슬립니다.</p>
+<p><img src="30-mpl_dists_17.png" alt=""></p>
+<h3 id="2-3-4-격자를-데이터-뒤로-옮기기">2.3.4. 격자를 데이터 뒤로 옮기기</h3>
+<ul>
+<li>
+<p>위 그림에서 분포를 가린 격자가 다소 거슬립니다.</p>
 <ul>
 <li>각 axes의 격자는 <code>zorder</code> 인자를 사용해서 분포 뒤로 보낼 수 있지만,</li>
-<li>아래 axes의 격자가 위 axes의 분포를 가리는 것은 막기 어렵습니다.<br>(방법을 찾지 못했습니다. 아시는 분 제보 부탁드립니다)</li>
+<li>아래 axes의 격자가 위 axes의 분포를 가리는 것은 막기 어렵습니다.<br>
+(방법을 찾지 못했습니다. 아시는 분 제보 부탁드립니다)</li>
 </ul>
 </li>
-<li><p>대안으로, grid 대신 <b>xtick 위치에 수직선을 긋는 방법</b>이 있습니다.</p>
+<li>
+<p>대안으로, grid 대신 <b>xtick 위치에 수직선을 긋는 방법</b>이 있습니다.</p>
 <ol>
 <li><code>ax.get_xticks()</code>로 x축 눈금 위치를 찾고</li>
 <li>거기에 지정된 높이의 막대기를 분포 그림 뒤에 그어줍니다.</li>
 </ol>
 </li>
-<li><p>이 부분을 포함한 전체 코드와 결과는 다음과 같습니다.</p>
+<li>
+<p>이 부분을 포함한 전체 코드와 결과는 다음과 같습니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(nrows=<span class="number">12</span>, figsize=(<span class="number">10</span>,<span class="number">7</span>), sharex=<span class="literal">True</span>, sharey=<span class="literal">True</span>)</span><br><span class="line">fig.set_alpha(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> <span class="built_in">enumerate</span>(axes, <span class="number">1</span>):</span><br><span class="line">    sns.kdeplot(df_2016.query(<span class="string">f&quot;month==<span class="subst">&#123;i&#125;</span>&quot;</span>)[<span class="string">&quot;meantempm&quot;</span>], </span><br><span class="line">                shade=<span class="literal">True</span>, color=<span class="string">&quot;w&quot;</span>, facecolor=<span class="string">&quot;cornflowerblue&quot;</span>, alpha=<span class="number">1</span>,</span><br><span class="line">                legend=<span class="literal">False</span>, ax=ax)</span><br><span class="line">    ax.set_xlim(-<span class="number">29</span>, <span class="number">40</span>)    </span><br><span class="line">    ax.text(-<span class="number">29</span>, <span class="number">0.01</span>, calendar.month_name[i], fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>&#125;) </span><br><span class="line">    </span><br><span class="line">    ax.spines[<span class="string">&quot;left&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;right&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;top&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    ax.spines[<span class="string">&quot;bottom&quot;</span>].set_visible(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">12</span>:</span><br><span class="line">        ax.tick_params(axis=<span class="string">&quot;x&quot;</span>, length=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ax.tick_params(axis=<span class="string">&quot;x&quot;</span>, direction=<span class="string">&quot;inout&quot;</span>, color=<span class="string">&quot;lightgray&quot;</span>, </span><br><span class="line">                       length=<span class="number">5</span>, width=<span class="number">2</span>, labelsize=<span class="string">&quot;large&quot;</span>)</span><br><span class="line">        ax.set_xlabel(<span class="string">&quot;Mean Temperature (℃)&quot;</span>, fontdict=&#123;<span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;large&quot;</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    ax.set_yticks([])    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#     ax.grid(axis=&quot;x&quot;)</span></span><br><span class="line">    xticks = ax.get_xticks()</span><br><span class="line">    <span class="keyword">for</span> xtick <span class="keyword">in</span> xticks:</span><br><span class="line">        ax.plot([xtick, xtick], [<span class="number">0</span>, <span class="number">0.065</span>], color=<span class="string">&#x27;lightgray&#x27;</span>, zorder=<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">    ax.axhline(<span class="number">0</span>, color=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">    ax.patch.set_alpha(<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">fig.subplots_adjust(hspace=-<span class="number">0.5</span>)    </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/Python-DS-30-mpl_dists/30-mpl_dists_18.png"></p>
+<p><img src="30-mpl_dists_18.png" alt=""></p>
 
         </div>
 		<p>
@@ -450,7 +497,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/" data-id="cuidSh85t7KP2JzRJ6foCupfq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/07/Python-DS-30-mpl_dists/" data-id="cuidIMGBRPPtcV24jC5o6HiG4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -534,8 +581,10 @@ matplotlib 혼자만으로는 힘듭니다. seaborn의 도움을 받아봅시다
 pandas의 도움을 받을 수도 있습니다.
 
 
-Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “데이터 시각화, 인지과학을 만나다”White Paper-Principles of Data Vi",
-        "wordCount": 2100
+Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)
+Colin Ware “데이터 시각화, 인지과학을 만나다”
+White Paper-Principles of Data ",
+        "wordCount": 2010
     }
 </script>
 
@@ -632,6 +681,26 @@ Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “�
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -706,26 +775,6 @@ Claus Wilke, “데이터 시각화 교과서”, 영문판(Free)Colin Ware “�
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

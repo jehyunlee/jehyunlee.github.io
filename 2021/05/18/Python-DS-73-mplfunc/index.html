@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization" />
     
-    <meta name="description" content="자주 사용하는 기능은 함수로 만들면 편리합니다. 마찬가지로 자주 그리는 그림은 함수로 만들면 좋습니다. Matplotlib 객체지향을 사용해 함수를 만듭시다.  1. Parity plot 머신러닝 후 참값을 x축, 예측값을 y축에 놓고 얼마나 비슷한지 평가하고는 합니다. 이런 그림을 parity plot이라고 하며, 매우 자주 그리는 그림입니다. 그림이">
+    <meta name="description" content="자주 사용하는 기능은 함수로 만들면 편리합니다. 마찬가지로 자주 그리는 그림은 함수로 만들면 좋습니다. Matplotlib 객체지향을 사용해 함수를 만듭시다.  1. Parity plot  머신러닝 후 참값을 x축, 예측값을 y축에 놓고 얼마나 비슷한지 평가하고는 합니다. 이런 그림을 parity plot이라고 하며, 매우 자주 그리는 그림입니다. 그림이">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matplotlib Vis. Function">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/05/18/Python-DS-73-mplfunc/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="자주 사용하는 기능은 함수로 만들면 편리합니다. 마찬가지로 자주 그리는 그림은 함수로 만들면 좋습니다. Matplotlib 객체지향을 사용해 함수를 만듭시다.  1. Parity plot 머신러닝 후 참값을 x축, 예측값을 y축에 놓고 얼마나 비슷한지 평가하고는 합니다. 이런 그림을 parity plot이라고 하며, 매우 자주 그리는 그림입니다. 그림이">
+<meta property="og:description" content="자주 사용하는 기능은 함수로 만들면 편리합니다. 마찬가지로 자주 그리는 그림은 함수로 만들면 좋습니다. Matplotlib 객체지향을 사용해 함수를 만듭시다.  1. Parity plot  머신러닝 후 참값을 x축, 예측값을 y축에 놓고 얼마나 비슷한지 평가하고는 합니다. 이런 그림을 parity plot이라고 하며, 매우 자주 그리는 그림입니다. 그림이">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/73_mplfunc_0.png">
 <meta property="article:published_time" content="2021-05-18T05:18:00.000Z">
@@ -233,47 +233,54 @@
 <li>마찬가지로 자주 그리는 그림은 함수로 만들면 좋습니다.</li>
 <li>Matplotlib 객체지향을 사용해 함수를 만듭시다.</li>
 </ul>
-<h1 id="1-Parity-plot"><a href="#1-Parity-plot" class="headerlink" title="1. Parity plot"></a>1. Parity plot</h1><ul>
+<h1>1. Parity plot</h1>
+<ul>
 <li>머신러닝 후 참값을 x축, 예측값을 y축에 놓고 얼마나 비슷한지 평가하고는 합니다.</li>
 <li>이런 그림을 parity plot이라고 하며, 매우 자주 그리는 그림입니다.</li>
 <li>그림이 목적이므로 데이터는 간단히 만듭니다.<br></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 샘플 데이터 생성</span></span><br><span class="line">size = <span class="number">1000</span></span><br><span class="line">x = np.random.normal(size=size, loc=<span class="number">12</span>, scale=<span class="number">3</span>)</span><br><span class="line">y = x + np.random.normal(size=size, loc=<span class="number">0</span>, scale=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
-<li><p>그리고, parity plot은 이렇게 그려집니다.</p>
+<li>
+<p>그리고, parity plot은 이렇게 그려집니다.</p>
 </li>
-<li><p><b>x가 큰 지점에서는 예측값이 실제값보다 큽니다.</b></p>
+<li>
+<p><b>x가 큰 지점에서는 예측값이 실제값보다 큽니다.</b></p>
 </li>
-<li><p><b>중앙부 기준 중심선에서 5정도 어긋난 듯 합니다.</b><br><br><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_01.png"><br></p>
+<li>
+<p><b>중앙부 기준 중심선에서 5정도 어긋난 듯 합니다.</b><br><br>
+<img src="73_mplfunc_01.png" alt=""><br></p>
 </li>
-<li><p>많이 본 형태라 당연하게 여길 수 있겠지만 <b>그냥</b> 그리면 이렇습니다.</p>
+<li>
+<p>많이 본 형태라 당연하게 여길 수 있겠지만 <b>그냥</b> 그리면 이렇습니다.</p>
 </li>
-<li><p>대충 일치하는 것 같기는 합니다.</p>
+<li>
+<p>대충 일치하는 것 같기는 합니다.</p>
 </li>
-<li><p>그런데 얼마나 일치하고 얼마나 어긋나는지 잘 모르겠습니다.<br></p>
+<li>
+<p>그런데 얼마나 일치하고 얼마나 어긋나는지 잘 모르겠습니다.<br></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(x, y, alpha=<span class="number">0.3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_02.png"><br></p>
+<p><img src="73_mplfunc_02.png" alt=""><br></p>
 <ul>
 <li>x와 y축의 눈금을 일치시키고, grid와 중심선까지 그었기 때문에 보이는 것입니다.</li>
 <li>코드는 이렇습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># data plot</span></span><br><span class="line">ax.scatter(x, y, c=<span class="string">&quot;g&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y limits</span></span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">25</span>)</span><br><span class="line">ax.set_ylim(<span class="number">0</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y ticks, ticklabels</span></span><br><span class="line">ticks = [<span class="number">0</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">25</span>]</span><br><span class="line">ax.set_xticks(ticks)</span><br><span class="line">ax.set_xticklabels(ticks)</span><br><span class="line">ax.set_yticks(ticks)</span><br><span class="line">ax.set_yticklabels(ticks)</span><br><span class="line"></span><br><span class="line"><span class="comment"># grid</span></span><br><span class="line">ax.grid(<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 기준선</span></span><br><span class="line">ax.plot([<span class="number">0</span>, <span class="number">25</span>], [<span class="number">0</span>, <span class="number">25</span>], c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x, y label</span></span><br><span class="line">font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">ax.set_xlabel(<span class="string">&quot;true&quot;</span>, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;predict&quot;</span>, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># title</span></span><br><span class="line">font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">ax.set_title(<span class="string">&quot;true vs predict&quot;</span>, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 파일로 저장</span></span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;73_mplfunc_01.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>34줄의 코드를 머신러닝 프로젝트때마다 짤 수는 있겠지만 귀찮습니다.</li>
 <li>함수로 만들어 자동화합시다.</li>
 </ul>
-<h1 id="2-함수-만들기"><a href="#2-함수-만들기" class="headerlink" title="2. 함수 만들기"></a>2. 함수 만들기</h1><ul>
+<h1>2. 함수 만들기</h1>
+<ul>
 <li>python에서 함수는 <b><code>def 함수이름(매개변수):</code></b>로 선언함으로써 만들어집니다.</li>
 <li>그리고 함수 내부에 parity plot을 그리는 코드를 넣어주면 작동합니다.</li>
 <li>그렇다면, 함수의 결과물은 무엇으로 하는 게 좋을까요? 매개변수에는 뭘 넣을까요?</li>
 <li><b>간단한 예시를 만들며 고민해 봅시다</b></li>
 </ul>
-<h2 id="2-1-plot-sample"><a href="#2-1-plot-sample" class="headerlink" title="2.1. plot_sample()"></a>2.1. <code>plot_sample()</code></h2><blockquote>
+<h2 id="2-1-plot-sample">2.1. <code>plot_sample()</code></h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/tutorials/text/mathtext.html">matplotlib: Writing mathematical expressions</a></p>
 </blockquote>
 <ul>
@@ -281,144 +288,155 @@
 <li></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample1</span>(<span class="params">x, y, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># math fonts</span></span><br><span class="line">    mathtext_fontset = plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>]</span><br><span class="line">    mathtext_default = plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>]</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&quot;it&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># object oriented interface</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    ax.scatter(x, y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y labels</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;darkgreen&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;xx-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># math fonts restoration</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = mathtext_fontset</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = mathtext_default</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># save figure</span></span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.savefig(filename)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>이 함수에 x와 y 데이터를 입력하면 다음과 같은 그림이 출력됩니다.</li>
-<li>함수 내부에서 fontdict를 사용해 xlabel과 ylabel, title 형태를 미리 설정했기 때문에,<br><b>별다른 옵션을 지정하지 않았는데도 크기와 색상이 반영</b>되어 있습니다.</li>
+<li>함수 내부에서 fontdict를 사용해 xlabel과 ylabel, title 형태를 미리 설정했기 때문에,<br>
+<b>별다른 옵션을 지정하지 않았는데도 크기와 색상이 반영</b>되어 있습니다.</li>
 <li>심지어 LaTeX 입력시 폰트도 roman(정확히는 Computer Modern)으로 설정됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x_sample = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">y_sample = np.sin(x_sample)</span><br><span class="line"></span><br><span class="line">plot_sample1(x_sample, y_sample, <span class="string">&quot;$X$&quot;</span>, <span class="string">&quot;$Y$&quot;</span>, <span class="string">&quot;$Y = \mathrm&#123;sin&#125;(X)$&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_03.png"><br></p>
+<p><img src="73_mplfunc_03.png" alt=""><br></p>
 <ul>
-<li><p>filename&#x3D;에 적절한 이름을 담아 매개변수로 넣으면 파일 저장까지 자동으로 됩니다.</p>
+<li>
+<p>filename=에 적절한 이름을 담아 매개변수로 넣으면 파일 저장까지 자동으로 됩니다.</p>
 </li>
-<li><p>기본값이 지정되면 사용이 편리합니다.</p>
+<li>
+<p>기본값이 지정되면 사용이 편리합니다.</p>
 </li>
-<li><p>xlabel, ylabel, title, filename의 <b>기본값 &#x3D; None</b>으로 지정했기 때문에, 함수의 인자로 <b>x와 y만 입력해도 결과물이 출력됩니다.</b></p>
+<li>
+<p>xlabel, ylabel, title, filename의 <b>기본값 = None</b>으로 지정했기 때문에, 함수의 인자로 <b>x와 y만 입력해도 결과물이 출력됩니다.</b></p>
 </li>
 </ul>
-<h2 id="2-2-시각화-유형-변환"><a href="#2-2-시각화-유형-변환" class="headerlink" title="2.2. 시각화 유형 변환"></a>2.2. 시각화 유형 변환</h2><ul>
-<li><p>scatter plot 말고 다른 것도 그려봅시다.</p>
+<h2 id="2-2-시각화-유형-변환">2.2. 시각화 유형 변환</h2>
+<ul>
+<li>
+<p>scatter plot 말고 다른 것도 그려봅시다.</p>
 </li>
-<li><p>경우에 따라 line plot을 그리고싶다면 매개변수에 종류가 있으면 됩니다.</p>
+<li>
+<p>경우에 따라 line plot을 그리고싶다면 매개변수에 종류가 있으면 됩니다.</p>
 </li>
-<li><p>seaborn과 pandas를 따라 이름은 <b>kind</b>로 지정합니다.</p>
+<li>
+<p>seaborn과 pandas를 따라 이름은 <b>kind</b>로 지정합니다.</p>
 </li>
-<li><p>생각을 한번만 더 해봅시다.</p>
+<li>
+<p>생각을 한번만 더 해봅시다.</p>
 <ul>
 <li>matplotlib에 익숙한 이이라면 <b><code>ax.scatter()</code></b>가 익숙할 것입니다.</li>
 <li>seaborn을 많이 쓰는 사람이라면 <b><code>sns.scatterplot()</code></b>이 친숙할 겁니다.</li>
-<li>kind&#x3D;로 전달되는 인자에 <b>scatter</b>가 있기만 하면 scatter plot을 그립시다.</li>
+<li>kind=로 전달되는 인자에 <b>scatter</b>가 있기만 하면 scatter plot을 그립시다.</li>
 <li><code>if &quot;scatter&quot; in kind:</code>로 구현할 수 있습니다.</li>
 <li>line plot도 비슷하게 구현합니다.</li>
 </ul>
 </li>
-<li><p>이제부터는 코드가 조금 길어집니다. 시각화 함수 코드는 기본적으로 숨겨두겠습니다.</p>
+<li>
+<p>이제부터는 코드가 조금 길어집니다. 시각화 함수 코드는 기본적으로 숨겨두겠습니다.</p>
 </li>
-<li><p>여기를 클릭하면 보입니다.</p>
+<li>
+<p>여기를 클릭하면 보입니다.</p>
 </li>
 </ul>
 <details>
     <summary><b><code>plot_sample2()</code> 코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample2</span>(<span class="params">x, y, kind=<span class="string">&quot;scatter&quot;</span>, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># math fonts</span></span><br><span class="line">    mathtext_fontset = plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>]</span><br><span class="line">    mathtext_default = plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>]</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&quot;it&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># object oriented interface</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        ax.scatter(x, y)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;line&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        ax.plot(x, y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y labels</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;darkgreen&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;xx-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># math fonts restoration</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = mathtext_fontset</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = mathtext_default</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># save figure</span></span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.savefig(filename)</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li><b>line plot</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_sample2(x_sample, y_sample, kind=<span class="string">&quot;line&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_04_line.png"><br></p>
+<p><img src="73_mplfunc_04_line.png" alt=""><br></p>
 <ul>
 <li><b>scatter plot</b> (지정)</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_sample2(x_sample, y_sample, kind=<span class="string">&quot;scatterplot&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_04_scatter.png"><br></p>
+<p><img src="73_mplfunc_04_scatter.png" alt=""><br></p>
 <ul>
 <li><b>scatter plot</b> (기본값)</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_sample2(x_sample, y_sample)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_04_default.png"><br></p>
-<h2 id="2-3-유형에-따른-매개변수-입력"><a href="#2-3-유형에-따른-매개변수-입력" class="headerlink" title="2.3. 유형에 따른 매개변수 입력"></a>2.3. 유형에 따른 매개변수 입력</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html">matplotlib.axes.Axes.plot</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html">matplotlib.axes.Axes.scatter</a></p>
+<p><img src="73_mplfunc_04_default.png" alt=""><br></p>
+<h2 id="2-3-유형에-따른-매개변수-입력">2.3. 유형에 따른 매개변수 입력</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html">matplotlib.axes.Axes.plot</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html">matplotlib.axes.Axes.scatter</a></p>
 </blockquote>
 <ul>
-<li><p>Matplotlib의 <code>plot()</code>명령과 <code>scatter()</code>명령은 입력받는 인자가 다릅니다.</p>
+<li>
+<p>Matplotlib의 <code>plot()</code>명령과 <code>scatter()</code>명령은 입력받는 인자가 다릅니다.</p>
 </li>
-<li><p>이 인자들을 모두 매개변수로 넣자면 너무 많고 코드 관리가 어렵습니다.</p>
+<li>
+<p>이 인자들을 모두 매개변수로 넣자면 너무 많고 코드 관리가 어렵습니다.</p>
 </li>
-<li><p><code>plot()</code>과 <code>scatter()</code>에 필요한 매개변수를 각기 <code>line_kws</code>과 <code>scatter_kws</code>라는 이름의 dictionary 형식으로 입력하게 합시다.</p>
+<li>
+<p><code>plot()</code>과 <code>scatter()</code>에 필요한 매개변수를 각기 <code>line_kws</code>과 <code>scatter_kws</code>라는 이름의 dictionary 형식으로 입력하게 합시다.</p>
 </li>
-<li><p>dictionary 형식의 인자는 기본값을 None으로 넣고, 실제 시각화 코드에 **line_kws 형식으로 unpacking하여 입력합니다.</p>
+<li>
+<p>dictionary 형식의 인자는 기본값을 None으로 넣고, 실제 시각화 코드에 **line_kws 형식으로 unpacking하여 입력합니다.</p>
 </li>
-<li><p>keyword arguments로 None이 들어가면 에러가 나기 때문에 간단한 예외처리를 합니다.</p>
+<li>
+<p>keyword arguments로 None이 들어가면 에러가 나기 때문에 간단한 예외처리를 합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 함수 선언 부분</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample3</span>(<span class="params">x, y, kind=<span class="string">&quot;scatter&quot;</span>, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 filename=<span class="literal">None</span>, line_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span></span>):</span><br><span class="line">                 </span><br><span class="line">    <span class="comment">#... 전략 ...#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> scatter_kws:</span><br><span class="line">            scatter_kws=&#123;&#125;</span><br><span class="line">        ax.scatter(x, y, **scatter_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;line&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line_kws:</span><br><span class="line">            line_kws=&#123;&#125;</span><br><span class="line">        ax.plot(x, y, **line_kws)    </span><br><span class="line">        </span><br><span class="line">    <span class="comment">#... 후략 ...#</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>keyword parameter를 적용한 코드입니다.</li>
 </ul>
 <details>
     <summary><b><code>plot_sample3()</code> 코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample3</span>(<span class="params">x, y, kind=<span class="string">&quot;scatter&quot;</span>, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 filename=<span class="literal">None</span>, line_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># math fonts</span></span><br><span class="line">    mathtext_fontset = plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>]</span><br><span class="line">    mathtext_default = plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>]</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&quot;it&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># object oriented interface</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> scatter_kws:</span><br><span class="line">            scatter_kws=&#123;&#125;</span><br><span class="line">        ax.scatter(x, y, **scatter_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;line&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line_kws:</span><br><span class="line">            line_kws=&#123;&#125;</span><br><span class="line">        ax.plot(x, y, **line_kws)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y labels</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;darkgreen&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;xx-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># math fonts restoration</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = mathtext_fontset</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = mathtext_default</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># save figure</span></span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.savefig(filename)</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li><b>line_kws 적용</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plot_sample3(x_sample, y_sample, kind=<span class="string">&quot;line&quot;</span>,</span><br><span class="line">             line_kws=&#123;<span class="string">&quot;c&quot;</span>:<span class="string">&quot;r&quot;</span>, <span class="string">&quot;ls&quot;</span>:<span class="string">&quot;:&quot;</span>, <span class="string">&quot;lw&quot;</span>:<span class="number">3</span>&#125;)</span><br><span class="line">             <span class="comment"># &quot;c&quot;: &quot;r&quot;  - line color = &quot;red&quot;</span></span><br><span class="line">             <span class="comment"># &quot;ls&quot;: &quot;:&quot; - line style = ......</span></span><br><span class="line">             <span class="comment"># &quot;lw&quot;: 3   - line width = 3</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_05_line.png"><br></p>
+<p><img src="73_mplfunc_05_line.png" alt=""><br></p>
 <ul>
 <li><b>scatter_kws 적용</b> : line_kws는 무시됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plot_sample3(x_sample, y_sample, kind=<span class="string">&quot;scatter&quot;</span>,</span><br><span class="line">             line_kws=&#123;<span class="string">&quot;c&quot;</span>: <span class="string">&quot;r&quot;</span>, <span class="string">&quot;ls&quot;</span>: <span class="string">&quot;:&quot;</span>, <span class="string">&quot;lw&quot;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">             scatter_kws=&#123;<span class="string">&quot;s&quot;</span>: <span class="number">50</span>, <span class="string">&quot;ec&quot;</span>: <span class="string">&quot;b&quot;</span>, <span class="string">&quot;alpha&quot;</span>: <span class="number">0.2</span>&#125;)</span><br><span class="line">             <span class="comment"># &quot;s&quot;: 50       - marker size = 50</span></span><br><span class="line">             <span class="comment"># &quot;ec&quot;: &quot;b&quot;     - marker color = &quot;blue&quot;</span></span><br><span class="line">             <span class="comment"># &quot;alpha&quot;: 0.2  - marker 불투명도 = 0.2</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_05_scatter.png"><br></p>
+<p><img src="73_mplfunc_05_scatter.png" alt=""><br></p>
 <ul>
 <li>이제 웬만한 함수는 원하는대로 만들 수 있습니다.</li>
 <li>그런데, <b>한번 만들고 끝일까요?</b></li>
 <li>함수를 실행할 때는 title을 달지 않았는데, 나중에 달고 싶지 않을까요?</li>
 <li>그럴 때 return이 유용합니다.</li>
 </ul>
-<h2 id="2-4-Axes-as-return"><a href="#2-4-Axes-as-return" class="headerlink" title="2.4. Axes as return"></a>2.4. Axes as return</h2><ul>
+<h2 id="2-4-Axes-as-return">2.4. Axes as return</h2>
+<ul>
 <li>matplotlib의 구성요소인 axes를 return 시키면 많은 것이 가능합니다.</li>
 <li>먼저, 기존의 코드에 <b><code>return ax</code></b>만 추가하고 실행해 봅니다.</li>
 </ul>
 <details>
     <summary><b><code>plot_sample4()</code> 코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample4</span>(<span class="params">x, y, kind=<span class="string">&quot;scatter&quot;</span>, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 filename=<span class="literal">None</span>, line_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># math fonts</span></span><br><span class="line">    mathtext_fontset = plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>]</span><br><span class="line">    mathtext_default = plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>]</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&quot;it&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># object oriented interface</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> scatter_kws:</span><br><span class="line">            scatter_kws=&#123;&#125;</span><br><span class="line">        ax.scatter(x, y, **scatter_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;line&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line_kws:</span><br><span class="line">            line_kws=&#123;&#125;</span><br><span class="line">        ax.plot(x, y, **line_kws)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y labels</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;darkgreen&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;xx-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># math fonts restoration</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = mathtext_fontset</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = mathtext_default</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># save figure</span></span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    <span class="keyword">if</span> filename:</span><br><span class="line">        fig.savefig(filename)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># return</span></span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>line plot을 그립니다.</li>
 <li>return된 axes에는 방금 그린 그림의 정보가 모두 포함되어 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax = plot_sample4(x_sample, y_sample, kind=<span class="string">&quot;line&quot;</span>, line_kws=&#123;<span class="string">&quot;lw&quot;</span>:<span class="number">3</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_06.png"><br></p>
+<p><img src="73_mplfunc_06.png" alt=""><br></p>
 <ul>
-<li>axes에 xlabel, ylabel, title을 추가할 수 있습니다. </li>
+<li>axes에 xlabel, ylabel, title을 추가할 수 있습니다.</li>
 <li>plot 추가도 가능합니다. 코드도 일반적인 시각화와 동일합니다.</li>
-<li>심지어 순차적으로 적용되는 line color도 그냥 그리는 그림과 같습니다. </li>
+<li>심지어 순차적으로 적용되는 line color도 그냥 그리는 그림과 같습니다.</li>
 <li><b>당연합니다. 객체지향 방식이니까요 :)</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># xlabel, ylabel, title 추가</span></span><br><span class="line">ax.set_xlabel(<span class="string">&quot;xlabel (postprocess)&quot;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&quot;ylabel (postprocess)&quot;</span>)</span><br><span class="line">ax.set_title(<span class="string">&quot;title (postprocess)&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 추가</span></span><br><span class="line">ax.plot(x_sample+<span class="number">1</span>, y_sample)</span><br><span class="line"></span><br><span class="line"><span class="comment"># jupyter cell에서 시각화</span></span><br><span class="line">display(ax.figure)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_07.png"><br></p>
+<p><img src="73_mplfunc_07.png" alt=""><br></p>
 <p><b>※ 주의 ※</b></p>
 <ul>
 <li>그러나 자세히 보면 x, y label에는 설정된 값들이 제대로 적용되지만 <b>title에는 색상만 적용됩니다.</b></li>
-<li>title&#x3D;None일 때 matplotlib axes가 담는 정보가 불충분한 것으로 생각됩니다.</li>
+<li>title=None일 때 matplotlib axes가 담는 정보가 불충분한 것으로 생각됩니다.</li>
 </ul>
-<h2 id="2-5-Axes-as-input"><a href="#2-5-Axes-as-input" class="headerlink" title="2.5. Axes as input"></a>2.5. Axes as input</h2><ul>
-<li><p>axes는 함수의 입력 매개변수로 작용할 때 그 진가를 발합니다.</p>
+<h2 id="2-5-Axes-as-input">2.5. Axes as input</h2>
+<ul>
+<li>
+<p>axes는 함수의 입력 매개변수로 작용할 때 그 진가를 발합니다.</p>
 <ul>
 <li><b>함수</b>는 <b>복잡한 명령을 한번에 실행</b>한다는 장점이 있지만 <b>유연성이 부족</b>합니다.</li>
 <li><b>날코딩</b>은 <b>유연성이 풍족</b>하지만 <b>일일이 코딩하기 번잡합니다.</b></li>
 <li>이 둘을 섞을 수 있는 방법이 <b>axes를 input으로 받는 것</b>입니다.</li>
 </ul>
 </li>
-<li><p>머신러닝 예측결과 시각화로 예를 들어보겠습니다.</p>
+<li>
+<p>머신러닝 예측결과 시각화로 예를 들어보겠습니다.</p>
 <ul>
 <li>parity plot은 실제값과 예측값을 비교하는 그림입니다.</li>
 <li>trainset, validation set, testset <b>세 데이터</b> 모두에 대해 그릴 수 있습니다.</li>
@@ -426,58 +444,66 @@
 <li>이 때마다 함수를 일일이 만든다면 몹시 번거로울 것입니다.</li>
 </ul>
 </li>
-<li><p>이럴 때 이런 해법을 만들 수 있습니다.   </p>
+<li>
+<p>이럴 때 이런 해법을 만들 수 있습니다.</p>
 <ol>
 <li><b><code>plt.subplots()</code>등으로 필요한 수만큼 Axes을 만듭니다.</b></li>
 <li><b>준비된 함수로 각각의 Axes에 parity plot을 그립니다</b></li>
 </ol>
 </li>
-<li><p>그러자면, 함수로 그려질 그림이 어디에 그려질지 지정되어야 합니다.</p>
+<li>
+<p>그러자면, 함수로 그려질 그림이 어디에 그려질지 지정되어야 합니다.</p>
 </li>
-<li><p><b>매개변수로 axes를 받으면 가능합니다.</b></p>
+<li>
+<p><b>매개변수로 axes를 받으면 가능합니다.</b></p>
 </li>
-<li><p>axes가 지정되지 않으면 스스로 figure를 만들도록 합니다. 이 때 figure size도 인자로 넣읍시다.</p>
+<li>
+<p>axes가 지정되지 않으면 스스로 figure를 만들도록 합니다. 이 때 figure size도 인자로 넣읍시다.</p>
 </li>
-<li><p>파일로 저장하려면 figure 객체가 필요합니다. figure 객체는 axes 입력이 없을 때만 존재하니 예외처리를 합니다.</p>
+<li>
+<p>파일로 저장하려면 figure 객체가 필요합니다. figure 객체는 axes 입력이 없을 때만 존재하니 예외처리를 합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample5</span>(<span class="params">x, y, kind=<span class="string">&quot;scatter&quot;</span>, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 filename=<span class="literal">None</span>, line_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 figsize=plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>], ax=<span class="literal">None</span></span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment">#... 전략 ...#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># object oriented interface</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig, ax = plt.subplots(figsize=figsize)    </span><br><span class="line">        </span><br><span class="line">    <span class="comment">#... 후략 ...#</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># save figure</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig.tight_layout()</span><br><span class="line">        <span class="keyword">if</span> filename:</span><br><span class="line">            fig.savefig(filename)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># return</span></span><br><span class="line">    <span class="keyword">return</span> ax    </span><br></pre></td></tr></table></figure>
 <details>
     <summary><b><code>plot_sample5()</code> 코드 보기/접기</b></summary>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_sample5</span>(<span class="params">x, y, kind=<span class="string">&quot;scatter&quot;</span>, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, title=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 filename=<span class="literal">None</span>, line_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                 figsize=plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>], ax=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># math fonts</span></span><br><span class="line">    mathtext_fontset = plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>]</span><br><span class="line">    mathtext_default = plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>]</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = <span class="string">&quot;cm&quot;</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = <span class="string">&quot;it&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># object oriented interface</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig, ax = plt.subplots(figsize=figsize)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> scatter_kws:</span><br><span class="line">            scatter_kws=&#123;&#125;</span><br><span class="line">        ax.scatter(x, y, **scatter_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;line&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line_kws:</span><br><span class="line">            line_kws=&#123;&#125;</span><br><span class="line">        ax.plot(x, y, **line_kws)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># x, y labels</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;darkgreen&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;xx-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># math fonts restoration</span></span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.fontset&#x27;</span>] = mathtext_fontset</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;mathtext.default&#x27;</span>] = mathtext_default</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># save figure</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig.tight_layout()</span><br><span class="line">        <span class="keyword">if</span> filename:</span><br><span class="line">            fig.savefig(filename)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># return</span></span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li><b>그냥 그리기</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_sample5(x_sample, y_sample)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_08.png"></p>
+<p><img src="73_mplfunc_08.png" alt=""></p>
 <ul>
 <li><b>subplots 안에 넣기</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>, <span class="number">4</span>), sharey=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">font_title = &#123;<span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 왼쪽 axes</span></span><br><span class="line">plot_sample5(x_sample, y_sample, ax=axs[<span class="number">0</span>])</span><br><span class="line">plot_sample5(<span class="number">10</span>-x_sample, y_sample, ax=axs[<span class="number">0</span>])</span><br><span class="line">axs[<span class="number">0</span>].set_title(<span class="string">&quot;plot 1&quot;</span>, fontdict=font_title)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 오른쪽 axes</span></span><br><span class="line">plot_sample5(x_sample, -y_sample, kind=<span class="string">&quot;line&quot;</span>, line_kws=&#123;<span class="string">&quot;c&quot;</span>: <span class="string">&quot;r&quot;</span>&#125;, ax=axs[<span class="number">1</span>])</span><br><span class="line">plot_sample5(x_sample, <span class="number">1</span>-y_sample, kind=<span class="string">&quot;line&quot;</span>, line_kws=&#123;<span class="string">&quot;c&quot;</span>: <span class="string">&quot;g&quot;</span>&#125;, ax=axs[<span class="number">1</span>])</span><br><span class="line">axs[<span class="number">1</span>].set_title(<span class="string">&quot;plot 1&quot;</span>, fontdict=font_title)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 그림 저장</span></span><br><span class="line">fig.tight_layout()</span><br><span class="line">fig.savefig(<span class="string">&quot;73_mplfunc_09.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_09.png"></p>
+<p><img src="73_mplfunc_09.png" alt=""></p>
 <ul>
-<li><p>새로 그린 그림이 <code>plt.subplots()</code>로 만든 axes에 정확히 담겼습니다.</p>
+<li>
+<p>새로 그린 그림이 <code>plt.subplots()</code>로 만든 axes에 정확히 담겼습니다.</p>
 </li>
-<li><p>그 뿐 아니라 sharey&#x3D;True 와 같은 <b>axes간 제약조건도 적용</b>됩니다. </p>
+<li>
+<p>그 뿐 아니라 sharey=True 와 같은 <b>axes간 제약조건도 적용</b>됩니다.</p>
 </li>
-<li><p><b>함수의 문법이 어디선가 본 것 같다</b>고 생각하셨으면 맞게 본 것입니다.</p>
+<li>
+<p><b>함수의 문법이 어디선가 본 것 같다</b>고 생각하셨으면 맞게 본 것입니다.</p>
 </li>
-<li><p>seaborn의 함수들이 바로 이렇게 만들어졌고 작동합니다.</p>
+<li>
+<p>seaborn의 함수들이 바로 이렇게 만들어졌고 작동합니다.</p>
 </li>
 </ul>
-<h1 id="3-parity-plot"><a href="#3-parity-plot" class="headerlink" title="3. parity plot"></a>3. parity plot</h1><ul>
+<h1>3. parity plot</h1>
+<ul>
 <li>다시 parity plot으로 돌아갑니다.</li>
 <li>아래는 <b>제가 만든 함수로 그린 parity plot들</b>입니다.</li>
-<li>다양한 경우에 활용할 수 있음을 알 수 있습니다.<br><br><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_10.png" alt="case I"><br></li>
+<li>다양한 경우에 활용할 수 있음을 알 수 있습니다.<br><br>
+<img src="73_mplfunc_10.png" alt="case I"><br></li>
 </ul>
-<p><img src="/2021/05/18/Python-DS-73-mplfunc/73_mplfunc_11.png" alt="case II"><br></p>
+<p><img src="73_mplfunc_11.png" alt="case II"><br></p>
 <ul>
 <li>코드입니다. 세 가지 지표를 평가하여 그림에 함께 담습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.colors <span class="keyword">as</span> colors</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_metrics</span>(<span class="params">true, predict</span>):</span><br><span class="line">    mae = mean_absolute_error(true, predict)</span><br><span class="line">    rmse = mean_squared_error(true, predict, squared=<span class="literal">False</span>)</span><br><span class="line">    r2 = r2_score(true, predict)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> mae, rmse, r2</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_parity</span>(<span class="params">true, pred, kind=<span class="string">&quot;scatter&quot;</span>, </span></span><br><span class="line"><span class="params">                xlabel=<span class="string">&quot;true&quot;</span>, ylabel=<span class="string">&quot;predict&quot;</span>, title=<span class="string">&quot;true vs predict&quot;</span>, </span></span><br><span class="line"><span class="params">                hist2d_kws=<span class="literal">None</span>, scatter_kws=<span class="literal">None</span>, kde_kws=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                equal=<span class="literal">True</span>, metrics=<span class="literal">True</span>, metrics_position=<span class="string">&quot;lower right&quot;</span>,</span></span><br><span class="line"><span class="params">                figsize=(<span class="params"><span class="number">4</span>, <span class="number">4</span></span>), ax=<span class="literal">None</span>, filename=<span class="literal">None</span></span>):</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig, ax = plt.subplots(figsize=figsize)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># data range</span></span><br><span class="line">    val_min = <span class="built_in">min</span>(true.<span class="built_in">min</span>(), pred.<span class="built_in">min</span>())</span><br><span class="line">    val_max = <span class="built_in">max</span>(true.<span class="built_in">max</span>(), pred.<span class="built_in">max</span>())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># data plot</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;scatter&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> scatter_kws:</span><br><span class="line">            scatter_kws=&#123;<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;alpha&#x27;</span>:<span class="number">0.5</span>&#125;</span><br><span class="line">        ax.scatter(true, pred, **scatter_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;hist2d&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hist2d_kws:</span><br><span class="line">            hist2d_kws=&#123;<span class="string">&#x27;cmap&#x27;</span>:<span class="string">&#x27;Greens&#x27;</span>, <span class="string">&#x27;vmin&#x27;</span>:<span class="number">1</span>&#125;</span><br><span class="line">        ax.hist2d(true, pred, **hist2d_kws)</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&quot;kde&quot;</span> <span class="keyword">in</span> kind:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> kde_kws:</span><br><span class="line">            kde_kws=&#123;<span class="string">&#x27;cmap&#x27;</span>:<span class="string">&#x27;viridis&#x27;</span>, <span class="string">&#x27;levels&#x27;</span>:<span class="number">5</span>&#125;</span><br><span class="line">        sns.kdeplot(x=true, y=pred, **kde_kws, ax=ax)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x, y bounds</span></span><br><span class="line">    xbounds = ax.get_xbound()</span><br><span class="line">    ybounds = ax.get_ybound()</span><br><span class="line">    max_bounds = [<span class="built_in">min</span>(xbounds[<span class="number">0</span>], ybounds[<span class="number">0</span>]), <span class="built_in">max</span>(xbounds[<span class="number">1</span>], ybounds[<span class="number">1</span>])]</span><br><span class="line">    ax.set_xlim(max_bounds)</span><br><span class="line">    ax.set_ylim(max_bounds)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x, y ticks, ticklabels</span></span><br><span class="line">    ticks = [<span class="built_in">int</span>(y) <span class="keyword">for</span> y <span class="keyword">in</span> ax.get_yticks() <span class="keyword">if</span> (<span class="number">10</span>*y)%<span class="number">10</span> == <span class="number">0</span>]</span><br><span class="line">    ax.set_xticks(ticks)</span><br><span class="line">    ax.set_xticklabels(ticks)</span><br><span class="line">    ax.set_yticks(ticks)</span><br><span class="line">    ax.set_yticklabels(ticks)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># grid</span></span><br><span class="line">    ax.grid(<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 기준선</span></span><br><span class="line">    ax.plot(max_bounds, max_bounds, c=<span class="string">&quot;k&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># x, y label</span></span><br><span class="line">    font_label = &#123;<span class="string">&quot;color&quot;</span>:<span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>&#125;</span><br><span class="line">    ax.set_xlabel(xlabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line">    ax.set_ylabel(ylabel, fontdict=font_label, labelpad=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    font_title = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;gray&quot;</span>, <span class="string">&quot;fontsize&quot;</span>:<span class="string">&quot;x-large&quot;</span>, <span class="string">&quot;fontweight&quot;</span>:<span class="string">&quot;bold&quot;</span>&#125;</span><br><span class="line">    ax.set_title(title, fontdict=font_title, pad=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># metrics</span></span><br><span class="line">    <span class="keyword">if</span> metrics:</span><br><span class="line">        rmse = mean_squared_error(true, pred, squared=<span class="literal">False</span>)</span><br><span class="line">        mae = mean_absolute_error(true, pred)</span><br><span class="line">        r2 = r2_score(true, pred)</span><br><span class="line"></span><br><span class="line">        font_metrics = &#123;<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;fontsize&#x27;</span>:<span class="number">12</span>&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> metrics_position == <span class="string">&quot;lower right&quot;</span>:</span><br><span class="line">            text_pos_x = <span class="number">0.98</span></span><br><span class="line">            text_pos_y = <span class="number">0.3</span></span><br><span class="line">            ha = <span class="string">&quot;right&quot;</span></span><br><span class="line">        <span class="keyword">elif</span> metrics_position == <span class="string">&quot;upper left&quot;</span>:</span><br><span class="line">            text_pos_x = <span class="number">0.1</span></span><br><span class="line">            text_pos_y = <span class="number">0.9</span></span><br><span class="line">            ha = <span class="string">&quot;left&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            text_pos_x, text_pos_y = text_position</span><br><span class="line">            ha = <span class="string">&quot;left&quot;</span></span><br><span class="line"></span><br><span class="line">        ax.text(text_pos_x, text_pos_y, <span class="string">f&quot;RMSE = <span class="subst">&#123;rmse:<span class="number">.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontdict=font_metrics, ha=ha)</span><br><span class="line">        ax.text(text_pos_x, text_pos_y-<span class="number">0.1</span>, <span class="string">f&quot;MAE = <span class="subst">&#123;mae:<span class="number">.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontdict=font_metrics, ha=ha)</span><br><span class="line">        ax.text(text_pos_x, text_pos_y-<span class="number">0.2</span>, <span class="string">f&quot;R2 = <span class="subst">&#123;r2:<span class="number">.3</span>f&#125;</span>&quot;</span>, </span><br><span class="line">                transform=ax.transAxes, fontdict=font_metrics, ha=ha)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 파일로 저장</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ax:</span><br><span class="line">        fig.tight_layout()</span><br><span class="line">        <span class="keyword">if</span> filename:</span><br><span class="line">            fig.savefig(filename)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ax</span><br></pre></td></tr></table></figure>
-
 
         </div>
 		<p>
@@ -495,7 +521,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/05/18/Python-DS-73-mplfunc/" data-id="cuidlJMXKE1LrPzvA_nBItzBD" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/05/18/Python-DS-73-mplfunc/" data-id="cuid5VJBrfKVXcWwJg9R7fNgU" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -579,10 +605,11 @@
 Matplotlib 객체지향을 사용해 함수를 만듭시다.
 
 1. Parity plot
+
 머신러닝 후 참값을 x축, 예측값을 y축에 놓고 얼마나 비슷한지 평가하고는 합니다.
 이런 그림을 parity plot이라고 하며, 매우 자주 그리는 그림입니다.
-그림이 ",
-        "wordCount": 4879
+그림이",
+        "wordCount": 4838
     }
 </script>
 
@@ -679,6 +706,26 @@ Matplotlib 객체지향을 사용해 함수를 만듭시다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -753,26 +800,6 @@ Matplotlib 객체지향을 사용해 함수를 만듭시다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

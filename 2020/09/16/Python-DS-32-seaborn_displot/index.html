@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,visualization,seaborn,displot" />
     
-    <meta name="description" content="seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다. distplot()이 없어진 대신 displot()이 들어왔습니다. matplotlib으로 만든 틀 안에 seaborn을 넣어봅니다.  1. displot() seaborn.displot    displot()은 histplot(), kdeplot(), ecdfplot()">
+    <meta name="description" content="seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다. distplot()이 없어진 대신 displot()이 들어왔습니다. matplotlib으로 만든 틀 안에 seaborn을 넣어봅니다.  1. displot()  seaborn.displot     displot()은 histplot(), kdeplot(), ecdfplot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Seaborn Distribution Plot">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다. distplot()이 없어진 대신 displot()이 들어왔습니다. matplotlib으로 만든 틀 안에 seaborn을 넣어봅니다.  1. displot() seaborn.displot    displot()은 histplot(), kdeplot(), ecdfplot()">
+<meta property="og:description" content="seaborn 0.11에서 업데이트된 distribution plot을 살펴봅니다. distplot()이 없어진 대신 displot()이 들어왔습니다. matplotlib으로 만든 틀 안에 seaborn을 넣어봅니다.  1. displot()  seaborn.displot     displot()은 histplot(), kdeplot(), ecdfplot">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/32_displots_0.png">
 <meta property="article:published_time" content="2020-09-16T00:58:00.000Z">
@@ -235,50 +235,65 @@
 <li>distplot()이 없어진 대신 displot()이 들어왔습니다.</li>
 <li>matplotlib으로 만든 틀 안에 seaborn을 넣어봅니다.</li>
 </ul>
-<h2 id="1-displot"><a href="#1-displot" class="headerlink" title="1. displot()"></a>1. <code>displot()</code></h2><blockquote>
+<h2 id="1-displot">1. <code>displot()</code></h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.displot.html#seaborn.displot">seaborn.displot</a></p>
 </blockquote>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_7.png"></p>
+<p><img src="32_displots_7.png" alt=""></p>
 <ul>
-<li><p><b><code>displot()</code></b>은 <code>histplot()</code>, <code>kdeplot()</code>, <code>ecdfplot()</code>, <code>rugplot()</code>을 편하게 그리는 방법입니다</p>
+<li>
+<p><b><code>displot()</code></b>은 <code>histplot()</code>, <code>kdeplot()</code>, <code>ecdfplot()</code>, <code>rugplot()</code>을 편하게 그리는 방법입니다</p>
 <ul>
 <li><b>편하게</b>라는 말은 하나의 명령어(<code>displot()</code>)로 여러 형태를 그릴 수 있다는 뜻입니다.</li>
 <li>장점은 <b>하나의 인자 <code>kind</code> 를 바꿔주는 것 만</b>으로 그래프의 형태를 바꿀 수 있다는 것,</li>
-<li>단점은 그림의 인자들이 그래프 종류마다 다르다는 점입니다. </li>
+<li>단점은 그림의 인자들이 그래프 종류마다 다르다는 점입니다.</li>
 <li>그 바람에 <code>kind</code> 외에도 <b>다른 인자들을 많이 바꾸게 된다는 것</b>입니다.</li>
 </ul>
 </li>
-<li><p>인자만 바꿔도 되는데 다른 인자도 많이 바꿔야 한다니 모순입니다.</p>
+<li>
+<p>인자만 바꿔도 되는데 다른 인자도 많이 바꿔야 한다니 모순입니다.</p>
 <ul>
 <li>조금 풀어서 설명하면,</li>
 <li><b>기본 세팅된 그림을 그리려면 인자만 바꾸면 된다</b></li>
 <li>그러나 <b>여기저기 수정하려면 여러 인자를 바꿔야 한다</b> 입니다.</li>
 </ul>
 </li>
-<li><p><code>displot()</code>을 알아보는 과정은 세부 기능들을 알아보는 기능과 거의 동일합니다.</p>
+<li>
+<p><code>displot()</code>을 알아보는 과정은 세부 기능들을 알아보는 기능과 거의 동일합니다.</p>
 </li>
-<li><p>세부 기능들을 먼저 알아보겠습니다.</p>
+<li>
+<p>세부 기능들을 먼저 알아보겠습니다.</p>
 </li>
 </ul>
-<h2 id="2-histplot-kdeplot-ecdfplot"><a href="#2-histplot-kdeplot-ecdfplot" class="headerlink" title="2. histplot(), kdeplot(), ecdfplot()"></a>2. <code>histplot()</code>, <code>kdeplot()</code>, <code>ecdfplot()</code></h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.histplot.html?highlight=histplot#seaborn.histplot">seaborn.histplot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot">seaborn.kdeplot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.ecdfplot.html?highlight=ecdfplot#seaborn.ecdfplot">seaborn.ecdfplot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.rugplot.html?highlight=rugplot#seaborn.rugplot">seaborn.rugplot</a></p>
+<h2 id="2-histplot-kdeplot-ecdfplot">2. <code>histplot()</code>, <code>kdeplot()</code>, <code>ecdfplot()</code></h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.histplot.html?highlight=histplot#seaborn.histplot">seaborn.histplot</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot">seaborn.kdeplot</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.ecdfplot.html?highlight=ecdfplot#seaborn.ecdfplot">seaborn.ecdfplot</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.rugplot.html?highlight=rugplot#seaborn.rugplot">seaborn.rugplot</a></p>
 </blockquote>
-<h3 id="2-1-plots"><a href="#2-1-plots" class="headerlink" title="2.1. plots"></a>2.1. plots</h3><ul>
-<li><p><b><code>rugplot()</code></b>은 단독으로 사용하기 어렵습니다.</p>
+<h3 id="2-1-plots">2.1. plots</h3>
+<ul>
+<li>
+<p><b><code>rugplot()</code></b>은 단독으로 사용하기 어렵습니다.</p>
 </li>
-<li><p>다른 세 plot을 하나의 figure에 담아보겠습니다.</p>
+<li>
+<p>다른 세 plot을 하나의 figure에 담아보겠습니다.</p>
 <ul>
 <li><code>plt.subplots()</code>명령으로 <code>Figure</code>와 <code>Axes</code>를 생성하고,</li>
 <li>seaborn plot 함수에 <code>ax=</code> 인자를 삽입하여 그려질 <code>axes</code>를 지정합니다.</li>
 </ul>
 </li>
-<li><p>동일 x값을 쌓아주도록 <code>multiple=&quot;stack&quot;</code>을 지정합니다.</p>
+<li>
+<p>동일 x값을 쌓아주도록 <code>multiple=&quot;stack&quot;</code>을 지정합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load the diamonds dataset</span></span><br><span class="line">diamonds = sns.load_dataset(<span class="string">&quot;diamonds&quot;</span>)</span><br><span class="line">diamonds.head()</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot</span></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line">sns.histplot(data=diamonds, x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>, multiple=<span class="string">&quot;stack&quot;</span>, ax=axes[<span class="number">0</span>], legend=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(data=diamonds, x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>, multiple=<span class="string">&quot;stack&quot;</span>, ax=axes[<span class="number">1</span>], legend=<span class="literal">True</span>)</span><br><span class="line">sns.ecdfplot(data=diamonds, x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>, ax=axes[<span class="number">2</span>], legend=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">&quot;histplot&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">&quot;kdeplot&quot;</span>)</span><br><span class="line">axes[<span class="number">2</span>].set_title(<span class="string">&quot;ecdfplot&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_1.png"></p>
-<h3 id="2-2-proportion"><a href="#2-2-proportion" class="headerlink" title="2.2. proportion"></a>2.2. proportion</h3><ul>
-<li><p>별도의 설정을 하지 않았는데도 <b>y축 label이 그래프마다 다릅니다</b>.</p>
+<p><img src="32_displots_1.png" alt=""></p>
+<h3 id="2-2-proportion">2.2. proportion</h3>
+<ul>
+<li>
+<p>별도의 설정을 하지 않았는데도 <b>y축 label이 그래프마다 다릅니다</b>.</p>
 <ul>
 <li><b><code>histplot()</code></b>은 <code>Count</code></li>
 <li><b><code>kdeplot()</code></b>은 <code>Density</code></li>
@@ -286,77 +301,91 @@
 <li><code>ecdfplot()</code>의 뜻은 empirical cumulative distribution functions 입니다.</li>
 </ul>
 </li>
-<li><p>위 코드에서 <code>multiple</code> 부분을 <code>&quot;fill&quot;</code>로 변경하면 비율을 그립니다.</p>
+<li>
+<p>위 코드에서 <code>multiple</code> 부분을 <code>&quot;fill&quot;</code>로 변경하면 비율을 그립니다.</p>
 </li>
-<li><p>단위가 바뀌었지만 <b>y축 label은 변하지 않았습니다.</b> 주의해야 합니다.</p>
+<li>
+<p>단위가 바뀌었지만 <b>y축 label은 변하지 않았습니다.</b> 주의해야 합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig, axes = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line">sns.histplot(data=diamonds, x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>, multiple=<span class="string">&quot;fill&quot;</span>, ax=axes[<span class="number">0</span>], legend=<span class="literal">False</span>)</span><br><span class="line">sns.kdeplot(data=diamonds, x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>, multiple=<span class="string">&quot;fill&quot;</span>, ax=axes[<span class="number">1</span>], legend=<span class="literal">False</span>)</span><br><span class="line">sns.ecdfplot(data=diamonds, x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>, ax=axes[<span class="number">2</span>], legend=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">&quot;histplot&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">&quot;kdeplot&quot;</span>)</span><br><span class="line">axes[<span class="number">2</span>].set_title(<span class="string">&quot;ecdfplot&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_2.png"></p>
-<h3 id="2-3-bivariate-distribution"><a href="#2-3-bivariate-distribution" class="headerlink" title="2.3. bivariate distribution"></a>2.3. bivariate distribution</h3><ul>
+<p><img src="32_displots_2.png" alt=""></p>
+<h3 id="2-3-bivariate-distribution">2.3. bivariate distribution</h3>
+<ul>
 <li>x와 y축에 다른 변수를 지정하면 <b>2변수 분포도</b>를 그릴 수 있습니다.</li>
 <li><code>ecdfplot()</code>에는 적용되지 않습니다.</li>
 <li>범주형(categorical) 변수에는 적용되지 않으니 주의합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Load the penguins dataset</span></span><br><span class="line">penguins = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>)</span><br><span class="line">penguins.head()</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(ncols=<span class="number">2</span>, figsize=(<span class="number">8</span>,<span class="number">4</span>))</span><br><span class="line">sns.histplot(data=penguins, x=<span class="string">&quot;bill_depth_mm&quot;</span>, y=<span class="string">&quot;body_mass_g&quot;</span>, hue=<span class="string">&quot;species&quot;</span>, </span><br><span class="line">             bins=<span class="number">20</span>, ax=axes[<span class="number">0</span>], legend=<span class="literal">False</span>)</span><br><span class="line">sns.kdeplot(data=penguins, x=<span class="string">&quot;bill_depth_mm&quot;</span>, y=<span class="string">&quot;body_mass_g&quot;</span>, hue=<span class="string">&quot;species&quot;</span>, </span><br><span class="line">            fill=<span class="literal">True</span>, levels=<span class="number">5</span>, alpha=<span class="number">0.5</span>,</span><br><span class="line">            ax=axes[<span class="number">1</span>], legend=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">&quot;histplot&quot;</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">&quot;kdeplot&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_6.png"></p>
-<h2 id="3-displot-vs-kdeplot"><a href="#3-displot-vs-kdeplot" class="headerlink" title="3. displot() vs kdeplot()"></a>3. <code>displot()</code> vs <code>kdeplot()</code></h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/examples/multiple_conditional_kde.html">seaborn Gallery</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid">seaborn.FacetGrid</a></p>
+<p><img src="32_displots_6.png" alt=""></p>
+<h2 id="3-displot-vs-kdeplot">3. <code>displot()</code> vs <code>kdeplot()</code></h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/examples/multiple_conditional_kde.html">seaborn Gallery</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid">seaborn.FacetGrid</a></p>
 </blockquote>
 <ul>
-<li><p>diamond 데이터셋을 <code>displot()</code>과 <code>kdeplot()</code>으로 그려 비교해 보겠습니다.</p>
+<li>
+<p>diamond 데이터셋을 <code>displot()</code>과 <code>kdeplot()</code>으로 그려 비교해 보겠습니다.</p>
 </li>
-<li><p><code>displot()</code>은 <b><code>FacetGrid</code>를 생성</b>합니다.</p>
+<li>
+<p><code>displot()</code>은 <b><code>FacetGrid</code>를 생성</b>합니다.</p>
 <ul>
 <li>matplotlib이 생성하는 <code>Figure</code>와 <code>Axes</code>를 포함하는 객체입니다.</li>
 <li>따라서 matplot이 <code>subplot</code>으로 생성하는 <b><code>Axes</code>에 담길 수 없습니다</b>.</li>
 </ul>
 </li>
-<li><p><code>displot()</code>은 matplotlib의 <code>pyplot</code>방식으로 사용해야 합니다.</p>
+<li>
+<p><code>displot()</code>은 matplotlib의 <code>pyplot</code>방식으로 사용해야 합니다.</p>
 </li>
-<li><p>그림 크기는 <code>height</code>와 <code>aspect</code>로 제어합니다.</p>
+<li>
+<p>그림 크기는 <code>height</code>와 <code>aspect</code>로 제어합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sns.displot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>,</span><br><span class="line">    kind=<span class="string">&quot;kde&quot;</span>, </span><br><span class="line">    multiple=<span class="string">&quot;fill&quot;</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">&quot;ch:rot=-.25,hue=1,light=.75&quot;</span>,</span><br><span class="line">    height=<span class="number">5</span>, aspect=<span class="number">2</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_3.png"></p>
+<p><img src="32_displots_3.png" alt=""></p>
 <ul>
 <li>반면 <code>kdeplot()</code>은 <code>Axes</code>를 생성합니다.</li>
 <li><code>ax</code> 인자를 사용해 <code>subplot</code>으로 미리 생성한 <code>Axes</code>에 담을 수 있습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">sns.kdeplot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>,</span><br><span class="line">    multiple=<span class="string">&quot;fill&quot;</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">&quot;ch:rot=-.25,hue=1,light=.75&quot;</span>,</span><br><span class="line">    ax=ax</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_4.png"></p>
+<p><img src="32_displots_4.png" alt=""></p>
 <ul>
-<li><p>두 그림의 legend가 묘하게 다릅니다.</p>
+<li>
+<p>두 그림의 legend가 묘하게 다릅니다.</p>
 <ul>
 <li><code>displot()</code>은 옆으로 밀려있고,</li>
 <li><code>kdeplot()</code>은 <code>axes</code> 안에 담겨 있습니다.</li>
 </ul>
 </li>
-<li><p>그런데 <b>문제</b>가 있습니다.</p>
+<li>
+<p>그런데 <b>문제</b>가 있습니다.</p>
 <ul>
 <li>legend를 옮기려면 <code>axes.legend()</code>로 제어해야 합니다.</li>
-<li>그리고 <code>legend(handles, labels)</code>형태로 데이터를 넣어야 하는데, </li>
+<li>그리고 <code>legend(handles, labels)</code>형태로 데이터를 넣어야 하는데,</li>
 <li>handles와 labels를 추출하는 <code>axes.get_legend_handles_labels()</code>가 작동하지 않습니다.</li>
 </ul>
 </li>
-<li><p>handles, labels를 출력시켜도 모두 []로만 나옵니다.</p>
+<li>
+<p>handles, labels를 출력시켜도 모두 []로만 나옵니다.</p>
 </li>
-<li><p><b>legend는 텅 비어 있습니다.</b></p>
+<li>
+<p><b>legend는 텅 비어 있습니다.</b></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># object oriented interface</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">sns.kdeplot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>,</span><br><span class="line">    multiple=<span class="string">&quot;fill&quot;</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">&quot;ch:rot=-.25,hue=1,light=.75&quot;</span>,</span><br><span class="line"><span class="comment">#     height=5, aspect=2</span></span><br><span class="line">    ax=ax</span><br><span class="line">)</span><br><span class="line">h, l = ax.get_legend_handles_labels()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;handles=<span class="subst">&#123;h&#125;</span>\nlables=<span class="subst">&#123;l&#125;</span>\n&quot;</span>)</span><br><span class="line">ax.legend(h, l, bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">0.9</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_5.png"></p>
+<p><img src="32_displots_5.png" alt=""></p>
 <ul>
 <li>강제로 labels를 인가하면 legend를 제어할 수 있습니다.</li>
 <li>그러나 <b>순서가 반대</b>이고, 반대로 넣으면 <b>언제나 색상과 맞는지</b> 확신이 없습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">sns.kdeplot(</span><br><span class="line">    data=diamonds,</span><br><span class="line">    x=<span class="string">&quot;carat&quot;</span>, hue=<span class="string">&quot;cut&quot;</span>,</span><br><span class="line">    multiple=<span class="string">&quot;fill&quot;</span>, clip=(<span class="number">0</span>, <span class="literal">None</span>),</span><br><span class="line">    palette=<span class="string">&quot;ch:rot=-.25,hue=1,light=.75&quot;</span>,</span><br><span class="line"><span class="comment">#     height=5, aspect=2</span></span><br><span class="line">    ax=ax</span><br><span class="line">)</span><br><span class="line">ax.legend(diamonds[<span class="string">&quot;cut&quot;</span>].unique()[::-<span class="number">1</span>], bbox_to_anchor=(<span class="number">1.2</span>,<span class="number">0.9</span>))</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/16/Python-DS-32-seaborn_displot/32_displots_8.png"></p>
+<p><img src="32_displots_8.png" alt=""></p>
 <ul>
-<li>아쉽게도 seaborn <b>공식문서</b>에도 설명이 제대로 나오지 않았네요.<ul>
+<li>아쉽게도 seaborn <b>공식문서</b>에도 설명이 제대로 나오지 않았네요.
+<ul>
 <li>본 방법은 <b>임시변통</b>으로만 알고 정석을 찾아야 할 것 같습니다.</li>
 <li>혹시 이 글을 보시는 분께서 방법을 알고 계시면, 제보 부탁드리겠습니다.</li>
-<li><a href="mailto:&#106;&#101;&#x68;&#121;&#x75;&#x6e;&#46;&#108;&#x65;&#101;&#64;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">jehyun.lee@gmail.com</a></li>
+<li><a href="mailto:jehyun.lee@gmail.com">jehyun.lee@gmail.com</a></li>
 </ul>
 </li>
 </ul>
@@ -377,7 +406,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/" data-id="cuidU80PASWZRjIcyPhk16dNm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/16/Python-DS-32-seaborn_displot/" data-id="cuidPRAT0wLfOc9E5teUFd1gI" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -461,12 +490,14 @@ distplot()이 없어진 대신 displot()이 들어왔습니다.
 matplotlib으로 만든 틀 안에 seaborn을 넣어봅니다.
 
 1. displot()
+
 seaborn.displot
 
 
 
-displot()은 histplot(), kdeplot(), ecdfplot()",
-        "wordCount": 896
+
+displot()은 histplot(), kdeplot(), ecdfplot",
+        "wordCount": 873
     }
 </script>
 
@@ -563,6 +594,26 @@ displot()은 histplot(), kdeplot(), ecdfplot()",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -637,26 +688,6 @@ displot()은 histplot(), kdeplot(), ecdfplot()",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

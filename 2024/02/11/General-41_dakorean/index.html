@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="openai,chatgpt,data analysis" />
     
-    <meta name="description" content="ChatGPT에는 Data Analysis가 탑재되어 있습니다. Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다. ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.  1. ChatGPT에서 데이터 불러오기 seaborn: penguins dataset   Chat">
+    <meta name="description" content="ChatGPT에는 Data Analysis가 탑재되어 있습니다. Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다. ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.  1. ChatGPT에서 데이터 불러오기  seaborn: penguins dataset   Cha">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ChatGPT Data Analysis 시각화 한글 사용">
 <meta property="og:url" content="https://jehyunlee.github.io/2024/02/11/General-41_dakorean/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="ChatGPT에는 Data Analysis가 탑재되어 있습니다. Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다. ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.  1. ChatGPT에서 데이터 불러오기 seaborn: penguins dataset   Chat">
+<meta property="og:description" content="ChatGPT에는 Data Analysis가 탑재되어 있습니다. Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다. ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.  1. ChatGPT에서 데이터 불러오기  seaborn: penguins dataset   Cha">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/General/41_dakorean_00.png">
 <meta property="article:published_time" content="2024-02-10T16:43:00.000Z">
@@ -233,7 +233,8 @@
 <li>Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 실행합니다.</li>
 <li>ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.</li>
 </ul>
-<h1 id="1-ChatGPT에서-데이터-불러오기"><a href="#1-ChatGPT에서-데이터-불러오기" class="headerlink" title="1. ChatGPT에서 데이터 불러오기"></a>1. ChatGPT에서 데이터 불러오기</h1><blockquote>
+<h1>1. ChatGPT에서 데이터 불러오기</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/mwaskom/seaborn-data/blob/master/penguins.csv">seaborn: penguins dataset</a></p>
 </blockquote>
 <ul>
@@ -241,102 +242,124 @@
 <li>가장 보편적인 데이터 분석용 예제 중 하나인 펭귄 데이터셋을 가져오라고 합니다.</li>
 <li>Data Analysis가 자동으로 실행됩니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_01.png"></p>
+<p><img src="41_dakorean_01.png" alt=""></p>
 <ul>
 <li>왜인지 실패합니다.</li>
-<li><b>현재 환경으로는 외부 URL에 접속할 수 없다</b>고 하네요.<br>(I’m unable to access external URLs directly from my current environment)</li>
+<li><b>현재 환경으로는 외부 URL에 접속할 수 없다</b>고 하네요.<br>
+(I’m unable to access external URLs directly from my current environment)</li>
 <li>이유를 알아보기 위해 ChatGPT의 동작을 제어하는 <b>system prompt</b>를 확인합니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_02.png"></p>
+<p><img src="41_dakorean_02.png" alt=""></p>
 <ul>
-<li><p>몇 가지 중요 정보가 있습니다.</p>
+<li>
+<p>몇 가지 중요 정보가 있습니다.</p>
 </li>
-<li><p><b>Jupyter Notebook 환경에서 실행된다</b>는 것,</p>
+<li>
+<p><b>Jupyter Notebook 환경에서 실행된다</b>는 것,</p>
 </li>
-<li><p><b>60.0초 뒤에 time out된다는 것</b>,</p>
+<li>
+<p><b>60.0초 뒤에 time out된다는 것</b>,</p>
 </li>
-<li><p>그리고 <b>Data Analysis에서는 Internet Access가 막혀있다는 점</b>입니다.</p>
+<li>
+<p>그리고 <b>Data Analysis에서는 Internet Access가 막혀있다는 점</b>입니다.</p>
 </li>
-<li><p>따라서 파일 다운로드를 포함한 <b>외부 web request도 막혀있고 API call도 안 됩니다.</b> </p>
+<li>
+<p>따라서 파일 다운로드를 포함한 <b>외부 web request도 막혀있고 API call도 안 됩니다.</b></p>
 </li>
-<li><p>이번에는 <b>Web Browsing</b>을 이용해서 펭귄 데이터셋을 가져오라고 시켜 봅니다.</p>
+<li>
+<p>이번에는 <b>Web Browsing</b>을 이용해서 펭귄 데이터셋을 가져오라고 시켜 봅니다.</p>
 </li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_03.png"></p>
+<p><img src="41_dakorean_03.png" alt=""></p>
 <ul>
-<li><p>역시 못한다고 합니다.</p>
+<li>
+<p>역시 못한다고 합니다.</p>
 </li>
-<li><p>대신 파일 링크를 주며 <b>다운받아 올려달라</b>고 하네요.</p>
+<li>
+<p>대신 파일 링크를 주며 <b>다운받아 올려달라</b>고 하네요.</p>
 </li>
-<li><p>기꺼이 다운받아 올려줍니다.</p>
+<li>
+<p>기꺼이 다운받아 올려줍니다.</p>
 </li>
-<li><p>파일을 올리고 세 가지 일을 함께 시킵니다.</p>
+<li>
+<p>파일을 올리고 세 가지 일을 함께 시킵니다.<br>
+<b>1. 파일 내용을 보여주고 df_penguins라는 이름의 pandas DataFrame으로 저장</b><br>
+<b>2. 데이터셋의 다섯 줄을 보여달라</b><br>
+<b>3. 데이터 요약 내용을 보여달라.</b></p>
 </li>
 </ul>
-<p><b>1. 파일 내용을 보여주고 df_penguins라는 이름의 pandas DataFrame으로 저장</b><br><b>2. 데이터셋의 다섯 줄을 보여달라</b><br><b>3. 데이터 요약 내용을 보여달라.</b></p>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_04.png"></p>
-<h1 id="2-ChatGPT에서-데이터-시각화하기"><a href="#2-ChatGPT에서-데이터-시각화하기" class="headerlink" title="2. ChatGPT에서 데이터 시각화하기"></a>2. ChatGPT에서 데이터 시각화하기</h1><blockquote>
+<p><img src="41_dakorean_04.png" alt=""></p>
+<h1>2. ChatGPT에서 데이터 시각화하기</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://pypi.org/project/koreanize-matplotlib/">pypi: koreanize-matplotlib</a></p>
 </blockquote>
 <ul>
 <li><b>데이터 중 <code>body_mass_g</code> 분포를 히스토그램으로 표현하라고 지시합니다.</b></li>
 <li>그림 크기도 4 x 3 inch로 지정합니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_05.png"></p>
+<p><img src="41_dakorean_05.png" alt=""></p>
 <ul>
 <li>기대대로 그림이 출력되었습니다.</li>
 <li>그런데 당연하게도 영문으로 출력되었습니다.</li>
 <li>제목을 한글로 바꿔봅시다.</li>
 <li><b>펭귄 체중 분포</b>로 바꿔달라고 했는데 글자가 깨져버립니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_06.png"></p>
+<p><img src="41_dakorean_06.png" alt=""></p>
 <ul>
-<li><p>너무나 당연하지만 한글 글꼴이 설치되지 않았기 때문입니다.</p>
+<li>
+<p>너무나 당연하지만 한글 글꼴이 설치되지 않았기 때문입니다.</p>
 </li>
-<li><p><b>글꼴을 업로드하고 사용하라고 할 수 있지만 연달아 제대로 동작하지 않습니다.</b></p>
+<li>
+<p><b>글꼴을 업로드하고 사용하라고 할 수 있지만 연달아 제대로 동작하지 않습니다.</b></p>
 </li>
-<li><p>일회성으로 <a href="https://jehyunlee.github.io/2024/01/24/General-39_signature/">폰트를 업로드해 그림에 한글을 삽입할 때</a>와는 다른 상황입니다.</p>
+<li>
+<p>일회성으로 <a href="https://jehyunlee.github.io/2024/01/24/General-39_signature/">폰트를 업로드해 그림에 한글을 삽입할 때</a>와는 다른 상황입니다.</p>
 </li>
-<li><p>Python의 가장 기본격인 시각화 라이브러리는 Matplotlib이며 Data Analysis도 이를 사용합니다.</p>
+<li>
+<p>Python의 가장 기본격인 시각화 라이브러리는 Matplotlib이며 Data Analysis도 이를 사용합니다.</p>
 </li>
-<li><p>안정적으로 Matplotlib을 한글화하는 <b><a target="_blank" rel="noopener" href="https://pypi.org/project/koreanize-matplotlib/">koreanize-matplotlib</a></b>을 사용합니다.</p>
+<li>
+<p>안정적으로 Matplotlib을 한글화하는 <b><a target="_blank" rel="noopener" href="https://pypi.org/project/koreanize-matplotlib/">koreanize-matplotlib</a></b>을 사용합니다.</p>
 </li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_07.png"></p>
+<p><img src="41_dakorean_07.png" alt=""></p>
 <ul>
 <li><b><a target="_blank" rel="noopener" href="https://files.pythonhosted.org/packages/ef/91/93f56a4526d2dbead44250d9166d97568c2ce051c90eaa4be36788d59131/koreanize_matplotlib-0.1.1-py3-none-any.whl">.whl file</a></b>을 다운받아 대화창에 올리고 환경 설정을 지시합니다.</li>
 <li>글꼴을 개별적으로 올렸을 때 발생할 수 있는 <b>오류가 예방</b>됩니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_08.png"></p>
-<h1 id="3-ChatGPT에서-데이터-시각화-수정하기"><a href="#3-ChatGPT에서-데이터-시각화-수정하기" class="headerlink" title="3. ChatGPT에서 데이터 시각화 수정하기"></a>3. ChatGPT에서 데이터 시각화 수정하기</h1><blockquote>
-<p><a href="https://jehyunlee.github.io/2022/10/16/Python-DS-117-pycon2022/">PyCon Korea 2022: 혼란한 Matplotlib에서 질서 찾기</a><br><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/showcase/anatomy.html">Matplotlib: Anatomy of a figure</a></p>
+<p><img src="41_dakorean_08.png" alt=""></p>
+<h1>3. ChatGPT에서 데이터 시각화 수정하기</h1>
+<blockquote>
+<p><a href="https://jehyunlee.github.io/2022/10/16/Python-DS-117-pycon2022/">PyCon Korea 2022: 혼란한 Matplotlib에서 질서 찾기</a><br>
+<a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/showcase/anatomy.html">Matplotlib: Anatomy of a figure</a></p>
 </blockquote>
 <ul>
 <li>데이터 시각화는 기본값으로 실행한 초안으로 끝나지 않습니다.</li>
 <li>적절한 요소를 더하고 빼면서 수정해야 합니다.</li>
 <li>먼저 크게 두 가지만 수정합시다.</li>
 </ul>
-<p><b>1. 모든 글꼴 크기를 절반으로 줄이고</b><br><b>2. 히스토그램 색을 오렌지색으로 변경합니다.</b></p>
+<p><b>1. 모든 글꼴 크기를 절반으로 줄이고</b><br>
+<b>2. 히스토그램 색을 오렌지색으로 변경합니다.</b></p>
 <ul>
 <li>해당 명령을 위처럼 간단히 내리지 못하고 복잡하게 내려야만 했습니다.</li>
 <li><b>title, xlabel, ylabel, xtick label, ytick label, edgewidth, facecolor</b>라는 용어를 사용합니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_09.png"></p>
+<p><img src="41_dakorean_09.png" alt=""></p>
 <ul>
 <li>그래프가 Matplotlib으로 그려졌기 때문에 Matplotlib에서 사용하는 요소명으로 지시하는 것입니다.</li>
 <li><a href="https://jehyunlee.github.io/2022/10/16/Python-DS-117-pycon2022/">PyCon Korea 2022: 혼란한 Matplotlib에서 질서 찾기</a>에서 말씀드린 내용 그대로입니다.</li>
 <li>각 부위의 이름은 <a target="_blank" rel="noopener" href="https://matplotlib.org/stable/gallery/showcase/anatomy.html">Anatomy of a figure</a>에서 참고할 수 있습니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_09.webp"></p>
+<p><img src="41_dakorean_09.webp" alt=""></p>
 <ul>
 <li>내친 김에 그림을 조금 더 바꿔봅니다.</li>
 <li><b>모든 테두리를 보이도록 하고, grid를 가리고, 눈금의 방향을 밖으로 향하게 합니다.</b></li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_10.png"></p>
+<p><img src="41_dakorean_10.png" alt=""></p>
 <ul>
 <li>ChatGPT의 답변 맨 아래에 있는 링크를 클릭하면 최종 코드를 볼 수 있습니다.</li>
 </ul>
-<p><img src="/2024/02/11/General-41_dakorean/41_dakorean_11.png"></p>
+<p><img src="41_dakorean_11.png" alt=""></p>
 
         </div>
 		<p>
@@ -354,7 +377,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2024/02/11/General-41_dakorean/" data-id="cuidGGW1I4CGj3CGKYNtFzyo6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2024/02/11/General-41_dakorean/" data-id="cuidt5OT_WrjLyAtaIr_-YQh3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -438,11 +461,12 @@ Code Interpreter로 불리던 기능으로, Python 프로그램을 작성하고 
 ChatGPT Data Analysis에서 데이터를 시각화할 때 한글을 사용하는 법을 알아봅니다.
 
 1. ChatGPT에서 데이터 불러오기
+
 seaborn: penguins dataset
 
 
-Chat",
-        "wordCount": 371
+Cha",
+        "wordCount": 360
     }
 </script>
 
@@ -539,6 +563,26 @@ Chat",
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -613,26 +657,6 @@ Chat",
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

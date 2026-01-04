@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="machine learning,statistics,linear algebra,principal component analysis,locally linear embedding,multidimensional scaling,isomap,t-SNE" />
     
-    <meta name="description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강">
+    <meta name="description" content="다크 프로그래머: 선형대수학 Wikipedia: Singular Value Decomposition 핸즈온 머신러닝: 8장-차원 축소 데이터 사이언스 스쿨: 3.5 PCA scikit learn: Faces recognition examples using eigenfaces and SVMs A.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PCA; Dimension Reduction + $\alpha$">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강">
+<meta property="og:description" content="다크 프로그래머: 선형대수학 Wikipedia: Singular Value Decomposition 핸즈온 머신러닝: 8장-차원 축소 데이터 사이언스 스쿨: 3.5 PCA scikit learn: Faces recognition examples using eigenfaces and SVMs A.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/21_pca_0.png">
 <meta property="article:published_time" content="2020-07-21T07:59:00.000Z">
@@ -234,46 +234,71 @@
             
 
             <blockquote>
-<p><a target="_blank" rel="noopener" href="https://darkpgmr.tistory.com/105">다크 프로그래머: 선형대수학</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia: Singular Value Decomposition</a><br><a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb">핸즈온 머신러닝: 8장-차원 축소</a><br><a target="_blank" rel="noopener" href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/">데이터 사이언스 스쿨: 3.5 PCA</a><br><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html">scikit learn: Faces recognition examples using eigenfaces and SVMs</a><br><a target="_blank" rel="noopener" href="https://pathmind.com/kr/wiki/eigenvector">A.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강의</a></p>
+<p><a target="_blank" rel="noopener" href="https://darkpgmr.tistory.com/105">다크 프로그래머: 선형대수학</a><br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia: Singular Value Decomposition</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb">핸즈온 머신러닝: 8장-차원 축소</a><br>
+<a target="_blank" rel="noopener" href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/">데이터 사이언스 스쿨: 3.5 PCA</a><br>
+<a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html">scikit learn: Faces recognition examples using eigenfaces and SVMs</a><br>
+<a target="_blank" rel="noopener" href="https://pathmind.com/kr/wiki/eigenvector">A.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강의</a></p>
 </blockquote>
-<h2 id="1-PCA-이해를-위한-간단한-선형대수학"><a href="#1-PCA-이해를-위한-간단한-선형대수학" class="headerlink" title="1. PCA 이해를 위한 간단한 선형대수학"></a>1. PCA 이해를 위한 간단한 선형대수학</h2><ul>
+<h2 id="1-PCA-이해를-위한-간단한-선형대수학">1. PCA 이해를 위한 간단한 선형대수학</h2>
+<ul>
 <li>머신러닝, 딥러닝 공부 블로그엔 PCA 관련 글이 상당히 많습니다.</li>
 <li>그만큼 중요한 기능이지만 많은 글에서 <b>차원 축소</b>에만 초점을 맞추고 있습니다.</li>
 <li>PCA의 본질로부터 이끌어낼 수 있는 차원을 축소 이상의 기능을 살펴보겠습니다.</li>
 <li>PCA는 선형대수에 뿌리를 두고 있습니다. 의미 중심으로 최대한 요약했습니다.</li>
 </ul>
-<h3 id="1-1-고유값eigenvalue-고유벡터eigenvector"><a href="#1-1-고유값eigenvalue-고유벡터eigenvector" class="headerlink" title="1.1. 고유값eigenvalue, 고유벡터eigenvector"></a>1.1. 고유값<code>eigenvalue</code>, 고유벡터<code>eigenvector</code></h3><ul>
-<li><p>행렬에 벡터를 곱하면 행렬이나 벡터가 나오는 것이 일반적입니다.<br>$ A \boldsymbol{v}<br>&#x3D; \begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13}\\ a_{21} &amp; a_{22} &amp; a_{23} \end{pmatrix} \begin{pmatrix} v_{1} \\ v_{2} \\ v_{3}\end{pmatrix}<br>&#x3D; \begin{pmatrix} a_{11}v_1 + a_{12}v_2 + a_{13}v_3\\ a_{21}v_1 + a_{22}v_2 + a_{23}v_3 \end{pmatrix}<br>$</p>
+<h3 id="1-1-고유값eigenvalue-고유벡터eigenvector">1.1. 고유값<code>eigenvalue</code>, 고유벡터<code>eigenvector</code></h3>
+<ul>
+<li>
+<p>행렬에 벡터를 곱하면 행렬이나 벡터가 나오는 것이 일반적입니다.<br>
+$ A \boldsymbol{v}<br>
+= \begin{pmatrix} a_{11} &amp; a_{12} &amp; a_{13}\\ a_{21} &amp; a_{22} &amp; a_{23} \end{pmatrix} \begin{pmatrix} v_{1} \\ v_{2} \\ v_{3}\end{pmatrix}<br>
+= \begin{pmatrix} a_{11}v_1 + a_{12}v_2 + a_{13}v_3\\ a_{21}v_1 + a_{22}v_2 + a_{23}v_3 \end{pmatrix}<br>
+$</p>
 </li>
-<li><p>그런데, <b>“어떤 행렬 A에 벡터 v를 곱했더니 벡터의 크기만 변하는”</b> 일이 벌어질 때가 있습니다.<br>$A \boldsymbol{v} &#x3D; \lambda \boldsymbol{v} $</p>
+<li>
+<p>그런데, <b>“어떤 행렬 A에 벡터 v를 곱했더니 벡터의 크기만 변하는”</b> 일이 벌어질 때가 있습니다.<br>
+$A \boldsymbol{v} = \lambda \boldsymbol{v} $</p>
 </li>
-<li><p>예를 들면, 이런 상황입니다.<br>$A &#x3D; \begin{pmatrix} 2 &amp; 0 &amp; -2\\ 1 &amp; 1 &amp; -2 \\ 0 &amp; 0 &amp; 1\end{pmatrix} \text{이고 } \boldsymbol{v}&#x3D; \begin{pmatrix} 1 \\ 1 \\ 0\end{pmatrix} \text{라면,} $</p>
+<li>
+<p>예를 들면, 이런 상황입니다.<br>
+$A = \begin{pmatrix} 2 &amp; 0 &amp; -2\\ 1 &amp; 1 &amp; -2 \\ 0 &amp; 0 &amp; 1\end{pmatrix} \text{이고 } \boldsymbol{v}= \begin{pmatrix} 1 \\ 1 \\ 0\end{pmatrix} \text{라면,} $</p>
 </li>
 </ul>
-<p>$A \boldsymbol{v} &#x3D;<br>\begin{pmatrix} 2 &amp; 0 &amp; -2\\ 1 &amp; 1 &amp; -2 \\ 0 &amp; 0 &amp; 1\end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ 0\end{pmatrix}<br>&#x3D; \begin{pmatrix} 2 \\ 2 \\ 0\end{pmatrix} &#x3D; 2 \boldsymbol{v}$</p>
+<p>$A \boldsymbol{v} =<br>
+\begin{pmatrix} 2 &amp; 0 &amp; -2\\ 1 &amp; 1 &amp; -2 \\ 0 &amp; 0 &amp; 1\end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ 0\end{pmatrix}<br>
+= \begin{pmatrix} 2 \\ 2 \\ 0\end{pmatrix} = 2 \boldsymbol{v}$</p>
 <ul>
-<li><p>이 때 벡터 $\boldsymbol{v} $를 고유벡터<code>eigenvector</code>, 상수 $ \lambda $를 고유값<code>eigenvalue</code>라고 합니다.</p>
+<li>
+<p>이 때 벡터 $\boldsymbol{v} $를 고유벡터<code>eigenvector</code>, 상수 $ \lambda $를 고유값<code>eigenvalue</code>라고 합니다.</p>
 <ul>
 <li>기하학적으로, 행렬 $A$의 고유벡터는 선형변환 $A$에 의해 방향은 보존되고 크기만 변화되었습니다.</li>
 <li>그리고 고유값 $ \lambda $는 고유벡터가 몇배로 변하는지를 나타내는 값입니다.</li>
 </ul>
 </li>
-<li><p>애니메이션으로 표현하면 다음과 같습니다.</p>
+<li>
+<p>애니메이션으로 표현하면 다음과 같습니다.</p>
 <ul>
 <li>파란색 벡터들은 선형변환을 해도 방향이 일정함을 알 수 있습니다.</li>
-<li>파란색 벡터의 방향이 고유벡터의 방향과 같기 때문입니다.<br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_13.gif"></li>
+<li>파란색 벡터의 방향이 고유벡터의 방향과 같기 때문입니다.<br>
+<img src="21_pca_13.gif" alt=""></li>
 </ul>
 </li>
 </ul>
-<h3 id="1-2-고유값분해eigendecomposition"><a href="#1-2-고유값분해eigendecomposition" class="headerlink" title="1.2. 고유값분해eigendecomposition"></a>1.2. 고유값분해<code>eigendecomposition</code></h3><ul>
-<li><p>하나의 행렬 $A$는 고유벡터와 고유값을 여럿 가질 수 있습니다.</p>
+<h3 id="1-2-고유값분해eigendecomposition">1.2. 고유값분해<code>eigendecomposition</code></h3>
 <ul>
-<li>행렬 $A$의 고유벡터를 열벡터로 갖는 행렬을 $P$, </li>
-<li>고유값들을 대각원소로 갖는 대각행렬을 $\Lambda$라고 하면 다음 식이 성립합니다.<br>$ AP &#x3D; P \Lambda $. 즉, $ A &#x3D; P \Lambda P^{-1} $로 <b>분해</b>됩니다.</li>
+<li>
+<p>하나의 행렬 $A$는 고유벡터와 고유값을 여럿 가질 수 있습니다.</p>
+<ul>
+<li>행렬 $A$의 고유벡터를 열벡터로 갖는 행렬을 $P$,</li>
+<li>고유값들을 대각원소로 갖는 대각행렬을 $\Lambda$라고 하면 다음 식이 성립합니다.<br>
+$ AP = P \Lambda $. 즉, $ A = P \Lambda P^{-1} $로 <b>분해</b>됩니다.</li>
 <li>이를 고유값분해<code>eigendecomposition</code>이라 합니다.</li>
 </ul>
 </li>
-<li><p>모든 정방행렬을 고유값분해 할 수는 없습니다.</p>
+<li>
+<p>모든 정방행렬을 고유값분해 할 수는 없습니다.</p>
 <ul>
 <li>그러나 가능하다면 이 때의 고유벡터는 일차 독립입니다.</li>
 <li>사실 거꾸로가 맞습니다.</li>
@@ -281,15 +306,19 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-2-특이값분해Singular-Value-Decomposition-SVD"><a href="#1-2-특이값분해Singular-Value-Decomposition-SVD" class="headerlink" title="1.2. 특이값분해Singular Value Decomposition(SVD)"></a>1.2. 특이값분해<code>Singular Value Decomposition</code>(SVD)</h3><ul>
-<li><p>정방행렬이 아니어도 비슷한 방식으로 분해될 수 있습니다.</p>
+<h3 id="1-2-특이값분해Singular-Value-Decomposition-SVD">1.2. 특이값분해<code>Singular Value Decomposition</code>(SVD)</h3>
+<ul>
+<li>
+<p>정방행렬이 아니어도 비슷한 방식으로 분해될 수 있습니다.</p>
 <ul>
 <li>특이값분해<code>Singular Value Decomposition</code>(SVD)이라고 합니다.</li>
-<li>임의의 $m \times n$ 행렬의 특이값분해는 다음과 같이 정의됩니다.<ul>
-<li>$A&#x3D; U \Sigma V^T $.</li>
+<li>임의의 $m \times n$ 행렬의 특이값분해는 다음과 같이 정의됩니다.
+<ul>
+<li>$A= U \Sigma V^T $.</li>
 </ul>
 </li>
-<li>이 때 $U$, $\Sigma$, $V$는 각기 다음과 같습니다.<ul>
+<li>이 때 $U$, $\Sigma$, $V$는 각기 다음과 같습니다.
+<ul>
 <li>$U: m \times m $ 직교행렬</li>
 <li>$\Sigma: m \times n$ 직사각 대각행렬</li>
 <li>$V: n \times n $ 직교행렬</li>
@@ -297,15 +326,17 @@
 </li>
 </ul>
 </li>
-<li><p>$A \boldsymbol{v} &#x3D; U \Sigma V^T \boldsymbol{v}$는 기하학적으로 다음과 같습니다.</p>
+<li>
+<p>$A \boldsymbol{v} = U \Sigma V^T \boldsymbol{v}$는 기하학적으로 다음과 같습니다.</p>
 <ul>
-<li><b>Step 1.</b> $\boldsymbol{v_1} &#x3D; V^T \boldsymbol{v}$ : 회전변환</li>
-<li><b>Step 2.</b> $\boldsymbol{v_2} &#x3D; \Sigma\boldsymbol{v_1}$ : 크기변화</li>
-<li><b>Step 3.</b> $\boldsymbol{v_3} &#x3D; U \boldsymbol{v_2}$ : 회전변환</li>
+<li><b>Step 1.</b> $\boldsymbol{v_1} = V^T \boldsymbol{v}$ : 회전변환</li>
+<li><b>Step 2.</b> $\boldsymbol{v_2} = \Sigma\boldsymbol{v_1}$ : 크기변화</li>
+<li><b>Step 3.</b> $\boldsymbol{v_3} = U \boldsymbol{v_2}$ : 회전변환</li>
 </ul>
-<p><img src="https://t1.daumcdn.net/cfile/tistory/2725C84C5260AA5F28"></p>
+<p><img src="https://t1.daumcdn.net/cfile/tistory/2725C84C5260AA5F28" alt=""></p>
 </li>
-<li><p>이 때 $V$는 <b>직교행렬<code>orthogonal matrix</code></b>입니다.</p>
+<li>
+<p>이 때 $V$는 <b>직교행렬<code>orthogonal matrix</code></b>입니다.</p>
 <ul>
 <li>행벡터($V^T$의 열벡터)가 유클리드 공간의 정규 직교 기저<code>basis</code>를 이룹니다.</li>
 <li>$m \times n$ 행렬 $A$는 <b>$n$개의 feature가 있는 데이터 $m$개</b>로 표현될 수 있습니다.</li>
@@ -315,8 +346,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-주성분분석principal-component-analysis-PCA"><a href="#2-주성분분석principal-component-analysis-PCA" class="headerlink" title="2. 주성분분석principal component analysis(PCA)"></a>2. 주성분분석<code>principal component analysis</code>(PCA)</h2><ul>
-<li>$n$개의 feature를 설명하기 위해 필요한 기저의 수는 더 적을 수 있습니다.<ul>
+<h2 id="2-주성분분석principal-component-analysis-PCA">2. 주성분분석<code>principal component analysis</code>(PCA)</h2>
+<ul>
+<li>$n$개의 feature를 설명하기 위해 필요한 기저의 수는 더 적을 수 있습니다.
+<ul>
 <li>$(1, 0.01), (-1.2, 0.1), (3, -0.03)$은 $(x, y)$라는 두 개의 feature가 있습니다.</li>
 <li>그러나 $x$방향에 비해 $y$방향의 분포가 적어 $y$방향을 무시해도 무리가 없습니다.</li>
 <li>이렇게 주성분(여기에선 $x$축)을 중심으로 분석하는 것을 주성분분석<code>principal component analysis</code>(PCA)라고 합니다.</li>
@@ -324,20 +357,34 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-1-PCA-방법"><a href="#2-1-PCA-방법" class="headerlink" title="2.1. PCA 방법"></a>2.1. PCA 방법</h3><ul>
-<li>$n$개의 feature를 가지는 데이터가 $m$개 있다고 합시다.<ul>
+<h3 id="2-1-PCA-방법">2.1. PCA 방법</h3>
+<ul>
+<li>$n$개의 feature를 가지는 데이터가 $m$개 있다고 합시다.
+<ul>
 <li>이 데이터셋 $X$는 $ m \times n $ 행렬로 표현될 수 있습니다.</li>
 <li>$X$의 PCA는 공분산<code>covariance</code>행렬 $(n \times n)$로부터 구할 수도 있고</li>
-<li>특이값분석 $X &#x3D; U \Sigma V^T$으로부터 구할 수도 있습니다.</li>
+<li>특이값분석 $X = U \Sigma V^T$으로부터 구할 수도 있습니다.</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-1-1-공분산행렬-고유값분해-PCA"><a href="#2-1-1-공분산행렬-고유값분해-PCA" class="headerlink" title="2.1.1. 공분산행렬 고유값분해 PCA"></a>2.1.1. 공분산행렬 고유값분해 PCA</h4><ul>
-<li><p><b>Step 1.</b> 데이터 $X$의 공분산<code>covariance</code>행렬 $Cov$를 구합니다.<br>$$Cov &#x3D; \frac{1}{n-1} X^T X$$</p>
+<h4 id="2-1-1-공분산행렬-고유값분해-PCA">2.1.1. 공분산행렬 고유값분해 PCA</h4>
+<ul>
+<li>
+<p><b>Step 1.</b> 데이터 $X$의 공분산<code>covariance</code>행렬 $Cov$를 구합니다.<br>
+$$Cov = \frac{1}{n-1} X^T X$$</p>
 </li>
-<li><p><b>Step 2.</b> $C &#x3D; V \Sigma_{Cov} V^{T}$로 고유값분해를 합니다.<br>$$\begin{equation}<br>\begin{split}<br>Cov &amp;&#x3D; \frac{1}{n-1} X^T X &#x3D; \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U \Sigma V^T \right)\\<br>&amp;&#x3D; \frac{1}{n-1} \left(V \Sigma U^T \right) \left(U \Sigma V^T \right) &#x3D; \frac{1}{n-1} V \Sigma^2 V^T\\<br>&amp;&#x3D; V \Sigma_{Cov} V^T<br>\end{split}<br>\end{equation}$$</p>
+<li>
+<p><b>Step 2.</b> $C = V \Sigma_{Cov} V^{T}$로 고유값분해를 합니다.<br>
+$$\begin{equation}<br>
+\begin{split}<br>
+Cov &amp;= \frac{1}{n-1} X^T X = \frac{1}{n-1} \left(U \Sigma V^T \right)^T \left(U \Sigma V^T \right)\\<br>
+&amp;= \frac{1}{n-1} \left(V \Sigma U^T \right) \left(U \Sigma V^T \right) = \frac{1}{n-1} V \Sigma^2 V^T\\<br>
+&amp;= V \Sigma_{Cov} V^T<br>
+\end{split}<br>
+\end{equation}$$</p>
 </li>
-<li><p>각 성분의 설명은 다음과 같습니다.  </p>
+<li>
+<p>각 성분의 설명은 다음과 같습니다.</p>
 <ul>
 <li>$\Sigma_{Cov} :$ $\lambda$ 크기순으로 정렬된 $n \times n$ 대각행렬.</li>
 <li>$V :$  $Cov$의 고유벡터 $e_i$를 열벡터로 가지는 직교행렬.</li>
@@ -345,10 +392,14 @@
 </ul>
 </li>
 </ul>
-<h4 id="2-1-2-특이값분해-PCA"><a href="#2-1-2-특이값분해-PCA" class="headerlink" title="2.1.2. 특이값분해 PCA"></a>2.1.2. 특이값분해 PCA</h4><ul>
-<li><p><b>Step 1.</b> 데이터 $X$를 특이값 분해합니다.<br>$$X &#x3D; U \Sigma V^T $$</p>
+<h4 id="2-1-2-특이값분해-PCA">2.1.2. 특이값분해 PCA</h4>
+<ul>
+<li>
+<p><b>Step 1.</b> 데이터 $X$를 특이값 분해합니다.<br>
+$$X = U \Sigma V^T $$</p>
 </li>
-<li><p><code>scipy.linalg.svd</code>, <code>numpy.linalg.svd</code>에서 사용하는 방식입니다.</p>
+<li>
+<p><code>scipy.linalg.svd</code>, <code>numpy.linalg.svd</code>에서 사용하는 방식입니다.</p>
 <ul>
 <li>한번에 고유값행렬 $\Sigma$와 고유벡터행렬 $V$를 얻을 수 있습니다.</li>
 <li>$U : m \times m $ 직교행렬. $U$의 열벡터는 $XX^T$의 고유벡터입니다.</li>
@@ -356,163 +407,202 @@
 </ul>
 </li>
 </ul>
-<h4 id="2-1-3-PCA-결과-활용"><a href="#2-1-3-PCA-결과-활용" class="headerlink" title="2.1.3. PCA 결과 활용"></a>2.1.3. PCA 결과 활용</h4><ul>
-<li><p>우리 관심사는 $n$개의 feature를 대표적으로 설명해줄 인자들입니다.</p>
+<h4 id="2-1-3-PCA-결과-활용">2.1.3. PCA 결과 활용</h4>
+<ul>
+<li>
+<p>우리 관심사는 $n$개의 feature를 대표적으로 설명해줄 인자들입니다.</p>
 <ul>
 <li>따라서 $Cov$의 고유벡터와 같은 $V$의 열벡터를 PC1, …, PCn으로 사용합니다.</li>
 </ul>
 </li>
-<li><p>$V$의 열벡터 수는 $n$으로, 데이터 feature 수와 같습니다.</p>
+<li>
+<p>$V$의 열벡터 수는 $n$으로, 데이터 feature 수와 같습니다.</p>
 <ul>
 <li>고유벡터를 전부 사용하면 PCA의 의미가 없습니다.</li>
-<li>가장 주요한 고유벡터 $d$개만을 선별하여 사용합니다. </li>
+<li>가장 주요한 고유벡터 $d$개만을 선별하여 사용합니다.</li>
 <li>선별될 $d$의 수는 시각화(2 or 3), 해석력 확보(ex. &gt;95%)에 따라 다릅니다.</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-2-PCA-활용-sklearn"><a href="#2-2-PCA-활용-sklearn" class="headerlink" title="2.2. PCA 활용: sklearn"></a>2.2. PCA 활용: sklearn</h3><ul>
+<h3 id="2-2-PCA-활용-sklearn">2.2. PCA 활용: sklearn</h3>
+<ul>
 <li>scikit-learn에서는 <code>sklearn.decomposition</code>을 통해 PCA를 제공합니다.</li>
 <li>상세한 내용은 <a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb">핸즈온 머신러닝: 8장-차원 축소</a>를 참고바랍니다.</li>
 <li>MNIST 데이터에 PCA를 적용하면 다음과 같습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MNIST data load</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line">mnist = fetch_openml(<span class="string">&quot;mnist_784&quot;</span>, version=<span class="number">1</span>)</span><br><span class="line">mnist.target = mnist.target.astype(np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># X(feature) and y(target) split</span></span><br><span class="line">X = mnist[<span class="string">&quot;data&quot;</span>]</span><br><span class="line">y = mnist[<span class="string">&quot;target&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># apply PCA</span></span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components=<span class="number">0.95</span>) <span class="comment"># secure 95% of data variance</span></span><br><span class="line">X_reduced = pca.fit_transform(X)</span><br><span class="line">X_recovered = pca.inverse_transform(X_reduced)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>데이터의 설명력을 95% 확보하도록 고유벡터의 숫자를 설정합니다.<ul>
+<li>데이터의 설명력을 95% 확보하도록 고유벡터의 숫자를 설정합니다.
+<ul>
 <li><code>print(pca.n_components_)</code>로 확인하면 154개를 이용했음을 알 수 있습니다.</li>
-<li>MNIST 데이터의 인자 수 &#x3D; $28 \times 28 &#x3D; 784$이므로, 20%가 안되는 분량입니다.</li>
-<li>그럼에도 불구하고 배경이 흐려진 것 외에는 숫자가 거의 그대로 잘 보입니다.<br><br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_1.png"><br></li>
+<li>MNIST 데이터의 인자 수 = $28 \times 28 = 784$이므로, 20%가 안되는 분량입니다.</li>
+<li>그럼에도 불구하고 배경이 흐려진 것 외에는 숫자가 거의 그대로 잘 보입니다.<br><br>
+<img src="21_pca_1.png" alt=""><br></li>
 </ul>
 </li>
 </ul>
-<h3 id="2-3-PCA-응용-eigenface"><a href="#2-3-PCA-응용-eigenface" class="headerlink" title="2.3. PCA 응용: eigenface"></a>2.3. PCA 응용: eigenface</h3><ul>
+<h3 id="2-3-PCA-응용-eigenface">2.3. PCA 응용: eigenface</h3>
+<ul>
 <li>숫자가 아닌 얼굴에 PCA를 적용하면 재미있는 일을 할 수 있습니다.</li>
 <li>상세한 내용은 <a target="_blank" rel="noopener" href="https://datascienceschool.net/view-notebook/f10aad8a34a4489697933f77c5d58e3a/">데이터 사이언스 스쿨: 3.5 PCA</a>를 참고바랍니다.</li>
 <li>올리베티 얼굴 데이터의 20번째 얼굴을 불러오면 다음과 같습니다.<br></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_olivetti_faces</span><br><span class="line"></span><br><span class="line">faces_all = fetch_olivetti_faces()</span><br><span class="line">K = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">faces = faces_all.images[faces_all.target == K]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">5</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">axes = ax.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> face, axi <span class="keyword">in</span> <span class="built_in">zip</span>(faces, axes):</span><br><span class="line">    axi.imshow(face, cmap=plt.cm.bone)</span><br><span class="line">    axi.grid(<span class="literal">False</span>)</span><br><span class="line">    axi.xaxis.set_ticks([])</span><br><span class="line">    axi.yaxis.set_ticks([])</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(top=<span class="number">1</span>, bottom=<span class="number">0</span>, hspace=<span class="number">0</span>, wspace=<span class="number">0.05</span>)</span><br><span class="line">plt.tight_layout()        </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/21/Python-DS-21-PCA/21_pca_2.png"><br></p>
+<p><img src="21_pca_2.png" alt=""><br></p>
 <ul>
 <li>2개의 인자만 이용해서 PCA 변환과 역변환을 적용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pca_oli = PCA(n_components=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">faces_ori = faces_all.data[faces_all.target==K]</span><br><span class="line">faces_reduced = pca_oli.fit_transform(faces_ori)</span><br><span class="line">faces_recovered = pca_oli.inverse_transform(faces_reduced)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>역변환 결과물을 원본과의 재구성오차<code>reconstruction error</code>와 함께 그립니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">5</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">axes = ax.ravel()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> face_ori, face_recovered, axi <span class="keyword">in</span> <span class="built_in">zip</span>(faces_ori, faces_recovered, axes):</span><br><span class="line">    mse = mean_squared_error(face_ori, face_recovered)</span><br><span class="line">    </span><br><span class="line">    axi.imshow(face_recovered.reshape(<span class="number">64</span>,<span class="number">64</span>), cmap=plt.cm.bone)</span><br><span class="line">    axi.set_title(<span class="string">f&quot;mse=<span class="subst">&#123;mse:<span class="number">1.2</span>e&#125;</span>&quot;</span>)</span><br><span class="line">    axi.grid(<span class="literal">False</span>)</span><br><span class="line">    axi.xaxis.set_ticks([])</span><br><span class="line">    axi.yaxis.set_ticks([])</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(top=<span class="number">1</span>, bottom=<span class="number">0</span>, hspace=<span class="number">0</span>, wspace=<span class="number">0.05</span>)</span><br><span class="line">plt.tight_layout()   </span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/21/Python-DS-21-PCA/21_pca_3.png"><br></p>
+<p><img src="21_pca_3.png" alt=""><br></p>
 <ul>
 <li>데이터의 평균과 주성분1<code>PC1</code>, 주성분2<code>PC2</code>을 확인합니다.</li>
-<li>주성분도 $n &#x3D; 64 \times 64 &#x3D;4096$개의 데이터를 가진 이미지입니다.</li>
+<li>주성분도 $n = 64 \times 64 =4096$개의 데이터를 가진 이미지입니다.</li>
 <li>그래서 고유얼굴이라는 의미로 <b>eigenface</b>라고 부릅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">face_mean = pca_oli.mean_.reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p1 = pca_oli.components_[<span class="number">0</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">face_p2 = pca_oli.components_[<span class="number">1</span>].reshape(<span class="number">64</span>, <span class="number">64</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/21/Python-DS-21-PCA/21_pca_4.png"><br></p>
+<p><img src="21_pca_4.png" alt=""><br></p>
 <ul>
-<li><p>평균 얼굴에 PC1의 가중치를 달리해서 더하면, 얼굴 방향이 바뀝니다.<br><br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_5.png"><br></p>
+<li>
+<p>평균 얼굴에 PC1의 가중치를 달리해서 더하면, 얼굴 방향이 바뀝니다.<br><br>
+<img src="21_pca_5.png" alt=""><br></p>
 </li>
-<li><p>평균 얼굴에 PC2의 가중치를 달리해서 더하면, 웃는 정도가 바뀝니다.<br><br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_6.png"><br></p>
+<li>
+<p>평균 얼굴에 PC2의 가중치를 달리해서 더하면, 웃는 정도가 바뀝니다.<br><br>
+<img src="21_pca_6.png" alt=""><br></p>
 </li>
 </ul>
-<h3 id="2-4-PCA-응용-2D-원자-찾기"><a href="#2-4-PCA-응용-2D-원자-찾기" class="headerlink" title="2.4. PCA 응용: 2D 원자 찾기"></a>2.4. PCA 응용: 2D 원자 찾기</h3><ul>
-<li><p>PCA가 데이터가 주로 분산된 방향을 찾는다는 점에 착안하여 소재 문제를 풀기도 합니다.</p>
+<h3 id="2-4-PCA-응용-2D-원자-찾기">2.4. PCA 응용: 2D 원자 찾기</h3>
+<ul>
+<li>
+<p>PCA가 데이터가 주로 분산된 방향을 찾는다는 점에 착안하여 소재 문제를 풀기도 합니다.</p>
 <ul>
 <li>물질을 이루는 원자들은 선형<code>1D</code>, 판상형<code>2D</code>, 입체형<code>3D</code>으로 배열됩니다.</li>
 <li>이 중 graphene과 같이 2D로 배열된 원자들은 독특한 성질이 있습니다.</li>
 <li>그러나 국부적으로 2D로 배열된 원자만 골라내는 것은 쉬운 일이 아닙니다.</li>
-<li>3D 공간상에 면처럼 위치한 점들<code>manifold</code>이기 때문입니다.<br><br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_7.png"><br></li>
+<li>3D 공간상에 면처럼 위치한 점들<code>manifold</code>이기 때문입니다.<br><br>
+<img src="21_pca_7.png" alt=""><br></li>
 </ul>
 </li>
-<li><p>고체를 이루는 원자들이 구조상 주기를 가지는 성질을 이용합니다.</p>
+<li>
+<p>고체를 이루는 원자들이 구조상 주기를 가지는 성질을 이용합니다.</p>
 <ul>
 <li>푸리에 변환을 적용해 $x$, $y$, $z$ 세 방향으로의 주기성을 구합니다.</li>
 <li>주기성을 바탕으로 구 형태의 공간을 설정, 이 안에 들어오는 원자들만 분류합니다.</li>
-<li>이 원자들의 좌표에 PCA를 적용해 국부적으로 2D 배열된 원자를 구분합니다.<br><br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_8.png" alt="graphene의 불룩한 부분을 제외한 나머지를 2D로 탐지했습니다."><br></li>
+<li>이 원자들의 좌표에 PCA를 적용해 국부적으로 2D 배열된 원자를 구분합니다.<br><br>
+<img src="21_pca_8.png" alt="graphene의 불룩한 부분을 제외한 나머지를 2D로 탐지했습니다."><br></li>
 </ul>
 </li>
 </ul>
-<h2 id="3-비선형-데이터"><a href="#3-비선형-데이터" class="headerlink" title="3. 비선형 데이터"></a>3. 비선형 데이터</h2><ul>
-<li>PCA는 비선형 데이터에는 취약합니다.<ul>
+<h2 id="3-비선형-데이터">3. 비선형 데이터</h2>
+<ul>
+<li>PCA는 비선형 데이터에는 취약합니다.
+<ul>
 <li>PCA의 기반이 선형 행렬 연산이기 때문입니다.</li>
 <li>상세한 내용은 <a target="_blank" rel="noopener" href="https://github.com/rickiepark/handson-ml2/blob/master/08_dimensionality_reduction.ipynb">핸즈온 머신러닝: 8장-차원 축소</a>를 참고바랍니다.</li>
 </ul>
 </li>
 </ul>
-<h3 id="3-1-kernel-PCA"><a href="#3-1-kernel-PCA" class="headerlink" title="3.1. kernel PCA"></a>3.1. kernel PCA</h3><ul>
-<li><p>PCA 연산 전 커널을 씌움으로써 이를 극복합니다.</p>
+<h3 id="3-1-kernel-PCA">3.1. kernel PCA</h3>
+<ul>
+<li>
+<p>PCA 연산 전 커널을 씌움으로써 이를 극복합니다.</p>
 <ul>
 <li>커널은 데이터를 매우 높은 고차원 특성 공간<code>feature space</code>로 매핑합니다.</li>
 <li>만병통치약은 아닙니다만 커널 PCA는 커널이 씌워진 상태에서 PCA를 수행하기 때문에 선형 공간의 한계를 상당히 극복할 수 있습니다.</li>
 </ul>
 </li>
-<li><p>Swiss-roll 데이터에 kernel PCA를 적용해 봅시다.</p>
+<li>
+<p>Swiss-roll 데이터에 kernel PCA를 적용해 봅시다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_swiss_roll</span><br><span class="line">X, t = make_swiss_roll(n_samples=<span class="number">1000</span>, noise=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>kernel PCA 또한 <code>sklearn.decomposition</code>에 <code>KernelPCA</code>로 탑재되어 있습니다.</li>
 <li>3가지 kernel을 씌워보겠습니다: <code>linear</code>, <code>rbf</code>, <code>sigmoid</code></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lin_pca = KernelPCA(n_components=<span class="number">2</span>, kernel=<span class="string">&quot;linear&quot;</span>, fit_inverse_transform=<span class="literal">True</span>)</span><br><span class="line">rbf_pca = KernelPCA(n_components=<span class="number">2</span>, kernel=<span class="string">&quot;rbf&quot;</span>, gamma=<span class="number">0.0433</span>, fit_inverse_transform=<span class="literal">True</span>)</span><br><span class="line">sig_pca = KernelPCA(n_components=<span class="number">2</span>, kernel=<span class="string">&quot;sigmoid&quot;</span>, gamma=<span class="number">0.001</span>, coef0=<span class="number">1</span>, fit_inverse_transform=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/21/Python-DS-21-PCA/21_pca_9.png"><br></p>
+<p><img src="21_pca_9.png" alt=""><br></p>
 <ul>
-<li><p>커널마다 다른 모양이 출력됩니다.</p>
+<li>
+<p>커널마다 다른 모양이 출력됩니다.</p>
 <ul>
 <li>Linear Kernel은 일반 PCA와 동일합니다.</li>
 <li>RBF와 Sigmoid는 형상이 원본 데이터(맨 왼쪽)와 크게 다릅니다.</li>
 <li>파라미터를 바꿔가며 어떻게 변하는지 한번 보겠습니다.</li>
 </ul>
 </li>
-<li><p><code>poly</code> kernel<br><img src="/2020/07/21/Python-DS-21-PCA/kernelpca_poly_plt.png"><br></p>
+<li>
+<p><code>poly</code> kernel<br>
+<img src="kernelpca_poly_plt.png" alt=""><br></p>
 </li>
-<li><p><code>rbf</code> kernel<br><img src="/2020/07/21/Python-DS-21-PCA/kernelpca_rbf_plt.png"><br></p>
+<li>
+<p><code>rbf</code> kernel<br>
+<img src="kernelpca_rbf_plt.png" alt=""><br></p>
 </li>
-<li><p><code>sigmoid</code> kernel<br><img src="/2020/07/21/Python-DS-21-PCA/kernelpca_sigmoid_plt.png"><br></p>
+<li>
+<p><code>sigmoid</code> kernel<br>
+<img src="kernelpca_sigmoid_plt.png" alt=""><br></p>
 </li>
-<li><p><code>cosine</code> kernel<br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_10.png" alt="cosine 커널은 인자가 없습니다"><br></p>
+<li>
+<p><code>cosine</code> kernel<br>
+<img src="21_pca_10.png" alt="cosine 커널은 인자가 없습니다"><br></p>
 </li>
-<li><p>재구성원상<code>pre-image</code>과의 오차를 줄이는 방법을 찾아야 합니다.</p>
+<li>
+<p>재구성원상<code>pre-image</code>과의 오차를 줄이는 방법을 찾아야 합니다.</p>
 <ul>
 <li>커널의 종류와 파라미터를 대상으로 <code>GridSearchCV</code>를 수행하기도 합니다.</li>
 <li>PCA는 전처리 과정이므로, 머신러닝 기법과 궁합이 맞는 조건을 찾기 위해 <code>Pipeline</code>을 구성하기도 합니다.</li>
 </ul>
 </li>
-<li><p>LogisticRegression과의 결합 예시입니다.</p>
+<li>
+<p>LogisticRegression과의 결합 예시입니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"></span><br><span class="line">clf = Pipeline([(<span class="string">&quot;kpca&quot;</span>, KernelPCA(n_components=<span class="number">2</span>)),</span><br><span class="line">                (<span class="string">&quot;log_reg&quot;</span>, LogisticRegression())</span><br><span class="line">               ])</span><br><span class="line">               </span><br><span class="line">param_grid = [&#123;<span class="string">&quot;kpca_gamma&quot;</span>: np.linspace(<span class="number">0.03</span>, <span class="number">0.05</span>, <span class="number">10</span>),</span><br><span class="line">               <span class="string">&quot;kpca_kernel&quot;</span>: [<span class="string">&quot;rbf&quot;</span>, <span class="string">&quot;sigmoid&quot;</span>]</span><br><span class="line">              &#125;]                </span><br><span class="line">               </span><br><span class="line">grid_search = GridSearchCV(clf, param_grid, cv=<span class="number">3</span>)</span><br><span class="line">grid_search.fit(X, y)               </span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-다른-방법들"><a href="#3-2-다른-방법들" class="headerlink" title="3.2. 다른 방법들"></a>3.2. 다른 방법들</h3><ul>
+<h3 id="3-2-다른-방법들">3.2. 다른 방법들</h3>
+<ul>
 <li>매니폴드 문제를 해결하기 위해 PCA와 근본적으로 다른 방법을 사용할 수도 있습니다.</li>
 </ul>
-<h4 id="3-2-1-LLE"><a href="#3-2-1-LLE" class="headerlink" title="3.2.1. LLE"></a>3.2.1. LLE</h4><ul>
-<li><p>지역 선형 임베딩<code>Locally Linear Embedding</code>은 투영에 의존하지 않습니다.</p>
+<h4 id="3-2-1-LLE">3.2.1. LLE</h4>
+<ul>
+<li>
+<p>지역 선형 임베딩<code>Locally Linear Embedding</code>은 투영에 의존하지 않습니다.</p>
 <ul>
 <li>각 훈련 데이터가 가장 가까운 이웃<code>closest neighbor</code>에 얼마나 선형적으로 연관되어 있는지를 찾습니다.</li>
 <li>그 다음, 국부적인 관계가 가장 잘 보존되는 훈련 세트의 저차원 표현을 찾습니다.</li>
 <li>잡음이 너무 많지 않은, 꼬인 매니폴드를 펼치는데 잘 작동합니다.</li>
 </ul>
 </li>
-<li><p>Swiss Roll을 LLE로 푼 예시입니다.</p>
+<li>
+<p>Swiss Roll을 LLE로 푼 예시입니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> LocallyLinearEmbedding</span><br><span class="line"></span><br><span class="line">lle = LocallyLinearEmbedding(n_components=<span class="number">2</span>, n_neighbors=<span class="number">10</span>)</span><br><span class="line">X, t = make_swiss_roll(n_samples=<span class="number">1000</span>, noise=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">X_reduced = lle.fit_transform(X)</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/21/Python-DS-21-PCA/21_pca_11.png"><br></p>
-<h4 id="3-2-2-MDS"><a href="#3-2-2-MDS" class="headerlink" title="3.2.2. MDS"></a>3.2.2. MDS</h4><ul>
+<p><img src="21_pca_11.png" alt=""><br></p>
+<h4 id="3-2-2-MDS">3.2.2. MDS</h4>
+<ul>
 <li>데이터간 거리를 보존하면서 차원을 축소합니다.</li>
 </ul>
-<h4 id="3-2-3-Isomap"><a href="#3-2-3-Isomap" class="headerlink" title="3.2.3. Isomap"></a>3.2.3. Isomap</h4><ul>
+<h4 id="3-2-3-Isomap">3.2.3. Isomap</h4>
+<ul>
 <li>각 데이터를 가장 가까운 이웃과 연결해서 그래프를 만듭니다.</li>
 <li>샘플간 지오데식 거리<code>geodesic distance</code>(두 노드 사이의 최단 경로를 이루는 노드의 수)를 유지하며 차원을 축소합니다.</li>
 </ul>
-<h4 id="3-2-4-t-SNE"><a href="#3-2-4-t-SNE" class="headerlink" title="3.2.4. t-SNE"></a>3.2.4. t-SNE</h4><ul>
-<li><p>비슷한 데이터를 가까이, 비슷하지 않은 샘플은 멀리 유지하며 차원을 축소합니다.</p>
+<h4 id="3-2-4-t-SNE">3.2.4. t-SNE</h4>
+<ul>
+<li>
+<p>비슷한 데이터를 가까이, 비슷하지 않은 샘플은 멀리 유지하며 차원을 축소합니다.</p>
 </li>
-<li><p>고차원 데이터의 군집을 시각화할 때 주로 사용됩니다.</p>
+<li>
+<p>고차원 데이터의 군집을 시각화할 때 주로 사용됩니다.</p>
 </li>
-<li><p>위 세 알고리즘을 통해 Swiss-roll을 변형하면 다음과 같습니다.<br><img src="/2020/07/21/Python-DS-21-PCA/21_pca_12.png"><br></p>
+<li>
+<p>위 세 알고리즘을 통해 Swiss-roll을 변형하면 다음과 같습니다.<br>
+<img src="21_pca_12.png" alt=""><br></p>
 </li>
 </ul>
 
@@ -532,7 +622,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/" data-id="cuidZimOMKNE1o_MVVW5FT6AW" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/" data-id="cuid4W_ciUR9JUk505QK60S6H" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -611,8 +701,13 @@
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/07/21/Python-DS-21-PCA/",
         "description": "
-다크 프로그래머: 선형대수학Wikipedia: Singular Value Decomposition핸즈온 머신러닝: 8장-차원 축소데이터 사이언스 스쿨: 3.5 PCAscikit learn: Faces recognition examples using eigenfaces and SVMsA.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한 기초 강",
-        "wordCount": 1908
+다크 프로그래머: 선형대수학
+Wikipedia: Singular Value Decomposition
+핸즈온 머신러닝: 8장-차원 축소
+데이터 사이언스 스쿨: 3.5 PCA
+scikit learn: Faces recognition examples using eigenfaces and SVMs
+A.I. Wiki: 고유벡터, PCA, 공분산 및 엔트로피에 대한",
+        "wordCount": 1817
     }
 </script>
 
@@ -709,6 +804,26 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -783,26 +898,6 @@
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

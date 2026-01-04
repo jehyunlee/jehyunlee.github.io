@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,matplotlib,pandas" />
     
-    <meta name="description" content="Matplotlib 객체지향 방식은 훌륭합니다. 객체를 섬세하게 제어할 수 있고, 시각화 함수를 만들기도 좋습니다. 데이터 정리부터 객체지향 방식으로 그림을 그리는 예제를 만들어 보았습니다.  1. 목표 우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.  한번 그리고 말 것이 아닙니다.  시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의 그림을 찍">
+    <meta name="description" content="Matplotlib 객체지향 방식은 훌륭합니다. 객체를 섬세하게 제어할 수 있고, 시각화 함수를 만들기도 좋습니다. 데이터 정리부터 객체지향 방식으로 그림을 그리는 예제를 만들어 보았습니다.  1. 목표   우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.    한번 그리고 말 것이 아닙니다.   시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Population by gender and age">
 <meta property="og:url" content="https://jehyunlee.github.io/2021/10/05/Python-DS-85-popkr/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="Matplotlib 객체지향 방식은 훌륭합니다. 객체를 섬세하게 제어할 수 있고, 시각화 함수를 만들기도 좋습니다. 데이터 정리부터 객체지향 방식으로 그림을 그리는 예제를 만들어 보았습니다.  1. 목표 우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.  한번 그리고 말 것이 아닙니다.  시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의 그림을 찍">
+<meta property="og:description" content="Matplotlib 객체지향 방식은 훌륭합니다. 객체를 섬세하게 제어할 수 있고, 시각화 함수를 만들기도 좋습니다. 데이터 정리부터 객체지향 방식으로 그림을 그리는 예제를 만들어 보았습니다.  1. 목표   우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.    한번 그리고 말 것이 아닙니다.   시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/85_popkr_0.png">
 <meta property="article:published_time" content="2021-10-05T04:31:00.000Z">
@@ -233,181 +233,224 @@
 <li>객체를 섬세하게 제어할 수 있고, 시각화 함수를 만들기도 좋습니다.</li>
 <li>데이터 정리부터 객체지향 방식으로 그림을 그리는 예제를 만들어 보았습니다.</li>
 </ul>
-<h1 id="1-목표"><a href="#1-목표" class="headerlink" title="1. 목표"></a>1. 목표</h1><ul>
-<li><p>우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.<br><br><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_18.png"><br></p>
+<h1>1. 목표</h1>
+<ul>
+<li>
+<p>우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.<br><br>
+<img src="85_popkr_18.png" alt=""><br></p>
 </li>
-<li><p>한번 그리고 말 것이 아닙니다.</p>
+<li>
+<p>한번 그리고 말 것이 아닙니다.</p>
 </li>
-<li><p>시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의 그림을 찍어낼 것입니다.<br><br><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_26.png"><br></p>
+<li>
+<p>시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의 그림을 찍어낼 것입니다.<br><br>
+<img src="85_popkr_26.png" alt=""><br></p>
 </li>
 </ul>
-<h1 id="2-데이터-준비"><a href="#2-데이터-준비" class="headerlink" title="2. 데이터 준비"></a>2. 데이터 준비</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/72227684">모두의 데이터 분석 with 파이썬</a><br><a target="_blank" rel="noopener" href="https://jumin.mois.go.kr/index.jsp#">주민등록 인구 및 세대현황</a></p>
+<h1>2. 데이터 준비</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/72227684">모두의 데이터 분석 with 파이썬</a><br>
+<a target="_blank" rel="noopener" href="https://jumin.mois.go.kr/index.jsp#">주민등록 인구 및 세대현황</a></p>
 </blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://www.yes24.com/Product/Goods/72227684">모두의 데이터 분석 with 파이썬</a>에는 인구 데이터를 내려받아 분포를 bar plot으로 표현하는 내용이 있습니다.</li>
 <li>같은 데이터를 조금 더 깔끔하게, 조금 체계적으로 만들어 보겠습니다.</li>
 </ul>
-<h2 id="2-1-데이터-다운로드"><a href="#2-1-데이터-다운로드" class="headerlink" title="2.1. 데이터 다운로드"></a>2.1. 데이터 다운로드</h2><ul>
-<li><p>아래와 같이 <b>주민등록 인구 및 세대현황</b>자료에서 csv 파일을 다운받습니다.<br></p>
+<h2 id="2-1-데이터-다운로드">2.1. 데이터 다운로드</h2>
+<ul>
+<li>
+<p>아래와 같이 <b>주민등록 인구 및 세대현황</b>자료에서 csv 파일을 다운받습니다.<br></p>
 </li>
-<li><p><a href="202108_202108_%EC%97%B0%EB%A0%B9%EB%B3%84%EC%9D%B8%EA%B5%AC%ED%98%84%ED%99%A9_%EC%9B%94%EA%B0%84.csv">파일 다운로드</a><br><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_27.png"><br></p>
+<li>
+<p><a href="202108_202108_%EC%97%B0%EB%A0%B9%EB%B3%84%EC%9D%B8%EA%B5%AC%ED%98%84%ED%99%A9_%EC%9B%94%EA%B0%84.csv">파일 다운로드</a><br>
+<img src="85_popkr_27.png" alt=""><br></p>
 </li>
-<li><p>주피터 노트북을 켜고 데이터 분석을 준비합니다.</p>
+<li>
+<p>주피터 노트북을 켜고 데이터 분석을 준비합니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 시각화 설정</span></span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linux 한글 사용 설정</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.family&#x27;</span>]=[<span class="string">&#x27;NanumGothic&#x27;</span>, <span class="string">&#x27;sans-serif&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-데이터-전처리"><a href="#2-2-데이터-전처리" class="headerlink" title="2.2. 데이터 전처리"></a>2.2. 데이터 전처리</h2><ul>
+<h2 id="2-2-데이터-전처리">2.2. 데이터 전처리</h2>
+<ul>
 <li>다운받은 파일을 파이썬으로 열어봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_popkr = pd.read_csv(<span class="string">&quot;202108_202108_연령별인구현황_월간.csv&quot;</span>, encoding=<span class="string">&quot;euc-kr&quot;</span>)</span><br><span class="line">df_popkr.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_01.png"><br></p>
+<p><img src="85_popkr_01.png" alt=""><br></p>
 <ul>
 <li>연령대와 성별이 column으로 정리되어 있고 행정구역들이 첫번째 column에 나열되어 있습니다.</li>
 <li>분석하기에 좋은 모양은 아닙니다. 전처리를 들어갑니다.</li>
 </ul>
-<h3 id="2-2-1-데이터-내용-정리"><a href="#2-2-1-데이터-내용-정리" class="headerlink" title="2.2.1. 데이터 내용 정리"></a>2.2.1. 데이터 내용 정리</h3><ul>
+<h3 id="2-2-1-데이터-내용-정리">2.2.1. 데이터 내용 정리</h3>
+<ul>
 <li>행정구역에서 불필요한 번호를 떼어냅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_popkr[<span class="string">&quot;행정구역&quot;</span>] = df_popkr[<span class="string">&quot;행정구역&quot;</span>].<span class="built_in">str</span>.split(<span class="string">&quot;(&quot;</span>).<span class="built_in">str</span>[<span class="number">0</span>]</span><br><span class="line">df_popkr.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_02.png"><br></p>
+<p><img src="85_popkr_02.png" alt=""><br></p>
 <ul>
 <li>행정구역에서 번호가 떨어진 뒤에 빈 칸이 붙어 있습니다.</li>
 <li>숫자들 사이에는 자리수를 표현하는 쉼표(,)가 붙어 있습니다.</li>
 <li><code>df.replace()</code>로 처리합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df_popkr.replace(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;&quot;</span>, regex=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">df_popkr.replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>, regex=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">df_popkr.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_03.png"><br></p>
-<h3 id="2-2-2-성별-분리"><a href="#2-2-2-성별-분리" class="headerlink" title="2.2.2. 성별 분리"></a>2.2.2. 성별 분리</h3><ul>
+<p><img src="85_popkr_03.png" alt=""><br></p>
+<h3 id="2-2-2-성별-분리">2.2.2. 성별 분리</h3>
+<ul>
 <li>남성과 여성 데이터를 따로 그릴 것입니다. 데이터부터 분리합니다.</li>
 <li>먼저 남성 데이터를 정리합니다.</li>
 <li>컬럼명에 <b>“남”</b>이 있는 것들을 골라냅니다.</li>
 <li>그 중에서도 불필요한 내용을 제거하기 위해 <b>“세”</b>가 있는 것만 또 따로 분리합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_popkrM = df_popkr.<span class="built_in">filter</span>(like=<span class="string">&quot;남&quot;</span>).<span class="built_in">filter</span>(like=<span class="string">&quot;세&quot;</span>)</span><br><span class="line">df_popkrM.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_04.png"><br></p>
-<h3 id="2-2-3-행-열-전환"><a href="#2-2-3-행-열-전환" class="headerlink" title="2.2.3. 행-열 전환"></a>2.2.3. 행-열 전환</h3><ul>
+<p><img src="85_popkr_04.png" alt=""><br></p>
+<h3 id="2-2-3-행-열-전환">2.2.3. 행-열 전환</h3>
+<ul>
 <li>데이터를 편하게 다루려면 열에 지역명, 행에 나이대를 놓는 것이 좋습니다.</li>
 <li><code>df.T</code>로 행과 열을 바꾼 뒤 <code>df.astype(int</code>)로 정수형으로 변환합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df_popkrMT = df_popkrM.T</span><br><span class="line">df_popkrMT.columns = df_popkr[<span class="string">&quot;행정구역&quot;</span>].values</span><br><span class="line">df_popkrMT = df_popkrMT.astype(<span class="built_in">int</span>)</span><br><span class="line">df_popkrMT.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_05.png"><br></p>
-<h3 id="2-2-4-“나이”만-남기기"><a href="#2-2-4-“나이”만-남기기" class="headerlink" title="2.2.4. “나이”만 남기기"></a>2.2.4. “나이”만 남기기</h3><ul>
+<p><img src="85_popkr_05.png" alt=""><br></p>
+<h3 id="2-2-4-나이-만-남기기">2.2.4. &quot;나이&quot;만 남기기</h3>
+<ul>
 <li>나이 정보가 index로 오긴 했지만 불필요한 정보들이 많습니다.</li>
 <li><code>pd.Series.str.split()</code>을 사용해 나이만 남깁니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df_popkrMT[<span class="string">&quot;나이&quot;</span>] = df_popkrMT.index.<span class="built_in">str</span>.split(<span class="string">&quot;_&quot;</span>).<span class="built_in">str</span>[<span class="number">2</span>]</span><br><span class="line">df_popkrMT.reset_index(drop=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">df_popkrMT</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_06.png"><br></p>
-<h3 id="2-2-5-여성-데이터-정리"><a href="#2-2-5-여성-데이터-정리" class="headerlink" title="2.2.5. 여성 데이터 정리"></a>2.2.5. 여성 데이터 정리</h3><ul>
+<p><img src="85_popkr_06.png" alt=""><br></p>
+<h3 id="2-2-5-여성-데이터-정리">2.2.5. 여성 데이터 정리</h3>
+<ul>
 <li>같은 요령으로 여성 데이터도 정리합니다.</li>
 <li>위에서 뭔가 복잡하게 한 것 같지만 코드 6줄로 정리됩니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df_popkrF = df_popkr.<span class="built_in">filter</span>(like=<span class="string">&quot;여&quot;</span>).<span class="built_in">filter</span>(like=<span class="string">&quot;세&quot;</span>)</span><br><span class="line">df_popkrFT = df_popkrF.T</span><br><span class="line">df_popkrFT.columns = df_popkr[<span class="string">&quot;행정구역&quot;</span>].values</span><br><span class="line">df_popkrFT = df_popkrFT.astype(<span class="built_in">int</span>)</span><br><span class="line">df_popkrFT[<span class="string">&quot;나이&quot;</span>] = df_popkrFT.index.<span class="built_in">str</span>.split(<span class="string">&quot;_&quot;</span>).<span class="built_in">str</span>[<span class="number">2</span>]</span><br><span class="line">df_popkrFT.reset_index(drop=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">df_popkrFT.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_07.png"><br></p>
-<h1 id="3-데이터-시각화"><a href="#3-데이터-시각화" class="headerlink" title="3. 데이터 시각화"></a>3. 데이터 시각화</h1><ul>
-<li><p>이제 정리한 데이터를 그림으로 표현할 차례입니다.</p>
+<p><img src="85_popkr_07.png" alt=""><br></p>
+<h1>3. 데이터 시각화</h1>
+<ul>
+<li>
+<p>이제 정리한 데이터를 그림으로 표현할 차례입니다.</p>
 </li>
-<li><p>글의 맨 처음에서 어떻게 그리겠다는 것을 먼저 보여드리긴 했지만 여기서 고민이 필요합니다.</p>
+<li>
+<p>글의 맨 처음에서 어떻게 그리겠다는 것을 먼저 보여드리긴 했지만 여기서 고민이 필요합니다.</p>
 </li>
-<li><p><b>남 vs 여</b>구도를 어떻게 살릴지,</p>
+<li>
+<p><b>남 vs 여</b>구도를 어떻게 살릴지,</p>
 </li>
-<li><p><b>연령대간 변화율</b>이 아닌 <b>연령대별 데이터</b>를 어떻게 표현할지에 대한 고민입니다.</p>
+<li>
+<p><b>연령대간 변화율</b>이 아닌 <b>연령대별 데이터</b>를 어떻게 표현할지에 대한 고민입니다.</p>
 </li>
-<li><p>성별, 연령별 인구 분포는 많이 사용하는 형식이 있습니다.</p>
+<li>
+<p>성별, 연령별 인구 분포는 많이 사용하는 형식이 있습니다.</p>
 </li>
-<li><p><b>등을 맞대고 있는 구도</b>로 <b>남 vs 여</b>를 표현합니다.</p>
+<li>
+<p><b>등을 맞대고 있는 구도</b>로 <b>남 vs 여</b>를 표현합니다.</p>
 </li>
-<li><p><b>bar plot</b>으로 <b>해당 구간의 데이터</b>에 집중합니다.<br><br><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_08.jpg" alt="대강 이런 그림입니다."><br></p>
+<li>
+<p><b>bar plot</b>으로 <b>해당 구간의 데이터</b>에 집중합니다.<br><br>
+<img src="85_popkr_08.jpg" alt="대강 이런 그림입니다."><br></p>
 </li>
 </ul>
-<h2 id="3-1-Axes-제작"><a href="#3-1-Axes-제작" class="headerlink" title="3.1. Axes 제작"></a>3.1. Axes 제작</h2><ul>
+<h2 id="3-1-Axes-제작">3.1. Axes 제작</h2>
+<ul>
 <li><code>plt.subplots()</code>명령으로 <code>fig</code>(Figure)와 <code>axs</code>(Axes)를 동시에 생성합니다.</li>
 <li><code>ncols=2</code>로 bar plot이 들어갈 Axes를 두 개 만듭니다.</li>
 <li><code>gridspec_kw={&quot;wspace&quot;:0}</code>으로 Axes 사이 간격을 없앱니다.</li>
 <li><code>sharey=True</code>로 두 Axes의 y 범위를 통일합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, </span><br><span class="line">                        figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_09.png"><br></p>
-<h2 id="3-2-bar-plot"><a href="#3-2-bar-plot" class="headerlink" title="3.2. bar plot"></a>3.2. bar plot</h2><ul>
+<p><img src="85_popkr_09.png" alt=""><br></p>
+<h2 id="3-2-bar-plot">3.2. bar plot</h2>
+<ul>
 <li>공간이 준비됐으니 데이터를 넣습니다.</li>
 <li><code>ax.barh()</code>명령으로 가로 bar plot을 그립니다.</li>
 <li>x에 나이, y에 전국 인구 수를 넣습니다.</li>
 <li>남성은 green, 여성은 darkorange로 표현합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;darkorange&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_10.png"><br></p>
-<h2 id="3-3-남성-좌우-반전"><a href="#3-3-남성-좌우-반전" class="headerlink" title="3.3. 남성 좌우 반전"></a>3.3. 남성 좌우 반전</h2><ul>
+<p><img src="85_popkr_10.png" alt=""><br></p>
+<h2 id="3-3-남성-좌우-반전">3.3. 남성 좌우 반전</h2>
+<ul>
 <li>남녀가 등을 맞대고 있도록 표현하려면 남성 데이터의 좌우를 뒤집어야 합니다.</li>
 <li>데이터 범위의 최대값<code>xmax</code>을 충분히 큰 수로 지정하고,</li>
 <li><b>남성은 xmax에서 0으로, 여성은 0에서 xmax로 가도록</b> 지정합니다.</li>
 <li><code>ax.set_xlim()</code>을 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;darkorange&quot;</span>)</span><br><span class="line"></span><br><span class="line">xmax = <span class="number">4.5e6</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(xmax, <span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, xmax)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_11.png"><br></p>
-<h2 id="3-4-xticklabels-수정"><a href="#3-4-xticklabels-수정" class="headerlink" title="3.4. xticklabels 수정"></a>3.4. xticklabels 수정</h2><ul>
+<p><img src="85_popkr_11.png" alt=""><br></p>
+<h2 id="3-4-xticklabels-수정">3.4. xticklabels 수정</h2>
+<ul>
 <li>x축 눈금 레이블(xticklabels)이 0부터 4까지 적혀있고 1e6이라는 숫자가 함께 있습니다.</li>
 <li>$0 \times 10^6$ ~ $4\times 10^6$ 이라는 의미이지만 잘 읽히지 않습니다.</li>
 <li>$4\times 10^6$은 우리 뇌 속에서 <b>4,000,000</b>이 되고, 다시 <b>4백만</b>이 됩니다.</li>
-<li>이럴 바에는 그냥 <b>4백만</b>이라고 써 주는게 낫습니다. </li>
+<li>이럴 바에는 그냥 <b>4백만</b>이라고 써 주는게 낫습니다.</li>
 <li><code>f-string</code>과 list comprehension을 이용해 xticklabels를 수정합니다.</li>
 <li>Axes 두 개에 똑같은 일을 해야 합니다. <code>for loop</code>으로 반복시킵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;darkorange&quot;</span>)</span><br><span class="line"></span><br><span class="line">xmax = <span class="number">4.5e6</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(xmax, <span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, xmax)</span><br><span class="line"></span><br><span class="line">xticks = np.arange(<span class="number">0</span>, xmax, <span class="number">1e6</span>)</span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels([<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">int</span>(x*<span class="number">1e-6</span>)&#125;</span>백만&quot;</span> <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;0&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks])</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_12.png"><br></p>
-<h2 id="3-5-title-grid-추가"><a href="#3-5-title-grid-추가" class="headerlink" title="3.5. title, grid 추가"></a>3.5. title, grid 추가</h2><ul>
+<p><img src="85_popkr_12.png" alt=""><br></p>
+<h2 id="3-5-title-grid-추가">3.5. title, grid 추가</h2>
+<ul>
 <li>남성과 여성을 나란히 그렸으니 어디가 어디인지 적어줘야 합니다.</li>
 <li>중앙에서 좌우로 뻗은 막대들이 언뜻 보면 비슷합니다.</li>
 <li><b>정량적인 비교</b>를 돕기 위해 grid를 추가합니다.</li>
 <li>제목은 <code>ax.set_title()</code>, 눈금은 <code>ax.grid()</code>명령입니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;darkorange&quot;</span>)</span><br><span class="line"></span><br><span class="line">xmax = <span class="number">4.5e6</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(xmax, <span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, xmax)</span><br><span class="line"></span><br><span class="line">xticks = np.arange(<span class="number">0</span>, xmax, <span class="number">1e6</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>]):</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels([<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">int</span>(x*<span class="number">1e-6</span>)&#125;</span>백만&quot;</span> <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;0&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks])</span><br><span class="line">    ax.grid(c=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">    ax.set_title(title, color=<span class="string">&quot;gray&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, pad=<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_13.png"><br></p>
+<p><img src="85_popkr_13.png" alt=""><br></p>
 <ul>
 <li>이제 <b>남성과 여성의 차이</b>가 조금 눈에 들어옵니다.</li>
 <li>70대 여성은 2백만명이 넘지만 70대 남성은 2백만명이 못 됩니다.</li>
 <li>10세 미만은 여성보다 남성이 더 많습니다.</li>
 </ul>
-<h2 id="3-6-text-추가"><a href="#3-6-text-추가" class="headerlink" title="3.6. text 추가"></a>3.6. text 추가</h2><ul>
-<li><p>grid 덕택에 조금은 읽기가 수월해졌지만 정확한 값은 보이지 않습니다.</p>
+<h2 id="3-6-text-추가">3.6. text 추가</h2>
+<ul>
+<li>
+<p>grid 덕택에 조금은 읽기가 수월해졌지만 정확한 값은 보이지 않습니다.</p>
 </li>
-<li><p><b>숫자는 신빙성을 부여합니다. 활용성도 높아집니다.</b></p>
+<li>
+<p><b>숫자는 신빙성을 부여합니다. 활용성도 높아집니다.</b></p>
 </li>
-<li><p><code>ax.text()</code>명령으로 글자를 넣을 수 있습니다.</p>
+<li>
+<p><code>ax.text()</code>명령으로 글자를 넣을 수 있습니다.</p>
 </li>
-<li><p>그런데 어디에 넣을까요?</p>
+<li>
+<p>그런데 어디에 넣을까요?</p>
 </li>
-<li><p>막대 끝에 넣으면 어떨까요? 데이터의 편차가 돋보일 것입니다.</p>
+<li>
+<p>막대 끝에 넣으면 어떨까요? 데이터의 편차가 돋보일 것입니다.</p>
 </li>
-<li><p>bar plot은 Matplotlib이 patch라는 객체로 관리합니다.</p>
+<li>
+<p>bar plot은 Matplotlib이 patch라는 객체로 관리합니다.</p>
 </li>
-<li><p><code>ax.patches[0]</code>이라면 맨 처음에 붙인 객체를 의미합니다.</p>
+<li>
+<p><code>ax.patches[0]</code>이라면 맨 처음에 붙인 객체를 의미합니다.</p>
 </li>
-<li><p><code>ax.patches</code>와 for loop을 결합하면 하나씩 순회하면서 숫자를 달아봅시다.</p>
+<li>
+<p><code>ax.patches</code>와 for loop을 결합하면 하나씩 순회하면서 숫자를 달아봅시다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;darkorange&quot;</span>)</span><br><span class="line"></span><br><span class="line">xmax = <span class="number">4.5e6</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(xmax, <span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, xmax)</span><br><span class="line"></span><br><span class="line">xticks = np.arange(<span class="number">0</span>, xmax, <span class="number">1e6</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>]):</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels([<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">int</span>(x*<span class="number">1e-6</span>)&#125;</span>백만&quot;</span> <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;0&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks])</span><br><span class="line">    ax.grid(c=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">    ax.set_title(title, color=<span class="string">&quot;gray&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.patches):</span><br><span class="line">        w = p.get_width()</span><br><span class="line">        ax.text(w, i, <span class="string">f&quot; <span class="subst">&#123;<span class="built_in">format</span>(w, <span class="string">&#x27;,&#x27;</span>)&#125;</span> &quot;</span>, </span><br><span class="line">                fontsize=<span class="string">&quot;x-small&quot;</span>, va=<span class="string">&quot;center&quot;</span>, ha=<span class="string">&quot;right&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_14.png"><br></p>
+<p><img src="85_popkr_14.png" alt=""><br></p>
 <ul>
 <li>2중 for loop으로 Axes마다, patch마다 숫자를 달았습니다.</li>
 <li><code>ax.patch</code>에 <code>.get_width()</code>를 적용해서 위치를 구했습니다.</li>
-<li><code>format()</code>으로 천 단위마다 쉼표를 추가했고, ha&#x3D;”right”로 우측 정렬을 했습니다.</li>
+<li><code>format()</code>으로 천 단위마다 쉼표를 추가했고, ha=&quot;right&quot;로 우측 정렬을 했습니다.</li>
 <li>그런데 여성 데이터마저 우측 정렬이 되어버렸습니다. <code>if</code>를 사용해 여성은 좌측 정렬을 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=<span class="string">&quot;darkorange&quot;</span>)</span><br><span class="line"></span><br><span class="line">xmax = <span class="number">6e6</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(xmax, <span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, xmax)</span><br><span class="line"></span><br><span class="line">xticks = np.arange(<span class="number">0</span>, xmax, <span class="number">1e6</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>]):</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels([<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">int</span>(x*<span class="number">1e-6</span>)&#125;</span>백만&quot;</span> <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;0&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks])</span><br><span class="line">    ax.grid(c=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">    ax.set_title(title, color=<span class="string">&quot;gray&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.patches):</span><br><span class="line">        w = p.get_width()</span><br><span class="line">        <span class="keyword">if</span> ax == axs[<span class="number">0</span>]:</span><br><span class="line">            ha = <span class="string">&quot;right&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ha = <span class="string">&quot;left&quot;</span></span><br><span class="line">        </span><br><span class="line">        ax.text(w, i, <span class="string">f&quot; <span class="subst">&#123;<span class="built_in">format</span>(w, <span class="string">&#x27;,&#x27;</span>)&#125;</span> &quot;</span>, </span><br><span class="line">                fontsize=<span class="string">&quot;x-small&quot;</span>, va=<span class="string">&quot;center&quot;</span>, ha=ha)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_15.png"><br></p>
-<h2 id="3-7-전체-제목-추가-세부-수정"><a href="#3-7-전체-제목-추가-세부-수정" class="headerlink" title="3.7. 전체 제목 추가, 세부 수정"></a>3.7. 전체 제목 추가, 세부 수정</h2><ul>
+<p><img src="85_popkr_15.png" alt=""><br></p>
+<h2 id="3-7-전체-제목-추가-세부-수정">3.7. 전체 제목 추가, 세부 수정</h2>
+<ul>
 <li>이제 거의 다 그렸습니다. 한번씩 보면서 맘에 들지 않는 부분을 수정합니다.</li>
 <li>먼저 <b>grid와 글자가 너무 난잡합니다.</b></li>
-<li><code>ax.grid(axis=&quot;x&quot;)</code>로 세로선만 남깁니다. </li>
+<li><code>ax.grid(axis=&quot;x&quot;)</code>로 세로선만 남깁니다.</li>
 <li>숫자 색상에 남성과 여성에 사용한 색상을 적용합니다.</li>
 <li>그리고 왼쪽은 남성, 오른쪽은 여성이지만 <b>이게 어디 데이터인지</b>가 없네요.</li>
 <li><code>fig.suptitle()</code>로 추가합니다.</li>
 <li>구성요소간 간격 정리를 위해 <code>fig.tight_layout()</code>을 사용합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line">c_M = <span class="string">&quot;green&quot;</span></span><br><span class="line">c_F = <span class="string">&quot;darkorange&quot;</span></span><br><span class="line">axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[<span class="string">&quot;전국&quot;</span>], color=c_M)</span><br><span class="line">axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[<span class="string">&quot;전국&quot;</span>], color=c_F)</span><br><span class="line"></span><br><span class="line">xmax = <span class="number">6e6</span></span><br><span class="line">axs[<span class="number">0</span>].set_xlim(xmax, <span class="number">0</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, xmax)</span><br><span class="line"></span><br><span class="line">xticks = np.arange(<span class="number">0</span>, xmax, <span class="number">1e6</span>)</span><br><span class="line"><span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>]):</span><br><span class="line">    ax.set_xticks(xticks)</span><br><span class="line">    ax.set_xticklabels([<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">int</span>(x*<span class="number">1e-6</span>)&#125;</span>백만&quot;</span> <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;0&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks])</span><br><span class="line">    ax.grid(axis=<span class="string">&quot;x&quot;</span>, c=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">    ax.set_title(title, color=<span class="string">&quot;gray&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">    <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.patches):</span><br><span class="line">        w = p.get_width()</span><br><span class="line">        <span class="keyword">if</span> ax == axs[<span class="number">0</span>]:</span><br><span class="line">            ha = <span class="string">&quot;right&quot;</span></span><br><span class="line">            c = c_M</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ha = <span class="string">&quot;left&quot;</span></span><br><span class="line">            c = c_F</span><br><span class="line">        </span><br><span class="line">        ax.text(w, i, <span class="string">f&quot; <span class="subst">&#123;<span class="built_in">format</span>(w, <span class="string">&#x27;,&#x27;</span>)&#125;</span> &quot;</span>, </span><br><span class="line">                c=c, fontsize=<span class="string">&quot;x-small&quot;</span>, va=<span class="string">&quot;center&quot;</span>, ha=ha, </span><br><span class="line">                fontweight=<span class="string">&quot;bold&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">fig.suptitle(<span class="string">&quot;                 전국&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_17.png"><br></p>
-<h2 id="3-8-함수로-만들기"><a href="#3-8-함수로-만들기" class="headerlink" title="3.8. 함수로 만들기"></a>3.8. 함수로 만들기</h2><ul>
+<p><img src="85_popkr_17.png" alt=""><br></p>
+<h2 id="3-8-함수로-만들기">3.8. 함수로 만들기</h2>
+<ul>
 <li>이제 조금 쓸만해진 것 같습니다.</li>
 <li>전국 말고 시도별 데이터도 시각화하고 싶은데, 그 때마다 코드를 복붙하기 불편합니다.</li>
 <li><b>함수로 만들어버립니다.</b></li>
@@ -416,29 +459,32 @@
 <li><code>fig</code>를 return해서 여차하면 추가 수정을 할 수 있도록 합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_pop</span>(<span class="params">loc, popmax=<span class="number">6e6</span>, poptick=<span class="number">1e6</span></span>):</span><br><span class="line">    fig, axs = plt.subplots(ncols=<span class="number">2</span>, sharey=<span class="literal">True</span>, figsize=(<span class="number">10</span>, <span class="number">5</span>), gridspec_kw=&#123;<span class="string">&quot;wspace&quot;</span>:<span class="number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line">    c_M = <span class="string">&quot;green&quot;</span></span><br><span class="line">    c_F = <span class="string">&quot;darkorange&quot;</span></span><br><span class="line">    axs[<span class="number">0</span>].barh(df_popkrMT[<span class="string">&quot;나이&quot;</span>], df_popkrMT[loc], color=c_M)</span><br><span class="line">    axs[<span class="number">1</span>].barh(df_popkrFT[<span class="string">&quot;나이&quot;</span>], df_popkrFT[loc], color=c_F)</span><br><span class="line"></span><br><span class="line">    axs[<span class="number">0</span>].set_xlim(popmax, <span class="number">0</span>)</span><br><span class="line">    axs[<span class="number">1</span>].set_xlim(<span class="number">0</span>, popmax)</span><br><span class="line"></span><br><span class="line">    xticks = np.arange(<span class="number">0</span>, popmax, poptick)</span><br><span class="line">    <span class="keyword">if</span> poptick &gt;= <span class="number">1e6</span>:</span><br><span class="line">        factor, unit = <span class="number">1e-6</span>, <span class="string">&quot;백만&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="number">1e5</span> &lt;= poptick &lt; <span class="number">1e6</span>:</span><br><span class="line">        factor, unit = <span class="number">1e-5</span>, <span class="string">&quot;십만&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="number">1e4</span> &lt;= poptick &lt; <span class="number">2e5</span>:</span><br><span class="line">        factor, unit = <span class="number">1e-4</span>, <span class="string">&quot;만&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="number">1e3</span> &lt;= poptick &lt; <span class="number">2e4</span>:</span><br><span class="line">        factor, unit = <span class="number">1e-3</span>, <span class="string">&quot;천&quot;</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> ax, title <span class="keyword">in</span> <span class="built_in">zip</span>(axs, [<span class="string">&quot;남성&quot;</span>, <span class="string">&quot;여성&quot;</span>]):</span><br><span class="line">        ax.set_xticks(xticks)</span><br><span class="line">        ax.set_xticklabels([<span class="string">f&quot;<span class="subst">&#123;<span class="built_in">int</span>(x*factor)&#125;</span><span class="subst">&#123;unit&#125;</span>&quot;</span> <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="string">&quot;0&quot;</span> <span class="keyword">for</span> x <span class="keyword">in</span> xticks])</span><br><span class="line">        ax.grid(axis=<span class="string">&quot;x&quot;</span>, c=<span class="string">&quot;lightgray&quot;</span>)</span><br><span class="line">        ax.set_title(title, color=<span class="string">&quot;gray&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>, pad=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ax <span class="keyword">in</span> axs:</span><br><span class="line">        <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(ax.patches):</span><br><span class="line">            w = p.get_width()</span><br><span class="line">            <span class="keyword">if</span> ax == axs[<span class="number">0</span>]:</span><br><span class="line">                ha = <span class="string">&quot;right&quot;</span></span><br><span class="line">                c = c_M</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ha = <span class="string">&quot;left&quot;</span></span><br><span class="line">                c = c_F</span><br><span class="line"></span><br><span class="line">            ax.text(w, i, <span class="string">f&quot; <span class="subst">&#123;<span class="built_in">format</span>(w, <span class="string">&#x27;,&#x27;</span>)&#125;</span> &quot;</span>, </span><br><span class="line">                    c=c, fontsize=<span class="string">&quot;x-small&quot;</span>, va=<span class="string">&quot;center&quot;</span>, ha=ha, </span><br><span class="line">                    fontweight=<span class="string">&quot;bold&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    fig.suptitle(<span class="string">f&quot;                 <span class="subst">&#123;loc&#125;</span>&quot;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">    fig.tight_layout()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> fig</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>이 함수로 전국 인구 분포를 그려봅시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig = plot_pop(<span class="string">&quot;전국&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_18.png"><br></p>
+<p><img src="85_popkr_18.png" alt=""><br></p>
 <ul>
-<li><p>똑같이 나왔습니다. :)</p>
+<li>
+<p>똑같이 나왔습니다. :)</p>
 </li>
-<li><p>서울시를 해볼까요? 구간별 인구 단위가 <b>십만</b>으로 줄어듭니다.</p>
+<li>
+<p>서울시를 해볼까요? 구간별 인구 단위가 <b>십만</b>으로 줄어듭니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig = plot_pop(<span class="string">&quot;서울특별시&quot;</span>, popmax=<span class="number">1e6</span>, poptick=<span class="number">2e5</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_19.png"><br></p>
+<p><img src="85_popkr_19.png" alt=""><br></p>
 <ul>
 <li>이제는 세종시 차례입니다. 구간별 인구 단위가 <b>만</b>단위로 줄어듭니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig = plot_pop(<span class="string">&quot;세종특별자치시&quot;</span>, popmax=<span class="number">1e6</span>, poptick=<span class="number">2e5</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_20.png"><br></p>
+<p><img src="85_popkr_20.png" alt=""><br></p>
 <ul>
-<li>같은 요령으로 영호남과 다른 광역시도 그릴 수 있습니다.<br><br><img src="/2021/10/05/Python-DS-85-popkr/85_popkr_26.png"><br></li>
+<li>같은 요령으로 영호남과 다른 광역시도 그릴 수 있습니다.<br><br>
+<img src="85_popkr_26.png" alt=""><br></li>
 </ul>
-<h1 id="4-결론"><a href="#4-결론" class="headerlink" title="4. 결론"></a>4. 결론</h1><ul>
+<h1>4. 결론</h1>
+<ul>
 <li>수작업 대신 코딩을 왜 하냐는 질문에 가장 좋은 답변 중 하나는 <b>반복 작업 처리</b>일 것입니다.</li>
 <li><b>수작업보다 체계적인 작업</b>도 답변이 될 수 있을 것입니다.</li>
 <li>데이터 시각화 작업을 체계적으로, 그리고 반복에 대응하는 방법은 <b>객체지향 방식</b>입니다.</li>
@@ -461,7 +507,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/10/05/Python-DS-85-popkr/" data-id="cuidUVDpXFHBTcThAK030RNFw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/10/05/Python-DS-85-popkr/" data-id="cuidlU6B0Jale9zIwEwC-_M-V" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -545,12 +591,17 @@ Matplotlib 객체지향 방식은 훌륭합니다.
 데이터 정리부터 객체지향 방식으로 그림을 그리는 예제를 만들어 보았습니다.
 
 1. 목표
+
+
 우리나라 인구 데이터로부터 이런 그림을 그릴 것입니다.
+
+
 
 한번 그리고 말 것이 아닙니다.
 
-시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의 그림을 찍",
-        "wordCount": 2870
+
+시나 도 이름을 입력하면 데이터만 바뀐 같은 형식의 ",
+        "wordCount": 2786
     }
 </script>
 
@@ -647,6 +698,26 @@ Matplotlib 객체지향 방식은 훌륭합니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -721,26 +792,6 @@ Matplotlib 객체지향 방식은 훌륭합니다.
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

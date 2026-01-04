@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,gis,polygon,shapefile" />
     
-    <meta name="description" content="csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다. shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다. shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.  References  shapelyfionageopandas">
+    <meta name="description" content="csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다. shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다. shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.  References  shapely fiona geopanda">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Create Shapefile from Polygon Dots">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다. shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다. shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.  References  shapelyfionageopandas">
+<meta property="og:description" content="csv 파일에서 읽은 기본 정보를 바탕으로 polygon shapefile을 생성하는 과정입니다. shapely와 fiona를 사용했으며, geopandas 0.8을 설치할 때 함께 설치되는 버전을 사용했습니다. shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.  References  shapely fiona geopanda">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/GIS-Python/2_polygonshp_1.png">
 <meta property="article:published_time" content="2020-09-14T04:11:00.000Z">
@@ -236,15 +236,19 @@
 </ul>
 <p><b>References</b></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://shapely.readthedocs.io/en/latest/">shapely</a><br><a target="_blank" rel="noopener" href="https://github.com/Toblerity/Fiona">fiona</a><br><a target="_blank" rel="noopener" href="https://geopandas.org/">geopandas</a></p>
+<p><a target="_blank" rel="noopener" href="https://shapely.readthedocs.io/en/latest/">shapely</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/Toblerity/Fiona">fiona</a><br>
+<a target="_blank" rel="noopener" href="https://geopandas.org/">geopandas</a></p>
 </blockquote>
-<h3 id="1-csv-읽기"><a href="#1-csv-읽기" class="headerlink" title="1. csv 읽기"></a>1. csv 읽기</h3><ul>
+<h3 id="1-csv-읽기">1. csv 읽기</h3>
+<ul>
 <li><code>.csv</code> 파일에서 건물 정보를 읽어옵니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_ombb0914 = pd.read_csv(<span class="string">&#x27;./data/ombb_200914.csv&#x27;</span>)</span><br><span class="line">df_ombb0914.head()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/14/GIS-Python-2-PolygonShapefile/2_polygonshp_2.png"><br></p>
+<p><img src="2_polygonshp_2.png" alt=""><br></p>
 <ul>
-<li>데이터 컬럼은 다음과 같습니다.<ul>
+<li>데이터 컬럼은 다음과 같습니다.
+<ul>
 <li><b><code>BD_MGT_SN</code> : </b>건물관리번호 (건물 고유 번호)</li>
 <li><b><code>width</code> $$w$$ : </b>최소경계도형 폭 ($$m$$)</li>
 <li><b><code>height</code> $$h$$ : </b>최소경계도형 높이 ($$m$$)</li>
@@ -256,21 +260,23 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2020/09/14/GIS-Python-2-PolygonShapefile/2_polygonshp_3.png"><br></p>
-<h3 id="2-polygon-변환"><a href="#2-polygon-변환" class="headerlink" title="2. polygon 변환"></a>2. polygon 변환</h3><ul>
+<p><img src="2_polygonshp_3.png" alt=""><br></p>
+<h3 id="2-polygon-변환">2. polygon 변환</h3>
+<ul>
 <li>행 하나가 건물 하나에 해당합니다.</li>
 <li>행 하나마다 정보를 좌표로 변환해서 <code>shapefile</code>로 저장합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> mapping, Polygon</span><br><span class="line"><span class="keyword">import</span> fiona</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_polygons</span>(<span class="params">x, y, width, height, angle, filename</span>):</span><br><span class="line">    h_half = height/<span class="number">2</span> </span><br><span class="line">    w_half = width/<span class="number">2</span></span><br><span class="line">    a_rad = np.deg2rad(angle)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 꼭지점 좌표 생성</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_coord</span>(<span class="params">x, y, h_half, w_half, a_rad</span>):</span><br><span class="line">        X = x + h_half * np.sin(a_rad) - w_half * np.cos(a_rad)</span><br><span class="line">        Y = y + h_half * np.cos(a_rad) + w_half * np.sin(a_rad)</span><br><span class="line">        <span class="keyword">return</span> (X, Y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># shapefile schema 지정</span></span><br><span class="line">    schema = &#123;<span class="string">&quot;geometry&quot;</span>: <span class="string">&quot;Polygon&quot;</span>, <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 행 수만큼 반복</span></span><br><span class="line">    n_polygon = <span class="built_in">len</span>(x)</span><br><span class="line">    <span class="keyword">with</span> fiona.<span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;filename&#125;</span>&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="string">&quot;ESRI Shapefile&quot;</span>, schema) <span class="keyword">as</span> c:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_polygon):</span><br><span class="line">            p_x, p_y = x.iloc[i], y.iloc[i]</span><br><span class="line">            p_h, p_w, p_r = h_half.iloc[i], w_half.iloc[i], a_rad.iloc[i]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># closed loop을 이루도록 point 지정.</span></span><br><span class="line">            points = [get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, -p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, -p_w, p_r), </span><br><span class="line">                      get_coord(p_x, p_y, p_h, p_w, p_r), </span><br><span class="line">                      ]</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># shapefile 작성</span></span><br><span class="line">            c.write(&#123;</span><br><span class="line">                <span class="string">&quot;geometry&quot;</span>: mapping(Polygon(points)),</span><br><span class="line">                <span class="string">&quot;properties&quot;</span>: &#123;<span class="string">&quot;id&quot;</span>: <span class="number">1</span>&#125;</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-QGIS에서-확인"><a href="#3-QGIS에서-확인" class="headerlink" title="3. QGIS에서 확인"></a>3. QGIS에서 확인</h3><ul>
-<li>QGIS에서 읽어서 잘 보이는지 확인합니다.<ul>
+<h3 id="3-QGIS에서-확인">3. QGIS에서 확인</h3>
+<ul>
+<li>QGIS에서 읽어서 잘 보이는지 확인합니다.
+<ul>
 <li>.csv를 출력한 원본(노랑)과 생성된 shapefile(파랑) 비교 결과 완벽히 일치합니다.</li>
 <li>최소경계도형(보라)과 비교해봐도 잘 복원되었습니다.</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2020/09/14/GIS-Python-2-PolygonShapefile/2_polygonshp_4.png"><br></p>
+<p><img src="2_polygonshp_4.png" alt=""><br></p>
 
         </div>
 		<p>
@@ -288,7 +294,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/" data-id="cuid4_65L1Maf_XZKirsrnYTE" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/09/14/GIS-Python-2-PolygonShapefile/" data-id="cuid3u9xl6UFsW823NFi_7ju8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -373,9 +379,10 @@ shapely 버전은 1.7, fiona 버전은 1.8.13.post1 입니다.
 
 References
 
-shapelyfionageopandas
-",
-        "wordCount": 710
+shapely
+fiona
+geopanda",
+        "wordCount": 698
     }
 </script>
 
@@ -472,6 +479,26 @@ shapelyfionageopandas
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -546,26 +573,6 @@ shapelyfionageopandas
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

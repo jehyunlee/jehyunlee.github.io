@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,text mining,natural language,VOSviewer" />
     
-    <meta name="description" content="1. 요약1.1. 포부 논문을 긁어서 내용을 정리할 수 있음을 이전 글에서 간략히 언급했습니다. 짧은 시간동안 필요한 결론을 도출할 수 있었고 피보고자의 반응도 좋았습니다. Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하며 작업했기에 기록도 없었습니다. 다음에도 이 강력한 기능의 재현 가능성을 확보하고자 했">
+    <meta name="description" content="1. 요약 1.1. 포부  논문을 긁어서 내용을 정리할 수 있음을 이전 글에서 간략히 언급했습니다. 짧은 시간동안 필요한 결론을 도출할 수 있었고 피보고자의 반응도 좋았습니다. Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하며 작업했기에 기록도 없었습니다. 다음에도 이 강력한 기능의 재현 가능성을 확보하고자">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Words Co-occurence in Academic Literatures">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/06/30/Python-DS-17-papermining/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="1. 요약1.1. 포부 논문을 긁어서 내용을 정리할 수 있음을 이전 글에서 간략히 언급했습니다. 짧은 시간동안 필요한 결론을 도출할 수 있었고 피보고자의 반응도 좋았습니다. Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하며 작업했기에 기록도 없었습니다. 다음에도 이 강력한 기능의 재현 가능성을 확보하고자 했">
+<meta property="og:description" content="1. 요약 1.1. 포부  논문을 긁어서 내용을 정리할 수 있음을 이전 글에서 간략히 언급했습니다. 짧은 시간동안 필요한 결론을 도출할 수 있었고 피보고자의 반응도 좋았습니다. Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하며 작업했기에 기록도 없었습니다. 다음에도 이 강력한 기능의 재현 가능성을 확보하고자">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/17_pm_01.png">
 <meta property="article:published_time" content="2020-06-30T07:31:00.000Z">
@@ -229,47 +229,63 @@
 
             
 
-            <h2 id="1-요약"><a href="#1-요약" class="headerlink" title="1. 요약"></a>1. 요약</h2><h3 id="1-1-포부"><a href="#1-1-포부" class="headerlink" title="1.1. 포부"></a>1.1. 포부</h3><ul>
+            <h2 id="1-요약">1. 요약</h2>
+<h3 id="1-1-포부">1.1. 포부</h3>
+<ul>
 <li>논문을 긁어서 내용을 정리할 수 있음을 <a href="https://jehyunlee.github.io/2020/06/15/Python-DS-16-VOSviewer/">이전 글</a>에서 간략히 언급했습니다.</li>
 <li>짧은 시간동안 필요한 결론을 도출할 수 있었고 피보고자의 반응도 좋았습니다.</li>
 <li>Notepad++에서 시간에 쫓기며 find(<code>Ctrl+F</code>), replace(<code>Ctrl+H</code>)를 반복하며 작업했기에 기록도 없었습니다.</li>
-<li>다음에도 이 강력한 기능의 <b>재현 가능성</b>을 확보하고자 했습니다.<br><br><img src="/2020/06/30/Python-DS-17-papermining/17_pm_05.png" alt="이 뿌듯한 감자밭을 일구는 법을 정형화해야죠"><br></li>
+<li>다음에도 이 강력한 기능의 <b>재현 가능성</b>을 확보하고자 했습니다.<br><br>
+<img src="17_pm_05.png" alt="이 뿌듯한 감자밭을 일구는 법을 정형화해야죠"><br></li>
 </ul>
-<h3 id="1-2-현실"><a href="#1-2-현실" class="headerlink" title="1.2. 현실"></a>1.2. 현실</h3><ul>
-<li><p>주피터 노트북을 켜고 경험을 더듬어가며 깨달았습니다.<br><br><img src="/2020/06/30/Python-DS-17-papermining/17_pm_04.png"><br></p>
+<h3 id="1-2-현실">1.2. 현실</h3>
+<ul>
+<li>
+<p>주피터 노트북을 켜고 경험을 더듬어가며 깨달았습니다.<br><br>
+<img src="17_pm_04.png" alt=""><br></p>
 </li>
-<li><p>저 감자밭을 만들기 전에 뭘 했는지 기억이 났습니다.<br><br><img src="/2020/06/30/Python-DS-17-papermining/17_pm_06.png" alt="이거 뜯으면 뭐가 나오게요?"><br></p>
+<li>
+<p>저 감자밭을 만들기 전에 뭘 했는지 기억이 났습니다.<br><br>
+<img src="17_pm_06.png" alt="이거 뜯으면 뭐가 나오게요?"><br></p>
 </li>
 </ul>
-<h3 id="1-3-의지"><a href="#1-3-의지" class="headerlink" title="1.3. 의지"></a>1.3. 의지</h3><ul>
+<h3 id="1-3-의지">1.3. 의지</h3>
+<ul>
 <li>그래도 지금이 아니면 정리할 수 없다는 생각에 의지를 불태웠습니다.</li>
 <li>3일로 잡았던 일정이 <b>열흘이 걸렸습니다.</b></li>
 <li>겨우 재현 가능한 정형화를 했지만 다른 글과 달리 코드를 공개하지 않기로 했습니다.<br></li>
-<li>대신, 전체적인 flow와 유념할 사항들을 선택적으로 기록하기로 했습니다.<br><br><img src="/2020/06/30/Python-DS-17-papermining/17_pm_08.png" alt="일단 끝내기 위해 코드 퀄리티를 포기했기 때문입니다."><br></li>
+<li>대신, 전체적인 flow와 유념할 사항들을 선택적으로 기록하기로 했습니다.<br><br>
+<img src="17_pm_08.png" alt="일단 끝내기 위해 코드 퀄리티를 포기했기 때문입니다."><br></li>
 </ul>
-<h2 id="2-기록"><a href="#2-기록" class="headerlink" title="2. 기록"></a>2. 기록</h2><h3 id="2-1-Flowchart"><a href="#2-1-Flowchart" class="headerlink" title="2.1. Flowchart"></a>2.1. Flowchart</h3><blockquote>
+<h2 id="2-기록">2. 기록</h2>
+<h3 id="2-1-Flowchart">2.1. Flowchart</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.nltk.org/">Natural Language Toolkit</a></p>
 </blockquote>
 <ul>
 <li>본 작업은 자동화가 가능한 부분과 불가능했던 부분으로 나누어집니다.</li>
 </ul>
-<p><img src="/2020/06/30/Python-DS-17-papermining/17_pm_03.png" alt="전체 flowchart"><br></p>
+<p><img src="17_pm_03.png" alt="전체 flowchart"><br></p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.nltk.org/"><code>nltk</code></a>를 사용해 복수를 단수로 바꾸는 작업이 가능했습니다.</p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nltk.org/"><code>nltk</code></a>를 사용해 복수를 단수로 바꾸는 작업이 가능했습니다.</p>
 </li>
-<li><p>그러나 품사 변환은 마음같지 않았습니다.</p>
+<li>
+<p>그러나 품사 변환은 마음같지 않았습니다.</p>
 <ul>
 <li><b>optimization</b>을 기대했던 optimize 명사변환은 <b>optimum</b>이 나왔습니다.</li>
 <li>전문용어가 아니면 틀린 단어이기 때문에, 사전을 만들며 작업했습니다.</li>
 </ul>
 </li>
-<li><p>논문 작성자들의 예상치 못한 실수와 고의가 담긴 단어들은 새로운 단어로 인식됩니다.</p>
+<li>
+<p>논문 작성자들의 예상치 못한 실수와 고의가 담긴 단어들은 새로운 단어로 인식됩니다.</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-030-04789-4_13"><b>“Multiple-layer perceptrion”</b>을 담은 글</a>이 있기도 하고  </li>
+<li><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-030-04789-4_13"><b>“Multiple-layer perceptrion”</b>을 담은 글</a>이 있기도 하고</li>
 <li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/7281372"><b>“Newton-Rhapson”</b></a>처럼 사람 이름을 틀립니다.</li>
 </ul>
 </li>
-<li><p>정상적인 단어들이라고 쉬운 건 아닙니다.</p>
+<li>
+<p>정상적인 단어들이라고 쉬운 건 아닙니다.</p>
 <ul>
 <li><b>“EV”</b>라는 동일한 약어가 <b>“expected value”</b> 이기도 하고 <b>“electric vehicle”</b> 이기도 합니다.</li>
 <li>같은 의미가 <b>“BIPV”</b>, <b>“BAPV”</b>, <b>“BISS”</b> 등 여러가지로 표시되는 건 예사입니다.</li>
@@ -277,117 +293,136 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-2-Knowledge"><a href="#2-2-Knowledge" class="headerlink" title="2.2. Knowledge"></a>2.2. Knowledge</h3><ul>
-<li><p>무엇보다, 키워드에 드러나지 않는 지식을 담는 과정이 만만찮았습니다.</p>
+<h3 id="2-2-Knowledge">2.2. Knowledge</h3>
+<ul>
+<li>
+<p>무엇보다, 키워드에 드러나지 않는 지식을 담는 과정이 만만찮았습니다.</p>
 <ul>
 <li><b>“xgboost”</b>는 <b>“machine learing”</b> 방법론입니다.</li>
 <li><b>“tree model”</b>에 속하며, <b>“ensemble”</b> 기법입니다.</li>
-<li>그리고 “ensemble” 기법은 “statistics”의 가지입니다.</li>
+<li>그리고 “ensemble” 기법은 &quot;statistics&quot;의 가지입니다.</li>
 </ul>
 </li>
-<li><p>이를 처리하고자 knowledge graph를 그렸습니다.<br></p>
+<li>
+<p>이를 처리하고자 knowledge graph를 그렸습니다.<br></p>
 </li>
 </ul>
-<p><img src="/2020/06/30/Python-DS-17-papermining/17_pm_09.png" alt="knowledge graph (일부)"><br></p>
+<p><img src="17_pm_09.png" alt="knowledge graph (일부)"><br></p>
 <ul>
-<li>그런데 줄기(key)를 보고 가지(value)를 입력받으면 안됩니다.<ul>
+<li>그런데 줄기(key)를 보고 가지(value)를 입력받으면 안됩니다.
+<ul>
 <li>가지를 보고 어느 줄기에 속해있는지를 찾아야 했습니다.</li>
 <li>여러 단계를 거쳐야 했기 때문에, 이 그래프를 해석해서 연관어 사전을 만들었습니다.</li>
 <li><code>class</code>를 이용해 상속할 수 있을까도 싶었는데, 그냥 <code>dictionary</code>로 처리했습니다.</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2020/06/30/Python-DS-17-papermining/17_pm_01.png" alt="이 나무를 거슬러야 합니다."><br>  </p>
+<p><img src="17_pm_01.png" alt="이 나무를 거슬러야 합니다."><br></p>
 <ul>
 <li>DFS(depth first search)를 구현했습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find_key</span>(<span class="params">value</span>):</span><br><span class="line">    result_key = []</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> kn_keys_init:</span><br><span class="line">        <span class="keyword">if</span> value <span class="keyword">in</span> keywords_knowledge_init[k]:</span><br><span class="line">            result_key.append(k)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> result_key</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">graph, start_node</span>):</span><br><span class="line">    visit = []</span><br><span class="line">    stack = []</span><br><span class="line">    </span><br><span class="line">    stack.append(start_node)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        node = stack.pop()</span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> visit:</span><br><span class="line">            visit.append(node)</span><br><span class="line">            stack.extend(find_key(node))</span><br><span class="line">    <span class="keyword">return</span> visit</span><br><span class="line"></span><br><span class="line">keywords_knowledge = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> kn <span class="keyword">in</span> kn_values_all:</span><br><span class="line">    value_add = dfs(keywords_knowledge_init, kn)</span><br><span class="line">    keywords_knowledge.update(&#123;kn: value_add&#125;)    </span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>그리고 원래의 키워드에 해당하는 단어들을 찾아 끼워줍니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">dict_values_kn = []</span><br><span class="line"><span class="keyword">for</span> values <span class="keyword">in</span> dict_values:</span><br><span class="line">    dict_values_kn_ = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> values:</span><br><span class="line">        <span class="keyword">for</span> kn_key <span class="keyword">in</span> kn_values_all:        </span><br><span class="line">            <span class="comment"># multiple words (ex. monte carlo, rule-based):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(kn_key.replace(<span class="string">&quot;-&quot;</span>, <span class="string">&quot; &quot;</span>).split(<span class="string">&quot; &quot;</span>)) &gt; <span class="number">1</span>:</span><br><span class="line">                kn_key0 = <span class="string">&quot;-&quot;</span>.join(kn_key.replace(<span class="string">&quot;-&quot;</span>,<span class="string">&quot; &quot;</span>).replace(<span class="string">&quot;_&quot;</span>, <span class="string">&quot; &quot;</span>).split(<span class="string">&quot; &quot;</span>))</span><br><span class="line">                <span class="keyword">if</span> kn_key0 <span class="keyword">in</span> value.replace(<span class="string">&quot; &quot;</span>,<span class="string">&quot;-&quot;</span>).replace(<span class="string">&quot;_&quot;</span>, <span class="string">&quot;-&quot;</span>):</span><br><span class="line">                    dict_values_kn_.extend(keywords_knowledge[kn_key])</span><br><span class="line">                </span><br><span class="line">            <span class="comment"># single word (ex. ensemble)</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> kn_key <span class="keyword">in</span> value.replace(<span class="string">&quot;-&quot;</span>,<span class="string">&quot; &quot;</span>).split(<span class="string">&quot; &quot;</span>):</span><br><span class="line">                    dict_values_kn_.extend(keywords_knowledge[kn_key])</span><br><span class="line">            </span><br><span class="line">    dict_values_kn.append(<span class="built_in">list</span>(<span class="built_in">set</span>(dict_values_kn_)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">keywords_dict_kn = <span class="built_in">dict</span>(<span class="built_in">zip</span>(dict_keys, dict_values_kn))</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;keywords_dict_kn.json&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> j:</span><br><span class="line">    json.dump(keywords_dict_kn, j, ensure_ascii=<span class="literal">False</span>, indent=<span class="number">2</span>) </span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-Frequency"><a href="#2-3-Frequency" class="headerlink" title="2.3. Frequency"></a>2.3. Frequency</h3><ul>
-<li><p>8700여개 문서에서 추출한 키워드는 20000개 가량입니다.</p>
+<h3 id="2-3-Frequency">2.3. Frequency</h3>
+<ul>
+<li>
+<p>8700여개 문서에서 추출한 키워드는 20000개 가량입니다.</p>
 <ul>
 <li>사실상의 중복이 많아 처리하는데 애를 먹었습니다.</li>
 <li>그리고 중요한 단어와 중요하지 않은 단어가 있습니다.</li>
 <li>빈도 중심으로 또 한번 정제를 해줍니다.</li>
 </ul>
 </li>
-<li><p>원치 않는 단어들이 끼어있습니다.</p>
+<li>
+<p>원치 않는 단어들이 끼어있습니다.</p>
 <ul>
 <li>키워드를 단어 단위로 쪼개다 튀어나온 듯 합니다.</li>
-<li><b>stop words</b>를 지정해서 제거해줍니다.<br><br><img src="/2020/06/30/Python-DS-17-papermining/17_pm_10.png" alt="Frequent keywords"><br></li>
+<li><b>stop words</b>를 지정해서 제거해줍니다.<br><br>
+<img src="17_pm_10.png" alt="Frequent keywords"><br></li>
 </ul>
 </li>
-<li><p>knowledge에서 가져온 단어와 빈도 중심 단어를 합치려고 합니다.</p>
+<li>
+<p>knowledge에서 가져온 단어와 빈도 중심 단어를 합치려고 합니다.</p>
 <ul>
 <li><b>“artificial neural network”</b>가 있는데,</li>
 <li><b>“artificial”, “neural”, “network”</b>가 또 있습니다.</li>
-<li>한 단어가 다른 단어를 포함하는지를 검사해서 제거해줍니다.<br><br><img src="/2020/06/30/Python-DS-17-papermining/17_pm_11.png" alt="Frequent + Knowledge"><br></li>
+<li>한 단어가 다른 단어를 포함하는지를 검사해서 제거해줍니다.<br><br>
+<img src="17_pm_11.png" alt="Frequent + Knowledge"><br></li>
 </ul>
 </li>
 </ul>
-<h3 id="2-4-Abstract"><a href="#2-4-Abstract" class="headerlink" title="2.4. Abstract"></a>2.4. Abstract</h3><ul>
-<li>8300여개 문헌 중 1700여개 문헌에 <b>키워드가 없습니다.</b><ul>
+<h3 id="2-4-Abstract">2.4. Abstract</h3>
+<ul>
+<li>8300여개 문헌 중 1700여개 문헌에 <b>키워드가 없습니다.</b>
+<ul>
 <li>버리기엔 아까운 숫자입니다.</li>
 <li>전체 논문의 abstract를 한번 더 긁어줍니다.</li>
 </ul>
 </li>
 </ul>
-<h2 id="3-결실"><a href="#3-결실" class="headerlink" title="3. 결실"></a>3. 결실</h2><ul>
-<li>이렇게 단어를 정제하면, 비로소 볼만해집니다.<ul>
+<h2 id="3-결실">3. 결실</h2>
+<ul>
+<li>이렇게 단어를 정제하면, 비로소 볼만해집니다.
+<ul>
 <li>언뜻 봐도 비슷비슷한 무리끼리 모인 것 같습니다.</li>
 <li><a href="http://jehyunlee.github.io/2020/06/15/Python-DS-16-VOSviewer/16_VOS_8.png">키워드 정제 전</a>과 비교하면 <b>차이가 큽니다.</b></li>
 </ul>
 </li>
 </ul>
-<p><img src="/2020/06/30/Python-DS-17-papermining/17_pm_12.png" alt="visualization @VOSviewer"><br>  </p>
+<p><img src="17_pm_12.png" alt="visualization @VOSviewer"><br></p>
 <ul>
-<li>그러나 수없이 들어간 <b>수동 작업이 영 찜찜합니다.</b><ul>
+<li>그러나 수없이 들어간 <b>수동 작업이 영 찜찜합니다.</b>
+<ul>
 <li>기계적으로 최상위 단어 중심으로 보면 모르겠습니다.</li>
 <li>그러나 제 목적은 그게 아니거든요. 제 키워드는 따로 있습니다.</li>
 <li>그래서, <b>citation network와 함께 봐야 합니다.</b></li>
 </ul>
 </li>
 </ul>
-<p><img src="/2020/06/30/Python-DS-17-papermining/17_pm_13.png" alt="visualization @VOSviewer"><br>  </p>
+<p><img src="17_pm_13.png" alt="visualization @VOSviewer"><br></p>
 <ul>
-<li>citation network는 물고 물리는 <b>논문의 인용 관계</b>를 보여줍니다.<ul>
+<li>citation network는 물고 물리는 <b>논문의 인용 관계</b>를 보여줍니다.
+<ul>
 <li>제 손을 타지 않아서 오염도 안됐습니다.</li>
 <li>이 분야와 저 분야가 어떻게 연결되었는지 알 수 있습니다.</li>
 <li>연결되지 않을 것 같은 분야를 이어주는 논문들을 보면 존경스럽습니다.</li>
 </ul>
 </li>
 </ul>
-<h2 id="4-Epilogue"><a href="#4-Epilogue" class="headerlink" title="4. Epilogue"></a>4. Epilogue</h2><ul>
-<li><p><b>정리가 쉽지 않았습니다.</b></p>
+<h2 id="4-Epilogue">4. Epilogue</h2>
+<ul>
+<li>
+<p><b>정리가 쉽지 않았습니다.</b></p>
 <ul>
 <li>끝이 안보이는 매뉴얼 작업에 지치고 (수천개 x 수십회)</li>
 <li>손을 댈때마다 들어가는 주관이 못마땅합니다.</li>
 <li>잘 못쓰기도 했겠지만, 자연어 처리 엔진들도 마음에 들지 않았습니다.</li>
 </ul>
 </li>
-<li><p>그럼에도 불구하고, <b>유용성은 부정할 수 없습니다.</b></p>
+<li>
+<p>그럼에도 불구하고, <b>유용성은 부정할 수 없습니다.</b></p>
 <ul>
-<li>제 목적은 paper mining 자체로 결론을 내기 위한 것이 아닙니다.  </li>
+<li>제 목적은 paper mining 자체로 결론을 내기 위한 것이 아닙니다.</li>
 <li>수천 수만 편의 논문 중 <b>읽어야 할 논문을 추리는 것</b>이고, 그 목적은 충실히 달성했습니다.</li>
 <li>잘못 걸러진 것들이 있더라도 읽으면서 거르니 문제를 일으키지 않습니다.</li>
 </ul>
 </li>
-<li><p><b>논문 출판 전략</b>을 짜기도 좋습니다.</p>
+<li>
+<p><b>논문 출판 전략</b>을 짜기도 좋습니다.</p>
 <ul>
 <li>글에서는 생략했지만, 어떤 저널에 어떤 주제가 많이 나오는지가 잘 보입니다.</li>
 <li>tracking을 하면서 바뀌는 트렌드를 관찰할 수도 있겠더군요.</li>
 <li>물론 좋은 supervisor가 해주는 조언만은 못할 것입니다.</li>
 </ul>
 </li>
-<li><p>앞으로 종종 코드를 업데이트하며 사용해보려 합니다.</p>
+<li>
+<p>앞으로 종종 코드를 업데이트하며 사용해보려 합니다.</p>
 </li>
 </ul>
-<p><img src="/2020/06/30/Python-DS-17-papermining/17_pm_07.png" alt="농장은 아니더라도 싹은 틔운 거겠죠"><br>  </p>
+<p><img src="17_pm_07.png" alt="농장은 아니더라도 싹은 틔운 거겠죠"><br></p>
 
         </div>
 		<p>
@@ -405,7 +440,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/06/30/Python-DS-17-papermining/" data-id="cuidHEE2_TFGMqjqzL1SOtl1b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/06/30/Python-DS-17-papermining/" data-id="cuidEIu-7qV5Qp-VXtNEaNjFO" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -483,12 +518,14 @@
         "dateCreated": "2020-06-30",
         "dateModified": "2025-12-30",
         "url": "https://jehyunlee.github.io/2020/06/30/Python-DS-17-papermining/",
-        "description": "1. 요약1.1. 포부
+        "description": "1. 요약
+1.1. 포부
+
 논문을 긁어서 내용을 정리할 수 있음을 이전 글에서 간략히 언급했습니다.
 짧은 시간동안 필요한 결론을 도출할 수 있었고 피보고자의 반응도 좋았습니다.
 Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하며 작업했기에 기록도 없었습니다.
-다음에도 이 강력한 기능의 재현 가능성을 확보하고자 했",
-        "wordCount": 1151
+다음에도 이 강력한 기능의 재현 가능성을 확보하고자",
+        "wordCount": 1096
     }
 </script>
 
@@ -585,6 +622,26 @@ Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하�
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -659,26 +716,6 @@ Notepad++에서 시간에 쫓기며 find(Ctrl+F), replace(Ctrl+H)를 반복하�
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

@@ -12,12 +12,12 @@
     
     <meta name="keywords" content="python,statistics,numpy,scipy,data augmentation,data generation,probability" />
     
-    <meta name="description" content="새로운 데이터는 numpy.random함수로 만들 수 있습니다. 정규분포나 균일하게 만드는 것은 많이들 합니다만, 기존 데이터의 분포를 모방해 봅시다.   RIP tutorial: Fitting a function to data from a histogram  1. 기존 데이터 10만개가 조금 넘는 데이터가 있습니다. 대강 이렇게 생겼습니다.  123im">
+    <meta name="description" content="새로운 데이터는 numpy.random함수로 만들 수 있습니다. 정규분포나 균일하게 만드는 것은 많이들 합니다만, 기존 데이터의 분포를 모방해 봅시다.   RIP tutorial: Fitting a function to data from a histogram  1. 기존 데이터  10만개가 조금 넘는 데이터가 있습니다. 대강 이렇게 생겼습니다.  123i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Random Generation Fitting to a Histogram">
 <meta property="og:url" content="https://jehyunlee.github.io/2020/10/15/Python-DS-39-randgen_dist/index.html">
 <meta property="og:site_name" content="Pega Devlog">
-<meta property="og:description" content="새로운 데이터는 numpy.random함수로 만들 수 있습니다. 정규분포나 균일하게 만드는 것은 많이들 합니다만, 기존 데이터의 분포를 모방해 봅시다.   RIP tutorial: Fitting a function to data from a histogram  1. 기존 데이터 10만개가 조금 넘는 데이터가 있습니다. 대강 이렇게 생겼습니다.  123im">
+<meta property="og:description" content="새로운 데이터는 numpy.random함수로 만들 수 있습니다. 정규분포나 균일하게 만드는 것은 많이들 합니다만, 기존 데이터의 분포를 모방해 봅시다.   RIP tutorial: Fitting a function to data from a histogram  1. 기존 데이터  10만개가 조금 넘는 데이터가 있습니다. 대강 이렇게 생겼습니다.  123i">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jehyunlee.github.io/thumbnails/Python-DS/39_randgen_dist_0.png">
 <meta property="article:published_time" content="2020-10-15T05:32:00.000Z">
@@ -240,14 +240,18 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://riptutorial.com/scipy/example/31081/fitting-a-function-to-data-from-a-histogram">RIP tutorial: Fitting a function to data from a histogram</a></p>
 </blockquote>
-<h3 id="1-기존-데이터"><a href="#1-기존-데이터" class="headerlink" title="1. 기존 데이터"></a>1. 기존 데이터</h3><ul>
+<h3 id="1-기존-데이터">1. 기존 데이터</h3>
+<ul>
 <li><a href="randgen_dist.pkl">10만개가 조금 넘는 데이터</a>가 있습니다.</li>
 <li>대강 이렇게 생겼습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_pickle(<span class="string">&quot;randgen_dist.pkl&quot;</span>)</span><br><span class="line">display(df.describe())</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_6.png"></p>
+<p><img src="39_randgen_dist_6.png" alt=""></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_palette.html">seaborn.set_palette</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_context.html?highlight=set_context#seaborn.set_context">seaborn.set_context</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_style.html?highlight=set_style#seaborn.set_style">seaborn.set_style</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.histplot.html?highlight=histplot#seaborn.histplot">seaborn.histplot</a></p>
+<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_palette.html">seaborn.set_palette</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_context.html?highlight=set_context#seaborn.set_context">seaborn.set_context</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.set_style.html?highlight=set_style#seaborn.set_style">seaborn.set_style</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.histplot.html?highlight=histplot#seaborn.histplot">seaborn.histplot</a></p>
 </blockquote>
 <ul>
 <li><b>분포</b>를 확인해보겠습니다.</li>
@@ -256,9 +260,11 @@
 <li>seaborn이 이럴 때 좋습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.set_palette(<span class="string">&quot;muted&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;talk&quot;</span>)</span><br><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line">sns.histplot(df[<span class="string">&quot;A&quot;</span>], ax=axs[<span class="number">0</span>], kde=<span class="literal">True</span>, bins=<span class="number">100</span>)</span><br><span class="line">sns.histplot(df[<span class="string">&quot;B&quot;</span>], ax=axs[<span class="number">1</span>], kde=<span class="literal">True</span>, bins=<span class="number">100</span>)</span><br><span class="line">sns.histplot(df[<span class="string">&quot;C&quot;</span>], ax=axs[<span class="number">2</span>], kde=<span class="literal">True</span>, bins=<span class="number">100</span>, kde_kws=&#123;<span class="string">&quot;bw_adjust&quot;</span>:<span class="number">5</span>&#125;)</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_1.png"></p>
+<p><img src="39_randgen_dist_1.png" alt=""></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot">seaborn.kdeplot</a><br><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.regplot.html?highlight=regplot#seaborn.regplot">seaborn.regplot</a><br><a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">pandas.DataFrame.corr</a></p>
+<p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html?highlight=kdeplot#seaborn.kdeplot">seaborn.kdeplot</a><br>
+<a target="_blank" rel="noopener" href="https://seaborn.pydata.org/generated/seaborn.regplot.html?highlight=regplot#seaborn.regplot">seaborn.regplot</a><br>
+<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">pandas.DataFrame.corr</a></p>
 </blockquote>
 <ul>
 <li><b>2변수 분포</b>를 확인해보겠습니다.</li>
@@ -267,40 +273,38 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCC_AB = df.corr().loc[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>]</span><br><span class="line">PCC_BC = df.corr().loc[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]</span><br><span class="line">PCC_AC = df.corr().loc[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;C&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(PCC_AB, PCC_BC, PCC_AC)</span><br></pre></td></tr></table></figure>
 <p>실행결과: 피어슨 계수가 모두 작네요.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.2813347529044316 0.025736569810035914 0.0011956781154378422</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>2차원 분포에 같이 얹어봅니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line">sns.kdeplot(x=df[<span class="string">&quot;A&quot;</span>], y=df[<span class="string">&quot;B&quot;</span>], cmap=<span class="string">&quot;Blues&quot;</span>, ax=axs[<span class="number">0</span>])</span><br><span class="line">sns.regplot(x=df[<span class="string">&quot;A&quot;</span>], y=df[<span class="string">&quot;B&quot;</span>], scatter=<span class="literal">False</span>, ax=axs[<span class="number">0</span>])</span><br><span class="line">axs[<span class="number">0</span>].annotate(<span class="string">f&quot;PCC = <span class="subst">&#123;PCC_AB:<span class="number">0.2</span>f&#125;</span>&quot;</span>, (<span class="number">0.5</span>, <span class="number">0.8</span>), xycoords=<span class="string">&#x27;axes fraction&#x27;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=df[<span class="string">&quot;B&quot;</span>], y=df[<span class="string">&quot;C&quot;</span>], cmap=<span class="string">&quot;Blues&quot;</span>, ax=axs[<span class="number">1</span>])</span><br><span class="line">sns.regplot(x=df[<span class="string">&quot;B&quot;</span>], y=df[<span class="string">&quot;C&quot;</span>], scatter=<span class="literal">False</span>, ax=axs[<span class="number">1</span>])</span><br><span class="line">axs[<span class="number">1</span>].annotate(<span class="string">f&quot;PCC = <span class="subst">&#123;PCC_BC:<span class="number">0.2</span>f&#125;</span>&quot;</span>, (<span class="number">0.5</span>, <span class="number">0.8</span>), xycoords=<span class="string">&#x27;axes fraction&#x27;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=df[<span class="string">&quot;A&quot;</span>], y=df[<span class="string">&quot;C&quot;</span>], cmap=<span class="string">&quot;Blues&quot;</span>, ax=axs[<span class="number">2</span>])</span><br><span class="line">sns.regplot(x=df[<span class="string">&quot;A&quot;</span>], y=df[<span class="string">&quot;C&quot;</span>], scatter=<span class="literal">False</span>, ax=axs[<span class="number">2</span>])</span><br><span class="line">axs[<span class="number">2</span>].annotate(<span class="string">f&quot;PCC = <span class="subst">&#123;PCC_AC:<span class="number">0.2</span>f&#125;</span>&quot;</span>, (<span class="number">0.5</span>, <span class="number">0.8</span>), xycoords=<span class="string">&#x27;axes fraction&#x27;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_2.png"></p>
+<p><img src="39_randgen_dist_2.png" alt=""></p>
 <ul>
 <li>A와 B 사이에 상관관계가 있지만 매우 약합니다.</li>
 <li>C는 A, B와 전혀 관계가 없어보입니다.</li>
 </ul>
-<h3 id="2-histogram-fitting"><a href="#2-histogram-fitting" class="headerlink" title="2. histogram fitting"></a>2. histogram fitting</h3><ul>
+<h3 id="2-histogram-fitting">2. histogram fitting</h3>
+<ul>
 <li>원 데이터의 분포를 재현하려면 <b>함수</b>로 모사해야 합니다.</li>
 <li>히스토그램이 정규분포만으로는 설명이 되지 않습니다.</li>
-<li><b>A</b>와 <b>B</b> : $$y &#x3D; (ax + b) + e^{-\frac{1}{2} (\frac{x-\mu}{\sigma})^2}$$로,</li>
-<li><b>C</b> : $$y &#x3D; (ax + b) + Ae^{-\frac{1}{2} (\frac{x-\mu_A}{\sigma_A})^2} + Be^{-\frac{1}{2} (\frac{x-\mu_B}{\sigma_B})^2}$$로 가정합니다.</li>
+<li><b>A</b>와 <b>B</b> : $$y = (ax + b) + e^{-\frac{1}{2} (\frac{x-\mu}{\sigma})^2}$$로,</li>
+<li><b>C</b> : $$y = (ax + b) + Ae^{-\frac{1}{2} (\frac{x-\mu_A}{\sigma_A})^2} + Be^{-\frac{1}{2} (\frac{x-\mu_B}{\sigma_B})^2}$$로 가정합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> curve_fit</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fit_lingau</span>(<span class="params">x, a, b, B, mu, sigma</span>):</span><br><span class="line">    func_lin = a * x + b</span><br><span class="line">    func_gaussian = B * np.exp(-<span class="number">1.0</span> * (x - mu)**<span class="number">2</span> / (<span class="number">2</span> * sigma**<span class="number">2</span>))</span><br><span class="line">    <span class="keyword">return</span> func_lin + func_gaussian</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fit_lingaugau</span>(<span class="params">x, a, b, A, muA, sigmaA, B, muB, sigmaB</span>):</span><br><span class="line">    func_lin = a * x + b</span><br><span class="line">    func_gaussian1 = A * np.exp(-<span class="number">1.0</span> * (x - muA)**<span class="number">2</span> / (<span class="number">2</span> * sigmaA**<span class="number">2</span>))</span><br><span class="line">    func_gaussian2 = B * np.exp(-<span class="number">1.0</span> * (x - muB)**<span class="number">2</span> / (<span class="number">2</span> * sigmaB**<span class="number">2</span>))</span><br><span class="line">    <span class="keyword">return</span> func_lin + func_gaussian1 + func_gaussian2</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>데이터 A의 히스토그램 계급과 갯수를 추출합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># histogram of A</span></span><br><span class="line">counts_A, bins_A = np.histogram(df[<span class="string">&quot;A&quot;</span>], bins=<span class="number">100</span>)</span><br><span class="line">bins_Ac = np.array([bins_A[i]*<span class="number">0.5</span> + bins_A[i+<span class="number">1</span>]*<span class="number">0.5</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(counts_A))])</span><br><span class="line"></span><br><span class="line"><span class="comment"># fit for histogram of A</span></span><br><span class="line">popt_A, pcov_A = curve_fit(fit_lingau, xdata=bins_Ac, ydata=counts_A,</span><br><span class="line">                           p0=[-<span class="number">20.0</span>, <span class="number">500.0</span>, <span class="number">3000.0</span>, <span class="number">10.0</span>, <span class="number">3.0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># new x range</span></span><br><span class="line">xa_new = np.linspace(df[<span class="string">&quot;A&quot;</span>].<span class="built_in">min</span>(), df[<span class="string">&quot;A&quot;</span>].<span class="built_in">max</span>(), <span class="number">100</span>)</span><br><span class="line">ya_new = fit_lingau(xa_new, *popt_A)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>데이터 B와 C도 같은 요령으로 처리합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># A</span></span><br><span class="line">sns.histplot(df[<span class="string">&quot;A&quot;</span>], ax=axs[<span class="number">0</span>], kde=<span class="literal">True</span>, bins=<span class="number">100</span>)</span><br><span class="line">axs[<span class="number">0</span>].plot(xa_new, ya_new, c=<span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="comment"># B</span></span><br><span class="line">sns.histplot(df[<span class="string">&quot;B&quot;</span>], ax=axs[<span class="number">1</span>], kde=<span class="literal">True</span>, bins=<span class="number">100</span>)</span><br><span class="line">axs[<span class="number">1</span>].plot(xb_new, yb_new, c=<span class="string">&quot;r&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">axs[<span class="number">1</span>].set_ylim(<span class="number">0</span>,)</span><br><span class="line"></span><br><span class="line"><span class="comment"># C</span></span><br><span class="line">sns.histplot(df[<span class="string">&quot;C&quot;</span>], ax=axs[<span class="number">2</span>], kde=<span class="literal">True</span>, bins=<span class="number">100</span>, kde_kws=&#123;<span class="string">&quot;bw_adjust&quot;</span>:<span class="number">5</span>&#125;, label=<span class="string">&quot;data&quot;</span>)</span><br><span class="line">axs[<span class="number">2</span>].plot(xc_new, yc_new, c=<span class="string">&quot;r&quot;</span>, label=<span class="string">&quot;fit&quot;</span>)</span><br><span class="line">axs[<span class="number">2</span>].set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line">axs[<span class="number">2</span>].set_ylim(<span class="number">0</span>,)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">2</span>].legend(bbox_to_anchor=(<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_3.png"></p>
+<p><img src="39_randgen_dist_3.png" alt=""></p>
 <ul>
 <li>fitting된 함수가 데이터 분포와 잘 맞습니다.</li>
 <li>C는 모양을 조금 더 잘 반영하고자 gaussian을 하나 더 추가해서 <b>의도적으로</b> 조금 복잡하게 만들었습니다.</li>
 </ul>
-<h3 id="3-데이터-생성"><a href="#3-데이터-생성" class="headerlink" title="3. 데이터 생성"></a>3. 데이터 생성</h3><blockquote>
+<h3 id="3-데이터-생성">3. 데이터 생성</h3>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html">numpy.random.choice</a></p>
 </blockquote>
 <ul>
@@ -309,53 +313,49 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">np.random.choice(A, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <p>실행결과: 균일하게 뽑혀나옵니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([2, 1, 1, 3, 2, 2, 1, 2, 3, 2])</span><br></pre></td></tr></table></figure>
-<p><img src="/"></p>
+<p><img src="" alt=""></p>
 <ul>
 <li><b>추출 확률</b>을 조정할 수 있습니다.</li>
 <li>1, 2, 3 중 <b>3만 뽑히도록 조작합시다.</b></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">p = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">np.random.choice(A, <span class="number">10</span>, p=p)</span><br></pre></td></tr></table></figure>
-<p>실행결과: p&#x3D;1로 설정된 3만 반복해서 나옵니다.</p>
+<p>실행결과: p=1로 설정된 3만 반복해서 나옵니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([3, 3, 3, 3, 3, 3, 3, 3, 3, 3])</span><br></pre></td></tr></table></figure>
-
-
 <ul>
-<li><p><b>확률을 조정해 추출하는 함수</b>를 만듭니다.</p>
+<li>
+<p><b>확률을 조정해 추출하는 함수</b>를 만듭니다.</p>
 <ul>
 <li>분포를 재현할 함수가 필요합니다.</li>
 <li>fitting 함수 이름과 파라미터를 입력받도록 합니다.</li>
 <li>함수에 맞춰 지정된 갯수의 데이터를 생성합니다.</li>
 </ul>
 </li>
-<li><p><b>데이터 생성 및 추출 함수</b>입니다.</p>
+<li>
+<p><b>데이터 생성 및 추출 함수</b>입니다.</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gen_data</span>(<span class="params">x, fit_func, fit_param, number</span>):</span><br><span class="line">    prob_ = fit_func(x, *fit_param)</span><br><span class="line">    prob_ = np.array([p <span class="keyword">if</span> p&gt;<span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> p <span class="keyword">in</span> prob_])</span><br><span class="line">    prob = prob_/prob_.<span class="built_in">sum</span>()</span><br><span class="line">    <span class="keyword">return</span> np.random.choice(x, number, p=prob)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>데이터를 10000개 생성합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gen_A = gen_data(xa_new, fit_lingau, popt_A, <span class="number">10000</span>)</span><br><span class="line">gen_B = gen_data(xb_new, fit_lingau, popt_B, <span class="number">10000</span>)</span><br><span class="line">gen_C = gen_data(xc_new, fit_lingaugau, popt_C, <span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
-
-
 <ul>
 <li>생성된 데이터의 분포를 원본과 비교합니다.</li>
 <li><b>원본의 빨간 선</b>과 <b>생성데이터의 녹색</b>이 <b>거의 일치</b>합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># A</span></span><br><span class="line">sns.histplot(gen_A, bins=<span class="number">100</span>, ax=axs[<span class="number">0</span>], color=<span class="string">&quot;green&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">axs[<span class="number">0</span>].plot(xa_new, fit_lingau(xa_new, *popt_A)/df.shape[<span class="number">0</span>]*<span class="number">10000</span>, c=<span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="comment"># B</span></span><br><span class="line">sns.histplot(gen_B, bins=<span class="number">100</span>, ax=axs[<span class="number">1</span>], color=<span class="string">&quot;green&quot;</span>, alpha=<span class="number">0.3</span>)</span><br><span class="line">axs[<span class="number">1</span>].plot(xb_new, fit_lingau(xb_new, *popt_B)/df.shape[<span class="number">0</span>]*<span class="number">10000</span>, c=<span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="comment"># C</span></span><br><span class="line">sns.histplot(gen_C, bins=<span class="number">100</span>, ax=axs[<span class="number">2</span>], color=<span class="string">&quot;green&quot;</span>, alpha=<span class="number">0.3</span>, label=<span class="string">&quot;generated&quot;</span>)</span><br><span class="line">axs[<span class="number">2</span>].plot(xc_new, fit_lingaugau(xc_new, *popt_C)/df.shape[<span class="number">0</span>]*<span class="number">10000</span>, c=<span class="string">&quot;r&quot;</span>, label=<span class="string">&quot;fit&quot;</span>)</span><br><span class="line"></span><br><span class="line">xlabels=[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    axs[i].set_xlabel(xlabels[i])</span><br><span class="line">    axs[i].set_ylim(<span class="number">0</span>,)</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">        axs[i].set_ylabel(<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">axs[<span class="number">2</span>].legend(bbox_to_anchor=(<span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_4.png"></p>
+<p><img src="39_randgen_dist_4.png" alt=""></p>
 <ul>
 <li>생성된 데이터간의 상관성을 확인합시다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df_gen = pd.DataFrame(&#123;<span class="string">&quot;A&quot;</span>:gen_A, <span class="string">&quot;B&quot;</span>:gen_B, <span class="string">&quot;C&quot;</span>: gen_C&#125;)</span><br><span class="line">gen_corr = df_gen.corr()</span><br><span class="line">gen_corr</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_7.png"></p>
+<p><img src="39_randgen_dist_7.png" alt=""></p>
 <ul>
 <li>독립적으로 생성되었기 때문에 <b>변수간 관계가 없습니다.</b></li>
 <li>다시 <b>2변수 분포</b>를 확인합니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">gen_PCC_AB = df_gen.corr().loc[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>]</span><br><span class="line">gen_PCC_BC = df_gen.corr().loc[<span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>]</span><br><span class="line">gen_PCC_AC = df_gen.corr().loc[<span class="string">&quot;A&quot;</span>, <span class="string">&quot;C&quot;</span>]</span><br><span class="line"></span><br><span class="line">fig, axs = plt.subplots(ncols=<span class="number">3</span>, figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line">sns.kdeplot(x=df_gen[<span class="string">&quot;A&quot;</span>], y=df_gen[<span class="string">&quot;B&quot;</span>], cmap=<span class="string">&quot;Greens&quot;</span>, ax=axs[<span class="number">0</span>])</span><br><span class="line">sns.regplot(x=df_gen[<span class="string">&quot;A&quot;</span>], y=df_gen[<span class="string">&quot;B&quot;</span>], scatter=<span class="literal">False</span>, ax=axs[<span class="number">0</span>])</span><br><span class="line">axs[<span class="number">0</span>].annotate(<span class="string">f&quot;PCC = <span class="subst">&#123;gen_PCC_AB:<span class="number">0.2</span>f&#125;</span>&quot;</span>, (<span class="number">0.5</span>, <span class="number">0.8</span>), xycoords=<span class="string">&#x27;axes fraction&#x27;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=df_gen[<span class="string">&quot;B&quot;</span>], y=df_gen[<span class="string">&quot;C&quot;</span>], cmap=<span class="string">&quot;Greens&quot;</span>, ax=axs[<span class="number">1</span>])</span><br><span class="line">sns.regplot(x=df_gen[<span class="string">&quot;B&quot;</span>], y=df_gen[<span class="string">&quot;C&quot;</span>], scatter=<span class="literal">False</span>, ax=axs[<span class="number">1</span>])</span><br><span class="line">axs[<span class="number">1</span>].annotate(<span class="string">f&quot;PCC = <span class="subst">&#123;gen_PCC_BC:<span class="number">0.2</span>f&#125;</span>&quot;</span>, (<span class="number">0.5</span>, <span class="number">0.8</span>), xycoords=<span class="string">&#x27;axes fraction&#x27;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">sns.kdeplot(x=df_gen[<span class="string">&quot;A&quot;</span>], y=df_gen[<span class="string">&quot;C&quot;</span>], cmap=<span class="string">&quot;Greens&quot;</span>, ax=axs[<span class="number">2</span>])</span><br><span class="line">sns.regplot(x=df_gen[<span class="string">&quot;A&quot;</span>], y=df_gen[<span class="string">&quot;C&quot;</span>], scatter=<span class="literal">False</span>, ax=axs[<span class="number">2</span>])</span><br><span class="line">axs[<span class="number">2</span>].annotate(<span class="string">f&quot;PCC = <span class="subst">&#123;gen_PCC_AC:<span class="number">0.2</span>f&#125;</span>&quot;</span>, (<span class="number">0.5</span>, <span class="number">0.8</span>), xycoords=<span class="string">&#x27;axes fraction&#x27;</span>, ha=<span class="string">&quot;center&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/10/15/Python-DS-39-randgen_dist/39_randgen_dist_5.png"></p>
+<p><img src="39_randgen_dist_5.png" alt=""></p>
 <ul>
 <li><b>A와 B 사이의 상관관계가 소멸</b>되었습니다.</li>
 <li>그러나 <b>B와 C</b>, <b>A와 C</b>는 <b>2차원 분포까지 재현</b>되었습니다.</li>
@@ -378,7 +378,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2020/10/15/Python-DS-39-randgen_dist/" data-id="cuid4Il0Nu334mNOHTAc4Jusj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2020/10/15/Python-DS-39-randgen_dist/" data-id="cuidC7-d6SqWETJfWHEG8RTV0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -465,11 +465,12 @@
 RIP tutorial: Fitting a function to data from a histogram
 
 1. 기존 데이터
+
 10만개가 조금 넘는 데이터가 있습니다.
 대강 이렇게 생겼습니다.
 
-123im",
-        "wordCount": 1378
+123i",
+        "wordCount": 1371
     }
 </script>
 
@@ -566,6 +567,26 @@ RIP tutorial: Fitting a function to data from a histogram
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -640,26 +661,6 @@ RIP tutorial: Fitting a function to data from a histogram
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 

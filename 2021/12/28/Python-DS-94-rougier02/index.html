@@ -245,7 +245,6 @@
 		margin-right: 0px;
     }
 </style>
-
 <div class="en" bgcolor="#AAAAAA">
 <ul>
 <li> <b>Scientific Visualization: Python + Matplotlib</b> contains cutting-edge visualization skills and examples of Matplotlib and Python.  
@@ -254,20 +253,20 @@
 </li><li> This series will be posted in <b>English</b> as well as Korean, for international readers.  
 </ul>
 </div>
-
 <p>
-
 <blockquote>
-<p><b>영어 감수:</b> <a href="mailto:&#x6a;&#115;&#108;&#x65;&#101;&#105;&#x6e;&#100;&#x65;&#x78;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;">EY한영회계법인 이지수 시니어</a></p>
+<p><b>영어 감수:</b> <a href="mailto:jsleeindex@gmail.com">EY한영회계법인 이지수 시니어</a></p>
 </blockquote>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/rougier/scientific-visualization-book">Scientific Visualization: Python + Matplotlib</a><br><a target="_blank" rel="noopener" href="https://github.com/rougier">github: Nicolas P. Rougier</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/rougier/scientific-visualization-book">Scientific Visualization: Python + Matplotlib</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/rougier">github: Nicolas P. Rougier</a></p>
 </blockquote>
-<p><img src="/2021/12/28/Python-DS-94-rougier02/92_rougier01_13.png"><br></p>
-<h1 id="1-Star-Wars-text"><a href="#1-Star-Wars-text" class="headerlink" title="1. Star Wars text"></a>1. Star Wars text</h1><blockquote>
+<p><img src="92_rougier01_13.png" alt=""><br></p>
+<h1>1. Star Wars text</h1>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/jehyunlee/scientific-visualization-book/blob/master/code/typography/text-starwars.py">text-starwars.py</a></p>
 </blockquote>
-<p><img src="/2021/12/28/Python-DS-94-rougier02/text-starwars_org.png"><br></p>
+<p><img src="text-starwars_org.png" alt=""><br></p>
 <ul>
 <li>이번에 살펴볼 그림은 영화 스타워즈의 도입부처럼 글자들이 무한 원점을 향해 소멸하는 모양입니다.</li>
 <li>글자의 크기 뿐 아니라 색상도 점차 희미해져가는 모습입니다.</li>
@@ -276,8 +275,8 @@
 <li> This time we are going to plot lines of texts vanishing towards the point at infinity, like the lines of texts at the beginning of a Star Wars movie.</li>
 <li> Not only does the size of the font diminish as the text approach infinity, the opacity of the text also diminish. </li>
 </ul></div>
-
-<h1 id="2-prerequisites"><a href="#2-prerequisites" class="headerlink" title="2. prerequisites"></a>2. prerequisites</h1><ul>
+<h1>2. prerequisites</h1>
+<ul>
 <li>이번 코드는 딱 하나의 기술만 알면 됩니다.</li>
 <li>바로 <b>어떻게 글자의 형상을 변환하는지</b>입니다.</li>
 <li>원본 코드를 이해하기 위해서 예제 코드를 먼저 봅시다.</li>
@@ -287,8 +286,8 @@
 <li> <b>How to transform shapes of the letters.</b></li>
 <li> Let's take a look at the example codes to understand the Nicolas's.</li>
 </ul></div>
-
-<h2 id="2-1-import-libraries"><a href="#2-1-import-libraries" class="headerlink" title="2.1. import libraries"></a>2.1. import libraries</h2><ul>
+<h2 id="2-1-import-libraries">2.1. import libraries</h2>
+<ul>
 <li>기본 라이브러리와 함께 <b>텍스트 형상을 제어할 라이브러리</b>를 불러옵니다.</li>
 <li>text를 Path로 만드는 <code>TextPath</code>와 Path를 Patch로 만드는 <code>PathPatch</code>를 불러옵니다.</li>
 </ul>
@@ -296,10 +295,9 @@
 <li> We need to import <b>text shape control libraries</b> as well as basic ones.</li>
 <li> <b><code>TextPath</code></b> to convert text to Path object and <b><code>PathPatch</code></b> to turn Path into Patch is imported.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.textpath <span class="keyword">import</span> TextPath</span><br><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> PathPatch</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-prepare-an-example-text"><a href="#2-2-prepare-an-example-text" class="headerlink" title="2.2. prepare an example text"></a>2.2. prepare an example text</h2><ul>
+<h2 id="2-2-prepare-an-example-text">2.2. prepare an example text</h2>
+<ul>
 <li>복잡한 수식으로 이루어진 예제 텍스트를 준비합니다.</li>
 <li>Matplotlib의 <code>Axes.text()</code>명령으로 한 가운데 큼지막하게 넣습니다.</li>
 </ul>
@@ -307,10 +305,10 @@
 <li> An example text made up of complicated mathematics equation is prepared.</li>
 <li> The text is placed at the center of the figure with <code>Axes.text()</code> function of Matplotlib.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">eq = <span class="string">r&quot;$\left[\sum_&#123;n=1&#125;^\infty\frac&#123;-e^&#123;i\pi&#125;&#125;&#123;2^n&#125;\right]$!&quot;</span></span><br><span class="line">txt = ax.text(<span class="number">0.5</span>, <span class="number">0.5</span>, eq, ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;center&quot;</span>, fontsize=<span class="number">90</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_01.png"><br></p>
-<h2 id="2-3-Text-to-Path"><a href="#2-3-Text-to-Path" class="headerlink" title="2.3. Text to Path"></a>2.3. <code>Text</code> to <code>Path</code></h2><blockquote>
+<p><img src="94_rougier02_01.png" alt=""><br></p>
+<h2 id="2-3-Text-to-Path">2.3. <code>Text</code> to <code>Path</code></h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://matplotlib.org/stable/api/textpath_api.html">matplotlib.textpath</a></p>
 </blockquote>
 <ul>
@@ -323,13 +321,11 @@
 <li> <code>Path</code> object is consisted of <b>points(vertices), lines(edges) and shapes(codes)</b>.</li>
 <li> We will be able to check the coordinates of the vertices after conversion by extracting vertices.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">eq_path = TextPath((<span class="number">0</span>, <span class="number">0</span>), eq, size=<span class="number">90</span>) </span><br><span class="line"><span class="comment"># (0, 0)  : no offset</span></span><br><span class="line"><span class="comment"># size=90 : font size in points</span></span><br><span class="line"></span><br><span class="line">V = eq_path.vertices</span><br><span class="line">xmin, xmax = V[:, <span class="number">0</span>].<span class="built_in">min</span>(), V[:, <span class="number">0</span>].<span class="built_in">max</span>()</span><br><span class="line">ymin, ymax = V[:, <span class="number">1</span>].<span class="built_in">min</span>(), V[:, <span class="number">1</span>].<span class="built_in">max</span>()</span><br><span class="line"><span class="built_in">print</span>(xmin, xmax, ymin, ymax)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과:</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.5 420.0953767578125 -86.41370141006101 140.0</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>위 그림 눈금에 보이는 것보다 크기가 훨씬 큽니다.</li>
 <li>화면의 눈금은 아무렇게나 적힌 값이고 치수는 points 단위입니다.</li>
@@ -338,7 +334,6 @@
 <li> It is much larger than values seen from the ticks.</li>
 <li> It should be noted that the tick labels are arbitrary, and the unit of dimension is points.</li>
 </ul></div>
-
 <ul>
 <li>이제 <code>Path</code> 객체를 그림에 붙여봅니다.</li>
 <li><code>Path</code>를 <code>Patch</code>로 변환한 뒤 <code>Axes.add_artist()</code>명령으로 붙입니다.</li>
@@ -349,9 +344,8 @@
 <li> <code>Path</code> is going to be turned into <code>Patch</code> object, then pasted by <code>Axes.add_artist()</code> function.</li>
 <li> The vertices extracted from the <code>TextPath</code> will be drawn together for comparison.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.transforms <span class="keyword">import</span> IdentityTransform</span><br><span class="line"></span><br><span class="line"><span class="comment"># patch creation. IndentityTransform() does nothing.</span></span><br><span class="line">eq_patch = PathPatch(eq_path, ec=<span class="string">&quot;k&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, transform=IdentityTransform())</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># text (original)</span></span><br><span class="line">ax.text(<span class="number">0.5</span>, <span class="number">0.5</span>, eq, ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;center&quot;</span>, fontsize=<span class="number">90</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># vertices from Path</span></span><br><span class="line">ax.plot(V[:, <span class="number">0</span>], V[:, <span class="number">1</span>], <span class="string">&quot;o-&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Patch</span></span><br><span class="line">ax.add_artist(eq_patch)</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_02.png"><br></p>
+<p><img src="94_rougier02_02.png" alt=""><br></p>
 <ul>
 <li><b>뭔가 잘못된 것 같아 보입니다.</b></li>
 <li>Text, Path vertices와 Patch의 크기와 위치가 맞지 않습니다.</li>
@@ -362,9 +356,13 @@
 <li> The sizes and locations of the Text, Path vertices and Patch are not coincide.</li>
 <li> It's because of the mismatches of definitions on origin and size.</li>
 </ul></div>
-
-<h2 id="2-4-apply-offset"><a href="#2-4-apply-offset" class="headerlink" title="2.4. apply offset"></a>2.4. apply offset</h2><ul>
-<li>위치 조정을 위해 <b>offset 설정</b>이 필요하며 다음과 같은 과정을 거쳐 진행됩니다.<br> ① <code>AuxTransformBox</code> 객체 생성<br> ② <code>AuxTransformBox</code>에 <code>Patch</code> 추가<br> ③ <b>offset</b> 지정<br> ④ <code>Matplotlib.Axes</code>에 <code>add_artist()</code>로 <code>AuxTransformBox</code> 객체 추가</li>
+<h2 id="2-4-apply-offset">2.4. apply offset</h2>
+<ul>
+<li>위치 조정을 위해 <b>offset 설정</b>이 필요하며 다음과 같은 과정을 거쳐 진행됩니다.<br>
+① <code>AuxTransformBox</code> 객체 생성<br>
+② <code>AuxTransformBox</code>에 <code>Patch</code> 추가<br>
+③ <b>offset</b> 지정<br>
+④ <code>Matplotlib.Axes</code>에 <code>add_artist()</code>로 <code>AuxTransformBox</code> 객체 추가</li>
 </ul>
 <div class="en"><ul>
 <li> <b>Setting offset</b> is required to adjust position.</li>
@@ -373,27 +371,24 @@
    ③ apply <b>offset</b><br>
    ④ Add <code>AuxTransformBox</code> on <code>Matplotlib.Axes</code> using <code>add_artist()</code><br>
 </ul></div>
-
-
 <ul>
 <li>③ 없이 Patch를 붙이면 다음과 같습니다.</li>
 </ul>
 <div class="en"><ul>
 <li> At first, let's take a look without ③ applying offset.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.offsetbox <span class="keyword">import</span> AuxTransformBox</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">eq_patch = PathPatch(eq_path, ec=<span class="string">&quot;k&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, transform=IdentityTransform())</span><br><span class="line">offsetbox = AuxTransformBox(IdentityTransform()) <span class="comment"># ①</span></span><br><span class="line">offsetbox.add_artist(eq_patch) <span class="comment"># ②</span></span><br><span class="line"></span><br><span class="line">ax.add_artist(offsetbox) <span class="comment"># ④</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_04.png"><br></p>
+<p><img src="94_rougier02_04.png" alt=""><br></p>
 <ul>
 <li>이제 ③ <b>offset</b> 지정을 추가합니다.</li>
 </ul>
 <div class="en"><ul>
 <li> Now we apply offset(③).</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">eq_patch = PathPatch(eq_path, ec=<span class="string">&quot;k&quot;</span>, fc=<span class="string">&quot;w&quot;</span>, transform=IdentityTransform())</span><br><span class="line">offsetbox = AuxTransformBox(IdentityTransform()) <span class="comment"># ①</span></span><br><span class="line">offsetbox.add_artist(eq_patch) <span class="comment"># ②</span></span><br><span class="line">offsetbox.set_offset((<span class="number">120</span>, <span class="number">48</span>)) <span class="comment"># ③</span></span><br><span class="line">ax.add_artist(offsetbox) <span class="comment"># ④</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_05.png"><br></p>
-<h2 id="2-5-manipulate-coordinates"><a href="#2-5-manipulate-coordinates" class="headerlink" title="2.5. manipulate coordinates"></a>2.5. manipulate coordinates</h2><ul>
+<p><img src="94_rougier02_05.png" alt=""><br></p>
+<h2 id="2-5-manipulate-coordinates">2.5. manipulate coordinates</h2>
+<ul>
 <li>방금 우리는 <code>set_offset()</code>을 이용해서 Patch의 위치를 변경했습니다.</li>
 <li>하지만 vertex 좌표를 조정하고 Path를 재구성해서 위치를 변경할 수도 있습니다.</li>
 </ul>
@@ -401,17 +396,15 @@
 <li> We modified position of the Patch by applying <code>set_offset()</code>.</li>
 <li> But there is another way - manipulating vertices coordinates and reconstructing Path.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.path <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"><span class="comment"># path from text</span></span><br><span class="line">eq_path = TextPath((<span class="number">0.5</span>, <span class="number">0.5</span>), eq, size=<span class="number">90</span>)</span><br><span class="line">Vc = eq_path.vertices  <span class="comment"># vertices coordinates</span></span><br><span class="line">codes = eq_path.codes  <span class="comment"># codes: Path parts</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ranges of coordinates</span></span><br><span class="line">xcmin, xcmax = Vc[:, <span class="number">0</span>].<span class="built_in">min</span>(), Vc[:, <span class="number">0</span>].<span class="built_in">max</span>()</span><br><span class="line">ycmin, ycmax = Vc[:, <span class="number">1</span>].<span class="built_in">min</span>(), Vc[:, <span class="number">1</span>].<span class="built_in">max</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;before centering: [<span class="subst">&#123;xcmin:<span class="number">.2</span>f&#125;</span>, <span class="subst">&#123;xcmax:<span class="number">.2</span>f&#125;</span>, <span class="subst">&#123;ycmin:<span class="number">.2</span>f&#125;</span>, <span class="subst">&#123;ycmax:<span class="number">.2</span>f&#125;</span>]&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># X centering</span></span><br><span class="line">Px = Vc[:, <span class="number">0</span>] - (xcmax + xcmin)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Y centering</span></span><br><span class="line">Py = Vc[:, <span class="number">1</span>] - (ycmax + ycmin)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># coordinates check: centering</span></span><br><span class="line">xpmin, xpmax = Px.<span class="built_in">min</span>(), Px.<span class="built_in">max</span>()</span><br><span class="line">ypmin, ypmax = Py.<span class="built_in">min</span>(), Py.<span class="built_in">max</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;after centering: [<span class="subst">&#123;xpmin:<span class="number">.2</span>f&#125;</span>, <span class="subst">&#123;xpmax:<span class="number">.2</span>f&#125;</span>, <span class="subst">&#123;ypmin:<span class="number">.2</span>f&#125;</span>, <span class="subst">&#123;ypmax:<span class="number">.2</span>f&#125;</span>]&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create new Path</span></span><br><span class="line">path_new = Path(np.array([Px, Py]).T, codes=codes)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># convert Path to Patch</span></span><br><span class="line">patch = PathPatch(path_new, facecolor=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;k&quot;</span>, zorder=<span class="number">2</span>) </span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">ax.plot(Px, Py, <span class="string">&quot;o-&quot;</span>)  <span class="comment"># Path vetices</span></span><br><span class="line">ax.add_artist(patch)   <span class="comment"># Patch from Path</span></span><br><span class="line">ax.set_xlim((-<span class="number">250</span>, <span class="number">250</span>))</span><br><span class="line">ax.set_ylim((-<span class="number">150</span>, <span class="number">150</span>))</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과:</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">before centering: [0.50, 420.10, -86.41, 140.00]</span><br><span class="line">after centering: [-209.80, 209.80, -113.21, 113.21]</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_06.png"><br></p>
+<p><img src="94_rougier02_06.png" alt=""><br></p>
 <ul>
-<li>Path vertices와 재구성한 Path를 겹쳐 그려보니 정확히 일치합니다. </li>
-<li>Patch에는 없는 선이 Path vertices에 보입니다. <b>개별 다각형에 대한 정보가 없어서 그렇습니다.</b> </li>
+<li>Path vertices와 재구성한 Path를 겹쳐 그려보니 정확히 일치합니다.</li>
+<li>Patch에는 없는 선이 Path vertices에 보입니다. <b>개별 다각형에 대한 정보가 없어서 그렇습니다.</b></li>
 <li><b><code>Path()</code> 실행시 <b><code>codes</code></b>를 추가함으로써 구분</b>되었습니다.</li>
 </ul>
 <div class="en"><ul>
@@ -419,8 +412,6 @@
 <li> Some lines that weren’t visible on the Patch can be seen on Path vertices. This is due to the <b>absence of information on individual polygons.</b></li>
 <li> <codes>codes</codes> <b>is applied to distinguish each polygon parts.</b></li>
 </ul></div>
-
-
 <ul>
 <li><b>꼭지점 좌표를 수정해서 Path를 재구성할 수 있다</b>는 말은 여러 <b>변형을 가할 수 있다</b>는 뜻입니다.</li>
 <li>아래 부분은 늘리고 위 부분을 좁히면 그림을 앞으로 기울인 듯한 효과가 납니다.</li>
@@ -431,12 +422,9 @@
 <li> If we stretch the bottom and shrink the top, the figure seems to be tilted forward.</li>
 <li> This is how the <b>Star Wars intro crawl</b> starts.</li>
 </ul></div>
-
 &#123;% youtube tGsKzZtRwxw %&#125;
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># path from text</span></span><br><span class="line">eq_path = TextPath((<span class="number">0.5</span>, <span class="number">0.5</span>), eq, size=<span class="number">90</span>)</span><br><span class="line">Vc = eq_path.vertices</span><br><span class="line">codes = eq_path.codes</span><br><span class="line">xcmin, xcmax = Vc[:, <span class="number">0</span>].<span class="built_in">min</span>(), Vc[:, <span class="number">0</span>].<span class="built_in">max</span>()</span><br><span class="line">ycmin, ycmax = Vc[:, <span class="number">1</span>].<span class="built_in">min</span>(), Vc[:, <span class="number">1</span>].<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># X centering</span></span><br><span class="line">Px = Vc[:, <span class="number">0</span>] - (xcmax + xcmin)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Y centering</span></span><br><span class="line">Py = Vc[:, <span class="number">1</span>] - (ycmax + ycmin)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># X rescaling &lt;-- here!</span></span><br><span class="line">xfactor = <span class="number">0.002</span></span><br><span class="line">Px *= <span class="number">1</span> - (Py * xfactor)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create new Path</span></span><br><span class="line">path_new = Path(np.array([Px, Py]).T, codes=codes)</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert Path to Patch</span></span><br><span class="line">patch = PathPatch(path_new, facecolor=<span class="string">&quot;w&quot;</span>, ec=<span class="string">&quot;k&quot;</span>) </span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_07.png"><br></p>
+<p><img src="94_rougier02_07.png" alt=""><br></p>
 <ul>
 <li><b>이미지를 몇 겹으로 쌓은 효과</b>를 낼 수도 있습니다.</li>
 <li>Patch를 y 축 방향으로 조금씩 움직이면서 색을 점점 밝게 입혀 보겠습니다.</li>
@@ -445,11 +433,10 @@
 <li> We can <b>stack different layers of images on top of each other.</b></li>
 <li> We will move The Patch along the y-axis a little bit, and apply brighter colors on it as it moves.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">10</span>, <span class="number">5</span>))</span><br><span class="line">ax.set_xlim((-<span class="number">250</span>, <span class="number">250</span>))</span><br><span class="line">ax.set_ylim((-<span class="number">150</span>, <span class="number">180</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    eq_path = TextPath((<span class="number">0.5</span>, <span class="number">0.5</span>), eq, size=<span class="number">90</span>)</span><br><span class="line">    Vc = eq_path.vertices</span><br><span class="line">    codes = eq_path.codes</span><br><span class="line">    xcmin, xcmax = Vc[:, <span class="number">0</span>].<span class="built_in">min</span>(), Vc[:, <span class="number">0</span>].<span class="built_in">max</span>()</span><br><span class="line">    ycmin, ycmax = Vc[:, <span class="number">1</span>].<span class="built_in">min</span>(), Vc[:, <span class="number">1</span>].<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># X centering</span></span><br><span class="line">    Px = Vc[:, <span class="number">0</span>] - (xcmax + xcmin)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Y centering</span></span><br><span class="line">    Py = Vc[:, <span class="number">1</span>] - (ycmax + ycmin)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># X rescaling</span></span><br><span class="line">    xfactor = <span class="number">0.002</span></span><br><span class="line">    Px *= <span class="number">1</span> - (Py * xfactor)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Y shifting</span></span><br><span class="line">    Py += i * <span class="number">15</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># create new Path</span></span><br><span class="line">    path_new = Path(np.array([Px, Py]).T, codes=codes)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># convert Path to Patch</span></span><br><span class="line">    patch = PathPatch(path_new, facecolor=<span class="string">f&quot;<span class="subst">&#123;i*<span class="number">0.4</span>&#125;</span>&quot;</span>, ec=<span class="string">&quot;k&quot;</span>) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ax.add_artist(patch)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/12/28/Python-DS-94-rougier02/94_rougier02_08.png"><br></p>
-<h1 id="3-In-Far-Distance-Galaxy"><a href="#3-In-Far-Distance-Galaxy" class="headerlink" title="3. In Far Distance Galaxy"></a>3. In Far Distance Galaxy</h1><ul>
+<p><img src="94_rougier02_08.png" alt=""><br></p>
+<h1>3. In Far Distance Galaxy</h1>
+<ul>
 <li><b>Zen of Python을 스타워즈 스타일로 변형합니다.</b></li>
 <li>한 줄씩 읽어서 Patch로 바꾸어 점점 흐리게 기울인 듯 변형합니다.</li>
 </ul>
@@ -457,10 +444,8 @@
 <li> <b>Zen of Python is going to be transformed to Star-Wars crawl style.</b></li>
 <li> It will be transformed to tilted Patch line by line, and dimmed gradually.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">text = [</span><br><span class="line">    <span class="string">&quot;Beautiful is better than ugly.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Explicit is better than implicit.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Simple is better than complex.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Complex is better than complicated.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Flat is better than nested.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sparse is better than dense.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Readability counts.&quot;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># enlarged by 2 x 2</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">8.5</span>, <span class="number">4</span>))</span><br><span class="line">ax = fig.add_axes([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>], aspect=<span class="number">1</span>, xlim=[-<span class="number">40</span>, <span class="number">40</span>], ylim=[-<span class="number">1</span>, <span class="number">25</span>])</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line"></span><br><span class="line">y = <span class="number">0</span></span><br><span class="line">size = <span class="number">6</span></span><br><span class="line">xfactor = <span class="number">1</span> / <span class="number">50</span></span><br><span class="line">yfactor = <span class="number">1</span> / <span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, line <span class="keyword">in</span> <span class="built_in">enumerate</span>(text[::-<span class="number">1</span>]):</span><br><span class="line">    path = TextPath((<span class="number">0</span>, <span class="number">0</span>), line, size=size)</span><br><span class="line">    V = path.vertices</span><br><span class="line">    codes = path.codes</span><br><span class="line">    xmin, xmax = V[:, <span class="number">0</span>].<span class="built_in">min</span>(), V[:, <span class="number">0</span>].<span class="built_in">max</span>()</span><br><span class="line">    ymin, ymax = V[:, <span class="number">1</span>].<span class="built_in">min</span>(), V[:, <span class="number">1</span>].<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># X centering</span></span><br><span class="line">    Px = V[:, <span class="number">0</span>] - (xmax + xmin) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Moving whole text at y coordinates</span></span><br><span class="line">    Py = V[:, <span class="number">1</span>] + y</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Rescaling along y</span></span><br><span class="line">    Py *= <span class="number">1</span> - (Py * yfactor)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Rescaling along x</span></span><br><span class="line">    Px *= <span class="number">1</span> - (Py * xfactor)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update interlines</span></span><br><span class="line">    y += size * (<span class="number">1</span> - ymin * yfactor)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># create new Path</span></span><br><span class="line">    path_new = Path(np.array([Px, Py]).T, codes=codes)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># convert Path to Patch</span></span><br><span class="line">    patch = PathPatch(path_new, facecolor=<span class="string">&quot;%.2f&quot;</span> % (i / <span class="number">10</span>), linewidth=<span class="number">0</span>, clip_on=<span class="literal">False</span>)</span><br><span class="line">    ax.add_artist(patch)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/12/28/Python-DS-94-rougier02/text-starwars_org.png"><br></p>
+<p><img src="text-starwars_org.png" alt=""><br></p>
 <ul>
 <li><b>스타워즈 원본에 가깝도록 색을 노랗게 바꿔보겠습니다.</b></li>
 <li>Nicolas의 원본처럼 맨 앞을 선명하게 하고 뒤로 갈수록 어둡게 만듭니다.</li>
@@ -471,10 +456,8 @@
 <li> Nicolas's idea - clear in front and dim far above - will be maintained.</li>
 <li> <code>colorsys</code>, a default library of Python will be used to control lightness in HLS space, instaed of RGB color space.</li>
 </ul></div>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">8.5</span>, <span class="number">4</span>), facecolor=<span class="string">&quot;k&quot;</span>)</span><br><span class="line">ax = fig.add_axes([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>], aspect=<span class="number">1</span>, xlim=[-<span class="number">40</span>, <span class="number">40</span>], ylim=[-<span class="number">1</span>, <span class="number">25</span>])</span><br><span class="line">ax.axis(<span class="string">&quot;off&quot;</span>)</span><br><span class="line"></span><br><span class="line">y = <span class="number">0</span></span><br><span class="line">size = <span class="number">6</span></span><br><span class="line">xfactor = <span class="number">1</span> / <span class="number">50</span></span><br><span class="line">yfactor = <span class="number">1</span> / <span class="number">120</span></span><br><span class="line">c = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>) <span class="comment"># yellow</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, line <span class="keyword">in</span> <span class="built_in">enumerate</span>(text[::-<span class="number">1</span>]):</span><br><span class="line">    path = TextPath((<span class="number">0</span>, <span class="number">0</span>), line, size=size)</span><br><span class="line">    V = path.vertices</span><br><span class="line">    codes = path.codes</span><br><span class="line">    xmin, xmax = V[:, <span class="number">0</span>].<span class="built_in">min</span>(), V[:, <span class="number">0</span>].<span class="built_in">max</span>()</span><br><span class="line">    ymin, ymax = V[:, <span class="number">1</span>].<span class="built_in">min</span>(), V[:, <span class="number">1</span>].<span class="built_in">max</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># New Path</span></span><br><span class="line">    <span class="comment"># X centering</span></span><br><span class="line">    Px = V[:, <span class="number">0</span>] - (xmax + xmin) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Moving whole text at y coordinates</span></span><br><span class="line">    Py = V[:, <span class="number">1</span>] + y</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Rescaling along y</span></span><br><span class="line">    Py *= <span class="number">1</span> - (Py * yfactor)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Rescaling along x</span></span><br><span class="line">    Px *= <span class="number">1</span> - (Py * xfactor)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update interlines</span></span><br><span class="line">    y += size * (<span class="number">1</span> - ymin * yfactor)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># new path</span></span><br><span class="line">    path_new = Path(np.array([Px, Py]).T, codes=codes)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Display</span></span><br><span class="line">    hls = <span class="built_in">list</span>(colorsys.rgb_to_hls(*c))</span><br><span class="line">    hls[<span class="number">1</span>] -= <span class="number">0.07</span> * i</span><br><span class="line">    rgb = colorsys.hls_to_rgb(*hls)</span><br><span class="line">    patch = PathPatch(path_new, facecolor=rgb, edgecolor=<span class="string">&quot;none&quot;</span>, linewidth=<span class="number">0</span>, clip_on=<span class="literal">False</span>)</span><br><span class="line">    ax.add_artist(patch)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/12/28/Python-DS-94-rougier02/text-starwars.png"><br></p>
+<p><img src="text-starwars.png" alt=""><br></p>
 
         </div>
 		<p>
@@ -492,7 +475,7 @@
 
 
 
-    <a data-url="https://jehyunlee.github.io/2021/12/28/Python-DS-94-rougier02/" data-id="cuidjcD7Al6vF52m550AiqcJ4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jehyunlee.github.io/2021/12/28/Python-DS-94-rougier02/" data-id="cuidPwLOokVyq413Ef0MwE4rR" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -578,7 +561,7 @@ Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각�
 
 
     .e",
-        "wordCount": 2876
+        "wordCount": 2833
     }
 </script>
 
@@ -675,6 +658,26 @@ Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각�
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/01/04/General-91_2026_redhorse/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/91_2026redhorse_00.png)" alt="2026년 붉은 말의 해" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/01/04/General-91_2026_redhorse/" class="title">2026년 붉은 말의 해</a></p>
+                            <p class="item-date"><time datetime="2026-01-03T21:34:00.000Z" itemprop="datePublished">2026-01-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
     
     
@@ -749,26 +752,6 @@ Scientific Visualization: Python + Matplotlib 책에는 최고 수준의 시각�
                             <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
                             <p class="item-title"><a href="/2025/07/16/General-88_researchagent/" class="title">솔트룩스-리서치 에이전트 세상을 집어 삼키다</a></p>
                             <p class="item-date"><time datetime="2025-07-16T11:06:00.000Z" itemprop="datePublished">2025-07-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/05/30/General-86_kepco/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/86_kepco_00.png)" alt="인공지능을 활용한 슬기로운 연구생활 v2505" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/05/30/General-86_kepco/" class="title">인공지능을 활용한 슬기로운 연구생활 v2505</a></p>
-                            <p class="item-date"><time datetime="2025-05-30T05:13:00.000Z" itemprop="datePublished">2025-05-30</time></p>
                         </div>
                     </li>
                 
