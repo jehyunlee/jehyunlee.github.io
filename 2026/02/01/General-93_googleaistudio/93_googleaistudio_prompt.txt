@@ -1,0 +1,51 @@
+1. 화면 구성
+
+1.1. 키워드 입력
+- 클립아트로 만들고자 하는 키워드 입력
+
+1.2. 스타일 참고용 이미지 업로드 (선택사항)
+- Nano Banana Pro가 이미지를 만들 때 스타일을 참고할 수 있는 이미지 업로드
+
+1.3. 프롬프트 수정하기 (선택사항)
+- 평소에는 접혀있으나 확장해서 프롬프트를 보고 수정하여 적용할 수 있음.
+- 기본 프롬프트는 아래 <기본 프롬프트>에 제공됨
+
+1.4. 그림 생성하기 버튼
+- 이 버튼을 누르면 1.3.의 <기본 프롬프트>의 {keyword}에 1.1.에서 입력한 키워드를 입력하고,
+- 1.3.에서 프롬프트가 수정되었다면 수정된 프롬프트를 반영하여 Nano Banana Pro를 구동하여 이미지 생성.
+
+1.4.1. 생성된 그림을 보여주는 공간
+- 1.4.에서 생성된 그림을 여기에 표시
+
+1.4.2. 생성된 그림이 클립아트 단위로 잘린 것을 보여주는 공간.
+- 1.4.1.에서 생성된 그림에서 클립아트만 잘라내어 격자로 배열하여 한 눈에 보여줌.
+- 클립아트는 배경색(#AAAAAA, Light Gray)과 구분되는 flat solid white square로 둘러싸인 5 by 5 array를 의미함.
+- 배경색과 flat solid white square의 edge를 탐지하여 이를 기준으로 생성된 그림을 자르고, flat solid white square 부분만 남김.
+
+<기본 프롬프트>
+```
+Evenly allocated regular 5 by 5 array of cliparts on {keyword}. 
+Each clipart should be about {keyword} but various designs. 
+The design of the cliparts should be typical to be easily recognized without text.
+No title.
+Each clipart has to be placed on flat solid white square.
+Aspect ratio: "1:1"
+
+###
+Overall Design Settings:
+  Tone: "Friendly, Professional, Safe, Soft, Playful, Touchable."
+  Visual Identity:
+    Background Color: "#AAAAAA (Light Gray)"
+    Text Color: "#FFB7B2 (Pastel Red)"
+    Accent Color: "#B5EAD7 (Pastel Mint), #E2F0CB (Pastel Green), #FFFFFF (White)"
+    Image Style:
+      Features: "Clay-like 3D UI elements using Soft lighting and Pastel colors."
+      Shape: "Capsule shape, Inflated rectangle, Sphere, Floating card."
+      Imagery: "3D rendered Simple objects, Floating icons."
+      Effects: "Inner Shadow with little depth (Clay effect), No Outer Shadow, Matte finish."
+      Composition: "Centered, Ample White space, Layout with Floating feel."
+  Typography:
+    Heading: "Nunito, Quicksand, or Rounded Sans-serif."
+    Style: "Soft tips (Round terminal), Approachable."
+###
+```
