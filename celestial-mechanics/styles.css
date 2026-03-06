@@ -1,0 +1,161 @@
+/* ── Simulation Controls ── */
+.sim-container {
+  background: #f8fafd;
+  border: 1px solid #dde4ee;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 24px 0;
+}
+.sim-container canvas {
+  display: block;
+  margin: 0 auto 12px;
+  border-radius: 8px;
+  background: #0a0e27;
+  max-width: 100%;
+}
+.sim-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+.sim-controls label {
+  font-size: 13px;
+  color: #444;
+  font-weight: 500;
+}
+.sim-controls input[type="range"] {
+  width: 160px;
+  accent-color: #2E74B5;
+}
+.sim-controls button {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2E74B5;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.sim-controls button:hover { background: #1F3864; }
+.sim-controls select {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+.sim-info {
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+  margin-top: 8px;
+  font-weight: 500;
+}
+.sim-dual {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.sim-dual canvas {
+  flex: 1;
+  min-width: 280px;
+  max-width: 340px;
+}
+.sim-label {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1F3864;
+  margin-bottom: 6px;
+}
+
+/* ── Scientist portraits ── */
+.scientist-card {
+  display: flex;
+  gap: 20px;
+  background: #faf8f4;
+  border: 1px solid #e8e0d4;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  align-items: flex-start;
+}
+.scientist-card img {
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #c8b898;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+.scientist-info { flex: 1; }
+.scientist-info h4 {
+  font-size: 16px;
+  color: #4a3520;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+.scientist-info .years {
+  font-size: 12px;
+  color: #8a7050;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+.scientist-info p {
+  font-size: 13.5px;
+  color: #3a2a1a;
+  text-align: left;
+}
+
+/* ── Math display ── */
+.math-block {
+  background: #f0f4f8;
+  border-left: 4px solid #2E74B5;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  overflow-x: auto;
+}
+
+/* ── History timeline feel ── */
+.era-header {
+  background: linear-gradient(135deg, #f5f0e6, #ede5d8);
+  border: 1px solid #d4c8b0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 20px 0 12px;
+  position: relative;
+}
+.era-header::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #8B6914;
+  border-radius: 50%;
+  border: 3px solid #f5f0e6;
+}
+.era-header h3 {
+  font-size: 15px;
+  color: #5a3e10;
+  font-weight: 700;
+  margin: 0;
+  padding-left: 16px;
+}
+
+/* ── Responsive sim ── */
+@media (max-width: 768px) {
+  .scientist-card { flex-direction: column; align-items: center; text-align: center; }
+  .scientist-card img { width: 100px; height: 125px; }
+  .sim-controls { flex-direction: column; }
+  .sim-dual { flex-direction: column; align-items: center; }
+  .sim-dual canvas { max-width: 100%; }
+}
