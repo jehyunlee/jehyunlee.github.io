@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수안정안 역사이야기: 삼국시대까지 편</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Gaegu:wght@400;700&display=swap');
+:root {
+  --goguryeo: #C62828; --goguryeo-light: #FFCDD2;
+  --baekje: #1565C0; --baekje-light: #BBDEFB;
+  --silla: #2E7D32; --silla-light: #C8E6C9;
+  --gaya: #F57F17; --gaya-light: #FFF9C4;
+  --bg: #FFFDF7; --text: #3E2723; --accent: #5D4037;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--text); line-height:1.8; }
+.nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(93,64,55,0.95);backdrop-filter:blur(10px);padding:0.8rem 2rem;display:flex;align-items:center;gap:1.5rem;overflow-x:auto; }
+.nav a { color:#FFF;text-decoration:none;font-size:0.85rem;white-space:nowrap;opacity:0.8;transition:opacity 0.3s; }
+.nav a:hover { opacity:1; }
+.nav .logo { font-weight:900;font-size:1.1rem;opacity:1;margin-right:1rem; }
+.hero { min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#5D4037 0%,#3E2723 50%,#4E342E 100%);color:#FFF;text-align:center;padding:2rem;position:relative;overflow:hidden; }
+.hero h1 { font-size:3.5rem;font-weight:900;margin-bottom:1rem;text-shadow:2px 4px 8px rgba(0,0,0,0.3); }
+.hero .subtitle { font-size:1.3rem;font-weight:300;opacity:0.9; }
+.hero .scroll-hint { position:absolute;bottom:2rem;animation:bounce 2s infinite;font-size:2rem;opacity:0.6; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.section { max-width:1100px;margin:0 auto;padding:5rem 2rem; }
+.section-title { font-size:2.2rem;font-weight:900;margin-bottom:0.5rem; }
+.section-subtitle { font-size:1.1rem;color:#888;margin-bottom:2rem;padding-left:0.5rem;border-left:4px solid #DDD; }
+.content-block { margin-bottom:2rem; }
+.content-block h3 { font-size:1.4rem;font-weight:700;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid #EEE; }
+.content-block p { margin-bottom:1rem;font-size:1rem; }
+.illust { text-align:center;margin:2rem 0; }
+.illust img { max-width:100%;width:600px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12); }
+.illust-cap { font-size:0.8rem;color:#999;margin-top:0.5rem; }
+.illust-row { display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin:2rem 0; }
+.illust-row .illust { flex:1 1 280px;max-width:48%; }
+.fun-fact { background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border-radius:16px;padding:1.8rem 2rem;margin:2rem 0;border:2px dashed #FFB74D; }
+.fun-fact-title { font-family:'Gaegu',cursive;font-size:1.3rem;font-weight:700;color:#E65100;margin-bottom:0.5rem; }
+.vocab-box { background:#E8F5E9;border-radius:12px;padding:1.5rem;margin:1.5rem 0;border-left:4px solid #4CAF50; }
+.vocab-box h4 { color:#2E7D32;margin-bottom:0.8rem; }
+.vocab-box dl { display:grid;grid-template-columns:auto 1fr;gap:0.3rem 1rem; }
+.vocab-box dt { font-weight:700;color:#1B5E20; }
+.vocab-box dd { margin:0; }
+.think-box { background:#E3F2FD;border-radius:12px;padding:1.5rem;margin:1.5rem 0;border-left:4px solid #2196F3; }
+.think-box h4 { color:#1565C0;margin-bottom:0.5rem; }
+.story-box { background:#FFF;border-radius:16px;padding:2rem;margin:2rem 0;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:5px solid var(--accent); }
+.story-box h4 { font-size:1.2rem;margin-bottom:1rem;color:var(--accent); }
+.person-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin:1.5rem 0; }
+.person-card { background:#FAFAFA;border-radius:12px;padding:1.5rem;text-align:center;transition:transform 0.3s; }
+.person-card:hover { transform:scale(1.03); }
+.person-icon { width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.8rem;color:#FFF; }
+.person-card h4 { font-size:1.1rem;font-weight:700;margin-bottom:0.3rem; }
+.person-card .role { font-size:0.8rem;color:#999;margin-bottom:0.5rem; }
+.person-card p { font-size:0.85rem;line-height:1.6; }
+.map-container { max-width:1100px;margin:0 auto 2rem;background:#FFF;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.08);overflow:hidden; }
+.map-header { padding:2rem 2.5rem 1rem; }
+.map-header h2 { font-size:1.8rem;font-weight:900; }
+.map-header p { color:#888;margin-top:0.3rem; }
+.map-body { display:flex;flex-wrap:wrap; }
+.map-svg-area { flex:1 1 55%;min-width:320px;padding:1rem 2rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+.map-svg-area img { width:100%;max-width:480px;height:auto;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+.map-info-area { flex:1 1 40%;min-width:280px;padding:1.5rem 2.5rem 2.5rem 1rem; }
+.info-list { list-style:none; }
+.info-list li { padding:0.6rem 0;border-bottom:1px solid #F0F0F0;font-size:0.9rem;display:flex;align-items:baseline;gap:0.5rem; }
+.info-list li::before { content:'>';font-weight:900;color:var(--accent); }
+.kingdom-card { background:#FFF;border-radius:16px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:5px solid;transition:transform 0.3s,box-shadow 0.3s; }
+.kingdom-card:hover { transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.1); }
+.kingdom-card.goguryeo { border-color:var(--goguryeo); }
+.kingdom-card.baekje { border-color:var(--baekje); }
+.kingdom-card.silla { border-color:var(--silla); }
+.kingdom-card.gaya { border-color:var(--gaya); }
+.kingdom-badge { display:inline-block;padding:0.15rem 0.7rem;border-radius:20px;font-size:0.75rem;font-weight:700;color:#FFF; }
+.timeline { position:relative;padding-left:3rem;margin:2rem 0; }
+.timeline::before { content:'';position:absolute;left:1rem;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--goguryeo),var(--baekje),var(--silla));border-radius:2px; }
+.timeline-item { position:relative;margin-bottom:2rem;padding:1.2rem 1.5rem;background:#FFF;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.timeline-item::before { content:'';position:absolute;left:-2.35rem;top:1.5rem;width:14px;height:14px;border-radius:50%;border:3px solid;background:#FFF; }
+.timeline-item.goguryeo::before { border-color:var(--goguryeo); }
+.timeline-item.baekje::before { border-color:var(--baekje); }
+.timeline-item.silla::before { border-color:var(--silla); }
+.timeline-item.gaya::before { border-color:var(--gaya); }
+.timeline-item.unified::before { border-color:#9C27B0; }
+.timeline-year { font-size:0.85rem;font-weight:700;margin-bottom:0.3rem; }
+.timeline-item h4 { font-size:1.05rem;margin-bottom:0.3rem; }
+.timeline-item p { font-size:0.9rem;color:#666; }
+.compare-table { width:100%;border-collapse:separate;border-spacing:0;margin:2rem 0;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+.compare-table th { padding:1rem 1.2rem;font-weight:700;font-size:0.95rem;color:#FFF; }
+.compare-table th:nth-child(1) { background:var(--accent); }
+.compare-table th:nth-child(2) { background:var(--goguryeo); }
+.compare-table th:nth-child(3) { background:var(--baekje); }
+.compare-table th:nth-child(4) { background:var(--silla); }
+.compare-table th:nth-child(5) { background:var(--gaya); }
+.compare-table td { padding:0.9rem 1.2rem;font-size:0.9rem;border-bottom:1px solid #F0F0F0;background:#FFF; }
+.compare-table tr:last-child td { border-bottom:none; }
+.compare-table td:first-child { font-weight:600;background:#FAFAFA; }
+.quiz-section { background:#F3E5F5;border-radius:20px;padding:2.5rem;margin:3rem 0; }
+.quiz-section h3 { color:#7B1FA2;font-size:1.5rem;margin-bottom:1.5rem; }
+.quiz-box { background:#FFF;border-radius:16px;padding:1.5rem;margin-bottom:1.2rem; }
+.quiz-box h4 { color:#7B1FA2;margin-bottom:0.8rem;font-size:1rem; }
+.quiz-item { background:#FAFAFA;border-radius:10px;padding:0.8rem 1.2rem;margin-bottom:0.5rem;cursor:pointer;transition:all 0.3s;border:2px solid transparent;font-size:0.95rem; }
+.quiz-item:hover { border-color:#CE93D8;background:#F3E5F5; }
+.quiz-item.correct { background:#E8F5E9;border-color:#66BB6A; }
+.quiz-item.wrong { background:#FFEBEE;border-color:#EF5350; }
+.chapter-divider { text-align:center;padding:3rem;font-size:3rem;opacity:0.15; }
+footer { background:var(--accent);color:#FFF;text-align:center;padding:3rem 2rem;font-size:0.9rem; }
+footer a { color:#FFCC80; }
+@media (max-width:768px) {
+  .hero h1 { font-size:2.2rem; }
+  .section { padding:3rem 1.2rem; }
+  .section-title { font-size:1.6rem; }
+  .map-body { flex-direction:column; }
+  .map-info-area { padding:1.5rem; }
+  .person-grid { grid-template-columns:1fr 1fr; }
+  .nav { gap:1rem;padding:0.6rem 1rem; }
+  .illust-row .illust { max-width:100%; }
+}
+
+/* Deep Thinking Questions */
+.deep-think { background:linear-gradient(135deg,#fef9e7 0%,#fdf2e9 100%); border:2px solid #f0b429; border-radius:16px; padding:25px 25px 15px; margin:30px 0; }
+.deep-think h3 { color:#d4780a; font-size:1.2rem; margin-bottom:15px; }
+.deep-think h3::before { content:"\1F4A1 "; }
+.deep-q { margin-bottom:18px; }
+.deep-q p.question { font-weight:600; color:#5d4037; font-size:1.05rem; margin-bottom:8px; }
+.deep-q p.question::before { content:"Q. "; color:#f0b429; font-weight:800; }
+.deep-answer { display:none; background:#fff; border-left:4px solid #f0b429; padding:15px 18px; border-radius:0 10px 10px 0; margin:8px 0 12px; font-size:0.95rem; color:#555; line-height:1.7; }
+.deep-answer p { margin:0; }
+.deep-toggle { background:#f0b429; color:#fff; border:none; padding:6px 16px; border-radius:20px; font-size:0.85rem; cursor:pointer; transition:all 0.2s; font-family:inherit; }
+.deep-toggle:hover { background:#d4780a; }
+.deep-toggle.open { background:#d4780a; }
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span class="logo">한국사</span>
+  <a href="#ch1">선사시대</a>
+  <a href="#ch2">고조선</a>
+  <a href="#ch3">고구려</a>
+  <a href="#ch4">백제</a>
+  <a href="#ch5">신라</a>
+  <a href="#ch6">가야</a>
+  <a href="#ch7">삼국통일</a>
+  <a href="#timeline">연표</a>
+  <a href="#compare">비교</a>
+</nav>
+<section class="hero">
+  <h1>수안정안 역사이야기</h1>
+  <p class="subtitle">삼국시대까지 편 — 선사시대부터 삼국시대까지, 우리 가족과 떠나는 시간 여행</p>
+  <div class="scroll-hint">&#9660;</div>
+</section>
+<section class="section" id="ch1">
+  <h2 class="section-title">1. 선사시대</h2>
+  <p class="section-subtitle">돌멩이가 도구라고? 우리 조상들의 놀라운 지혜</p>
+
+  <div class="content-block">
+    <h3>구석기 시대 (약 70만 년 전 ~)</h3>
+    <p>아주 아주 옛날, 지금으로부터 약 <strong>70만 년 전</strong>부터 한반도에 사람이 살기 시작했어. 이 시대를 <strong>구석기 시대</strong>라고 해. '구석기'는 '옛날 돌 도구'라는 뜻이야.</p>
+    <div class="illust"><img src="korean_history_images/ch1_paleolithic.png" alt="구석기 시대의 생활 모습"><p class="illust-cap">구석기 시대의 생활 모습</p></div>
+    <p>구석기 시대 사람들은 돌을 깨뜨려서 만든 <strong>뗀석기</strong>를 사용했어. 대표적인 도구가 <strong>주먹도끼</strong>야. 주먹에 딱 쥘 수 있는 크기로, 동물의 가죽을 벗기거나 나무를 자르는 데 썼지.</p>
+    <p>이 시대 사람들은 주로 <strong>동굴이나 바위 그늘</strong>에서 살았어. 겨울에는 추위를 막기 위해 동물 가죽으로 옷을 만들어 입었지. 불을 사용할 줄 알아서 음식을 익혀 먹고, 맹수를 쫓아내기도 했어.</p>
+    <p>먹을 것은 주로 <strong>사냥과 채집</strong>으로 구했어. 남자들은 무리를 지어 사슴, 멧돼지 같은 동물을 사냥하고, 여자와 아이들은 열매, 뿌리, 나물 같은 것을 모았어. 한곳에 오래 머물지 않고 먹을 것을 찾아 <strong>이동 생활</strong>을 했단다.</p>
+
+    <div class="vocab-box">
+      <h4>용어 정리</h4>
+      <dl>
+        <dt>뗀석기</dt><dd>돌을 깨뜨려 만든 도구 (구석기 시대)</dd>
+        <dt>주먹도끼</dt><dd>손에 쥐고 쓰는 만능 도구</dd>
+        <dt>채집</dt><dd>열매, 뿌리 등을 모으는 것</dd>
+      </dl>
+    </div>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">알고 있니?</div>
+      <p>한반도에서 발견된 가장 오래된 구석기 유적지는 <strong>경기도 연천 전곡리</strong>야! 1978년에 미군 병사가 한탄강변에서 주먹도끼를 발견했는데, 이것이 동아시아 최초의 아슐리안형 주먹도끼로 밝혀져 세계 고고학계를 깜짝 놀라게 했어.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>신석기 시대 (약 1만 년 전 ~)</h3>
+    <p>빙하기가 끝나고 날씨가 따뜻해지면서 사람들의 생활이 크게 바뀌었어. 이제 돌을 갈아서 만든 <strong>간석기</strong>를 사용하기 시작했지. 이 시대를 <strong>신석기 시대</strong>라고 해.</p>
+    <div class="illust"><img src="korean_history_images/ch1_neolithic.png" alt="신석기 시대의 마을 풍경"><p class="illust-cap">신석기 시대의 마을 풍경</p></div>
+    <p>신석기 시대의 가장 큰 변화는 바로 <strong>농사의 시작</strong>이야! 조, 피, 수수 같은 곡식을 심어 키우기 시작했어. 농사를 짓게 되면서 한곳에 머물러 사는 <strong>정착 생활</strong>을 시작했지.</p>
+    <p>강가나 바닷가에 움집(땅을 파고 지붕을 얹은 집)을 짓고 마을을 이루어 살았어. 곡식을 저장하고 음식을 담기 위해 <strong>토기</strong>를 만들었는데, 이 시대의 대표적인 토기가 바로 <strong>빗살무늬 토기</strong>야!</p>
+    <p>빗살무늬 토기는 뾰족한 바닥에 빗살 같은 무늬가 새겨져 있어. 바닥이 뾰족한 이유는 모래나 흙에 꽂아 세우기 위해서였어. 또 낚시를 하고, 그물로 물고기를 잡고, 조개를 모아 먹었어. 조개를 먹고 남은 껍데기가 쌓인 것을 <strong>조개더미(패총)</strong>라고 해.</p>
+
+    <div class="think-box">
+      <h4>생각해 보기</h4>
+      <p>농사를 짓기 시작한 것이 왜 인류 역사에서 가장 중요한 변화 중 하나일까? 힌트: 정착 생활, 인구 증가, 직업의 분화와 관련이 있어!</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>청동기 시대 (약 기원전 2000년 ~)</h3>
+    <p>청동(구리+주석 합금)으로 만든 도구를 사용하기 시작한 시대야. 하지만 청동은 귀하고 비쌌기 때문에 주로 <strong>무기(비파형 동검)</strong>와 <strong>의식 도구(청동 거울)</strong>에 사용했어. 일반 농사 도구는 여전히 돌로 만들었어.</p>
+    <div class="illust"><img src="korean_history_images/ch1_bronze.png" alt="청동기 시대의 마을과 계급 사회"><p class="illust-cap">청동기 시대의 마을과 계급 사회</p></div>
+    <p>청동기 시대의 가장 큰 변화는 <strong>벼농사</strong>의 시작이야! 벼를 수확할 때 사용한 도구가 바로 <strong>반달 돌칼</strong>이야. 반달 모양으로 생긴 돌칼에 구멍 두 개를 뚫어 끈을 꿰고, 손에 쥐고 벼 이삭을 따냈어.</p>
+    <p>농사 기술이 발전하면서 곡식이 많이 생산되었고, 이것을 많이 가진 사람과 적게 가진 사람이 나뉘면서 <strong>빈부 격차</strong>가 생겼어. 힘이 센 사람이 우두머리(족장)가 되어 다른 사람들을 다스리기 시작했지. 이것이 바로 <strong>계급의 탄생</strong>이야!</p>
+
+    <div class="story-box">
+      <h4>고인돌 이야기</h4>
+      <p>청동기 시대의 대표적인 유적이 바로 <strong>고인돌(돌멘)</strong>이야. 고인돌은 거대한 돌을 이용해 만든 무덤인데, 윗돌의 무게가 수십 톤에 달하기도 해! 이렇게 큰 돌을 옮기려면 수백 명의 사람이 필요했을 거야.</p>
+      <p>그래서 고인돌은 단순한 무덤이 아니라 <strong>"나는 이렇게 많은 사람을 동원할 수 있는 힘 있는 사람이다!"</strong>라는 것을 보여주는 권력의 상징이기도 했어.</p>
+    </div>
+    <div class="illust"><img src="korean_history_images/ch1_dolmen.png" alt="고인돌 건설 장면"><p class="illust-cap">고인돌 건설 장면</p></div>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">세계유산 한국 고인돌!</div>
+      <p>전 세계 고인돌의 약 <strong>40%</strong>가 한반도에 있어! 특히 <strong>고창, 화순, 강화</strong>의 고인돌은 2000년에 유네스코 세계유산으로 등재되었어. 고창에만 약 447기의 고인돌이 모여 있단다.</p>
+    </div>
+
+    <div class="vocab-box">
+      <h4>용어 정리</h4>
+      <dl>
+        <dt>간석기</dt><dd>돌을 갈아서 만든 도구 (신석기 시대)</dd>
+        <dt>빗살무늬 토기</dt><dd>신석기 시대의 대표 토기, 뾰족한 바닥</dd>
+        <dt>반달 돌칼</dt><dd>벼 이삭을 따는 반달 모양 돌 도구</dd>
+        <dt>비파형 동검</dt><dd>비파(악기) 모양의 청동 칼, 고조선의 세력 범위를 알려줌</dd>
+        <dt>고인돌</dt><dd>청동기 시대의 거대한 돌무덤, 지배자의 권력 상징</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-header"><h2>한반도 고인돌 분포</h2><p>전 세계 고인돌의 40%가 한반도에!</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Dolmen_in_Korea.png" alt="한반도 고인돌 분포 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">한반도 고인돌 분포도 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">고인돌 종류</h3>
+        <ul class="info-list">
+          <li><strong>탁자식 (북방식)</strong>: 받침돌 위에 덮개돌을 올린 형태. 주로 한반도 북부</li>
+          <li><strong>바둑판식 (남방식)</strong>: 땅속에 받침돌을 묻고 덮개돌을 올림. 주로 남부</li>
+          <li><strong>개석식</strong>: 받침돌 없이 덮개돌만 올린 형태</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <h3>선사시대 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 구석기 시대 사람들이 사용한 도구는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">간석기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">뗀석기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">청동기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">철기</div>
+</div>
+<div class="quiz-box"><h4>Q2. 구석기 시대 사람들의 생활 방식은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">정착 생활</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">이동 생활</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">도시 생활</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">해상 생활</div>
+</div>
+<div class="quiz-box"><h4>Q3. 신석기 시대의 대표적인 토기는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">민무늬 토기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">빗살무늬 토기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">청자</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">백자</div>
+</div>
+<div class="quiz-box"><h4>Q4. 신석기 시대에 시작된 가장 큰 변화는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">철기 사용</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">불의 발견</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">농사</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">문자 발명</div>
+</div>
+<div class="quiz-box"><h4>Q5. 청동기 시대에 벼를 수확하는 데 사용한 도구는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">주먹도끼</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">반달 돌칼</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">비파형 동검</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">가락바퀴</div>
+</div>
+<div class="quiz-box"><h4>Q6. 고인돌은 어떤 시대의 유적일까?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">구석기 시대</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">신석기 시대</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">청동기 시대</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">철기 시대</div>
+</div>
+<div class="quiz-box"><h4>Q7. 한국의 고인돌이 세계유산으로 등재된 지역이 아닌 곳은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">고창</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">화순</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">강화</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">경주</div>
+</div>
+<div class="quiz-box"><h4>Q8. 신석기 시대 사람들이 살았던 집의 형태는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">동굴</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">움집</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기와집</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">초가집</div>
+</div>
+<div class="quiz-box"><h4>Q9. 청동기 시대에 나타난 사회 변화는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">모든 사람이 평등해짐</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">계급이 생김</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">나라가 없어짐</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">글자가 사라짐</div>
+</div>
+<div class="quiz-box"><h4>Q10. 전 세계 고인돌의 약 몇 %가 한반도에 있을까?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">10%</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">20%</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">30%</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">40%</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">벼농사가 시작되면서 왜 '전쟁'이 더 자주 일어나게 되었을까?</p>
+<div class="deep-answer"><p>농사를 짓게 되면서 사람들은 땅, 물, 수확물 같은 '재산'을 갖게 되었어요. 이전에는 먹을 것을 찾아 이동했기 때문에 땅을 두고 싸울 이유가 없었지만, 농사를 지으면서 '내 땅'이라는 개념이 생기고, 더 좋은 땅과 더 많은 식량을 차지하려는 다툼이 시작된 거예요. 또한 식량이 남으면서 인구가 늘어나고, 큰 마을과 작은 마을 사이에 힘의 차이가 생겨 강한 쪽이 약한 쪽을 공격하게 되었답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">불을 발견하기 전과 후, 사람들의 '밤'은 어떻게 달라졌을까?</p>
+<div class="deep-answer"><p>불이 없던 시절, 밤은 무서운 시간이었어요. 어둠 속에서 맹수가 다가와도 볼 수 없었고, 추운 겨울에는 체온을 유지하기도 힘들었죠. 불을 발견한 후에는 밤에도 활동할 수 있게 되었어요. 불빛 아래서 도구를 만들거나 이야기를 나눌 수 있었고, 불이 맹수를 쫓아주어 안전해졌어요. 음식을 익혀 먹게 되면서 질병도 줄고 소화도 잘 되었답니다. 불은 '문명의 시작'이라고 할 수 있어요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">고인돌을 만드는 데 수백 명이 필요했다면, 그 시대에 이미 '리더'가 있었다는 뜻일까?</p>
+<div class="deep-answer"><p>맞아요! 수백 명이 함께 무거운 돌을 옮기고 쌓으려면, 누군가가 계획을 세우고 일을 나누어 지시해야 해요. 또한 그 많은 사람들에게 밥을 먹여야 하니 식량을 관리하는 사람도 필요했을 거예요. 이것은 이미 '지배자(족장)'와 '피지배자'가 구분되는 계급 사회가 시작되었다는 증거랍니다. 고인돌의 크기가 클수록 그 지도자의 힘이 컸다고 볼 수 있어요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+<div class="chapter-divider">&#9670; &#9670; &#9670;</div>
+<section class="section" id="ch2" style="background:#F5F0E8;">
+  <h2 class="section-title">2. 고조선</h2>
+  <p class="section-subtitle">기원전 2333년, 우리 역사 최초의 나라가 탄생하다</p>
+
+  <div class="content-block">
+    <h3>단군 신화 - 우리 민족의 시작 이야기</h3>
+    <p>아주 먼 옛날, 하늘의 신 <strong>환인</strong>에게 아들 <strong>환웅</strong>이 있었어. 환웅은 인간 세상을 다스리고 싶었지. 환인은 아들의 뜻을 알고 천부인 3개(거울, 칼, 방울)를 주며 인간 세상으로 내려보냈어.</p>
+    <div class="illust"><img src="korean_history_images/ch2_dangun_myth.png" alt="단군 신화 - 환웅의 하강과 웅녀"><p class="illust-cap">단군 신화 - 환웅의 하강과 웅녀</p></div>
+    <p>환웅은 <strong>바람, 비, 구름</strong>의 신하 3,000명을 데리고 <strong>백두산 신단수</strong> 아래로 내려왔어. 그곳에서 신시(신의 도시)를 열고 인간의 360가지 일을 맡아 다스렸지.</p>
+    <p>그때 곰 한 마리와 호랑이 한 마리가 환웅을 찾아와 "사람이 되게 해주세요!"라고 빌었어. 환웅이 말했지.</p>
+
+    <div class="story-box">
+      <h4>"이 쑥과 마늘을 먹으며 100일 동안 햇빛을 보지 마라!"</h4>
+      <p>곰은 참고 또 참아 <strong>21일 만에</strong> 여자(웅녀)로 변했어. 하지만 호랑이는 참지 못하고 뛰쳐나갔지. 웅녀는 환웅과 결혼하여 아들을 낳았는데, 그가 바로 <strong>단군왕검</strong>이야!</p>
+    </div>
+
+    <p>단군왕검은 <strong>기원전 2333년</strong>에 아사달에 도읍을 정하고 나라를 세웠어. 나라 이름은 <strong>조선(아침의 나라)</strong>이야. 나중에 이성계가 세운 조선과 구별하기 위해 <strong>고조선</strong>이라고 불러.</p>
+    <div class="illust"><img src="korean_history_images/ch2_dangun_founding.png" alt="단군왕검의 고조선 건국"><p class="illust-cap">단군왕검의 고조선 건국</p></div>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">단군 신화의 숨은 의미</div>
+      <p><strong>환웅이 하늘에서 내려왔다</strong> = 고조선의 지배층은 하늘의 자손이라는 자부심<br>
+      <strong>곰이 사람이 됐다</strong> = 곰을 숭배하던 부족이 환웅 부족과 합쳤다는 뜻<br>
+      <strong>호랑이가 실패했다</strong> = 호랑이를 숭배하던 부족은 합치지 못했다는 뜻<br>
+      <strong>쑥과 마늘</strong> = 당시 한반도에서 자라던 식물, 농경 문화를 상징</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>홍익인간 - 고조선의 건국 이념</h3>
+    <p>고조선의 건국 이념은 <strong>"홍익인간(弘益人間)"</strong>이야. "널리 인간을 이롭게 하라"는 뜻이지. 이 정신은 오늘날 대한민국 교육법에도 나와 있을 정도로 중요한 가치야.</p>
+    <p>단군왕검은 이 정신을 바탕으로 백성들을 다스렸어. 하늘에서 내려온 환웅이 가장 먼저 한 일이 바람, 비, 구름을 관리한 것처럼, 고조선은 <strong>농업</strong>을 가장 중요하게 여겼어.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>8조법 - 고조선의 법률</h3>
+    <div class="illust"><img src="korean_history_images/ch2_eight_laws.png" alt="고조선의 재판 모습"><p class="illust-cap">고조선의 재판 모습</p></div>
+    <p>고조선에는 <strong>8조법</strong>이라는 법이 있었어. 안타깝게도 8개 중 3개만 오늘날까지 전해지고 있어:</p>
+    <div class="story-box">
+      <h4>8조법 중 남아있는 3개</h4>
+      <p><strong>1.</strong> 사람을 죽이면 <strong>사형</strong>에 처한다.<br>
+      <strong>2.</strong> 남에게 상처를 입히면 <strong>곡식으로 갚는다</strong>.<br>
+      <strong>3.</strong> 남의 물건을 훔치면 <strong>노비가 된다</strong>. (돈을 내면 풀려날 수 있지만 사회적으로 멸시받음)</p>
+    </div>
+    <p>이 법에서 알 수 있는 것은 고조선 사회가 <strong>생명, 신체, 재산</strong>을 소중히 여겼다는 것이야. 또한 '곡식으로 갚는다'는 것에서 <strong>농업 사회</strong>였다는 것을, '노비'가 있다는 것에서 <strong>계급 사회</strong>였다는 것을 알 수 있어.</p>
+
+    <div class="think-box">
+      <h4>생각해 보기</h4>
+      <p>나머지 5개의 법은 어떤 내용이었을까? 당시 사회를 생각하며 상상해 봐!</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>위만 조선과 고조선의 멸망</h3>
+    <p>고조선은 오랫동안 강력한 나라였어. 특히 <strong>철기 문화</strong>를 받아들이면서 더욱 강해졌지. 하지만 기원전 194년, 중국에서 온 <strong>위만</strong>이라는 사람이 왕위를 빼앗았어. 이것을 <strong>위만 조선</strong>이라고 해.</p>
+    <p>위만 조선은 철기를 적극적으로 사용하고 중국과 한반도 남부 사이의 <strong>중계 무역</strong>으로 큰 이익을 얻었어. 하지만 이것이 중국 한나라의 불만을 사게 됐지.</p>
+    <div class="illust"><img src="korean_history_images/ch2_fall.png" alt="고조선의 마지막 전투"><p class="illust-cap">고조선의 마지막 전투</p></div>
+    <p><strong>기원전 108년</strong>, 한나라 무제가 대군을 보내 고조선을 공격했어. 고조선은 1년 넘게 저항했지만, 내부 배신으로 결국 멸망하고 말았어. 한나라는 고조선 자리에 4개의 군(한사군)을 설치했는데, 우리 민족은 이에 끊임없이 저항했어.</p>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">비파형 동검의 비밀</div>
+      <p><strong>비파형 동검</strong>이 발견되는 지역이 곧 고조선의 영향력이 미친 지역이야! 만주와 한반도 전역에서 발견되는데, 이를 통해 고조선이 정말 넓은 지역을 다스렸다는 것을 알 수 있어.</p>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-header"><h2>고조선의 영토</h2><p>만주와 한반도 북부를 아우른 최초의 국가</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Gojoseon_map.jpg" alt="고조선 영토 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">고조선 영토 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">고조선 핵심 정리</h3>
+        <ul class="info-list">
+          <li><strong>건국</strong>: 기원전 2333년, 단군왕검</li>
+          <li><strong>이념</strong>: 홍익인간 (널리 인간을 이롭게 하라)</li>
+          <li><strong>수도</strong>: 아사달 (왕검성)</li>
+          <li><strong>영토</strong>: 만주 + 한반도 북부</li>
+          <li><strong>법</strong>: 8조법 (3개만 전해짐)</li>
+          <li><strong>위만 조선</strong>: 기원전 194년 위만이 왕위 찬탈</li>
+          <li><strong>멸망</strong>: 기원전 108년 (한나라 침략)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="map-container" style="margin-top:2rem;">
+    <div class="map-header"><h2>고조선의 영역 (기원전 108년)</h2><p>한나라 침략 직전의 고조선</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="korean_history_images/map_gojoseon_108bc.png" alt="기원전 108년 고조선 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">기원전 108년 한반도 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">위만 조선의 멸망</h3>
+        <ul class="info-list">
+          <li>기원전 194년: 위만이 고조선의 왕위를 빼앗음</li>
+          <li>위만 조선은 철기 문화와 중계 무역으로 성장</li>
+          <li>기원전 108년: 한나라 무제의 침략으로 멸망</li>
+          <li>한나라가 한사군(낙랑, 임둔, 진번, 현도)을 설치</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-container" style="margin-top:2rem;">
+    <div class="map-header"><h2>한사군의 설치</h2><p>고조선 멸망 후 한나라가 설치한 4개 군</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="korean_history_images/map_hangunhyeon.png" alt="한사군 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">한군현 지도 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">한사군과 우리 민족의 저항</h3>
+        <ul class="info-list">
+          <li><strong>낙랑군</strong>: 평양 일대, 가장 오래 존속 (313년까지)</li>
+          <li><strong>임둔군</strong>: 함경도 일대, 일찍 폐지</li>
+          <li><strong>진번군</strong>: 황해도 일대, 일찍 폐지</li>
+          <li><strong>현도군</strong>: 압록강 일대, 고구려의 저항으로 축소</li>
+          <li>우리 민족은 끊임없이 저항하여 한사군을 몰아냄</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <h3>고조선 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 고조선을 세운 사람은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">주몽</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">단군왕검</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">박혁거세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">온조</div>
+</div>
+<div class="quiz-box"><h4>Q2. 고조선의 건국 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기원전 108년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기원전 57년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">기원전 2333년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기원전 37년</div>
+</div>
+<div class="quiz-box"><h4>Q3. 고조선의 건국 이념은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">부국강병</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">홍익인간</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">충효사상</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">위민정치</div>
+</div>
+<div class="quiz-box"><h4>Q4. 단군 신화에서 사람이 된 동물은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">호랑이</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">곰</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">사슴</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">독수리</div>
+</div>
+<div class="quiz-box"><h4>Q5. 8조법에서 알 수 있는 고조선 사회의 특징이 아닌 것은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">생명 존중</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">재산 보호</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">모든 사람이 평등</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">계급 존재</div>
+</div>
+<div class="quiz-box"><h4>Q6. 환웅이 하늘에서 내려온 산은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">한라산</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">지리산</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">백두산</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">설악산</div>
+</div>
+<div class="quiz-box"><h4>Q7. 고조선의 영향력 범위를 알 수 있는 유물은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">빗살무늬 토기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">비파형 동검</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">금관</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">첨성대</div>
+</div>
+<div class="quiz-box"><h4>Q8. 고조선을 멸망시킨 나라는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">수나라</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">당나라</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">한나라</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">진나라</div>
+</div>
+<div class="quiz-box"><h4>Q9. 고조선이 멸망한 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기원전 2333년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기원전 194년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">기원전 108년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">기원전 57년</div>
+</div>
+<div class="quiz-box"><h4>Q10. 단군 신화에서 곰이 사람이 되기 위해 먹은 것은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">쌀과 보리</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">쑥과 마늘</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">콩과 팥</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">감자와 고구마</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">단군신화에서 곰은 참을성이 있어서 사람이 되고, 호랑이는 참지 못해서 실패했어요. 이 이야기가 전하고 싶은 메시지는 무엇일까?</p>
+<div class="deep-answer"><p>이 이야기는 '인내와 절제'의 중요성을 말해요. 큰 목표를 이루려면 쉬운 길을 택하지 않고 어려움을 견뎌야 한다는 교훈이에요. 또한 고조선 사람들이 중요하게 여긴 덕목(참을성, 규칙 지키기)을 신화 속에 담은 것이기도 해요. 재미있는 점은, 곰 부족(농경민)과 호랑이 부족(수렵민)의 통합 과정을 상징한다는 해석도 있다는 거예요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">고조선의 '8조법' 중에서 '남의 물건을 훔치면 노비가 된다'는 법이 있었어요. 이것은 그 시대에 어떤 사회 변화가 있었다는 뜻일까?</p>
+<div class="deep-answer"><p>'개인 재산'이라는 개념이 확실히 생겼다는 뜻이에요. 사냥꾼 시대에는 잡은 동물을 다 같이 나눠 먹었지만, 농사를 짓게 되면서 '내 것'과 '네 것'이 구분되었어요. 또한 '노비'라는 말이 있다는 것은 이미 신분의 차이, 즉 계급이 존재했다는 증거이기도 해요. 법이 있다는 것 자체가 나라다운 체계를 갖추고 있었다는 뜻이랍니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">왜 모든 나라에는 '건국 신화'가 있을까? 신화가 그 나라에 어떤 역할을 했을까?</p>
+<div class="deep-answer"><p>건국 신화는 단순한 옛이야기가 아니라, 나라의 정체성과 자부심을 만들어주는 역할을 해요. '우리 나라는 하늘이 세운 특별한 나라'라는 이야기는 백성들에게 소속감과 자긍심을 주고, 왕의 권위를 뒷받침했어요. 단군신화가 '하늘의 후손'이 세운 나라라고 하는 것은, 고조선이 하늘의 뜻으로 만들어진 정당한 나라임을 강조하는 거예요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+
+<div class="chapter-divider">&#9670; &#9670; &#9670;</div>
+<section class="section" id="ch3">
+  <h2 class="section-title"><span style="color:var(--goguryeo);">3. 고구려</span> - 동북아의 최강자</h2>
+  <p class="section-subtitle">기원전 37년 ~ 668년, 약 700년간 동북아를 호령한 대제국</p>
+
+  <div class="content-block">
+    <h3>건국 신화 - 활의 명수 주몽</h3>
+    <p>고구려의 시작은 한 영웅의 드라마틱한 탈출에서 시작돼. 북쪽 <strong>부여</strong>라는 나라에 <strong>주몽</strong>이라는 청년이 살고 있었어. 주몽은 하백(물의 신)의 딸 유화부인의 아들이었는데, 활을 정말 잘 쏘았어. '주몽'이라는 이름 자체가 부여 말로 <strong>"활을 잘 쏘는 사람"</strong>이라는 뜻이야!</p>
+    <div class="illust"><img src="korean_history_images/ch3_jumong.png" alt="주몽의 부여 탈출"><p class="illust-cap">주몽의 부여 탈출</p></div>
+    <p>하지만 부여의 왕자들이 주몽의 재능을 시기해서 죽이려고 했어. 주몽은 오이, 마리, 협보 세 친구와 함께 남쪽으로 도망쳤지. 강에 다다랐을 때 추격자들이 바로 뒤에 있었어!</p>
+
+    <div class="story-box">
+      <h4>"나는 하늘 신의 아들이요, 물의 신의 외손자다! 오늘 도망하는데 추격자가 뒤에 있으니 어찌하리요!"</h4>
+      <p>주몽이 강물을 향해 외치자, 놀랍게도 물고기와 자라들이 떠올라 <strong>다리를 만들어</strong> 주었어! 주몽 일행이 건너자마자 다리는 사라졌고, 추격자들은 강을 건널 수 없었지. 기원전 37년, 주몽은 <strong>졸본</strong>(지금의 중국 환인 지역)에서 고구려를 세웠어.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>광개토대왕 - 18세 소년왕의 대정복</h3>
+    <p><strong>광개토대왕</strong>(재위 391~412년)은 이름 그대로 "<strong>영토를 넓게 개척한 위대한 왕</strong>"이야. 본명은 담덕이고, 불과 <strong>18세</strong>에 왕이 되었어!</p>
+    <div class="illust"><img src="korean_history_images/ch3_gwanggaeto.png" alt="광개토대왕의 기마 대정복"><p class="illust-cap">광개토대왕의 기마 대정복</p></div>
+    <p>어린 나이에 왕이 되었지만, 그의 업적은 어마어마해:</p>
+    <ul class="info-list">
+      <li>서쪽으로 <strong>후연(중국)</strong>을 공격해 요동 지역 차지</li>
+      <li>북쪽으로 <strong>거란, 숙신</strong> 등 주변 민족 정복</li>
+      <li>남쪽으로 <strong>백제</strong>를 공격해 한강 이북까지 진출</li>
+      <li><strong>신라</strong>에 침입한 왜구를 물리쳐 줌 (400년, 5만 대군 파병)</li>
+      <li>64개의 성, 1,400개의 마을을 정복!</li>
+    </ul>
+    <p>광개토대왕은 22년간 재위하면서 고구려를 <strong>동북아 최강국</strong>으로 만들었어. 39세에 세상을 떠났는데, 짧은 생애 동안 이룬 업적은 정말 대단했지.</p>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">광개토대왕릉비</div>
+      <p>아들 장수왕이 아버지의 업적을 기리기 위해 세운 거대한 비석이야. 높이 <strong>6.39m</strong>, 네 면에 <strong>1,775자</strong>가 새겨져 있어. 지금은 중국 지린성 지안시에 있는데, 한국 고대사 연구의 가장 중요한 사료 중 하나야!</p>
+    </div>
+    <div class="illust"><img src="korean_history_images/ch3_gwanggaeto_stele.png" alt="광개토대왕릉비"><p class="illust-cap">광개토대왕릉비</p></div>
+  </div>
+
+  <div class="content-block">
+    <h3>장수왕 - 오래 살고 크게 이룬 왕</h3>
+    <p><strong>장수왕</strong>(재위 413~491년)은 이름처럼 <strong>98세</strong>까지 살며 <strong>79년간</strong> 나라를 다스린 왕이야! (세계 역사에서도 가장 오래 재위한 왕 중 한 명이지.)</p>
+    <div class="illust"><img src="korean_history_images/ch3_jangsu.png" alt="장수왕의 평양 통치"><p class="illust-cap">장수왕의 평양 통치</p></div>
+    <p>장수왕의 가장 큰 업적은 <strong>427년 수도를 평양으로 옮긴</strong> 것이야. 왜 옮겼을까?</p>
+    <div class="story-box">
+      <h4>평양 천도의 이유</h4>
+      <p><strong>1.</strong> 평양은 넓은 평야가 있어 <strong>농사</strong>에 유리해<br>
+      <strong>2.</strong> 대동강을 통해 <strong>무역</strong>이 편리해<br>
+      <strong>3.</strong> 남쪽(백제, 신라)을 공격하기에 <strong>전략적</strong>으로 유리해</p>
+    </div>
+    <p><strong>475년</strong>, 장수왕은 3만 대군으로 백제의 수도 <strong>한성(서울)</strong>을 공격했어. 백제의 개로왕은 전사하고, 백제는 급하게 수도를 공주(웅진)로 옮겨야 했지. 이때 고구려는 만주에서 한반도 중부까지 <strong>가장 넓은 영토</strong>를 차지했어.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>을지문덕과 살수대첩 (612년)</h3>
+    <p>7세기 초, 중국을 통일한 <strong>수나라 양제</strong>가 고구려를 정복하겠다며 무려 <strong>113만 대군</strong>을 동원했어! (역사상 가장 큰 군대 중 하나야.) 고구려는 이 거대한 침략에 맞서야 했지.</p>
+    <div class="illust"><img src="korean_history_images/ch3_eulji.png" alt="을지문덕의 살수대첩"><p class="illust-cap">을지문덕의 살수대첩</p></div>
+    <p>고구려의 장군 <strong>을지문덕</strong>은 천재적인 전략을 썼어:</p>
+    <div class="story-box">
+      <h4>을지문덕의 거짓 후퇴 작전</h4>
+      <p><strong>1단계:</strong> 일부러 전투에서 지는 척하며 <strong>후퇴</strong>를 반복. 수나라 군대를 깊이 유인.<br>
+      <strong>2단계:</strong> 수나라 군대의 <strong>보급선</strong>이 끊기고 병사들이 지칠 때까지 기다림.<br>
+      <strong>3단계:</strong> 살수(청천강)에서 미리 막아둔 <strong>댐을 터뜨려</strong> 대홍수를 일으킴!<br>
+      <strong>결과:</strong> 수나라 별동대 30만 5천 명 중 살아 돌아간 것은 겨우 <strong>2,700명</strong>!</p>
+    </div>
+    <p>이것이 바로 한국사 최대의 승리 중 하나인 <strong>살수대첩</strong>이야. 수나라는 이 패배의 충격으로 결국 멸망하고 말았어.</p>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">을지문덕이 보낸 시</div>
+      <p>을지문덕은 수나라 장수에게 조롱하는 시를 보냈어:<br>
+      "신의 책략은 하늘의 이치를 다했고, 오묘한 계산은 땅의 이치를 다했도다. 싸움에 이겨 공이 이미 높으니, 만족할 줄 알고 그만 돌아가기를 바라노라." 수나라 장수는 이 시를 받고도 계속 진군했다가 참패했지!</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>연개소문 - 고구려의 마지막 영웅</h3>
+    <div class="illust"><img src="korean_history_images/ch3_yeongaesomun.png" alt="연개소문의 위용"><p class="illust-cap">연개소문의 위용</p></div>
+    <p><strong>연개소문</strong>은 고구려 말기의 실권자야. 642년에 쿠데타를 일으켜 권력을 잡았어. 등에 <strong>5자루의 칼</strong>을 꽂고 다녔다고 해! 그만큼 무시무시한 사람이었지.</p>
+    <p>연개소문은 당나라 태종이 보낸 <strong>20만 대군</strong>을 <strong>안시성 전투</strong>(645년)에서 물리쳤어. 안시성의 성주(이름은 전해지지 않음)가 88일간 성을 지키며 당 태종을 물러가게 했지. 당 태종은 눈에 화살을 맞을 뻔하기까지 했어!</p>
+    <p>하지만 666년 연개소문이 죽자 그의 아들들이 <strong>권력 다툼</strong>을 벌였어. 큰아들 남생이 당나라로 도망가 고구려를 공격하는 안내자가 되었고, 결국 668년 고구려는 멸망하고 말았어.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>고구려 고분벽화 - 1,500년 전의 그림</h3>
+    <div class="illust"><img src="korean_history_images/ch3_murals.png" alt="고구려 고분벽화의 사신도"><p class="illust-cap">고구려 고분벽화의 사신도</p></div>
+    <p>고구려는 무덤 벽에 화려한 그림을 그렸어. 이것을 <strong>고분벽화</strong>라고 해. 벽화에는 사냥하는 장면, 춤추는 사람들, 생활 모습 등이 담겨 있어. 가장 유명한 것은 <strong>사신도</strong>야:</p>
+    <ul class="info-list">
+      <li><strong>청룡</strong> (동쪽) - 푸른 용</li>
+      <li><strong>백호</strong> (서쪽) - 흰 호랑이</li>
+      <li><strong>주작</strong> (남쪽) - 붉은 봉황</li>
+      <li><strong>현무</strong> (북쪽) - 거북이와 뱀이 엉킨 모습</li>
+    </ul>
+    <p>이 벽화는 1,500년이 지난 지금도 색이 선명해서 고구려인들의 뛰어난 예술 실력을 보여줘.</p>
+
+    <div class="vocab-box">
+      <h4>용어 정리</h4>
+      <dl>
+        <dt>졸본</dt><dd>고구려 최초의 수도 (중국 환인)</dd>
+        <dt>국내성</dt><dd>두 번째 수도 (중국 지안)</dd>
+        <dt>평양</dt><dd>세 번째 수도 (장수왕 427년 천도)</dd>
+        <dt>살수대첩</dt><dd>612년 을지문덕이 수나라 30만 대군을 격파</dd>
+        <dt>안시성 전투</dt><dd>645년 당 태종의 20만 대군을 88일간 막아냄</dd>
+        <dt>고분벽화</dt><dd>무덤 벽에 그린 그림, 고구려의 생활과 문화를 보여줌</dd>
+      </dl>
+    </div>
+  </div>
+
+  
+  <div class="map-container" style="margin-top:2rem;">
+    <div class="map-header">
+      <h2>고구려 전성기 (5세기, 광개토대왕~장수왕)</h2>
+      <p>고구려가 가장 넓은 영토를 차지하던 때</p>
+    </div>
+    <div class="map-body">
+      <div class="map-svg-area" style="flex:1 1 60%;">
+        <img src="korean_history_images/map_476.png" alt="삼국시대 지도 (476년)">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">삼국시대 영토 - 476년 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area" style="flex:1 1 35%;">
+        <h3 style="margin-bottom:1rem;">5세기 한반도</h3>
+        <p style="font-size:0.9rem;color:#555;">광개토대왕과 장수왕 시기, 고구려는 만주에서 한반도 중부까지 최대 영토를 차지했어. <strong>"동북아의 강자"</strong>라는 별명에 걸맞은 대제국이었지!</p>
+      </div>
+    </div>
+  </div>
+
+<div class="quiz-section">
+    <h3>고구려 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 고구려를 세운 사람은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">온조</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">주몽</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">박혁거세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김수로왕</div>
+</div>
+<div class="quiz-box"><h4>Q2. '주몽'이라는 이름의 뜻은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">빛나는 왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">강한 전사</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">활을 잘 쏘는 사람</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">하늘의 아들</div>
+</div>
+<div class="quiz-box"><h4>Q3. 광개토대왕이 왕이 된 나이는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">15세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">18세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">25세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">30세</div>
+</div>
+<div class="quiz-box"><h4>Q4. 광개토대왕릉비의 높이는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">2m</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">4m</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">6.39m</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">10m</div>
+</div>
+<div class="quiz-box"><h4>Q5. 장수왕이 수도를 옮긴 곳은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">졸본</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">국내성</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">평양</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">한성</div>
+</div>
+<div class="quiz-box"><h4>Q6. 살수대첩에서 수나라 군대를 격파한 장군은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">광개토대왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">장수왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">을지문덕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">연개소문</div>
+</div>
+<div class="quiz-box"><h4>Q7. 살수대첩에서 살아 돌아간 수나라 병사 수는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">약 2,700명</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">약 10,000명</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">약 50,000명</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">약 100,000명</div>
+</div>
+<div class="quiz-box"><h4>Q8. 연개소문은 등에 칼을 몇 자루 꽂고 다녔을까?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">3자루</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">5자루</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">7자루</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">10자루</div>
+</div>
+<div class="quiz-box"><h4>Q9. 고분벽화의 사신도에서 동쪽을 상징하는 동물은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">백호</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">현무</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">주작</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">청룡</div>
+</div>
+<div class="quiz-box"><h4>Q10. 고구려가 멸망한 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">612년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">645년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">660년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">668년</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">고구려는 왜 넓은 땅을 차지하려고 그렇게 노력했을까? 넓은 땅이 나라에 어떤 도움이 될까?</p>
+<div class="deep-answer"><p>넓은 영토는 더 많은 사람(인구), 더 많은 농지(식량), 더 많은 자원(철, 말 등)을 뜻해요. 또한 국경이 넓으면 적이 수도까지 오는 데 시간이 오래 걸리니 방어에도 유리하죠. 고구려는 특히 만주의 넓은 평야에서 말을 기르고 철을 캐서 강력한 기마군단을 만들 수 있었어요. 하지만 너무 넓은 영토는 관리하기 어렵다는 단점도 있었답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">세 나라의 위치(고구려: 북쪽 산악, 백제: 서남쪽 평야, 신라: 동남쪽 분지)가 각 나라의 성격에 어떤 영향을 주었을까?</p>
+<div class="deep-answer"><p>지리는 나라의 성격을 크게 좌우해요. 고구려는 추운 북쪽 산악 지대에서 강인한 전사 문화를 발전시켰고, 백제는 서해안의 평야와 바다를 이용해 농업과 해상 무역이 발달했어요. 신라는 동남쪽 분지에 갇혀 있어 다른 나라보다 발전이 늦었지만, 외부 침입을 받기 어려운 지형 덕분에 안정적으로 힘을 키울 수 있었답니다. 이것을 '지리적 결정론'이라고 해요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">만약 세 나라가 싸우지 않고 처음부터 하나의 나라였다면, 역사가 어떻게 달라졌을까?</p>
+<div class="deep-answer"><p>하나의 큰 나라였다면 중국(당나라)에 맞서는 힘이 더 강했을 거예요. 하지만 경쟁이 없었다면 각 나라만의 독특한 문화(고구려의 벽화, 백제의 공예, 신라의 금관)가 발전하지 못했을 수도 있어요. 경쟁이 발전을 이끌기도 하거든요. 또한 넓은 영토를 하나의 정부가 다스리기 어려워 결국 나뉘었을 가능성도 있어요. 역사에 '만약'은 없지만, 상상해보면 재미있죠!</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+<div class="chapter-divider">&#9670; &#9670; &#9670;</div>
+<section class="section" id="ch4" style="background:#F0F4FC;">
+  <h2 class="section-title"><span style="color:var(--baekje);">4. 백제</span> - 우아한 문화 강국</h2>
+  <p class="section-subtitle">기원전 18년 ~ 660년, 동아시아에 문화를 전파한 나라</p>
+
+  <div class="content-block">
+    <h3>건국 이야기 - 온조와 비류 형제</h3>
+    <p>백제의 건국은 형제의 이야기에서 시작돼. 고구려를 세운 주몽에게는 부여에서 태어난 첫째 아들 <strong>유리</strong>와 졸본에서 태어난 아들 <strong>비류</strong>와 <strong>온조</strong>가 있었어.</p>
+    <div class="illust"><img src="korean_history_images/ch4_onjo.png" alt="온조와 비류의 남하"><p class="illust-cap">온조와 비류의 남하</p></div>
+    <p>유리가 부여에서 찾아와 태자가 되자, 비류와 온조는 어머니 <strong>소서노</strong>와 함께 남쪽으로 내려왔어. 비류는 바닷가(미추홀, 지금의 인천)에 자리 잡았고, 온조는 한강 유역(위례성, 지금의 서울)에 자리 잡았어.</p>
+
+    <div class="story-box">
+      <h4>두 형제의 선택</h4>
+      <p><strong>비류</strong>: "바다 근처가 무역에 좋겠다!" &#8594; 하지만 땅이 습하고 물이 짜서 농사가 안 됨 &#8594; 실패<br>
+      <strong>온조</strong>: "넓은 평야가 농사에 좋겠다!" &#8594; 비옥한 한강 유역에서 번성 &#8594; 성공!<br>
+      결국 비류의 백성들도 온조에게 합류했어. 이것이 <strong>백제의 시작</strong>(기원전 18년)이야.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>근초고왕 - 백제의 전성기</h3>
+    <p><strong>근초고왕</strong>(재위 346~375년)은 백제를 가장 강력하게 만든 왕이야. 그의 업적은 정말 대단해:</p>
+    <div class="illust"><img src="korean_history_images/ch4_geunchogo.png" alt="근초고왕과 칠지도"><p class="illust-cap">근초고왕과 칠지도</p></div>
+    <ul class="info-list">
+      <li>남쪽으로 마한의 남은 세력을 모두 흡수해 <strong>전라도 전역</strong> 차지</li>
+      <li>북쪽으로 고구려를 공격해 <strong>고국원왕을 전사</strong>시킴 (371년, 평양성 전투)</li>
+      <li>바다 건너 일본, 중국과 활발한 <strong>해상 무역</strong></li>
+      <li>일본에 <strong>칠지도</strong>(일곱 가지 칼)를 보냄</li>
+      <li><strong>박사 고흥</strong>에게 역사서 《서기》를 편찬하게 함</li>
+    </ul>
+
+    
+    <div class="illust"><img src="korean_history_images/chiljido.jpg" alt="칠지도 (일본 나라현 이소노카미 신궁 소장)"><p class="illust-cap">칠지도 실물 사진 — 길이 약 75cm, 양쪽에 3개씩 가지가 뻗은 독특한 형태 (출처: Wikimedia Commons)</p></div>
+    <div class="fun-fact">
+      <div class="fun-fact-title">칠지도의 비밀</div>
+      <p><strong>칠지도</strong>는 길이 약 75cm의 철제 의례용 검이야. 중앙 칼날 양쪽에 각각 3개씩, 총 <strong>6개의 가지</strong>가 뻗어 나온 독특한 모양이야. 칼날에는 금으로 글자가 새겨져 있어. 이 칼은 전투용이 아니라 <strong>의례용</strong>으로, 백제와 일본의 외교 관계를 보여주는 중요한 유물이야. 지금은 일본 나라현 이소노카미 신궁에 보관되어 있어.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>백제의 수도 이동 - 세 번의 새 출발</h3>
+    <div class="illust"><img src="korean_history_images/ch4_capital_moves.png" alt="백제의 세 수도"><p class="illust-cap">백제의 세 수도</p></div>
+    <div class="story-box">
+      <h4>1차: 한성 (위례성, 서울) - 건국 ~ 475년</h4>
+      <p>한강 유역의 비옥한 평야에서 시작. 근초고왕 때 전성기를 맞이함. 하지만 475년 고구려 장수왕이 3만 대군으로 공격! 개로왕이 전사하고 한성이 함락됨.</p>
+    </div>
+    <div class="story-box">
+      <h4>2차: 웅진 (공주) - 475 ~ 538년</h4>
+      <p>급하게 남쪽으로 피신. 금강 유역의 산으로 둘러싸인 곳. <strong>무령왕</strong>이 혼란을 수습하고 국력 회복. 무령왕릉에서 화려한 유물이 발견됨.</p>
+    </div>
+    <div class="story-box">
+      <h4>3차: 사비 (부여) - 538 ~ 660년</h4>
+      <p><strong>성왕</strong>이 더 넓은 평야로 수도를 옮김. 국호를 '남부여'로 바꿈. 불교 문화가 꽃피우고 일본에 문화를 전파. 하지만 660년 나당연합군에게 멸망.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>무령왕릉 - 1,500년 만의 기적적 발견</h3>
+    <div class="illust"><img src="korean_history_images/ch4_muryeong_tomb.png" alt="무령왕릉 발견 장면"><p class="illust-cap">무령왕릉 발견 장면</p></div>
+    <p><strong>1971년</strong> 공주에서 배수로 공사를 하다가 우연히 발견된 무덤이야. 무려 <strong>1,500년 동안 한 번도 도굴되지 않은</strong> 완벽한 상태였어!</p>
+    <p>무덤 안에서 발견된 유물은 <strong>4,600여 점</strong>! 왕과 왕비의 금관 장식, 금귀걸이, 금동 신발, 청동 거울 등 백제의 섬세하고 우아한 예술을 보여주는 보물들이 쏟아져 나왔어. 특히 무덤 주인이 누구인지 알려주는 <strong>지석(묘지명)</strong>이 발견되어 정확히 무령왕과 왕비의 무덤임을 알 수 있었어.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>백제 금동대향로 - 국보 중의 국보</h3>
+    <div class="illust"><img src="korean_history_images/ch4_incense_burner.png" alt="백제 금동대향로"><p class="illust-cap">백제 금동대향로</p></div>
+    <p><strong>백제 금동대향로</strong>는 1993년 부여에서 발견된 향로야. 높이 61.8cm의 이 향로는 백제 예술의 최고 걸작이야:</p>
+    <ul class="info-list">
+      <li><strong>꼭대기</strong>: 봉황이 여의주를 물고 서 있어</li>
+      <li><strong>뚜껑</strong>: 신선, 악기 연주자, 동물 등이 산 속에서 어울리는 장면 (5악사, 16나한 등)</li>
+      <li><strong>몸체</strong>: 연꽃 무늬가 새겨진 그릇</li>
+      <li><strong>받침</strong>: 용이 입을 벌려 향로를 받치고 있어</li>
+    </ul>
+    <p>이 향로에서 불교, 도교, 한국 전통 신앙이 모두 조화롭게 표현되어 있어. 백제의 높은 문화 수준을 보여주는 대표 유물이야.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>계백과 황산벌 전투 - 백제의 마지막</h3>
+    <div class="illust"><img src="korean_history_images/ch4_gyebaek.png" alt="계백의 황산벌 전투"><p class="illust-cap">계백의 황산벌 전투</p></div>
+    <p><strong>660년</strong>, 나당연합군이 백제를 공격했어. 백제의 장군 <strong>계백</strong>은 <strong>5,000명의 결사대</strong>를 이끌고 황산벌(지금의 충남 논산)에서 신라의 <strong>5만 대군</strong>을 맞아 싸웠어.</p>
+    <p>출전하기 전 계백은 가족이 적에게 욕을 당할까 두려워 <strong>직접 가족을 먼저 보냈다</strong>는 비극적인 이야기가 전해져. "죽을 각오로 싸우면 반드시 이긴다!"며 4번이나 신라군을 격퇴했지만, 숫자 차이를 극복하지 못하고 결국 전사했어.</p>
+
+    <div class="think-box">
+      <h4>생각해 보기</h4>
+      <p>10배나 많은 적과 싸운 계백의 용기에 대해 어떻게 생각하니? 그리고 전쟁에서 가족을 먼저 보낸 그의 결정은 어떤 의미였을까?</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>백제의 문화 전파</h3>
+    <p>백제는 중국의 문화를 받아들여 자기만의 것으로 발전시킨 뒤, 일본에 전파했어:</p>
+    <ul class="info-list">
+      <li><strong>아직기</strong>: 일본 태자에게 한자를 가르침</li>
+      <li><strong>왕인</strong>: 천자문과 논어를 일본에 전함</li>
+      <li>백제 장인들이 일본 최초의 절 <strong>아스카데라</strong>를 건축</li>
+      <li>불교, 의학, 역법, 천문학 등을 일본에 전파</li>
+    </ul>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">백제의 미소</div>
+      <p>충남 서산에 있는 <strong>서산 마애삼존불상</strong>을 "백제의 미소"라고 불러. 바위에 새겨진 부처님이 너무나 부드럽고 따뜻한 미소를 짓고 있거든. 이 미소에서 백제 사람들의 <strong>섬세하고 우아한 감성</strong>을 느낄 수 있어.</p>
+    </div>
+
+    <div class="vocab-box">
+      <h4>용어 정리</h4>
+      <dl>
+        <dt>한성</dt><dd>백제의 첫 수도 (지금의 서울)</dd>
+        <dt>웅진</dt><dd>두 번째 수도 (지금의 공주)</dd>
+        <dt>사비</dt><dd>세 번째 수도 (지금의 부여)</dd>
+        <dt>칠지도</dt><dd>6개 가지가 달린 의례용 철검, 백제가 일본에 보냄</dd>
+        <dt>금동대향로</dt><dd>백제 예술의 최고 걸작, 국보 287호</dd>
+        <dt>무령왕릉</dt><dd>1971년 발견된 도굴되지 않은 완벽한 왕릉</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-header"><h2>백제 전성기 (375년, 근초고왕)</h2><p>한반도 서남부를 장악한 문화 강국</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="korean_history_images/map_375.png" alt="백제 전성기 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">375년 백제 근초고왕 전성기 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">수도를 왜 옮겼을까?</h3>
+        <ul class="info-list">
+          <li><strong>한성 함락</strong>: 고구려 장수왕이 공격, 개로왕 전사!</li>
+          <li><strong>웅진</strong>: 금강 유역으로 피신, 무령왕이 국력 회복</li>
+          <li><strong>사비</strong>: 성왕이 넓은 평야로 옮김</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <h3>백제 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 백제를 세운 사람은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">주몽</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">비류</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">온조</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">근초고왕</div>
+</div>
+<div class="quiz-box"><h4>Q2. 백제의 첫 수도는 어디일까?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">평양</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">웅진(공주)</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">한성(서울)</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">사비(부여)</div>
+</div>
+<div class="quiz-box"><h4>Q3. 백제 전성기를 이끈 왕은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">온조</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">무령왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">근초고왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">의자왕</div>
+</div>
+<div class="quiz-box"><h4>Q4. 칠지도의 가지는 총 몇 개일까?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">4개</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">5개</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">6개</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">7개</div>
+</div>
+<div class="quiz-box"><h4>Q5. 무령왕릉이 발견된 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">1945년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">1960년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">1971년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">1993년</div>
+</div>
+<div class="quiz-box"><h4>Q6. 무령왕릉에서 발견된 유물 수는 약?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">100점</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">1,000점</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">4,600점</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">10,000점</div>
+</div>
+<div class="quiz-box"><h4>Q7. 백제 금동대향로 꼭대기에 있는 동물은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">용</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">거북이</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">봉황</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">호랑이</div>
+</div>
+<div class="quiz-box"><h4>Q8. 황산벌에서 계백의 결사대 규모는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">1,000명</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">3,000명</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">5,000명</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">10,000명</div>
+</div>
+<div class="quiz-box"><h4>Q9. 일본에 천자문과 논어를 전한 백제인은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">아직기</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">왕인</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">고흥</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">계백</div>
+</div>
+<div class="quiz-box"><h4>Q10. 백제가 멸망한 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">562년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">612년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">660년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">668년</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">을지문덕은 수나라 30만 대군에게 일부러 지는 척하며 깊이 끌어들였어요. '일부러 약한 척하는 전략'이 왜 효과적이었을까?</p>
+<div class="deep-answer"><p>적이 '이기고 있다'고 착각하면 방심하게 돼요. 을지문덕은 수나라 군대를 평양 근처까지 깊이 끌어들여 보급선(식량과 무기를 나르는 길)을 길게 만들었어요. 배고프고 지친 적을 살수(청천강)에서 한꺼번에 공격한 거예요. 이것을 '유인 전술'이라 하는데, 적의 자만심을 이용한 매우 영리한 전략이에요. 나폴레옹을 물리친 러시아도 비슷한 전략을 썼답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">고구려 고분 벽화에는 사냥, 춤, 씨름, 별자리 그림이 있어요. 무덤에 왜 이런 그림을 그렸을까?</p>
+<div class="deep-answer"><p>고구려 사람들은 죽은 후에도 삶이 계속된다고 믿었어요. 그래서 살아있을 때 좋아했던 것들을 무덤에 그려 죽은 사람이 저승에서도 즐길 수 있게 한 거예요. 또한 사신도(청룡, 백호, 주작, 현무)는 죽은 사람을 지켜주는 수호신이에요. 이 벽화들 덕분에 우리는 1,500년 전 사람들이 어떻게 살았는지 생생하게 알 수 있답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">광개토대왕은 영토를 크게 넓혔고, 아들 장수왕은 수도를 평양으로 옮겼어요. 아버지와 아들의 역할은 어떻게 달랐을까?</p>
+<div class="deep-answer"><p>광개토대왕은 '확장(정복)'에 집중한 왕이에요. 새로운 땅을 차지하고 고구려의 힘을 세계에 알렸죠. 장수왕은 '관리(안정)'에 집중한 왕이에요. 아버지가 넓힌 땅을 효과적으로 다스리기 위해 수도를 중심부인 평양으로 옮기고 체계적인 통치를 했어요. 나라를 키우는 것과 지키는 것, 둘 다 중요하지만 서로 다른 능력이 필요하답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+<div class="chapter-divider">&#9670; &#9670; &#9670;</div>
+<section class="section" id="ch5">
+  <h2 class="section-title"><span style="color:var(--silla);">5. 신라</span> - 천년의 왕국</h2>
+  <p class="section-subtitle">기원전 57년 ~ 935년, 약 1,000년간 이어진 놀라운 나라</p>
+
+  <div class="content-block">
+    <h3>건국 신화 - 알에서 태어난 왕</h3>
+    <div class="illust"><img src="korean_history_images/ch5_hyeokgeose.png" alt="박혁거세의 탄생"><p class="illust-cap">박혁거세의 탄생</p></div>
+    <p>옛날 진한 땅에 6개의 마을이 있었어. 어느 날 마을 촌장들이 모여 회의를 하고 있을 때, 하늘에서 <strong>빛이 내려와</strong> 숲속의 우물가를 비추었어. 가보니 <strong>큰 알</strong> 하나가 있었지!</p>
+    <p>알이 깨지면서 아기가 나왔는데, 몸에서 <strong>빛</strong>이 났어. 하얀 말 한 마리가 절을 하며 아기를 보호하고 있었지. 촌장들은 이 아기를 <strong>박혁거세</strong>라고 이름 지었어. '혁거세'는 "밝게 세상을 다스린다"는 뜻이야.</p>
+    <p>박혁거세는 13세에 왕이 되어 나라를 세웠어(기원전 57년). 나라 이름은 처음에 <strong>'서라벌'</strong>이었다가, 나중에 <strong>'신라'</strong>로 바뀌었어.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>신라 금관 - 세계에서 가장 화려한 왕관</h3>
+    <div class="illust"><img src="korean_history_images/ch5_gold_crown.png" alt="신라 금관 제작"><p class="illust-cap">신라 금관 제작</p></div>
+    <p>신라의 <strong>금관</strong>은 세계 어디에도 없는 독특하고 화려한 왕관이야. 현재까지 6개가 발견되었는데, 순금으로 만들어져 눈이 부실 정도야!</p>
+    <p>금관의 특징은 나뭇가지(出 모양)와 사슴뿔 장식이야. 여기에 <strong>곡옥(곡옥, 쉼표 모양 옥)</strong>과 <strong>금방울</strong>이 주렁주렁 매달려 있어. 왕이 걸을 때마다 금방울이 찰랑찰랑 소리를 냈을 거야!</p>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">금관은 실제로 썼을까?</div>
+      <p>금관은 너무 무겁고 약해서 일상적으로 쓰기 어려웠을 거야. 학자들은 <strong>장례 의식</strong>이나 중요한 <strong>제사</strong> 때만 사용했을 것으로 추측해. 신라 왕의 금관은 "나는 하늘과 연결된 신성한 존재"라는 의미를 가지고 있었어.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>진흥왕 - 신라의 대도약</h3>
+    <div class="illust"><img src="korean_history_images/ch5_jinheung.png" alt="진흥왕의 영토 확장"><p class="illust-cap">진흥왕의 영토 확장</p></div>
+    <p><strong>진흥왕</strong>(재위 540~576년)은 신라를 강대국으로 만든 왕이야. 그의 업적은:</p>
+    <ul class="info-list">
+      <li><strong>한강 유역</strong>을 차지! (백제와 동맹을 깨고 빼앗음)</li>
+      <li>함경도까지 진출하여 동해안 전역 확보</li>
+      <li>가야 연맹 정복 (대가야 562년 멸망)</li>
+      <li><strong>화랑도</strong> 창설 - 청소년 수련 조직</li>
+      <li>새 영토에 <strong>순수비</strong>를 세워 자신이 직접 다녀갔음을 기록</li>
+    </ul>
+    <p>특히 한강 유역을 차지한 것이 결정적이었어. 한강을 통해 <strong>중국과 직접 교류</strong>할 수 있게 되었고, 이것이 나중에 삼국통일의 기반이 되었거든.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>선덕여왕 - 최초의 여왕</h3>
+    <div class="illust"><img src="korean_history_images/ch5_seondeok.png" alt="선덕여왕과 첨성대"><p class="illust-cap">선덕여왕과 첨성대</p></div>
+    <p><strong>선덕여왕</strong>(재위 632~647년)은 신라, 아니 한국 역사 최초의 <strong>여왕</strong>이야! 성골(가장 높은 왕족) 남자가 없어서 여자인 선덕이 왕이 되었어.</p>
+    <p>선덕여왕의 업적:</p>
+    <ul class="info-list">
+      <li><strong>첨성대</strong> 건립 - 동아시아에서 가장 오래된 천문대!</li>
+      <li><strong>황룡사 9층 목탑</strong> 건설 지시 - 높이 약 80m!</li>
+      <li>당나라에 유학생을 보내 선진 문화 도입</li>
+      <li>김유신, 김춘추 등 인재 등용</li>
+    </ul>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">선덕여왕의 지혜 세 가지</div>
+      <p><strong>1. 모란꽃 이야기:</strong> 당 태종이 보내온 모란꽃 그림을 보고 "이 꽃은 향기가 없겠구나"라고 했어. 그림에 나비가 없었거든! (꽃에 향기가 있으면 나비가 있을 테니까)<br>
+      <strong>2. 개구리 이야기:</strong> 겨울에 개구리가 울자 "서쪽에 적이 숨어 있다"고 했는데, 정말 적군이 있었어!<br>
+      <strong>3. 자신의 죽음:</strong> 자기가 죽을 날짜까지 맞추었다고 해.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>첨성대 - 별을 관측하다</h3>
+    <div class="illust"><img src="korean_history_images/ch5_cheomseongdae.png" alt="첨성대"><p class="illust-cap">첨성대</p></div>
+    <p><strong>첨성대</strong>는 선덕여왕 때 건립된 <strong>천문 관측대</strong>야. 높이 약 9.17m, 화강암 <strong>362개</strong>를 쌓아 만들었어. 이 숫자는 음력 1년의 날수와 비슷해!</p>
+    <p>가운데에 사각형 창문이 있는데, <strong>춘분과 추분</strong>에 햇빛이 이 창문을 통해 바닥까지 비추어진다고 해. 천문학과 수학이 결합된 놀라운 건축물이야.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>화랑도 - 신라의 엘리트 청소년</h3>
+    <div class="illust"><img src="korean_history_images/ch5_hwarang.png" alt="화랑도의 훈련"><p class="illust-cap">화랑도의 훈련</p></div>
+    <p><strong>화랑도</strong>는 진흥왕이 만든 <strong>청소년 수련 조직</strong>이야. 귀족 출신의 잘생긴 청년을 '화랑'으로 뽑고, 그 아래에 수백~수천 명의 '낭도'가 따랐어.</p>
+    <p>화랑들은 산과 강을 돌아다니며 심신을 단련하고, 원광법사가 만든 <strong>세속오계</strong>(5가지 약속)를 지켰어:</p>
+    <div class="story-box">
+      <h4>세속오계</h4>
+      <p><strong>1. 사군이충</strong> - 나라에 충성하자<br>
+      <strong>2. 사친이효</strong> - 부모에게 효도하자<br>
+      <strong>3. 교우이신</strong> - 친구를 믿자<br>
+      <strong>4. 임전무퇴</strong> - 싸움에서 물러나지 말자<br>
+      <strong>5. 살생유택</strong> - 생명을 함부로 죽이지 말자</p>
+    </div>
+    <p>화랑 출신 중 가장 유명한 사람이 바로 <strong>김유신</strong>이야!</p>
+  </div>
+
+  <div class="content-block">
+    <h3>김유신 - 삼국통일의 주역</h3>
+    <div class="illust"><img src="korean_history_images/ch5_kim_yushin.png" alt="김유신의 수련"><p class="illust-cap">김유신의 수련</p></div>
+    <p><strong>김유신</strong>(595~673년)은 원래 <strong>가야 왕족</strong> 출신이야. 가야가 신라에 흡수된 후 가야계는 차별을 받았는데, 김유신은 뛰어난 능력으로 이를 극복했어.</p>
+    <p>15세에 화랑이 된 김유신은 혼자 산속 동굴에서 수련하며 검술을 갈고닦았어. 그의 칼에서 빛이 났다는 전설도 있어! 김유신은 평생 친구인 <strong>김춘추</strong>(후에 태종무열왕)와 함께 삼국통일의 꿈을 이루어 냈어.</p>
+
+    <div class="vocab-box">
+      <h4>용어 정리</h4>
+      <dl>
+        <dt>성골</dt><dd>부모 모두 왕족인 최고 신분</dd>
+        <dt>진골</dt><dd>한쪽만 왕족인 귀족 신분</dd>
+        <dt>골품제</dt><dd>신라의 신분 제도 (혈통으로 모든 것이 결정)</dd>
+        <dt>첨성대</dt><dd>동아시아 최고(最古)의 천문 관측대</dd>
+        <dt>화랑도</dt><dd>귀족 청소년 수련 조직</dd>
+        <dt>세속오계</dt><dd>화랑이 지킨 5가지 약속</dd>
+      </dl>
+    </div>
+  </div>
+
+  
+  <div class="map-container" style="margin-top:2rem;">
+    <div class="map-header">
+      <h2>삼국시대 변화 (6세기, 진흥왕 시기)</h2>
+      <p>신라가 한강 유역을 차지하며 판도가 바뀌다!</p>
+    </div>
+    <div class="map-body">
+      <div class="map-svg-area" style="flex:1 1 60%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/History_of_Korea-576_ko.png" alt="삼국시대 지도 (576년)">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">삼국시대 영토 - 576년 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area" style="flex:1 1 35%;">
+        <h3 style="margin-bottom:1rem;">한강은 왜 중요할까?</h3>
+        <div class="fun-fact">
+          <div class="fun-fact-title">삼국의 한강 쟁탈전!</div>
+          <p>한강 유역을 가진 나라가 <strong>중국과 직접 무역</strong>을 할 수 있었어. 또 비옥한 땅에서 <strong>농사를 많이</strong> 지을 수 있었지.</p>
+          <p style="margin-top:0.8rem;"><strong>고구려</strong> 차지 &#8594; <strong>백제</strong> 차지 &#8594; <strong>신라</strong> 차지!</p>
+        </div>
+        <h4 style="margin:1.5rem 0 0.8rem;">진흥왕 순수비란?</h4>
+        <p style="font-size:0.9rem;color:#555;">진흥왕이 새로 차지한 땅에 직접 가서 세운 기념비야. 북한산, 창녕, 마운령, 황초령 등에 세웠어.</p>
+      </div>
+    </div>
+  </div>
+
+<div class="quiz-section">
+    <h3>신라 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 신라를 세운 사람은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">주몽</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">온조</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">박혁거세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김수로왕</div>
+</div>
+<div class="quiz-box"><h4>Q2. 신라의 수도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">평양</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">한성</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">경주</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">부여</div>
+</div>
+<div class="quiz-box"><h4>Q3. 한국 최초의 여왕은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">진덕여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">선덕여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">진성여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">허황옥</div>
+</div>
+<div class="quiz-box"><h4>Q4. 첨성대를 세운 사람은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">진흥왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">선덕여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김유신</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김춘추</div>
+</div>
+<div class="quiz-box"><h4>Q5. 첨성대에 사용된 돌의 수는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">100개</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">200개</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">362개</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">500개</div>
+</div>
+<div class="quiz-box"><h4>Q6. 화랑도를 만든 왕은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">박혁거세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">진흥왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">선덕여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">태종무열왕</div>
+</div>
+<div class="quiz-box"><h4>Q7. 세속오계에 포함되지 않는 것은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">사군이충</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">임전무퇴</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">부국강병</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">살생유택</div>
+</div>
+<div class="quiz-box"><h4>Q8. 김유신은 원래 어느 나라 왕족이었을까?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">고구려</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">백제</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">신라</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">가야</div>
+</div>
+<div class="quiz-box"><h4>Q9. 신라 금관에 매달린 곡옥의 모양은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">동그라미</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">별</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">쉼표(곡옥)</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">삼각형</div>
+</div>
+<div class="quiz-box"><h4>Q10. 한강 유역을 차지한 신라 왕은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">박혁거세</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">진흥왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">선덕여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김춘추</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">백제는 수도를 세 번이나 옮겼어요(한성→웅진→사비). 수도를 옮기는 것이 나라에 어떤 영향을 주었을까?</p>
+<div class="deep-answer"><p>수도를 옮기는 것은 매우 큰 일이에요. 좋은 점은 적의 공격에서 벗어나고 새로운 시작을 할 수 있다는 거예요. 하지만 나쁜 점도 있어요. 기존 수도에서 힘을 가진 귀족들이 반발하고, 백성들이 이사하면서 혼란이 생기죠. 백제의 경우 수도를 옮길 때마다 새로운 문화가 꽃피기도 했지만, 매번 고구려나 신라의 공격 때문에 어쩔 수 없이 옮긴 것이라 나라의 힘이 약해진 측면도 있었어요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">백제의 문화재(금동대향로, 무령왕릉)는 매우 세련되고 아름다워요. 전쟁이 많았던 시대에 어떻게 이렇게 뛰어난 예술이 가능했을까?</p>
+<div class="deep-answer"><p>백제는 중국, 일본과 활발히 교류하며 다양한 문화를 받아들이고 자기 것으로 만들었어요. 특히 바다를 통한 무역이 활발해서 새로운 기술과 재료를 쉽게 구할 수 있었답니다. 또한 전쟁 중에도 장인들은 계속 작품을 만들었어요. 아름다운 것을 만들고 싶은 인간의 욕구는 전쟁 속에서도 사라지지 않거든요. 오히려 불안한 시대일수록 종교(불교)와 예술에 더 의지하기도 해요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">백제가 멸망할 때 계백 장군은 5천 명으로 5만 명과 싸웠어요. 이길 수 없는 전쟁인데 왜 싸웠을까?</p>
+<div class="deep-answer"><p>계백은 전쟁 전에 가족을 직접 죽이고 출전했다고 해요. 그만큼 각오가 대단했죠. 이길 수 없다는 걸 알면서도 싸운 이유는 '나라에 대한 충성'과 '명예'예요. 포기하고 항복하면 목숨은 살 수 있지만, 나라와 동료를 저버리는 것이라 생각했어요. 이런 정신은 슬프지만 존경받는 이유이기도 해요. 다만, 이길 수 없는 싸움을 피하는 것도 용기라는 시각도 있답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+<div class="chapter-divider">&#9670; &#9670; &#9670;</div>
+<section class="section" id="ch6" style="background:#FFF9F0;">
+  <h2 class="section-title"><span style="color:var(--gaya);">6. 가야</span> - 잊혀진 철의 왕국</h2>
+  <p class="section-subtitle">42년 ~ 562년, 뛰어난 철 기술과 아름다운 음악의 나라</p>
+
+  <div class="content-block">
+    <h3>건국 신화 - 하늘에서 내려온 금빛 알</h3>
+    <div class="illust"><img src="korean_history_images/ch6_suro.png" alt="김수로왕의 탄생"><p class="illust-cap">김수로왕의 탄생</p></div>
+    <p>서기 42년, 가야 지역(지금의 김해) 구지봉에서 신비한 일이 일어났어. 하늘에서 이상한 소리가 들려왔지:</p>
+    <div class="story-box">
+      <h4>"거북아 거북아, 머리를 내밀어라. 내밀지 않으면 구워서 먹겠다!"</h4>
+      <p>9명의 촌장이 이 노래(구지가)를 부르며 춤을 추자, 하늘에서 <strong>붉은 보자기에 싸인 금빛 상자</strong>가 내려왔어. 상자 안에는 <strong>6개의 황금 알</strong>이 있었지!</p>
+      <p>12일 후 알이 깨지며 아이들이 나왔는데, 가장 먼저 태어난 아이가 <strong>김수로</strong>야. 수로는 <strong>금관가야</strong>의 왕이 되었고, 나머지 5명은 각각 다른 가야의 왕이 되었어.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>허황옥 - 인도에서 온 공주</h3>
+    <div class="illust"><img src="korean_history_images/ch6_hwanghok.png" alt="허황옥의 도착"><p class="illust-cap">허황옥의 도착</p></div>
+    <p>서기 48년, 먼 바다 건너 <strong>인도 아유타국</strong>에서 공주가 배를 타고 찾아왔어. 그녀의 이름은 <strong>허황옥</strong>. 김수로왕은 이 공주와 결혼했어.</p>
+    <p>허황옥이 정말 인도에서 왔는지는 학자들 사이에서 논쟁이 있지만, 가야가 <strong>해상 무역</strong>을 통해 먼 나라와 교류했다는 증거야. 김해에 있는 <strong>쌍어문 석탑</strong>에는 인도 아유타 지역의 문양과 비슷한 두 마리 물고기 문양이 새겨져 있어!</p>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">김해 김씨와 허씨의 조상!</div>
+      <p>김수로왕과 허황옥은 <strong>김해 김씨</strong>와 <strong>김해 허씨</strong>의 시조야! 오늘날 한국에서 가장 많은 성씨 중 하나인 김해 김씨가 바로 가야에서 시작된 거야. 약 450만 명 이상이 김해 김씨라고 해!</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>철의 왕국 - 가야의 경제력</h3>
+    <div class="illust"><img src="korean_history_images/ch6_iron.png" alt="가야의 철 생산"><p class="illust-cap">가야의 철 생산</p></div>
+    <p>가야는 "삼국"에 포함되지 않지만, 사실 매우 강한 나라들이었어. 가야의 가장 큰 힘은 바로 <strong>철</strong>이야!</p>
+    <p>가야 지역에는 양질의 <strong>철광석</strong>이 풍부했어. 가야 사람들은 뛰어난 제철 기술로 철을 생산하고:</p>
+    <ul class="info-list">
+      <li>덩이쇠(철 덩어리)를 <strong>화폐처럼</strong> 사용</li>
+      <li>철제 갑옷, 투구, 무기를 만들어 <strong>수출</strong></li>
+      <li>일본, 중국, 낙랑 등과 <strong>해상 무역</strong></li>
+      <li>농기구를 만들어 <strong>농업 생산력</strong> 향상</li>
+    </ul>
+
+    <div class="think-box">
+      <h4>생각해 보기</h4>
+      <p>가야는 이렇게 뛰어난 철 기술을 가지고 있었는데 왜 통일된 하나의 나라를 만들지 못했을까? (힌트: 가야는 6개 이상의 소국이 각각 독립적으로 존재하는 "연맹"이었어.)</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>가야금 - 우륵의 음악</h3>
+    <div class="illust"><img src="korean_history_images/ch6_gayageum.png" alt="우륵의 가야금 연주"><p class="illust-cap">우륵의 가야금 연주</p></div>
+    <p>가야의 또 다른 유산은 <strong>가야금</strong>이야. 대가야의 가실왕이 음악가 <strong>우륵</strong>에게 12줄짜리 현악기를 만들게 했어. 이것이 바로 <strong>가야금</strong>이야!</p>
+    <p>우륵은 12곡의 음악을 작곡했는데, 각 곡은 가야의 각 지역을 표현한 것이었어. 대가야가 신라에 멸망한 후 우륵은 신라로 건너가 가야금을 전했고, 이 전통은 오늘날까지 이어지고 있어. 가야금은 현재 한국 전통 음악의 대표 악기 중 하나야!</p>
+
+    <div class="vocab-box">
+      <h4>가야 연맹의 나라들</h4>
+      <dl>
+        <dt>금관가야</dt><dd>김해, 초기 맹주 (김수로왕)</dd>
+        <dt>대가야</dt><dd>고령, 후기 맹주 (가야금의 본고장)</dd>
+        <dt>아라가야</dt><dd>함안</dd>
+        <dt>소가야</dt><dd>고성</dd>
+        <dt>비화가야</dt><dd>창녕</dd>
+        <dt>성산가야</dt><dd>성주</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-header"><h2>가야 연맹의 위치 (300년경)</h2><p>하나의 나라가 아니라 여러 소국들의 연합</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="korean_history_images/map_300.png" alt="가야 시대 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">300년경 한반도 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">가야 핵심 정리</h3>
+        <ul class="info-list">
+          <li><strong>건국</strong>: 42년, 김수로왕</li>
+          <li><strong>특기</strong>: 철 생산과 해상 무역</li>
+          <li><strong>문화유산</strong>: 가야금, 철갑옷</li>
+          <li><strong>멸망</strong>: 562년 신라에 흡수</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <h3>가야 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 금관가야를 세운 사람은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">단군</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">주몽</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">김수로왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">박혁거세</div>
+</div>
+<div class="quiz-box"><h4>Q2. 금관가야가 있던 곳은 현재의?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">경주</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">부여</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">김해</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">공주</div>
+</div>
+<div class="quiz-box"><h4>Q3. 구지가에서 부른 동물은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">호랑이</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">거북이</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">용</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">학</div>
+</div>
+<div class="quiz-box"><h4>Q4. 허황옥이 왔다고 전해지는 나라는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">중국</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">일본</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">인도</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">태국</div>
+</div>
+<div class="quiz-box"><h4>Q5. 가야에서 화폐처럼 사용한 것은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">금</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">은</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">덩이쇠(철)</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">조개</div>
+</div>
+<div class="quiz-box"><h4>Q6. 가야금을 만든 음악가는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">고흥</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">왕인</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">우륵</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">아직기</div>
+</div>
+<div class="quiz-box"><h4>Q7. 가야금의 줄 수는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">6줄</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">9줄</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">12줄</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">15줄</div>
+</div>
+<div class="quiz-box"><h4>Q8. 가야가 '삼국'에 포함되지 않는 이유는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">너무 작아서</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">통일된 왕국이 아닌 연맹이라서</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">문화가 없어서</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">역사가 짧아서</div>
+</div>
+<div class="quiz-box"><h4>Q9. 가야가 멸망한 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">475년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">532년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">562년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">660년</div>
+</div>
+<div class="quiz-box"><h4>Q10. 가야 연맹의 후기 맹주는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">금관가야</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">대가야</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">아라가야</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">소가야</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">선덕여왕 시대에 첨성대를 세웠어요. 별을 관찰하는 것이 나라를 다스리는 데 왜 중요했을까?</p>
+<div class="deep-answer"><p>옛날에는 별과 하늘의 변화가 농사와 직접 연결되었어요. 별자리의 움직임으로 계절을 알고, 씨 뿌리는 시기와 수확 시기를 정했답니다. 또한 왕은 '하늘의 뜻'을 읽는 사람이라 여겨졌기에, 천문 관측은 왕의 권위를 보여주는 수단이기도 했어요. 일식이나 혜성이 나타나면 나쁜 징조로 보았기 때문에, 이를 미리 예측하는 것이 정치적으로도 중요했답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">신라의 골품제는 태어난 집안에 따라 할 수 있는 일이 정해져 있었어요. 이 제도가 초기 신라에는 도움이 되었지만 나중에는 해가 된 이유는?</p>
+<div class="deep-answer"><p>초기에는 골품제 덕분에 사회 질서가 안정되었어요. 누가 왕이 되고 누가 장군이 될지 정해져 있으니 권력 다툼이 적었죠. 하지만 나라가 커지면서 능력 있는 사람이 신분 때문에 실력을 펼치지 못하게 되었어요. 뛰어난 인재들이 좌절하면 사회 발전이 멈추고, 진골 귀족들만 높은 자리를 독차지하니 부패가 심해졌답니다. 모든 제도는 시대에 맞게 바뀌어야 한다는 교훈이에요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">화랑도는 전사이면서 동시에 시를 짓고 산을 돌아다녔어요. 왜 '싸우는 기술'과 '아름다움을 느끼는 마음'을 함께 가르쳤을까?</p>
+<div class="deep-answer"><p>화랑도의 교육 철학은 '몸과 마음을 함께 키운다'는 것이에요. 칼만 잘 쓰는 사람은 난폭해질 수 있고, 글만 읽는 사람은 나라를 지키지 못해요. 자연 속에서 아름다움을 느끼는 사람은 무엇을 지켜야 하는지 알고, 전투 훈련을 받은 사람은 실제로 지킬 힘이 있어요. 이것은 오늘날 교육에서도 '지덕체(지식, 도덕, 체력)' 균형을 강조하는 것과 같은 생각이랍니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+<div class="chapter-divider">&#9670; &#9670; &#9670;</div>
+<section class="section" id="ch7">
+  <h2 class="section-title">7. 삼국 통일 전쟁</h2>
+  <p class="section-subtitle">660~676년, 한반도의 운명을 결정한 격동의 16년</p>
+
+  <div class="content-block">
+    <h3>김춘추의 외교 - "적의 적은 나의 친구"</h3>
+    <div class="illust"><img src="korean_history_images/ch7_chunchu_diplomacy.png" alt="김춘추의 당나라 외교"><p class="illust-cap">김춘추의 당나라 외교</p></div>
+    <p>신라의 <strong>김춘추</strong>는 뛰어난 외교관이었어. 642년 백제의 의자왕이 신라의 <strong>대야성</strong>을 공격해 김춘추의 딸과 사위가 죽는 비극이 일어났어. 복수를 다짐한 김춘추는 동맹을 찾아 나섰지.</p>
+    <p>처음에는 고구려에 도움을 요청했지만 거절당했어. 그래서 바다를 건너 <strong>당나라</strong>를 찾아갔지. 당 태종과 회담한 김춘추는 "함께 백제와 고구려를 치자!"는 <strong>나당동맹</strong>을 맺는 데 성공했어 (648년).</p>
+    <p>김춘추는 후에 <strong>태종무열왕</strong>이 되어 통일의 기반을 닦았어. 최초의 <strong>진골</strong> 출신 왕이기도 해.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>백제 멸망 (660년)</h3>
+    <p>660년, 나당연합군이 백제를 공격했어. 당나라 소정방이 이끄는 13만 대군이 바다를 건너오고, 김유신의 5만 신라군이 육로로 진군했어.</p>
+    <div class="illust"><img src="korean_history_images/ch7_hwangsanbeol.png" alt="황산벌 전투"><p class="illust-cap">황산벌 전투</p></div>
+    <p><strong>황산벌 전투</strong>에서 계백의 5,000 결사대가 4번이나 신라군을 격퇴했지만, 신라의 젊은 장수 <strong>관창</strong>(16세!)이 적진에 뛰어들어 전사하자, 신라 병사들이 분노하며 총공격을 감행했어.</p>
+    <div class="illust"><img src="korean_history_images/ch7_baekje_fall.png" alt="백제의 멸망"><p class="illust-cap">백제의 멸망</p></div>
+    <p>결국 계백은 전사하고, 사비성이 함락되었어. 의자왕은 항복했고, 백제의 궁녀들이 <strong>낙화암</strong>(꽃이 떨어지는 바위)에서 백마강으로 뛰어내렸다는 슬픈 전설이 전해져.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>고구려 멸망 (668년)</h3>
+    <div class="illust"><img src="korean_history_images/ch7_goguryeo_fall.png" alt="고구려의 최후"><p class="illust-cap">고구려의 최후</p></div>
+    <p>백제를 무너뜨린 나당연합군은 다음 목표인 고구려를 공격했어. 하지만 고구려는 쉬운 상대가 아니었지!</p>
+    <p>666년 연개소문이 죽자 그의 세 아들이 <strong>권력 다툼</strong>을 벌였어. 큰아들 남생이 당나라로 도망가 고구려의 약점을 알려주는 배신을 했어. 결국 <strong>668년</strong>, 나당연합군에 의해 평양이 함락되고 고구려는 700년의 역사를 마감했어.</p>
+
+    <div class="fun-fact">
+      <div class="fun-fact-title">고구려 유민의 저항</div>
+      <p>고구려가 멸망한 후에도 <strong>검모잠, 고연무, 안승</strong> 등이 고구려 부흥 운동을 벌였어. 특히 대조영은 고구려 유민과 말갈족을 이끌고 <strong>발해</strong>(698년)를 건국했어! 발해는 스스로를 고구려의 후계자로 여겼어.</p>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>나당전쟁 - 당나라를 몰아내다 (670~676년)</h3>
+    <div class="illust"><img src="korean_history_images/ch7_nadan_war.png" alt="매소성 전투"><p class="illust-cap">매소성 전투</p></div>
+    <p>문제는 당나라였어. 당나라는 백제와 고구려를 함께 멸망시켜줬지만, 한반도 전체를 자기 것으로 만들려 했어! 평양에 안동도호부를 설치하고 백제 땅에도 웅진도독부를 두었지.</p>
+    <p>신라의 <strong>문무왕</strong>은 이를 거부하고 당나라와 전쟁을 시작했어:</p>
+    <div class="story-box">
+      <h4>나당전쟁의 주요 전투</h4>
+      <p><strong>매소성 전투 (675년):</strong> 이근행이 이끄는 당나라 20만 대군을 신라가 격파! 군마 30,000필과 무기를 노획.<br>
+      <strong>기벌포 해전 (676년):</strong> 서해에서 당나라 해군을 크게 무찌름. 당나라가 한반도에서 완전 철수!</p>
+    </div>
+    <div class="illust"><img src="korean_history_images/ch7_unification.png" alt="삼국통일의 순간"><p class="illust-cap">삼국통일의 순간</p></div>
+    <p><strong>676년</strong>, 신라는 마침내 당나라 세력을 한반도에서 몰아내고 <strong>삼국 통일</strong>을 완성했어! 대동강~원산만 이남의 한반도를 하나의 나라로 통일한 거야.</p>
+
+    <div class="think-box">
+      <h4>토론: 신라의 삼국통일은 진정한 통일인가?</h4>
+      <p><strong>긍정적 평가:</strong> 삼한의 후예를 하나로 모음, 전쟁 종식, 민족 통합의 기반<br>
+      <strong>부정적 평가:</strong> 외세(당나라)를 끌어들임, 대동강 이북의 넓은 고구려 영토 상실, 만주 포기</p>
+      <p>너는 어떻게 생각하니? 친구들과 토론해 봐!</p>
+    </div>
+
+    <div class="vocab-box">
+      <h4>용어 정리</h4>
+      <dl>
+        <dt>나당동맹</dt><dd>신라와 당나라의 군사 동맹 (648년)</dd>
+        <dt>황산벌 전투</dt><dd>계백 5,000 vs 신라 50,000의 전투</dd>
+        <dt>낙화암</dt><dd>백제 궁녀들이 뛰어내렸다는 절벽</dd>
+        <dt>나당전쟁</dt><dd>통일 후 당나라를 몰아내기 위한 전쟁</dd>
+        <dt>매소성 전투</dt><dd>당나라 20만 대군을 격파한 결전</dd>
+        <dt>기벌포 해전</dt><dd>당나라 해군을 물리친 최종 해전</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-header"><h2>삼국 통일 전쟁 (645~676년)</h2><p>백제 멸망 &#8594; 고구려 멸망 &#8594; 나당전쟁 &#8594; 통일!</p></div>
+    <div class="map-body">
+      <div class="map-svg-area">
+        <img src="korean_history_images/map_645.png" alt="삼국 통일 전쟁 지도">
+        <p style="font-size:0.75rem;color:#999;margin-top:0.5rem;">645년 전후 한반도 (출처: Wikimedia Commons)</p>
+      </div>
+      <div class="map-info-area">
+        <h3 style="margin-bottom:1rem;">통일 과정 요약</h3>
+        <ul class="info-list">
+          <li><strong>648년</strong>: 나당동맹 체결</li>
+          <li><strong>660년</strong>: 백제 멸망 (황산벌, 사비성)</li>
+          <li><strong>668년</strong>: 고구려 멸망 (평양성)</li>
+          <li><strong>670~676년</strong>: 나당전쟁</li>
+          <li><strong>676년</strong>: 삼국통일 완성!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <h3>삼국통일 퀴즈 (10문제)</h3>
+<div class="quiz-box"><h4>Q1. 나당동맹을 이끈 신라의 외교관은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김유신</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">김춘추</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">을지문덕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">계백</div>
+</div>
+<div class="quiz-box"><h4>Q2. 나당동맹이 체결된 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">642년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">648년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">660년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">668년</div>
+</div>
+<div class="quiz-box"><h4>Q3. 백제가 멸망한 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">648년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">660년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">668년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">676년</div>
+</div>
+<div class="quiz-box"><h4>Q4. 황산벌에서 적진에 뛰어든 16세 신라 장수는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김유신</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김춘추</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">관창</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">화랑</div>
+</div>
+<div class="quiz-box"><h4>Q5. 고구려 멸망의 직접적 원인은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">살수대첩 패배</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">연개소문 아들들의 내분</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">자연재해</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">경제 위기</div>
+</div>
+<div class="quiz-box"><h4>Q6. 당나라를 한반도에서 몰아낸 결정적 전투는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">황산벌 전투</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">안시성 전투</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">매소성 전투와 기벌포 해전</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">살수대첩</div>
+</div>
+<div class="quiz-box"><h4>Q7. 삼국통일이 완성된 연도는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">660년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">668년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">670년</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">676년</div>
+</div>
+<div class="quiz-box"><h4>Q8. 고구려 멸망 후 유민이 세운 나라는?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">후고구려</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">발해</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">후백제</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">고려</div>
+</div>
+<div class="quiz-box"><h4>Q9. 신라 삼국통일에 대한 비판은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">너무 오래 걸렸다</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">외세를 끌어들이고 영토를 잃었다</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">문화가 파괴되었다</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">경제가 나빠졌다</div>
+</div>
+<div class="quiz-box"><h4>Q10. 삼국을 통일한 신라의 왕은?</h4>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">진흥왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">선덕여왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, true)">태종무열왕과 문무왕</div>
+    <div class="quiz-item" onclick="checkAnswer(this, false)">김유신</div>
+</div>
+  </div>
+<div class="deep-think">
+<h3>깊이 생각해보기</h3>
+<div class="deep-q">
+<p class="question">가야는 하나의 왕국이 아니라 여러 소국들의 연맹이었어요. '하나의 강한 나라'와 '여러 나라의 연합' 중 어떤 것이 더 유리했을까?</p>
+<div class="deep-answer"><p>연맹의 장점은 각 소국이 자유롭게 자기 특색을 발전시킬 수 있다는 거예요. 가야의 철 기술이 뛰어났던 것은 각 소국이 경쟁하며 기술을 발전시켰기 때문이에요. 하지만 단점은 외부 공격에 하나로 뭉치기 어렵다는 것이에요. 신라가 한 명의 왕 아래 단결했던 반면, 가야는 소국들이 따로 놀아 결국 하나씩 흡수되었어요. 오늘날 유럽연합(EU)도 비슷한 고민을 하고 있답니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">가야는 철을 생산하고 수출하는 나라였어요. '철'이 왜 그 시대에 그렇게 중요했을까?</p>
+<div class="deep-answer"><p>철은 오늘날의 '석유'나 '반도체'와 같은 전략 자원이었어요. 철로 무기(칼, 갑옷)를 만들면 전쟁에서 유리하고, 농기구(쟁기, 낫)를 만들면 농사에 유리해요. 가야의 철은 품질이 뛰어나 일본과 중국에 수출했는데, 이것은 가야가 '기술 강국'이었다는 뜻이에요. 자원이 풍부하면 무역을 통해 부유해지고, 부유하면 문화도 발전하는 선순환이 일어나요.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+<div class="deep-q">
+<p class="question">허황옥 공주가 인도에서 배를 타고 가야에 왔다는 이야기가 사실이라면, 2,000년 전에 어떻게 인도와 한반도가 연결될 수 있었을까?</p>
+<div class="deep-answer"><p>2,000년 전에도 바다를 통한 교류는 생각보다 활발했어요. 인도양에서 동남아시아를 거쳐 중국, 한반도, 일본까지 이어지는 '바다의 실크로드'가 있었답니다. 실제로 가야 지역에서 인도 유리구슬이 발견되었고, 이것은 교역의 증거예요. 허황옥 이야기가 100% 사실이 아니더라도, 고대에 이미 먼 나라와 교류가 있었다는 역사적 사실을 반영하는 거랍니다.</p></div>
+<button class="deep-toggle" onclick="toggleAnswer(this)">🔒 답안 보기 (학부모용)</button>
+</div>
+</div>
+
+</section>
+<section class="section" id="timeline" style="background:#F5F0E8;">
+  <h2 class="section-title">8. 시대별 연표</h2>
+  <p class="section-subtitle">한눈에 보는 선사시대 ~ 삼국통일</p>
+  <div class="timeline">
+    <div class="timeline-item" style="border-left:3px solid #795548;">
+      <div class="timeline-year" style="color:#795548;">기원전 70만 년</div><h4>구석기 시대 시작</h4><p>한반도에 사람이 살기 시작 (연천 전곡리 유적)</p>
+    </div>
+    <div class="timeline-item" style="border-left:3px solid #795548;">
+      <div class="timeline-year" style="color:#795548;">기원전 8000년</div><h4>신석기 시대</h4><p>빗살무늬 토기, 농사 시작, 정착 생활</p>
+    </div>
+    <div class="timeline-item" style="border-left:3px solid #795548;">
+      <div class="timeline-year" style="color:#795548;">기원전 2333년</div><h4>고조선 건국</h4><p>단군왕검이 아사달에 세운 최초의 국가</p>
+    </div>
+    <div class="timeline-item" style="border-left:3px solid #795548;">
+      <div class="timeline-year" style="color:#795548;">기원전 194년</div><h4>위만 조선</h4><p>위만이 왕위를 빼앗고 위만 조선 시작</p>
+    </div>
+    <div class="timeline-item" style="border-left:3px solid #795548;">
+      <div class="timeline-year" style="color:#795548;">기원전 108년</div><h4>고조선 멸망</h4><p>한나라 무제의 침략으로 멸망</p>
+    </div>
+    <div class="timeline-item silla">
+      <div class="timeline-year" style="color:var(--silla);">기원전 57년</div><h4>신라 건국</h4><p>박혁거세가 서라벌에서 건국</p>
+    </div>
+    <div class="timeline-item goguryeo">
+      <div class="timeline-year" style="color:var(--goguryeo);">기원전 37년</div><h4>고구려 건국</h4><p>주몽이 졸본에서 건국</p>
+    </div>
+    <div class="timeline-item baekje">
+      <div class="timeline-year" style="color:var(--baekje);">기원전 18년</div><h4>백제 건국</h4><p>온조가 한강 유역(위례성)에서 건국</p>
+    </div>
+    <div class="timeline-item gaya">
+      <div class="timeline-year" style="color:var(--gaya);">42년</div><h4>가야 건국</h4><p>김수로왕이 금관가야 건국</p>
+    </div>
+    <div class="timeline-item baekje">
+      <div class="timeline-year" style="color:var(--baekje);">346~375년</div><h4>근초고왕 전성기</h4><p>백제 최대 영토, 고구려 고국원왕 전사시킴</p>
+    </div>
+    <div class="timeline-item goguryeo">
+      <div class="timeline-year" style="color:var(--goguryeo);">391~412년</div><h4>광개토대왕</h4><p>고구려 최대 영토 확장, 64성 1400촌 정복</p>
+    </div>
+    <div class="timeline-item goguryeo">
+      <div class="timeline-year" style="color:var(--goguryeo);">413~491년</div><h4>장수왕</h4><p>평양 천도(427), 백제 한성 함락(475)</p>
+    </div>
+    <div class="timeline-item silla">
+      <div class="timeline-year" style="color:var(--silla);">540~576년</div><h4>진흥왕</h4><p>한강 유역 차지, 화랑도 창설, 순수비 건립</p>
+    </div>
+    <div class="timeline-item gaya">
+      <div class="timeline-year" style="color:var(--gaya);">562년</div><h4>가야 멸망</h4><p>대가야가 신라에 흡수됨</p>
+    </div>
+    <div class="timeline-item goguryeo">
+      <div class="timeline-year" style="color:var(--goguryeo);">612년</div><h4>살수대첩</h4><p>을지문덕이 수나라 30만 대군 격퇴</p>
+    </div>
+    <div class="timeline-item silla">
+      <div class="timeline-year" style="color:var(--silla);">632~647년</div><h4>선덕여왕</h4><p>첨성대 건립, 최초의 여왕</p>
+    </div>
+    <div class="timeline-item goguryeo">
+      <div class="timeline-year" style="color:var(--goguryeo);">645년</div><h4>안시성 전투</h4><p>연개소문, 당 태종 20만 대군 격퇴</p>
+    </div>
+    <div class="timeline-item silla">
+      <div class="timeline-year" style="color:var(--silla);">648년</div><h4>나당동맹</h4><p>김춘추가 당나라와 군사 동맹 체결</p>
+    </div>
+    <div class="timeline-item baekje">
+      <div class="timeline-year" style="color:var(--baekje);">660년</div><h4>백제 멸망</h4><p>나당연합군에 의해 멸망, 계백 황산벌 전투</p>
+    </div>
+    <div class="timeline-item goguryeo">
+      <div class="timeline-year" style="color:var(--goguryeo);">668년</div><h4>고구려 멸망</h4><p>연개소문 사후 내분, 나당연합군에 멸망</p>
+    </div>
+    <div class="timeline-item unified">
+      <div class="timeline-year" style="color:#9C27B0;">676년</div><h4>삼국 통일 완성!</h4><p>나당전쟁 승리, 기벌포 해전으로 당나라 축출</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="compare">
+  <h2 class="section-title">9. 삼국 + 가야 비교</h2>
+  <p class="section-subtitle">네 나라를 한눈에 비교해 보자!</p>
+  <table class="compare-table">
+    <thead><tr>
+      <th>구분</th><th>고구려</th><th>백제</th><th>신라</th><th>가야</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>건국</td><td>기원전 37년</td><td>기원전 18년</td><td>기원전 57년</td><td>42년</td></tr>
+      <tr><td>건국자</td><td>주몽</td><td>온조</td><td>박혁거세</td><td>김수로왕</td></tr>
+      <tr><td>수도</td><td>졸본&#8594;국내성&#8594;평양</td><td>한성&#8594;웅진&#8594;사비</td><td>경주 (금성)</td><td>김해 (금관가야)</td></tr>
+      <tr><td>전성기 왕</td><td>광개토대왕, 장수왕</td><td>근초고왕</td><td>진흥왕</td><td>-</td></tr>
+      <tr><td>위치</td><td>만주 + 한반도 북부</td><td>한반도 서남부</td><td>한반도 동남부</td><td>낙동강 유역</td></tr>
+      <tr><td>강점</td><td>군사력, 영토 확장</td><td>문화, 해상 무역</td><td>외교, 인재 양성</td><td>철 생산, 무역</td></tr>
+      <tr><td>대표 유물</td><td>광개토대왕릉비, 고분벽화</td><td>금동대향로, 무령왕릉</td><td>첨성대, 금관</td><td>철갑옷, 가야금</td></tr>
+      <tr><td>문화 특징</td><td>씩씩하고 웅장</td><td>섬세하고 우아</td><td>화려하고 독창적</td><td>실용적이고 국제적</td></tr>
+      <tr><td>멸망</td><td>668년 (나당연합)</td><td>660년 (나당연합)</td><td>935년 (고려에 항복)</td><td>562년 (신라에 흡수)</td></tr>
+    </tbody>
+  </table>
+</section>
+<section class="section" style="background:#F5F5F5;padding:2rem;">
+  <h3 style="font-size:1rem;color:#888;margin-bottom:0.5rem;">출처</h3>
+  <p style="font-size:0.8rem;color:#AAA;line-height:2;">
+    지도: <a href="https://commons.wikimedia.org/wiki/Category:Maps_of_the_Three_Kingdoms_of_Korea" style="color:#5D4037;">Wikimedia Commons</a> (CC BY-SA)<br>
+    삽화: Google Gemini 이미지 생성 AI로 제작<br>
+    내용: 초등학교 사회과 교과서 및 한국사 참고 자료 기반
+  </p>
+</section>
+<footer>
+  <p style="font-size:1.2rem;margin-bottom:0.5rem;">역사를 알면 미래가 보인다!</p>
+  <p style="opacity:0.7;">초등학생을 위한 한국사 교재 | 2026년 3월</p>
+</footer>
+<script>
+function checkAnswer(el, isCorrect) {
+  const siblings = el.parentElement.querySelectorAll('.quiz-item');
+  siblings.forEach(s => { s.classList.remove('correct','wrong'); s.style.pointerEvents='none'; });
+  if (isCorrect) {
+    el.classList.add('correct');
+    el.innerHTML += ' <strong style="color:#2E7D32;"> &#10004; 정답!</strong>';
+  } else {
+    el.classList.add('wrong');
+    el.innerHTML += ' <strong style="color:#C62828;"> &#10008; 오답!</strong>';
+    siblings.forEach(s => {
+      if (s.getAttribute('onclick') && s.getAttribute('onclick').includes('true') && s !== el) {
+        s.classList.add('correct');
+        s.innerHTML += ' <strong style="color:#2E7D32;"> &#8592; 정답</strong>';
+      }
+    });
+  }
+}
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+
+function toggleAnswer(btn) {
+  var answer = btn.previousElementSibling;
+  if (answer.style.display === 'block') {
+    answer.style.display = 'none';
+    btn.textContent = '\uD83D\uDD12 답안 보기 (학부모용)';
+    btn.classList.remove('open');
+  } else {
+    answer.style.display = 'block';
+    btn.textContent = '\uD83D\uDD13 답안 숨기기';
+    btn.classList.add('open');
+  }
+}
+
+</script>
+</body>
+</html>
