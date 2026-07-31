@@ -10,7 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="imagej,jython,inspection" />
+    <meta name="keywords" content="imagej,inspection,jython" />
     
     <meta name="description" content="6.1. ImagePlus: ImageJ의 이미지 instance Reference  TCP School 26) 클래스의 개념 ImagePlus    지난 글에서 객체지향 프로그래밍(OOP: Object Oriented Programming)의 개념을 짧게 설명했습니다.   instance란 것은 Class에 정의된 대로 만들어진 객체입니다.   자동차 설">
 <meta property="og:type" content="article">
@@ -242,14 +242,17 @@
 <p><code>instance</code>란 것은 <code>Class</code>에 정의된 대로 만들어진 객체입니다.</p>
 <ul>
 <li>
-<p>자동차 설계도(<code>Class</code>)와 자동차(<code>instance</code>) 관계로 보시면 비슷합니다.</p>
+<p>자동차 설계도(<code>Class</code>)와 자동차(<code>instance</code>) 관계로 보시면 비슷합니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>instance</code>는 <code>Class</code>에 선언된 <code>Field</code>와 <code>Method</code>를 가지고 있습니다.<br>
-(ex. 그랜저 <code>Class</code>로 만들어진 철수 차 <code>instance</code>의  후방카메라 옵션)</p>
+(ex. 그랜저 <code>Class</code>로 만들어진 철수 차 <code>instance</code>의  후방카메라 옵션)<br>
+<br></p>
 </li>
 <li>
-<p>다른 <code>Class</code>로 만든 <code>instance</code>끼리는 당연히 다르고 (ex. 람보르기니 vs 그랜저)</p>
+<p>다른 <code>Class</code>로 만든 <code>instance</code>끼리는 당연히 다르고 (ex. 람보르기니 vs 그랜저)<br>
+<br></p>
 </li>
 <li>
 <p>같은 <code>Class</code>로 만든 <code>instance</code>라도 다른 존재입니다 (ex. 철수 차 vs 영희 차)</p>
@@ -289,13 +292,16 @@
 <h4 id="6-2-1-이미지-기본-정보-분석">6.2.1. 이미지 기본 정보 분석</h4>
 <ul>
 <li>
-<p><a target="_blank" rel="noopener" href="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/"><code>이미지 파일 구조</code></a> 글에서, 이미지는 x, y 2차원 공간에 놓인 픽셀들로 구성되며 이미지 파일에는 <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성이 있다고 말씀드렸습니다.</p>
+<p><a target="_blank" rel="noopener" href="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-2-ImageFileStructure/"><code>이미지 파일 구조</code></a> 글에서, 이미지는 x, y 2차원 공간에 놓인 픽셀들로 구성되며 이미지 파일에는 <code>Channels</code>, <code>Slices</code>, <code>Frames</code> 속성이 있다고 말씀드렸습니다.<br>
+<br></p>
 </li>
 <li>
-<p>이 데이터들을 뽑아보겠습니다.</p>
+<p>이 데이터들을 뽑아보겠습니다.<br>
+<br></p>
 </li>
 <li>
-<p><code>File &gt; Open Samples &gt; Boats.gif</code>로 배 이미지를 엽니다.</p>
+<p><code>File &gt; Open Samples &gt; Boats.gif</code>로 배 이미지를 엽니다.<br>
+<br></p>
 </li>
 <li>
 <p>단축키 <code>[</code>를 눌러 아래 코드를 붙여넣고 실행합니다. <a target="_blank" rel="noopener" href="https://github.com/jehyunlee/image_processing/blob/master/imagej_script_python/sample_code/03_inspect_01imageplus.py">여기에서 다운로드</a>도 가능합니다.</p>
@@ -307,33 +313,34 @@
 <p><img src="6_insp_1.PNG" alt=" "></p>
 <ul>
 <li>
-<p>코드 맨 마지막 부분, <code>print &quot;image type:&quot;, types[imp.type]</code> 의 결과물로 <code>image type: 8-bit</code>이 출력되었습니다.</p>
+<p>코드 맨 마지막 부분, <code>print &quot;image type:&quot;, types[imp.type]</code> 의 결과물로 <code>image type: 8-bit</code>이 출력되었습니다.<br>
+<br></p>
 </li>
 <li>
 <p>읽어들인<code>boats.gif</code>의 type이 <code>ImagePlus</code>의  <code>GRAY8</code>형식이기 때문에 <code>imp.type</code>은 <code>ImagePlus.GRAY8</code>로 치환되었고, <code>python</code>의 데이터 타입 중 하나인 <code>dictionary</code> 호출에 따라 <code>types</code>에서 <code>ImagePlus.GRAY8</code>에 해당하는 값인 <code>8-bit</code>가 출력된 것입니다.</p>
 <br>
 </li>
-<li>
-<p><code>image type</code>은 이 이미지의 픽셀이 어떻게 구성되어 있는지를 보여줍니다.</p>
-<ul>
-<li>GRAY8 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^8 = 256 $개)의 정수값(0~255)을 가질 수 있습니다.</li>
-<li>GRAY16 : 흑백. 한 <code>pixel</code>은 8 bit ($ 2^{16} = 65536 $개)의 정수값(0~65535)을 가질 수 있습니다.</li>
-<li>GRAY32 : 흑백. 한 <code>pixel</code>은 32 bit의 소수(<code>float</code>)값을 가질 수 있습니다.</li>
-<li>COLOR_256: 컬러. 한 <code>pixel</code>은 3 개(Red, Green, Blue)의 8 bit 채널을 가집니다.</li>
-<li>COLOR_RGB: 컬러. 한 <code>pixel</code>은 3 개(Red, Green, Blue)의 32 bit 채널을 가집니다.</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 <br>
+  * `image type`은 이 이미지의 픽셀이 어떻게 구성되어 있는지를 보여줍니다.
+<pre><code>* GRAY8 : 흑백. 한 `pixel`은 8 bit ($ 2^8 = 256 $개)의 정수값(0~255)을 가질 수 있습니다. 
+* GRAY16 : 흑백. 한 `pixel`은 8 bit ($ 2^{16} = 65536 $개)의 정수값(0~65535)을 가질 수 있습니다.
+* GRAY32 : 흑백. 한 `pixel`은 32 bit의 소수(`float`)값을 가질 수 있습니다.
+* COLOR_256: 컬러. 한 `pixel`은 3 개(Red, Green, Blue)의 8 bit 채널을 가집니다.
+* COLOR_RGB: 컬러. 한 `pixel`은 3 개(Red, Green, Blue)의 32 bit 채널을 가집니다.
+</code></pre>
+<br>
 <h4 id="6-2-2-이미지-통계-정보-분석">6.2.2. 이미지 통계 정보 분석</h4>
 <ul>
 <li>
-<p>위에서 <code>boats.gif</code>는 width(가로) 720 x height(세로) 576 이므로 총 <code>pixel</code> 수는  414,720개입니다.</p>
+<p>위에서 <code>boats.gif</code>는 width(가로) 720 x height(세로) 576 이므로 총 <code>pixel</code> 수는  414,720개입니다.<br>
+<br></p>
 </li>
 <li>
-<p>이미지 처리 중 많은 작업이 명도(<code>brightness</code>)와 대비(<code>contrast</code>) 조정입니다.</p>
+<p>이미지 처리 중 많은 작업이 명도(<code>brightness</code>)와 대비(<code>contrast</code>) 조정입니다.<br>
+<br></p>
 </li>
 <li>
 <p>이미지를 조정하기에 앞서 현재 이미지의 상태를 파악해야 하는데, 작은 이미지라도 상당히 많은 수의 <code>pixel</code>로 이루어져 있기 때문에 전체적인 통계 데이터를 파악할 필요가 있습니다.</p>
@@ -343,7 +350,8 @@
 <h5 id="6-2-2-1-ImagePlus로부터-통계-정보-분석">6.2.2.1. <code>ImagePlus</code>로부터 통계 정보 분석</h5>
 <ul>
 <li>
-<p><code>ImageJ</code>에서 이미지 데이터를 다루는 <code>ImagePlus</code> 객체는 <code>getStatistics()</code>라는 <code>Method</code>를 가지고 있습니다.</p>
+<p><code>ImageJ</code>에서 이미지 데이터를 다루는 <code>ImagePlus</code> 객체는 <code>getStatistics()</code>라는 <code>Method</code>를 가지고 있습니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>ImagePlus</code>의 <code>getStatistics()</code>는 4가지 사용 방법이 있습니다.</p>
@@ -352,7 +360,8 @@
 <li><b>인자 없이 실행:</b> Calibration을 반영한 통계결과 (histogram, area, mean, min, max, st.dev, mode)</li>
 <li><b>측정항목(<code>mOptions</code>)을 특정해서 실행:</b> 특정한 항목에 대해서만 결과를 출력합니다.</li>
 <li><b>측정항목과 구간 수 (<code>nBins</code>)를 특정해서 실행:</b> 2. + 지정된 히스토그램 bin count로 실행합니다.</li>
-<li><b>측정항목, 구간 수, 히스토그램 범위(<code>histMin</code>, <code>histMax</code>)를 특정해서 실행:</b> 3. + 히스토그램 범위를 지정하여 실행합니다.</li>
+<li><b>측정항목, 구간 수, 히스토그램 범위(<code>histMin</code>, <code>histMax</code>)를 특정해서 실행:</b> 3. + 히스토그램 범위를 지정하여 실행합니다.<br>
+<br></li>
 </ol>
 </li>
 <li>
@@ -364,10 +373,11 @@
 </li>
 </ul>
 </li>
-<li>
-<p><a href="6_insp_4.tif">예제 이미지를 여기에서 다운로드</a>하여 실습해봅시다.<br>
-0~255 Gray Scale 중 0을 -2에, 254를 45에 대응하여 Calibration한 이미지입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석</span></span><br><span class="line"><span class="comment"># 2-1. 인자 없이 실행</span></span><br><span class="line">stats1 = imp.getStatistics()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 분석 결과 출력</span></span><br><span class="line"><span class="comment"># 3-1. 통계 정보 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats1&quot;</span>, stats1          <span class="comment"># stats1에 저장되는 내용 확인 (여기 보이지 않는 것도 저장됨)</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats1.area      <span class="comment"># 면적</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats1.mean      <span class="comment"># 평균</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats1.<span class="built_in">min</span>        <span class="comment"># 최소값</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats1.<span class="built_in">max</span>        <span class="comment"># 최대값</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats1.stdDev  <span class="comment"># 표준편차</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mode:&quot;</span>, stats1.mode      <span class="comment"># 256 histogram의 mode</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats1.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot1.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot2.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
+</ul>
+<br>
+* [예제 이미지를 여기에서 다운로드](6_insp_4.tif)하여 실습해봅시다.
+  0~255 Gray Scale 중 0을 -2에, 254를 45에 대응하여 Calibration한 이미지입니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석</span></span><br><span class="line"><span class="comment"># 2-1. 인자 없이 실행</span></span><br><span class="line">stats1 = imp.getStatistics()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 분석 결과 출력</span></span><br><span class="line"><span class="comment"># 3-1. 통계 정보 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats1&quot;</span>, stats1          <span class="comment"># stats1에 저장되는 내용 확인 (여기 보이지 않는 것도 저장됨)</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats1.area      <span class="comment"># 면적</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats1.mean      <span class="comment"># 평균</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats1.<span class="built_in">min</span>        <span class="comment"># 최소값</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats1.<span class="built_in">max</span>        <span class="comment"># 최대값</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats1.stdDev  <span class="comment"># 표준편차</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mode:&quot;</span>, stats1.mode      <span class="comment"># 256 histogram의 mode</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats1.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot1.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot2.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과, stats1로 저장한 통계 분석 결과의 각 항목들이 출력되었습니다.</li>
 </ul>
@@ -375,10 +385,12 @@
 <ul>
 <li>
 <p>histogram은 구간별 count array로 출력할 수도 있고 (<b># 3-2-1</b>),<br>
-plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>).</p>
+plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>).<br>
+<br></p>
 </li>
 <li>
-<p>두 방식의 plot 출력은 디자인만 조금 다르고 본질적으로 같습니다. 원하는 것을 사용하면 됩니다.</p>
+<p>두 방식의 plot 출력은 디자인만 조금 다르고 본질적으로 같습니다. 원하는 것을 사용하면 됩니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>getImagePlus()</code>와 <code>IJ.save()</code>를 활용하면 plot을 그림파일로 저장할 수 있습니다.<br>
@@ -387,68 +399,69 @@ plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>).</p>
 <br>
 </li>
 </ul>
-</li>
-</ul>
 <h5 id="6-2-2-2-ImageProcessor로부터-통계-정보-분석">6.2.2.2. <code>ImageProcessor</code>로부터 통계 정보 분석</h5>
 <ul>
 <li>
 <p><code>ImageJ</code>는 이미지 통계 분석을 위해 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html"><code>ImageStatistics</code></a>라는 모듈을 제공합니다.</p>
 <ul>
 <li>
-<p><b>6.2.2.1</b>에서 <code>imp.getStatistics()</code> 실행 결과로 얻어진 <code>stats1</code>도 <code>ImageStatistics</code> 클래스입니다.</p>
+<p><b>6.2.2.1</b>에서 <code>imp.getStatistics()</code> 실행 결과로 얻어진 <code>stats1</code>도 <code>ImageStatistics</code> 클래스입니다.<br>
+<br></p>
 </li>
 <li>
-<p><code>ImageStatistics</code> 에서 사용하는 <code>getStatistics()</code>는 입력으로 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageProcessor.html"><code>ImageProcessor</code></a>를 읽어들이므로 이미지를 <code>ImagePlus</code> 형식에서 <code>ImageProcessor</code>형식으로 변환해줘야 합니다.</p>
+<p><code>ImageStatistics</code> 에서 사용하는 <code>getStatistics()</code>는 입력으로 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageProcessor.html"><code>ImageProcessor</code></a>를 읽어들이므로 이미지를 <code>ImagePlus</code> 형식에서 <code>ImageProcessor</code>형식으로 변환해줘야 합니다.<br>
+<br></p>
 </li>
 <li>
-<p><code>ImageProcessor</code>라는 이름만 보면 뭔가 계산을 대신 해줘야 할 것 같지만, 알고 보면 <code>ImageProcessor</code>는 <code>ImagePlus</code> 의 <code>Field</code> 중 하나로, <b>이미지의 2D데이터 + 통계데이터 + 조작을 위한 <code>Method</code></b>를 포함한 것이 <code>ImageProcessor</code> 입니다.</p>
+<p><code>ImageProcessor</code>라는 이름만 보면 뭔가 계산을 대신 해줘야 할 것 같지만, 알고 보면 <code>ImageProcessor</code>는 <code>ImagePlus</code> 의 <code>Field</code> 중 하나로, <b>이미지의 2D데이터 + 통계데이터 + 조작을 위한 <code>Method</code></b>를 포함한 것이 <code>ImageProcessor</code> 입니다.<br>
+<br></p>
 </li>
 <li>
-<p>3D 이상이라 볼 수 있는 <code>stack</code> 관련한 데이터는 <code>ImageProcessor</code>에 포함되지 않았으며, 이 것은 <code>ImageStack</code>에 있습니다.</p>
+<p>3D 이상이라 볼 수 있는 <code>stack</code> 관련한 데이터는 <code>ImageProcessor</code>에 포함되지 않았으며, 이 것은 <code>ImageStack</code>에 있습니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>ImageProcessor</code>로 2D 정보만 추린 후, 여기에서 통계정보를 얻는 명령이 <code>getStatistics()</code>입니다.</p>
 <br>
 </li>
-<li>
-<p><code>getStatistics()</code> 명령을 <a target="_blank" rel="noopener" href="https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html"><code>ImageStatistics</code></a>에서 찾아보면, 아래와 같이 두 가지 사용법이 있습니다.</p>
-<p><img src="6_insp_2.PNG" alt=" "></p>
-<ol>
-<li>
-<p><code>getStatistics(ImageProcessor ip)</code>: 인자로 <code>ImageProcessor</code> 객체만을 입력하고, <b><code>calibration</code>되지 않은</b> 상태의 이미지 데이터에 대한 통계를 출력합니다.</p>
-<p><code>ImagePlus</code>에서 사용하는 <code>getStatistics()</code>는 Calibration 된 이미지로, 헷갈리기 쉽습니다.</p>
-</li>
-<li>
-<p><code>getStatistics(ImageProcessor ip, int mOptions, Calbiration cal)</code>: 추가 인자로  <code>mOptions</code>와 <code>Calibration</code> 인자 <code>cal</code>을 넣을 수 있습니다. 이 때 주어진 measurement option(<code>mOptions</code>)과 <b>calibration(<code>cal</code>)을 적용한</b> 통계결과를 출력합니다.</p>
-<br>
-</li>
-</ol>
-</li>
 </ul>
 </li>
-<li>
-<p><code>ImagePlus</code>에서 데이터를 뽑는 <b>6.2.2.1</b> 방식이 덜 복잡하고 더 간결해 보입니다.<br>
-하지만 이런 방법도 있다는 차원에서 살펴보고 지나가겠습니다.</p>
+</ul>
 <br>
-</li>
-<li>
-<p><b>6.2.2.1</b> 과 동일한 작업을 <code>ImageStatistics(ip)</code>로 진행해 보겠습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij.process <span class="keyword">import</span> ImageStatistics <span class="keyword">as</span> IS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석  </span></span><br><span class="line"><span class="comment"># 2-1. ImageProcessor 호출</span></span><br><span class="line">ip = imp.getProcessor()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2-2. 인자 없이 분석</span></span><br><span class="line">stats2 = IS.getStatistics(ip)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats2&quot;</span>, stats2</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats2.area</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats2.mean</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats2.<span class="built_in">min</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats2.<span class="built_in">max</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats2.stdDev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats2.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot3.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot4.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
+  * `getStatistics()` 명령을 [`ImageStatistics`](https://javadoc.scijava.org/ImageJ1/ij/process/ImageStatistics.html)에서 찾아보면, 아래와 같이 두 가지 사용법이 있습니다.
+<pre><code>![ ](6_insp_2.PNG)
+
+1. `getStatistics(ImageProcessor ip)`: 인자로 `ImageProcessor` 객체만을 입력하고, &lt;b&gt;`calibration`되지 않은&lt;/b&gt; 상태의 이미지 데이터에 대한 통계를 출력합니다.
+
+   `ImagePlus`에서 사용하는 `getStatistics()`는 Calibration 된 이미지로, 헷갈리기 쉽습니다.
+</code></pre>
+<br>
+    2. `getStatistics(ImageProcessor ip, int mOptions, Calbiration cal)`: 추가 인자로  `mOptions`와 `Calibration` 인자 `cal`을 넣을 수 있습니다. 이 때 주어진 measurement option(`mOptions`)과 <b>calibration(`cal`)을 적용한</b> 통계결과를 출력합니다.
+<pre><code>   &lt;br&gt;
+</code></pre>
+<br>
+* `ImagePlus`에서 데이터를 뽑는 <b>6.2.2.1</b> 방식이 덜 복잡하고 더 간결해 보입니다.  
+  하지만 이런 방법도 있다는 차원에서 살펴보고 지나가겠습니다.
+  <br>
+<br>
+* <b>6.2.2.1</b> 과 동일한 작업을 `ImageStatistics(ip)`로 진행해 보겠습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ij <span class="keyword">import</span> IJ</span><br><span class="line"><span class="keyword">from</span> ij.process <span class="keyword">import</span> ImageStatistics <span class="keyword">as</span> IS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. Load Image</span></span><br><span class="line">imp = IJ.getImage()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Image 통계 정보 분석  </span></span><br><span class="line"><span class="comment"># 2-1. ImageProcessor 호출</span></span><br><span class="line">ip = imp.getProcessor()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2-2. 인자 없이 분석</span></span><br><span class="line">stats2 = IS.getStatistics(ip)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;stats2&quot;</span>, stats2</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;area:&quot;</span>, stats2.area</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;mean:&quot;</span>, stats2.mean</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;min:&quot;</span>, stats2.<span class="built_in">min</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;max:&quot;</span>, stats2.<span class="built_in">max</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;st.dev:&quot;</span>, stats2.stdDev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2. 히스토그램 출력</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-1. array 출력</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;histogram:&quot;</span>, stats2.histogram()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-2. plot 출력 1</span></span><br><span class="line">hist1 = imp.plotHistogram()</span><br><span class="line">plot1 = hist1.getImagePlus()</span><br><span class="line">IJ.save(plot1, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot3.tif&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3-2-3. plot 출력 2</span></span><br><span class="line"><span class="keyword">from</span> ij.gui <span class="keyword">import</span> HistogramWindow</span><br><span class="line">hist2 = HistogramWindow(imp)</span><br><span class="line">plot2 = hist2.getImagePlus()</span><br><span class="line">IJ.save(plot2, <span class="string">&quot;C:\Arbeitplatz//19_hexoblog_backup\source\_posts\ImageJ-tutorial-6-Inspection\plot4.tif&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>실행 결과, <b>6.2.2.1</b> 과 동일한 형태로 다른 값들이 출력됩니다.</li>
 </ul>
 <p><img src="6_insp_6.PNG" alt=" "></p>
 <ul>
 <li>
-<p>예를 들면 <code>max</code> 값이 45.185에서 255로 바뀌었는데, Calibration이 되지 않은 값이라 그렇습니다.</p>
+<p>예를 들면 <code>max</code> 값이 45.185에서 255로 바뀌었는데, Calibration이 되지 않은 값이라 그렇습니다.<br>
+<br></p>
 </li>
 <li>
-<p>실제 실행시 <b># 3-2-2</b> 그래프는 위 그림과 달리 바닥에 납작 엎드린 히스토그램이 출력되지만, 마우스로 빨간 원 안에 해당하는 부분을 클릭해서 상한선을 낮춰주면 전체적으로 히스토그램이 높게 표현됩니다.</p>
-</li>
-</ul>
+<p>실제 실행시 <b># 3-2-2</b> 그래프는 위 그림과 달리 바닥에 납작 엎드린 히스토그램이 출력되지만, 마우스로 빨간 원 안에 해당하는 부분을 클릭해서 상한선을 낮춰주면 전체적으로 히스토그램이 높게 표현됩니다.<br>
+<br></p>
 </li>
 <li>
-<p>이번에는 <code>ImageStatistics(ip, mOptions, cal)</code>로 진행해 보겠습니다.</p>
+<p>이번에는 <code>ImageStatistics(ip, mOptions, cal)</code>로 진행해 보겠습니다.<br>
+<br></p>
 <ul>
 <li>위 코드에서 세 줄만 바꿔주면 됩니다.</li>
 </ul>
@@ -472,11 +485,10 @@ plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>).</p>
 <p><img src="6_insp_7.PNG" alt=" "></p>
 <br>
 </li>
-<li>
-<p><code>ImagePlus</code>상태에서 데이터를 분석하는 것이 더 편하고 직관적입니다.<br>
-특별한 이유가 없으면 <code>ImageStatistics</code>로 넘어가지 않는 것을 권장합니다.</p>
-</li>
 </ul>
+<br>
+* `ImagePlus`상태에서 데이터를 분석하는 것이 더 편하고 직관적입니다.
+  특별한 이유가 없으면 `ImageStatistics`로 넘어가지 않는 것을 권장합니다.
 
         </div>
 		<p>
@@ -494,7 +506,7 @@ plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>).</p>
 
 
 
-    <a data-url="https://tech.jehyunlee.dev/2020/01/28/ImageJ-tutorial-6-Inspection/" data-id="cuidRdFSJzdLDYDthjZs0ET4u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://tech.jehyunlee.dev/2020/01/28/ImageJ-tutorial-6-Inspection/" data-id="cuidhbeN5mpH-TvoopHT_KX1d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -566,7 +578,7 @@ plot으로 출력할 수도 있습니다 (<b># 3-2-2</b>, <b># 3-2-3</b>).</p>
         },
         "headline": "6. Image Data 분석",
         "image": "https://tech.jehyunlee.dev/thumbnails/ImageJ-Tutorial/6_insp_plot6.PNG",
-        "keywords": "imagej jython inspection",
+        "keywords": "imagej inspection jython",
         "genre": "ImageJ Tutorial",
         "datePublished": "2020-01-28",
         "dateCreated": "2020-01-28",
@@ -587,7 +599,7 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
 
 
 자동차 설",
-        "wordCount": 1770
+        "wordCount": 1808
     }
 </script>
 
@@ -684,6 +696,26 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/07/31/General-95_reviewofgoldenage/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/95_reviewofgoldenage_00.png)" alt="리뷰 - Science A New Golden Age" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/07/31/General-95_reviewofgoldenage/" class="title">리뷰 - Science A New Golden Age</a></p>
+                            <p class="item-date"><time datetime="2026-07-31T14:09:00.000Z" itemprop="datePublished">2026-07-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2026/04/29/General-94_kistaixedu260429/" class="thumbnail">
     
     
@@ -761,26 +793,6 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/90_rndagent_cases_00.png)" alt="AI for Science 도메인 특화 Agent 공개 사례" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/08/24/General-90_rndagent_cases/" class="title">AI for Science 도메인 특화 Agent 공개 사례</a></p>
-                            <p class="item-date"><time datetime="2025-08-24T05:51:00.000Z" itemprop="datePublished">2025-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -790,7 +802,7 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">85</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">131</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">86</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">131</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -800,7 +812,7 @@ instance란 것은 Class에 정의된 대로 만들어진 객체입니다.
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.5px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.5px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 13px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.5px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/CHATGPT/" style="font-size: 10px;">CHATGPT</a> <a href="/tags/ChatGPT/" style="font-size: 11.5px;">ChatGPT</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/DALL-E/" style="font-size: 11.5px;">DALL.E</a> <a href="/tags/DATA-ANALYSIS/" style="font-size: 10px;">DATA ANALYSIS</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Analyst/" style="font-size: 10px;">Data Analyst</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/EOST/" style="font-size: 12px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPTs/" style="font-size: 10px;">GPTs</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Gemini/" style="font-size: 11px;">Gemini</a> <a href="/tags/Genspark/" style="font-size: 10.5px;">Genspark</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15.5px;">KIER</a> <a href="/tags/KIST/" style="font-size: 10px;">KIST</a> <a href="/tags/Manus/" style="font-size: 10px;">Manus</a> <a href="/tags/NIA/" style="font-size: 10.5px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.5px;">Nicolas P. Rougier</a> <a href="/tags/NotebookLM/" style="font-size: 10px;">NotebookLM</a> <a href="/tags/OPENAI/" style="font-size: 10px;">OPENAI</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.5px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/Perplexity/" style="font-size: 10.5px;">Perplexity</a> <a href="/tags/RAG/" style="font-size: 10.5px;">RAG</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/SEMA/" style="font-size: 10px;">SEMA</a> <a href="/tags/SciSpace/" style="font-size: 12px;">SciSpace</a> <a href="/tags/Storm/" style="font-size: 10px;">Storm</a> <a href="/tags/TalkIT/" style="font-size: 10px;">TalkIT</a> <a href="/tags/UST/" style="font-size: 10px;">UST</a> <a href="/tags/VOSviewer/" style="font-size: 10.5px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/ZDNET/" style="font-size: 10px;">ZDNET</a> <a href="/tags/agent/" style="font-size: 11px;">agent</a> <a href="/tags/ai-studio/" style="font-size: 10px;">ai studio</a> <a href="/tags/aifrenz/" style="font-size: 10px;">aifrenz</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.5px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.5px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.5px;">bayesian</a> <a href="/tags/bingchat/" style="font-size: 11px;">bingchat</a> <a href="/tags/bingimagecreator/" style="font-size: 13.5px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.5px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 18.5px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/claude-code/" style="font-size: 10px;">claude code</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.5px;">color</a> <a href="/tags/colorbar/" style="font-size: 12px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/consensus/" style="font-size: 10px;">consensus</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.5px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 11.5px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 16.5px;">dalle</a> <a href="/tags/data-analysis/" style="font-size: 11.5px;">data analysis</a> <a href="/tags/data-analyst/" style="font-size: 10.5px;">data analyst</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.5px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.5px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 11.5px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/deepl/" style="font-size: 10px;">deepl</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 11px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/escher/" style="font-size: 10px;">escher</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/foldlm/" style="font-size: 10px;">foldlm</a> <a href="/tags/font/" style="font-size: 10.5px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.5px;">gaussian process</a> <a href="/tags/gemini/" style="font-size: 11px;">gemini</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 13.5px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/ideogram/" style="font-size: 10px;">ideogram</a> <a href="/tags/image/" style="font-size: 12px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.5px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.5px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11px;">legend</a> <a href="/tags/life/" style="font-size: 10.5px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.5px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 14.5px;">microsoft</a> <a href="/tags/microsoft-designer/" style="font-size: 10px;">microsoft designer</a> <a href="/tags/midjourney/" style="font-size: 10px;">midjourney</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/nanobanana/" style="font-size: 11px;">nanobanana</a> <a href="/tags/natural-language/" style="font-size: 10.5px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.5px;">neural network</a> <a href="/tags/notebooklm/" style="font-size: 11px;">notebooklm</a> <a href="/tags/nst/" style="font-size: 12px;">nst</a> <a href="/tags/numpy/" style="font-size: 12.5px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.5px;">open API</a> <a href="/tags/openai/" style="font-size: 18px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.5px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/perplexity/" style="font-size: 11.5px;">perplexity</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/photovoltaics/" style="font-size: 10px;">photovoltaics</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.5px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.5px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.5px;">pycon</a> <a href="/tags/pyhon/" style="font-size: 10px;">pyhon</a> <a href="/tags/pysolar/" style="font-size: 10.5px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.5px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.5px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/research/" style="font-size: 11px;">research</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.5px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/scholar-AI/" style="font-size: 10px;">scholar AI</a> <a href="/tags/scholar-GPT/" style="font-size: 10px;">scholar GPT</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.5px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11px;">scipy</a> <a href="/tags/scispace/" style="font-size: 12px;">scispace</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 11px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.5px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.5px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.5px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.5px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.5px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.5px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10.5px;">youtube</a> <a href="/tags/zotero/" style="font-size: 10px;">zotero</a> <a href="/tags/%EA%B3%A8%EB%93%A0%EB%9E%98%EB%B9%97/" style="font-size: 10px;">골든래빗</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%ED%95%9C%EB%A6%BC%EC%9B%90/" style="font-size: 10px;">한국과학기술한림원</a> <a href="/tags/%ED%97%A4%EB%9F%B4%EB%93%9C%EA%B2%BD%EC%A0%9C/" style="font-size: 10px;">헤럴드경제</a> <a href="/tags/%ED%99%A9%EB%AF%BC%ED%98%B8/" style="font-size: 10px;">황민호</a>
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.5px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.5px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 13px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.5px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/CHATGPT/" style="font-size: 10px;">CHATGPT</a> <a href="/tags/ChatGPT/" style="font-size: 11.5px;">ChatGPT</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/DALL-E/" style="font-size: 11.5px;">DALL.E</a> <a href="/tags/DATA-ANALYSIS/" style="font-size: 10px;">DATA ANALYSIS</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Analyst/" style="font-size: 10px;">Data Analyst</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/EOST/" style="font-size: 12px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPTs/" style="font-size: 10px;">GPTs</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Gemini/" style="font-size: 11px;">Gemini</a> <a href="/tags/Genspark/" style="font-size: 10.5px;">Genspark</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15.5px;">KIER</a> <a href="/tags/KIST/" style="font-size: 10px;">KIST</a> <a href="/tags/Manus/" style="font-size: 10px;">Manus</a> <a href="/tags/NIA/" style="font-size: 10.5px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.5px;">Nicolas P. Rougier</a> <a href="/tags/NotebookLM/" style="font-size: 10px;">NotebookLM</a> <a href="/tags/OPENAI/" style="font-size: 10px;">OPENAI</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.5px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/Perplexity/" style="font-size: 10.5px;">Perplexity</a> <a href="/tags/RAG/" style="font-size: 10.5px;">RAG</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/SEMA/" style="font-size: 10px;">SEMA</a> <a href="/tags/SciSpace/" style="font-size: 12px;">SciSpace</a> <a href="/tags/Storm/" style="font-size: 10px;">Storm</a> <a href="/tags/TalkIT/" style="font-size: 10px;">TalkIT</a> <a href="/tags/UST/" style="font-size: 10px;">UST</a> <a href="/tags/VOSviewer/" style="font-size: 10.5px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/ZDNET/" style="font-size: 10px;">ZDNET</a> <a href="/tags/agent/" style="font-size: 11px;">agent</a> <a href="/tags/ai-studio/" style="font-size: 10px;">ai studio</a> <a href="/tags/aifrenz/" style="font-size: 10px;">aifrenz</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.5px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.5px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.5px;">bayesian</a> <a href="/tags/bingchat/" style="font-size: 11px;">bingchat</a> <a href="/tags/bingimagecreator/" style="font-size: 13.5px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.5px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 18.5px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/claude-code/" style="font-size: 10px;">claude code</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.5px;">color</a> <a href="/tags/colorbar/" style="font-size: 12px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/consensus/" style="font-size: 10px;">consensus</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.5px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 11.5px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 16.5px;">dalle</a> <a href="/tags/data-analysis/" style="font-size: 11.5px;">data analysis</a> <a href="/tags/data-analyst/" style="font-size: 10.5px;">data analyst</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.5px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.5px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 11.5px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/deepl/" style="font-size: 10px;">deepl</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 11px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/escher/" style="font-size: 10px;">escher</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/foldlm/" style="font-size: 10px;">foldlm</a> <a href="/tags/font/" style="font-size: 10.5px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.5px;">gaussian process</a> <a href="/tags/gemini/" style="font-size: 11px;">gemini</a> <a href="/tags/genesis-mission/" style="font-size: 10px;">genesis mission</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 13.5px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/ideogram/" style="font-size: 10px;">ideogram</a> <a href="/tags/image/" style="font-size: 12px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.5px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.5px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11px;">legend</a> <a href="/tags/life/" style="font-size: 10.5px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.5px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 14.5px;">microsoft</a> <a href="/tags/microsoft-designer/" style="font-size: 10px;">microsoft designer</a> <a href="/tags/midjourney/" style="font-size: 10px;">midjourney</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/nanobanana/" style="font-size: 11px;">nanobanana</a> <a href="/tags/natural-language/" style="font-size: 10.5px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.5px;">neural network</a> <a href="/tags/notebooklm/" style="font-size: 11px;">notebooklm</a> <a href="/tags/nst/" style="font-size: 12px;">nst</a> <a href="/tags/numpy/" style="font-size: 12.5px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.5px;">open API</a> <a href="/tags/openai/" style="font-size: 18px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.5px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/perplexity/" style="font-size: 11.5px;">perplexity</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/photovoltaics/" style="font-size: 10px;">photovoltaics</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12px;">pipeline</a> <a href="/tags/policy/" style="font-size: 10px;">policy</a> <a href="/tags/polygon/" style="font-size: 11px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.5px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.5px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.5px;">pycon</a> <a href="/tags/pyhon/" style="font-size: 10px;">pyhon</a> <a href="/tags/pysolar/" style="font-size: 10.5px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.5px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.5px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/research/" style="font-size: 11px;">research</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.5px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/scholar-AI/" style="font-size: 10px;">scholar AI</a> <a href="/tags/scholar-GPT/" style="font-size: 10px;">scholar GPT</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.5px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11px;">scipy</a> <a href="/tags/scispace/" style="font-size: 12px;">scispace</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 11px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.5px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.5px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.5px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.5px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.5px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.5px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10.5px;">youtube</a> <a href="/tags/zotero/" style="font-size: 10px;">zotero</a> <a href="/tags/%EA%B3%A8%EB%93%A0%EB%9E%98%EB%B9%97/" style="font-size: 10px;">골든래빗</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%ED%95%9C%EB%A6%BC%EC%9B%90/" style="font-size: 10px;">한국과학기술한림원</a> <a href="/tags/%ED%97%A4%EB%9F%B4%EB%93%9C%EA%B2%BD%EC%A0%9C/" style="font-size: 10px;">헤럴드경제</a> <a href="/tags/%ED%99%A9%EB%AF%BC%ED%98%B8/" style="font-size: 10px;">황민호</a>
         </div>
     </div>
 

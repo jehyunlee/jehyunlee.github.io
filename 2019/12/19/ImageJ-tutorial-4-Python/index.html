@@ -249,11 +249,13 @@
 <ul>
 <li>
 <p>우리는 집 안에서 비바람을 피할 뿐 아니라 식사, 빨래, 게임, TV와 인터넷 사용 등 많은 일을 하지만 집 자체가 이러한 기능들을 제공하는 것은 아닙니다.  집은 텅 빈 공간일 뿐이고, 여기에 밥솥, 전자렌지, 냉장고, 식기가 들어와야 부엌이 갖추어지고 세탁기와 건조기가 들어와야 빨래를 하고 건조를 시킬 수 있습니다.<br>
+<br><br>
 <br></p>
 </li>
 <li>
 <p><a target="_blank" rel="noopener" href="https://jehyunlee.github.io/2019/12/16/ImageJ-tutorial-3-DevEnv/">앞서</a> 설치한 <code>miniconda(anaconda)</code>는 상하수도와 전기, 가스만 붙어있는 텅 빈 집이나 마찬가지입니다.</p>
 <p>빈 집에서 모든 가전제품을 스스로 만들 수도 있겠지만, 그것보다 판매되는 제품을 구매하는 것이 훨씬 경제적입니다. 이렇게 다른 사람이 만든 모듈을 불러오는 과정을 <code>import</code>라고 합니다.<br>
+<br><br>
 <br></p>
 </li>
 <li>
@@ -262,69 +264,56 @@
 </ul>
 <h4 id="4-2-1-모듈-전체를-불러오기">4.2.1. 모듈 전체를 불러오기</h4>
 <ul>
-<li>
-<p>모듈 안에는 함수와 같은 기능이 여럿 포함되어 있을 수 있습니다.</p>
-</li>
-<li>
-<p>모듈 전체를 불러올 때는 다음과 같이 불러옵니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> [모듈 이름]</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>module1</code> 이라는 모듈에 두 수의 합을 출력하는 <code>sumf()</code>라는 함수가 있다면, 다음처럼 사용할 수 있습니다.</p>
+<li>모듈 안에는 함수와 같은 기능이 여럿 포함되어 있을 수 있습니다.<br>
+<br></li>
+<li>모듈 전체를 불러올 때는 다음과 같이 불러옵니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> [모듈 이름]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<br>
+*  `module1` 이라는 모듈에 두 수의 합을 출력하는 `sumf()`라는 함수가 있다면, 다음처럼 사용할 수 있습니다.
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> module1</span><br><span class="line"></span><br><span class="line">ans = module1.sumf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>
-<p>함수를 부를 때마다 <code>module1.</code>을 매번 앞에 써줘야 하기 때문에 번거롭습니다.<br>
-<code>module1</code> 대신 <code>m1</code>이라고 부르기로 하겠습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> module1 <span class="keyword">as</span> m1</span><br><span class="line"></span><br><span class="line">ans = m1.sumf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>import [모듈 이름] as [짧은 이름]</code> 형식을 사용해서 번거로움을 줄일 수 있습니다.</p>
-</li>
-</ul>
+<br>
+* 함수를 부를 때마다 `module1.`을 매번 앞에 써줘야 하기 때문에 번거롭습니다.  
+  `module1` 대신 `m1`이라고 부르기로 하겠습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> module1 <span class="keyword">as</span> m1</span><br><span class="line"></span><br><span class="line">ans = m1.sumf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
+<br>
+* `import [모듈 이름] as [짧은 이름]` 형식을 사용해서 번거로움을 줄일 수 있습니다.
 <h4 id="4-2-2-함수를-따로-부르기">4.2.2. 함수를 따로 부르기</h4>
 <ul>
-<li>
-<p>함수를 사용하기 위해서 모듈 이름을 매번 부르는 것은 귀찮은 일입니다.</p>
-</li>
-<li>
-<p><code>from [모듈 이름] import [함수 이름]</code>을 이용해서 함수 이름만 사용할 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> module1 <span class="keyword">import</span> sumf</span><br><span class="line"></span><br><span class="line">ans = sumf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>함수 이름도 짧게 줄일 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> module1 <span class="keyword">import</span> sumf <span class="keyword">as</span> sf</span><br><span class="line"></span><br><span class="line">ans = sf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>모듈에 함수가 여럿 있고 이들을 모두 부르고 싶다면 <code>from [모듈 이름 ] import *</code>을 사용하면 됩니다.</p>
-<p><strong>※ 주의 ※</strong> 여러  <code>module</code>을 이렇게 부르면, 함수 이름이 겹칠 때 마지막 함수만 사용 가능합니다.<br>
-<br></p>
+<li>함수를 사용하기 위해서 모듈 이름을 매번 부르는 것은 귀찮은 일입니다.<br>
+<br></li>
+<li><code>from [모듈 이름] import [함수 이름]</code>을 이용해서 함수 이름만 사용할 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> module1 <span class="keyword">import</span> sumf</span><br><span class="line"></span><br><span class="line">ans = sumf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<br>
+* 함수 이름도 짧게 줄일 수 있습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> module1 <span class="keyword">import</span> sumf <span class="keyword">as</span> sf</span><br><span class="line"></span><br><span class="line">ans = sf(<span class="number">3</span>, <span class="number">4</span>) <span class="comment"># ans 변수에 3 + 4 = 7 저장됨.</span></span><br></pre></td></tr></table></figure>
+<br>
+* 모듈에 함수가 여럿 있고 이들을 모두 부르고 싶다면 `from [모듈 이름 ] import *`을 사용하면 됩니다.
+<p><strong>※ 주의 ※</strong> 여러  <code>module</code>을 이렇게 부르면, 함수 이름이 겹칠 때 마지막 함수만 사용 가능합니다.<br>
+<br></p>
 <h3 id="4-3-print-출력하기">4.3. <code>print</code>: 출력하기</h3>
 <ul>
 <li>
-<p>계산 결과나 문자열을 출력할 때 사용하는 함수입니다.</p>
+<p>계산 결과나 문자열을 출력할 때 사용하는 함수입니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>python</code> 을 최근에 3.x 버전으로 학습하신 분은 <code>print()</code> 명령으로 알고 계실 테지만,<br>
-<code>jython</code>은 기본적으로 <code>python 2.7</code>버전을 사용하기 때문에 <code>print [출력 내용]</code>을 사용합니다.</p>
+<code>jython</code>은 기본적으로 <code>python 2.7</code>버전을 사용하기 때문에 <code>print [출력 내용]</code>을 사용합니다.<br>
+<br></p>
 </li>
 <li>
 <p>특이하게도 <code>python</code> 3.x 버전의 <code>print()</code> 형식도 지원하지만, 간혹 출력이 깔끔하지 못한 경우가 있으니 2.7 버전의 사용법을 익숙하게 합시다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3.141592</span></span><br><span class="line"><span class="built_in">print</span> a    <span class="comment"># a 내용 출력: &quot;3.141592&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;a&#x27;</span>  <span class="comment"># 문자 a를 출력: &quot;a&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;a=&#x27;</span>, a <span class="comment"># 문자열과 a의 내용을 붙여서 출력: &quot;a= 3.141592&quot;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>%</code>를 사용해서 출력 형식을 지정할 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3.141592</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%d&#x27;</span> % a     <span class="comment"># 정수형으로 출력합니다: &quot;3&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%3d&#x27;</span> % a   <span class="comment"># 총 3자리 정수를 출력, 빈 자리에 빈칸을 출력합니다: &quot;  3&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%03d&#x27;</span> % a   <span class="comment"># 총 3자리 정수를 출력, 빈 자리에 0을 붙입니다: &quot;003&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%f&#x27;</span> % a     <span class="comment"># 소수형으로 출력합니다: &quot;3.141592&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%1.3f&#x27;</span> % a  <span class="comment"># 소수점 3자리까지만 출력합니다: &quot;3.142&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%7.3f&#x27;</span> % a  <span class="comment"># 총 7글자, 소수점 3자리까지만 출력합니다: &quot;  3.142&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%07.3f&#x27;</span> % a  <span class="comment"># 총 7글자, 소수점 3자리까지 빈칸을 0으로 출력합니다: &quot;003.142&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>줄 바꿈 문자(<code>\n</code>), 탭 문자(<code>\t</code>) 등을 사용해서 간단한 틀에 맞춘 출력을 할 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> <span class="string">&#x27;The answer is : %d\t(%1.2f)\nOthers are wrong!&#x27;</span> % (<span class="number">1</span>, <span class="number">3.141592</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># The answer is 1 :       (3.14)</span></span><br><span class="line"><span class="comment"># Others are wrong!</span></span><br></pre></td></tr></table></figure>
-</li>
 </ul>
+<br>
+* `%`를 사용해서 출력 형식을 지정할 수 있습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3.141592</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%d&#x27;</span> % a     <span class="comment"># 정수형으로 출력합니다: &quot;3&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%3d&#x27;</span> % a   <span class="comment"># 총 3자리 정수를 출력, 빈 자리에 빈칸을 출력합니다: &quot;  3&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%03d&#x27;</span> % a   <span class="comment"># 총 3자리 정수를 출력, 빈 자리에 0을 붙입니다: &quot;003&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%f&#x27;</span> % a     <span class="comment"># 소수형으로 출력합니다: &quot;3.141592&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%1.3f&#x27;</span> % a  <span class="comment"># 소수점 3자리까지만 출력합니다: &quot;3.142&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%7.3f&#x27;</span> % a  <span class="comment"># 총 7글자, 소수점 3자리까지만 출력합니다: &quot;  3.142&quot;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;%07.3f&#x27;</span> % a  <span class="comment"># 총 7글자, 소수점 3자리까지 빈칸을 0으로 출력합니다: &quot;003.142&quot;</span></span><br></pre></td></tr></table></figure>
+<br>
+* 줄 바꿈 문자(`\n`), 탭 문자(`\t`) 등을 사용해서 간단한 틀에 맞춘 출력을 할 수 있습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> <span class="string">&#x27;The answer is : %d\t(%1.2f)\nOthers are wrong!&#x27;</span> % (<span class="number">1</span>, <span class="number">3.141592</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># The answer is 1 :       (3.14)</span></span><br><span class="line"><span class="comment"># Others are wrong!</span></span><br></pre></td></tr></table></figure>
 <br>
 <h3 id="4-4-if-elif-else-조건문">4.4. <code>if</code>, <code>elif</code>, <code>else</code>: 조건문</h3>
 <ul>
@@ -335,18 +324,15 @@
 <p><code>if [조건]:</code> 밑에 조건을 만족할 때 실행할 행동을 들여쓰기를 해서 작성합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 조건문:</span><br><span class="line">    수행할 문장<span class="number">1</span></span><br><span class="line">    수행할 문장<span class="number">2</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>if</code> 조건을 만족하지 않을 경우 실행할 행동을 <code>else</code>문에 넣어줍니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">money = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> money:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Walk!&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># Taxi!</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>이렇게 해서 결과를 비교해 봅니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">money = <span class="literal">False</span></span><br><span class="line"><span class="keyword">if</span> money:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Walk!&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># Walk!</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>조건문은 비교연산자로 표현할 수도 있습니다.</p>
-</li>
 </ul>
+<br>
+* `if` 조건을 만족하지 않을 경우 실행할 행동을 `else`문에 넣어줍니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">money = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> money:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Walk!&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># Taxi!</span></span><br></pre></td></tr></table></figure>
+<br>
+* 이렇게 해서 결과를 비교해 봅니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">money = <span class="literal">False</span></span><br><span class="line"><span class="keyword">if</span> money:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Walk!&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># Walk!</span></span><br></pre></td></tr></table></figure>
+<br>
+* 조건문은 비교연산자로 표현할 수도 있습니다.
 <table>
 <thead>
 <tr>
@@ -407,35 +393,35 @@
 </tbody>
 </table>
 <ul>
-<li>
-<p>여러 조건이 있는 경우 <code>elif</code>로 조건을 추가할 수 있습니다.<br>
-<code>elif</code>는 <code>if</code>와 <code>else</code> 사이에 여러 개가 올 수 있지만 위에서부터 순차적으로 조건을 검토해서 적용하는 것을 유념해야 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">money = <span class="number">3000</span></span><br><span class="line"><span class="keyword">if</span> money &gt; <span class="number">10000</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"><span class="keyword">elif</span> money &gt; <span class="number">1000</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Bus!&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># Bus!</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>if</code>, <code>elif</code>, <code>else</code>는 여러 층으로 적용할 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pocket = [<span class="string">&#x27;paper&#x27;</span>, <span class="string">&#x27;handphone&#x27;</span>]</span><br><span class="line">card = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;money&#x27;</span> <span class="keyword">in</span> pocket:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;Taxi!&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> card:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;택시를 타고 가라&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;걸어가라&#x27;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># 택시를 타고 가라</span></span><br></pre></td></tr></table></figure>
-<br>
+<li>여러 조건이 있는 경우 <code>elif</code>로 조건을 추가할 수 있습니다.<br>
+<code>elif</code>는 <code>if</code>와 <code>else</code> 사이에 여러 개가 올 수 있지만 위에서부터 순차적으로 조건을 검토해서 적용하는 것을 유념해야 합니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">money = <span class="number">3000</span></span><br><span class="line"><span class="keyword">if</span> money &gt; <span class="number">10000</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"><span class="keyword">elif</span> money &gt; <span class="number">1000</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Bus!&quot;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Taxi!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># Bus!</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<br>
+* `if`, `elif`, `else`는 여러 층으로 적용할 수 있습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pocket = [<span class="string">&#x27;paper&#x27;</span>, <span class="string">&#x27;handphone&#x27;</span>]</span><br><span class="line">card = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;money&#x27;</span> <span class="keyword">in</span> pocket:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;Taxi!&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> card:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;택시를 타고 가라&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;걸어가라&#x27;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># 택시를 타고 가라</span></span><br></pre></td></tr></table></figure>
+  <br>
 <h3 id="4-5-try-except-else-finally-예외-처리">4.5. <code>try</code>, <code>except</code>, <code>else</code>, <code>finally</code> : 예외 처리</h3>
 <ul>
 <li>
-<p>프로그램 구동 중 발생하는 예외 상황을 처리하기 위한 명령어입니다.</p>
+<p>프로그램 구동 중 발생하는 예외 상황을 처리하기 위한 명령어입니다.<br>
+<br></p>
 </li>
 <li>
 <p>아래의 예를 봅시다. 존재하지 않는 파일을 열려고 하다 에러가 나는 경우입니다.<br>
 <img src="4_python_2.PNG" alt=" "></p>
 <ul>
 <li>이와 같이 에러가 발생하면 프로그램이 중단되기 때문에 목적을 달성할 수 없습니다.</li>
-<li>다른 명령을 실행하거나 적어도 원인을 이해하기 쉽도록 알려줘야 합니다.</li>
+<li>다른 명령을 실행하거나 적어도 원인을 이해하기 쉽도록 알려줘야 합니다.<br>
+<br></li>
 </ul>
 </li>
 <li>
 <p>파일이 존재하지 않으면 <code>File not exist!</code>라는 메시지를 출력합니다.<br>
 <img src="4_python_3.PNG" alt=" "></p>
 <ul>
-<li>번외로, 위 예제에서 <code>python</code> 2.x 버전의 <code>print 내용</code> 대신 3.x 버전의 <code>print(내용)</code>을 사용했음에도 정상 출력되었음을 확인할 수 있습니다.</li>
+<li>번외로, 위 예제에서 <code>python</code> 2.x 버전의 <code>print 내용</code> 대신 3.x 버전의 <code>print(내용)</code>을 사용했음에도 정상 출력되었음을 확인할 수 있습니다.<br>
+<br></li>
 </ul>
 </li>
 <li>
@@ -453,21 +439,19 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&quot;does_not_exist.jpg&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> IOError:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;File not exist!&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># File not exist!</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>IOError</code>를 붙이면 <code>IOError</code>에 <code>print</code>문이 반응하지만 다른 종류의 에러에는 <code>except</code>절이 작용하지 않습니다.</li>
-<li>예를 들어 <code>3/0</code>같은 상황이 발생했다면, <code>ZeroDivisionError</code>가 발생하기 때문에 <code>IOError</code>에 반응하는 위 <code>except</code>절을 건너뛰고 에러를 발생시키며 프로그램이 종료됩니다.</li>
+<li>예를 들어 <code>3/0</code>같은 상황이 발생했다면, <code>ZeroDivisionError</code>가 발생하기 때문에 <code>IOError</code>에 반응하는 위 <code>except</code>절을 건너뛰고 에러를 발생시키며 프로그램이 종료됩니다.<br>
+<br></li>
 </ul>
 </li>
 <li>
 <p>오류 종류에 따라 <code>except</code> 처리를 다르게 하고 싶다면 다음과 같이 합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    실행을 시도할 명령</span><br><span class="line"><span class="keyword">except</span> [발생오류 <span class="number">1</span>]:</span><br><span class="line">    <span class="keyword">try</span> 절이 [발생오류 <span class="number">1</span>]로 실패했을 때 실행할 명령</span><br><span class="line"><span class="keyword">except</span> [발생오류 <span class="number">2</span>]:</span><br><span class="line">    <span class="keyword">try</span> 절이 [발생오류 <span class="number">2</span>]로 실패했을 때 실행할 명령</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>오류 메시지를 다음 실행의 입력으로 활용할 수도 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&quot;does_not_exist.jpg&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> IOError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;(1)&#x27;</span>, e</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;(2) Error message is: &#x27;</span> + <span class="built_in">str</span>(e).split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># (1) [Errno 2] No such file or directory: &#x27;does_not_exist.jpg&#x27;</span></span><br><span class="line"><span class="comment"># (2) Error message is: [Errno 2] No such file or directory</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>(1)</code>: <code>IOError</code>로 출력되는 오류 메시지 전체를 변수 <code>e</code>에 담아 그대로 출력할 수도 있고, <code>(2)</code>: 에러 설명에 해당하는 부분만 떼어서 독자적인 메시지를 출력할 수도 있습니다.</li>
 </ul>
-</li>
-</ul>
+<br>
+* 오류 메시지를 다음 실행의 입력으로 활용할 수도 있습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&quot;does_not_exist.jpg&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> IOError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;(1)&#x27;</span>, e</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;(2) Error message is: &#x27;</span> + <span class="built_in">str</span>(e).split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># (1) [Errno 2] No such file or directory: &#x27;does_not_exist.jpg&#x27;</span></span><br><span class="line"><span class="comment"># (2) Error message is: [Errno 2] No such file or directory</span></span><br></pre></td></tr></table></figure>
+  * `(1)`: `IOError`로 출력되는 오류 메시지 전체를 변수 `e`에 담아 그대로 출력할 수도 있고, `(2)`: 에러 설명에 해당하는 부분만 떼어서 독자적인 메시지를 출력할 수도 있습니다.
 <h4 id="4-5-2-try-except-else">4.5.2. <code>try</code> + <code>except</code> + <code>else</code></h4>
 <ul>
 <li>
@@ -502,11 +486,10 @@
 <p>리스트 대신 튜플이나 문자열이 올 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test_list = [<span class="string">&#x27;one&#x27;</span>, <span class="string">&#x27;two&#x27;</span>, <span class="string">&#x27;three&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> test_list:</span><br><span class="line">    <span class="built_in">print</span> i</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># one</span></span><br><span class="line"><span class="comment"># two</span></span><br><span class="line"><span class="comment"># three</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>for</code>문의 원소로 튜플을 사용하여 동시의 여러 변수를 받아들일 수 있습니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = [(<span class="number">1</span>,<span class="number">2</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>)]</span><br><span class="line"><span class="keyword">for</span> (first, last) <span class="keyword">in</span> a:</span><br><span class="line">    <span class="built_in">print</span> first + last</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line"><span class="comment"># 11</span></span><br></pre></td></tr></table></figure>
-</li>
 </ul>
+<br>
+* `for`문의 원소로 튜플을 사용하여 동시의 여러 변수를 받아들일 수 있습니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = [(<span class="number">1</span>,<span class="number">2</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>)]</span><br><span class="line"><span class="keyword">for</span> (first, last) <span class="keyword">in</span> a:</span><br><span class="line">    <span class="built_in">print</span> first + last</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line"><span class="comment"># 11</span></span><br></pre></td></tr></table></figure>
 <h5 id="4-6-1-1-for-continue">4.6.1.1. <code>for</code> + <code>continue</code></h5>
 <ul>
 <li><code>for</code> 문을 수행하는 도중 <code>continue</code>를 만나면 이후를 실행하지 않고 <code>for</code>문의 처음으로 돌아갑니다.</li>
@@ -526,13 +509,12 @@
 </li>
 </ul>
 </li>
-<li>
-<p><code>for</code>문을 2개 이상 사용하는 것도 가능합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[표현식 <span class="keyword">for</span> 항목<span class="number">1</span> <span class="keyword">in</span> 반복가능객체<span class="number">1</span> <span class="keyword">if</span> 조건문<span class="number">1</span></span><br><span class="line">       <span class="keyword">for</span> 항목<span class="number">2</span> <span class="keyword">in</span> 반복가능객체<span class="number">2</span> <span class="keyword">if</span> 조건문<span class="number">2</span></span><br><span class="line">       ...</span><br><span class="line">       <span class="keyword">for</span> 항목n <span class="keyword">in</span> 반복가능객체n <span class="keyword">if</span> 조건문n]</span><br></pre></td></tr></table></figure>
+</ul>
+<br>
+* `for`문을 2개 이상 사용하는 것도 가능합니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[표현식 <span class="keyword">for</span> 항목<span class="number">1</span> <span class="keyword">in</span> 반복가능객체<span class="number">1</span> <span class="keyword">if</span> 조건문<span class="number">1</span></span><br><span class="line">       <span class="keyword">for</span> 항목<span class="number">2</span> <span class="keyword">in</span> 반복가능객체<span class="number">2</span> <span class="keyword">if</span> 조건문<span class="number">2</span></span><br><span class="line">       ...</span><br><span class="line">       <span class="keyword">for</span> 항목n <span class="keyword">in</span> 반복가능객체n <span class="keyword">if</span> 조건문n]</span><br></pre></td></tr></table></figure>
 <ul>
 <li>구구단의 모든 결과를 다음과 같이 표현할 수 있습니다.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">result = [x*y <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">10</span>)</span><br><span class="line">              <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> result</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># [2, 4, 6, 8, 10, 12, 14, 16, 18, 3, 6, 9, 12, 15, 18, 21, 24, 27, 4, 8, 12, 16,</span></span><br><span class="line"><span class="number">20</span>, <span class="number">24</span>, <span class="number">28</span>, <span class="number">32</span>, <span class="number">36</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">25</span>, <span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>, <span class="number">45</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">18</span>, <span class="number">24</span>, <span class="number">30</span>, <span class="number">36</span>, <span class="number">42</span></span><br><span class="line">, <span class="number">48</span>, <span class="number">54</span>, <span class="number">7</span>, <span class="number">14</span>, <span class="number">21</span>, <span class="number">28</span>, <span class="number">35</span>, <span class="number">42</span>, <span class="number">49</span>, <span class="number">56</span>, <span class="number">63</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">24</span>, <span class="number">32</span>, <span class="number">40</span>, <span class="number">48</span>, <span class="number">56</span>, <span class="number">64</span>, <span class="number">72</span>,</span><br><span class="line"><span class="number">9</span>, <span class="number">18</span>, <span class="number">27</span>, <span class="number">36</span>, <span class="number">45</span>, <span class="number">54</span>, <span class="number">63</span>, <span class="number">72</span>, <span class="number">81</span>]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
 </li>
 </ul>
 <h5 id="4-6-1-3-for-break">4.6.1.3. <code>for</code> + <code>break</code></h5>
@@ -551,14 +533,16 @@
 <h5 id="4-6-1-4-for-else">4.6.1.4. <code>for</code> + <code>else</code></h5>
 <ul>
 <li>
-<p>위 코드에서 맨 마지막에 <code>else</code> 명령이 있는데 실행되지 않았습니다.</p>
+<p>위 코드에서 맨 마지막에 <code>else</code> 명령이 있는데 실행되지 않았습니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>for</code> 뒤에 붙은 <code>else</code>는 <code>for</code> 에서 <code>break</code>가 실행되지 않았을 때 실행됩니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">5</span>):</span><br><span class="line">    <span class="built_in">print</span> a</span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">6</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;else statement is called.&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과:</span></span><br><span class="line"><span class="comment"># 0</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line"><span class="comment"># else statement is called.</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>range()</code>에 의해 a에 0부터 4까지 대입되고 출력되었으나 <code>break</code>의 조건이 a == 6 이기 때문에 <code>break</code>는 발동되지 않았습니다.</li>
-<li><code>break</code>없이 <code>for</code> loop이 완료되었으므로 이후에 있는 <code>else</code>가 실행됩니다.</li>
+<li><code>break</code>없이 <code>for</code> loop이 완료되었으므로 이후에 있는 <code>else</code>가 실행됩니다.<br>
+<br></li>
 </ul>
 </li>
 <li>
@@ -570,40 +554,41 @@
 <h5 id="4-6-2-1-기본-사용법">4.6.2.1. 기본 사용법</h5>
 <ul>
 <li>
-<p><code>while</code> 문도 <code>for</code>문과 비슷하게 반복수행을 실시합니다.</p>
+<p><code>while</code> 문도 <code>for</code>문과 비슷하게 반복수행을 실시합니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>for</code>문은 리스트나 튜플 등의 원소를 하나씩 건너가면서(<code>iterate</code>) 하단의 명령에 대입하는 것이 기본인데 반해 <code>while</code>문은 조건문이 참을 만족하는 동안 동일 명령을 계속 수행하는 것이 차이점입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> [조건문]:</span><br><span class="line">    [수행할 문장<span class="number">1</span>]</span><br><span class="line">    [수행할 문장<span class="number">2</span>]</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>&quot;열 번 찍어 안 넘어가는 나무 없다&quot;는 속담을 <code>for</code>문과 <code>while</code>문으로 만들면 다음과 같습니다.</p>
+</ul>
+<br>
+* "열 번 찍어 안 넘어가는 나무 없다"는 속담을 `for`문과 `while`문으로 만들면 다음과 같습니다.
 <ul>
 <li>
 <p><code>for</code>: <code>treehit</code>에 0부터 9까지 차례로 대입하면서 실행합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> treehit <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Tree hit by %d times.&quot;</span> % (treehit + <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Tree fall!&quot;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>while</code>: <code>treehit</code>을 1씩 수동으로 증가시켜줘야 합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">treehit = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> treehit &lt; <span class="number">10</span>:</span><br><span class="line">    treehit = treehit + <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Tree hit by %d times.&quot;</span> % treehit</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Tree fall!&quot;</span>    </span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>위의 두 코드는 모두 동작을 하고 동일한 결과를 출력합니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># Tree hit by 1 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 2 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 3 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 4 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 5 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 6 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 7 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 8 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 9 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 10 times.</span></span><br><span class="line"><span class="comment"># Tree fall!</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>treehit</code>이 9가 될때까지 반복문을 수행하고 <code>treehit</code>가 10이 되는 순간 반복문을 중단하고 맨 마지막줄이 실행되는데, <code>for</code>문은 반복문에서 실행될 횟수가 정해진 반면 <code>while</code>은 조건문을 만족할 때까지 무한히 실행되는 특징이 있어 무한루프에 빠지기 쉬우니 주의해야 합니다.</p>
-</li>
 </ul>
-</li>
-</ul>
+<br>
+  * `while`: `treehit`을 1씩 수동으로 증가시켜줘야 합니다.
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">treehit = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> treehit &lt; <span class="number">10</span>:</span><br><span class="line">    treehit = treehit + <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Tree hit by %d times.&quot;</span> % treehit</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Tree fall!&quot;</span>    </span><br></pre></td></tr></table></figure>
+</code></pre>
+<br>
+  * 위의 두 코드는 모두 동작을 하고 동일한 결과를 출력합니다.
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># Tree hit by 1 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 2 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 3 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 4 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 5 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 6 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 7 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 8 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 9 times.</span></span><br><span class="line"><span class="comment"># Tree hit by 10 times.</span></span><br><span class="line"><span class="comment"># Tree fall!</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<br>
+  * `treehit`이 9가 될때까지 반복문을 수행하고 `treehit`가 10이 되는 순간 반복문을 중단하고 맨 마지막줄이 실행되는데, `for`문은 반복문에서 실행될 횟수가 정해진 반면 `while`은 조건문을 만족할 때까지 무한히 실행되는 특징이 있어 무한루프에 빠지기 쉬우니 주의해야 합니다.
 <h5 id="4-6-2-2-while-break-while문-강제-중단">4.6.2.2. <code>while</code> + <code>break</code>: <code>while</code>문 강제 중단</h5>
 <ul>
 <li>
-<p>평소엔 지시된 명령을 수행하다가 특정 조건을 만족할 때 중단이 필요할 때가 있습니다.</p>
+<p>평소엔 지시된 명령을 수행하다가 특정 조건을 만족할 때 중단이 필요할 때가 있습니다.<br>
+<br></p>
 </li>
 <li>
-<p>예를 들면 자동판매기에 돈을 넣고 금액이 허락하는 최대한의 커피를 뽑고자 할 때, 돈이 부족해지거나 커피가 부족하면 중단을 시켜야 합니다.</p>
+<p>예를 들면 자동판매기에 돈을 넣고 금액이 허락하는 최대한의 커피를 뽑고자 할 때, 돈이 부족해지거나 커피가 부족하면 중단을 시켜야 합니다.<br>
+<br></p>
 </li>
 <li>
 <p>커피가 10잔 장전된 커피 자동판매기에 1000원을 넣고 커피를 뽑는 경우, 다음과 같이 코드를 작성할 수 있습니다.</p>
@@ -611,7 +596,8 @@
 <ul>
 <li>위 코드에는 크게 두 개의 <code>if</code>절이 있습니다. 상단의 <code>if</code>-<code>elif</code>-<code>else</code>로 이어지는 <code>if</code>절은 투입 금액(<code>money</code>)의 경우에 따른 동작을 기술하고 있고 하단의 <code>if coffee==0:</code> 부분은 커피가 다 떨어졌을 때의 메시지를 담고 있습니다.</li>
 <li>두 경우에 모두 <code>break</code>가 있는데 돈이 부족하거나 커피가 부족할 경우 동작을 중단하라는 명령입니다.</li>
-<li>둘 중 하나라도 <code>break</code>가 없는 경우, 각각의 경우에 대해 프로그램이 종료되지 않는 무한루프로 빠져듭니다.</li>
+<li>둘 중 하나라도 <code>break</code>가 없는 경우, 각각의 경우에 대해 프로그램이 종료되지 않는 무한루프로 빠져듭니다.<br>
+<br></li>
 </ul>
 </li>
 <li>
@@ -637,10 +623,12 @@
 <h4 id="4-7-1-map">4.7.1. <code>map</code></h4>
 <ul>
 <li>
-<p><code>map(f, iterable)</code>은 함수(<code>f</code>)와 반복 가능한(<code>iterable</code>) 자료형을 입력으로 받습니다.</p>
+<p><code>map(f, iterable)</code>은 함수(<code>f</code>)와 반복 가능한(<code>iterable</code>) 자료형을 입력으로 받습니다.<br>
+<br></p>
 </li>
 <li>
-<p><code>map</code>은 입력받은 자료형의 각 요소를 함수 <code>f</code>가 수행한 결과를 묶어서 돌려줍니다.</p>
+<p><code>map</code>은 입력받은 자료형의 각 요소를 함수 <code>f</code>가 수행한 결과를 묶어서 돌려줍니다.<br>
+<br></p>
 </li>
 <li>
 <p>입력받은 리스트에 2를 곱하는 함수를 <code>def</code>문으로 만들면 다음과 같습니다.</p>
@@ -664,15 +652,16 @@
 <p><code>lambda</code> 함수는 <code>return</code>없이 동작합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># def</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line"></span><br><span class="line"><span class="comment"># lambda</span></span><br><span class="line">add = <span class="keyword">lambda</span> a, b: a+b</span><br><span class="line"></span><br><span class="line">result = add(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span> result</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># 7</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>map</code>과 <code>lambda</code>를 결합하면 위의 <code>two_times</code>함수를 한 줄로 줄일 수 있습니다.</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="built_in">map</span>(<span class="keyword">lambda</span> x: <span class="number">2</span>*x, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line"><span class="built_in">print</span> result</span><br></pre></td></tr></table></figure>
-</li>
 </ul>
+<br>
+* `map`과 `lambda`를 결합하면 위의 `two_times`함수를 한 줄로 줄일 수 있습니다.
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="built_in">map</span>(<span class="keyword">lambda</span> x: <span class="number">2</span>*x, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line"><span class="built_in">print</span> result</span><br></pre></td></tr></table></figure>
+</code></pre>
 <h4 id="4-7-3-filter">4.7.3 <code>filter</code></h4>
 <ul>
 <li>
-<p><code>filter(f, iterable)</code>은 함수(<code>f</code>)와 반복 가능한(<code>iterable</code>) 자료형을 입력으로 받습니다.</p>
+<p><code>filter(f, iterable)</code>은 함수(<code>f</code>)와 반복 가능한(<code>iterable</code>) 자료형을 입력으로 받습니다.<br>
+<br></p>
 </li>
 <li>
 <p><code>map</code>과 비슷하지만, 함수 <code>f</code>의 결과를 참(<code>True</code>)로 만드는 결과만을 돌려줍니다.</p>
@@ -690,13 +679,16 @@
 <h4 id="4-7-4-reduce">4.7.4. <code>reduce</code></h4>
 <ul>
 <li>
-<p><code>reduce</code>도 함수와 반복가능한 자료형을 입력으로 받습니다.</p>
+<p><code>reduce</code>도 함수와 반복가능한 자료형을 입력으로 받습니다.<br>
+<br></p>
 </li>
 <li>
-<p>옵션으로 세 번째 인자를 받을 수 있으며, 의미는 연산의 초기값입니다.</p>
+<p>옵션으로 세 번째 인자를 받을 수 있으며, 의미는 연산의 초기값입니다.<br>
+<br></p>
 </li>
 <li>
-<p>리스트가 아니라 단일 값을 돌려준다는 점에서 <code>map</code>, <code>filter</code>와의 차이가 있습니다.</p>
+<p>리스트가 아니라 단일 값을 돌려준다는 점에서 <code>map</code>, <code>filter</code>와의 차이가 있습니다.<br>
+<br></p>
 </li>
 <li>
 <p>함수 <code>f</code>와 리스트 <code>[a1, a2, a3]</code>이 인자로 주어진다면 입력과 결과는 다음과 같습니다.</p>
@@ -706,17 +698,17 @@
 <li>여기에 초기값 <code>a0</code>이 인자로 주어진다면 입력과 결과는 다음과 같습니다.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reduce(f, [a1, a2, a3], a0)</span><br></pre></td></tr></table></figure>
-<p>= $ f(f(f(a0, a1), a2), a3) $</p>
+<p>= $ f(f(f(a0, a1), a2), a3) $<br>
+<br></p>
 </li>
 <li>
 <p><code>lambda</code>로 구현한 함수 <code>f(x, y) = x + y</code>를 이용해 1부터 5까지의 합을 구하는 예시입니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> reduce(<span class="keyword">lambda</span> x, y: x+y, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># 15</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><code>filter</code>함수를 이용해 리스트의 최대값을 구하는 예시입니다.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func = <span class="keyword">lambda</span> a, b: a <span class="keyword">if</span> (a&gt;b) <span class="keyword">else</span> b</span><br><span class="line"><span class="built_in">print</span> reduce(func, [<span class="number">34</span>, <span class="number">76</span>, <span class="number">29</span>, <span class="number">96</span>, <span class="number">68</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># 96</span></span><br></pre></td></tr></table></figure>
-</li>
 </ul>
+<br>
+* `filter`함수를 이용해 리스트의 최대값을 구하는 예시입니다.
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func = <span class="keyword">lambda</span> a, b: a <span class="keyword">if</span> (a&gt;b) <span class="keyword">else</span> b</span><br><span class="line"><span class="built_in">print</span> reduce(func, [<span class="number">34</span>, <span class="number">76</span>, <span class="number">29</span>, <span class="number">96</span>, <span class="number">68</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행결과</span></span><br><span class="line"><span class="comment"># 96</span></span><br></pre></td></tr></table></figure>
 <br>
 <h3 id="4-8-ImageJ-응용">4.8. <code>ImageJ</code> 응용</h3>
 <ul>
@@ -748,7 +740,7 @@
 
 
 
-    <a data-url="https://tech.jehyunlee.dev/2019/12/19/ImageJ-tutorial-4-Python/" data-id="cuidRh0PSOxLj2Pf7uuanNW6d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://tech.jehyunlee.dev/2019/12/19/ImageJ-tutorial-4-Python/" data-id="cuidUHPoyp2NRBI9K7YGvLqR7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -831,7 +823,7 @@
 ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python을 구현한 것입니다.
 
 주로 web 환경에 많이 사용되는 JVM과 python의 연동이 자유로워 Java Class와 .jar 파일을 아무런 변환이나 노력 없이 그대로 끌어다 사용할 수 있다는 장점이 있습니다",
-        "wordCount": 4902
+        "wordCount": 4958
     }
 </script>
 
@@ -928,6 +920,26 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2026/07/31/General-95_reviewofgoldenage/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/General/95_reviewofgoldenage_00.png)" alt="리뷰 - Science A New Golden Age" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
+                            <p class="item-title"><a href="/2026/07/31/General-95_reviewofgoldenage/" class="title">리뷰 - Science A New Golden Age</a></p>
+                            <p class="item-date"><time datetime="2026-07-31T14:09:00.000Z" itemprop="datePublished">2026-07-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2026/04/29/General-94_kistaixedu260429/" class="thumbnail">
     
     
@@ -1005,26 +1017,6 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2025/08/24/General-90_rndagent_cases/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/thumbnails/General/90_rndagent_cases_00.png)" alt="AI for Science 도메인 특화 Agent 공개 사례" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/General/">General</a></p>
-                            <p class="item-title"><a href="/2025/08/24/General-90_rndagent_cases/" class="title">AI for Science 도메인 특화 Agent 공개 사례</a></p>
-                            <p class="item-date"><time datetime="2025-08-24T05:51:00.000Z" itemprop="datePublished">2025-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1034,7 +1026,7 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">85</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">131</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/QGIS/">QGIS</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/General/">General</a><span class="category-list-count">86</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/">ImageJ</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Cookbook/">Cookbook</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ImageJ/Tutorial/">Tutorial</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">151</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Data-Science/">Data Science</a><span class="category-list-count">131</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Deep-Learning/">Deep Learning</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/General/">General</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Physics/">Physics</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1044,7 +1036,7 @@ ImageJ에서 활용하는 jython은 Java Virtual Machine (JVM) 위에서 python�
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.5px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.5px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 13px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.5px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/CHATGPT/" style="font-size: 10px;">CHATGPT</a> <a href="/tags/ChatGPT/" style="font-size: 11.5px;">ChatGPT</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/DALL-E/" style="font-size: 11.5px;">DALL.E</a> <a href="/tags/DATA-ANALYSIS/" style="font-size: 10px;">DATA ANALYSIS</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Analyst/" style="font-size: 10px;">Data Analyst</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/EOST/" style="font-size: 12px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPTs/" style="font-size: 10px;">GPTs</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Gemini/" style="font-size: 11px;">Gemini</a> <a href="/tags/Genspark/" style="font-size: 10.5px;">Genspark</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15.5px;">KIER</a> <a href="/tags/KIST/" style="font-size: 10px;">KIST</a> <a href="/tags/Manus/" style="font-size: 10px;">Manus</a> <a href="/tags/NIA/" style="font-size: 10.5px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.5px;">Nicolas P. Rougier</a> <a href="/tags/NotebookLM/" style="font-size: 10px;">NotebookLM</a> <a href="/tags/OPENAI/" style="font-size: 10px;">OPENAI</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.5px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/Perplexity/" style="font-size: 10.5px;">Perplexity</a> <a href="/tags/RAG/" style="font-size: 10.5px;">RAG</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/SEMA/" style="font-size: 10px;">SEMA</a> <a href="/tags/SciSpace/" style="font-size: 12px;">SciSpace</a> <a href="/tags/Storm/" style="font-size: 10px;">Storm</a> <a href="/tags/TalkIT/" style="font-size: 10px;">TalkIT</a> <a href="/tags/UST/" style="font-size: 10px;">UST</a> <a href="/tags/VOSviewer/" style="font-size: 10.5px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/ZDNET/" style="font-size: 10px;">ZDNET</a> <a href="/tags/agent/" style="font-size: 11px;">agent</a> <a href="/tags/ai-studio/" style="font-size: 10px;">ai studio</a> <a href="/tags/aifrenz/" style="font-size: 10px;">aifrenz</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.5px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.5px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.5px;">bayesian</a> <a href="/tags/bingchat/" style="font-size: 11px;">bingchat</a> <a href="/tags/bingimagecreator/" style="font-size: 13.5px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.5px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 18.5px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/claude-code/" style="font-size: 10px;">claude code</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.5px;">color</a> <a href="/tags/colorbar/" style="font-size: 12px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/consensus/" style="font-size: 10px;">consensus</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.5px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 11.5px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 16.5px;">dalle</a> <a href="/tags/data-analysis/" style="font-size: 11.5px;">data analysis</a> <a href="/tags/data-analyst/" style="font-size: 10.5px;">data analyst</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.5px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.5px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 11.5px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/deepl/" style="font-size: 10px;">deepl</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 11px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/escher/" style="font-size: 10px;">escher</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/foldlm/" style="font-size: 10px;">foldlm</a> <a href="/tags/font/" style="font-size: 10.5px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.5px;">gaussian process</a> <a href="/tags/gemini/" style="font-size: 11px;">gemini</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 13.5px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/ideogram/" style="font-size: 10px;">ideogram</a> <a href="/tags/image/" style="font-size: 12px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.5px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.5px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11px;">legend</a> <a href="/tags/life/" style="font-size: 10.5px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.5px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 14.5px;">microsoft</a> <a href="/tags/microsoft-designer/" style="font-size: 10px;">microsoft designer</a> <a href="/tags/midjourney/" style="font-size: 10px;">midjourney</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/nanobanana/" style="font-size: 11px;">nanobanana</a> <a href="/tags/natural-language/" style="font-size: 10.5px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.5px;">neural network</a> <a href="/tags/notebooklm/" style="font-size: 11px;">notebooklm</a> <a href="/tags/nst/" style="font-size: 12px;">nst</a> <a href="/tags/numpy/" style="font-size: 12.5px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.5px;">open API</a> <a href="/tags/openai/" style="font-size: 18px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.5px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/perplexity/" style="font-size: 11.5px;">perplexity</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/photovoltaics/" style="font-size: 10px;">photovoltaics</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12px;">pipeline</a> <a href="/tags/polygon/" style="font-size: 11px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.5px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.5px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.5px;">pycon</a> <a href="/tags/pyhon/" style="font-size: 10px;">pyhon</a> <a href="/tags/pysolar/" style="font-size: 10.5px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.5px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.5px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/research/" style="font-size: 11px;">research</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.5px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/scholar-AI/" style="font-size: 10px;">scholar AI</a> <a href="/tags/scholar-GPT/" style="font-size: 10px;">scholar GPT</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.5px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11px;">scipy</a> <a href="/tags/scispace/" style="font-size: 12px;">scispace</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 11px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.5px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.5px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.5px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.5px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.5px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.5px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10.5px;">youtube</a> <a href="/tags/zotero/" style="font-size: 10px;">zotero</a> <a href="/tags/%EA%B3%A8%EB%93%A0%EB%9E%98%EB%B9%97/" style="font-size: 10px;">골든래빗</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%ED%95%9C%EB%A6%BC%EC%9B%90/" style="font-size: 10px;">한국과학기술한림원</a> <a href="/tags/%ED%97%A4%EB%9F%B4%EB%93%9C%EA%B2%BD%EC%A0%9C/" style="font-size: 10px;">헤럴드경제</a> <a href="/tags/%ED%99%A9%EB%AF%BC%ED%98%B8/" style="font-size: 10px;">황민호</a>
+            <a href="/tags/1-cycle-learning-rate-policy/" style="font-size: 10px;">1 cycle learning rate policy</a> <a href="/tags/3D/" style="font-size: 12.5px;">3D</a> <a href="/tags/AAiCON/" style="font-size: 10px;">AAiCON</a> <a href="/tags/AI-Factory/" style="font-size: 10.5px;">AI Factory</a> <a href="/tags/AI-Frenz/" style="font-size: 13px;">AI Frenz</a> <a href="/tags/AI-festival/" style="font-size: 11px;">AI festival</a> <a href="/tags/API/" style="font-size: 10.5px;">API</a> <a href="/tags/C-level/" style="font-size: 10px;">C-level</a> <a href="/tags/CHATGPT/" style="font-size: 10px;">CHATGPT</a> <a href="/tags/ChatGPT/" style="font-size: 11.5px;">ChatGPT</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/DALL-E/" style="font-size: 11.5px;">DALL.E</a> <a href="/tags/DATA-ANALYSIS/" style="font-size: 10px;">DATA ANALYSIS</a> <a href="/tags/Daejeon-Learning-Day/" style="font-size: 10px;">Daejeon Learning Day</a> <a href="/tags/Daejeon-Science-Festival/" style="font-size: 10px;">Daejeon Science Festival</a> <a href="/tags/Data-Analyst/" style="font-size: 10px;">Data Analyst</a> <a href="/tags/Data-Scienctist/" style="font-size: 10px;">Data Scienctist</a> <a href="/tags/DeepL/" style="font-size: 10px;">DeepL</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/EOST/" style="font-size: 12px;">EOST</a> <a href="/tags/ETRI/" style="font-size: 10px;">ETRI</a> <a href="/tags/FacetGrid/" style="font-size: 10px;">FacetGrid</a> <a href="/tags/GPTs/" style="font-size: 10px;">GPTs</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Gemini/" style="font-size: 11px;">Gemini</a> <a href="/tags/Genspark/" style="font-size: 10.5px;">Genspark</a> <a href="/tags/Google-Colab/" style="font-size: 10px;">Google Colab</a> <a href="/tags/Google-Form/" style="font-size: 10px;">Google Form</a> <a href="/tags/HelloDD/" style="font-size: 10px;">HelloDD</a> <a href="/tags/KIER/" style="font-size: 15.5px;">KIER</a> <a href="/tags/KIST/" style="font-size: 10px;">KIST</a> <a href="/tags/Manus/" style="font-size: 10px;">Manus</a> <a href="/tags/NIA/" style="font-size: 10.5px;">NIA</a> <a href="/tags/NIA-data-story/" style="font-size: 10px;">NIA data story</a> <a href="/tags/NLP/" style="font-size: 10px;">NLP</a> <a href="/tags/Nicolas-P-Rougier/" style="font-size: 10.5px;">Nicolas P. Rougier</a> <a href="/tags/NotebookLM/" style="font-size: 10px;">NotebookLM</a> <a href="/tags/OPENAI/" style="font-size: 10px;">OPENAI</a> <a href="/tags/Open-AI/" style="font-size: 10px;">Open AI</a> <a href="/tags/PCA/" style="font-size: 10.5px;">PCA</a> <a href="/tags/PairGrid/" style="font-size: 10px;">PairGrid</a> <a href="/tags/Perplexity/" style="font-size: 10.5px;">Perplexity</a> <a href="/tags/RAG/" style="font-size: 10.5px;">RAG</a> <a href="/tags/RPA/" style="font-size: 10px;">RPA</a> <a href="/tags/SEMA/" style="font-size: 10px;">SEMA</a> <a href="/tags/SciSpace/" style="font-size: 12px;">SciSpace</a> <a href="/tags/Storm/" style="font-size: 10px;">Storm</a> <a href="/tags/TalkIT/" style="font-size: 10px;">TalkIT</a> <a href="/tags/UST/" style="font-size: 10px;">UST</a> <a href="/tags/VOSviewer/" style="font-size: 10.5px;">VOSviewer</a> <a href="/tags/X-STEM/" style="font-size: 10px;">X-STEM</a> <a href="/tags/ZDNET/" style="font-size: 10px;">ZDNET</a> <a href="/tags/agent/" style="font-size: 11px;">agent</a> <a href="/tags/ai-studio/" style="font-size: 10px;">ai studio</a> <a href="/tags/aifrenz/" style="font-size: 10px;">aifrenz</a> <a href="/tags/align/" style="font-size: 10px;">align</a> <a href="/tags/annotate/" style="font-size: 10px;">annotate</a> <a href="/tags/art/" style="font-size: 10px;">art</a> <a href="/tags/article/" style="font-size: 10px;">article</a> <a href="/tags/ascii/" style="font-size: 10px;">ascii</a> <a href="/tags/atom/" style="font-size: 10.5px;">atom</a> <a href="/tags/automation/" style="font-size: 10px;">automation</a> <a href="/tags/axes/" style="font-size: 10px;">axes</a> <a href="/tags/azurethon/" style="font-size: 10px;">azurethon</a> <a href="/tags/batch/" style="font-size: 10px;">batch</a> <a href="/tags/batch-normalization/" style="font-size: 10.5px;">batch normalization</a> <a href="/tags/bayesian/" style="font-size: 11.5px;">bayesian</a> <a href="/tags/bingchat/" style="font-size: 11px;">bingchat</a> <a href="/tags/bingimagecreator/" style="font-size: 13.5px;">bingimagecreator</a> <a href="/tags/bresenham/" style="font-size: 10px;">bresenham</a> <a href="/tags/c-level/" style="font-size: 10px;">c-level</a> <a href="/tags/calendar/" style="font-size: 10.5px;">calendar</a> <a href="/tags/calibration/" style="font-size: 10px;">calibration</a> <a href="/tags/callback/" style="font-size: 11px;">callback</a> <a href="/tags/capstyle/" style="font-size: 10px;">capstyle</a> <a href="/tags/channel-threshold/" style="font-size: 10px;">channel threshold</a> <a href="/tags/chatgpt/" style="font-size: 18.5px;">chatgpt</a> <a href="/tags/chrome-remote-desktop/" style="font-size: 10px;">chrome remote desktop</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/classification/" style="font-size: 10px;">classification</a> <a href="/tags/claude-code/" style="font-size: 10px;">claude code</a> <a href="/tags/code-states/" style="font-size: 10px;">code states</a> <a href="/tags/cognitive-science/" style="font-size: 11px;">cognitive science</a> <a href="/tags/color/" style="font-size: 15.5px;">color</a> <a href="/tags/colorbar/" style="font-size: 12px;">colorbar</a> <a href="/tags/colormap/" style="font-size: 14px;">colormap</a> <a href="/tags/colorsys/" style="font-size: 10px;">colorsys</a> <a href="/tags/confidence-interval/" style="font-size: 10px;">confidence interval</a> <a href="/tags/consensus/" style="font-size: 10px;">consensus</a> <a href="/tags/convolution/" style="font-size: 10px;">convolution</a> <a href="/tags/cookbook/" style="font-size: 10.5px;">cookbook</a> <a href="/tags/csv/" style="font-size: 10px;">csv</a> <a href="/tags/dall-e/" style="font-size: 11.5px;">dall.e</a> <a href="/tags/dalle/" style="font-size: 16.5px;">dalle</a> <a href="/tags/data-analysis/" style="font-size: 11.5px;">data analysis</a> <a href="/tags/data-analyst/" style="font-size: 10.5px;">data analyst</a> <a href="/tags/data-augmentation/" style="font-size: 10px;">data augmentation</a> <a href="/tags/data-cleansing/" style="font-size: 10px;">data cleansing</a> <a href="/tags/data-generation/" style="font-size: 10.5px;">data generation</a> <a href="/tags/data-preprocessing/" style="font-size: 10px;">data preprocessing</a> <a href="/tags/data-sampling/" style="font-size: 10.5px;">data sampling</a> <a href="/tags/data-split/" style="font-size: 10px;">data split</a> <a href="/tags/data-visualization/" style="font-size: 11.5px;">data visualization</a> <a href="/tags/datetime/" style="font-size: 11px;">datetime</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/deepl/" style="font-size: 10px;">deepl</a> <a href="/tags/design-of-experiment/" style="font-size: 10px;">design of experiment</a> <a href="/tags/display/" style="font-size: 10px;">display</a> <a href="/tags/displot/" style="font-size: 10px;">displot</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/education/" style="font-size: 11px;">education</a> <a href="/tags/ensemble/" style="font-size: 10px;">ensemble</a> <a href="/tags/environment/" style="font-size: 10px;">environment</a> <a href="/tags/error-bar/" style="font-size: 10px;">error bar</a> <a href="/tags/escher/" style="font-size: 10px;">escher</a> <a href="/tags/experiment-design/" style="font-size: 10px;">experiment design</a> <a href="/tags/fast-ai/" style="font-size: 10px;">fast.ai</a> <a href="/tags/foldlm/" style="font-size: 10px;">foldlm</a> <a href="/tags/font/" style="font-size: 10.5px;">font</a> <a href="/tags/gaussian-process/" style="font-size: 11.5px;">gaussian process</a> <a href="/tags/gemini/" style="font-size: 11px;">gemini</a> <a href="/tags/genesis-mission/" style="font-size: 10px;">genesis mission</a> <a href="/tags/geopandas/" style="font-size: 10px;">geopandas</a> <a href="/tags/get-data/" style="font-size: 10px;">get_data</a> <a href="/tags/get-lines/" style="font-size: 10px;">get_lines</a> <a href="/tags/gibbs-sampling/" style="font-size: 10px;">gibbs sampling</a> <a href="/tags/gis/" style="font-size: 13.5px;">gis</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/google-map/" style="font-size: 10px;">google map</a> <a href="/tags/google-trends/" style="font-size: 10px;">google trends</a> <a href="/tags/grid/" style="font-size: 10px;">grid</a> <a href="/tags/gridspec/" style="font-size: 10px;">gridspec</a> <a href="/tags/hyperparameter/" style="font-size: 10px;">hyperparameter</a> <a href="/tags/ideogram/" style="font-size: 10px;">ideogram</a> <a href="/tags/image/" style="font-size: 12px;">image</a> <a href="/tags/image-file/" style="font-size: 10px;">image file</a> <a href="/tags/imagej/" style="font-size: 16px;">imagej</a> <a href="/tags/inpaining/" style="font-size: 10px;">inpaining</a> <a href="/tags/inspection/" style="font-size: 10px;">inspection</a> <a href="/tags/installation/" style="font-size: 10px;">installation</a> <a href="/tags/io/" style="font-size: 10px;">io</a> <a href="/tags/isomap/" style="font-size: 10px;">isomap</a> <a href="/tags/job-schedule/" style="font-size: 10px;">job schedule</a> <a href="/tags/joinstyle/" style="font-size: 10px;">joinstyle</a> <a href="/tags/jointplot/" style="font-size: 10px;">jointplot</a> <a href="/tags/jupyter-lab/" style="font-size: 10.5px;">jupyter lab</a> <a href="/tags/jython/" style="font-size: 12px;">jython</a> <a href="/tags/kdeplot/" style="font-size: 10px;">kdeplot</a> <a href="/tags/keras/" style="font-size: 10.5px;">keras</a> <a href="/tags/keras-learing-day/" style="font-size: 10px;">keras learing day</a> <a href="/tags/langchain/" style="font-size: 10px;">langchain</a> <a href="/tags/latural-language-processing/" style="font-size: 10px;">latural language processing</a> <a href="/tags/learning-rate/" style="font-size: 10px;">learning rate</a> <a href="/tags/legend/" style="font-size: 11px;">legend</a> <a href="/tags/life/" style="font-size: 10.5px;">life</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear algebra</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/llm/" style="font-size: 10px;">llm</a> <a href="/tags/lmplot/" style="font-size: 10px;">lmplot</a> <a href="/tags/locally-linear-embedding/" style="font-size: 10px;">locally linear embedding</a> <a href="/tags/machine-learning/" style="font-size: 16px;">machine learning</a> <a href="/tags/matplotlib/" style="font-size: 19.5px;">matplotlib</a> <a href="/tags/mbc/" style="font-size: 10px;">mbc</a> <a href="/tags/microsoft/" style="font-size: 14.5px;">microsoft</a> <a href="/tags/microsoft-designer/" style="font-size: 10px;">microsoft designer</a> <a href="/tags/midjourney/" style="font-size: 10px;">midjourney</a> <a href="/tags/midnight-commander/" style="font-size: 10px;">midnight commander</a> <a href="/tags/minimum-oriented-rectangle/" style="font-size: 10px;">minimum oriented rectangle</a> <a href="/tags/multidimensional-scaling/" style="font-size: 10px;">multidimensional scaling</a> <a href="/tags/nanobanana/" style="font-size: 11px;">nanobanana</a> <a href="/tags/natural-language/" style="font-size: 10.5px;">natural language</a> <a href="/tags/natural-language-processing/" style="font-size: 10px;">natural language processing</a> <a href="/tags/naver-map/" style="font-size: 10px;">naver map</a> <a href="/tags/neural-network/" style="font-size: 11.5px;">neural network</a> <a href="/tags/notebooklm/" style="font-size: 11px;">notebooklm</a> <a href="/tags/nst/" style="font-size: 12px;">nst</a> <a href="/tags/numpy/" style="font-size: 12.5px;">numpy</a> <a href="/tags/object-minimum-bounding-box/" style="font-size: 10px;">object minimum bounding box</a> <a href="/tags/open-API/" style="font-size: 10.5px;">open API</a> <a href="/tags/openai/" style="font-size: 18px;">openai</a> <a href="/tags/pairplot/" style="font-size: 10px;">pairplot</a> <a href="/tags/pandas/" style="font-size: 15px;">pandas</a> <a href="/tags/paraview/" style="font-size: 10.5px;">paraview</a> <a href="/tags/patches/" style="font-size: 10px;">patches</a> <a href="/tags/perplexity/" style="font-size: 11.5px;">perplexity</a> <a href="/tags/person-correlation/" style="font-size: 10px;">person correlation</a> <a href="/tags/photovoltaics/" style="font-size: 10px;">photovoltaics</a> <a href="/tags/pie-chart/" style="font-size: 10px;">pie chart</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/pipeline/" style="font-size: 12px;">pipeline</a> <a href="/tags/policy/" style="font-size: 10px;">policy</a> <a href="/tags/polygon/" style="font-size: 11px;">polygon</a> <a href="/tags/power-bi/" style="font-size: 10px;">power bi</a> <a href="/tags/power-platform/" style="font-size: 10px;">power platform</a> <a href="/tags/powerpoint/" style="font-size: 10px;">powerpoint</a> <a href="/tags/presentation/" style="font-size: 17.5px;">presentation</a> <a href="/tags/principal-component-analysis/" style="font-size: 10px;">principal component analysis</a> <a href="/tags/probability/" style="font-size: 10.5px;">probability</a> <a href="/tags/proj/" style="font-size: 10px;">proj</a> <a href="/tags/pycon/" style="font-size: 10.5px;">pycon</a> <a href="/tags/pyhon/" style="font-size: 10px;">pyhon</a> <a href="/tags/pysolar/" style="font-size: 10.5px;">pysolar</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12px;">pytorch</a> <a href="/tags/qgis/" style="font-size: 10.5px;">qgis</a> <a href="/tags/raster/" style="font-size: 10.5px;">raster</a> <a href="/tags/regplot/" style="font-size: 10px;">regplot</a> <a href="/tags/research/" style="font-size: 11px;">research</a> <a href="/tags/response-surface-method/" style="font-size: 10px;">response surface method</a> <a href="/tags/ridge-map/" style="font-size: 10px;">ridge-map</a> <a href="/tags/ridgeplot/" style="font-size: 10.5px;">ridgeplot</a> <a href="/tags/roi/" style="font-size: 10px;">roi</a> <a href="/tags/savgol/" style="font-size: 10px;">savgol</a> <a href="/tags/scatter-density/" style="font-size: 10px;">scatter-density</a> <a href="/tags/scholar-AI/" style="font-size: 10px;">scholar AI</a> <a href="/tags/scholar-GPT/" style="font-size: 10px;">scholar GPT</a> <a href="/tags/science-and-people/" style="font-size: 10px;">science and people</a> <a href="/tags/sciencedirect/" style="font-size: 10px;">sciencedirect</a> <a href="/tags/scikit-image/" style="font-size: 10px;">scikit-image</a> <a href="/tags/scikit-learn/" style="font-size: 11.5px;">scikit-learn</a> <a href="/tags/scipy/" style="font-size: 11px;">scipy</a> <a href="/tags/scispace/" style="font-size: 12px;">scispace</a> <a href="/tags/scopus/" style="font-size: 10px;">scopus</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/seaborn/" style="font-size: 17px;">seaborn</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/seoul/" style="font-size: 11px;">seoul</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/shadow/" style="font-size: 10px;">shadow</a> <a href="/tags/shapefile/" style="font-size: 10.5px;">shapefile</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a> <a href="/tags/signal-processing/" style="font-size: 11.5px;">signal processing</a> <a href="/tags/sklearn/" style="font-size: 13px;">sklearn</a> <a href="/tags/spines/" style="font-size: 10px;">spines</a> <a href="/tags/statistics/" style="font-size: 13.5px;">statistics</a> <a href="/tags/streamgraph/" style="font-size: 10px;">streamgraph</a> <a href="/tags/subplots/" style="font-size: 10.5px;">subplots</a> <a href="/tags/summary/" style="font-size: 10px;">summary</a> <a href="/tags/t-SNE/" style="font-size: 10px;">t-SNE</a> <a href="/tags/tensorflow/" style="font-size: 11px;">tensorflow</a> <a href="/tags/text/" style="font-size: 10px;">text</a> <a href="/tags/text-mining/" style="font-size: 11.5px;">text mining</a> <a href="/tags/translation/" style="font-size: 11.5px;">translation</a> <a href="/tags/tree-models/" style="font-size: 10px;">tree models</a> <a href="/tags/uncertainty/" style="font-size: 10px;">uncertainty</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/validation/" style="font-size: 10px;">validation</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/vesta/" style="font-size: 10px;">vesta</a> <a href="/tags/visualization/" style="font-size: 19px;">visualization</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a> <a href="/tags/x-window/" style="font-size: 10px;">x-window</a> <a href="/tags/xception/" style="font-size: 10px;">xception</a> <a href="/tags/youth/" style="font-size: 10px;">youth</a> <a href="/tags/youtube/" style="font-size: 10.5px;">youtube</a> <a href="/tags/zotero/" style="font-size: 10px;">zotero</a> <a href="/tags/%EA%B3%A8%EB%93%A0%EB%9E%98%EB%B9%97/" style="font-size: 10px;">골든래빗</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%ED%95%9C%EB%A6%BC%EC%9B%90/" style="font-size: 10px;">한국과학기술한림원</a> <a href="/tags/%ED%97%A4%EB%9F%B4%EB%93%9C%EA%B2%BD%EC%A0%9C/" style="font-size: 10px;">헤럴드경제</a> <a href="/tags/%ED%99%A9%EB%AF%BC%ED%98%B8/" style="font-size: 10px;">황민호</a>
         </div>
     </div>
 
