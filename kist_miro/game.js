@@ -1,12 +1,12 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout} from './maze-core.js?v=20260906-2';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout} from './maze-core.js?v=20260906-3';
 
 const $=id=>document.getElementById(id);
 const STAGE_INFO=[
   {name:'특허의 미로',objective:'출구를 찾아 특허를 출원하세요.',reward:'특허출원!',line:'첫 번째 발견을 세상에.',color:'#e2f58a'},
   {name:'논문의 미로',objective:'새로운 길에서 논문을 완성하세요.',reward:'논문출판!',line:'당신의 발견이 한 편의 논문으로.',color:'#93ddf5'},
   {name:'기술의 미로',objective:'기술이 세상으로 나갈 길을 찾으세요.',reward:'기술이전!',line:'연구실의 아이디어가 세상으로.',color:'#e3b1ff'},
-  {name:'행운의 미로',objective:'마지막 출구에서 행운을 만나세요.',reward:'로또당첨!',line:'K → I → S → T, 네 글자를 모두 연결했어요!',color:'#ffcd75'}
+  {name:'현장적용의 미로',objective:'마지막 출구에서 연구를 현장에 적용하세요.',reward:'현장적용!',line:'K → I → S → T, 연구의 보물을 현장에 연결했어요!',color:'#ffcd75'}
 ];
 const CELL=3.2,WALL_HEIGHT=3.3,VISION_RADIUS=5.3;
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -15,8 +15,8 @@ const touchControls=$('touch-controls'),projectedPlayer=new THREE.Vector3();
 let mobileLayout=null;
 let renderer,scene,camera,mazeGroup,avatar,body,legs=[],portal,portalRing,playerRing;
 let floorMesh,wallMesh,capMesh,visitNumbers,wallData=[],visibleCells=new Set();
-let overviewGroup,overviewMarker,cameraTween=null,playFog,fireworksStarted=false;
-let celebrationHold=0,shownCountdown=-1;
+let overviewGroup,overviewMarker,overviewCurrentMarker,overviewGateways=[],cameraTween=null,playFog,fireworksStarted=false;
+let celebrationHold=0,peekHold=0,shownCountdown=-1;
 let logoBounds={minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity};
 const cameraLook=new THREE.Vector3();
 const visitedColor=new THREE.Color(LOGO_COLOR),unvisitedColor=new THREE.Color(UNVISITED_COLOR);
@@ -243,8 +243,25 @@ function updateWalls(dt) {
   wallMesh.instanceMatrix.needsUpdate=true;capMesh.instanceMatrix.needsUpdate=true;
 }
 
+function makeOverviewBeacon(stage,id,label,color,emphasis=false) {
+  const marker=new THREE.Group();marker.position.fromArray(logoPosition(stage,id,CELL));
+  const solid=new THREE.MeshBasicMaterial({color,fog:false,toneMapped:false,side:THREE.DoubleSide,transparent:true,opacity:1});
+  const glow=new THREE.MeshBasicMaterial({color,fog:false,toneMapped:false,side:THREE.DoubleSide,transparent:true,opacity:.24,depthWrite:false,blending:THREE.AdditiveBlending});
+  const ring=new THREE.Mesh(new THREE.RingGeometry(emphasis?2.2:1.3,emphasis?2.8:1.82,48),solid);
+  ring.rotation.x=-Math.PI/2;ring.position.y=.26;marker.add(ring);
+  const halo=new THREE.Mesh(new THREE.RingGeometry(emphasis?2.9:1.9,emphasis?4.15:2.85,48),glow);
+  halo.rotation.x=-Math.PI/2;halo.position.y=.2;marker.add(halo);
+  const height=emphasis?8:5.4;
+  const stem=new THREE.Mesh(new THREE.CylinderGeometry(emphasis?.13:.09,emphasis?.13:.09,height,10),solid);
+  stem.position.y=height/2;marker.add(stem);
+  const text=makeTextSprite(label,emphasis?68:76,color);text.position.y=height+1.5;
+  text.scale.set(emphasis?7.8:5.1,emphasis?7.8:5.1,1);text.material.fog=false;text.material.toneMapped=false;marker.add(text);
+  return marker;
+}
+
 function buildOverview(entranceIndex=session.stageIndex+1) {
   disposeGroup(overviewGroup);overviewGroup=new THREE.Group();scene.add(overviewGroup);
+  overviewGateways=[];overviewMarker=null;overviewCurrentMarker=null;
   logoBounds={minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity};
   const floorGeometry=new THREE.BoxGeometry(CELL-.035,.18,CELL-.035);
   const floorMaterial=new THREE.MeshBasicMaterial({color:0xffffff,fog:false,toneMapped:false});
@@ -272,20 +289,20 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
     const wallInstances=new THREE.InstancedMesh(wallGeometry,wallMaterial,walls.length);
     walls.forEach((wall,i)=>setMatrix(wallInstances,i,wall.x,WALL_HEIGHT/2,wall.z,1,1,1,wall.angle));
     wallInstances.instanceMatrix.needsUpdate=true;overviewGroup.add(wallInstances);
+    const entrance=makeOverviewBeacon(stage,stage.start,`입구 ${stage.letter}`,'#8deeff');
+    const exit=makeOverviewBeacon(stage,stage.goal,`출구 ${stage.letter}`,STAGE_INFO[index].color);
+    overviewGateways.push(entrance,exit);overviewGroup.add(entrance,exit);
   }
   const overviewNumbers=makeVisitNumbers(visitedTiles.reduce((total,tile)=>total+String(tile.count).length,0));
   overviewNumbers.material.fog=false;setVisitNumbers(overviewNumbers,visitedTiles);overviewGroup.add(overviewNumbers);
-  // The next entrance is marked on its actual letter, in the original logo layout.
-  overviewMarker=null;
-  if(entranceIndex<session.stages.length) {
+  // The opening and stage transitions emphasize the entrance to enter next.
+  if(Number.isInteger(entranceIndex)&&entranceIndex>=0&&entranceIndex<session.stages.length) {
     const nextStage=session.stages[entranceIndex];
-    overviewMarker=new THREE.Group();overviewMarker.position.fromArray(logoPosition(nextStage,nextStage.start,CELL));
-    const markerMaterial=new THREE.MeshBasicMaterial({color:0xe2f58a,fog:false,toneMapped:false,side:THREE.DoubleSide});
-    const ring=new THREE.Mesh(new THREE.RingGeometry(2.6,3.2,48),markerMaterial);ring.rotation.x=-Math.PI/2;ring.position.y=3.5;overviewMarker.add(ring);
-    const stem=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,8,8),markerMaterial);stem.position.y=7;overviewMarker.add(stem);
-    const letter=makeTextSprite(nextStage.letter,150);letter.position.y=15;letter.scale.set(11,11,1);letter.material.fog=false;letter.material.toneMapped=false;overviewMarker.add(letter);
+    overviewMarker=makeOverviewBeacon(nextStage,nextStage.start,`다음 · ${nextStage.letter}`,'#ffffff',true);
     overviewGroup.add(overviewMarker);
   }
+  overviewCurrentMarker=makeOverviewBeacon(session.stage,session.cell,'현재 위치','#ffffff',true);
+  overviewCurrentMarker.visible=false;overviewGroup.add(overviewCurrentMarker);
   overviewGroup.visible=false;
 }
 
@@ -306,11 +323,12 @@ function setCameraFrame(offsetY) {
 }
 function beginCameraMove(type,destination) {
   const from=camera.position.clone(),to=destination.position.clone();
+  const movingOut=type==='out'||type==='peekOut',movingIn=type==='in'||type==='peekIn';
   const lift=Math.max(38,Math.abs(to.y-from.y)*.32);
-  const control1=from.clone().add(new THREE.Vector3(0,type==='out'?lift:25,0));
-  const control2=to.clone().add(new THREE.Vector3(0,type==='in'?lift:25,0));
-  cameraTween={type,progress:0,duration:reducedMotion?.35:type==='out'?2.8:2.6,
-    fromFrame:camera.view?.enabled?camera.view.offsetY:0,toFrame:type==='in'?(mobileLayout?.offsetY??0):0,
+  const control1=from.clone().add(new THREE.Vector3(0,movingOut?lift:25,0));
+  const control2=to.clone().add(new THREE.Vector3(0,movingIn?lift:25,0));
+  cameraTween={type,progress:0,duration:reducedMotion?.35:type.startsWith('peek')?1.65:type==='out'?2.8:2.6,
+    fromFrame:camera.view?.enabled?camera.view.offsetY:0,toFrame:movingIn?(mobileLayout?.offsetY??0):0,
     curve:new THREE.CubicBezierCurve3(from,control1,control2,to),fromLook:cameraLook.clone(),toLook:destination.look.clone()};
 }
 function updateCameraMove(dt) {
@@ -327,10 +345,16 @@ function updateCameraMove(dt) {
   cameraTween=null;
   if(move.type==='out') {
     mode='celebration';celebrationHold=0;shownCountdown=-1;$('next').disabled=false;$('next').focus();
+  } else if(move.type==='peekOut') {
+    mode='peekHold';peekHold=0;
   } else {
     mode='play';mazeGroup.visible=true;overviewGroup.visible=false;scene.fog=playFog;
     document.body.classList.remove('overview-mode');
-    toast(`${session.stage.letter} 입구에 도착했어요. 다음 출구를 찾아보세요.`);
+    $('overview').disabled=false;
+    if(move.type==='peekIn') {
+      $('overview-peek-label').hidden=true;
+      toast('현재 위치를 확인했어요. 탐험을 계속하세요.');
+    } else toast(`${session.stage.letter} 입구에 도착했어요. 다음 출구를 찾아보세요.`);
   }
 }
 
@@ -394,8 +418,15 @@ function startGame() {
   if(overviewMarker)overviewMarker.visible=false;
   beginCameraMove('in',getPlayPose());frameTime=performance.now()/1000;
 }
+function showOverview() {
+  if(mode!=='play'||animation||cameraTween)return;
+  clearInputs();mode='peekOut';$('overview').disabled=true;
+  buildOverview(null);overviewCurrentMarker.visible=true;overviewGroup.visible=true;mazeGroup.visible=false;scene.fog=null;
+  document.body.classList.add('overview-mode');$('overview-peek-label').hidden=false;$('toast').classList.remove('show');
+  beginCameraMove('peekOut',getOverviewPose());
+}
 function openDialog(id) {
-  if(!loaded||['celebration','zoomOut','zoomIn'].includes(mode))return;
+  if(!loaded||['celebration','zoomOut','zoomIn','peekOut','peekHold','peekIn'].includes(mode))return;
   if(!document.querySelector('dialog[open]'))modeBeforeDialog=mode;
   clearInputs();mode='pause';$(id).showModal();
 }
@@ -405,10 +436,12 @@ function restartGame() {
   $('celebration').hidden=true;particles=[];rockets=[];clearInputs();animation=null;cameraTween=null;
   if(overviewGroup)overviewGroup.visible=false;scene.fog=playFog;document.body.classList.remove('overview-mode');
   session.reset();buildMaze();mode='play';modeBeforeDialog='play';document.body.classList.add('playing');
+  $('overview').disabled=false;$('overview-peek-label').hidden=true;
   $('timer').textContent='00:00';toast('K 구역에서 새로운 탐험을 시작해요.');
 }
 function completeStage() {
   mode='zoomOut';session.recordStage();clearInputs();updateHUD();
+  $('overview').disabled=true;$('overview-peek-label').hidden=true;
   const index=session.stageIndex,info=STAGE_INFO[index];
   $('celebration').style.setProperty('--lime',info.color);
   $('celebration-eyebrow').textContent=index===3?'KIST · ALL ZONES COMPLETE':`${session.stage.letter} ZONE COMPLETE`;
@@ -494,9 +527,9 @@ function resize() {
     touchControls.style.width=`${mobileLayout.padWidth}px`;touchControls.style.height=`${mobileLayout.padHeight}px`;
   } else {mobileLayout=null;touchControls.style.removeProperty('width');touchControls.style.removeProperty('height');}
   if(cameraTween) {
-    const destination=cameraTween.type==='out'?getOverviewPose():getPlayPose();
+    const destination=cameraTween.type==='out'||cameraTween.type==='peekOut'?getOverviewPose():getPlayPose();
     cameraTween.curve.v3.copy(destination.position);cameraTween.toLook.copy(destination.look);
-    cameraTween.toFrame=cameraTween.type==='in'?(mobileLayout?.offsetY??0):0;
+    cameraTween.toFrame=cameraTween.type==='in'||cameraTween.type==='peekIn'?(mobileLayout?.offsetY??0):0;
   } else {
     setCameraFrame(mode==='play'||(mode==='pause'&&modeBeforeDialog==='play')?(mobileLayout?.offsetY??0):0);
   }
@@ -514,6 +547,10 @@ function animate(timestamp) {
       $('next').innerHTML=`${'KIST'[session.stageIndex+1]} 입구로 이동 · ${remaining}<span>→</span>`;
     }
     if(celebrationHold>=5)continueJourney();
+  }
+  if(mode==='peekHold') {
+    peekHold+=elapsedSeconds;
+    if(peekHold>=1){mode='peekIn';beginCameraMove('peekIn',getPlayPose());}
   }
   if(mode==='play') {
     session.tick(elapsedSeconds);$('timer').textContent=formatTime(session.elapsed);$('stage-timer').textContent=formatPreciseTime(session.stageElapsed);
@@ -539,7 +576,7 @@ function animate(timestamp) {
   followPosition.lerp(playerPosition,1-Math.exp(-12*dt));
   const introMode=mode==='intro'||(mode==='pause'&&modeBeforeDialog==='intro');
   if(cameraTween) updateCameraMove(dt);
-  else if(mode==='celebration'||introMode) {
+  else if(mode==='celebration'||mode==='peekHold'||introMode) {
     setCameraFrame(0);
     const pose=getOverviewPose();camera.position.copy(pose.position);cameraLook.copy(pose.look);camera.lookAt(cameraLook);
   } else {
@@ -552,6 +589,8 @@ function animate(timestamp) {
   playerRing.material.opacity=.27+Math.sin(now*1.7)*.055;
   if(portalRing){portalRing.rotation.z=now*.16;portalRing.scale.setScalar(1+Math.sin(now*2)*.045);}
   if(overviewMarker)overviewMarker.scale.setScalar(1+Math.sin(now*2)*.045);
+  if(overviewCurrentMarker?.visible)overviewCurrentMarker.scale.setScalar(1+Math.sin(now*4)*.08);
+  overviewGateways.forEach((marker,index)=>marker.scale.setScalar(1+Math.sin(now*2+index*.8)*.025));
   if(mazeGroup.visible)orientVisitNumbers(visitNumbers,yaw);
   renderer.render(scene,camera);
   updateTouchControls();
@@ -587,6 +626,7 @@ function setupInputs() {
   window.addEventListener('blur',()=>{clearInputs();if(mode==='play')openDialog('pause-dialog');});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(mode==='play')openDialog('pause-dialog');}});
   $('start').addEventListener('click',startGame);$('help').addEventListener('click',()=>openDialog('help-dialog'));
+  $('overview').addEventListener('click',showOverview);
   $('pause').addEventListener('click',()=>openDialog('pause-dialog'));
   $('resume').addEventListener('click',()=>closeDialog('pause-dialog'));
   $('restart').addEventListener('click',()=>{$('pause-dialog').close();$('restart-dialog').showModal();});
@@ -602,7 +642,7 @@ function setupInputs() {
 }
 
 async function init() {
-  const response=await fetch('./mazes.json?v=20260906-2');if(!response.ok)throw new Error('미로 데이터를 불러오지 못했어요. 다시 열어 주세요.');
+  const response=await fetch('./mazes.json?v=20260906-3');if(!response.ok)throw new Error('미로 데이터를 불러오지 못했어요. 다시 열어 주세요.');
   const stages=await response.json();session=new MazeSession(stages);
   renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x10191e);
