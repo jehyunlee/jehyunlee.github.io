@@ -1,13 +1,51 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout} from './maze-core.js?v=20260906-3';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260906-4';
 
 const $=id=>document.getElementById(id);
-const STAGE_INFO=[
-  {name:'특허의 미로',objective:'출구를 찾아 특허를 출원하세요.',reward:'특허출원!',line:'첫 번째 발견을 세상에.',color:'#e2f58a'},
-  {name:'논문의 미로',objective:'새로운 길에서 논문을 완성하세요.',reward:'논문출판!',line:'당신의 발견이 한 편의 논문으로.',color:'#93ddf5'},
-  {name:'기술의 미로',objective:'기술이 세상으로 나갈 길을 찾으세요.',reward:'기술이전!',line:'연구실의 아이디어가 세상으로.',color:'#e3b1ff'},
-  {name:'현장적용의 미로',objective:'마지막 출구에서 연구를 현장에 적용하세요.',reward:'현장적용!',line:'K → I → S → T, 연구의 보물을 현장에 연결했어요!',color:'#ffcd75'}
-];
+const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
+const COPY={
+  en:{
+    documentTitle:"KIST Maze · Sweet Fatty's Adventure",meta:'Explore a new KIST-shaped 3D maze with Sweet Fatty every time you play.',journeyCaption:'KIST · YOUR JOURNEY',
+    brandSubtitle:"Sweet Fatty's Adventure",stage0:'PATENT',stage1:'PAPER',stage2:'TRANSFER',stage3:'FIELD USE',helpEyebrow:'HOW TO PLAY',pauseEyebrow:'TAKE A BREATH',newAdventure:'NEW ADVENTURE',
+    exploring:'EXPLORING',zoneTime:'ZONE TIME',totalTime:'TOTAL TIME',steps:'STEPS',visited:'Visited',unexplored:'Unexplored',unexploredBright:'Unexplored · 50% brighter',routeRule:'15 choices, one exit',
+    fullMap:'FULL MAP',currentMarker:'White marker: current position',playerName:'Sweet Fatty',move:'MOVE',takeBreak:'TAKE A BREAK',limitedView:'Only your surroundings are visible',
+    introTitle:'At the end of the research tunnel,<br> <span>a hidden treasure.</span>',introCopy:'Explore between towering walls with Sweet Fatty<br>and complete K, I, S, and T in order.',loadingMaze:'Building a new maze…',start:'START EXPLORING',introHint:'Use the arrow keys or the translucent controls around Sweet Fatty',wanderOkay:'A little wandering is part of discovery.',
+    helpTitle:'Find your own way.',helpIntro:'Complete the four logo-shaped mazes in K → I → S → T order. Every new game creates new walls, entrances, exits, and a unique route with 15 correct choices.',helpForward:'Move one tile forward',helpTurn:'Turn and move one tile',helpBack:'Turn around and move one tile',helpControls:'Hold an arrow key to keep walking in the same direction. The camera follows behind you. On mobile, use the translucent arrows around Sweet Fatty; zone information and time are shown at the bottom.',helpTiles:'Visited tiles use KIST red; unexplored tiles are 50% brighter. The white number shows how many times you have stepped on that tile. The entrance starts at 1.',helpOverview:'Select Overview to see the full map and your position for one second. Cyan marks entrances; each reward color marks an exit. Overview time is not counted.',helpFinish:'At an exit, the camera zooms out and fireworks fill the screen. After five seconds, it automatically zooms into the next entrance. Camera moves, celebrations, and pauses do not count toward your time.',gotIt:'Got it',
+    pauseTitle:'Take a short break.',pauseCopy:'The maze will wait for you.',resume:'Keep exploring',restart:'Start a new maze',restartTitle:'Start with a new maze?',restartCopy:'Your records will be cleared and all four mazes will be regenerated.',confirmRestart:'Generate new maze',goBack:'Go back',finalTime:'FINAL TIME',loadErrorTitle:'The maze could not open.',reload:'Reload',overview:'Overview',
+    stages:[
+      {name:'Patent Maze',objective:'Find the exit and file your patent.',reward:'PATENT FILED!',line:'Your first discovery meets the world.'},
+      {name:'Paper Maze',objective:'Complete your paper along a new path.',reward:'PAPER PUBLISHED!',line:'Your discovery becomes a published paper.'},
+      {name:'Technology Maze',objective:'Find the path that takes technology into the world.',reward:'TECH TRANSFER!',line:'A laboratory idea reaches the world.'},
+      {name:'Field Application Maze',objective:'Bring your research into the field at the final exit.',reward:'FIELD APPLICATION!',line:'K → I → S → T — the hidden treasure reaches the field!'}],
+    directions:['north','east','south','west'],facing:value=>`Facing ${value}`,stageStatus:(letter,state)=>`${letter} ${state==='complete'?'complete':state==='current'?'in progress':'not reached'}`,zoneComplete:letter=>`${letter} ZONE COMPLETE`,allComplete:'KIST · ALL ZONES COMPLETE',
+    entrance:letter=>`Entrance ${letter}`,exit:letter=>`Exit ${letter}`,nextMarker:letter=>`Next · ${letter}`,currentPosition:'Current position',
+    entered:letter=>`You reached the ${letter} entrance. Find the next exit.`,peekDone:'Position checked. Keep exploring.',blocked:'That way is blocked. Try another direction.',newMaze:'A new KIST maze has been generated.',
+    stageStats:(letter,time,steps)=>`${letter} clear · ${time} · ${steps.toLocaleString()} steps`,allStats:steps=>`${steps.toLocaleString()} steps · all 4 zones complete`,next:letter=>`Enter ${letter}`,nextCountdown:(letter,count)=>`Enter ${letter} · ${count}`,replay:'PLAY A NEW MAZE',
+    errorFetch:'The maze data could not be loaded. Please reload.',errorGraphics:'The 3D scene could not start. Open this page in a modern browser with WebGL support.',contextLost:'The 3D connection was interrupted. Select Reload.'
+  },
+  ko:{
+    documentTitle:'KIST 미로 · 달콤한 뚱땡이의 모험',meta:'달콤한 뚱땡이와 매번 새롭게 생성되는 KIST 모양 3D 미로를 탐험하세요.',journeyCaption:'KIST · 나의 탐험 기록',
+    brandSubtitle:'달콤한 뚱땡이의 모험',stage0:'특허출원',stage1:'논문출판',stage2:'기술이전',stage3:'현장적용',helpEyebrow:'게임 방법',pauseEyebrow:'잠시 쉬기',newAdventure:'새로운 탐험',
+    exploring:'탐험 중',zoneTime:'현재 구역',totalTime:'전체 시간',steps:'걸음 수',visited:'지나온 길',unexplored:'미탐험',unexploredBright:'미탐험 · 50% 밝게',routeRule:'15개의 갈림길, 하나의 출구',
+    fullMap:'전체 지도',currentMarker:'흰색 표식이 현재 위치입니다',playerName:'달콤한 뚱땡이',move:'이동',takeBreak:'잠시 쉬기',limitedView:'주변만 보이는 미로',
+    introTitle:'연구의 터널 끝,<br> <span>숨겨진 보물.</span>',introCopy:'달콤한 뚱땡이와 높은 벽 사이를 탐험하고<br>K, I, S, T를 차례대로 통과해 보세요.',loadingMaze:'새 미로를 만들고 있어요…',start:'탐험 시작하기',introHint:'방향키 또는 뚱땡이 주변의 반투명 키로 이동',wanderOkay:'조금 헤매도 괜찮아요.',
+    helpTitle:'길은, 직접 찾아야죠.',helpIntro:'로고 모양의 네 미로를 K → I → S → T 순서로 통과하세요. 새 게임마다 벽, 입구, 출구와 15개의 올바른 선택으로 이루어진 정답 경로가 새로 생성됩니다.',helpForward:'보고 있는 방향으로 한 칸 이동',helpTurn:'해당 방향으로 돌아 한 칸 이동',helpBack:'뒤돌아 한 칸 이동',helpControls:'방향키를 누르고 있으면 같은 방향으로 계속 걷습니다. 시점은 캐릭터 뒤를 따라갑니다. 모바일은 뚱땡이 주변의 반투명 방향키를 사용하고, 구역 정보와 시간은 하단에서 확인하세요.',helpTiles:'지나온 길은 KIST 로고의 빨강, 미탐험 길은 50% 밝은 빨강입니다. 흰 숫자는 발판을 밟은 횟수이며 시작 발판은 1회로 계산합니다.',helpOverview:'전체보기를 누르면 전체 지도와 현재 위치를 1초 동안 확인합니다. 청록빛은 입구, 각 보상색은 출구입니다. 전체보기 시간은 기록에 포함되지 않습니다.',helpFinish:'출구에서는 전체 로고로 줌아웃하며 폭죽이 터집니다. 5초 뒤 다음 입구로 자동 줌인합니다. 카메라 이동, 축하 화면과 일시 정지는 기록에 포함되지 않습니다.',gotIt:'알겠어요',
+    pauseTitle:'잠깐, 쉬어가기.',pauseCopy:'미로는 기다려 줄 거예요.',resume:'계속 탐험하기',restart:'새 미로로 다시 시작',restartTitle:'새 미로로 시작할까요?',restartCopy:'현재 기록을 지우고 네 글자의 미로를 모두 새로 생성합니다.',confirmRestart:'새 미로 만들기',goBack:'돌아가기',finalTime:'최종 통과 시간',loadErrorTitle:'미로를 열 수 없어요.',reload:'다시 열기',overview:'전체보기',
+    stages:[
+      {name:'특허의 미로',objective:'출구를 찾아 특허를 출원하세요.',reward:'특허출원!',line:'첫 번째 발견을 세상에.'},
+      {name:'논문의 미로',objective:'새로운 길에서 논문을 완성하세요.',reward:'논문출판!',line:'당신의 발견이 한 편의 논문으로.'},
+      {name:'기술의 미로',objective:'기술이 세상으로 나갈 길을 찾으세요.',reward:'기술이전!',line:'연구실의 아이디어가 세상으로.'},
+      {name:'현장적용의 미로',objective:'마지막 출구에서 연구를 현장에 적용하세요.',reward:'현장적용!',line:'K → I → S → T, 연구의 보물을 현장에 연결했어요!'}],
+    directions:['북쪽','동쪽','남쪽','서쪽'],facing:value=>`${value}을 보는 중`,stageStatus:(letter,state)=>`${letter} ${state==='complete'?'완료':state==='current'?'탐험 중':'아직 도착하지 않음'}`,zoneComplete:letter=>`${letter} 구역 통과`,allComplete:'KIST · 전 구역 통과',
+    entrance:letter=>`입구 ${letter}`,exit:letter=>`출구 ${letter}`,nextMarker:letter=>`다음 · ${letter}`,currentPosition:'현재 위치',
+    entered:letter=>`${letter} 입구에 도착했어요. 다음 출구를 찾아보세요.`,peekDone:'현재 위치를 확인했어요. 탐험을 계속하세요.',blocked:'막힌 길이에요. 다른 방향을 찾아보세요.',newMaze:'새로운 KIST 미로가 생성됐어요.',
+    stageStats:(letter,time,steps)=>`${letter} 통과 ${time} · ${steps.toLocaleString()}걸음`,allStats:steps=>`${steps.toLocaleString()}걸음 · 4개 구역 완주`,next:letter=>`${letter} 입구로 들어가기`,nextCountdown:(letter,count)=>`${letter} 입구로 이동 · ${count}`,replay:'새 미로 탐험하기',
+    errorFetch:'미로 데이터를 불러오지 못했어요. 다시 열어 주세요.',errorGraphics:'3D 화면을 시작하지 못했어요. WebGL을 지원하는 최신 브라우저에서 다시 열어 주세요.',contextLost:'3D 화면 연결이 잠시 끊겼어요. 다시 열기를 눌러 주세요.'
+  }
+};
+let language='en';
+const copy=()=>COPY[language];
+const stageInfo=index=>({...copy().stages[index],color:STAGE_COLORS[index]});
 const CELL=3.2,WALL_HEIGHT=3.3,VISION_RADIUS=5.3;
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobileUI=matchMedia('(max-width: 700px), (hover: none), (pointer: coarse)');
@@ -20,7 +58,7 @@ let celebrationHold=0,peekHold=0,shownCountdown=-1;
 let logoBounds={minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity};
 const cameraLook=new THREE.Vector3();
 const visitedColor=new THREE.Color(LOGO_COLOR),unvisitedColor=new THREE.Color(UNVISITED_COLOR);
-let session,mode='intro',modeBeforeDialog='intro',animation=null,held=null,queued=null;
+let session,mazeTemplates,mode='intro',modeBeforeDialog='intro',animation=null,held=null,queued=null;
 let playerPosition=new THREE.Vector3(),followPosition=new THREE.Vector3(),yaw=0,targetYaw=0;
 let frameTime=0,walkPhase=0,nextInputAt=0,lastCollisionAt=-5,toastTimeout,loaded=false;
 let audioContext,soundEnabled=false,fireworkTime=0,fireworkNext=0,particles=[],rockets=[];
@@ -28,6 +66,41 @@ const fireworks=$('fireworks'),fx=fireworks.getContext('2d');
 const object=new THREE.Object3D(),explorerUniform={value:new THREE.Vector3()};
 const temporary=new THREE.Vector3();
 const shadeMaterials=[];
+
+function randomSeed() {
+  if(globalThis.crypto?.getRandomValues){const value=new Uint32Array(1);crypto.getRandomValues(value);return value[0];}
+  return (Date.now()^Math.floor(performance.now()*1000))>>>0;
+}
+function createRandomSession() { return new MazeSession(generateRandomStages(mazeTemplates,randomSeed(),15)); }
+function setLabel(element,label) { element.setAttribute('aria-label',label);element.title=label; }
+function applyLanguage(nextLanguage) {
+  language=nextLanguage==='ko'?'ko':'en';const c=copy();
+  document.documentElement.lang=language;document.title=c.documentTitle;
+  document.querySelector('meta[name="description"]').content=c.meta;
+  document.querySelectorAll('[data-i18n]').forEach(element=>{const value=c[element.dataset.i18n];if(typeof value==='string')element.textContent=value;});
+  $('intro-title').innerHTML=c.introTitle;$('intro-copy').innerHTML=c.introCopy;
+  document.querySelectorAll('[data-lang]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lang===language)));
+  setLabel($('overview'),c.overview);setLabel($('help'),language==='en'?'How to play':'게임 방법');setLabel($('pause'),language==='en'?'Pause':'일시 정지');
+  setLabel($('sound'),soundEnabled?(language==='en'?'Sound off':'소리 끄기'):(language==='en'?'Sound on':'소리 켜기'));
+  document.querySelector('.brand img').alt=language==='en'?'KIST logo':'KIST 로고';
+  document.querySelector('.player-label img').alt=c.playerName;
+  document.querySelector('.journey').setAttribute('aria-label',language==='en'?'Zone progress':'구역 진행 상황');
+  document.querySelector('.zone-card').setAttribute('aria-label',language==='en'?'Current zone and exploration record':'현재 구역과 탐험 기록');
+  document.querySelector('.compass').setAttribute('aria-label',language==='en'?'View direction':'시선 방향');
+  $('touch-controls').setAttribute('aria-label',language==='en'?'Virtual direction controls around Sweet Fatty':'뚱땡이 주변 가상 방향키');
+  document.querySelectorAll('.dpad button').forEach((button,index)=>button.setAttribute('aria-label',language==='en'?['Move forward','Move left','Move right','Move backward'][index]:['앞으로 이동','왼쪽으로 이동','오른쪽으로 이동','뒤로 이동'][index]));
+  document.querySelectorAll('.dialog-close').forEach(button=>button.setAttribute('aria-label',language==='en'?'Close':'닫기'));
+  if(renderer)renderer.domElement.setAttribute('aria-label',language==='en'?'Sweet Fatty exploring between the tall walls of a KIST-shaped maze.':'KIST 모양 미로의 높은 벽 사이를 탐험하는 달콤한 뚱땡이.');
+  if(session){updateHUD();if(session.finished)updateCelebrationCopy();}
+  if(loaded) {
+    $('start').firstElementChild.textContent=c.start;
+    if(overviewGroup) {
+      const wasVisible=overviewGroup.visible,showCurrent=overviewCurrentMarker?.visible;
+      const entrance=mode==='intro'?0:['zoomOut','celebration'].includes(mode)?session.stageIndex+1:null;
+      buildOverview(entrance);overviewGroup.visible=wasVisible;overviewCurrentMarker.visible=showCurrent;
+    }
+  }
+}
 
 function fogMaterial(options={}) {
   const material=new THREE.MeshStandardMaterial(options);
@@ -164,7 +237,7 @@ function disposeGroup(group) {
 function buildMaze() {
   disposeGroup(mazeGroup);shadeMaterials.length=0;
   mazeGroup=new THREE.Group();scene.add(mazeGroup);
-  const stage=session.stage,info=STAGE_INFO[session.stageIndex];
+  const stage=session.stage,info=stageInfo(session.stageIndex);
   const floorMaterial=fogMaterial({color:0xffffff,roughness:.79,metalness:.02,emissive:0x230400,emissiveIntensity:.2});
   floorMesh=new THREE.InstancedMesh(new THREE.BoxGeometry(CELL-.035,.16,CELL-.035),floorMaterial,stage.cells.length);
   floorMesh.receiveShadow=true;floorMesh.frustumCulled=false;floorMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mazeGroup.add(floorMesh);
@@ -289,8 +362,8 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
     const wallInstances=new THREE.InstancedMesh(wallGeometry,wallMaterial,walls.length);
     walls.forEach((wall,i)=>setMatrix(wallInstances,i,wall.x,WALL_HEIGHT/2,wall.z,1,1,1,wall.angle));
     wallInstances.instanceMatrix.needsUpdate=true;overviewGroup.add(wallInstances);
-    const entrance=makeOverviewBeacon(stage,stage.start,`입구 ${stage.letter}`,'#8deeff');
-    const exit=makeOverviewBeacon(stage,stage.goal,`출구 ${stage.letter}`,STAGE_INFO[index].color);
+    const entrance=makeOverviewBeacon(stage,stage.start,copy().entrance(stage.letter),'#8deeff');
+    const exit=makeOverviewBeacon(stage,stage.goal,copy().exit(stage.letter),STAGE_COLORS[index]);
     overviewGateways.push(entrance,exit);overviewGroup.add(entrance,exit);
   }
   const overviewNumbers=makeVisitNumbers(visitedTiles.reduce((total,tile)=>total+String(tile.count).length,0));
@@ -298,10 +371,10 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
   // The opening and stage transitions emphasize the entrance to enter next.
   if(Number.isInteger(entranceIndex)&&entranceIndex>=0&&entranceIndex<session.stages.length) {
     const nextStage=session.stages[entranceIndex];
-    overviewMarker=makeOverviewBeacon(nextStage,nextStage.start,`다음 · ${nextStage.letter}`,'#ffffff',true);
+    overviewMarker=makeOverviewBeacon(nextStage,nextStage.start,copy().nextMarker(nextStage.letter),'#ffffff',true);
     overviewGroup.add(overviewMarker);
   }
-  overviewCurrentMarker=makeOverviewBeacon(session.stage,session.cell,'현재 위치','#ffffff',true);
+  overviewCurrentMarker=makeOverviewBeacon(session.stage,session.cell,copy().currentPosition,'#ffffff',true);
   overviewCurrentMarker.visible=false;overviewGroup.add(overviewCurrentMarker);
   overviewGroup.visible=false;
 }
@@ -338,7 +411,7 @@ function updateCameraMove(dt) {
   camera.position.copy(move.curve.getPoint(ease));cameraLook.lerpVectors(move.fromLook,move.toLook,ease);camera.lookAt(cameraLook);
   if(move.type==='out'&&t>=.5&&!fireworksStarted) {
     fireworksStarted=true;$('celebration').classList.remove('revealing');
-    burst(innerWidth*.5,innerHeight*.31,STAGE_INFO[session.stageIndex].color,110);
+    burst(innerWidth*.5,innerHeight*.31,STAGE_COLORS[session.stageIndex],110);
     [523.25,659.25,783.99,1046.5].forEach((frequency,i)=>playTone(frequency,.3,.1,'triangle',i*.12));
   }
   if(t<1)return;
@@ -353,22 +426,22 @@ function updateCameraMove(dt) {
     $('overview').disabled=false;
     if(move.type==='peekIn') {
       $('overview-peek-label').hidden=true;
-      toast('현재 위치를 확인했어요. 탐험을 계속하세요.');
-    } else toast(`${session.stage.letter} 입구에 도착했어요. 다음 출구를 찾아보세요.`);
+      toast(copy().peekDone);
+    } else toast(copy().entered(session.stage.letter));
   }
 }
 
 function updateHUD() {
-  const info=STAGE_INFO[session.stageIndex];
+  const info=stageInfo(session.stageIndex);
   $('zone-index').textContent=`ZONE 0${session.stageIndex+1} / 04`;
   $('zone-letter').textContent=session.stage.letter;$('zone-name').textContent=info.name;$('zone-objective').textContent=info.objective;
   $('steps').textContent=session.steps.toLocaleString();
   $('stage-timer').textContent=formatPreciseTime(session.stageElapsed);
   $('compass-needle').style.transform=`rotate(${session.heading*-90}deg)`;
-  $('heading-label').textContent=`${['북쪽','동쪽','남쪽','서쪽'][session.heading]}을 보는 중`;
+  $('heading-label').textContent=copy().facing(copy().directions[session.heading]);
   document.querySelectorAll('.stage').forEach((el,i)=>{
     el.classList.toggle('current',i===session.stageIndex&&!session.finished);el.classList.toggle('complete',session.cleared.includes(i));
-    el.setAttribute('aria-label',`${'KIST'[i]} ${session.cleared.includes(i)?'완료':i===session.stageIndex?'탐험 중':'아직 도착하지 않음'}`);
+    el.setAttribute('aria-label',copy().stageStatus('KIST'[i],session.cleared.includes(i)?'complete':i===session.stageIndex?'current':'future'));
     if(i===session.stageIndex)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');
     el.querySelector('time').textContent=session.stageTimes[i]===null?'--:--':formatPreciseTime(session.stageTimes[i]);
   });
@@ -395,9 +468,9 @@ function step(direction,now) {
   if(mode!=='play'||animation)return;
   const result=session.move(direction);targetYaw=directionYaw(direction);
   $('compass-needle').style.transform=`rotate(${session.heading*-90}deg)`;
-  $('heading-label').textContent=`${['북쪽','동쪽','남쪽','서쪽'][session.heading]}을 보는 중`;
+  $('heading-label').textContent=copy().facing(copy().directions[session.heading]);
   if(!result.allowed) {
-    if(now-lastCollisionAt>.95){toast('막힌 길이에요. 다른 방향을 찾아보세요.');playTone(95,.08,.05,'sine');lastCollisionAt=now;}
+    if(now-lastCollisionAt>.95){toast(copy().blocked);playTone(95,.08,.05,'sine');lastCollisionAt=now;}
     nextInputAt=now+.27;return;
   }
   animation={start:cellPosition(result.from),end:cellPosition(result.to),progress:0,duration:.34,complete:result.complete};
@@ -435,26 +508,33 @@ function restartGame() {
   document.querySelectorAll('dialog[open]').forEach(d=>d.close());
   $('celebration').hidden=true;particles=[];rockets=[];clearInputs();animation=null;cameraTween=null;
   if(overviewGroup)overviewGroup.visible=false;scene.fog=playFog;document.body.classList.remove('overview-mode');
-  session.reset();buildMaze();mode='play';modeBeforeDialog='play';document.body.classList.add('playing');
+  session=createRandomSession();buildMaze();mode='play';modeBeforeDialog='play';document.body.classList.add('playing');
   $('overview').disabled=false;$('overview-peek-label').hidden=true;
-  $('timer').textContent='00:00';toast('K 구역에서 새로운 탐험을 시작해요.');
+  $('timer').textContent='00:00';toast(copy().newMaze);
 }
-function completeStage() {
-  mode='zoomOut';session.recordStage();clearInputs();updateHUD();
-  $('overview').disabled=true;$('overview-peek-label').hidden=true;
-  const index=session.stageIndex,info=STAGE_INFO[index];
-  $('celebration').style.setProperty('--lime',info.color);
-  $('celebration-eyebrow').textContent=index===3?'KIST · ALL ZONES COMPLETE':`${session.stage.letter} ZONE COMPLETE`;
+function updateCelebrationCopy() {
+  if(!session?.finished)return;
+  const index=session.stageIndex,info=stageInfo(index);
+  $('celebration-eyebrow').textContent=index===3?copy().allComplete:copy().zoneComplete(session.stage.letter);
   $('celebration-letter').textContent=session.stage.letter;
   $('celebration-title').textContent=info.reward;$('celebration-description').textContent=info.line;
-  $('celebration-stats').textContent=index===3?`${session.steps.toLocaleString()}걸음 · 4개 구역 완주`:`${session.stage.letter} 통과 ${formatPreciseTime(session.stageTimes[index])} · ${session.stageSteps.toLocaleString()}걸음`;
+  $('celebration-stats').textContent=index===3?copy().allStats(session.steps):copy().stageStats(session.stage.letter,formatPreciseTime(session.stageTimes[index]),session.stageSteps);
   $('final-times').hidden=index!==3;
-  $('celebration').classList.toggle('all-complete',index===3);
   if(index===3) {
     $('final-total-time').textContent=formatPreciseTime(session.totalClearTime);
     $('final-stage-times').innerHTML=session.stageTimes.map((time,i)=>`<div><b>${'KIST'[i]}</b><time>${formatPreciseTime(time)}</time></div>`).join('');
   }
-  $('next').innerHTML=index===3?'다시 탐험하기 <span>↻</span>':`${'KIST'[index+1]} 입구로 들어가기 <span>→</span>`;
+  const nextLetter='KIST'[index+1];
+  const label=index===3?copy().replay:mode==='celebration'&&shownCountdown>=0?copy().nextCountdown(nextLetter,shownCountdown):copy().next(nextLetter);
+  $('next').innerHTML=`${label} <span>${index===3?'↻':'→'}</span>`;
+}
+function completeStage() {
+  mode='zoomOut';session.recordStage();clearInputs();updateHUD();
+  $('overview').disabled=true;$('overview-peek-label').hidden=true;
+  const index=session.stageIndex,info=stageInfo(index);
+  $('celebration').style.setProperty('--lime',info.color);
+  $('celebration').classList.toggle('all-complete',index===3);
+  updateCelebrationCopy();
   $('next').disabled=true;$('celebration').classList.add('revealing');$('celebration').hidden=false;
   particles=[];rockets=[];fireworkTime=0;fireworkNext=0;
   fireworksStarted=false;buildOverview();overviewGroup.visible=true;mazeGroup.visible=false;scene.fog=null;
@@ -463,7 +543,7 @@ function completeStage() {
 }
 function continueJourney() {
   if(mode!=='celebration')return;
-  if(session.stageIndex===3){session.reset();buildOverview(0);overviewGroup.visible=true;}
+  if(session.stageIndex===3){session=createRandomSession();buildOverview(0);overviewGroup.visible=true;}
   else if(!session.nextStage())return;
   $('celebration').hidden=true;particles=[];rockets=[];animation=null;clearInputs();buildMaze();
   mazeGroup.visible=false;mode='zoomIn';$('next').blur();
@@ -494,7 +574,7 @@ function animateFireworks(dt) {
   fx.clearRect(0,0,width,height);fireworkTime+=dt;
   if(fireworkTime>=fireworkNext&&(!reducedMotion||fireworkTime<.1)) {
     fireworkNext=fireworkTime+.45+Math.random()*.45;
-    const palette=[STAGE_INFO[session.stageIndex].color,'#ff7675','#9ce9ff','#ffffff','#dfafff'];
+    const palette=[STAGE_COLORS[session.stageIndex],'#ff7675','#9ce9ff','#ffffff','#dfafff'];
     rockets.push({x:width*(.12+Math.random()*.76),y:height+10,target:height*(.13+Math.random()*.36),speed:340+Math.random()*170,color:palette[Math.floor(Math.random()*palette.length)]});
   }
   for(let i=rockets.length-1;i>=0;i--) {
@@ -544,7 +624,7 @@ function animate(timestamp) {
     const remaining=Math.max(0,Math.ceil(5-celebrationHold));
     if(remaining!==shownCountdown) {
       shownCountdown=remaining;
-      $('next').innerHTML=`${'KIST'[session.stageIndex+1]} 입구로 이동 · ${remaining}<span>→</span>`;
+      $('next').innerHTML=`${copy().nextCountdown('KIST'[session.stageIndex+1],remaining)} <span>→</span>`;
     }
     if(celebrationHold>=5)continueJourney();
   }
@@ -635,22 +715,23 @@ function setupInputs() {
   document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>closeDialog(button.dataset.close)));
   document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('cancel',event=>{event.preventDefault();if(dialog.id==='restart-dialog'){$('restart-dialog').close();$('pause-dialog').showModal();}else closeDialog(dialog.id);}));
   $('next').addEventListener('click',continueJourney);
-  $('sound').addEventListener('click',()=>{soundEnabled=!soundEnabled;$('sound').setAttribute('aria-pressed',String(soundEnabled));$('sound').setAttribute('aria-label',soundEnabled?'소리 끄기':'소리 켜기');$('sound').title=soundEnabled?'소리 끄기':'소리 켜기';if(soundEnabled)playTone(523,.13,.07);});
+  $('sound').addEventListener('click',()=>{soundEnabled=!soundEnabled;$('sound').setAttribute('aria-pressed',String(soundEnabled));setLabel($('sound'),soundEnabled?(language==='en'?'Sound off':'소리 끄기'):(language==='en'?'Sound on':'소리 켜기'));if(soundEnabled)playTone(523,.13,.07);});
+  document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',()=>applyLanguage(button.dataset.lang)));
   window.addEventListener('resize',resize);
   mobileUI.addEventListener('change',resize);
   if(document.fonts)document.fonts.ready.then(resize);
 }
 
 async function init() {
-  const response=await fetch('./mazes.json?v=20260906-3');if(!response.ok)throw new Error('미로 데이터를 불러오지 못했어요. 다시 열어 주세요.');
-  const stages=await response.json();session=new MazeSession(stages);
+  const response=await fetch('./mazes.json?v=20260906-4');if(!response.ok)throw new Error(copy().errorFetch);
+  mazeTemplates=await response.json();session=createRandomSession();
   renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x10191e);
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  renderer.domElement.setAttribute('aria-label','높은 벽 사이를 걷는 빨간 달콤한 뚱땡이. 방향키로 조작하세요.');
+  renderer.domElement.setAttribute('aria-label','Sweet Fatty exploring between the tall walls of a KIST-shaped maze.');
   $('game').appendChild(renderer.domElement);
-  renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();mode='pause';clearInputs();$('error-message').textContent='3D 화면 연결이 잠시 끊겼어요. 다시 열기를 눌러 주세요.';$('load-error').hidden=false;});
+  renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();mode='pause';clearInputs();$('error-message').textContent=copy().contextLost;$('load-error').hidden=false;});
   scene=new THREE.Scene();scene.background=new THREE.Color(0x10191e);playFog=new THREE.FogExp2(0x10191e,.038);scene.fog=playFog;
   camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,4000);
   makeEnvironment();scene.add(new THREE.HemisphereLight(0xe1f4fa,0x172631,2.5));
@@ -662,7 +743,8 @@ async function init() {
   buildMaze();buildOverview(0);mazeGroup.visible=false;overviewGroup.visible=true;scene.fog=null;
   setupInputs();resize();const opening=getOverviewPose();camera.position.copy(opening.position);cameraLook.copy(opening.look);camera.lookAt(cameraLook);
   loaded=true;frameTime=performance.now()/1000;
-  $('start').disabled=false;$('start').innerHTML='<span>탐험 시작하기</span><span>↗</span>';
+  $('start').disabled=false;$('start').innerHTML=`<span>${copy().start}</span><span>↗</span>`;
   requestAnimationFrame(animate);
 }
-init().catch(error=>{console.error(error);$('error-message').textContent=error.message.includes('미로')?error.message:'3D 화면을 시작하지 못했어요. WebGL을 지원하는 최신 브라우저에서 다시 열어 주세요.';$('load-error').hidden=false;});
+applyLanguage('en');
+init().catch(error=>{console.error(error);$('error-message').textContent=error.message===copy().errorFetch?error.message:copy().errorGraphics;$('load-error').hidden=false;});

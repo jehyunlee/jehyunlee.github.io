@@ -29,6 +29,70 @@ export function mobileCameraLayout(width,height,top,bottom) {
 export function relativeDirection(input, heading) {
   return (heading + RELATIVE_DIRECTIONS[input]) % 4;
 }
+export function seededRandom(seed) {
+  let value=seed>>>0;
+  return ()=>{
+    value=(value+0x6d2b79f5)>>>0;
+    let result=value;result=Math.imul(result^(result>>>15),result|1);
+    result^=result+Math.imul(result^(result>>>7),result|61);
+    return ((result^(result>>>14))>>>0)/4294967296;
+  };
+}
+function shuffle(items,random) {
+  for(let i=items.length-1;i>0;i--) {
+    const j=Math.floor(random()*(i+1));[items[i],items[j]]=[items[j],items[i]];
+  }
+  return items;
+}
+export function makeRandomTree(cells,random) {
+  const lookup=new Map(cells.map((cell,index)=>[cell.join(','),index]));
+  const neighbors=cells.map(([x,z])=>DIRECTIONS.map(([dx,dz])=>lookup.get(`${x+dx},${z+dz}`)).filter(id=>id!==undefined));
+  const links=cells.map(()=>[]),seen=new Uint8Array(cells.length);
+  const root=Math.floor(random()*cells.length),active=[root];seen[root]=1;let visited=1;
+  while(active.length) {
+    const activeIndex=random()<.72?active.length-1:Math.floor(random()*active.length);
+    const here=active[activeIndex],options=neighbors[here].filter(id=>!seen[id]);
+    if(options.length) {
+      const next=options[Math.floor(random()*options.length)];
+      links[here].push(next);links[next].push(here);seen[next]=1;visited++;active.push(next);
+    } else active.splice(activeIndex,1);
+  }
+  if(visited!==cells.length)throw new Error('The KIST letter mask is disconnected.');
+  return links;
+}
+export function chooseRandomRoute(cells,links,random,targetChoices=15) {
+  const leaves=shuffle(links.flatMap((neighbors,index)=>neighbors.length===1?[index]:[]),random);
+  let best=null,bestScore=Infinity;
+  for(const start of leaves.slice(0,90)) {
+    const parent=new Int32Array(cells.length);parent.fill(-2);parent[start]=-1;
+    const stack=[[start,-1,0,0]];
+    while(stack.length) {
+      const [here,previous,choices,length]=stack.pop();
+      if(here!==start&&links[here].length===1&&choices===targetChoices&&length>32) {
+        const path=[here];while(parent[path.at(-1)]!==-1)path.push(parent[path.at(-1)]);path.reverse();
+        const score=Math.abs(length-65);
+        if(score<bestScore){best=path;bestScore=score;if(score===0)return best;}
+      }
+      const nextChoices=choices+(here!==start&&links[here].length>=3?1:0);
+      if(nextChoices>targetChoices)continue;
+      for(const next of links[here])if(next!==previous){parent[next]=here;stack.push([next,here,nextChoices,length+1]);}
+    }
+  }
+  return best;
+}
+export function generateRandomStages(templates,seed,targetChoices=15) {
+  return templates.map((template,index)=>{
+    for(let attempt=0;attempt<1000;attempt++) {
+      const stageSeed=(seed+Math.imul(index+1,0x9e3779b9)+Math.imul(attempt+1,0x85ebca6b))>>>0;
+      const random=seededRandom(stageSeed),links=makeRandomTree(template.cells,random);
+      const solution=chooseRandomRoute(template.cells,links,random,targetChoices);
+      if(!solution)continue;
+      const decisions=solution.slice(1,-1).filter(id=>links[id].length>=3);
+      return {...template,links,start:solution[0],goal:solution.at(-1),solution,decisions,seed:stageSeed};
+    }
+    throw new Error(`Could not generate a ${targetChoices}-choice ${template.letter} maze.`);
+  });
+}
 export class MazeSession {
   constructor(stages) { this.stages=stages; this.reset(); }
   reset() {
