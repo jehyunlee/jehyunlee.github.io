@@ -430,7 +430,7 @@ function resize() {
 function animate(timestamp) {
   if(!loaded)return;
   requestAnimationFrame(animate);
-  const now=timestamp/1000,dt=Math.min(Math.max(now-frameTime,0),.05);frameTime=now;
+  const now=timestamp/1000,elapsedSeconds=Math.max(now-frameTime,0),dt=Math.min(elapsedSeconds,.05);frameTime=now;
   if(document.hidden)return;
   if(mode==='celebration'&&session.stageIndex<3) {
     celebrationHold+=dt;
@@ -442,7 +442,7 @@ function animate(timestamp) {
     if(celebrationHold>=5)continueJourney();
   }
   if(mode==='play') {
-    session.tick(dt);$('timer').textContent=formatTime(session.elapsed);$('stage-timer').textContent=formatPreciseTime(session.stageElapsed);
+    session.tick(elapsedSeconds);$('timer').textContent=formatTime(session.elapsed);$('stage-timer').textContent=formatPreciseTime(session.stageElapsed);
     if(animation) {
       animation.progress=Math.min(1,animation.progress+dt/animation.duration);
       const t=animation.progress,curve=t*t*(3-2*t);playerPosition.lerpVectors(animation.start,animation.end,curve);
