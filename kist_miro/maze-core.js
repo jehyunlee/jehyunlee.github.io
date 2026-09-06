@@ -7,7 +7,7 @@ export function lightenHex(hex,fraction) {
     return Math.round(value+(255-value)*fraction).toString(16).padStart(2,'0');
   }).join('');
 }
-export const UNVISITED_COLOR = lightenHex(LOGO_COLOR,.2);
+export const UNVISITED_COLOR = lightenHex(LOGO_COLOR,.5);
 export function logoPosition(stage,id,cellSize=3.2) {
   const [x,z]=stage.cells[id];
   return [(x+(stage.logoBox[0]-258)/12)*cellSize,0,(z+(stage.logoBox[1]-300)/12)*cellSize];
@@ -19,6 +19,13 @@ export function overviewCameraPose(bounds,aspect,fov=48) {
   const look=[(bounds.minX+bounds.maxX)/2,0,(bounds.minZ+bounds.maxZ)/2+depth*.15];
   return {look,position:[look[0],distance*Math.cos(Math.PI/12),look[2]+distance*Math.sin(Math.PI/12)]};
 }
+export function mobileCameraLayout(width,height,top,bottom) {
+  const buttonSize=height<=530?50:56;
+  const padHeight=Math.min(320,Math.max(100,bottom-top));
+  const bodyHeight=Math.max(36,Math.min(160,padHeight-2*buttonSize-26));
+  return {top,bottom,padHeight,padWidth:Math.min(280,width-28),centerY:(top+bottom)/2,
+    distance:Math.max(6.7,1.8*height/bodyHeight),offsetY:height/2-(top+bottom)/2};
+}
 export function relativeDirection(input, heading) {
   return (heading + RELATIVE_DIRECTIONS[input]) % 4;
 }
@@ -28,11 +35,15 @@ export class MazeSession {
     this.stageIndex=0; this.steps=0; this.elapsed=0; this.cleared=[];
     this.stageTimes=this.stages.map(()=>null);
     this.visitedByStage=this.stages.map(()=>new Set());
+    this.visitsByStage=this.stages.map(stage=>Array(stage.cells.length).fill(0));
     this.loadStage();
   }
   loadStage() {
     this.stage=this.stages[this.stageIndex]; this.cell=this.stage.start;
     this.visited=this.visitedByStage[this.stageIndex];this.visited.add(this.cell);
+    this.visitCounts=this.visitsByStage[this.stageIndex];
+    // Arriving at the entrance counts once, just like entering any other tile.
+    this.visitCounts[this.cell]++;
     this.stageSteps=0; this.stageElapsed=0;
     this.finished=false;
     this.lookup=new Map(this.stage.cells.map((c,i)=>[c.join(','),i]));
@@ -46,6 +57,7 @@ export class MazeSession {
     this.heading=direction;
     if(to===undefined || !this.stage.links[from].includes(to)) return {allowed:false,complete:false,from};
     this.cell=to; this.steps++; this.stageSteps++; this.visited.add(to);
+    this.visitCounts[to]++;
     this.finished=to===this.stage.goal;
     if(this.finished) this.cleared.push(this.stageIndex);
     return {allowed:true,from,to,complete:this.finished};

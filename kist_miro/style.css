@@ -11,7 +11,7 @@
 
 /* The complete logo stays visible behind the opening and celebration. */
 .stage-meta{display:flex;flex-direction:column;gap:4px}.stage time{font:11px ui-monospace,SFMono-Regular,monospace;font-variant-numeric:tabular-nums;color:#8b9d9f;letter-spacing:0}.stage.complete time{color:var(--lime)}
-.path-legend{display:flex;align-items:center;gap:15px;font-size:12px;color:#bac8c9;margin-top:15px}.path-legend>span{display:flex;align-items:center;gap:6px;white-space:nowrap}.path-legend i{height:11px;width:11px;border-radius:2px;border:1px solid #ffffff35;display:inline-block}.visited-swatch{background:#ef1702}.unvisited-swatch{background:#f24535}
+.path-legend{display:flex;align-items:center;gap:15px;font-size:12px;color:#bac8c9;margin-top:15px}.path-legend>span{display:flex;align-items:center;gap:6px;white-space:nowrap}.path-legend i{height:11px;width:11px;border-radius:2px;border:1px solid #ffffff35;display:inline-block}.visited-swatch{background:#ef1702}.unvisited-swatch{background:#f78b81}
 body.overview-mode .zone-card,body.overview-mode .compass,body.overview-mode .bottom-hud,body.overview-mode .touch-controls{opacity:0;visibility:hidden;pointer-events:none}body.overview-mode .touch-controls{display:none!important}
 body:not(.playing) .intro{inset:110px 0 65px;align-items:flex-end;justify-content:center;background:linear-gradient(0deg,#10191ef0,transparent 41%)}
 body:not(.playing) .intro-content{margin:0 24px 12px;max-width:760px;text-align:center;padding:0}
@@ -35,3 +35,78 @@ body:not(.playing) .scene-caption{display:none}
 @media(max-height:530px) and (min-width:701px){.overview-caption{top:96px}body:not(.playing) .intro{top:77px;bottom:50px}body:not(.playing) .intro-content{margin-bottom:0}body:not(.playing) .intro h2{font-size:25px}body:not(.playing) .intro-eyebrow,body:not(.playing) .intro-hint{display:none}body:not(.playing) .intro-rules{margin:8px 0}.celebration #celebration-stats{font-size:11px}.final-stage-times{gap:18px}}
 
 .brand-wordmark{height:49px;min-width:62px;padding:0 6px;background:#fff;color:#ef1702;border-radius:4px;display:grid;place-items:center;font:24px Georgia,serif;letter-spacing:-.05em}@media(max-width:700px){.brand-wordmark{height:40px;min-width:49px;font-size:20px}}
+
+/* Touch play: keep the maze clear and place the controls around the explorer. */
+@media (max-width:700px), (hover:none), (pointer:coarse) {
+  .zone-card {
+    top:auto;bottom:max(12px,env(safe-area-inset-bottom));left:12px;right:12px;
+    width:auto;max-width:520px;margin:0 auto;padding:12px 16px 10px;
+    background:rgba(18,31,38,.91);border-color:#9aaeb336;border-radius:12px;
+  }
+  .zone-card .eyebrow{font-size:9px;line-height:13px}
+  .zone-card .live-label{display:inline;font-size:9px!important}
+  .zone-title{margin:4px 0 9px;gap:11px}
+  .zone-title>b{font-size:37px}
+  .zone-title h1{font-size:15px;line-height:1.45;margin:0 0 1px}
+  .zone-title p{font-size:10px;line-height:1.5}
+  .zone-card .divider{display:none}
+  .zone-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:1px solid var(--line);padding-top:8px}
+  .zone-stats .stat-row{flex-direction:column;align-items:flex-start;gap:3px;margin:0;font-size:10px;line-height:1.3}
+  .zone-stats .stat-row strong{font-size:16px;line-height:1.3;white-space:nowrap}
+  .zone-notes{display:flex;justify-content:space-between;align-items:center;gap:6px 14px;flex-wrap:wrap;margin-top:9px}
+  .zone-notes .path-legend{margin:0;gap:10px;font-size:9px}
+  .zone-notes .path-legend i{height:8px;width:8px}
+  .zone-notes .route-rule{border:0;margin:0;padding:0;font-size:9px}
+  .zone-notes .route-icon{display:none}
+  .bottom-hud{display:none}
+  .touch-controls {
+    left:50%;top:48%;right:auto;bottom:auto;width:min(260px,calc(100vw - 28px));height:260px;
+    transform:translate(-50%,-50%);pointer-events:none;touch-action:none;
+  }
+  body.playing .touch-controls{display:block}
+  .dpad{position:relative;display:block;width:100%;height:100%;filter:none;pointer-events:none}
+  .dpad button {
+    position:absolute;display:grid;place-items:center;width:56px;height:56px;min-width:48px;min-height:48px;padding:0;
+    border-radius:50%;border:1px solid rgba(231,242,241,.4);background:rgba(20,37,45,.36);
+    color:rgba(255,255,255,.88);font:28px/1 Arial,sans-serif;pointer-events:auto;
+    backdrop-filter:blur(2px);box-shadow:0 2px 16px #06101830;text-shadow:0 1px 5px #0008;
+  }
+  .dpad .pad-up{top:0;left:50%;transform:translateX(-50%)}
+  .dpad .pad-down{bottom:0;left:50%;transform:translateX(-50%)}
+  .dpad .pad-left{left:0;top:50%;transform:translateY(-50%)}
+  .dpad .pad-right{right:0;top:50%;transform:translateY(-50%)}
+  .dpad button:active,.dpad button.pressed{background:rgba(226,245,138,.65);border-color:var(--lime);color:#122027;text-shadow:none}
+  .toast{bottom:max(184px,calc(env(safe-area-inset-bottom) + 172px));max-width:calc(100% - 28px);white-space:normal;text-align:center;font-size:12px}
+}
+@media (max-width:700px) and (max-height:640px) {
+  .touch-controls{height:230px}
+  .zone-card{padding:9px 13px}
+  .zone-title{margin:3px 0 6px}
+  .zone-title>b{font-size:32px}
+  .zone-notes{margin-top:6px}
+}
+@media (max-height:530px) and (max-width:700px), (max-height:530px) and (hover:none), (max-height:530px) and (pointer:coarse) {
+  .topbar{height:60px;padding:10px max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left))}
+  .brand img{width:34px;height:34px}
+  .brand>div{display:none}
+  .journey{position:fixed;top:10px;left:50%;transform:translateX(-50%);gap:8px}
+  .journey i{width:12px}
+  .stage b{width:28px;height:29px;font-size:22px}
+  .stage-meta{display:none}
+  .stage.complete .stage-meta{display:block;position:absolute;top:32px;left:50%;transform:translateX(-50%)}
+  .stage-meta span{display:none}
+  .stage.complete time{font-size:8px}
+  .compass{display:none}
+  .zone-card{max-width:600px;bottom:max(8px,env(safe-area-inset-bottom));padding:8px 12px;display:grid;grid-template-columns:minmax(100px,.9fr) minmax(180px,1.6fr);gap:6px 12px}
+  .zone-card>.eyebrow,.zone-title p{display:none}
+  .zone-title{margin:0;gap:9px}
+  .zone-title>b{font-size:30px}
+  .zone-title h1{font-size:13px;margin:0}
+  .zone-stats{border-top:0;padding:0;align-items:center}
+  .zone-stats .stat-row{font-size:9px;gap:2px}
+  .zone-stats .stat-row strong{font-size:14px}
+  .zone-notes{grid-column:1/-1;margin:0}
+  .touch-controls{width:230px;height:clamp(142px,46dvh,220px)}
+  .dpad button{width:50px;height:50px;font-size:25px}
+  .toast{bottom:max(92px,calc(env(safe-area-inset-bottom) + 80px));padding:7px 13px;font-size:11px}
+}

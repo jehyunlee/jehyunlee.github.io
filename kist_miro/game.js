@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose} from './maze-core.js';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout} from './maze-core.js?v=20260906-2';
 
 const $=id=>document.getElementById(id);
 const STAGE_INFO=[
@@ -8,10 +8,13 @@ const STAGE_INFO=[
   {name:'기술의 미로',objective:'기술이 세상으로 나갈 길을 찾으세요.',reward:'기술이전!',line:'연구실의 아이디어가 세상으로.',color:'#e3b1ff'},
   {name:'행운의 미로',objective:'마지막 출구에서 행운을 만나세요.',reward:'로또당첨!',line:'K → I → S → T, 네 글자를 모두 연결했어요!',color:'#ffcd75'}
 ];
-const CELL=3.2,WALL_HEIGHT=3.3;
+const CELL=3.2,WALL_HEIGHT=3.3,VISION_RADIUS=5.3;
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mobileUI=matchMedia('(max-width: 700px), (hover: none), (pointer: coarse)');
+const touchControls=$('touch-controls'),projectedPlayer=new THREE.Vector3();
+let mobileLayout=null;
 let renderer,scene,camera,mazeGroup,avatar,body,legs=[],portal,portalRing,playerRing;
-let floorMesh,wallMesh,capMesh,trailMesh,wallData=[],visibleCells=new Set();
+let floorMesh,wallMesh,capMesh,visitNumbers,wallData=[],visibleCells=new Set();
 let overviewGroup,overviewMarker,cameraTween=null,playFog,fireworksStarted=false;
 let celebrationHold=0,shownCountdown=-1;
 let logoBounds={minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity};
@@ -101,6 +104,51 @@ function makeTextSprite(text,size,color='#e2f58a') {
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
   const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true,depthTest:true}));sprite.scale.set(1.8,1.8,1);return sprite;
 }
+function makeVisitNumbers(capacity) {
+  // One texture and one draw call for all white floor digits, including revisits.
+  const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=128;
+  const context=canvas.getContext('2d');
+  context.font='bold 90px ui-monospace, monospace';context.textAlign='center';context.textBaseline='middle';
+  context.lineJoin='round';context.lineWidth=7;context.strokeStyle='#620a08';context.fillStyle='#ffffff';
+  for(let digit=0;digit<10;digit++) {
+    context.strokeText(String(digit),digit*128+64,68);context.fillText(String(digit),digit*128+64,68);
+  }
+  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+  const geometry=new THREE.PlaneGeometry(1,1);geometry.rotateX(-Math.PI/2);
+  geometry.setAttribute('visitDigit',new THREE.InstancedBufferAttribute(new Float32Array(Math.max(1,capacity)),1).setUsage(THREE.DynamicDrawUsage));
+  const material=new THREE.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.03,depthWrite:false,toneMapped:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});
+  material.onBeforeCompile=shader=>{
+    shader.vertexShader='attribute float visitDigit;\n'+shader.vertexShader;
+    shader.vertexShader=shader.vertexShader.replace('#include <uv_vertex>',`#include <uv_vertex>
+      #ifdef USE_MAP
+        vMapUv.x=(vMapUv.x+visitDigit)/10.0;
+      #endif
+    `);
+  };
+  const mesh=new THREE.InstancedMesh(geometry,material,Math.max(1,capacity));
+  mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mesh.frustumCulled=false;mesh.count=0;mesh.userData.glyphs=[];
+  return mesh;
+}
+function setVisitNumbers(mesh,tiles,angle=0) {
+  const glyphs=mesh.userData.glyphs=[];
+  for(const {x,z,count} of tiles) {
+    if(!count)continue;
+    const digits=String(count),scale=Math.min(1,2/(digits.length*.56+.22));
+    for(let i=0;i<digits.length;i++)glyphs.push({x,z,scale,offset:(i-(digits.length-1)/2)*.56*scale,digit:Number(digits[i])});
+  }
+  mesh.count=glyphs.length;
+  const attribute=mesh.geometry.getAttribute('visitDigit');
+  glyphs.forEach((glyph,index)=>attribute.setX(index,glyph.digit));attribute.needsUpdate=true;
+  orientVisitNumbers(mesh,angle);
+}
+function orientVisitNumbers(mesh,angle) {
+  const sin=Math.sin(angle),cos=Math.cos(angle);
+  mesh.userData.glyphs.forEach(({x,z,scale,offset},index)=>{
+    // The number sits near the edge facing the camera, clear of the player's feet.
+    setMatrix(mesh,index,x+offset*cos+.75*sin,.035,z-offset*sin+.75*cos,.78*scale,1,1.04*scale,angle);
+  });
+  mesh.instanceMatrix.needsUpdate=true;
+}
 function disposeGroup(group) {
   if(!group)return;
   const geometries=new Set(),materials=new Set();
@@ -137,8 +185,8 @@ function buildMaze() {
   wallMesh=new THREE.InstancedMesh(new THREE.BoxGeometry(CELL+.22,1,.26),[sideMaterial,sideMaterial,topMaterial,sideMaterial,sideMaterial,sideMaterial],wallData.length);
   wallMesh.castShadow=true;wallMesh.receiveShadow=true;wallMesh.frustumCulled=false;wallMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mazeGroup.add(wallMesh);
   capMesh=new THREE.InstancedMesh(new THREE.BoxGeometry(CELL+.23,.055,.28),capMaterial,wallData.length);capMesh.frustumCulled=false;capMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);mazeGroup.add(capMesh);
-  const trailMaterial=fogMaterial({color:0xc2d3ba,emissive:0x6f8663,emissiveIntensity:.35,roughness:.7});
-  trailMesh=new THREE.InstancedMesh(new THREE.CylinderGeometry(.085,.085,.027,12),trailMaterial,stage.cells.length);trailMesh.frustumCulled=false;mazeGroup.add(trailMesh);
+  const visibleCapacity=Math.min(stage.cells.length,(2*Math.floor(VISION_RADIUS)+1)**2);
+  visitNumbers=makeVisitNumbers(visibleCapacity*String(Number.MAX_SAFE_INTEGER).length);mazeGroup.add(visitNumbers);
   portal=new THREE.Group();portal.position.copy(cellPosition(stage.goal));
   const incoming=stage.links[stage.goal][0],[gx,gz]=stage.cells[stage.goal],[px,pz]=stage.cells[incoming];
   portal.rotation.y=gx!==px?Math.PI/2:0;
@@ -159,7 +207,7 @@ function buildMaze() {
 function updateVisibility() {
   const [x,z]=session.stage.cells[session.cell];visibleCells=new Set();
   session.stage.cells.forEach(([cx,cz],i)=>{
-    if(Math.hypot(cx-x,cz-z)<=5.3 && hasLineOfSight(session.stage,session.lookup,session.cell,i))visibleCells.add(i);
+    if(Math.hypot(cx-x,cz-z)<=VISION_RADIUS && hasLineOfSight(session.stage,session.lookup,session.cell,i))visibleCells.add(i);
   });
   // At the starting screen, show a few near walls to frame the explorer.
   session.stage.cells.forEach(([cx,cz],i)=>{
@@ -167,10 +215,11 @@ function updateVisibility() {
     const position=cellPosition(i);
     setMatrix(floorMesh,i,position.x,-.09,position.z,visible?1:0,visible?1:0,visible?1:0);
     floorMesh.setColorAt(i,session.visited.has(i)?visitedColor:unvisitedColor);
-    const trail=visible&&session.visited.has(i)&&i!==session.cell;
-    setMatrix(trailMesh,i,position.x,.016,position.z,trail?1:0,trail?1:0,trail?1:0);
   });
-  floorMesh.instanceMatrix.needsUpdate=true;floorMesh.instanceColor.needsUpdate=true;trailMesh.instanceMatrix.needsUpdate=true;
+  floorMesh.instanceMatrix.needsUpdate=true;floorMesh.instanceColor.needsUpdate=true;
+  setVisitNumbers(visitNumbers,[...visibleCells].map(id=>{
+    const {x,z}=cellPosition(id);return {x,z,count:session.visitCounts[id]};
+  }),yaw);
   portal.visible=visibleCells.has(session.stage.goal);
   for(const wall of wallData)wall.visible=wall.cells.some(i=>visibleCells.has(i));
   updateWalls(1);
@@ -201,6 +250,7 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
   const floorMaterial=new THREE.MeshBasicMaterial({color:0xffffff,fog:false,toneMapped:false});
   const wallGeometry=new THREE.BoxGeometry(CELL+.2,WALL_HEIGHT,.26);
   const wallMaterial=new THREE.MeshBasicMaterial({color:0x4b292a,fog:false,toneMapped:false});
+  const visitedTiles=[];
   for(let index=0;index<session.stages.length;index++) {
     const stage=session.stages[index],seen=session.visitedByStage[index];
     const floors=new THREE.InstancedMesh(floorGeometry,floorMaterial,stage.cells.length);
@@ -211,6 +261,7 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
       logoBounds.minX=Math.min(logoBounds.minX,wx-CELL/2);logoBounds.maxX=Math.max(logoBounds.maxX,wx+CELL/2);
       logoBounds.minZ=Math.min(logoBounds.minZ,wz-CELL/2);logoBounds.maxZ=Math.max(logoBounds.maxZ,wz+CELL/2);
       setMatrix(floors,i,wx,-.1,wz);floors.setColorAt(i,seen.has(i)?visitedColor:unvisitedColor);
+      if(seen.has(i))visitedTiles.push({x:wx,z:wz,count:session.visitsByStage[index][i]});
       DIRECTIONS.forEach(([dx,dz],dir)=>{
         const neighbor=lookup.get(`${x+dx},${z+dz}`);
         if(stage.links[i].includes(neighbor)||(neighbor!==undefined&&neighbor<i))return;
@@ -222,6 +273,8 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
     walls.forEach((wall,i)=>setMatrix(wallInstances,i,wall.x,WALL_HEIGHT/2,wall.z,1,1,1,wall.angle));
     wallInstances.instanceMatrix.needsUpdate=true;overviewGroup.add(wallInstances);
   }
+  const overviewNumbers=makeVisitNumbers(visitedTiles.reduce((total,tile)=>total+String(tile.count).length,0));
+  overviewNumbers.material.fog=false;setVisitNumbers(overviewNumbers,visitedTiles);overviewGroup.add(overviewNumbers);
   // The next entrance is marked on its actual letter, in the original logo layout.
   overviewMarker=null;
   if(entranceIndex<session.stages.length) {
@@ -241,8 +294,15 @@ function getOverviewPose() {
   return {position:new THREE.Vector3(...pose.position),look:new THREE.Vector3(...pose.look)};
 }
 function getPlayPose() {
-  const look=playerPosition.clone();look.y=1.05;
-  return {look,position:new THREE.Vector3(look.x+Math.sin(targetYaw)*6.7,look.y+6.7,look.z+Math.cos(targetYaw)*6.7)};
+  const distance=mobileLayout?.distance??6.7;
+  const look=playerPosition.clone();look.y=mobileLayout?1.35:1.05;
+  return {look,position:new THREE.Vector3(look.x+Math.sin(targetYaw)*distance,look.y+distance,look.z+Math.cos(targetYaw)*distance)};
+}
+function setCameraFrame(offsetY) {
+  if(!offsetY){if(camera.view?.enabled)camera.clearViewOffset();return;}
+  const view=camera.view;
+  if(view?.enabled&&view.fullWidth===innerWidth&&view.fullHeight===innerHeight&&Math.abs(view.offsetY-offsetY)<.01)return;
+  camera.setViewOffset(innerWidth,innerHeight,0,offsetY,innerWidth,innerHeight);
 }
 function beginCameraMove(type,destination) {
   const from=camera.position.clone(),to=destination.position.clone();
@@ -250,11 +310,13 @@ function beginCameraMove(type,destination) {
   const control1=from.clone().add(new THREE.Vector3(0,type==='out'?lift:25,0));
   const control2=to.clone().add(new THREE.Vector3(0,type==='in'?lift:25,0));
   cameraTween={type,progress:0,duration:reducedMotion?.35:type==='out'?2.8:2.6,
+    fromFrame:camera.view?.enabled?camera.view.offsetY:0,toFrame:type==='in'?(mobileLayout?.offsetY??0):0,
     curve:new THREE.CubicBezierCurve3(from,control1,control2,to),fromLook:cameraLook.clone(),toLook:destination.look.clone()};
 }
 function updateCameraMove(dt) {
   const move=cameraTween;move.progress=Math.min(1,move.progress+dt/move.duration);
   const t=move.progress,ease=t*t*t*(t*(t*6-15)+10);
+  setCameraFrame(THREE.MathUtils.lerp(move.fromFrame,move.toFrame,ease));
   camera.position.copy(move.curve.getPoint(ease));cameraLook.lerpVectors(move.fromLook,move.toLook,ease);camera.lookAt(cameraLook);
   if(move.type==='out'&&t>=.5&&!fireworksStarted) {
     fireworksStarted=true;$('celebration').classList.remove('revealing');
@@ -423,8 +485,20 @@ function resize() {
   if(!renderer)return;
   const width=innerWidth,height=innerHeight;renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();
   const ratio=Math.min(devicePixelRatio,2);fireworks.width=width*ratio;fireworks.height=height*ratio;fx.setTransform(ratio,0,0,ratio,0,0);
-  if(cameraTween?.type==='out') {
-    const destination=getOverviewPose();cameraTween.curve.v3.copy(destination.position);cameraTween.toLook.copy(destination.look);
+  if(mobileUI.matches) {
+    const headerBottom=document.querySelector('.topbar').getBoundingClientRect().bottom;
+    const journeyBottom=document.querySelector('.journey').getBoundingClientRect().bottom;
+    const top=Math.max(headerBottom,journeyBottom+(width<=700&&height>530?22:0))+12;
+    const bottom=document.querySelector('.zone-card').getBoundingClientRect().top-12;
+    mobileLayout=mobileCameraLayout(width,height,top,bottom);
+    touchControls.style.width=`${mobileLayout.padWidth}px`;touchControls.style.height=`${mobileLayout.padHeight}px`;
+  } else {mobileLayout=null;touchControls.style.removeProperty('width');touchControls.style.removeProperty('height');}
+  if(cameraTween) {
+    const destination=cameraTween.type==='out'?getOverviewPose():getPlayPose();
+    cameraTween.curve.v3.copy(destination.position);cameraTween.toLook.copy(destination.look);
+    cameraTween.toFrame=cameraTween.type==='in'?(mobileLayout?.offsetY??0):0;
+  } else {
+    setCameraFrame(mode==='play'||(mode==='pause'&&modeBeforeDialog==='play')?(mobileLayout?.offsetY??0):0);
   }
 }
 function animate(timestamp) {
@@ -466,18 +540,32 @@ function animate(timestamp) {
   const introMode=mode==='intro'||(mode==='pause'&&modeBeforeDialog==='intro');
   if(cameraTween) updateCameraMove(dt);
   else if(mode==='celebration'||introMode) {
+    setCameraFrame(0);
     const pose=getOverviewPose();camera.position.copy(pose.position);cameraLook.copy(pose.look);camera.lookAt(cameraLook);
   } else {
-    cameraLook.copy(followPosition);cameraLook.y=1.05;
-    camera.position.set(cameraLook.x+Math.sin(yaw)*6.7,cameraLook.y+6.7,cameraLook.z+Math.cos(yaw)*6.7);camera.lookAt(cameraLook);
+    const distance=mobileLayout?.distance??6.7;
+    setCameraFrame(mobileLayout?.offsetY??0);cameraLook.copy(followPosition);cameraLook.y=mobileLayout?1.35:1.05;
+    camera.position.set(cameraLook.x+Math.sin(yaw)*distance,cameraLook.y+distance,cameraLook.z+Math.cos(yaw)*distance);camera.lookAt(cameraLook);
   }
   explorerUniform.value.copy(playerPosition);if(mazeGroup.visible)updateWalls(dt);
   playerRing.position.set(playerPosition.x,.025,playerPosition.z);
   playerRing.material.opacity=.27+Math.sin(now*1.7)*.055;
   if(portalRing){portalRing.rotation.z=now*.16;portalRing.scale.setScalar(1+Math.sin(now*2)*.045);}
   if(overviewMarker)overviewMarker.scale.setScalar(1+Math.sin(now*2)*.045);
+  if(mazeGroup.visible)orientVisitNumbers(visitNumbers,yaw);
   renderer.render(scene,camera);
+  updateTouchControls();
   if((mode==='celebration'||mode==='zoomOut')&&fireworksStarted)animateFireworks(dt);
+}
+
+function updateTouchControls() {
+  if(!mobileLayout||mode!=='play')return;
+  // Track the actual projected body while the chase camera moves and turns.
+  camera.updateMatrixWorld();projectedPlayer.copy(playerPosition);projectedPlayer.y+=1.35;projectedPlayer.project(camera);
+  const {padWidth,padHeight,top,bottom}=mobileLayout;
+  const x=THREE.MathUtils.clamp((projectedPlayer.x*.5+.5)*innerWidth,padWidth/2+12,innerWidth-padWidth/2-12);
+  const y=THREE.MathUtils.clamp((-projectedPlayer.y*.5+.5)*innerHeight,top+padHeight/2,bottom-padHeight/2);
+  touchControls.style.left=`${x.toFixed(1)}px`;touchControls.style.top=`${y.toFixed(1)}px`;
 }
 
 function setupInputs() {
@@ -509,10 +597,12 @@ function setupInputs() {
   $('next').addEventListener('click',continueJourney);
   $('sound').addEventListener('click',()=>{soundEnabled=!soundEnabled;$('sound').setAttribute('aria-pressed',String(soundEnabled));$('sound').setAttribute('aria-label',soundEnabled?'소리 끄기':'소리 켜기');$('sound').title=soundEnabled?'소리 끄기':'소리 켜기';if(soundEnabled)playTone(523,.13,.07);});
   window.addEventListener('resize',resize);
+  mobileUI.addEventListener('change',resize);
+  if(document.fonts)document.fonts.ready.then(resize);
 }
 
 async function init() {
-  const response=await fetch('./mazes.json');if(!response.ok)throw new Error('미로 데이터를 불러오지 못했어요. 다시 열어 주세요.');
+  const response=await fetch('./mazes.json?v=20260906-2');if(!response.ok)throw new Error('미로 데이터를 불러오지 못했어요. 다시 열어 주세요.');
   const stages=await response.json();session=new MazeSession(stages);
   renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x10191e);
