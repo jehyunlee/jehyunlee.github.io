@@ -1,16 +1,18 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260906-4';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260907-1';
+
+import {BALL_RADIUS,createBallTexture,drawAnniversaryLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260907-1';
 
 const $=id=>document.getElementById(id);
 const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
 const COPY={
   en:{
-    documentTitle:"KIST Maze · Sweet Fatty's Adventure",meta:'Explore a new KIST-shaped 3D maze with Sweet Fatty every time you play.',journeyCaption:'KIST · YOUR JOURNEY',
-    brandSubtitle:"Sweet Fatty's Adventure",stage0:'PATENT',stage1:'PAPER',stage2:'TRANSFER',stage3:'FIELD USE',helpEyebrow:'HOW TO PLAY',pauseEyebrow:'TAKE A BREATH',newAdventure:'NEW ADVENTURE',
+    documentTitle:"KIST Maze · Journey into Research",meta:'Explore a new KIST-shaped 3D maze with the KIST 60 ball every time you play.',journeyCaption:'KIST · YOUR JOURNEY',
+    brandSubtitle:"Journey into Research",stage0:'PATENT',stage1:'PAPER',stage2:'TRANSFER',stage3:'FIELD USE',helpEyebrow:'HOW TO PLAY',pauseEyebrow:'TAKE A BREATH',newAdventure:'NEW ADVENTURE',
     exploring:'EXPLORING',zoneTime:'ZONE TIME',totalTime:'TOTAL TIME',steps:'STEPS',visited:'Visited',unexplored:'Unexplored',unexploredBright:'Unexplored · 50% brighter',routeRule:'15 choices, one exit',
-    fullMap:'FULL MAP',currentMarker:'White marker: current position',playerName:'Sweet Fatty',move:'MOVE',takeBreak:'TAKE A BREAK',limitedView:'Only your surroundings are visible',
-    introTitle:'At the end of the research tunnel,<br> <span>a hidden treasure.</span>',introCopy:'Explore between towering walls with Sweet Fatty<br>and complete K, I, S, and T in order.',loadingMaze:'Building a new maze…',start:'START EXPLORING',introHint:'Use the arrow keys or the translucent controls around Sweet Fatty',wanderOkay:'A little wandering is part of discovery.',
-    helpTitle:'Find your own way.',helpIntro:'Complete the four logo-shaped mazes in K → I → S → T order. Every new game creates new walls, entrances, exits, and a unique route with 15 correct choices.',helpForward:'Move one tile forward',helpTurn:'Turn and move one tile',helpBack:'Turn around and move one tile',helpControls:'Hold an arrow key to keep walking in the same direction. The camera follows behind you. On mobile, use the translucent arrows around Sweet Fatty; zone information and time are shown at the bottom.',helpTiles:'Visited tiles use KIST red; unexplored tiles are 50% brighter. The white number shows how many times you have stepped on that tile. The entrance starts at 1.',helpOverview:'Select Overview to see the full map and your position for one second. Cyan marks entrances; each reward color marks an exit. Overview time is not counted.',helpFinish:'At an exit, the camera zooms out and fireworks fill the screen. After five seconds, it automatically zooms into the next entrance. Camera moves, celebrations, and pauses do not count toward your time.',gotIt:'Got it',
+    fullMap:'FULL MAP',currentMarker:'White marker: current position',playerName:'KIST 60 Ball',move:'MOVE',takeBreak:'TAKE A BREAK',limitedView:'Only your surroundings are visible',
+    introTitle:'At the end of the research tunnel,<br> <span>a hidden treasure.</span>',introCopy:'Explore between towering walls with the KIST 60 ball<br>and complete K, I, S, and T in order.',loadingMaze:'Building a new maze…',start:'START EXPLORING',introHint:'Use the arrow keys or the translucent controls around the KIST 60 ball',wanderOkay:'A little wandering is part of discovery.',
+    helpTitle:'Find your own way.',helpIntro:'Complete the four logo-shaped mazes in K → I → S → T order. Every new game creates new walls, entrances, exits, and a unique route with 15 correct choices.',helpForward:'Move one tile forward',helpTurn:'Turn and move one tile',helpBack:'Turn around and move one tile',helpControls:'Hold an arrow key to keep rolling in the same direction. The camera follows behind you. On mobile, use the translucent arrows around the KIST 60 ball; zone information and time are shown at the bottom.',helpTiles:'Visited tiles use KIST red; unexplored tiles are 50% brighter. The white number shows how many times you have stepped on that tile. The entrance starts at 1.',helpOverview:'Select Overview to see the full map and your position for one second. Cyan marks entrances; each reward color marks an exit. Overview time is not counted.',helpFinish:'At an exit, the camera zooms out and fireworks fill the screen. After five seconds, it automatically zooms into the next entrance. Camera moves, celebrations, and pauses do not count toward your time.',gotIt:'Got it',
     pauseTitle:'Take a short break.',pauseCopy:'The maze will wait for you.',resume:'Keep exploring',restart:'Start a new maze',restartTitle:'Start with a new maze?',restartCopy:'Your records will be cleared and all four mazes will be regenerated.',confirmRestart:'Generate new maze',goBack:'Go back',finalTime:'FINAL TIME',loadErrorTitle:'The maze could not open.',reload:'Reload',overview:'Overview',
     stages:[
       {name:'Patent Maze',objective:'Find the exit and file your patent.',reward:'PATENT FILED!',line:'Your first discovery meets the world.'},
@@ -24,12 +26,12 @@ const COPY={
     errorFetch:'The maze data could not be loaded. Please reload.',errorGraphics:'The 3D scene could not start. Open this page in a modern browser with WebGL support.',contextLost:'The 3D connection was interrupted. Select Reload.'
   },
   ko:{
-    documentTitle:'KIST 미로 · 달콤한 뚱땡이의 모험',meta:'달콤한 뚱땡이와 매번 새롭게 생성되는 KIST 모양 3D 미로를 탐험하세요.',journeyCaption:'KIST · 나의 탐험 기록',
-    brandSubtitle:'달콤한 뚱땡이의 모험',stage0:'특허출원',stage1:'논문출판',stage2:'기술이전',stage3:'현장적용',helpEyebrow:'게임 방법',pauseEyebrow:'잠시 쉬기',newAdventure:'새로운 탐험',
+    documentTitle:'KIST 미로 · 연구를 향한 여정',meta:'KIST 60주년 공와 매번 새롭게 생성되는 KIST 모양 3D 미로를 탐험하세요.',journeyCaption:'KIST · 나의 탐험 기록',
+    brandSubtitle:'연구를 향한 여정',stage0:'특허출원',stage1:'논문출판',stage2:'기술이전',stage3:'현장적용',helpEyebrow:'게임 방법',pauseEyebrow:'잠시 쉬기',newAdventure:'새로운 탐험',
     exploring:'탐험 중',zoneTime:'현재 구역',totalTime:'전체 시간',steps:'걸음 수',visited:'지나온 길',unexplored:'미탐험',unexploredBright:'미탐험 · 50% 밝게',routeRule:'15개의 갈림길, 하나의 출구',
-    fullMap:'전체 지도',currentMarker:'흰색 표식이 현재 위치입니다',playerName:'달콤한 뚱땡이',move:'이동',takeBreak:'잠시 쉬기',limitedView:'주변만 보이는 미로',
-    introTitle:'연구의 터널 끝,<br> <span>숨겨진 보물.</span>',introCopy:'달콤한 뚱땡이와 높은 벽 사이를 탐험하고<br>K, I, S, T를 차례대로 통과해 보세요.',loadingMaze:'새 미로를 만들고 있어요…',start:'탐험 시작하기',introHint:'방향키 또는 뚱땡이 주변의 반투명 키로 이동',wanderOkay:'조금 헤매도 괜찮아요.',
-    helpTitle:'길은, 직접 찾아야죠.',helpIntro:'로고 모양의 네 미로를 K → I → S → T 순서로 통과하세요. 새 게임마다 벽, 입구, 출구와 15개의 올바른 선택으로 이루어진 정답 경로가 새로 생성됩니다.',helpForward:'보고 있는 방향으로 한 칸 이동',helpTurn:'해당 방향으로 돌아 한 칸 이동',helpBack:'뒤돌아 한 칸 이동',helpControls:'방향키를 누르고 있으면 같은 방향으로 계속 걷습니다. 시점은 캐릭터 뒤를 따라갑니다. 모바일은 뚱땡이 주변의 반투명 방향키를 사용하고, 구역 정보와 시간은 하단에서 확인하세요.',helpTiles:'지나온 길은 KIST 로고의 빨강, 미탐험 길은 50% 밝은 빨강입니다. 흰 숫자는 발판을 밟은 횟수이며 시작 발판은 1회로 계산합니다.',helpOverview:'전체보기를 누르면 전체 지도와 현재 위치를 1초 동안 확인합니다. 청록빛은 입구, 각 보상색은 출구입니다. 전체보기 시간은 기록에 포함되지 않습니다.',helpFinish:'출구에서는 전체 로고로 줌아웃하며 폭죽이 터집니다. 5초 뒤 다음 입구로 자동 줌인합니다. 카메라 이동, 축하 화면과 일시 정지는 기록에 포함되지 않습니다.',gotIt:'알겠어요',
+    fullMap:'전체 지도',currentMarker:'흰색 표식이 현재 위치입니다',playerName:'KIST 60주년 공',move:'이동',takeBreak:'잠시 쉬기',limitedView:'주변만 보이는 미로',
+    introTitle:'연구의 터널 끝,<br> <span>숨겨진 보물.</span>',introCopy:'KIST 60주년 공와 높은 벽 사이를 탐험하고<br>K, I, S, T를 차례대로 통과해 보세요.',loadingMaze:'새 미로를 만들고 있어요…',start:'탐험 시작하기',introHint:'방향키 또는 공 주변의 반투명 키로 이동',wanderOkay:'조금 헤매도 괜찮아요.',
+    helpTitle:'길은, 직접 찾아야죠.',helpIntro:'로고 모양의 네 미로를 K → I → S → T 순서로 통과하세요. 새 게임마다 벽, 입구, 출구와 15개의 올바른 선택으로 이루어진 정답 경로가 새로 생성됩니다.',helpForward:'보고 있는 방향으로 한 칸 이동',helpTurn:'해당 방향으로 돌아 한 칸 이동',helpBack:'뒤돌아 한 칸 이동',helpControls:'방향키를 누르고 있으면 같은 방향으로 계속 구릅니다. 시점은 공 뒤를 따라갑니다. 모바일은 공 주변의 반투명 방향키를 사용하고, 구역 정보와 시간은 하단에서 확인하세요.',helpTiles:'지나온 길은 KIST 로고의 빨강, 미탐험 길은 50% 밝은 빨강입니다. 흰 숫자는 발판을 밟은 횟수이며 시작 발판은 1회로 계산합니다.',helpOverview:'전체보기를 누르면 전체 지도와 현재 위치를 1초 동안 확인합니다. 청록빛은 입구, 각 보상색은 출구입니다. 전체보기 시간은 기록에 포함되지 않습니다.',helpFinish:'출구에서는 전체 로고로 줌아웃하며 폭죽이 터집니다. 5초 뒤 다음 입구로 자동 줌인합니다. 카메라 이동, 축하 화면과 일시 정지는 기록에 포함되지 않습니다.',gotIt:'알겠어요',
     pauseTitle:'잠깐, 쉬어가기.',pauseCopy:'미로는 기다려 줄 거예요.',resume:'계속 탐험하기',restart:'새 미로로 다시 시작',restartTitle:'새 미로로 시작할까요?',restartCopy:'현재 기록을 지우고 네 글자의 미로를 모두 새로 생성합니다.',confirmRestart:'새 미로 만들기',goBack:'돌아가기',finalTime:'최종 통과 시간',loadErrorTitle:'미로를 열 수 없어요.',reload:'다시 열기',overview:'전체보기',
     stages:[
       {name:'특허의 미로',objective:'출구를 찾아 특허를 출원하세요.',reward:'특허출원!',line:'첫 번째 발견을 세상에.'},
@@ -51,7 +53,7 @@ const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobileUI=matchMedia('(max-width: 700px), (hover: none), (pointer: coarse)');
 const touchControls=$('touch-controls'),projectedPlayer=new THREE.Vector3();
 let mobileLayout=null;
-let renderer,scene,camera,mazeGroup,avatar,body,legs=[],portal,portalRing,playerRing;
+let renderer,scene,camera,mazeGroup,avatar,ball,portal,portalRing,playerRing;
 let floorMesh,wallMesh,capMesh,visitNumbers,wallData=[],visibleCells=new Set();
 let overviewGroup,overviewMarker,overviewCurrentMarker,overviewGateways=[],cameraTween=null,playFog,fireworksStarted=false;
 let celebrationHold=0,peekHold=0,shownCountdown=-1;
@@ -60,11 +62,11 @@ const cameraLook=new THREE.Vector3();
 const visitedColor=new THREE.Color(LOGO_COLOR),unvisitedColor=new THREE.Color(UNVISITED_COLOR);
 let session,mazeTemplates,mode='intro',modeBeforeDialog='intro',animation=null,held=null,queued=null;
 let playerPosition=new THREE.Vector3(),followPosition=new THREE.Vector3(),yaw=0,targetYaw=0;
-let frameTime=0,walkPhase=0,nextInputAt=0,lastCollisionAt=-5,toastTimeout,loaded=false;
+let frameTime=0,nextInputAt=0,lastCollisionAt=-5,toastTimeout,loaded=false;
 let audioContext,soundEnabled=false,fireworkTime=0,fireworkNext=0,particles=[],rockets=[];
 const fireworks=$('fireworks'),fx=fireworks.getContext('2d');
 const object=new THREE.Object3D(),explorerUniform={value:new THREE.Vector3()};
-const temporary=new THREE.Vector3();
+const temporary=new THREE.Vector3(),lastBallPosition=new THREE.Vector3();
 const shadeMaterials=[];
 
 function randomSeed() {
@@ -83,14 +85,14 @@ function applyLanguage(nextLanguage) {
   setLabel($('overview'),c.overview);setLabel($('help'),language==='en'?'How to play':'게임 방법');setLabel($('pause'),language==='en'?'Pause':'일시 정지');
   setLabel($('sound'),soundEnabled?(language==='en'?'Sound off':'소리 끄기'):(language==='en'?'Sound on':'소리 켜기'));
   document.querySelector('.brand img').alt=language==='en'?'KIST logo':'KIST 로고';
-  document.querySelector('.player-label img').alt=c.playerName;
+  document.querySelector('.player-label canvas').setAttribute('aria-label',c.playerName);
   document.querySelector('.journey').setAttribute('aria-label',language==='en'?'Zone progress':'구역 진행 상황');
   document.querySelector('.zone-card').setAttribute('aria-label',language==='en'?'Current zone and exploration record':'현재 구역과 탐험 기록');
   document.querySelector('.compass').setAttribute('aria-label',language==='en'?'View direction':'시선 방향');
-  $('touch-controls').setAttribute('aria-label',language==='en'?'Virtual direction controls around Sweet Fatty':'뚱땡이 주변 가상 방향키');
+  $('touch-controls').setAttribute('aria-label',language==='en'?'Virtual direction controls around the KIST 60 ball':'공 주변 가상 방향키');
   document.querySelectorAll('.dpad button').forEach((button,index)=>button.setAttribute('aria-label',language==='en'?['Move forward','Move left','Move right','Move backward'][index]:['앞으로 이동','왼쪽으로 이동','오른쪽으로 이동','뒤로 이동'][index]));
   document.querySelectorAll('.dialog-close').forEach(button=>button.setAttribute('aria-label',language==='en'?'Close':'닫기'));
-  if(renderer)renderer.domElement.setAttribute('aria-label',language==='en'?'Sweet Fatty exploring between the tall walls of a KIST-shaped maze.':'KIST 모양 미로의 높은 벽 사이를 탐험하는 달콤한 뚱땡이.');
+  if(renderer)renderer.domElement.setAttribute('aria-label',language==='en'?'the KIST 60 ball exploring between the tall walls of a KIST-shaped maze.':'KIST 모양 미로의 높은 벽 사이를 탐험하는 KIST 60주년 공.');
   if(session){updateHUD();if(session.finished)updateCelebrationCopy();}
   if(loaded) {
     $('start').firstElementChild.textContent=c.start;
@@ -137,26 +139,14 @@ function makeEnvironment() {
   scene.environment=environment.texture;texture.dispose();pmrem.dispose();
 }
 
-function createAvatar() {
+function createAvatar(logoImage) {
   const character=new THREE.Group();
-  const red=new THREE.MeshPhysicalMaterial({color:0xee080e,roughness:.17,metalness:.12,clearcoat:1,clearcoatRoughness:.08,envMapIntensity:1.55});
-  function ellipsoid(parent,x,y,z,sx,sy,sz) {
-    const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),red);
-    mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;
-  }
-  body=new THREE.Group();character.add(body);
-  const profile=[[0,.5],[.42,.56],[.65,.72],[.79,1.02],[.80,1.29],[.72,1.58],[.57,1.88],[.35,2.04],[0,2.08]].map(([x,y])=>new THREE.Vector2(x,y));
-  const torso=new THREE.Mesh(new THREE.LatheGeometry(profile,48),red);torso.scale.z=.87;torso.position.z=.08;torso.castShadow=true;torso.receiveShadow=true;body.add(torso);
-  ellipsoid(body,0,1.91,-.18,.33,.27,.33);
-  const head=ellipsoid(body,0,2.27,-.24,.56,.57,.53);head.rotation.x=-.12;
-  const armL=ellipsoid(body,-.64,1.23,-.09,.22,.52,.28);armL.rotation.z=-.17;
-  const armR=ellipsoid(body,.64,1.23,-.09,.22,.52,.28);armR.rotation.z=.17;
-  legs=[];
-  for(const side of [-1,1]) {
-    const leg=new THREE.Group();leg.position.set(side*.33,.68,.03);
-    const calf=new THREE.Mesh(new THREE.CapsuleGeometry(.175,.34,6,16),red);calf.position.set(0,-.22,-.04);calf.castShadow=true;leg.add(calf);
-    ellipsoid(leg,0,-.5,-.16,.19,.16,.31);character.add(leg);legs.push(leg);
-  }
+  const material=new THREE.MeshPhysicalMaterial({color:0xffffff,map:createBallTexture(logoImage,Math.min(8,renderer.capabilities.getMaxAnisotropy())),roughness:.18,metalness:0,clearcoat:1,clearcoatRoughness:.09,envMapIntensity:.85});
+  ball=new THREE.Mesh(new THREE.SphereGeometry(BALL_RADIUS,64,48),material);
+  ball.position.y=BALL_RADIUS;ball.castShadow=true;ball.receiveShadow=true;character.add(ball);
+  const badge=document.querySelector('.player-label canvas'),badgeContext=badge.getContext('2d');
+  badgeContext.fillStyle='#ffffff';badgeContext.fillRect(0,0,badge.width,badge.height);
+  drawAnniversaryLogo(badgeContext,logoImage,4,2,72,72*176/170);
   const shadowCanvas=document.createElement('canvas');shadowCanvas.width=128;shadowCanvas.height=128;
   const c=shadowCanvas.getContext('2d'),g=c.createRadialGradient(64,64,12,64,64,64);
   g.addColorStop(0,'rgba(0,0,0,.55)');g.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g;c.fillRect(0,0,128,128);
@@ -273,7 +263,8 @@ function buildMaze() {
   const beacon=new THREE.PointLight(info.color,16,8,2);beacon.position.set(0,1.6,0);portal.add(beacon);
   const landing=new THREE.Mesh(new THREE.RingGeometry(.82,.99,64),new THREE.MeshBasicMaterial({color:info.color,side:THREE.DoubleSide,transparent:true,opacity:.8}));landing.rotation.x=-Math.PI/2;landing.position.y=.02;portal.add(landing);mazeGroup.add(portal);
   playerPosition.copy(cellPosition(session.cell));followPosition.copy(playerPosition);
-  targetYaw=-session.heading*Math.PI/2;yaw=targetYaw;avatar.position.copy(playerPosition);avatar.rotation.y=yaw;
+  targetYaw=-session.heading*Math.PI/2;yaw=targetYaw;avatar.position.copy(playerPosition);
+  resetBallOrientation(ball,yaw);lastBallPosition.copy(playerPosition);
   explorerUniform.value.copy(playerPosition);updateVisibility();updateHUD();
 }
 
@@ -385,7 +376,7 @@ function getOverviewPose() {
 }
 function getPlayPose() {
   const distance=mobileLayout?.distance??6.7;
-  const look=playerPosition.clone();look.y=mobileLayout?1.35:1.05;
+  const look=playerPosition.clone();look.y=BALL_RADIUS;
   return {look,position:new THREE.Vector3(look.x+Math.sin(targetYaw)*distance,look.y+distance,look.z+Math.cos(targetYaw)*distance)};
 }
 function setCameraFrame(offsetY) {
@@ -647,12 +638,8 @@ function animate(timestamp) {
       if(direction!==undefined&&direction!==null){queued=null;step(direction,now);}
     }
   }
-  const walking=mode==='play'&&!!animation;
-  walkPhase+=dt*(walking?12:2);
-  body.position.y=walking&&!reducedMotion?Math.abs(Math.sin(walkPhase))*.065:Math.sin(now*1.6)*.018;
-  body.rotation.z=walking&&!reducedMotion?Math.sin(walkPhase)*.025:0;
-  for(let i=0;i<legs.length;i++)legs[i].rotation.x=THREE.MathUtils.damp(legs[i].rotation.x,walking&&!reducedMotion?Math.sin(walkPhase+i*Math.PI)*.37:0,14,dt);
-  yaw=THREE.MathUtils.damp(yaw,targetYaw,8,dt);avatar.rotation.y=yaw;avatar.position.copy(playerPosition);
+  rollBall(ball,lastBallPosition,playerPosition);lastBallPosition.copy(playerPosition);
+  yaw=THREE.MathUtils.damp(yaw,targetYaw,8,dt);avatar.position.copy(playerPosition);
   followPosition.lerp(playerPosition,1-Math.exp(-12*dt));
   const introMode=mode==='intro'||(mode==='pause'&&modeBeforeDialog==='intro');
   if(cameraTween) updateCameraMove(dt);
@@ -661,7 +648,7 @@ function animate(timestamp) {
     const pose=getOverviewPose();camera.position.copy(pose.position);cameraLook.copy(pose.look);camera.lookAt(cameraLook);
   } else {
     const distance=mobileLayout?.distance??6.7;
-    setCameraFrame(mobileLayout?.offsetY??0);cameraLook.copy(followPosition);cameraLook.y=mobileLayout?1.35:1.05;
+    setCameraFrame(mobileLayout?.offsetY??0);cameraLook.copy(followPosition);cameraLook.y=BALL_RADIUS;
     camera.position.set(cameraLook.x+Math.sin(yaw)*distance,cameraLook.y+distance,cameraLook.z+Math.cos(yaw)*distance);camera.lookAt(cameraLook);
   }
   explorerUniform.value.copy(playerPosition);if(mazeGroup.visible)updateWalls(dt);
@@ -679,8 +666,8 @@ function animate(timestamp) {
 
 function updateTouchControls() {
   if(!mobileLayout||mode!=='play')return;
-  // Track the actual projected body while the chase camera moves and turns.
-  camera.updateMatrixWorld();projectedPlayer.copy(playerPosition);projectedPlayer.y+=1.35;projectedPlayer.project(camera);
+  // Track the actual projected ball while the chase camera moves and turns.
+  camera.updateMatrixWorld();projectedPlayer.copy(playerPosition);projectedPlayer.y+=BALL_RADIUS;projectedPlayer.project(camera);
   const {padWidth,padHeight,top,bottom}=mobileLayout;
   const x=THREE.MathUtils.clamp((projectedPlayer.x*.5+.5)*innerWidth,padWidth/2+12,innerWidth-padWidth/2-12);
   const y=THREE.MathUtils.clamp((-projectedPlayer.y*.5+.5)*innerHeight,top+padHeight/2,bottom-padHeight/2);
@@ -723,13 +710,13 @@ function setupInputs() {
 }
 
 async function init() {
-  const response=await fetch('./mazes.json?v=20260906-4');if(!response.ok)throw new Error(copy().errorFetch);
+  const [response,logoImage]=await Promise.all([fetch('./mazes.json?v=20260907-1'),new THREE.ImageLoader().loadAsync('./kist-60-original.png').catch(()=>{throw new Error(language==='ko'?'60주년 로고를 불러오지 못했어요. 다시 열어 주세요.':'The anniversary logo could not load. Please reload.');})]);if(!response.ok)throw new Error(copy().errorFetch);
   mazeTemplates=await response.json();session=createRandomSession();
   renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x10191e);
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  renderer.domElement.setAttribute('aria-label','Sweet Fatty exploring between the tall walls of a KIST-shaped maze.');
+  renderer.domElement.setAttribute('aria-label','the KIST 60 ball exploring between the tall walls of a KIST-shaped maze.');
   $('game').appendChild(renderer.domElement);
   renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();mode='pause';clearInputs();$('error-message').textContent=copy().contextLost;$('load-error').hidden=false;});
   scene=new THREE.Scene();scene.background=new THREE.Color(0x10191e);playFog=new THREE.FogExp2(0x10191e,.038);scene.fog=playFog;
@@ -737,9 +724,9 @@ async function init() {
   makeEnvironment();scene.add(new THREE.HemisphereLight(0xe1f4fa,0x172631,2.5));
   const key=new THREE.DirectionalLight(0xf1faff,3.4);key.position.set(6,18,10);scene.add(key);
   const fill=new THREE.DirectionalLight(0xa4d1e3,1.6);fill.position.set(-10,8,-5);scene.add(fill);
-  avatar=createAvatar();scene.add(avatar);
+  avatar=createAvatar(logoImage);scene.add(avatar);
   const lantern=new THREE.PointLight(0xd7e9b9,9,11,1.6);lantern.position.set(0,3.8,-.3);avatar.add(lantern);
-  playerRing=new THREE.Mesh(new THREE.RingGeometry(.94,.96,64),new THREE.MeshBasicMaterial({color:0xe2f58a,side:THREE.DoubleSide,transparent:true,opacity:.3,depthWrite:false}));playerRing.rotation.x=-Math.PI/2;scene.add(playerRing);
+  playerRing=new THREE.Mesh(new THREE.RingGeometry(1.1,1.12,64),new THREE.MeshBasicMaterial({color:0xe2f58a,side:THREE.DoubleSide,transparent:true,opacity:.3,depthWrite:false}));playerRing.rotation.x=-Math.PI/2;scene.add(playerRing);
   buildMaze();buildOverview(0);mazeGroup.visible=false;overviewGroup.visible=true;scene.fog=null;
   setupInputs();resize();const opening=getOverviewPose();camera.position.copy(opening.position);cameraLook.copy(opening.look);camera.lookAt(cameraLook);
   loaded=true;frameTime=performance.now()/1000;
@@ -747,4 +734,4 @@ async function init() {
   requestAnimationFrame(animate);
 }
 applyLanguage('en');
-init().catch(error=>{console.error(error);$('error-message').textContent=error.message===copy().errorFetch?error.message:copy().errorGraphics;$('load-error').hidden=false;});
+init().catch(error=>{console.error(error);$('error-message').textContent=error.message===copy().errorFetch||/anniversary logo|60주년 로고/.test(error.message)?error.message:copy().errorGraphics;$('load-error').hidden=false;});
