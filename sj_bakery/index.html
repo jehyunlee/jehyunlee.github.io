@@ -3,40 +3,42 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#743a32">
 <meta name="description" content="갓 구운 과자를 돌리고 뒤집어 상자에 쏙! PC와 모바일에서 즐기는 10개 스테이지 베이커리 퍼즐 게임.">
-<title>엉뚱한 제과점</title><link rel="stylesheet" href="./style.css?v=easy-landscape-1">
+<title>엉뚱한 제과점</title><link rel="stylesheet" href="./style.css?v=full-scene-2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='51' font-size='52'%3E🍪%3C/text%3E%3C/svg%3E">
 </head>
 <body><main class="bakery-app">
-<header class="page-header"><div class="brand"><span class="brand-mark" aria-hidden="true">✿</span><div><div class="eyebrow">THE PECULIAR BAKERY</div><h1>엉뚱한 제과점<span class="title-dot">.</span></h1></div></div><div class="header-tools"><span class="header-caption" id="player-caption">조금 삐뚤어도, 맛있을 거야!</span><button class="icon-button" id="sound-button" aria-label="소리 켜기" title="소리 켜기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4 6 8H3v8h3l5 4z"/><path class="sound-waves" d="M15 8q4 4 0 8m3-11q7 7 0 14"/><path class="sound-off" d="m16 9 6 6m0-6-6 6"/></svg></button><button class="icon-button" id="help-button" aria-label="게임 방법" title="게임 방법">?</button></div></header>
+<header class="page-header"><div class="brand"><span class="brand-mark" aria-hidden="true">✿</span><div><div class="eyebrow">THE PECULIAR BAKERY</div><h1>엉뚱한 제과점<span class="title-dot">.</span></h1></div></div></header>
 <section class="game-shell choosing-player" aria-label="엉뚱한 제과점 게임">
 <div class="hud">
-<div class="stage-hud"><span class="hud-label">오늘의 스테이지</span><div><b id="stage-number">01</b><span class="muted"> / 10</span><span class="stage-flavor" id="stage-flavor">버터의 첫걸음</span></div></div>
+<div class="stage-hud"><span class="hud-label">오늘의 스테이지</span><div><b id="stage-number">01</b><span class="muted"> / 10</span><span class="stage-flavor" id="stage-flavor">세모 버터의 첫걸음</span></div></div>
 <div class="time-hud"><span class="hud-label">남은 시간</span><strong id="time" role="timer">01:00</strong></div>
 <div class="score-hud"><div class="score-label"><span class="hud-label">포장 성공</span><span><strong id="score">0</strong><span class="muted"> / 25개</span></span></div><div class="score-track" role="progressbar" aria-label="스테이지 성공 목표" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" id="score-progress"><i id="score-fill"></i></div></div>
 <div class="hearts-hud"><span class="hud-label">남은 기회</span><div id="hearts" aria-label="남은 기회 3번"><span>♥</span><span>♥</span><span>♥</span></div></div>
+<div class="packing-status"><span class="control-label">이번 과자</span><div class="window-time"><strong id="window-time">2.0</strong><span>초</span><span class="clock-symbol" aria-hidden="true">◷</span></div><div class="window-track"><i id="window-fill"></i></div><p id="status-tip">상자 속 희미한 그림과<br>모양도, 장식도 똑같이!</p></div>
 <button class="icon-button pause-button" id="pause-button" aria-label="일시정지" title="일시정지 (P)"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+<div class="header-tools"><span class="header-caption" id="player-caption">조금 삐뚤어도, 맛있을 거야!</span><button class="icon-button" id="fullscreen-button" aria-label="전체화면 보기" aria-pressed="false" title="전체화면 보기"><span aria-hidden="true">⛶</span></button><button class="icon-button" id="sound-button" aria-label="소리 켜기" title="소리 켜기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4 6 8H3v8h3l5 4z"/><path class="sound-waves" d="M15 8q4 4 0 8m3-11q7 7 0 14"/><path class="sound-off" d="m16 9 6 6m0-6-6 6"/></svg></button><button class="icon-button" id="help-button" aria-label="게임 방법" title="게임 방법">?</button></div>
 </div>
 <div class="play-surface">
 <div class="side-controls side-controls-left" role="group" aria-label="과자 뒤집기">
 <button class="side-key" data-action="up" aria-label="위로 뒤집기"><span class="side-key-icon" aria-hidden="true">↑</span><span>위로 뒤집기</span></button>
+<div class="preview-item"><span class="control-label">지금 내 과자</span><div class="cookie-swatch current-swatch"><canvas id="current-cookie" width="180" height="180" aria-label="현재 과자 모양"></canvas><span id="match-badge">돌려 주세요</span></div></div>
 <button class="side-key" data-action="down" aria-label="아래로 뒤집기"><span class="side-key-icon" aria-hidden="true">↓</span><span>아래로 뒤집기</span></button>
 </div>
 <div class="scene-wrap choosing-player">
+<div class="scene-stage">
 <canvas id="game-canvas" width="1200" height="600" aria-label="왼쪽 제빵사에서 오른쪽 작업 구역으로 과자가 이동합니다. 방향키로 과자 모양을 맞추세요."></canvas>
 <div class="scene-label bakery-label">오븐에서 갓 구운 과자</div><div class="scene-label work-label"><span>여기서 모양을 맞춰요</span><b>작업 구역 · 2초</b></div><div class="scene-feedback" id="scene-feedback" aria-live="polite"></div>
-<div class="stage-intro hidden" id="stage-intro"><span>오븐 준비 완료!</span><canvas id="stage-lettering" width="1000" height="190" aria-label="스테이지 시작"></canvas><strong id="intro-flavor">버터의 첫걸음</strong></div>
+<div class="stage-intro hidden" id="stage-intro"><span>오븐 준비 완료!</span><canvas id="stage-lettering" width="1000" height="190" aria-label="스테이지 시작"></canvas><strong id="intro-flavor">세모 버터의 첫걸음</strong></div>
 <div class="tasting hidden" id="tasting"><div class="tasting-sparkle">✦ &nbsp; ✧ &nbsp; ✦</div><canvas id="tasting-canvas" width="460" height="440"></canvas><h2 id="tasting-title">음~ 맛있다!</h2><p id="tasting-subtitle">STAGE 1 CLEAR</p></div>
+</div>
 </div>
 <div class="side-controls side-controls-right" role="group" aria-label="과자 회전">
 <button class="side-key" data-action="left" aria-label="반시계 방향 90도 회전"><span class="side-key-icon" aria-hidden="true">⟲</span><span>반시계 회전</span></button>
+<div class="preview-item"><span class="control-label">상자 속 정답</span><div class="cookie-swatch target-swatch"><canvas id="target-cookie" width="180" height="180" aria-label="맞춰야 할 과자 모양"></canvas><span>이 모양으로!</span></div></div>
 <button class="side-key" data-action="right" aria-label="시계 방향 90도 회전"><span class="side-key-icon" aria-hidden="true">⟳</span><span>시계 회전</span></button>
 </div>
 </div>
-<div class="workbench">
-<div class="cookie-comparison"><div class="preview-item"><span class="control-label">지금 내 과자</span><div class="cookie-swatch current-swatch"><canvas id="current-cookie" width="180" height="180" aria-label="현재 과자 모양"></canvas><span id="match-badge">돌려 주세요</span></div></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="preview-item"><span class="control-label">상자 속 정답</span><div class="cookie-swatch target-swatch"><canvas id="target-cookie" width="180" height="180" aria-label="맞춰야 할 과자 모양"></canvas><span>이 모양으로!</span></div></div></div>
-<div class="keyboard-area"><div class="key-instruction">방향키로 과자를 맞춰 주세요</div><div class="dpad"><button class="key key-up" data-action="up" aria-label="위로 뒤집기"><span>↑</span></button><button class="key key-left" data-action="left" aria-label="반시계 방향 90도 회전"><span>←</span></button><span class="key-center" aria-hidden="true">✿</span><button class="key key-right" data-action="right" aria-label="시계 방향 90도 회전"><span>→</span></button><button class="key key-down" data-action="down" aria-label="아래로 뒤집기"><span>↓</span></button><span class="dpad-left-label">반시계 회전</span><span class="dpad-right-label">시계 회전</span><span class="dpad-up-label">위로 뒤집기</span><span class="dpad-down-label">아래로 뒤집기</span></div></div>
-<div class="packing-status"><span class="control-label">과자 하나에 주어진 시간</span><div class="window-time"><strong id="window-time">2.0</strong><span>초</span><span class="clock-symbol" aria-hidden="true">◷</span></div><div class="window-track"><i id="window-fill"></i></div><p id="status-tip">상자 속 희미한 그림과<br>모양도, 장식도 똑같이!</p></div>
-</div>
+<div class="rotate-prompt hidden" id="rotate-prompt" role="status"><span aria-hidden="true">↻</span><strong>화면을 가로로 돌려 주세요</strong><p>게임은 잠시 멈춰 있어요.<br>가로로 돌리면 전체 장면이 보이고 다시 시작돼요.</p></div>
 <div class="overlay" id="overlay"><div class="modal-card character-select" id="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
 <div class="small-stamp">우리 가족의 엉뚱한 제과점</div><h2 id="modal-title">누가 과자를 구울까요?</h2>
 <fieldset class="family-options"><legend class="sr-only">플레이할 이름을 선택하세요</legend>
@@ -48,7 +50,7 @@
 <button class="primary-button" id="start-button" disabled>이름을 선택해 주세요</button><span class="start-note" id="load-note">함께할 가족을 불러오고 있어요…</span>
 </div></div>
 </section>
-<p class="orientation-hint">휴대폰을 가로로 돌리면 양손으로 조작할 수 있어요.</p>
+<p class="orientation-hint">게임은 가로 · 전체화면으로 진행돼요. 시작 버튼을 눌러 주세요.</p>
 <footer class="page-footer"><span><b>HOW TO PLAY</b> ← → 회전 <i>·</i> ↑ ↓ 뒤집기 <i>·</i> P 일시정지</span><span>작은 과자 하나, 커다란 행복 <span class="footer-flower">✿</span></span></footer>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
-</main><script type="module" src="./game.js?v=easy-landscape-1"></script></body></html>
+</main><script type="module" src="./game.js?v=full-scene-2"></script></body></html>

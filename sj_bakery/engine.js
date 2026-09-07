@@ -9,10 +9,15 @@ export const PASTRIES=[
  {name:'크림으로 그린 낙서',color:'#c3a074'}, {name:'달콤한 삼각관계',color:'#b96b4a'},
  {name:'빙글빙글 크림 미로',color:'#ba885d'}, {name:'엉뚱한 제과장의 걸작',color:'#b44740'}
 ];
-export const getPastryLevel=stage=>Math.max(1,Math.min(10,stage)-3);
+const EASY_PASTRIES=[
+ {name:'세모 버터의 첫걸음',color:'#e8b968'},
+ {name:'네모난 버터 친구',color:'#e1ad58'},
+ {name:'다섯 모서리 산책',color:'#dba04a'}
+];
+export const getPastryLevel=stage=>Math.max(1,Math.min(10,stage));
 export const STAGES=Array.from({length:10},(_,index)=>{
- const pastryIndex=getPastryLevel(index+1)-1;
- return {...PASTRIES[pastryIndex],pastryIndex};
+ const pastryIndex=Math.max(0,index-3);
+ return {...(index<3?EASY_PASTRIES[index]:PASTRIES[pastryIndex]),shapeLevel:index+1,pastryIndex};
 });
 export const mod4=n=>((n%4)+4)%4;
 export function transform(o,action){

@@ -20,7 +20,7 @@
 @media(orientation:portrait) and (max-width:760px){.orientation-hint{display:block;text-align:center;color:#94765f;font-size:11px;margin:16px 0 0}}
 
 /* Reserve both thumb areas without covering the conveyor or cookie previews. */
-@media (orientation:landscape) and (max-width:1200px) and (max-height:600px), (orientation:landscape) and (max-width:1400px) and (pointer:coarse){
+@media (orientation:landscape){
  body{height:100dvh;min-height:0;overflow:hidden;overscroll-behavior:none}
  .bakery-app{height:100dvh;max-width:none;min-height:0;display:flex;flex-direction:column;gap:6px;padding:max(6px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
  .page-header{min-height:32px;height:32px;flex-shrink:0;margin:0;gap:10px}
@@ -62,6 +62,44 @@
  .stage-intro>span{font-size:12px;letter-spacing:1px}.stage-intro canvas{max-height:50%;width:84%;object-fit:contain}.stage-intro strong{font-size:20px}
  .tasting h2{font-size:23px}.tasting p{font-size:10px;margin:3px}.tasting-sparkle{font-size:25px;letter-spacing:25px}
  .results-card h2{font-size:25px}.results-table-wrap{max-height:120px}
+}
+
+/* The full scene keeps its width and 2:1 ratio. Fullscreen frees the vertical space. */
+.scene-wrap{display:grid;place-items:center;aspect-ratio:2/1}
+.scene-stage{width:100%;aspect-ratio:2/1;position:relative;isolation:isolate}
+#game-canvas{width:100%;height:100%;aspect-ratio:2/1;object-fit:contain}
+.side-key{word-break:keep-all}
+.rotate-prompt{position:absolute;inset:0;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff5e9f5;text-align:center;padding:20px}
+.rotate-prompt>span{font-size:60px;color:#ab4941}.rotate-prompt strong{font-family:'Jua',sans-serif;font-size:25px}.rotate-prompt p{font-size:13px;line-height:1.7}
+.header-caption{display:none}
+.hud{grid-template-columns:1fr .8fr 1.2fr .7fr .65fr 32px 110px;gap:12px}
+.hud .packing-status{width:auto;min-width:0;padding:0;margin:0}.hud .packing-status>p,.hud .clock-symbol{display:none}
+.hud .packing-status .control-label{font-size:10px;margin:0}
+.hud .window-time{justify-content:center;margin:2px 0 4px;gap:3px}.hud .window-time strong{font-size:24px}.hud .window-time>span{font-size:10px}.hud .window-track{height:4px}
+.header-tools{gap:5px}.header-tools .icon-button{width:32px;height:32px}
+@media (orientation:landscape){
+ .game-shell,.game-shell.choosing-player{grid-template-rows:48px minmax(0,1fr)}
+ .bakery-app.game-started .page-header{display:none}
+ .bakery-app.game-started{gap:0}
+ .hud{grid-template-columns:.85fr .8fr 1.15fr .7fr .6fr 32px 106px;padding:3px 10px;gap:8px}
+ .hud .packing-status{grid-column:auto;grid-row:auto}
+ .side-controls{grid-template-rows:minmax(44px,1fr) auto minmax(44px,1fr);gap:8px;padding-top:6px;padding-bottom:6px}
+ .side-controls .preview-item{display:flex;flex-direction:column;gap:3px;align-items:center;justify-content:center;min-width:0}
+ .side-controls .control-label{font-size:10px;white-space:nowrap}
+ .side-controls .cookie-swatch{width:68px;height:68px}.side-controls .cookie-swatch canvas{width:64px;height:64px}
+ .scene-wrap{align-content:center;overflow:visible}
+ .scene-stage{height:auto}
+ .scene-label{font-size:9px}.work-label{width:25%;left:59%;bottom:4%;padding:3px}
+ .work-label span{display:none}.work-label b{font-size:10px}
+ .bakery-label{top:3%;padding:3px 5px}
+ .character-select .start-note{font-size:10px}
+}
+@media (orientation:portrait){
+ .hud{height:auto;min-height:106px;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:8px}
+ .hud .packing-status{grid-row:2;grid-column:1 / 3}.hud .window-time{display:inline-flex;margin:0 6px}.hud .packing-status .control-label{display:inline}.hud .window-track{display:none}
+ .hud .pause-button{position:static;margin:0;grid-row:2;grid-column:3}
+ .hud .header-tools{grid-row:2;grid-column:4;justify-content:flex-end}
+ .hud .header-tools #sound-button,.hud .header-tools #help-button{display:none}
 }
 @media (orientation:landscape) and (max-height:340px) and (max-width:1200px){
  .side-controls{gap:8px;padding-top:4px;padding-bottom:4px}
