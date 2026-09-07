@@ -2,13 +2,18 @@ export const STAGE_SECONDS=60;
 export const COOKIE_SECONDS=2;
 export const COOKIES_PER_STAGE=30;
 export const PASS_SCORE=25;
-export const STAGES=[
+export const PASTRIES=[
  {name:'버터의 첫걸음',color:'#dba04a'}, {name:'초코칩이 콕콕',color:'#cd8f3f'},
  {name:'초콜릿 반쪽의 비밀',color:'#8b5133'}, {name:'지그재그 초코 산책',color:'#875232'},
  {name:'딸기의 등장',color:'#cb6352'}, {name:'딸기와 크림의 춤',color:'#d87f69'},
  {name:'크림으로 그린 낙서',color:'#c3a074'}, {name:'달콤한 삼각관계',color:'#b96b4a'},
  {name:'빙글빙글 크림 미로',color:'#ba885d'}, {name:'엉뚱한 제과장의 걸작',color:'#b44740'}
 ];
+export const getPastryLevel=stage=>Math.max(1,Math.min(10,stage)-3);
+export const STAGES=Array.from({length:10},(_,index)=>{
+ const pastryIndex=getPastryLevel(index+1)-1;
+ return {...PASTRIES[pastryIndex],pastryIndex};
+});
 export const mod4=n=>((n%4)+4)%4;
 export function transform(o,action){
  if(action==='left')return {rotation:mod4(o.rotation-1),flipped:o.flipped};

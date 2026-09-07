@@ -1,4 +1,4 @@
-import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js';
+import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=easy-landscape-1';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
 const $=id=>document.getElementById(id);
@@ -47,7 +47,7 @@ function refreshSelection(){
 function selectPlayer(id){const player=getPlayer(id);if(!loaded||game.phase!=='ready'||!player||helpOpen)return;selectedPlayer=player;refreshSelection();$('announcer').textContent=`${player.name} 선택. 시작 버튼을 눌러 주세요.`;}
 function showCharacterSelection(){
  game.reset();selectedPlayer=null;paused=false;helpOpen=false;expression='neutral';expressionUntil=0;transitionTime=0;$('scene-feedback').textContent='';
- $('stage-intro').classList.add('hidden');$('tasting').classList.add('hidden');canvas.parentElement.classList.add('choosing-player');showModal(selectionHTML,'character-select');refreshSelection();updateHud(true);
+ $('stage-intro').classList.add('hidden');$('tasting').classList.add('hidden');canvas.parentElement.classList.add('choosing-player');document.querySelector('.game-shell').classList.add('choosing-player');showModal(selectionHTML,'character-select');refreshSelection();updateHud(true);
 }
 function familyCharacter(c,pose,cx,bottom,height){
  if(!loaded||!selectedPlayer)return null;const sprite=familyFrames[pose*4+selectedPlayer.column];const w=height*sprite.width/sprite.height;const x=cx-w/2,y=bottom-height;c.drawImage(sprite,x,y,w,height);return {x,y,w,h:height};
@@ -61,7 +61,7 @@ function cookie(c,stage,x,y,size,o={rotation:0,flipped:false},alpha=1,animate=tr
  const a=o.animation,progress=a?Math.min(1,(game.elapsed-a.at)/.14):1;
  if(animate&&a&&progress<1&&!reducedMotion){const ease=1-(1-progress)**3;if(a.action==='left'||a.action==='right'){angle=(a.fromRotation+(a.action==='left'?-1:1)*ease)*Math.PI/2;sy=a.fromFlipped?-1:1;}else{angle=(progress<.5?a.fromRotation:o.rotation)*Math.PI/2;sy=(progress<.5?(a.fromFlipped?-1:1):(o.flipped?-1:1))*Math.max(.08,Math.abs(Math.cos(Math.PI*progress)));}}
  if(animate&&a&&progress<1&&!reducedMotion&&(a.action==='up'||a.action==='down'))c.translate(0,(a.action==='up'?-1:1)*Math.sin(Math.PI*progress)*size*.12);
- c.rotate(angle);c.scale(1,sy);c.drawImage(cookieTiles[stage-1],-size/2,-size/2,size,size);c.restore();
+ c.rotate(angle);c.scale(1,sy);c.drawImage(cookieTiles[STAGES[stage-1].pastryIndex],-size/2,-size/2,size,size);c.restore();
 }
 function box(c,x,y,size=108,ghost=false,stage=game.stage){
  c.save();rounded(c,x-size/2,y-size*.36+13,size,size*.73,5,'#b88150','#8f5d39');rounded(c,x-size/2,y-size*.43,size,size*.75,5,'#e9c99e','#a47649');rounded(c,x-size*.42,y-size*.36,size*.84,size*.6,3,'#f8e8ca','#ceaa7e');
@@ -128,7 +128,7 @@ function drawLettering(){
  const c=$('stage-lettering').getContext('2d');c.clearRect(0,0,1000,190);const text=`STAGE ${game.stage}`;
  c.font='900 145px Georgia,serif';c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.strokeStyle='#8c542e';c.lineWidth=15;c.strokeText(text,500,102);c.strokeStyle='#edbd73';c.lineWidth=7;c.strokeText(text,500,97);
  const g=c.createLinearGradient(0,20,0,170);g.addColorStop(0,'#f8d893');g.addColorStop(.55,STAGES[game.stage-1].color);g.addColorStop(1,'#b77939');c.fillStyle=g;c.fillText(text,500,97);
- if(cookieTiles.length){const pattern=c.createPattern(cookieTiles[game.stage-1],'repeat');c.globalAlpha=.62;c.fillStyle=pattern;c.fillText(text,500,97);c.globalAlpha=1;}
+ if(cookieTiles.length){const pattern=c.createPattern(cookieTiles[STAGES[game.stage-1].pastryIndex],'repeat');c.globalAlpha=.62;c.fillStyle=pattern;c.fillText(text,500,97);c.globalAlpha=1;}
  c.save();c.globalCompositeOperation='source-atop';c.fillStyle='#7b3f24';for(let i=0;i<56;i++){const x=55+(i*113)%900,y=40+(i*37)%116;c.beginPath();c.ellipse(x,y,2.5,1.6,i,0,Math.PI*2);c.fill();}c.restore();
  $('stage-lettering').setAttribute('aria-label',`STAGE ${game.stage}`);$('intro-flavor').textContent=STAGES[game.stage-1].name;letteringStage=game.stage;
 }
@@ -156,11 +156,11 @@ function playSound(type){if(type==='move')tone(370,.04,'triangle');if(type==='su
 function showModal(html,extraClass=''){$('modal-card').className=`modal-card ${extraClass}`;$('modal-card').innerHTML=html;$('overlay').classList.remove('hidden');requestAnimationFrame(()=>$('modal-card').querySelector('input:checked,input:not([disabled]),button:not([disabled])')?.focus({preventScroll:true}));}
 function hideModal(){$('overlay').classList.add('hidden');}
 function startIntro(){paused=false;helpOpen=false;hideModal();$('tasting').classList.add('hidden');game.phase='intro';game.elapsed=0;game.score=0;game.total=0;game.cookies=[];expression='neutral';expressionUntil=0;$('scene-feedback').textContent='';transitionTime=1.5;drawLettering();$('stage-intro').classList.remove('hidden');$('announcer').textContent=`스테이지 ${game.stage}. ${STAGES[game.stage-1].name}. 60초 동안 25개를 포장하세요.`;updateHud(true);playSound('stage');}
-function newGame(){if(!loaded){loadAssets();return;}if(!selectedPlayer||game.phase!=='ready')return;game.reset();canvas.parentElement.classList.remove('choosing-player');startIntro();}
+function newGame(){if(!loaded){loadAssets();return;}if(!selectedPlayer||game.phase!=='ready')return;game.reset();canvas.parentElement.classList.remove('choosing-player');document.querySelector('.game-shell').classList.remove('choosing-player');startIntro();}
 function togglePause(){if(!['playing','intro','tasting'].includes(game.phase)||helpOpen)return;if(paused){paused=false;hideModal();$('pause-button').setAttribute('aria-label','일시정지');return;}paused=true;returnFocus=document.activeElement;$('pause-button').setAttribute('aria-label','계속하기');showModal('<div class="small-stamp">잠깐 쉬어 가요</div><h2 id="modal-title">오븐도 잠깐 휴식!</h2><p>시간과 컨베이어가 멈췄어요.<br>준비되면 이어서 포장해 주세요.</p><button class="primary-button" id="resume-button">계속하기 →</button>');}
 function showHelp(){
  if(helpOpen)return;helpOpen=true;const wasPaused=paused;paused=true;returnFocus=document.activeElement;const previous=$('modal-card').innerHTML;const previousClass=$('modal-card').className;const wasHidden=$('overlay').classList.contains('hidden');
- showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>초록 타일 위 <b>작업 구역</b>에 들어온 과자를 조작해요.</li><li><b>← →</b>는 90도 회전, <b>↑ ↓</b>는 앞으로 / 뒤로 뒤집기예요. 두 뒤집기는 움직이는 방향이 다르고 마지막 모양은 같아요.</li><li><b>상자 속 정답</b>과 모양·장식을 맞추면 자동으로 포장돼요. 제한 시간은 <b>2초</b>!</li><li>초록 O는 성공, 빨간 X는 실패. 1분 동안 <b>30개 중 25개</b> 이상 성공하면 다음 단계로 가요.</li><li>스테이지 실패 시 하트 하나를 잃고 재도전해요. <b>하트 3개, 총 10단계</b>에 도전해 보세요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
+ showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>초록 타일 위 <b>작업 구역</b>에 들어온 과자를 조작해요.</li><li><b>← →</b>는 90도 회전, <b>↑ ↓</b>는 위로 / 아래로 뒤집기예요. 두 뒤집기는 움직이는 방향이 다르고 마지막 모양은 같아요.</li><li>휴대폰을 <b>가로로</b> 돌리면 왼쪽은 위·아래 뒤집기, 오른쪽 위는 반시계, 아래는 시계 회전 버튼이에요.</li><li><b>상자 속 정답</b>과 모양·장식을 맞추면 자동으로 포장돼요. 제한 시간은 <b>2초</b>!</li><li>초록 O는 성공, 빨간 X는 실패. 1분 동안 <b>30개 중 25개</b> 이상 성공하면 다음 단계로 가요.</li><li>스테이지 실패 시 하트 하나를 잃고 재도전해요. <b>하트 3개, 총 10단계</b>에 도전해 보세요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
  $('close-help').onclick=()=>{helpOpen=false;paused=wasPaused;$('modal-card').innerHTML=previous;$('modal-card').className=previousClass;if(wasHidden)hideModal();refreshSelection();if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});else $('modal-card').querySelector('input:checked,input:not([disabled]),button:not([disabled])')?.focus({preventScroll:true});};
 }
 function showRetry(){showModal(`<div class="small-stamp">다시 구우면 더 맛있어질 거예요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 포장 성공<br>25개까지 ${25-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>같은 스테이지에 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
@@ -176,7 +176,7 @@ function stageEnded(passed){
  if(passed){expression='happy';expressionUntil=clock+2;drawTasting();$('tasting-subtitle').textContent=`STAGE ${game.stage} CLEAR · ${game.score} / 30`;$('tasting-title').textContent=game.stage===10?'이 맛에 제과장 하지!':'음~ 맛있다!';$('tasting').classList.remove('hidden');transitionTime=1;playSound('stage');}
  else{expression='crying';expressionUntil=clock+10;transitionTime=.8;}
 }
-function act(action){if(!loaded||paused||game.phase!=='playing')return;if(game.act(action)){const key=document.querySelector(`[data-action="${action}"]`);key.classList.add('pressed');setTimeout(()=>key.classList.remove('pressed'),140);}}
+function act(action){if(!loaded||paused||game.phase!=='playing')return;if(game.act(action)){for(const key of document.querySelectorAll(`[data-action="${action}"]`)){key.classList.add('pressed');setTimeout(()=>key.classList.remove('pressed'),140);}}}
 function frame(now){
  const dt=lastFrame?Math.min(.25,(now-lastFrame)/1000):0;lastFrame=now;
  if(!paused&&!document.hidden){clock+=dt;
@@ -193,7 +193,11 @@ $('overlay').addEventListener('change',e=>{if(e.target.matches('input[name="play
 $('overlay').addEventListener('click',e=>{const id=e.target.closest('button')?.id;if(id==='start-button')newGame();if(id==='restart-button')showCharacterSelection();if(id==='retry-button')startIntro();if(id==='resume-button'){togglePause();returnFocus?.focus({preventScroll:true});}});
 $('pause-button').addEventListener('click',togglePause);$('help-button').addEventListener('click',showHelp);
 $('sound-button').addEventListener('click',()=>{soundEnabled=!soundEnabled;$('sound-button').classList.toggle('sound-on',soundEnabled);$('sound-button').setAttribute('aria-label',soundEnabled?'소리 끄기':'소리 켜기');$('sound-button').title=soundEnabled?'소리 끄기':'소리 켜기';tone(660,.09);});
-for(const key of document.querySelectorAll('[data-action]')){key.addEventListener('pointerdown',e=>{e.preventDefault();act(key.dataset.action);});key.addEventListener('click',e=>{if(e.detail===0)act(key.dataset.action);});key.addEventListener('contextmenu',e=>e.preventDefault());}
+for(const key of document.querySelectorAll('[data-action]')){
+ key.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();key.setPointerCapture?.(e.pointerId);act(key.dataset.action);});
+ for(const event of ['pointerup','pointercancel','lostpointercapture'])key.addEventListener(event,()=>key.classList.remove('pressed'));
+ key.addEventListener('click',e=>{if(e.detail===0)act(key.dataset.action);});key.addEventListener('contextmenu',e=>e.preventDefault());
+}
 document.addEventListener('keydown',e=>{
  const mapping={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
  if(mapping[e.key]&&game.phase==='playing'&&!paused){e.preventDefault();if(!e.repeat)act(mapping[e.key]);}
