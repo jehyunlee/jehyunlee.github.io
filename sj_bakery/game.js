@@ -1,10 +1,11 @@
-import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=full-scene-2';
-import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=full-scene-2';
-import {createPastryTiles} from './pastries.js?v=full-scene-2';
+import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=ready-five-3';
+import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=ready-five-3';
+import {createPastryTiles} from './pastries.js?v=ready-five-3';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
 const $=id=>document.getElementById(id);
 const game=new BakeryGame();
+const PREP_SECONDS=5;
 const canvas=$('game-canvas'),ctx=canvas.getContext('2d');
 const sceneWrap=document.querySelector('.scene-wrap');
 let displayPending=false,rotationRequired=false,fullscreenBlocked=false,fullscreenModalOpen=false;
@@ -95,9 +96,9 @@ function drawScene(){
  if(!loaded)return;
  ctx.save();
  drawFloor();
- const t=game.cookies.length?game.elapsed:clock*.32;
+ const t=game.cookies.length?(game.phase==='intro'?-transitionTime:game.elapsed):clock*.32;
  const playerPose=expressionUntil>clock?(POSES[expression]??POSES.neutral):POSES.neutral;
- character(ctx,(t%2<.52)?5:4,196,427,311);
+ character(ctx,((t%2+2)%2<.52)?5:4,196,427,311);
  const bob=reducedMotion||paused?0:Math.sin(clock*2.5)*2;
  familyCharacter(ctx,playerPose,873,424+bob,selectedPlayer?.height??253);
  if(selectedPlayer){const nameY=424-selectedPlayer.height-34;rounded(ctx,827,nameY,92,27,13,'#fff7e4e8','#b98c61');ctx.font='600 17px sans-serif';ctx.textAlign='center';ctx.fillStyle='#87513b';ctx.fillText(selectedPlayer.name,873,nameY+19);}
@@ -106,8 +107,8 @@ function drawScene(){
  drawBelt(t);
  const list=game.cookies.length?game.cookies:demoCookies;
  for(const c of list){
-  let x=720+125*((game.cookies.length?game.elapsed:0)-c.arrival),y=381;
-  if(x<145||x>1290)continue;
+  let x=720+125*((game.cookies.length?t:0)-c.arrival),y=381;
+  if(x<(game.phase==='intro'?45:145)||x>1290)continue;
   let scale=1,opacity=1;
   const failure=c.result==='failure';
   if(failure&&x>1005){const fall=(x-1005)/125;x=1005+Math.min(fall*90,45);y+=fall*130+fall*fall*290;scale=Math.max(.15,1-fall*.75);opacity=Math.max(0,1-fall*.8);if(y>523)continue;}
@@ -148,11 +149,13 @@ function updateHud(force=false){
  const seconds=Math.max(0,Math.ceil(STAGE_SECONDS-game.elapsed));$('time').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;$('time').classList.toggle('low-time',seconds<=10);
  $('score').textContent=game.score;$('score-fill').style.width=`${Math.min(100,game.score/PASS_SCORE*100)}%`;$('score-progress').setAttribute('aria-valuenow',Math.min(PASS_SCORE,game.score));
  [...$('hearts').children].forEach((h,i)=>h.classList.toggle('lost',i>=game.lives));$('hearts').setAttribute('aria-label',`남은 기회 ${game.lives}번`);
- const active=game.active;const waiting=game.phase==='playing'&&!active;const remaining=active?Math.max(0,active.deadline-game.elapsed):waiting?0:2;
- $('window-time').textContent=remaining.toFixed(1);$('window-fill').style.width=`${remaining/2*100}%`;$('window-fill').style.background=remaining<.6?'#b54f40':'#be9154';
+ const preparing=game.phase==='intro',active=game.active;const waiting=game.phase==='playing'&&!active;const remaining=preparing?transitionTime:active?Math.max(0,active.deadline-game.elapsed):waiting?0:2;
+ $('window-time').textContent=preparing?String(Math.ceil(remaining)):remaining.toFixed(1);$('window-fill').style.width=`${remaining/(preparing?PREP_SECONDS:COOKIE_SECONDS)*100}%`;$('window-fill').style.background=preparing?'#4b8461':remaining<.6?'#b54f40':'#be9154';
+ $('window-label').textContent=preparing?'시작까지':'이번 과자';$('current-cookie-label').textContent=preparing?'첫 과자':'지금 내 과자';
+ if(preparing){$('prep-countdown').textContent=Math.ceil(remaining);$('stage-intro').classList.toggle('compact',remaining<=PREP_SECONDS-1);}
  const previous=game.cookies[Math.min(29,Math.floor(game.elapsed/2))];const correct=active?isCorrect(active):previous?.result==='success';
- $('match-badge').textContent=correct?'모양이 딱 맞아요!':waiting?'다음 과자 준비 중':'돌려 주세요';$('match-badge').style.color=correct?'#438655':'#9d795d';
- $('status-tip').innerHTML=game.score>=25?'목표 달성! 끝까지 포장해요.':waiting?'다음 과자가 오고 있어요.':'상자 속 희미한 그림과<br>모양도, 장식도 똑같이!';
+ $('match-badge').textContent=preparing?'미리 살펴보세요':correct?'모양이 딱 맞아요!':waiting?'다음 과자 준비 중':'돌려 주세요';$('match-badge').style.color=correct?'#438655':'#9d795d';
+ $('status-tip').innerHTML=preparing?'첫 과자가 오는 동안 정답을 살펴보세요.':game.score>=25?'목표 달성! 끝까지 포장해요.':waiting?'다음 과자가 오고 있어요.':'상자 속 희미한 그림과<br>모양도, 장식도 똑같이!';
  $('pause-button').disabled=!['playing','intro','tasting'].includes(game.phase);
 }
 
@@ -160,7 +163,14 @@ function tone(freq,duration=.08,type='sine',delay=0){if(!soundEnabled)return;try
 function playSound(type){if(type==='move')tone(370,.04,'triangle');if(type==='success'){tone(660,.11);tone(880,.14,'sine',.075);}if(type==='failure'){tone(210,.14,'triangle');tone(155,.18,'triangle',.08);}if(type==='stage'){[523,659,784,1046].forEach((f,i)=>tone(f,.2,'sine',i*.11));}}
 function showModal(html,extraClass=''){$('modal-card').className=`modal-card ${extraClass}`;$('modal-card').innerHTML=html;$('overlay').classList.remove('hidden');requestAnimationFrame(()=>$('modal-card').querySelector('input:checked,input:not([disabled]),button:not([disabled])')?.focus({preventScroll:true}));}
 function hideModal(){$('overlay').classList.add('hidden');}
-function startIntro(){paused=false;helpOpen=false;hideModal();$('tasting').classList.add('hidden');game.phase='intro';game.elapsed=0;game.score=0;game.total=0;game.cookies=[];expression='neutral';expressionUntil=0;$('scene-feedback').textContent='';transitionTime=1.5;drawLettering();$('stage-intro').classList.remove('hidden');$('announcer').textContent=`스테이지 ${game.stage}. ${STAGES[game.stage-1].name}. 60초 동안 25개를 포장하세요.`;updateHud(true);playSound('stage');updateDisplayState();}
+function startIntro(){
+ paused=false;helpOpen=false;hideModal();$('tasting').classList.add('hidden');
+ // Prepare the real first pastry now, so its preview stays identical at arrival.
+ game.beginStage();game.phase='intro';expression='neutral';expressionUntil=0;$('scene-feedback').textContent='';transitionTime=PREP_SECONDS;
+ drawLettering();$('stage-intro').classList.remove('hidden','compact');
+ $('announcer').textContent=`스테이지 ${game.stage}. ${STAGES[game.stage-1].name}. 5초 동안 첫 과자와 정답을 살펴보세요. 과자가 도착하면 60초 동안 25개를 포장하세요.`;
+ updateHud(true);playSound('stage');updateDisplayState();
+}
 async function newGame(){
  if(!loaded){loadAssets();return;}if(!selectedPlayer||game.phase!=='ready'||displayPending)return;
  displayPending=true;document.querySelector('.bakery-app').classList.add('game-started');
@@ -173,7 +183,7 @@ async function newGame(){
 function togglePause(){if(!['playing','intro','tasting'].includes(game.phase)||helpOpen||fullscreenBlocked)return;if(paused){paused=false;hideModal();$('pause-button').setAttribute('aria-label','일시정지');return;}paused=true;returnFocus=document.activeElement;$('pause-button').setAttribute('aria-label','계속하기');showModal('<div class="small-stamp">잠깐 쉬어 가요</div><h2 id="modal-title">오븐도 잠깐 휴식!</h2><p>시간과 컨베이어가 멈췄어요.<br>준비되면 이어서 포장해 주세요.</p><button class="primary-button" id="resume-button">계속하기 →</button>');}
 function showHelp(){
  if(helpOpen||fullscreenBlocked)return;helpOpen=true;const wasPaused=paused;paused=true;returnFocus=document.activeElement;const previous=$('modal-card').innerHTML;const previousClass=$('modal-card').className;const wasHidden=$('overlay').classList.contains('hidden');
- showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>가로 · 전체화면에서 진행해요. 새 게임마다 <b>단계 난이도는 같고 과자 모양은 달라져요.</b></li><li>초록 타일 위 <b>작업 구역</b>에 들어온 과자를 조작해요.</li><li><b>← →</b>는 90도 회전, <b>↑ ↓</b>는 위로 / 아래로 뒤집기예요. 두 뒤집기는 움직이는 방향이 다르고 마지막 모양은 같아요.</li><li>휴대폰을 <b>가로로</b> 돌리면 왼쪽은 위·아래 뒤집기, 오른쪽 위는 반시계, 아래는 시계 회전 버튼이에요.</li><li><b>상자 속 정답</b>과 모양·장식을 맞추면 자동으로 포장돼요. 제한 시간은 <b>2초</b>!</li><li>초록 O는 성공, 빨간 X는 실패. 1분 동안 <b>30개 중 25개</b> 이상 성공하면 다음 단계로 가요.</li><li>스테이지 실패 시 하트 하나를 잃고 재도전해요. <b>하트 3개, 총 10단계</b>에 도전해 보세요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
+ showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>가로 · 전체화면에서 진행해요. 새 게임마다 <b>단계 난이도는 같고 과자 모양은 달라져요.</b></li><li>스테이지마다 <b>5초 준비 시간</b>이 있어요. 첫 과자가 다가오는 동안 정답을 살펴보세요. 도착하면 60초가 시작돼요.</li><li>초록 타일 위 <b>작업 구역</b>에 들어온 과자를 조작해요.</li><li><b>← →</b>는 90도 회전, <b>↑ ↓</b>는 위로 / 아래로 뒤집기예요. 두 뒤집기는 움직이는 방향이 다르고 마지막 모양은 같아요.</li><li>휴대폰을 <b>가로로</b> 돌리면 왼쪽은 위·아래 뒤집기, 오른쪽 위는 반시계, 아래는 시계 회전 버튼이에요.</li><li><b>상자 속 정답</b>과 모양·장식을 맞추면 자동으로 포장돼요. 제한 시간은 <b>2초</b>!</li><li>초록 O는 성공, 빨간 X는 실패. 1분 동안 <b>30개 중 25개</b> 이상 성공하면 다음 단계로 가요.</li><li>스테이지 실패 시 하트 하나를 잃고 재도전해요. <b>하트 3개, 총 10단계</b>에 도전해 보세요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
  $('close-help').onclick=()=>{helpOpen=false;paused=wasPaused;$('modal-card').innerHTML=previous;$('modal-card').className=previousClass;if(wasHidden)hideModal();refreshSelection();if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});else $('modal-card').querySelector('input:checked,input:not([disabled]),button:not([disabled])')?.focus({preventScroll:true});};
 }
 function showRetry(){showModal(`<div class="small-stamp">다시 구우면 더 맛있어질 거예요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 포장 성공<br>25개까지 ${25-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>같은 스테이지에 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
@@ -194,7 +204,7 @@ function frame(now){
  const dt=lastFrame?Math.min(.25,(now-lastFrame)/1000):0;lastFrame=now;
  if(!paused&&!rotationRequired&&!displayPending&&!fullscreenBlocked&&!document.hidden){clock+=dt;
   if(game.phase==='playing'){game.tick(dt);for(const e of game.drainEvents()){playSound(e.type);if(e.type==='success'||e.type==='failure'){expression=e.type==='success'?'happy':'crying';expressionUntil=clock+1.05;$('scene-feedback').textContent=e.type==='success'?['딱 맞아요!','포장 완료!','잘했어요!'][e.cookie.id%3]:'앗, 아까워요!';$('scene-feedback').classList.toggle('bad',e.type==='failure');}if(e.type==='stageEnd')stageEnded(e.passed);}}
-  else if(game.phase==='intro'){transitionTime-=dt;if(transitionTime<=0){$('stage-intro').classList.add('hidden');game.beginStage();}}
+  else if(game.phase==='intro'){transitionTime=Math.max(0,transitionTime-dt);if(transitionTime===0){$('stage-intro').classList.add('hidden');game.phase='playing';game.elapsed=0;$('announcer').textContent='첫 과자 도착! 지금부터 60초 동안 포장해요.';updateHud(true);}}
   else if(game.phase==='tasting'){transitionTime-=dt;if(transitionTime<=0){$('tasting').classList.add('hidden');game.advance();if(game.phase==='complete')showResults();else startIntro();}}
   else if((game.phase==='retry'||game.phase==='gameover')&&transitionTime>0){transitionTime-=dt;if(transitionTime<=0){if(game.phase==='retry')showRetry();else showResults();}}
   if(clock>expressionUntil)$('scene-feedback').textContent='';

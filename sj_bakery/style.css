@@ -106,3 +106,13 @@
  .side-key{flex-direction:row;min-height:44px;padding:4px 2px;gap:3px;font-size:10px}
  .side-key-icon{font-size:23px}.side-key>span:last-child{max-width:4em}
 }
+
+/* Leave the conveyor and both previews visible throughout the five-second run-up. */
+.stage-intro{background:none;backdrop-filter:none;pointer-events:none;justify-content:center;padding-top:10px;animation:none}
+.stage-intro>span{font-size:13px;letter-spacing:0;padding:6px 10px;border:1px solid #d9ba91;border-radius:20px;background:#fff8eaf2;color:#80513a;box-shadow:0 2px 5px #6b392315}
+.stage-intro>span b{color:#4b8461;font-size:17px;font-variant-numeric:tabular-nums}
+.stage-intro canvas{width:68%;max-width:680px;height:auto;max-height:42%;object-fit:contain}
+.stage-intro strong{font-size:20px;text-shadow:0 1px 3px #fff8ea,0 0 8px #fff8ea}
+.stage-intro.compact canvas,.stage-intro.compact strong{display:none}
+.stage-intro.compact{justify-content:flex-start}
+@media (max-height:500px){.stage-intro{padding-top:5px}.stage-intro>span{font-size:10px;padding:4px 8px}.stage-intro>span b{font-size:14px}.stage-intro strong{font-size:14px}}

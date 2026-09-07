@@ -1,7 +1,7 @@
 // Code-native pastry art: one reproducible recipe per stage, renewed per game.
 const OUTLINES = [
-  [[-72,58],[66,34],[-21,-91]],
-  [[-47,-91],[78,-20],[33,66],[-84,18]],
+  [[-96,-58],[96,-58],[-86,60]],
+  [[-96,-64],[50,-64],[96,-18],[-74,67]],
   [[-22,-91],[69,-45],[81,30],[-12,79],[-85,12]],
   [[-24,-91],[23,-61],[80,-44],[60,14],[71,47],[-9,82],[-78,24]],
   [[-34,-87],[30,-58],[82,-31],[59,25],[34,78],[-29,61],[-80,7]],
@@ -54,7 +54,29 @@ function distinctOrientations(points) {
   return true;
 }
 
-function makeShape(outline,random) {
+function distinctSimpleSilhouette(points) {
+  // A long point alone can pass a vertex-distance check while most of the
+  // cookie still looks mirrored. Early levels must differ over their full area.
+  const masks=Array.from({length:8},(_,state)=>{
+    const oriented=points.map(([x,y])=>{
+      x-=128;y-=128;if(state>=4)x=-x;
+      for(let rotation=0;rotation<state%4;rotation++)[x,y]=[-y,x];
+      return [x+128,y+128];
+    });
+    return Array.from({length:32*32},(_,index)=>inside(oriented,(index%32)*8+4,Math.floor(index/32)*8+4));
+  });
+  for(let state=1;state<8;state++) {
+    let different=0,occupied=0;
+    for(let pixel=0;pixel<masks[0].length;pixel++) {
+      if(masks[0][pixel]||masks[state][pixel])occupied++;
+      if(masks[0][pixel]!==masks[state][pixel])different++;
+    }
+    if(different/occupied<(points.length===3?.48:.42))return false;
+  }
+  return true;
+}
+
+function makeShape(outline,random,simple=false) {
   const sourcePoints=outline.map(([x,y])=>[128+x+(random()-.5)*9,128+y+(random()-.5)*9]);
   for(let attempt=0;attempt<48;attempt++) {
     // Unequal stretches and shear change the silhouette itself, beyond rotation.
@@ -64,7 +86,7 @@ function makeShape(outline,random) {
     if(extent>100)for(let i=0;i<shapeTransform.length;i++)shapeTransform[i]*=100/extent;
     const points=sourcePoints.map(warp);
     const area=Math.abs(points.reduce((sum,[x,y],i)=>{const [a,b]=points[(i+1)%points.length];return sum+x*b-y*a;},0)/2);
-    if(area>7200&&distinctOrientations(points))return {points,sourcePoints,shapeTransform};
+    if(area>7200&&distinctOrientations(points)&&(!simple||distinctSimpleSilhouette(points)))return {points,sourcePoints,shapeTransform};
   }
   // Bounded fallback templates are individually checked for all eight states.
   const points=outline.map(([x,y])=>[128+x,128+y]);
@@ -74,10 +96,20 @@ function makeShape(outline,random) {
 export function createPastryRecipes(seed = 0) {
   return OUTLINES.map((outline, index) => {
     const level = index + 1, random = randomFrom(`${seed}:pastry:${level}`);
-    const shape=makeShape(outline,random),points=shape.sourcePoints;
+    const shape=makeShape(outline,random,level<=2),points=shape.sourcePoints;
     const recipe = { level,...shape,chips: [], strawberries: [], cream: [], chocolate: null, crumbs: [] };
     // Soft baked flecks add texture without obscuring the simple early shapes.
     recipe.crumbs = Array.from({length:6},() => ({...interiorPoint(points,random,5),radius:1.4+random()*1.8}));
+    if(level<=2) {
+      // Two unequal baked dimples point along the long edge. Their positions
+      // belong to the dough, so rotating or flipping also transforms the cue.
+      const weights=level===1?[[.69,.14,.17],[.48,.30,.22]]:[[.70,.13,.02,.15],[.46,.33,.06,.15]];
+      recipe.bakeMarks=weights.map((weights,index)=>({
+        x:points.reduce((sum,point,i)=>sum+point[0]*weights[i],0),
+        y:points.reduce((sum,point,i)=>sum+point[1]*weights[i],0),
+        radius:index===0?11:6
+      }));
+    }
     if (level === 5) {
       recipe.chips = Array.from({length:4},(_,i) => {
         const corners = [[102,99],[154,108],[146,157],[95,147]];
@@ -158,6 +190,11 @@ function drawPastry(canvas, recipe) {
   context.fillStyle=dough;context.fill();context.shadowColor='transparent';context.strokeStyle='#a6652d';context.lineWidth=3.7;context.stroke();
   context.clip();context.fillStyle='#bc762326';
   for (const crumb of recipe.crumbs) {context.beginPath();context.arc(crumb.x,crumb.y,crumb.radius,0,Math.PI*2);context.fill();}
+  for (const mark of recipe.bakeMarks??[]) {
+    context.beginPath();context.arc(mark.x,mark.y,mark.radius,0,Math.PI*2);
+    context.fillStyle='#8a4f25';context.fill();context.strokeStyle='#f7cf80';context.lineWidth=2;context.stroke();
+    context.beginPath();context.arc(mark.x-1,mark.y-1,mark.radius*.58,0,Math.PI*2);context.fillStyle='#6a391d';context.fill();
+  }
   const chocolate=recipe.chocolate;
   if (chocolate?.kind==='half') {
     context.save();context.translate(128+chocolate.offset,128);context.rotate(chocolate.tilt);
