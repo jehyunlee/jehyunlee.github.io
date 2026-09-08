@@ -177,11 +177,11 @@ export const SNACK_MENUS = {
   ]},
   jeongan: {label:'엉뚱한 마법 간식', stages:[
     {name:'초록 젤리 품은 빵',color:'#84a94a'},
-    {name:'반은 초코 반은 빵',color:'#b08048'},
+    {name:'개구리 초콜릿',color:'#80533b'},
     {name:'보랏빛 젤리 파이',color:'#a282b8'},
-    {name:'파란 별빛 초코빵',color:'#718ba5'},
+    {name:'만드라고라',color:'#80944d'},
     {name:'톡톡 캔디 초코빵',color:'#a17883'},
-    {name:'초코빵 속 무지개 젤리',color:'#a58253'},
+    {name:'모든 맛 젤리',color:'#bb79a8'},
     {name:'초록 젤리 리본 빵',color:'#98ad5c'},
     {name:'딸기 젤리 용암빵',color:'#c97870'},
     {name:'마시멜로 구름 초코빵',color:'#a18bab'},
@@ -205,10 +205,10 @@ const THEMES = {
     {material:'mint',extra:'maze'}
   ],
   jeongan: [
-    {material:'bread',extra:'window',filling:'lime'}, {material:'bread',half:'dark'},
+    {material:'bread',extra:'window',filling:'lime'}, {material:'milk',extra:'frog'},
     {material:'bread',extra:'window',filling:'grape'},
-    {material:'dark',half:'bread',extra:'stars'}, {material:'dark',extra:'fruit'},
-    {material:'bread',half:'dark',extra:'window',filling:'rainbow'},
+    {material:'bread',extra:'mandrake'}, {material:'dark',extra:'fruit'},
+    {material:'mint',extra:'beans'},
     {material:'bread',extra:'ribbon'}, {material:'bread',extra:'window',filling:'berry'},
     {material:'dark',half:'bread',extra:'pillows'}, {material:'bread',half:'dark',extra:'maze'}
   ]
@@ -219,12 +219,44 @@ export function createPastryRecipes(seed = 0, playerId = 'dad') {
   return createBakedRecipes(`${seed}:${playerId}`).map(recipe => {
     const random=randomFrom(`${seed}:${playerId}:finish:${recipe.level}`);
     const center=recipe.sourcePoints.reduce((sum,[x,y])=>[sum[0]+x/recipe.sourcePoints.length,sum[1]+y/recipe.sourcePoints.length],[0,0]);
-    return {...recipe,playerId,theme:{...THEMES[playerId][recipe.level-1],
+    const themed={...recipe,playerId,theme:{...THEMES[playerId][recipe.level-1],
       center,tilt:-.24+random()*.32,shift:(random()-.5)*10,
       bubbles:Array.from({length:recipe.level<3?2:4},()=>({...interiorPoint(recipe.sourcePoints,random,10),radius:3+random()*4})),
       flecks:Array.from({length:4},()=>({...interiorPoint(recipe.sourcePoints,random,12),angle:random()*Math.PI}))
     }};
+    return playerId==='jeongan'&&[2,4,6].includes(recipe.level)?makeMagicRecipe(themed,seed):themed;
   });
+}
+
+
+// These three storybook sweets have their own recognisable silhouettes. The
+// deliberately unequal limbs and fixed colour landmarks move with the sweet,
+// so the player can tell all eight rotations/reflections apart at belt size.
+const FROG_OUTLINE = [[63,92],[64,63],[78,49],[98,48],[108,69],[124,54],[144,58],[152,81],[148,101],[170,116],[183,132],[203,116],[224,114],[223,136],[203,159],[173,174],[171,193],[152,208],[113,204],[98,184],[81,173],[67,188],[43,188],[35,173],[56,155],[70,146],[73,124],[49,135],[31,124],[38,109],[57,111]];
+const MANDRAKE_ROOT = [[102,79],[143,82],[163,100],[162,123],[180,124],[199,148],[196,164],[182,162],[167,144],[158,158],[164,180],[191,208],[184,221],[157,207],[137,181],[128,166],[114,180],[99,218],[79,223],[72,213],[85,177],[94,161],[90,145],[70,155],[54,149],[55,136],[82,126],[87,100]];
+const BEAN_OUTLINE = [[48,59],[82,45],[103,47],[129,31],[151,36],[156,76],[184,86],[199,112],[187,145],[190,167],[192,209],[166,219],[133,202],[113,196],[89,216],[61,205],[49,178],[56,144],[44,113]];
+
+function makeMagicRecipe(recipe,seed) {
+  const random=randomFrom(`${seed}:jeongan:storybook:${recipe.level}`);
+  const outline=recipe.level===2?FROG_OUTLINE:recipe.level===4?MANDRAKE_ROOT:BEAN_OUTLINE;
+  // Keep the familiar pose and number of ingredients; small seeded stretches
+  // change each new batch without changing the stage's visual difficulty.
+  const shapeTransform=[.965+random()*.04,0,(random()-.5)*.04,.97+random()*.03];
+  const sourcePoints=outline.map(([x,y])=>[x+(random()-.5)*1.4,y+(random()-.5)*1.4]);
+  const points=sourcePoints.map(([x,y])=>[128+(x-128)*shapeTransform[0]+(y-128)*shapeTransform[2],128+(y-128)*shapeTransform[3]]);
+  const paletteOffset=Math.floor(random()*6);
+  return {...recipe,sourcePoints,points,shapeTransform,magic:{
+    glint:random()*4-2,
+    beans:[
+      {x:75,y:89,rx:27,ry:40,angle:-.36},
+      {x:129,y:67,rx:26,ry:35,angle:.42},
+      {x:167,y:120,rx:28,ry:39,angle:-.15},
+      {x:106,y:131,rx:28,ry:37,angle:.69},
+      {x:78,y:178,rx:28,ry:36,angle:-.38},
+      {x:162,y:184,rx:28,ry:39,angle:.53}
+    ].map((bean,index)=>({...bean,x:bean.x+(random()-.5)*3,y:bean.y+(random()-.5)*3,
+      angle:bean.angle+(random()-.5)*.12,palette:(index+paletteOffset)%6}))
+  }};
 }
 
 function pastryPath(context, points) {
@@ -368,7 +400,132 @@ function magicStar(context,x,y,color,size=10) {
   context.closePath();context.fillStyle=color;context.fill();context.lineWidth=1.5;context.strokeStyle='#70557b';context.stroke();
 }
 
+
+function candyEllipse(context,x,y,rx,ry,fill,stroke,width=3,angle=0) {
+  context.beginPath();context.ellipse(x,y,rx,ry,angle,0,Math.PI*2);
+  context.fillStyle=fill;context.fill();
+  if(stroke){context.strokeStyle=stroke;context.lineWidth=width;context.stroke();}
+}
+
+function drawChocolateFrog(context,recipe) {
+  surface(context,recipe,'milk',true);
+  context.save();pastryPath(context,recipe.sourcePoints);context.clip();
+  // Moulded haunches, one outstretched foot, and an off-centre face make a
+  // chocolate frog whose left and right sides are visibly different.
+  const belly=context.createLinearGradient(97,115,160,197);
+  belly.addColorStop(0,'#c28c65');belly.addColorStop(.55,'#a16b49');belly.addColorStop(1,'#79503b');
+  candyEllipse(context,129,155,36,42,belly,'#5d392c',3,-.22);
+  candyEllipse(context,151,167,20,29,'#976447','#553529',4,.2);
+  drawStroke(context,[[144,192],[156,178],[162,160]],'#d6a279',4);
+  drawStroke(context,[[94,147],[87,163],[64,177],[47,178]],'#543229',5);
+  drawStroke(context,[[72,117],[57,122],[40,119]],'#523027',5);
+  drawStroke(context,[[173,147],[191,145],[211,127]],'#583429',5);
+  drawStroke(context,[[82,129],[92,140],[105,155]],'#e0ad7e',5);
+  drawStroke(context,[[203,130],[211,123]],'#e7b883',4);
+  drawStroke(context,[[206,138],[216,131]],'#e7b883',3);
+  // Pale chocolate eyes stay large enough to read on a 64-pixel sweet.
+  candyEllipse(context,83,73,15,17,'#f4dbac','#55332b',3,-.08);
+  candyEllipse(context,133,77,14,15,'#f7dfb3','#55332b',3,.12);
+  candyEllipse(context,85,76,6,8,'#40251e');
+  candyEllipse(context,129,79,6,7,'#40251e');
+  candyEllipse(context,83,73,2.3,2.3,'#fff8de');
+  candyEllipse(context,127,76,2,2,'#fff8de');
+  drawStroke(context,[[87,99],[107,119],[135,100]],'#47271f',6);
+  drawStroke(context,[[94,106],[112,117],[128,109]],'#dfac79',2.5);
+  candyEllipse(context,108,95,2.5,2.5,'#523027');
+  candyEllipse(context,119,94,2.5,2.5,'#523027');
+  // A single gold chocolate button is a second, simple reflection landmark.
+  candyEllipse(context,116,158+recipe.magic.glint,8,8,'#f6d486','#7a4829',2);
+  drawStroke(context,[[72,59],[84,55],[95,59]],'#e7b988',4);
+  context.restore();
+}
+
+function mandrakeLeaf(context,base,tip,width,color) {
+  const [x,y]=base,[tx,ty]=tip,dx=tx-x,dy=ty-y,length=Math.hypot(dx,dy);
+  const nx=-dy/length*width,ny=dx/length*width;
+  context.beginPath();context.moveTo(x,y);
+  context.bezierCurveTo(x+dx*.22+nx,y+dy*.22+ny,tx+nx*.38,ty+ny*.38,tx,ty);
+  context.bezierCurveTo(tx-nx*.6,ty-ny*.6,x+dx*.4-nx,y+dy*.4-ny,x,y);
+  context.fillStyle=color;context.fill();context.strokeStyle='#3f642c';context.lineWidth=3;context.stroke();
+  drawStroke(context,[[x,y],[x+dx*.58,y+dy*.58],[tx,ty]],'#b0d46a',3);
+}
+
+function drawMandrake(context,recipe) {
+  context.save();context.shadowColor='#3f3d2840';context.shadowBlur=5;context.shadowOffsetY=4;
+  mandrakeLeaf(context,[124,92],[65,30],22,'#78aa49');
+  mandrakeLeaf(context,[125,91],[143,23],19,'#90b852');
+  mandrakeLeaf(context,[130,94],[193,53],25,'#5f943d');
+  context.restore();
+  drawStroke(context,[[123,108],[126,78],[141,43]],'#557c33',8);
+  surface(context,recipe,'bread',true);
+  context.save();pastryPath(context,recipe.sourcePoints);context.clip();
+  // Golden marzipan/biscuit root, with a face and uneven branching legs.
+  const cheek=context.createRadialGradient(111,112,2,122,120,45);
+  cheek.addColorStop(0,'#ffe9b6');cheek.addColorStop(1,'#f1c78000');
+  candyEllipse(context,125,123,34,38,cheek);
+  drawStroke(context,[[94,104],[104,98],[113,101]],'#714b2c',4);
+  drawStroke(context,[[135,101],[145,104],[151,111]],'#714b2c',4);
+  candyEllipse(context,106,115,6,8,'#4e3624');
+  candyEllipse(context,142,117,5,7,'#4e3624');
+  candyEllipse(context,104,112,1.8,2,'#fff5d7');
+  candyEllipse(context,140,114,1.6,1.9,'#fff5d7');
+  candyEllipse(context,125,137,12,16,'#60392b','#a76b39',2,-.14);
+  candyEllipse(context,126,144,7,5,'#d99273',null,0,-.14);
+  drawStroke(context,[[115,163],[106,184],[88,211]],'#a16b39',4);
+  drawStroke(context,[[142,163],[153,182],[178,208]],'#a16b39',4);
+  drawStroke(context,[[160,132],[177,139],[187,152]],'#b58043',4);
+  drawStroke(context,[[92,136],[77,143],[64,145]],'#b58043',3);
+  drawStroke(context,[[98,155],[107,159]],'#b78146',3);
+  drawStroke(context,[[147,153],[156,151]],'#b78146',3);
+  drawStroke(context,[[121,92],[116,98]],'#b78146',3);
+  // One small sugar leaf on the left shoulder is deliberately unmatched.
+  mandrakeLeaf(context,[93,127],[82,103],9,'#8eb35a');
+  context.restore();
+}
+
+const BEAN_PALETTES = [
+  ['#ffd0de','#ed6a9e','#b62f68','#90234f'],
+  ['#eeffa9','#9dcd51','#508e3c','#3c692f'],
+  ['#e7cbff','#aa79d4','#684490','#543474'],
+  ['#ffe7a1','#efae48','#b96725','#8f511f'],
+  ['#c4f7ff','#63bed9','#357baf','#2a648c'],
+  ['#fff7df','#dac293','#a58b62','#816846']
+];
+
+function drawJellyBean(context,bean,index) {
+  const [highlight,mid,shade,outline]=BEAN_PALETTES[bean.palette];
+  context.save();context.translate(bean.x,bean.y);context.rotate(bean.angle);
+  const {rx,ry}=bean;
+  context.beginPath();context.moveTo(-rx*.72,-ry*.7);
+  context.bezierCurveTo(-rx*1.32,-ry*.14,-rx*.87,ry*.86,-rx*.12,ry);
+  context.bezierCurveTo(rx*.66,ry*1.04,rx*1.1,ry*.42,rx*.61,ry*.04);
+  context.bezierCurveTo(rx*.23,-ry*.22,rx*.91,-ry*.57,rx*.5,-ry*.85);
+  context.bezierCurveTo(rx*.16,-ry*1.1,-rx*.44,-ry*1.01,-rx*.72,-ry*.7);
+  context.closePath();
+  const glaze=context.createLinearGradient(-rx,-ry,rx,ry);
+  glaze.addColorStop(0,highlight);glaze.addColorStop(.48,mid);glaze.addColorStop(1,shade);
+  context.shadowColor='#41324155';context.shadowBlur=5;context.shadowOffsetY=4;
+  context.fillStyle=glaze;context.fill();context.shadowColor='transparent';
+  context.strokeStyle=outline;context.lineWidth=3.5;context.stroke();context.clip();
+  drawStroke(context,[[-rx*.46,-ry*.66],[-rx*.64,-ry*.26],[-rx*.52,ry*.12]],'#ffffffb8',6);
+  if(index===1||index===5)for(const [x,y,r] of [[-4,10,4],[10,-15,5],[-10,-16,3],[6,24,3]]){
+    candyEllipse(context,x,y,r,r,bean.palette===5?'#88613caa':'#fff7d0bb');
+  }
+  if(index===3)drawStroke(context,[[-rx,ry*.15],[0,ry*.36],[rx,ry*.12]],'#fff3c9a8',6);
+  context.restore();
+}
+
+function drawMagicPastry(canvas,recipe) {
+  const context=canvas.getContext('2d');
+  context.save();context.translate(128,128);context.transform(...recipe.shapeTransform,0,0);context.translate(-128,-128);
+  if(recipe.level===2)drawChocolateFrog(context,recipe);
+  else if(recipe.level===4)drawMandrake(context,recipe);
+  else recipe.magic.beans.forEach((bean,index)=>drawJellyBean(context,bean,index));
+  context.restore();
+}
+
 function drawThemedPastry(canvas,recipe) {
+  if(recipe.magic){drawMagicPastry(canvas,recipe);return;}
   const context=canvas.getContext('2d'),theme=recipe.theme,{material,extra}=theme;
   context.save();context.translate(128,128);context.transform(...recipe.shapeTransform,0,0);context.translate(-128,-128);
   surface(context,recipe,material,true);

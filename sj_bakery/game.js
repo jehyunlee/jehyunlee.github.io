@@ -1,6 +1,6 @@
 import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=family-snacks-4';
 import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
-import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=family-snacks-4';
+import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=jeongan-magic-5';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
 const $=id=>document.getElementById(id);
@@ -25,7 +25,7 @@ function loadImage(name,path){return new Promise((resolve,reject)=>{const img=ne
 async function loadAssets(){
  if(assetsLoading)return;assetsLoading=true;assetError=false;refreshSelection();$('help-button').disabled=true;
  try{
-  await Promise.all([loadImage('background','./assets/bakery-background.webp'),loadImage('characters','./assets/bakery-characters.webp'),loadImage('family','./assets/family-characters.png')]);
+  await Promise.all([loadImage('background','./assets/bakery-background.webp'),loadImage('characters','./assets/bakery-characters.webp'),loadImage('family','./assets/family-characters.png'),loadImage('jeonganHappy','./assets/jeongan-happy.webp').catch(()=>{})]);
   cookieTiles=createPastryTiles('bakery-preview',selectedPlayer?.id??'dad');
   prepareFamilyFrames();loaded=true;assetsLoading=false;$('help-button').disabled=false;refreshSelection();
   drawLettering();
@@ -39,6 +39,15 @@ function prepareFamilyFrames(){
   const cell=document.createElement('canvas');cell.width=right-sx;cell.height=bottom-sy;const c=cell.getContext('2d',{willReadFrequently:true});c.drawImage(art.family,sx,sy,cell.width,cell.height,0,0,cell.width,cell.height);
   const pixels=c.getImageData(0,0,cell.width,cell.height);keySpriteMatte(pixels.data,cell.width,cell.height);c.putImageData(pixels,0,0);return cell;
  });
+ // The original Jeongan celebration contains tears; replace only that pose.
+ const jeongan=getPlayer('jeongan'),happyIndex=POSES.happy*PLAYERS.length+jeongan.column;
+ familyFrames[happyIndex]=familyFrames[jeongan.column];
+ if(art.jeonganHappy){
+  const cell=document.createElement('canvas');cell.width=863;cell.height=1206;
+  const c=cell.getContext('2d',{willReadFrequently:true});c.drawImage(art.jeonganHappy,198,18,863,1206,0,0,863,1206);
+  const pixels=c.getImageData(0,0,cell.width,cell.height);keySpriteMatte(pixels.data,cell.width,cell.height);c.putImageData(pixels,0,0);
+  familyFrames[happyIndex]=cell;
+ }
 }
 function refreshSelection(){
  const button=$('start-button'),note=$('load-note');if(!button)return;
@@ -52,7 +61,7 @@ function refreshSelection(){
  }
  $('player-caption').textContent=selectedPlayer?`${selectedPlayer.name}의 달콤한 도전`:'조금 삐뚤어도, 맛있을 거야!';
 }
-function selectPlayer(id){const player=getPlayer(id);if(!loaded||game.phase!=='ready'||!player||helpOpen)return;selectedPlayer=player;cookieTiles=createPastryTiles('bakery-preview',player.id);refreshSelection();drawLettering();updateHud(true);$('announcer').textContent=`${player.name} 선택. ${SNACK_MENUS[player.id]?.label??'버터 과자'}를 포장해요. 시작 버튼을 눌러 주세요.`;}
+function selectPlayer(id){const player=getPlayer(id);if(!loaded||game.phase!=='ready'||!player||helpOpen)return;selectedPlayer=player;cookieTiles=createPastryTiles('bakery-preview',player.id);refreshSelection();drawLettering();updateHud(true);$('announcer').textContent=`${player.name} 선택. 포장할 간식: ${SNACK_MENUS[player.id]?.label??'버터 과자'}. 시작 버튼을 눌러 주세요.`;}
 function showCharacterSelection(){
  document.querySelector('.bakery-app').classList.remove('game-started');fullscreenModalOpen=false;fullscreenModalBackup=null;game.reset();selectedPlayer=null;paused=false;helpOpen=false;expression='neutral';expressionUntil=0;transitionTime=0;$('scene-feedback').textContent='';
  if(loaded)cookieTiles=createPastryTiles('bakery-preview','dad');
