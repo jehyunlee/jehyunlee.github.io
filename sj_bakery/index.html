@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#743a32">
 <meta name="description" content="갓 구운 과자를 돌리고 뒤집어 상자에 쏙! PC와 모바일에서 즐기는 10개 스테이지 베이커리 퍼즐 게임.">
-<title>엉뚱한 제과점</title><link rel="stylesheet" href="./style.css?v=ready-five-3">
+<title>엉뚱한 제과점</title><link rel="stylesheet" href="./style.css?v=family-snacks-4">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='51' font-size='52'%3E🍪%3C/text%3E%3C/svg%3E">
 </head>
 <body><main class="bakery-app">
@@ -20,9 +20,9 @@
 </div>
 <div class="play-surface">
 <div class="side-controls side-controls-left" role="group" aria-label="과자 뒤집기">
-<button class="side-key" data-action="up" aria-label="위로 뒤집기"><span class="side-key-icon" aria-hidden="true">↑</span><span>위로 뒤집기</span></button>
+<button class="side-key" data-action="up" aria-label="위아래 뒤집기"><span class="side-key-icon" aria-hidden="true">↑</span><span>위로 뒤집기</span></button>
 <div class="preview-item"><span class="control-label" id="current-cookie-label">지금 내 과자</span><div class="cookie-swatch current-swatch"><canvas id="current-cookie" width="180" height="180" aria-label="현재 과자 모양"></canvas><span id="match-badge">돌려 주세요</span></div></div>
-<button class="side-key" data-action="down" aria-label="아래로 뒤집기"><span class="side-key-icon" aria-hidden="true">↓</span><span>아래로 뒤집기</span></button>
+<button class="side-key" data-action="down" aria-label="좌우 뒤집기"><span class="side-key-icon" aria-hidden="true">↔</span><span>좌우 뒤집기</span></button>
 </div>
 <div class="scene-wrap choosing-player">
 <div class="scene-stage">
@@ -42,15 +42,15 @@
 <div class="overlay" id="overlay"><div class="modal-card character-select" id="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
 <div class="small-stamp">우리 가족의 엉뚱한 제과점</div><h2 id="modal-title">누가 과자를 구울까요?</h2>
 <fieldset class="family-options"><legend class="sr-only">플레이할 이름을 선택하세요</legend>
-<label class="family-option"><input type="radio" name="player" value="dad" disabled><span class="family-option-card"><canvas data-portrait="dad" width="160" height="160" aria-hidden="true"></canvas><strong>아빠</strong><span class="family-check" aria-hidden="true">✓</span></span></label>
-<label class="family-option"><input type="radio" name="player" value="mom" disabled><span class="family-option-card"><canvas data-portrait="mom" width="160" height="160" aria-hidden="true"></canvas><strong>엄마</strong><span class="family-check" aria-hidden="true">✓</span></span></label>
-<label class="family-option"><input type="radio" name="player" value="suan" disabled><span class="family-option-card"><canvas data-portrait="suan" width="160" height="160" aria-hidden="true"></canvas><strong>수안</strong><span class="family-check" aria-hidden="true">✓</span></span></label>
-<label class="family-option"><input type="radio" name="player" value="jeongan" disabled><span class="family-option-card"><canvas data-portrait="jeongan" width="160" height="160" aria-hidden="true"></canvas><strong>정안</strong><span class="family-check" aria-hidden="true">✓</span></span></label>
+<label class="family-option"><input type="radio" name="player" value="dad" disabled><span class="family-option-card"><canvas data-portrait="dad" width="160" height="160" aria-hidden="true"></canvas><span class="family-option-name"><strong>아빠</strong><small>버터 과자</small></span><span class="family-check" aria-hidden="true">✓</span></span></label>
+<label class="family-option"><input type="radio" name="player" value="mom" disabled><span class="family-option-card"><canvas data-portrait="mom" width="160" height="160" aria-hidden="true"></canvas><span class="family-option-name"><strong>엄마</strong><small>캐러멜·초콜릿</small></span><span class="family-check" aria-hidden="true">✓</span></span></label>
+<label class="family-option"><input type="radio" name="player" value="suan" disabled><span class="family-option-card"><canvas data-portrait="suan" width="160" height="160" aria-hidden="true"></canvas><span class="family-option-name"><strong>수안</strong><small>젤리·마시멜로</small></span><span class="family-check" aria-hidden="true">✓</span></span></label>
+<label class="family-option"><input type="radio" name="player" value="jeongan" disabled><span class="family-option-card"><canvas data-portrait="jeongan" width="160" height="160" aria-hidden="true"></canvas><span class="family-option-name"><strong>정안</strong><small>마법 간식</small></span><span class="family-check" aria-hidden="true">✓</span></span></label>
 </fieldset>
 <button class="primary-button" id="start-button" disabled>이름을 선택해 주세요</button><span class="start-note" id="load-note">함께할 가족을 불러오고 있어요…</span>
 </div></div>
 </section>
 <p class="orientation-hint">게임은 가로 · 전체화면으로 진행돼요. 시작 버튼을 눌러 주세요.</p>
-<footer class="page-footer"><span><b>HOW TO PLAY</b> ← → 회전 <i>·</i> ↑ ↓ 뒤집기 <i>·</i> P 일시정지</span><span>작은 과자 하나, 커다란 행복 <span class="footer-flower">✿</span></span></footer>
+<footer class="page-footer"><span><b>HOW TO PLAY</b> ← → 회전 <i>·</i> ↑ 위아래 <i>·</i> ↓ 좌우 뒤집기 <i>·</i> P 일시정지</span><span>작은 과자 하나, 커다란 행복 <span class="footer-flower">✿</span></span></footer>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
-</main><script type="module" src="./game.js?v=ready-five-3"></script></body></html>
+</main><script type="module" src="./game.js?v=family-snacks-4"></script></body></html>

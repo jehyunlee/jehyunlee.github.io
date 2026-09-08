@@ -23,7 +23,8 @@ export const mod4=n=>((n%4)+4)%4;
 export function transform(o,action){
  if(action==='left')return {rotation:mod4(o.rotation-1),flipped:o.flipped};
  if(action==='right')return {rotation:mod4(o.rotation+1),flipped:o.flipped};
- if(action==='up'||action==='down')return {rotation:mod4(-o.rotation),flipped:!o.flipped};
+ if(action==='up')return {rotation:mod4(-o.rotation),flipped:!o.flipped};
+ if(action==='down')return {rotation:mod4(2-o.rotation),flipped:!o.flipped};
  return {...o};
 }
 export const isCorrect=o=>o.rotation===0&&!o.flipped;

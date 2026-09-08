@@ -1,6 +1,6 @@
-import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=ready-five-3';
-import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=ready-five-3';
-import {createPastryTiles} from './pastries.js?v=ready-five-3';
+import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=family-snacks-4';
+import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
+import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=family-snacks-4';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
 const $=id=>document.getElementById(id);
@@ -15,6 +15,8 @@ const art={},crop=[[140,32,302,459],[613,31,307,460],[1112,33,304,458],[139,538,
 let loaded=false,paused=false,helpOpen=false,transitionTime=0,clock=0,lastFrame=0,lastHud=-1,expression='neutral',expressionUntil=0,soundEnabled=false,audioCtx=null,returnFocus=null;
 let cookieTiles=[],letteringStage=0;
 let selectedPlayer=null,assetsLoading=false,assetError=false,familyFrames=[];
+const playerStages=()=>SNACK_MENUS[selectedPlayer?.id]?.stages??STAGES;
+const stageDetails=()=>playerStages()[game.stage-1];
 const selectionHTML=$('modal-card').innerHTML;
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const demoCookies=[{id:0,arrival:0,rotation:1,flipped:false},{id:1,arrival:2,rotation:3,flipped:true},{id:2,arrival:4,rotation:2,flipped:false}];
@@ -24,7 +26,7 @@ async function loadAssets(){
  if(assetsLoading)return;assetsLoading=true;assetError=false;refreshSelection();$('help-button').disabled=true;
  try{
   await Promise.all([loadImage('background','./assets/bakery-background.webp'),loadImage('characters','./assets/bakery-characters.webp'),loadImage('family','./assets/family-characters.png')]);
-  cookieTiles=createPastryTiles('bakery-preview');
+  cookieTiles=createPastryTiles('bakery-preview',selectedPlayer?.id??'dad');
   prepareFamilyFrames();loaded=true;assetsLoading=false;$('help-button').disabled=false;refreshSelection();
   drawLettering();
  }catch{
@@ -50,9 +52,10 @@ function refreshSelection(){
  }
  $('player-caption').textContent=selectedPlayer?`${selectedPlayer.name}의 달콤한 도전`:'조금 삐뚤어도, 맛있을 거야!';
 }
-function selectPlayer(id){const player=getPlayer(id);if(!loaded||game.phase!=='ready'||!player||helpOpen)return;selectedPlayer=player;refreshSelection();$('announcer').textContent=`${player.name} 선택. 시작 버튼을 눌러 주세요.`;}
+function selectPlayer(id){const player=getPlayer(id);if(!loaded||game.phase!=='ready'||!player||helpOpen)return;selectedPlayer=player;cookieTiles=createPastryTiles('bakery-preview',player.id);refreshSelection();drawLettering();updateHud(true);$('announcer').textContent=`${player.name} 선택. ${SNACK_MENUS[player.id]?.label??'버터 과자'}를 포장해요. 시작 버튼을 눌러 주세요.`;}
 function showCharacterSelection(){
  document.querySelector('.bakery-app').classList.remove('game-started');fullscreenModalOpen=false;fullscreenModalBackup=null;game.reset();selectedPlayer=null;paused=false;helpOpen=false;expression='neutral';expressionUntil=0;transitionTime=0;$('scene-feedback').textContent='';
+ if(loaded)cookieTiles=createPastryTiles('bakery-preview','dad');
  $('stage-intro').classList.add('hidden');$('tasting').classList.add('hidden');sceneWrap.classList.add('choosing-player');document.querySelector('.game-shell').classList.add('choosing-player');showModal(selectionHTML,'character-select');refreshSelection();updateHud(true);updateDisplayState();
 }
 function familyCharacter(c,pose,cx,bottom,height){
@@ -65,8 +68,16 @@ function cookie(c,stage,x,y,size,o={rotation:0,flipped:false},alpha=1,animate=tr
  if(!cookieTiles.length)return;c.save();c.translate(x,y);c.globalAlpha=alpha;
  let angle=o.rotation*Math.PI/2,sy=o.flipped?-1:1;
  const a=o.animation,progress=a?Math.min(1,(game.elapsed-a.at)/.14):1;
- if(animate&&a&&progress<1&&!reducedMotion){const ease=1-(1-progress)**3;if(a.action==='left'||a.action==='right'){angle=(a.fromRotation+(a.action==='left'?-1:1)*ease)*Math.PI/2;sy=a.fromFlipped?-1:1;}else{angle=(progress<.5?a.fromRotation:o.rotation)*Math.PI/2;sy=(progress<.5?(a.fromFlipped?-1:1):(o.flipped?-1:1))*Math.max(.08,Math.abs(Math.cos(Math.PI*progress)));}}
- if(animate&&a&&progress<1&&!reducedMotion&&(a.action==='up'||a.action==='down'))c.translate(0,(a.action==='up'?-1:1)*Math.sin(Math.PI*progress)*size*.12);
+ if(animate&&a&&progress<1&&!reducedMotion){
+  const ease=1-(1-progress)**3;sy=a.fromFlipped?-1:1;
+  if(a.action==='left'||a.action==='right')angle=(a.fromRotation+(a.action==='left'?-1:1)*ease)*Math.PI/2;
+  else{
+   angle=a.fromRotation*Math.PI/2;
+   // Reflect the screen axis before applying the pastry's original orientation.
+   const fold=Math.cos(Math.PI*ease);
+   c.scale(a.action==='down'?fold:1,a.action==='up'?fold:1);
+  }
+ }
  c.rotate(angle);c.scale(1,sy);c.drawImage(cookieTiles[stage-1],-size/2,-size/2,size,size);c.restore();
 }
 function box(c,x,y,size=108,ghost=false,stage=game.stage){
@@ -133,10 +144,10 @@ function drawPreviews(){
 function drawLettering(){
  const c=$('stage-lettering').getContext('2d');c.clearRect(0,0,1000,190);const text=`STAGE ${game.stage}`;
  c.font='900 145px Georgia,serif';c.textAlign='center';c.textBaseline='middle';c.lineJoin='round';c.strokeStyle='#8c542e';c.lineWidth=15;c.strokeText(text,500,102);c.strokeStyle='#edbd73';c.lineWidth=7;c.strokeText(text,500,97);
- const g=c.createLinearGradient(0,20,0,170);g.addColorStop(0,'#f8d893');g.addColorStop(.55,STAGES[game.stage-1].color);g.addColorStop(1,'#b77939');c.fillStyle=g;c.fillText(text,500,97);
+ const g=c.createLinearGradient(0,20,0,170);g.addColorStop(0,'#f8d893');g.addColorStop(.55,stageDetails().color);g.addColorStop(1,'#b77939');c.fillStyle=g;c.fillText(text,500,97);
  if(cookieTiles.length){const pattern=c.createPattern(cookieTiles[game.stage-1],'repeat');c.globalAlpha=.62;c.fillStyle=pattern;c.fillText(text,500,97);c.globalAlpha=1;}
  c.save();c.globalCompositeOperation='source-atop';c.fillStyle='#7b3f24';for(let i=0;i<56;i++){const x=55+(i*113)%900,y=40+(i*37)%116;c.beginPath();c.ellipse(x,y,2.5,1.6,i,0,Math.PI*2);c.fill();}c.restore();
- $('stage-lettering').setAttribute('aria-label',`STAGE ${game.stage}`);$('intro-flavor').textContent=STAGES[game.stage-1].name;letteringStage=game.stage;
+ $('stage-lettering').setAttribute('aria-label',`STAGE ${game.stage}`);$('intro-flavor').textContent=stageDetails().name;letteringStage=game.stage;
 }
 function drawTasting(){
  const c=$('tasting-canvas').getContext('2d');c.clearRect(0,0,460,440);
@@ -145,7 +156,7 @@ function drawTasting(){
 }
 function updateHud(force=false){
  if(!force&&clock-lastHud<.07)return;lastHud=clock;
- $('stage-number').textContent=String(game.stage).padStart(2,'0');$('stage-flavor').textContent=STAGES[game.stage-1].name;
+ $('stage-number').textContent=String(game.stage).padStart(2,'0');$('stage-flavor').textContent=stageDetails().name;
  const seconds=Math.max(0,Math.ceil(STAGE_SECONDS-game.elapsed));$('time').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;$('time').classList.toggle('low-time',seconds<=10);
  $('score').textContent=game.score;$('score-fill').style.width=`${Math.min(100,game.score/PASS_SCORE*100)}%`;$('score-progress').setAttribute('aria-valuenow',Math.min(PASS_SCORE,game.score));
  [...$('hearts').children].forEach((h,i)=>h.classList.toggle('lost',i>=game.lives));$('hearts').setAttribute('aria-label',`남은 기회 ${game.lives}번`);
@@ -168,7 +179,7 @@ function startIntro(){
  // Prepare the real first pastry now, so its preview stays identical at arrival.
  game.beginStage();game.phase='intro';expression='neutral';expressionUntil=0;$('scene-feedback').textContent='';transitionTime=PREP_SECONDS;
  drawLettering();$('stage-intro').classList.remove('hidden','compact');
- $('announcer').textContent=`스테이지 ${game.stage}. ${STAGES[game.stage-1].name}. 5초 동안 첫 과자와 정답을 살펴보세요. 과자가 도착하면 60초 동안 25개를 포장하세요.`;
+ $('announcer').textContent=`스테이지 ${game.stage}. ${stageDetails().name}. 5초 동안 첫 과자와 정답을 살펴보세요. 과자가 도착하면 60초 동안 25개를 포장하세요.`;
  updateHud(true);playSound('stage');updateDisplayState();
 }
 async function newGame(){
@@ -177,20 +188,20 @@ async function newGame(){
  try{await enterGameDisplay();}finally{displayPending=false;lastFrame=0;}
  if(!isGameFullscreen()){document.querySelector('.bakery-app').classList.remove('game-started');showFullscreenGate();return;}
  fullscreenModalOpen=false;fullscreenModalBackup=null;
- cookieTiles=createPastryTiles(globalThis.crypto?.randomUUID?.()??`${Date.now()}-${Math.random()}`);
+ cookieTiles=createPastryTiles(globalThis.crypto?.randomUUID?.()??`${Date.now()}-${Math.random()}`,selectedPlayer.id);
  game.reset();sceneWrap.classList.remove('choosing-player');document.querySelector('.game-shell').classList.remove('choosing-player');startIntro();updateDisplayState();
 }
 function togglePause(){if(!['playing','intro','tasting'].includes(game.phase)||helpOpen||fullscreenBlocked)return;if(paused){paused=false;hideModal();$('pause-button').setAttribute('aria-label','일시정지');return;}paused=true;returnFocus=document.activeElement;$('pause-button').setAttribute('aria-label','계속하기');showModal('<div class="small-stamp">잠깐 쉬어 가요</div><h2 id="modal-title">오븐도 잠깐 휴식!</h2><p>시간과 컨베이어가 멈췄어요.<br>준비되면 이어서 포장해 주세요.</p><button class="primary-button" id="resume-button">계속하기 →</button>');}
 function showHelp(){
  if(helpOpen||fullscreenBlocked)return;helpOpen=true;const wasPaused=paused;paused=true;returnFocus=document.activeElement;const previous=$('modal-card').innerHTML;const previousClass=$('modal-card').className;const wasHidden=$('overlay').classList.contains('hidden');
- showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>가로 · 전체화면에서 진행해요. 새 게임마다 <b>단계 난이도는 같고 과자 모양은 달라져요.</b></li><li>스테이지마다 <b>5초 준비 시간</b>이 있어요. 첫 과자가 다가오는 동안 정답을 살펴보세요. 도착하면 60초가 시작돼요.</li><li>초록 타일 위 <b>작업 구역</b>에 들어온 과자를 조작해요.</li><li><b>← →</b>는 90도 회전, <b>↑ ↓</b>는 위로 / 아래로 뒤집기예요. 두 뒤집기는 움직이는 방향이 다르고 마지막 모양은 같아요.</li><li>휴대폰을 <b>가로로</b> 돌리면 왼쪽은 위·아래 뒤집기, 오른쪽 위는 반시계, 아래는 시계 회전 버튼이에요.</li><li><b>상자 속 정답</b>과 모양·장식을 맞추면 자동으로 포장돼요. 제한 시간은 <b>2초</b>!</li><li>초록 O는 성공, 빨간 X는 실패. 1분 동안 <b>30개 중 25개</b> 이상 성공하면 다음 단계로 가요.</li><li>스테이지 실패 시 하트 하나를 잃고 재도전해요. <b>하트 3개, 총 10단계</b>에 도전해 보세요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
+ showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>가로 · 전체화면에서 진행해요. 새 게임마다 <b>단계 난이도는 같고 과자 모양은 달라져요.</b></li><li>아빠는 버터 과자, 엄마는 캐러멜·초콜릿, 수안은 젤리·마시멜로, 정안은 엉뚱한 마법 간식을 포장해요.</li><li>스테이지마다 <b>5초 준비 시간</b>이 있어요. 첫 과자가 다가오는 동안 정답을 살펴보세요. 도착하면 60초가 시작돼요.</li><li>초록 타일 위 <b>작업 구역</b>에 들어온 과자를 조작해요.</li><li><b>← →</b>는 90도 회전, <b>↑</b>는 위아래 뒤집기, <b>↓</b>는 좌우 뒤집기예요.</li><li>휴대폰을 <b>가로로</b> 돌리면 왼쪽 위는 위아래 뒤집기, 왼쪽 아래는 좌우 뒤집기예요. 오른쪽 위는 반시계, 아래는 시계 회전 버튼이에요.</li><li><b>상자 속 정답</b>과 모양·장식을 맞추면 자동으로 포장돼요. 제한 시간은 <b>2초</b>!</li><li>초록 O는 성공, 빨간 X는 실패. 1분 동안 <b>30개 중 25개</b> 이상 성공하면 다음 단계로 가요.</li><li>스테이지 실패 시 하트 하나를 잃고 재도전해요. <b>하트 3개, 총 10단계</b>에 도전해 보세요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
  $('close-help').onclick=()=>{helpOpen=false;paused=wasPaused;$('modal-card').innerHTML=previous;$('modal-card').className=previousClass;if(wasHidden)hideModal();refreshSelection();if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});else $('modal-card').querySelector('input:checked,input:not([disabled]),button:not([disabled])')?.focus({preventScroll:true});};
 }
 function showRetry(){showModal(`<div class="small-stamp">다시 구우면 더 맛있어질 거예요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 포장 성공<br>25개까지 ${25-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>같은 스테이지에 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
 function showResults(){
  $('tasting').classList.add('hidden');$('stage-intro').classList.add('hidden');
  const allClear=game.phase==='complete',sum=game.history.reduce((s,r)=>s+r.success,0),total=game.history.reduce((s,r)=>s+r.total,0),cleared=game.history.filter(r=>r.passed).length;
- const rows=STAGES.map((s,i)=>{const attempts=game.history.filter(h=>h.stage===i+1);if(!attempts.length)return `<tr><td>${String(i+1).padStart(2,'0')} · ${s.name}</td><td>—</td><td>미도전</td></tr>`;return attempts.map(r=>`<tr><td>${String(i+1).padStart(2,'0')} · ${s.name}${r.attempt>1?` (${r.attempt}차)`:''}</td><td>${r.success} / ${r.total}</td><td class="${r.passed?'result-clear':'result-fail'}">${r.passed?'성공':'실패'}</td></tr>`).join('');}).join('');
+ const rows=playerStages().map((s,i)=>{const attempts=game.history.filter(h=>h.stage===i+1);if(!attempts.length)return `<tr><td>${String(i+1).padStart(2,'0')} · ${s.name}</td><td>—</td><td>미도전</td></tr>`;return attempts.map(r=>`<tr><td>${String(i+1).padStart(2,'0')} · ${s.name}${r.attempt>1?` (${r.attempt}차)`:''}</td><td>${r.success} / ${r.total}</td><td class="${r.passed?'result-clear':'result-fail'}">${r.passed?'성공':'실패'}</td></tr>`).join('');}).join('');
  showModal(`<div class="small-stamp">${selectedPlayer.name}의 제과점 영업 기록</div><h2 id="modal-title">${allClear?'최고의 엉뚱한 제과장!':'오늘도 수고했어요!'}</h2><p>${allClear?'10개 스테이지를 모두 완성했어요. 달콤한 대성공!':'하트를 모두 사용했어요. 다음에는 더 잘할 수 있어요.'}</p><div class="results-summary"><span><b>${sum}/${total}</b>개 성공</span><span><b>${cleared}/10</b>단계 완료</span></div><div class="results-table-wrap" tabindex="0" aria-label="스테이지별 전체 기록"><table class="results-table"><thead><tr><th>스테이지</th><th>성공 / 전체</th><th>결과</th></tr></thead><tbody>${rows}</tbody></table></div><button class="primary-button" id="restart-button">가족을 선택하고 다시 굽기 →</button>`,'results-card');
  $('announcer').textContent=`게임 종료. ${total}개 중 ${sum}개 포장 성공, ${cleared}개 스테이지 완료.`;
 }
