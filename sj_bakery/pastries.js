@@ -179,13 +179,13 @@ export const SNACK_MENUS = {
     {name:'초록 젤리 품은 빵',color:'#84a94a'},
     {name:'개구리 초콜릿',color:'#80533b'},
     {name:'보랏빛 젤리 파이',color:'#a282b8'},
-    {name:'만드라고라',color:'#80944d'},
+    {name:'맨드레이크',color:'#80944d'},
     {name:'톡톡 캔디 초코빵',color:'#a17883'},
     {name:'모든 맛 젤리',color:'#bb79a8'},
     {name:'초록 젤리 리본 빵',color:'#98ad5c'},
-    {name:'딸기 젤리 용암빵',color:'#c97870'},
+    {name:'마법빗자루',color:'#b88343'},
     {name:'마시멜로 구름 초코빵',color:'#a18bab'},
-    {name:'엉뚱한 마법 간식 미로',color:'#9c82b4'}
+    {name:'골든스니치',color:'#c99b38'}
   ]}
 };
 
@@ -209,8 +209,8 @@ const THEMES = {
     {material:'bread',extra:'window',filling:'grape'},
     {material:'bread',extra:'mandrake'}, {material:'dark',extra:'fruit'},
     {material:'mint',extra:'beans'},
-    {material:'bread',extra:'ribbon'}, {material:'bread',extra:'window',filling:'berry'},
-    {material:'dark',half:'bread',extra:'pillows'}, {material:'bread',half:'dark',extra:'maze'}
+    {material:'bread',extra:'ribbon'}, {material:'caramel',extra:'broom'},
+    {material:'dark',half:'bread',extra:'pillows'}, {material:'caramel',extra:'snitch'}
   ]
 };
 
@@ -224,21 +224,23 @@ export function createPastryRecipes(seed = 0, playerId = 'dad') {
       bubbles:Array.from({length:recipe.level<3?2:4},()=>({...interiorPoint(recipe.sourcePoints,random,10),radius:3+random()*4})),
       flecks:Array.from({length:4},()=>({...interiorPoint(recipe.sourcePoints,random,12),angle:random()*Math.PI}))
     }};
-    return playerId==='jeongan'&&[2,4,6].includes(recipe.level)?makeMagicRecipe(themed,seed):themed;
+    return playerId==='jeongan'&&[2,4,6,8,10].includes(recipe.level)?makeMagicRecipe(themed,seed):themed;
   });
 }
 
 
-// These three storybook sweets have their own recognisable silhouettes. The
+// These storybook sweets have their own recognisable silhouettes. The
 // deliberately unequal limbs and fixed colour landmarks move with the sweet,
 // so the player can tell all eight rotations/reflections apart at belt size.
 const FROG_OUTLINE = [[63,92],[64,63],[78,49],[98,48],[108,69],[124,54],[144,58],[152,81],[148,101],[170,116],[183,132],[203,116],[224,114],[223,136],[203,159],[173,174],[171,193],[152,208],[113,204],[98,184],[81,173],[67,188],[43,188],[35,173],[56,155],[70,146],[73,124],[49,135],[31,124],[38,109],[57,111]];
 const MANDRAKE_ROOT = [[102,79],[143,82],[163,100],[162,123],[180,124],[199,148],[196,164],[182,162],[167,144],[158,158],[164,180],[191,208],[184,221],[157,207],[137,181],[128,166],[114,180],[99,218],[79,223],[72,213],[85,177],[94,161],[90,145],[70,155],[54,149],[55,136],[82,126],[87,100]];
 const BEAN_OUTLINE = [[48,59],[82,45],[103,47],[129,31],[151,36],[156,76],[184,86],[199,112],[187,145],[190,167],[192,209],[166,219],[133,202],[113,196],[89,216],[61,205],[49,178],[56,144],[44,113]];
+const BROOM_OUTLINE = [[74,40],[79,29],[96,27],[108,39],[110,61],[105,78],[119,109],[143,137],[167,146],[197,176],[217,203],[197,207],[183,223],[157,215],[140,229],[119,216],[101,222],[85,207],[95,182],[102,161],[113,145],[96,118],[83,88],[82,70],[88,51],[86,45]];
+const SNITCH_OUTLINE = [[99,128],[74,118],[55,96],[37,66],[24,34],[48,54],[55,31],[74,65],[83,53],[99,84],[109,106],[128,102],[151,108],[166,128],[187,102],[209,87],[231,76],[216,105],[232,99],[216,128],[229,128],[203,150],[169,152],[162,176],[144,190],[121,193],[98,182],[83,162],[81,144]];
 
 function makeMagicRecipe(recipe,seed) {
   const random=randomFrom(`${seed}:jeongan:storybook:${recipe.level}`);
-  const outline=recipe.level===2?FROG_OUTLINE:recipe.level===4?MANDRAKE_ROOT:BEAN_OUTLINE;
+  const outline=({2:FROG_OUTLINE,4:MANDRAKE_ROOT,6:BEAN_OUTLINE,8:BROOM_OUTLINE,10:SNITCH_OUTLINE})[recipe.level];
   // Keep the familiar pose and number of ingredients; small seeded stretches
   // change each new batch without changing the stage's visual difficulty.
   const shapeTransform=[.965+random()*.04,0,(random()-.5)*.04,.97+random()*.03];
@@ -515,12 +517,117 @@ function drawJellyBean(context,bean,index) {
   context.restore();
 }
 
+function drawBroom(context,recipe) {
+  // A bent chocolate pretzel handle joins a wide caramel brush. The hooked
+  // handle, stepped bristle tips and unequal berry bow belong to the sweet;
+  // their asymmetry survives both reflections even at conveyor-belt size.
+  surface(context,recipe,'milk',true);
+  context.save();pastryPath(context,recipe.sourcePoints);context.clip();
+  drawStroke(context,[[82,37],[98,37],[101,57],[95,78],[108,110],[132,140]],'#ddb187',6);
+  drawStroke(context,[[97,50],[102,51]],'#fff2c3',3);
+  drawStroke(context,[[89,81],[99,79]],'#ffe6b2',4);
+  drawStroke(context,[[98,106],[110,102]],'#ffe6b2',4);
+  drawStroke(context,[[113,131],[124,123]],'#ffe6b2',4);
+  pastryPath(context,[[115,139],[142,135],[167,146],[199,177],[222,205],[198,210],[185,226],[157,217],[140,233],[118,219],[98,225],[82,208],[95,179],[102,158]]);
+  const caramel=context.createLinearGradient(112,145,176,224);
+  caramel.addColorStop(0,'#fff0b0');caramel.addColorStop(.38,'#eebb57');caramel.addColorStop(1,'#b57026');
+  context.fillStyle=caramel;context.fill();context.strokeStyle='#855025';context.lineWidth=4;context.stroke();
+  const strands=[
+    [[114,158],[109,181],[96,210]],
+    [[122,157],[123,187],[121,217]],
+    [[130,154],[143,188],[141,226]],
+    [[138,153],[157,183],[157,212]],
+    [[147,154],[173,184],[182,219]],
+    [[153,152],[187,174],[211,202]]
+  ];
+  for(const path of strands) {
+    drawStroke(context,path,'#955523',5);
+    drawStroke(context,path.map(([x,y])=>[x-3,y-1]),'#ffe2a0',3);
+  }
+  drawStroke(context,[[105,161],[126,164],[155,151]],'#714331',17);
+  drawStroke(context,[[105,157],[126,160],[155,147]],'#c3769f',11);
+  drawStroke(context,[[106,154],[126,157],[154,144]],'#f4c3d3',3);
+  // Three fixed sugar seeds and a single star vary in sheen with the seed.
+  for(const [x,y,angle] of [[148,184,.3],[171,201,-.4],[132,201,.1]])
+    candyEllipse(context,x,y+recipe.magic.glint,2.1,4.2,'#fff4ca',null,0,angle);
+  magicStar(context,178,176,'#fff0b5',8);
+  context.restore();
+  context.save();context.shadowColor='#55344740';context.shadowBlur=3;context.shadowOffsetY=2;
+  pastryPath(context,[[115,154],[89,132],[78,138],[84,159],[101,167]]);
+  context.fillStyle='#b9618a';context.fill();context.strokeStyle='#754257';context.lineWidth=3;context.stroke();
+  pastryPath(context,[[120,155],[137,152],[150,163],[140,172],[126,165]]);
+  context.fillStyle='#d485ab';context.fill();context.stroke();
+  context.shadowColor='transparent';
+  drawStroke(context,[[88,142],[104,156]],'#f4c3d3',4);
+  drawStroke(context,[[129,157],[141,164]],'#f5d0df',3);
+  candyEllipse(context,118,157,8,9,'#e5a3c0','#754257',3,-.3);
+  context.restore();
+}
+
+function snitchWing(context,points,veins,left) {
+  pastryPath(context,points);
+  const sugar=context.createLinearGradient(left?35:218,55,126,155);
+  sugar.addColorStop(0,'#fffef1');sugar.addColorStop(.52,'#f6e9bb');sugar.addColorStop(1,'#c9a759');
+  context.fillStyle=sugar;context.fill();context.lineWidth=3.5;context.strokeStyle='#9a782f';context.stroke();
+  for(const path of veins){
+    drawStroke(context,path,'#b19659',3.5);
+    drawStroke(context,path.map(([x,y])=>[x-1.7,y-1]),'#fffdf0',1.8);
+  }
+}
+
+function drawGoldenSnitch(context,recipe) {
+  context.save();context.shadowColor='#69501e45';context.shadowBlur=5;context.shadowOffsetY=4;
+  // One tall swept wing and one short outstretched wing prevent a mirrored
+  // sphere from looking correct. The pale wings are moulded sugar wafers.
+  snitchWing(context,[[103,139],[76,121],[55,98],[37,67],[24,34],[47,54],[55,31],[73,65],[83,53],[99,83],[110,113]],[
+    [[99,126],[69,98],[39,52]],
+    [[83,111],[71,80],[57,47]],
+    [[95,113],[90,86],[83,67]],
+    [[70,107],[60,95],[45,86]],
+    [[97,130],[79,124],[66,116]]
+  ],true);
+  snitchWing(context,[[158,139],[186,104],[210,87],[231,76],[216,105],[232,99],[216,127],[229,128],[203,151],[174,153]],[
+    [[169,137],[192,115],[219,87]],
+    [[181,140],[204,124],[220,108]],
+    [[187,146],[205,141],[218,133]],
+    [[175,126],[190,115],[204,108]]
+  ],false);
+  context.restore();
+  const gold=context.createRadialGradient(109,125,5,126,149,55);
+  gold.addColorStop(0,'#fff5b2');gold.addColorStop(.28,'#f9d774');gold.addColorStop(.67,'#dea938');gold.addColorStop(1,'#9d6116');
+  context.save();context.shadowColor='#68431955';context.shadowBlur=6;context.shadowOffsetY=5;
+  candyEllipse(context,126,148,46,46,gold,'#886019',4);
+  context.shadowColor='transparent';
+  context.beginPath();context.arc(126,148,44,0,Math.PI*2);context.clip();
+  // Chocolate mould grooves form unequal arcs and an off-centre raised stud.
+  // They add the final stage's fine orientation cues without masking the orb.
+  const grooves=[
+    [[83,139],[105,146],[135,141],[165,119]],
+    [[82,146],[105,154],[139,150],[172,128]],
+    [[101,108],[111,125],[117,150],[112,188]],
+    [[142,108],[151,129],[157,152],[151,187]],
+    [[91,169],[119,174],[152,162],[173,148]]
+  ];
+  for(const path of grooves){
+    drawStroke(context,path,'#a87223',4);
+    drawStroke(context,path.map(([x,y])=>[x,y-2]),'#ffe49a',2);
+  }
+  candyEllipse(context,137,161+recipe.magic.glint,9,9,'#e8b444','#96651c',2);
+  candyEllipse(context,135,159+recipe.magic.glint,3,3,'#fff0ad');
+  drawStroke(context,[[97,127],[101,118],[113,114]],'#fff6cb',6);
+  candyEllipse(context,131,117,2.5,2.5,'#fff8d1');
+  for(const [x,y] of [[94,159],[102,164],[110,166]])candyEllipse(context,x,y,1.6,2.3,'#98631d');
+  context.restore();
+}
+
 function drawMagicPastry(canvas,recipe) {
   const context=canvas.getContext('2d');
   context.save();context.translate(128,128);context.transform(...recipe.shapeTransform,0,0);context.translate(-128,-128);
   if(recipe.level===2)drawChocolateFrog(context,recipe);
   else if(recipe.level===4)drawMandrake(context,recipe);
-  else recipe.magic.beans.forEach((bean,index)=>drawJellyBean(context,bean,index));
+  else if(recipe.level===6)recipe.magic.beans.forEach((bean,index)=>drawJellyBean(context,bean,index));
+  else if(recipe.level===8)drawBroom(context,recipe);
+  else drawGoldenSnitch(context,recipe);
   context.restore();
 }
 

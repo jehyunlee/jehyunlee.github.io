@@ -1,6 +1,6 @@
 import {BakeryGame,STAGES,STAGE_SECONDS,COOKIE_SECONDS,PASS_SCORE,isCorrect} from './engine.js?v=family-snacks-4';
 import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
-import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=jeongan-magic-5';
+import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=jeongan-flight-6';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
 const $=id=>document.getElementById(id);
