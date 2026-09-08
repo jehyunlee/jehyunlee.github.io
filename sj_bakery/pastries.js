@@ -150,7 +150,7 @@ function createBakedRecipes(seed = 0) {
 
 // Menus describe the actual material rendered below, including the three easy
 // introductory silhouettes. The dad route retains the original baked recipes.
-export const SNACK_MENUS = {
+const ORIGINAL_SNACK_MENUS = {
   mom: {label:'캐러멜 · 초콜릿', stages:[
     {name:'황금 캐러멜',color:'#d28a27'},
     {name:'밀크초콜릿 조각',color:'#86503e'},
@@ -189,6 +189,14 @@ export const SNACK_MENUS = {
   ]}
 };
 
+// Both children share the original Suan odd stages and Jeongan even stages.
+const CHILD_STAGE_SOURCES=Array.from({length:10},(_,index)=>index%2===0?'suan':'jeongan');
+const sharedChildMenu=()=>({
+  label:'젤리 · 마법 간식',
+  stages:CHILD_STAGE_SOURCES.map((source,index)=>({...ORIGINAL_SNACK_MENUS[source].stages[index]}))
+});
+export const SNACK_MENUS={...ORIGINAL_SNACK_MENUS,suan:sharedChildMenu(),jeongan:sharedChildMenu()};
+
 const THEMES = {
   mom: [
     {material:'caramel'}, {material:'milk'}, {material:'caramel',extra:'butterscotch'},
@@ -215,6 +223,14 @@ const THEMES = {
 };
 
 export function createPastryRecipes(seed = 0, playerId = 'dad') {
+  if(playerId==='suan'||playerId==='jeongan'){
+    const sourceRecipes={suan:createOriginalPastryRecipes(seed,'suan'),jeongan:createOriginalPastryRecipes(seed,'jeongan')};
+    return CHILD_STAGE_SOURCES.map((source,index)=>sourceRecipes[source][index]);
+  }
+  return createOriginalPastryRecipes(seed,playerId);
+}
+
+function createOriginalPastryRecipes(seed,playerId) {
   if (!THEMES[playerId]) return createBakedRecipes(seed);
   return createBakedRecipes(`${seed}:${playerId}`).map(recipe => {
     const random=randomFrom(`${seed}:${playerId}:finish:${recipe.level}`);
