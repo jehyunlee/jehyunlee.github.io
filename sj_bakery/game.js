@@ -66,9 +66,9 @@ function drawScene(){
  character(ctx,4,174,430,320);familyCharacter(ctx,pose,1070,440+bob,selectedPlayer?.height??253);
  if(selectedPlayer){const nameY=440-selectedPlayer.height-31;rounded(ctx,1024,nameY,92,27,13,'#fff7e4e8','#b98c61');ctx.font='600 17px sans-serif';ctx.textAlign='center';ctx.fillStyle='#87513b';ctx.fillText(selectedPlayer.name,1070,nameY+19);}
  rounded(ctx,38,69,282,188,18,'#fff0d5e8','#a97048');rounded(ctx,54,83,250,145,12,'#e6c59a','#a97048');
- ctx.fillStyle='#593b2c26';ctx.beginPath();ctx.ellipse(179,194,67,18,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#593b2c26';ctx.beginPath();ctx.ellipse(179,199,72,19,0,0,Math.PI*2);ctx.fill();
  const question=game.question;
- if(question&&game.phase!=='intro')cookie(ctx,game.stage,179,171,164,question.initial);
+ if(question&&game.phase!=='intro')cookie(ctx,game.stage,179,171,180,question.initial);
  ctx.font='700 17px sans-serif';ctx.fillStyle='#704633';ctx.textAlign='center';ctx.fillText(game.phase==='intro'?'첫 문제를 준비하는 중…':'처음 놓인 방향',179,281);
  if(!reducedMotion){ctx.save();for(let i=0;i<3;i++){const p=(clock*.4+i/3)%1;ctx.globalAlpha=(1-p)*.42;ctx.strokeStyle='#fff8e8';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(151+i*25,126-p*36);ctx.quadraticCurveTo(136+i*25,110-p*36,157+i*25,94-p*36);ctx.stroke();}ctx.restore();}
 }
@@ -81,7 +81,7 @@ function drawQuestion(){
  if(!question||game.phase==='intro'){clearAnswerState();$('instruction-steps').innerHTML='<span class="instruction-wait">시작하면 명령이 나타나요</span>';answerCanvases.forEach(c=>c.getContext('2d').clearRect(0,0,180,180));answerButtons.forEach(button=>button.disabled=true);return;}
  $('instruction-steps').innerHTML=question.instructions.map((action,index)=>{const label=ACTION_LABELS[action];return `<span class="instruction-step"><b>${index+1}</b><i>${label.symbol}</i><small>${label.name}</small></span>`;}).join('<em>›</em>');
  clearAnswerState();
- question.candidates.forEach((orientation,index)=>{const c=answerCanvases[index].getContext('2d');c.clearRect(0,0,180,180);cookie(c,game.stage,90,90,160,orientation);answerButtons[index].setAttribute('aria-label',`${index+1}번 상자, 과자 방향 후보`);});
+ question.candidates.forEach((orientation,index)=>{const c=answerCanvases[index].getContext('2d');c.clearRect(0,0,180,180);cookie(c,game.stage,90,90,180,orientation);answerButtons[index].setAttribute('aria-label',`${index+1}번 상자, 과자 방향 후보`);});
 }
 function showAnswerResult(question){
  const row=$('answer-row');row.classList.add('answered',question.result);if(question.result==='failure'&&question.selectedIndex===null)row.classList.add('timeout');

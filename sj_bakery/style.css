@@ -131,11 +131,12 @@
 .instruction-step b{grid-row:1 / 3;font-size:13px;color:#a76542}.instruction-step i{font-style:normal;font-size:40px;font-weight:700;line-height:1}.instruction-step small{font-size:12px;font-weight:700;white-space:nowrap}
 #instruction-steps em{font-style:normal;color:#9b6847;font-size:30px;font-weight:800}
 .instruction-wait{padding:10px 17px;border-radius:12px;background:#fff8e8ed;color:#89624c;font-size:13px}
-.answer-row{position:absolute;z-index:3;left:16%;right:16%;top:49%;bottom:2%;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:24px}
+.scene-stage{container-type:inline-size}
+.answer-row{position:absolute;z-index:3;left:20%;right:20%;top:36%;bottom:12%;display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:24px}
 .answer-row.timeout::before{content:'X  시간 끝!';position:absolute;z-index:8;left:50%;top:42%;transform:translate(-50%,-50%);padding:8px 17px;border-radius:14px;background:#fff8e9e8;color:#c34c45;font:900 30px/1.1 sans-serif;text-shadow:0 2px white;box-shadow:0 5px 15px #4c2a2340}
-.answer-box{position:relative;height:100%;min-width:0;border:0;background:transparent;padding:0 4px 7px;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;isolation:isolate;touch-action:manipulation}
+.answer-box{position:relative;height:100%;min-width:0;border:0;background:transparent;padding:0 4px 7px;display:flex;align-items:center;justify-content:center;flex-direction:column;isolation:isolate;touch-action:manipulation}
 .answer-box::after{content:'';position:absolute;inset:22% 2% 0;z-index:-1;border-radius:9px;background:linear-gradient(#efd2a5,#d5a06a);border:3px solid #9c683f;box-shadow:inset 0 0 0 7px #f8e5c3,0 5px 0 #71472e}
-.answer-box canvas{width:min(96%,180px);height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 5px 3px #57331d45);transition:transform .15s}
+.answer-box canvas{width:15cqw;height:auto;max-width:96%;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 5px 3px #57331d45);transition:transform .15s}
 .answer-box:hover canvas,.answer-box:focus-visible canvas{transform:scale(1.06)}
 .answer-box:focus-visible{outline:3px solid #3f7f86;outline-offset:2px;border-radius:12px}
 .answer-number{position:absolute;left:11px;top:24%;display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:#86533b;color:#fff8e9;font-size:16px;font-weight:800;z-index:2}
@@ -158,8 +159,8 @@
  .question-hud strong{font-size:20px}
  .puzzle-panel{inset:0}
  .instruction-panel{left:27%;right:3%;top:3%}
- .answer-row{left:15%;right:15%;top:48%;bottom:1%;height:auto;gap:clamp(12px,2.4vw,28px)}
- .answer-box canvas{width:min(94%,170px)}
+ .answer-row{left:19%;right:19%;top:35%;bottom:11%;height:auto;gap:clamp(12px,2.4vw,28px)}
+ .answer-box canvas{width:15cqw;max-width:96%}
  .answer-box::after{inset:20% 1% 0}
  .answer-caption{font-size:10px}
  .bakery-label{top:61%}
@@ -172,7 +173,7 @@
  .instruction-step{width:48px;height:48px;grid-template-columns:12px 1fr;grid-template-rows:31px 14px;padding:1px 2px;border-width:2px;border-radius:7px}
  .instruction-step i{font-size:28px}.instruction-step small{font-size:8px}.instruction-step b{font-size:9px}
  #instruction-steps em{display:none}
- .answer-row{left:14%;right:14%;top:46%;bottom:1%;height:auto;gap:10px}.answer-box canvas{width:min(88%,128px)}
+ .answer-row{left:18%;right:18%;top:34%;bottom:8%;height:auto;gap:10px}.answer-box canvas{width:15cqw;max-width:94%}
  .answer-number{width:24px;height:24px;font-size:12px;left:6px}
  .answer-box.correct::before,.answer-box.wrong::before{font-size:52px}
  .scene-feedback{font-size:22px}
