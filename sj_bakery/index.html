@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#743a32">
 <meta name="description" content="과자에 적용할 회전·뒤집기 명령을 계산해 세 상자 중 정답을 고르는 10개 스테이지 베이커리 퍼즐 게임.">
-<title>엉뚱한 제과점</title><link rel="stylesheet" href="./style.css?v=box-puzzle-9">
+<title>엉뚱한 제과점</title><link rel="stylesheet" href="./style.css?v=puzzle-layout-10">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='51' font-size='52'%3E🍪%3C/text%3E%3C/svg%3E">
 </head>
 <body><main class="bakery-app">
@@ -23,11 +23,13 @@
 <div class="scene-stage">
 <canvas id="game-canvas" width="1200" height="600" aria-label="주방장이 놓은 과자를 명령대로 움직였을 때 들어갈 상자를 고르세요."></canvas>
 <div class="scene-label bakery-label">주방장 아저씨가 대충 놓은 과자</div>
+<div class="puzzle-panel">
 <div class="instruction-panel"><span>이 순서대로 움직이면?</span><div id="instruction-steps" aria-live="polite"></div></div>
 <div class="answer-row" id="answer-row" role="group" aria-label="정답 상자 선택">
 <button class="answer-box" data-answer="0" aria-label="첫 번째 상자"><span class="answer-number">1</span><canvas width="180" height="180"></canvas><span class="answer-caption">이 상자</span></button>
 <button class="answer-box" data-answer="1" aria-label="두 번째 상자"><span class="answer-number">2</span><canvas width="180" height="180"></canvas><span class="answer-caption">이 상자</span></button>
 <button class="answer-box" data-answer="2" aria-label="세 번째 상자"><span class="answer-number">3</span><canvas width="180" height="180"></canvas><span class="answer-caption">이 상자</span></button>
+</div>
 </div>
 <div class="scene-feedback" id="scene-feedback" aria-live="polite"></div>
 <div class="stage-intro hidden" id="stage-intro"><span>마음의 준비를 해요 · <b id="prep-countdown">5</b>초 후 시작</span><canvas id="stage-lettering" width="1000" height="190" aria-label="스테이지 시작"></canvas><strong id="intro-flavor">세모 버터의 첫걸음</strong></div>
@@ -50,4 +52,4 @@
 <p class="orientation-hint">게임은 가로 · 전체화면으로 진행돼요. 시작 버튼을 눌러 주세요.</p>
 <footer class="page-footer"><span><b>HOW TO PLAY</b> 상자를 누르거나 1 · 2 · 3 키로 선택 <i>·</i> P 일시정지</span><span>작은 과자 하나, 커다란 행복 <span class="footer-flower">✿</span></span></footer>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
-</main><script type="module" src="./game.js?v=box-puzzle-9"></script></body></html>
+</main><script type="module" src="./game.js?v=puzzle-layout-10"></script></body></html>
