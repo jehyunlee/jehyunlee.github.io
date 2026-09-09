@@ -65,12 +65,12 @@ function drawScene(){
  const pose=expressionUntil>clock?(POSES[expression]??POSES.neutral):POSES.neutral,bob=reducedMotion||paused?0:Math.sin(clock*2.5)*2;
  character(ctx,4,174,430,320);familyCharacter(ctx,pose,1070,440+bob,selectedPlayer?.height??253);
  if(selectedPlayer){const nameY=440-selectedPlayer.height-31;rounded(ctx,1024,nameY,92,27,13,'#fff7e4e8','#b98c61');ctx.font='600 17px sans-serif';ctx.textAlign='center';ctx.fillStyle='#87513b';ctx.fillText(selectedPlayer.name,1070,nameY+19);}
- rounded(ctx,54,146,292,188,18,'#fff0d5e8','#a97048');rounded(ctx,70,160,260,145,12,'#e6c59a','#a97048');
- ctx.fillStyle='#593b2c26';ctx.beginPath();ctx.ellipse(200,271,64,17,0,0,Math.PI*2);ctx.fill();
+ rounded(ctx,38,69,282,188,18,'#fff0d5e8','#a97048');rounded(ctx,54,83,250,145,12,'#e6c59a','#a97048');
+ ctx.fillStyle='#593b2c26';ctx.beginPath();ctx.ellipse(179,194,67,18,0,0,Math.PI*2);ctx.fill();
  const question=game.question;
- if(question&&game.phase!=='intro')cookie(ctx,game.stage,200,249,150,question.initial);
- ctx.font='700 17px sans-serif';ctx.fillStyle='#704633';ctx.textAlign='center';ctx.fillText(game.phase==='intro'?'첫 문제를 준비하는 중…':'처음 놓인 방향',200,358);
- if(!reducedMotion){ctx.save();for(let i=0;i<3;i++){const p=(clock*.4+i/3)%1;ctx.globalAlpha=(1-p)*.42;ctx.strokeStyle='#fff8e8';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(172+i*25,202-p*40);ctx.quadraticCurveTo(157+i*25,186-p*40,178+i*25,170-p*40);ctx.stroke();}ctx.restore();}
+ if(question&&game.phase!=='intro')cookie(ctx,game.stage,179,171,164,question.initial);
+ ctx.font='700 17px sans-serif';ctx.fillStyle='#704633';ctx.textAlign='center';ctx.fillText(game.phase==='intro'?'첫 문제를 준비하는 중…':'처음 놓인 방향',179,281);
+ if(!reducedMotion){ctx.save();for(let i=0;i<3;i++){const p=(clock*.4+i/3)%1;ctx.globalAlpha=(1-p)*.42;ctx.strokeStyle='#fff8e8';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(151+i*25,126-p*36);ctx.quadraticCurveTo(136+i*25,110-p*36,157+i*25,94-p*36);ctx.stroke();}ctx.restore();}
 }
 function clearAnswerState(){
  const row=$('answer-row');row.classList.remove('answered','success','failure','timeout');

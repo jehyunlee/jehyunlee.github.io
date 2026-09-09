@@ -123,23 +123,23 @@
 /* Three-box transformation puzzle */
 .question-hud strong{display:block;font-size:23px;font-variant-numeric:tabular-nums}
 .play-surface{display:block;position:relative;min-height:0}
-.puzzle-panel{position:absolute;z-index:4;left:29%;right:11%;top:5%;bottom:2%;display:flex;flex-direction:column;gap:13px}
-.instruction-panel{position:relative;z-index:4;padding:10px 12px 13px;text-align:center;pointer-events:none;background:#fff5e5ed;border:3px solid #ad7955;border-radius:18px;box-shadow:0 7px 0 #70452e66,0 12px 28px #5131252e}
+.puzzle-panel{position:absolute;z-index:4;inset:0}
+.instruction-panel{position:absolute;z-index:4;left:27%;right:4%;top:4%;padding:10px 12px 13px;text-align:center;pointer-events:none;background:#fff5e5ed;border:3px solid #ad7955;border-radius:18px;box-shadow:0 7px 0 #70452e66,0 12px 28px #5131252e}
 .instruction-panel>span{display:inline-block;color:#70422f;background:#f2d4aa;border:1px solid #b47b52;border-radius:15px;padding:5px 18px;font-size:16px;font-weight:800;margin-bottom:9px}
 #instruction-steps{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:7px;min-height:76px}
 .instruction-step{width:72px;height:72px;display:grid;grid-template-columns:18px 1fr;grid-template-rows:48px 20px;align-items:center;padding:2px 5px;border:3px solid #985f3e;border-radius:12px;background:#fffdf7;color:#633724;box-shadow:0 4px 0 #7541277d}
 .instruction-step b{grid-row:1 / 3;font-size:13px;color:#a76542}.instruction-step i{font-style:normal;font-size:40px;font-weight:700;line-height:1}.instruction-step small{font-size:12px;font-weight:700;white-space:nowrap}
 #instruction-steps em{font-style:normal;color:#9b6847;font-size:30px;font-weight:800}
 .instruction-wait{padding:10px 17px;border-radius:12px;background:#fff8e8ed;color:#89624c;font-size:13px}
-.answer-row{position:relative;z-index:3;flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:18px}
+.answer-row{position:absolute;z-index:3;left:16%;right:16%;top:49%;bottom:2%;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:24px}
 .answer-row.timeout::before{content:'X  시간 끝!';position:absolute;z-index:8;left:50%;top:42%;transform:translate(-50%,-50%);padding:8px 17px;border-radius:14px;background:#fff8e9e8;color:#c34c45;font:900 30px/1.1 sans-serif;text-shadow:0 2px white;box-shadow:0 5px 15px #4c2a2340}
 .answer-box{position:relative;height:100%;min-width:0;border:0;background:transparent;padding:0 4px 7px;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;isolation:isolate;touch-action:manipulation}
 .answer-box::after{content:'';position:absolute;inset:22% 2% 0;z-index:-1;border-radius:9px;background:linear-gradient(#efd2a5,#d5a06a);border:3px solid #9c683f;box-shadow:inset 0 0 0 7px #f8e5c3,0 5px 0 #71472e}
-.answer-box canvas{width:min(90%,150px);height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 4px 2px #57331d35);transition:transform .15s}
+.answer-box canvas{width:min(96%,180px);height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 5px 3px #57331d45);transition:transform .15s}
 .answer-box:hover canvas,.answer-box:focus-visible canvas{transform:scale(1.06)}
 .answer-box:focus-visible{outline:3px solid #3f7f86;outline-offset:2px;border-radius:12px}
-.answer-number{position:absolute;left:9px;top:26%;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#86533b;color:#fff8e9;font-weight:800;z-index:2}
-.answer-caption{font-size:11px;font-weight:700;color:#744832;z-index:2;margin-top:-12px}
+.answer-number{position:absolute;left:11px;top:24%;display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:#86533b;color:#fff8e9;font-size:16px;font-weight:800;z-index:2}
+.answer-caption{font-size:13px;font-weight:800;color:#744832;z-index:2;margin-top:-13px}
 .answer-row.answered .answer-box:not(.selected):not(.correct){opacity:.53}
 .answer-box.correct::before,.answer-box.wrong::before{position:absolute;z-index:6;left:50%;top:42%;transform:translate(-50%,-50%);font:900 72px/1 sans-serif;text-shadow:0 3px #fff8e9,-2px 0 #fff8e9,2px 0 #fff8e9}
 .answer-box.correct::before{content:'O';color:#438655}.answer-box.wrong::before{content:'X';color:#c34c45}
@@ -156,23 +156,24 @@
  .scene-wrap{height:100%;width:100%;overflow:hidden}
  .hud{grid-template-columns:.9fr .72fr 1.05fr .68fr .62fr 32px 105px}
  .question-hud strong{font-size:20px}
- .puzzle-panel{left:29%;right:11%;top:4%;bottom:2%;gap:10px}
- .answer-row{height:auto;gap:clamp(8px,2vw,22px)}
- .answer-box canvas{width:min(82%,138px)}
+ .puzzle-panel{inset:0}
+ .instruction-panel{left:27%;right:3%;top:3%}
+ .answer-row{left:15%;right:15%;top:48%;bottom:1%;height:auto;gap:clamp(12px,2.4vw,28px)}
+ .answer-box canvas{width:min(94%,170px)}
  .answer-box::after{inset:20% 1% 0}
  .answer-caption{font-size:10px}
  .bakery-label{top:61%}
 }
 @media (orientation:landscape) and (max-height:430px){
- .puzzle-panel{top:3%;bottom:1%;gap:6px}
- .instruction-panel{padding:4px 6px 6px;border-width:2px;border-radius:10px;box-shadow:0 4px 0 #70452e66}
+ .puzzle-panel{inset:0}
+ .instruction-panel{left:27%;right:2%;top:2%;padding:4px 6px 6px;border-width:2px;border-radius:10px;box-shadow:0 4px 0 #70452e66}
  .instruction-panel>span{font-size:11px;padding:2px 12px;margin-bottom:4px}
  #instruction-steps{gap:3px;min-height:42px}
  .instruction-step{width:48px;height:48px;grid-template-columns:12px 1fr;grid-template-rows:31px 14px;padding:1px 2px;border-width:2px;border-radius:7px}
  .instruction-step i{font-size:28px}.instruction-step small{font-size:8px}.instruction-step b{font-size:9px}
  #instruction-steps em{display:none}
- .answer-row{height:auto}.answer-box canvas{width:min(74%,106px)}
- .answer-number{width:21px;height:21px;font-size:11px;left:6px}
+ .answer-row{left:14%;right:14%;top:46%;bottom:1%;height:auto;gap:10px}.answer-box canvas{width:min(88%,128px)}
+ .answer-number{width:24px;height:24px;font-size:12px;left:6px}
  .answer-box.correct::before,.answer-box.wrong::before{font-size:52px}
  .scene-feedback{font-size:22px}
 }
