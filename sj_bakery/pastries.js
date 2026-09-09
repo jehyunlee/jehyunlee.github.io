@@ -189,13 +189,28 @@ const ORIGINAL_SNACK_MENUS = {
   ]}
 };
 
-// Both children share the original Suan odd stages and Jeongan even stages.
+// Both children keep Suan's odd-stage geometry and Jeongan's magic even stages.
+// Jeongan's odd sweets use a different finish without rerolling the silhouette
+// or moving its orientation landmarks.
 const CHILD_STAGE_SOURCES=Array.from({length:10},(_,index)=>index%2===0?'suan':'jeongan');
+const JEONGAN_ODD_DESIGNS = {
+  1:{name:'레몬 하드캔디',color:'#d8ac36',theme:{material:'hardCandy'}},
+  3:{name:'버터스카치 캐러멜',color:'#c58c35',theme:{material:'caramel',extra:'butterscotch'}},
+  5:{name:'초콜릿 크런치',color:'#865b43',theme:{material:'dark',extra:'crunch'}},
+  7:{name:'캐러멜 리본 초콜릿',color:'#a67c43',theme:{material:'milk',extra:'ribbon',ribbon:'#eac16c'}},
+  9:{name:'반반 초코 비스킷',color:'#b79061',theme:{material:'bread',half:'dark',extra:'biscuits'}}
+};
 const sharedChildMenu=()=>({
   label:'젤리 · 마법 간식',
   stages:CHILD_STAGE_SOURCES.map((source,index)=>({...ORIGINAL_SNACK_MENUS[source].stages[index]}))
 });
-export const SNACK_MENUS={...ORIGINAL_SNACK_MENUS,suan:sharedChildMenu(),jeongan:sharedChildMenu()};
+export const SNACK_MENUS={...ORIGINAL_SNACK_MENUS,suan:sharedChildMenu(),jeongan:{
+  label:'사탕 · 마법 간식',
+  stages:sharedChildMenu().stages.map((stage,index)=>{
+    const design=JEONGAN_ODD_DESIGNS[index+1];
+    return design?{name:design.name,color:design.color}:stage;
+  })
+}};
 
 const THEMES = {
   mom: [
@@ -225,7 +240,10 @@ const THEMES = {
 export function createPastryRecipes(seed = 0, playerId = 'dad') {
   if(playerId==='suan'||playerId==='jeongan'){
     const sourceRecipes={suan:createOriginalPastryRecipes(seed,'suan'),jeongan:createOriginalPastryRecipes(seed,'jeongan')};
-    return CHILD_STAGE_SOURCES.map((source,index)=>sourceRecipes[source][index]);
+    return CHILD_STAGE_SOURCES.map((source,index)=>{
+      const recipe=sourceRecipes[source][index],design=playerId==='jeongan'&&JEONGAN_ODD_DESIGNS[index+1];
+      return design?{...recipe,playerId,theme:{...recipe.theme,...design.theme}}:recipe;
+    });
   }
   return createOriginalPastryRecipes(seed,playerId);
 }
@@ -346,6 +364,7 @@ function drawPastry(canvas, recipe) {
 
 const MATERIALS = {
   bread:['#ffe0a0','#efb96b','#bb702f','#915125'],
+  hardCandy:['#fff9b5','#f1c630','#cc8216','#a46c16'],
   caramel:['#ffe49b','#d99028','#96501e','#824117'],
   milk:['#b58060','#80513e','#51302b','#40241e'],
   dark:['#8d6252','#56362f','#342223','#2d1b1b'],
@@ -375,6 +394,18 @@ function surface(context,recipe,material,shadow=false) {
     context.fillStyle='#ac612449';
     for(const crumb of recipe.crumbs){context.beginPath();context.arc(crumb.x,crumb.y,crumb.radius,0,Math.PI*2);context.fill();}
   } else {
+    if(material==='hardCandy') {
+      // Flat bevels and a solid glassy centre distinguish boiled sugar from
+      // Suan's rounded, translucent jelly even in the smallest game preview.
+      const inner=recipe.sourcePoints.map(([x,y])=>[128+(x-128)*.76,128+(y-128)*.76]);
+      recipe.sourcePoints.forEach((point,index)=>{
+        const next=(index+1)%inner.length;
+        context.beginPath();context.moveTo(...point);context.lineTo(...recipe.sourcePoints[next]);
+        context.lineTo(...inner[next]);context.lineTo(...inner[index]);context.closePath();
+        context.fillStyle=index%2?'#ad630c66':'#ffffd7a8';context.fill();
+      });
+      pastryPath(context,inner);context.lineWidth=2.5;context.strokeStyle='#fffbd0c9';context.stroke();
+    }
     if(soft){pastryPath(context,recipe.sourcePoints);context.strokeStyle=colors[2];context.lineWidth=13;context.stroke();}
     // A broad rounded bevel makes marshmallows pillowy, while the sharp inset
     // and specular glints make candy and gummy jelly read as different foods.
@@ -406,6 +437,21 @@ function pillow(context,x,y,size=1) {
   const gradient=context.createLinearGradient(0,-14,0,14);gradient.addColorStop(0,'#fffefa');gradient.addColorStop(.7,'#fff0ed');gradient.addColorStop(1,'#d4a7c6');
   context.shadowColor='#53385244';context.shadowBlur=3;context.shadowOffsetY=3;context.fillStyle=gradient;context.fill();context.shadowColor='transparent';context.strokeStyle='#bd8faf';context.lineWidth=1.7;context.stroke();
   drawStroke(context,[[-9,-7],[6,-7]],'#ffffff',4);context.restore();
+}
+
+function biscuit(context,x,y,size=1) {
+  context.save();context.translate(x,y);context.rotate(-.28);context.scale(size,size);
+  context.beginPath();context.roundRect(-19,-15,38,30,4);
+  const gradient=context.createLinearGradient(-12,-15,14,15);
+  gradient.addColorStop(0,'#fff1bb');gradient.addColorStop(.55,'#edc27a');gradient.addColorStop(1,'#b97c39');
+  context.shadowColor='#53321f66';context.shadowBlur=3;context.shadowOffsetY=3;
+  context.fillStyle=gradient;context.fill();context.shadowColor='transparent';
+  context.lineWidth=2.8;context.strokeStyle='#8c582a';context.stroke();
+  context.beginPath();context.roundRect(-14,-10,28,20,2);context.strokeStyle='#c3904a';context.lineWidth=1.6;context.stroke();
+  for(const [x,y] of [[-8,-5],[7,-5],[0,1],[-8,6],[7,6]]) {
+    context.beginPath();context.arc(x,y,1.8,0,Math.PI*2);context.fillStyle='#98602d';context.fill();
+  }
+  context.restore();
 }
 
 function magicStar(context,x,y,color,size=10) {
@@ -669,7 +715,7 @@ function drawThemedPastry(canvas,recipe) {
     context.beginPath();context.arc(mark.x-2,mark.y-2,mark.radius*.34,0,Math.PI*2);context.fillStyle='#ffffffbb';context.fill();
   }
   const [cx,cy]=theme.center,shift=theme.shift;
-  const ribbon=recipe.playerId==='mom'?'#efbb66':recipe.playerId==='suan'?'#ed71a6':'#8bdd64';
+  const ribbon=theme.ribbon??(recipe.playerId==='mom'?'#efbb66':recipe.playerId==='suan'?'#ed71a6':'#8bdd64');
   if(extra==='butterscotch') {
     for(let i=0;i<3;i++)drawStroke(context,[[70+i*37,62],[88+i*37,136],[108+i*37,205]],i===1?'#fae3a0':'#b26b31',10);
   }
@@ -682,6 +728,12 @@ function drawThemedPastry(canvas,recipe) {
     context.save();context.translate(fleck.x,fleck.y);context.rotate(fleck.angle);
     context.beginPath();context.roundRect(-8,-7,16,14,3);context.fillStyle=['#ffbc55','#ef6f95','#8be79d','#c496ed'][index];context.fill();
     context.strokeStyle='#ffffffa0';context.lineWidth=2;context.stroke();context.restore();
+  });
+  if(extra==='crunch') theme.flecks.forEach(fleck=>{
+    context.save();context.translate(fleck.x,fleck.y);context.rotate(fleck.angle);
+    pastryPath(context,[[-9,-5],[-2,-9],[8,-5],[9,4],[1,8],[-8,5]]);
+    context.fillStyle='#dfb365';context.fill();context.strokeStyle='#9e6a30';context.lineWidth=2;context.stroke();
+    drawStroke(context,[[-5,-3],[1,-5],[5,-2]],'#fff0bc',3);context.restore();
   });
   if(extra==='ribbon') {
     const path=[[73,94+shift],[106,130+shift],[133,99+shift],[166,142+shift],[187,121+shift]];
@@ -711,6 +763,9 @@ function drawThemedPastry(canvas,recipe) {
   if(extra==='pillows') {
     pillow(context,106+shift,107,1.08);pillow(context,151,148-shift,.91);
     if(recipe.playerId==='jeongan')magicStar(context,143,99,'#b7e9ff',9);
+  }
+  if(extra==='biscuits') {
+    biscuit(context,106+shift,107,1.08);biscuit(context,151,148-shift,.91);
   }
   if(extra==='stars') {
     drawStroke(context,[[86,135],[119,99],[159,139]],'#76b9e8',13);
