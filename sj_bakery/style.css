@@ -119,3 +119,57 @@
 
 /* Keep each family menu visible while choosing a player. */
 .family-option-name{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}.family-option-name small{font-size:10px;line-height:1.35;color:#9b7255;word-break:keep-all;overflow-wrap:anywhere}.family-option-card{gap:8px}
+
+/* Three-box transformation puzzle */
+.question-hud strong{display:block;font-size:23px;font-variant-numeric:tabular-nums}
+.play-surface{display:block;position:relative;min-height:0}
+.instruction-panel{position:absolute;z-index:4;left:31%;right:15%;top:4%;text-align:center;pointer-events:none}
+.instruction-panel>span{display:inline-block;color:#79513d;background:#fff7e9e8;border:1px solid #d7b68d;border-radius:15px;padding:4px 12px;font-size:12px;font-weight:700;margin-bottom:6px}
+#instruction-steps{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:5px;min-height:58px}
+.instruction-step{width:55px;height:55px;display:grid;grid-template-columns:15px 1fr;grid-template-rows:35px 17px;align-items:center;padding:2px 4px;border:2px solid #a9714d;border-radius:10px;background:#fffaf0f5;color:#70422f;box-shadow:0 3px 0 #8f5a3860}
+.instruction-step b{grid-row:1 / 3;font-size:10px;color:#ad7653}.instruction-step i{font-style:normal;font-size:28px;line-height:1}.instruction-step small{font-size:9px;white-space:nowrap}
+#instruction-steps em{font-style:normal;color:#fff8e5;font-size:24px;text-shadow:0 1px 3px #68402c}
+.instruction-wait{padding:10px 17px;border-radius:12px;background:#fff8e8ed;color:#89624c;font-size:13px}
+.answer-row{position:absolute;z-index:3;left:29%;right:13%;bottom:4%;height:43%;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:18px}
+.answer-row.timeout::before{content:'X  시간 끝!';position:absolute;z-index:8;left:50%;top:42%;transform:translate(-50%,-50%);padding:8px 17px;border-radius:14px;background:#fff8e9e8;color:#c34c45;font:900 30px/1.1 sans-serif;text-shadow:0 2px white;box-shadow:0 5px 15px #4c2a2340}
+.answer-box{position:relative;height:100%;min-width:0;border:0;background:transparent;padding:0 4px 7px;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;isolation:isolate;touch-action:manipulation}
+.answer-box::after{content:'';position:absolute;inset:22% 2% 0;z-index:-1;border-radius:9px;background:linear-gradient(#efd2a5,#d5a06a);border:3px solid #9c683f;box-shadow:inset 0 0 0 7px #f8e5c3,0 5px 0 #71472e}
+.answer-box canvas{width:min(90%,150px);height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 4px 2px #57331d35);transition:transform .15s}
+.answer-box:hover canvas,.answer-box:focus-visible canvas{transform:scale(1.06)}
+.answer-box:focus-visible{outline:3px solid #3f7f86;outline-offset:2px;border-radius:12px}
+.answer-number{position:absolute;left:9px;top:26%;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#86533b;color:#fff8e9;font-weight:800;z-index:2}
+.answer-caption{font-size:11px;font-weight:700;color:#744832;z-index:2;margin-top:-12px}
+.answer-row.answered .answer-box:not(.selected):not(.correct){opacity:.53}
+.answer-box.correct::before,.answer-box.wrong::before{position:absolute;z-index:6;left:50%;top:42%;transform:translate(-50%,-50%);font:900 72px/1 sans-serif;text-shadow:0 3px #fff8e9,-2px 0 #fff8e9,2px 0 #fff8e9}
+.answer-box.correct::before{content:'O';color:#438655}.answer-box.wrong::before{content:'X';color:#c34c45}
+.answer-box.selected.correct{animation:box-fly .62s ease-in forwards}
+.answer-box.selected.wrong{animation:box-drop .62s ease-in forwards}
+.answer-box.selected.wrong::after{box-shadow:inset 0 0 0 7px #f8e5c3,0 12px 0 10px #2b211d}
+.scene-feedback{left:auto;right:5%;top:25%;z-index:5;font-size:31px}
+.bakery-label{left:5%;top:48%;max-width:22%}
+@keyframes box-fly{60%{transform:translateY(-24px) rotate(-3deg)}to{transform:translateY(-620px) rotate(8deg) scale(.72);opacity:.35}}
+@keyframes box-drop{30%{transform:translateY(8px) rotate(2deg)}to{transform:translateY(310px) rotate(-13deg) scale(.55);opacity:.15}}
+
+@media (orientation:landscape){
+ .play-surface{display:block;overflow:hidden;background:#f4e5d0}
+ .scene-wrap{height:100%;width:100%;overflow:hidden}
+ .hud{grid-template-columns:.9fr .72fr 1.05fr .68fr .62fr 32px 105px}
+ .question-hud strong{font-size:20px}
+ .instruction-panel{left:29%;right:12%;top:3%}
+ .answer-row{left:27%;right:11%;bottom:3%;height:44%;gap:clamp(8px,2vw,22px)}
+ .answer-box canvas{width:min(82%,138px)}
+ .answer-box::after{inset:20% 1% 0}
+ .answer-caption{font-size:10px}
+ .bakery-label{top:45%}
+}
+@media (orientation:landscape) and (max-height:430px){
+ .instruction-panel>span{font-size:9px;padding:2px 9px;margin-bottom:3px}
+ #instruction-steps{gap:3px;min-height:42px}
+ .instruction-step{width:42px;height:40px;grid-template-columns:11px 1fr;grid-template-rows:25px 12px;padding:1px 2px;border-radius:7px}
+ .instruction-step i{font-size:21px}.instruction-step small{font-size:7px}.instruction-step b{font-size:8px}
+ #instruction-steps em{font-size:17px}
+ .answer-row{height:45%;bottom:2%}.answer-box canvas{width:min(74%,106px)}
+ .answer-number{width:21px;height:21px;font-size:11px;left:6px}
+ .answer-box.correct::before,.answer-box.wrong::before{font-size:52px}
+ .scene-feedback{font-size:22px}
+}
