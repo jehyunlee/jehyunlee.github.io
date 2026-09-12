@@ -1,7 +1,7 @@
 export const STAGE_SECONDS=60;
 export const QUESTION_SECONDS=5;
 export const getQuestionSeconds=stage=>QUESTION_SECONDS+Math.max(0,stage-1)*.5;
-export const REVEAL_STEP_SECONDS=.2;
+export const REVEAL_STEP_SECONDS=.4;
 export const REVEAL_PAUSE_SECONDS=.1;
 export const COOKIE_SECONDS=QUESTION_SECONDS;
 export const QUESTIONS_PER_STAGE=20;
