@@ -1,6 +1,7 @@
 export const STAGE_SECONDS=60;
 export const QUESTION_SECONDS=5;
 export const getQuestionSeconds=stage=>QUESTION_SECONDS+Math.max(0,stage-1)*.5;
+export const REVEAL_STEP_SECONDS=.1;
 export const COOKIE_SECONDS=QUESTION_SECONDS;
 export const QUESTIONS_PER_STAGE=20;
 export const COOKIES_PER_STAGE=QUESTIONS_PER_STAGE;
@@ -51,11 +52,17 @@ export class BakeryGame{
   const answer=applyInstructions(initial,instructions);
   const wrong=shuffle(ORIENTATIONS.filter(o=>!sameOrientation(o,answer)),this.random).slice(0,2);
   const candidates=shuffle([{...answer},...wrong],this.random);
-  return {id,initial,instructions,answer,candidates,correctIndex:candidates.findIndex(o=>sameOrientation(o,answer)),selectedIndex:null,result:null,resolvedAt:null};
+  return {id,initial,instructions,answer,candidates,correctIndex:candidates.findIndex(o=>sameOrientation(o,answer)),selectedIndex:null,reveal:null,result:null,resolvedAt:null};
  }
  beginStage(){this.attempt++;this.elapsed=0;this.questionElapsed=0;this.score=0;this.total=0;this.questionIndex=0;this.cooldown=0;this.cookies=[];this.events=[];this.question=this.makeQuestion(0);this.phase='playing';}
- get active(){return this.phase==='playing'&&this.question&&!this.question.result?this.question:null;}
- choose(index){const question=this.active;if(!question||index<0||index>2)return false;question.selectedIndex=index;this.resolve(question,index===question.correctIndex);return true;}
+ get active(){return this.phase==='playing'&&this.question&&!this.question.result&&!this.question.reveal?this.question:null;}
+ get revealing(){return Boolean(this.phase==='playing'&&this.question?.reveal&&!this.question.result);}
+ beginReveal(question,index=null){
+  if(!question||question.result||question.reveal)return false;question.selectedIndex=index;
+  question.reveal={step:0,stepElapsed:0,orientation:{...question.initial}};
+  this.events.push({type:'revealStart',question});return true;
+ }
+ choose(index){const question=this.active;if(!question||index<0||index>2)return false;return this.beginReveal(question,index);}
  resolve(question,success=false){
   if(question.result)return;question.result=success?'success':'failure';question.resolvedAt=this.elapsed;this.total++;if(success)this.score++;this.cooldown=.62;
   this.cookies.push(question);this.events.push({type:question.result,cookie:question,question});
@@ -67,8 +74,17 @@ export class BakeryGame{
  tick(dt){
   if(this.phase!=='playing')return;dt=Math.max(0,dt);this.elapsed+=dt;
   if(this.question?.result){this.cooldown-=dt;if(this.cooldown<=0)this.nextQuestion();return;}
+  if(this.question?.reveal){
+   const reveal=this.question.reveal;reveal.stepElapsed+=dt;
+   while(reveal.step<this.question.instructions.length&&reveal.stepElapsed+1e-9>=REVEAL_STEP_SECONDS){
+    const action=this.question.instructions[reveal.step];reveal.orientation=transform(reveal.orientation,action);reveal.step++;reveal.stepElapsed-=REVEAL_STEP_SECONDS;
+    this.events.push({type:'transformStep',action,step:reveal.step,question:this.question});
+   }
+   if(reveal.step>=this.question.instructions.length)this.resolve(this.question,this.question.selectedIndex===this.question.correctIndex);
+   return;
+  }
   this.questionElapsed=Math.min(this.questionSeconds,this.questionElapsed+dt);
-  if(this.questionElapsed>=this.questionSeconds)this.resolve(this.question,false);
+  if(this.questionElapsed>=this.questionSeconds)this.beginReveal(this.question,null);
  }
  finishStage(){if(this.phase!=='playing')return;const passed=this.score>=PASS_SCORE;this.history.push({stage:this.stage,attempt:this.attempt,success:this.score,total:this.total,passed});if(!passed)this.lives--;this.phase=passed?'tasting':this.lives>0?'retry':'gameover';this.events.push({type:'stageEnd',passed});}
  advance(){if(this.phase!=='tasting')return;if(this.stage===10){this.phase='complete';return;}this.stage++;this.attempt=0;this.phase='intro';}
