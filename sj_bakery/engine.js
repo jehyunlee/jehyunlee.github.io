@@ -2,6 +2,7 @@ export const STAGE_SECONDS=60;
 export const QUESTION_SECONDS=5;
 export const getQuestionSeconds=stage=>QUESTION_SECONDS+Math.max(0,stage-1)*.5;
 export const REVEAL_STEP_SECONDS=.2;
+export const REVEAL_PAUSE_SECONDS=.1;
 export const COOKIE_SECONDS=QUESTION_SECONDS;
 export const QUESTIONS_PER_STAGE=20;
 export const COOKIES_PER_STAGE=QUESTIONS_PER_STAGE;
@@ -45,6 +46,11 @@ const shuffle=(values,random)=>{
 export class BakeryGame{
  constructor(random=Math.random){this.random=random;this.reset();}
  get questionSeconds(){return getQuestionSeconds(this.stage);}
+ get revealRemaining(){
+  const reveal=this.question?.reveal;if(!reveal||this.question.result)return 0;const remainingActions=this.question.instructions.length-reveal.step;
+  if(reveal.pausing)return Math.max(0,REVEAL_PAUSE_SECONDS-reveal.pauseElapsed)+remainingActions*REVEAL_STEP_SECONDS+Math.max(0,remainingActions-1)*REVEAL_PAUSE_SECONDS;
+  return Math.max(0,REVEAL_STEP_SECONDS-reveal.stepElapsed)+Math.max(0,remainingActions-1)*(REVEAL_STEP_SECONDS+REVEAL_PAUSE_SECONDS);
+ }
  reset(){this.stage=1;this.lives=3;this.history=[];this.phase='ready';this.elapsed=0;this.questionElapsed=0;this.cookies=[];this.score=0;this.total=0;this.attempt=0;this.events=[];this.question=null;this.questionIndex=0;this.cooldown=0;}
  makeQuestion(id){
   const initial={rotation:Math.floor(this.random()*4),flipped:this.random()<.5};
@@ -59,7 +65,7 @@ export class BakeryGame{
  get revealing(){return Boolean(this.phase==='playing'&&this.question?.reveal&&!this.question.result);}
  beginReveal(question,index=null){
   if(!question||question.result||question.reveal)return false;question.selectedIndex=index;
-  question.reveal={step:0,stepElapsed:0,orientation:{...question.initial}};
+  question.reveal={step:0,stepElapsed:0,pausing:false,pauseElapsed:0,orientation:{...question.initial}};
   this.events.push({type:'revealStart',question});return true;
  }
  choose(index){const question=this.active;if(!question||index<0||index>2)return false;return this.beginReveal(question,index);}
@@ -75,12 +81,21 @@ export class BakeryGame{
   if(this.phase!=='playing')return;dt=Math.max(0,dt);this.elapsed+=dt;
   if(this.question?.result){this.cooldown-=dt;if(this.cooldown<=0)this.nextQuestion();return;}
   if(this.question?.reveal){
-   const reveal=this.question.reveal;reveal.stepElapsed+=dt;
-   while(reveal.step<this.question.instructions.length&&reveal.stepElapsed+1e-9>=REVEAL_STEP_SECONDS){
-    const action=this.question.instructions[reveal.step];reveal.orientation=transform(reveal.orientation,action);reveal.step++;reveal.stepElapsed-=REVEAL_STEP_SECONDS;
-    this.events.push({type:'transformStep',action,step:reveal.step,question:this.question});
+   const reveal=this.question.reveal;let remaining=dt;
+   while(remaining>1e-9&&!this.question.result){
+    if(reveal.pausing){
+     const needed=REVEAL_PAUSE_SECONDS-reveal.pauseElapsed,take=Math.min(remaining,needed);reveal.pauseElapsed+=take;remaining-=take;
+     if(reveal.pauseElapsed+1e-9>=REVEAL_PAUSE_SECONDS){reveal.pausing=false;reveal.pauseElapsed=0;this.events.push({type:'transformResume',step:reveal.step,question:this.question});}else break;
+    }else{
+     const needed=REVEAL_STEP_SECONDS-reveal.stepElapsed,take=Math.min(remaining,needed);reveal.stepElapsed+=take;remaining-=take;
+     if(reveal.stepElapsed+1e-9>=REVEAL_STEP_SECONDS){
+      const action=this.question.instructions[reveal.step];reveal.orientation=transform(reveal.orientation,action);reveal.step++;reveal.stepElapsed=0;
+      this.events.push({type:'transformStep',action,step:reveal.step,question:this.question});
+      if(reveal.step>=this.question.instructions.length)this.resolve(this.question,this.question.selectedIndex===this.question.correctIndex);
+      else{reveal.pausing=true;reveal.pauseElapsed=0;this.events.push({type:'transformPause',step:reveal.step,question:this.question});}
+     }else break;
+    }
    }
-   if(reveal.step>=this.question.instructions.length)this.resolve(this.question,this.question.selectedIndex===this.question.correctIndex);
    return;
   }
   this.questionElapsed=Math.min(this.questionSeconds,this.questionElapsed+dt);

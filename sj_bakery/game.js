@@ -1,4 +1,4 @@
-import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=reveal-speed-15';
+import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=overlay-pause-16';
 import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
 import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=odd-designs-8';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
@@ -53,7 +53,7 @@ function showCharacterSelection(){
  document.querySelector('.bakery-app').classList.remove('game-started');fullscreenModalOpen=false;fullscreenModalBackup=null;game.reset();selectedPlayer=null;paused=false;helpOpen=false;expression='neutral';expressionUntil=0;transitionTime=0;renderedQuestion=null;$('scene-feedback').textContent='';
  if(loaded)cookieTiles=createPastryTiles('bakery-preview','dad');$('stage-intro').classList.add('hidden');$('tasting').classList.add('hidden');sceneWrap.classList.add('choosing-player');document.querySelector('.game-shell').classList.add('choosing-player');showModal(selectionHTML,'character-select');refreshSelection();updateHud(true);updateDisplayState();
 }
-function familyCharacter(c,pose,cx,bottom,height){if(!loaded||!selectedPlayer)return null;const sprite=familyFrames[pose*4+selectedPlayer.column],w=height*sprite.width/sprite.height,x=cx-w/2,y=bottom-height;c.drawImage(sprite,x,y,w,height);return {x,y,w,h:height};}
+function familyCharacter(c,pose,cx,bottom,height,faceLeft=false){if(!loaded||!selectedPlayer)return null;const sprite=familyFrames[pose*4+selectedPlayer.column],w=height*sprite.width/sprite.height,x=cx-w/2,y=bottom-height;if(faceLeft){c.save();c.translate(x+w,0);c.scale(-1,1);c.drawImage(sprite,0,y,w,height);c.restore();}else c.drawImage(sprite,x,y,w,height);return {x,y,w,h:height};}
 function rounded(c,x,y,w,h,r,fill,stroke){c.beginPath();c.roundRect(x,y,w,h,r);if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=2;c.stroke();}}
 function character(c,index,cx,bottom,height){if(!art.characters)return;const [sx,sy,sw,sh]=crop[index],w=height*sw/sh;c.drawImage(art.characters,sx,sy,sw,sh,cx-w/2,bottom-height,w,height);}
 function cookie(c,stage,x,y,size,o={rotation:0,flipped:false},alpha=1,motion=null){
@@ -67,17 +67,18 @@ function drawScene(){
  if(art.background)ctx.drawImage(art.background,0,0,art.background.width,art.background.height,0,-55,1200,675);else{ctx.fillStyle='#e8c49e';ctx.fillRect(0,0,1200,600);}
  if(!loaded)return;
  const pose=expressionUntil>clock?(POSES[expression]??POSES.neutral):POSES.neutral,bob=reducedMotion||paused?0:Math.sin(clock*2.5)*2;
- character(ctx,4,174,430,320);familyCharacter(ctx,pose,1070,440+bob,selectedPlayer?.height??253);
+ character(ctx,4,174,430,320);familyCharacter(ctx,pose,1070,440+bob,selectedPlayer?.height??253,true);
  if(selectedPlayer){const nameY=440-selectedPlayer.height-31;rounded(ctx,1024,nameY,92,27,13,'#fff7e4e8','#b98c61');ctx.font='600 17px sans-serif';ctx.textAlign='center';ctx.fillStyle='#87513b';ctx.fillText(selectedPlayer.name,1070,nameY+19);}
  rounded(ctx,38,69,282,188,18,'#fff0d5e8','#a97048');rounded(ctx,54,83,250,145,12,'#e6c59a','#a97048');
  ctx.fillStyle='#593b2c26';ctx.beginPath();ctx.ellipse(179,199,72,19,0,0,Math.PI*2);ctx.fill();
  const question=game.question;
  if(question&&game.phase!=='intro'){
-  const reveal=question.reveal,orientation=reveal?.orientation??question.initial,action=reveal&&!question.result?question.instructions[reveal.step]:null;
+  const reveal=question.reveal,orientation=reveal?.orientation??question.initial,action=reveal&&!question.result&&!reveal.pausing?question.instructions[reveal.step]:null;
   cookie(ctx,game.stage,179,171,180,orientation,1,action?{action,progress:reveal.stepElapsed/REVEAL_STEP_SECONDS}:null);
+  if(action){const label=ACTION_LABELS[action];ctx.save();ctx.globalAlpha=.76;rounded(ctx,105,125,148,91,18,'#fffaf0','#754b39');ctx.textAlign='center';ctx.fillStyle='#6b3e2e';ctx.font='700 50px sans-serif';ctx.fillText(label.symbol,179,174);ctx.font='800 15px sans-serif';ctx.fillText(label.name,179,202);ctx.restore();}
  }
  const revealStep=question?.reveal&&!question.result?Math.min(question.instructions.length,question.reveal.step+1):0;
- ctx.font='700 17px sans-serif';ctx.fillStyle='#704633';ctx.textAlign='center';ctx.fillText(game.phase==='intro'?'첫 문제를 준비하는 중…':game.revealing?`지시 ${revealStep} / ${question.instructions.length} 변신 중`:question?.result?'지시 완료!':'처음 놓인 방향',179,281);
+ ctx.font='700 17px sans-serif';ctx.fillStyle='#704633';ctx.textAlign='center';ctx.fillText(game.phase==='intro'?'첫 문제를 준비하는 중…':game.revealing?(question.reveal.pausing?'0.1초 쉬는 중…':`지시 ${revealStep} / ${question.instructions.length} 변신 중`):question?.result?'지시 완료!':'처음 놓인 방향',179,281);
  if(!reducedMotion){ctx.save();for(let i=0;i<3;i++){const p=(clock*.4+i/3)%1;ctx.globalAlpha=(1-p)*.42;ctx.strokeStyle='#fff8e8';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(151+i*25,126-p*36);ctx.quadraticCurveTo(136+i*25,110-p*36,157+i*25,94-p*36);ctx.stroke();}ctx.restore();}
 }
 function clearAnswerState(){
@@ -100,7 +101,7 @@ function showRevealStart(question){
  $('scene-feedback').textContent='지시대로 변신 중…';$('scene-feedback').classList.remove('bad');updateInstructionProgress();
 }
 function updateInstructionProgress(){
- const reveal=game.question?.reveal;document.querySelectorAll('.instruction-step').forEach((step,index)=>{step.classList.toggle('done',Boolean(reveal&&index<reveal.step));step.classList.toggle('active',Boolean(reveal&&!game.question.result&&index===reveal.step));});
+ const reveal=game.question?.reveal;document.querySelectorAll('.instruction-step').forEach((step,index)=>{step.classList.toggle('done',Boolean(reveal&&index<reveal.step));step.classList.toggle('active',Boolean(reveal&&!reveal.pausing&&!game.question.result&&index===reveal.step));});
 }
 function drawLettering(){
  const c=$('stage-lettering').getContext('2d');c.clearRect(0,0,1000,190);const text=`STAGE ${game.stage}`;
@@ -116,7 +117,7 @@ function updateHud(force=false){
  [...$('hearts').children].forEach((h,i)=>h.classList.toggle('lost',i>=game.lives));$('hearts').setAttribute('aria-label',`남은 기회 ${game.lives}번`);
  const preparing=game.phase==='intro',limit=game.questionSeconds,remaining=preparing?transitionTime:game.active?Math.max(0,limit-game.questionElapsed):0;
  $('window-time').textContent=preparing?String(Math.ceil(remaining)):remaining.toFixed(1);$('window-fill').style.width=`${remaining/(preparing?PREP_SECONDS:limit)*100}%`;$('window-fill').style.background=preparing?'#4b8461':remaining<.8?'#b54f40':'#be9154';$('window-label').textContent=preparing?'시작까지':'고를 시간';
- if(game.revealing){const reveal=game.question.reveal,revealRemaining=Math.max(0,(game.question.instructions.length-reveal.step)*REVEAL_STEP_SECONDS-reveal.stepElapsed);$('window-time').textContent=revealRemaining.toFixed(1);$('window-label').textContent='변신 확인';$('window-fill').style.width='100%';$('window-fill').style.background='#4b8461';}
+ if(game.revealing){$('window-time').textContent=game.revealRemaining.toFixed(1);$('window-label').textContent='변신 확인';$('window-fill').style.width='100%';$('window-fill').style.background='#4b8461';}
  if(preparing){$('prep-countdown').textContent=Math.ceil(remaining);$('stage-intro').classList.toggle('compact',remaining<=PREP_SECONDS-1);}
  $('status-tip').innerHTML=preparing?`STAGE ${game.stage} · 명령 ${game.stage}번`:game.score>=PASS_SCORE?'목표 달성! 끝까지 풀어봐요.':'명령을 따라간 뒤<br>알맞은 상자를 고르세요!';
  $('pause-button').disabled=!['playing','intro','tasting'].includes(game.phase);
@@ -139,7 +140,7 @@ async function newGame(){
 function togglePause(){if(!['playing','intro','tasting'].includes(game.phase)||helpOpen||fullscreenBlocked)return;if(paused){paused=false;hideModal();$('pause-button').setAttribute('aria-label','일시정지');return;}paused=true;returnFocus=document.activeElement;$('pause-button').setAttribute('aria-label','계속하기');showModal('<div class="small-stamp">잠깐 쉬어 가요</div><h2 id="modal-title">오븐도 잠깐 휴식!</h2><p>문제 시간도 멈췄어요.<br>준비되면 이어서 풀어 주세요.</p><button class="primary-button" id="resume-button">계속하기 →</button>');}
 function showHelp(){
  if(helpOpen||fullscreenBlocked)return;helpOpen=true;const wasPaused=paused;paused=true;returnFocus=document.activeElement;const previous=$('modal-card').innerHTML,previousClass=$('modal-card').className,wasHidden=$('overlay').classList.contains('hidden');
- showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>주방장 아저씨가 과자를 비뚤게 놓아요.</li><li>과자 위에 나오는 <b>회전·뒤집기 기호</b>를 왼쪽부터 따라가세요.</li><li>명령을 모두 적용한 모양을 생각하고 <b>세 상자 중 정답</b>을 누르세요. PC에서는 1·2·3 키도 쓸 수 있어요.</li><li>답을 고르면 왼쪽 과자가 지시대로 <b>0.2초씩 변신</b>한 뒤 O/X를 알려줘요.</li><li>스테이지 번호만큼 명령이 나와요. 3단계는 3번, 10단계는 10번이에요.</li><li>제한 시간은 1단계 <b>5초</b>부터 단계마다 <b>0.5초씩 늘어나요.</b></li><li>맞으면 O와 함께 상자가 천장으로 날아가고, 틀리면 X와 함께 바닥으로 떨어져요.</li><li>스테이지마다 <b>20문제 중 15문제</b>를 맞히면 통과해요.</li><li>하트는 3개, 스테이지는 모두 10개예요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
+ showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>주방장 아저씨가 과자를 비뚤게 놓아요.</li><li>과자 위에 나오는 <b>회전·뒤집기 기호</b>를 왼쪽부터 따라가세요.</li><li>명령을 모두 적용한 모양을 생각하고 <b>세 상자 중 정답</b>을 누르세요. PC에서는 1·2·3 키도 쓸 수 있어요.</li><li>답을 고르면 왼쪽 과자가 지시대로 <b>0.2초씩 변신</b>하고 동작 사이에 <b>0.1초씩 쉬어요.</b></li><li>변신 중에는 현재 동작이 과자 위에 반투명하게 나타나요.</li><li>스테이지 번호만큼 명령이 나와요. 3단계는 3번, 10단계는 10번이에요.</li><li>제한 시간은 1단계 <b>5초</b>부터 단계마다 <b>0.5초씩 늘어나요.</b></li><li>맞으면 O와 함께 상자가 천장으로 날아가고, 틀리면 X와 함께 바닥으로 떨어져요.</li><li>스테이지마다 <b>20문제 중 15문제</b>를 맞히면 통과해요.</li><li>하트는 3개, 스테이지는 모두 10개예요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
  $('close-help').onclick=()=>{helpOpen=false;paused=wasPaused;$('modal-card').innerHTML=previous;$('modal-card').className=previousClass;if(wasHidden)hideModal();refreshSelection();returnFocus?.focus?.({preventScroll:true});};
 }
 function showRetry(){showModal(`<div class="small-stamp">다시 생각하면 풀 수 있어요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 정답<br>15개까지 ${15-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>같은 난이도로 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
@@ -153,7 +154,7 @@ function chooseBox(index){if(!loaded||paused||rotationRequired||displayPending||
 function frame(now){
  const dt=lastFrame?Math.min(.25,(now-lastFrame)/1000):0;lastFrame=now;
  if(!paused&&!rotationRequired&&!displayPending&&!fullscreenBlocked&&!document.hidden){clock+=dt;
-  if(game.phase==='playing'){game.tick(dt);for(const e of game.drainEvents()){if(e.type==='question'){renderedQuestion=null;$('scene-feedback').textContent='';}if(e.type==='revealStart')showRevealStart(e.question);if(e.type==='transformStep'){playSound('move');updateInstructionProgress();}if(e.type==='success'||e.type==='failure'){playSound(e.type);showAnswerResult(e.question);expression=e.type==='success'?'happy':'crying';expressionUntil=clock+1.05;$('scene-feedback').textContent=e.type==='success'?'O  정답!':'X  아까워요!';$('scene-feedback').classList.toggle('bad',e.type==='failure');}if(e.type==='stageEnd')stageEnded(e.passed);}}
+  if(game.phase==='playing'){game.tick(dt);for(const e of game.drainEvents()){if(e.type==='question'){renderedQuestion=null;$('scene-feedback').textContent='';}if(e.type==='revealStart')showRevealStart(e.question);if(e.type==='transformStep'){playSound('move');updateInstructionProgress();}if(e.type==='transformResume')updateInstructionProgress();if(e.type==='success'||e.type==='failure'){playSound(e.type);showAnswerResult(e.question);expression=e.type==='success'?'happy':'crying';expressionUntil=clock+1.05;$('scene-feedback').textContent=e.type==='success'?'O  정답!':'X  아까워요!';$('scene-feedback').classList.toggle('bad',e.type==='failure');}if(e.type==='stageEnd')stageEnded(e.passed);}}
   else if(game.phase==='intro'){transitionTime=Math.max(0,transitionTime-dt);if(transitionTime===0){$('stage-intro').classList.add('hidden');game.phase='playing';game.questionElapsed=0;renderedQuestion=null;$('announcer').textContent=`첫 문제 시작! ${game.questionSeconds.toFixed(1)}초 안에 알맞은 상자를 고르세요.`;}}
   else if(game.phase==='tasting'){transitionTime-=dt;if(transitionTime<=0){$('tasting').classList.add('hidden');game.advance();if(game.phase==='complete')showResults();else startIntro();}}
   else if((game.phase==='retry'||game.phase==='gameover')&&transitionTime>0){transitionTime-=dt;if(transitionTime<=0){if(game.phase==='retry')showRetry();else showResults();}}
