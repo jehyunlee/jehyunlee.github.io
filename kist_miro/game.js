@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260912-2';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260912-3';
 
-import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260912-2';
+import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260912-3';
 
 const $=id=>document.getElementById(id);
 const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
@@ -788,7 +788,7 @@ function setupInputs() {
 }
 
 async function init() {
-  const response=await fetch('./arenas.json?v=20260912-2');if(!response.ok)throw new Error(copy().errorFetch);
+  const response=await fetch('./arenas.json?v=20260912-3');if(!response.ok)throw new Error(copy().errorFetch);
   arenas=(await response.json()).arenas;selectedArena=arenas[0];renderArenaMenu();
   const loader=new THREE.ImageLoader();
   await Promise.all(arenas.map(async arena=>{const image=await loader.loadAsync(`./${arena.ballLogo}`);arenaImages.set(arena.id,image);})).catch(()=>{throw new Error(language==='ko'?'Arena 로고를 불러오지 못했어요. 다시 열어 주세요.':'An arena logo could not load. Please reload.');});
