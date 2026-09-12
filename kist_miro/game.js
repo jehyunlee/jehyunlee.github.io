@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260912-1';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260912-2';
 
-import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260912-1';
+import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260912-2';
 
 const $=id=>document.getElementById(id);
 const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
@@ -353,8 +353,23 @@ function makeOverviewBeacon(stage,id,label,color,emphasis=false) {
   const height=emphasis?8:5.4;
   const stem=new THREE.Mesh(new THREE.CylinderGeometry(emphasis?.13:.09,emphasis?.13:.09,height,10),solid);
   stem.position.y=height/2;marker.add(stem);
-  const text=makeTextSprite(label,emphasis?68:76,color);text.position.y=height+1.5;
-  text.scale.set(emphasis?7.8:5.1,emphasis?7.8:5.1,1);text.material.fog=false;text.material.toneMapped=false;marker.add(text);
+  if(label) {
+    const text=makeTextSprite(label,emphasis?68:76,color);text.position.y=height+1.5;
+    text.scale.set(emphasis?7.8:5.1,emphasis?7.8:5.1,1);text.material.fog=false;text.material.toneMapped=false;marker.add(text);
+  }
+  return marker;
+}
+
+function makeOverviewPin(stage,id,color,role) {
+  const marker=new THREE.Group();marker.position.fromArray(logoPosition(stage,id,CELL));marker.userData.role=role;
+  const solid=new THREE.MeshBasicMaterial({color,fog:false,toneMapped:false,transparent:true,opacity:1,depthTest:false});
+  const glow=new THREE.MeshBasicMaterial({color,fog:false,toneMapped:false,transparent:true,opacity:.32,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending});
+  const ring=new THREE.Mesh(new THREE.RingGeometry(1.55,2.05,48),solid);ring.rotation.x=-Math.PI/2;ring.position.y=.38;ring.renderOrder=20;marker.add(ring);
+  const halo=new THREE.Mesh(new THREE.RingGeometry(2.25,3.65,48),glow);halo.rotation.x=-Math.PI/2;halo.position.y=.3;halo.renderOrder=19;marker.add(halo);
+  const stem=new THREE.Mesh(new THREE.CylinderGeometry(.15,.15,5.2,16),solid);stem.position.y=3;stem.renderOrder=20;marker.add(stem);
+  const point=new THREE.Mesh(new THREE.ConeGeometry(.62,1.7,24),solid);point.position.y=5.65;point.rotation.x=Math.PI;point.renderOrder=20;marker.add(point);
+  const head=new THREE.Mesh(new THREE.SphereGeometry(1.12,28,20),solid);head.position.y=7.05;head.renderOrder=20;marker.add(head);
+  const headGlow=new THREE.Mesh(new THREE.SphereGeometry(1.75,24,16),glow);headGlow.position.y=7.05;headGlow.renderOrder=19;marker.add(headGlow);
   return marker;
 }
 
@@ -388,8 +403,8 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
     const wallInstances=new THREE.InstancedMesh(wallGeometry,wallMaterial,walls.length);
     walls.forEach((wall,i)=>setMatrix(wallInstances,i,wall.x,WALL_HEIGHT/2,wall.z,1,1,1,wall.angle));
     wallInstances.instanceMatrix.needsUpdate=true;overviewGroup.add(wallInstances);
-    const entrance=makeOverviewBeacon(stage,stage.start,copy().entrance(stage.letter),'#8deeff');
-    const exit=makeOverviewBeacon(stage,stage.goal,copy().exit(stage.letter),STAGE_COLORS[index]);
+    const entrance=makeOverviewBeacon(stage,stage.start,null,'#8deeff');
+    const exit=makeOverviewBeacon(stage,stage.goal,null,STAGE_COLORS[index]);
     overviewGateways.push(entrance,exit);overviewGroup.add(entrance,exit);
   }
   const overviewNumbers=makeVisitNumbers(visitedTiles.reduce((total,tile)=>total+String(tile.count).length,0));
@@ -397,17 +412,30 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
   // The opening and stage transitions emphasize the entrance to enter next.
   if(Number.isInteger(entranceIndex)&&entranceIndex>=0&&entranceIndex<session.stages.length) {
     const nextStage=session.stages[entranceIndex];
-    overviewMarker=makeOverviewBeacon(nextStage,nextStage.start,copy().nextMarker(nextStage.letter),'#ffffff',true);
+    overviewMarker=makeOverviewPin(nextStage,nextStage.start,STAGE_COLORS[entranceIndex],'target');
+    overviewGroup.add(overviewMarker);
+  } else {
+    overviewMarker=makeOverviewPin(session.stage,session.stage.goal,STAGE_COLORS[session.stageIndex],'target');
     overviewGroup.add(overviewMarker);
   }
-  overviewCurrentMarker=makeOverviewBeacon(session.stage,session.cell,copy().currentPosition,'#ffffff',true);
-  overviewCurrentMarker.visible=false;overviewGroup.add(overviewCurrentMarker);
+  overviewCurrentMarker=makeOverviewPin(session.stage,session.cell,'#ffffff','current');
+  overviewCurrentMarker.visible=entranceIndex===null||entranceIndex>session.stageIndex;overviewGroup.add(overviewCurrentMarker);
   overviewGroup.visible=false;
 }
 
+function getOverviewFrame() {
+  const topbarBottom=document.querySelector('.topbar')?.getBoundingClientRect().bottom??0;
+  const journeyBottom=document.querySelector('.journey')?.getBoundingClientRect().bottom??0;
+  const safeTop=Math.max(topbarBottom,journeyBottom)+18;
+  const safeBottom=innerHeight-Math.max(28,Math.min(72,innerHeight*.07));
+  const available=Math.max(innerHeight*.42,safeBottom-safeTop);
+  return {offsetY:(innerHeight-safeTop-safeBottom)/2,scale:Math.max(1.08,innerHeight/available*1.08)};
+}
 function getOverviewPose() {
   const pose=overviewCameraPose(logoBounds,camera.aspect,camera.fov);
-  return {position:new THREE.Vector3(...pose.position),look:new THREE.Vector3(...pose.look)};
+  const frame=getOverviewFrame(),look=new THREE.Vector3(...pose.look),position=new THREE.Vector3(...pose.position);
+  position.sub(look).multiplyScalar(frame.scale).add(look);
+  return {position,look,frame};
 }
 function getPlayPose() {
   const distance=mobileLayout?.distance??6.7;
@@ -427,7 +455,7 @@ function beginCameraMove(type,destination) {
   const control1=from.clone().add(new THREE.Vector3(0,movingOut?lift:25,0));
   const control2=to.clone().add(new THREE.Vector3(0,movingIn?lift:25,0));
   cameraTween={type,progress:0,duration:reducedMotion?.35:type.startsWith('peek')?1.65:type==='out'?2.8:2.6,
-    fromFrame:camera.view?.enabled?camera.view.offsetY:0,toFrame:movingIn?(mobileLayout?.offsetY??0):0,
+    fromFrame:camera.view?.enabled?camera.view.offsetY:0,toFrame:movingOut?getOverviewFrame().offsetY:(mobileLayout?.offsetY??0),
     curve:new THREE.CubicBezierCurve3(from,control1,control2,to),fromLook:cameraLook.clone(),toLook:destination.look.clone()};
 }
 function updateCameraMove(dt) {
@@ -647,9 +675,10 @@ function resize() {
   if(cameraTween) {
     const destination=cameraTween.type==='out'||cameraTween.type==='peekOut'?getOverviewPose():getPlayPose();
     cameraTween.curve.v3.copy(destination.position);cameraTween.toLook.copy(destination.look);
-    cameraTween.toFrame=cameraTween.type==='in'||cameraTween.type==='peekIn'?(mobileLayout?.offsetY??0):0;
+    cameraTween.toFrame=cameraTween.type==='out'||cameraTween.type==='peekOut'?getOverviewFrame().offsetY:(mobileLayout?.offsetY??0);
   } else {
-    setCameraFrame(mode==='play'||(mode==='pause'&&modeBeforeDialog==='play')?(mobileLayout?.offsetY??0):0);
+    const overviewMode=['arena','intro','celebration','peekHold'].includes(mode)||(mode==='pause'&&['arena','intro'].includes(modeBeforeDialog));
+    setCameraFrame(overviewMode?getOverviewFrame().offsetY:(mobileLayout?.offsetY??0));
   }
 }
 function animate(timestamp) {
@@ -691,7 +720,7 @@ function animate(timestamp) {
   const introMode=mode==='arena'||mode==='intro'||(mode==='pause'&&['arena','intro'].includes(modeBeforeDialog));
   if(cameraTween) updateCameraMove(dt);
   else if(mode==='celebration'||mode==='peekHold'||introMode) {
-    setCameraFrame(0);
+    setCameraFrame(getOverviewFrame().offsetY);
     const pose=getOverviewPose();camera.position.copy(pose.position);cameraLook.copy(pose.look);camera.lookAt(cameraLook);
   } else {
     const distance=mobileLayout?.distance??6.7;
@@ -759,7 +788,7 @@ function setupInputs() {
 }
 
 async function init() {
-  const response=await fetch('./arenas.json?v=20260912-1');if(!response.ok)throw new Error(copy().errorFetch);
+  const response=await fetch('./arenas.json?v=20260912-2');if(!response.ok)throw new Error(copy().errorFetch);
   arenas=(await response.json()).arenas;selectedArena=arenas[0];renderArenaMenu();
   const loader=new THREE.ImageLoader();
   await Promise.all(arenas.map(async arena=>{const image=await loader.loadAsync(`./${arena.ballLogo}`);arenaImages.set(arena.id,image);})).catch(()=>{throw new Error(language==='ko'?'Arena 로고를 불러오지 못했어요. 다시 열어 주세요.':'An arena logo could not load. Please reload.');});
