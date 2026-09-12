@@ -1,4 +1,4 @@
-import {BakeryGame,STAGES,QUESTION_SECONDS,QUESTIONS_PER_STAGE,PASS_SCORE} from './engine.js?v=box-puzzle-9';
+import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE} from './engine.js?v=time-symbols-13';
 import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
 import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=odd-designs-8';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
@@ -79,7 +79,7 @@ function clearAnswerState(){
 function drawQuestion(){
  const question=game.question;
  if(!question||game.phase==='intro'){clearAnswerState();$('instruction-steps').innerHTML='<span class="instruction-wait">시작하면 명령이 나타나요</span>';answerCanvases.forEach(c=>c.getContext('2d').clearRect(0,0,180,180));answerButtons.forEach(button=>button.disabled=true);return;}
- $('instruction-steps').innerHTML=question.instructions.map((action,index)=>{const label=ACTION_LABELS[action];return `<span class="instruction-step"><b>${index+1}</b><i>${label.symbol}</i><small>${label.name}</small></span>`;}).join('<em>›</em>');
+ $('instruction-steps').innerHTML=question.instructions.map((action,index)=>{const label=ACTION_LABELS[action];return `<span class="instruction-step" aria-label="${index+1}단계 ${label.name}"><b>${index+1}</b><i aria-hidden="true">${label.symbol}</i></span>`;}).join('<em aria-hidden="true">›</em>');
  clearAnswerState();
  question.candidates.forEach((orientation,index)=>{const c=answerCanvases[index].getContext('2d');c.clearRect(0,0,180,180);cookie(c,game.stage,90,90,180,orientation);answerButtons[index].setAttribute('aria-label',`${index+1}번 상자, 과자 방향 후보`);});
 }
@@ -99,8 +99,8 @@ function updateHud(force=false){
  if(!force&&clock-lastHud<.05)return;lastHud=clock;$('stage-number').textContent=String(game.stage).padStart(2,'0');$('stage-flavor').textContent=stageDetails().name;
  $('question-number').textContent=String(Math.min(QUESTIONS_PER_STAGE,game.total+1));$('score').textContent=game.score;$('score-fill').style.width=`${Math.min(100,game.score/PASS_SCORE*100)}%`;$('score-progress').setAttribute('aria-valuenow',Math.min(PASS_SCORE,game.score));
  [...$('hearts').children].forEach((h,i)=>h.classList.toggle('lost',i>=game.lives));$('hearts').setAttribute('aria-label',`남은 기회 ${game.lives}번`);
- const preparing=game.phase==='intro',remaining=preparing?transitionTime:game.active?Math.max(0,QUESTION_SECONDS-game.questionElapsed):0;
- $('window-time').textContent=preparing?String(Math.ceil(remaining)):remaining.toFixed(1);$('window-fill').style.width=`${remaining/(preparing?PREP_SECONDS:QUESTION_SECONDS)*100}%`;$('window-fill').style.background=preparing?'#4b8461':remaining<.8?'#b54f40':'#be9154';$('window-label').textContent=preparing?'시작까지':'고를 시간';
+ const preparing=game.phase==='intro',limit=game.questionSeconds,remaining=preparing?transitionTime:game.active?Math.max(0,limit-game.questionElapsed):0;
+ $('window-time').textContent=preparing?String(Math.ceil(remaining)):remaining.toFixed(1);$('window-fill').style.width=`${remaining/(preparing?PREP_SECONDS:limit)*100}%`;$('window-fill').style.background=preparing?'#4b8461':remaining<.8?'#b54f40':'#be9154';$('window-label').textContent=preparing?'시작까지':'고를 시간';
  if(preparing){$('prep-countdown').textContent=Math.ceil(remaining);$('stage-intro').classList.toggle('compact',remaining<=PREP_SECONDS-1);}
  $('status-tip').innerHTML=preparing?`STAGE ${game.stage} · 명령 ${game.stage}번`:game.score>=PASS_SCORE?'목표 달성! 끝까지 풀어봐요.':'명령을 따라간 뒤<br>알맞은 상자를 고르세요!';
  $('pause-button').disabled=!['playing','intro','tasting'].includes(game.phase);
@@ -112,7 +112,7 @@ function showModal(html,extraClass=''){$('modal-card').className=`modal-card ${e
 function hideModal(){$('overlay').classList.add('hidden');}
 function startIntro(){
  paused=false;helpOpen=false;hideModal();$('tasting').classList.add('hidden');game.beginStage();game.phase='intro';expression='neutral';expressionUntil=0;transitionTime=PREP_SECONDS;renderedQuestion=null;$('scene-feedback').textContent='';drawLettering();drawQuestion();$('stage-intro').classList.remove('hidden','compact');
- $('announcer').textContent=`스테이지 ${game.stage}. ${stageDetails().name}. 각 문제에는 명령 ${game.stage}개가 나오며, 3초 안에 세 상자 중 하나를 고릅니다.`;updateHud(true);playSound('stage');updateDisplayState();
+ $('announcer').textContent=`스테이지 ${game.stage}. ${stageDetails().name}. 각 문제에는 명령 ${game.stage}개가 나오며, ${game.questionSeconds.toFixed(1)}초 안에 세 상자 중 하나를 고릅니다.`;updateHud(true);playSound('stage');updateDisplayState();
 }
 async function newGame(){
  if(!loaded){loadAssets();return;}if(!selectedPlayer||game.phase!=='ready'||displayPending)return;displayPending=true;document.querySelector('.bakery-app').classList.add('game-started');
@@ -123,7 +123,7 @@ async function newGame(){
 function togglePause(){if(!['playing','intro','tasting'].includes(game.phase)||helpOpen||fullscreenBlocked)return;if(paused){paused=false;hideModal();$('pause-button').setAttribute('aria-label','일시정지');return;}paused=true;returnFocus=document.activeElement;$('pause-button').setAttribute('aria-label','계속하기');showModal('<div class="small-stamp">잠깐 쉬어 가요</div><h2 id="modal-title">오븐도 잠깐 휴식!</h2><p>문제 시간도 멈췄어요.<br>준비되면 이어서 풀어 주세요.</p><button class="primary-button" id="resume-button">계속하기 →</button>');}
 function showHelp(){
  if(helpOpen||fullscreenBlocked)return;helpOpen=true;const wasPaused=paused;paused=true;returnFocus=document.activeElement;const previous=$('modal-card').innerHTML,previousClass=$('modal-card').className,wasHidden=$('overlay').classList.contains('hidden');
- showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>주방장 아저씨가 과자를 비뚤게 놓아요.</li><li>과자 위에 나오는 <b>회전·뒤집기 명령</b>을 왼쪽부터 따라가세요.</li><li>명령을 모두 적용한 모양을 생각하고 <b>세 상자 중 정답</b>을 누르세요. PC에서는 1·2·3 키도 쓸 수 있어요.</li><li>스테이지 번호만큼 명령이 나와요. 3단계는 3번, 10단계는 10번이에요.</li><li>각 문제의 제한 시간은 <b>3초</b>예요.</li><li>맞으면 O와 함께 상자가 천장으로 날아가고, 틀리면 X와 함께 바닥으로 떨어져요.</li><li>스테이지마다 <b>20문제 중 15문제</b>를 맞히면 통과해요.</li><li>하트는 3개, 스테이지는 모두 10개예요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
+ showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>주방장 아저씨가 과자를 비뚤게 놓아요.</li><li>과자 위에 나오는 <b>회전·뒤집기 기호</b>를 왼쪽부터 따라가세요.</li><li>명령을 모두 적용한 모양을 생각하고 <b>세 상자 중 정답</b>을 누르세요. PC에서는 1·2·3 키도 쓸 수 있어요.</li><li>스테이지 번호만큼 명령이 나와요. 3단계는 3번, 10단계는 10번이에요.</li><li>제한 시간은 1단계 <b>5초</b>부터 단계마다 <b>0.5초씩 늘어나요.</b></li><li>맞으면 O와 함께 상자가 천장으로 날아가고, 틀리면 X와 함께 바닥으로 떨어져요.</li><li>스테이지마다 <b>20문제 중 15문제</b>를 맞히면 통과해요.</li><li>하트는 3개, 스테이지는 모두 10개예요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
  $('close-help').onclick=()=>{helpOpen=false;paused=wasPaused;$('modal-card').innerHTML=previous;$('modal-card').className=previousClass;if(wasHidden)hideModal();refreshSelection();returnFocus?.focus?.({preventScroll:true});};
 }
 function showRetry(){showModal(`<div class="small-stamp">다시 생각하면 풀 수 있어요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 정답<br>15개까지 ${15-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>같은 난이도로 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
@@ -138,7 +138,7 @@ function frame(now){
  const dt=lastFrame?Math.min(.25,(now-lastFrame)/1000):0;lastFrame=now;
  if(!paused&&!rotationRequired&&!displayPending&&!fullscreenBlocked&&!document.hidden){clock+=dt;
   if(game.phase==='playing'){game.tick(dt);for(const e of game.drainEvents()){if(e.type==='question'){renderedQuestion=null;$('scene-feedback').textContent='';}if(e.type==='success'||e.type==='failure'){playSound(e.type);showAnswerResult(e.question);expression=e.type==='success'?'happy':'crying';expressionUntil=clock+1.05;$('scene-feedback').textContent=e.type==='success'?'O  정답!':'X  아까워요!';$('scene-feedback').classList.toggle('bad',e.type==='failure');}if(e.type==='stageEnd')stageEnded(e.passed);}}
-  else if(game.phase==='intro'){transitionTime=Math.max(0,transitionTime-dt);if(transitionTime===0){$('stage-intro').classList.add('hidden');game.phase='playing';game.questionElapsed=0;renderedQuestion=null;$('announcer').textContent='첫 문제 시작! 3초 안에 알맞은 상자를 고르세요.';}}
+  else if(game.phase==='intro'){transitionTime=Math.max(0,transitionTime-dt);if(transitionTime===0){$('stage-intro').classList.add('hidden');game.phase='playing';game.questionElapsed=0;renderedQuestion=null;$('announcer').textContent=`첫 문제 시작! ${game.questionSeconds.toFixed(1)}초 안에 알맞은 상자를 고르세요.`;}}
   else if(game.phase==='tasting'){transitionTime-=dt;if(transitionTime<=0){$('tasting').classList.add('hidden');game.advance();if(game.phase==='complete')showResults();else startIntro();}}
   else if((game.phase==='retry'||game.phase==='gameover')&&transitionTime>0){transitionTime-=dt;if(transitionTime<=0){if(game.phase==='retry')showRetry();else showResults();}}
   if(clock>expressionUntil)$('scene-feedback').textContent='';

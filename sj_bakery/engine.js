@@ -1,5 +1,6 @@
 export const STAGE_SECONDS=60;
-export const QUESTION_SECONDS=3;
+export const QUESTION_SECONDS=5;
+export const getQuestionSeconds=stage=>QUESTION_SECONDS+Math.max(0,stage-1)*.5;
 export const COOKIE_SECONDS=QUESTION_SECONDS;
 export const QUESTIONS_PER_STAGE=20;
 export const COOKIES_PER_STAGE=QUESTIONS_PER_STAGE;
@@ -42,6 +43,7 @@ const shuffle=(values,random)=>{
 
 export class BakeryGame{
  constructor(random=Math.random){this.random=random;this.reset();}
+ get questionSeconds(){return getQuestionSeconds(this.stage);}
  reset(){this.stage=1;this.lives=3;this.history=[];this.phase='ready';this.elapsed=0;this.questionElapsed=0;this.cookies=[];this.score=0;this.total=0;this.attempt=0;this.events=[];this.question=null;this.questionIndex=0;this.cooldown=0;}
  makeQuestion(id){
   const initial={rotation:Math.floor(this.random()*4),flipped:this.random()<.5};
@@ -65,8 +67,8 @@ export class BakeryGame{
  tick(dt){
   if(this.phase!=='playing')return;dt=Math.max(0,dt);this.elapsed+=dt;
   if(this.question?.result){this.cooldown-=dt;if(this.cooldown<=0)this.nextQuestion();return;}
-  this.questionElapsed=Math.min(QUESTION_SECONDS,this.questionElapsed+dt);
-  if(this.questionElapsed>=QUESTION_SECONDS)this.resolve(this.question,false);
+  this.questionElapsed=Math.min(this.questionSeconds,this.questionElapsed+dt);
+  if(this.questionElapsed>=this.questionSeconds)this.resolve(this.question,false);
  }
  finishStage(){if(this.phase!=='playing')return;const passed=this.score>=PASS_SCORE;this.history.push({stage:this.stage,attempt:this.attempt,success:this.score,total:this.total,passed});if(!passed)this.lives--;this.phase=passed?'tasting':this.lives>0?'retry':'gameover';this.events.push({type:'stageEnd',passed});}
  advance(){if(this.phase!=='tasting')return;if(this.stage===10){this.phase='complete';return;}this.stage++;this.attempt=0;this.phase='intro';}
