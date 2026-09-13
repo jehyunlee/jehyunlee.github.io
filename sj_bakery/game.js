@@ -1,5 +1,5 @@
-import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=ios-fullscreen-21';
-import {isGameFullscreen,enterGameDisplay,exitGameDisplay,supportsIOSViewportFullscreen} from './display.js?v=ios-fullscreen-21';
+import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=ios-rotate-22';
+import {isGameFullscreen,enterGameDisplay,exitGameDisplay,supportsIOSViewportFullscreen} from './display.js?v=ios-rotate-22';
 import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=odd-designs-8';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
@@ -182,7 +182,7 @@ async function restoreFullscreen(){if(displayPending)return;displayPending=true;
 function updateDisplayState(){
  const fullscreen=isGameFullscreen(),button=$('fullscreen-button');button.setAttribute('aria-pressed',String(fullscreen));button.setAttribute('aria-label',fullscreen?'전체화면 나가기':'전체화면 보기');fullscreenBlocked=game.phase!=='ready'&&!fullscreen;
  if(fullscreenBlocked){if(helpOpen)$('close-help')?.click();showFullscreenGate();}else if(fullscreen&&fullscreenModalOpen){const previous=fullscreenModalBackup;fullscreenModalOpen=false;fullscreenModalBackup=null;if(previous){$('modal-card').innerHTML=previous.html;$('modal-card').className=previous.className;if(previous.hidden)hideModal();else refreshSelection();}}
- rotationRequired=matchMedia('(orientation: portrait)').matches&&['intro','playing','tasting'].includes(game.phase);$('rotate-prompt').classList.toggle('hidden',!rotationRequired);lastFrame=0;
+ const iosVirtualLandscape=supportsIOSViewportFullscreen()&&document.documentElement.classList.contains('ios-fullscreen-fallback');rotationRequired=matchMedia('(orientation: portrait)').matches&&!iosVirtualLandscape&&['intro','playing','tasting'].includes(game.phase);$('rotate-prompt').classList.toggle('hidden',!rotationRequired);lastFrame=0;
 }
 $('fullscreen-button').addEventListener('click',async()=>{if(displayPending)return;displayPending=true;try{if(isGameFullscreen())await exitGameDisplay();else await enterGameDisplay();}finally{displayPending=false;updateDisplayState();}});
 for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,updateDisplayState);window.addEventListener('resize',updateDisplayState);window.visualViewport?.addEventListener('resize',updateDisplayState);
