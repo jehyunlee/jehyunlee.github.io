@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260913-2';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260913-3';
 
-import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260913-2';
+import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260913-3';
 
 const $=id=>document.getElementById(id);
 const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
@@ -456,9 +456,11 @@ function beginCameraMove(type,destination) {
   const lift=Math.max(38,Math.abs(to.y-from.y)*.32);
   const control1=from.clone().add(new THREE.Vector3(0,movingOut?lift:25,0));
   const control2=to.clone().add(new THREE.Vector3(0,movingIn?lift:25,0));
-  cameraTween={type,progress:0,duration:reducedMotion?.35:type.startsWith('peek')?1.65:type==='out'?2.8:2.6,
+  const duration=reducedMotion?.35:type.startsWith('peek')?1.65:type==='out'?2.8:2.6;
+  cameraTween={type,progress:0,duration,
     fromFrame:camera.view?.enabled?camera.view.offsetY:0,toFrame:movingOut?getOverviewFrame().offsetY:(mobileLayout?.offsetY??0),
     curve:new THREE.CubicBezierCurve3(from,control1,control2,to),fromLook:cameraLook.clone(),toLook:destination.look.clone()};
+  playZoomSound(type,duration);
 }
 function updateCameraMove(dt) {
   const move=cameraTween;move.progress=Math.min(1,move.progress+dt/move.duration);
@@ -655,13 +657,49 @@ function playRollSound(travel) {
     grit.start(at);grit.stop(at+duration);body.start(at);body.stop(at+duration);
   }catch{}
 }
+function playZoomSound(type,duration) {
+  if(!soundEnabled)return;
+  try {
+    const context=unlockAudio();if(!context)return;
+    const movingIn=type==='in'||type==='peekIn',at=context.currentTime,length=Math.max(.3,duration*.92);
+    const output=context.createGain();output.gain.setValueAtTime(.0001,at);output.gain.exponentialRampToValueAtTime(.042,at+Math.min(.18,length*.18));output.gain.exponentialRampToValueAtTime(.0001,at+length);
+    const filter=context.createBiquadFilter();filter.type='bandpass';filter.Q.value=.68;
+    const start=movingIn?240:1150,end=movingIn?1280:210;filter.frequency.setValueAtTime(start,at);filter.frequency.exponentialRampToValueAtTime(end,at+length);
+    const size=Math.ceil(context.sampleRate*length),buffer=context.createBuffer(1,size,context.sampleRate),data=buffer.getChannelData(0);
+    for(let i=0;i<size;i++){const envelope=Math.sin(Math.PI*i/size);data[i]=(Math.random()*2-1)*envelope;}
+    const air=context.createBufferSource();air.buffer=buffer;air.playbackRate.setValueAtTime(movingIn?.72:1.38,at);air.playbackRate.exponentialRampToValueAtTime(movingIn?1.48:.68,at+length);
+    const doppler=context.createOscillator(),dopplerGain=context.createGain();doppler.type='sine';doppler.frequency.setValueAtTime(movingIn?105:310,at);doppler.frequency.exponentialRampToValueAtTime(movingIn?390:82,at+length);dopplerGain.gain.setValueAtTime(.18,at);dopplerGain.gain.exponentialRampToValueAtTime(.0001,at+length);
+    air.connect(filter);filter.connect(output);doppler.connect(dopplerGain);dopplerGain.connect(output);output.connect(context.destination);
+    air.start(at);air.stop(at+length);doppler.start(at);doppler.stop(at+length);
+  }catch{}
+}
+function playFireworkLaunch() {
+  if(!soundEnabled)return;
+  try {
+    const context=unlockAudio();if(!context)return;
+    const at=context.currentTime,osc=context.createOscillator(),gain=context.createGain();osc.type='sawtooth';osc.frequency.setValueAtTime(280,at);osc.frequency.exponentialRampToValueAtTime(1050,at+.38);
+    gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(.022,at+.04);gain.gain.exponentialRampToValueAtTime(.0001,at+.4);osc.connect(gain);gain.connect(context.destination);osc.start(at);osc.stop(at+.42);
+  }catch{}
+}
+function playFireworkBurst(power=1) {
+  if(!soundEnabled)return;
+  try {
+    const context=unlockAudio();if(!context)return;
+    const at=context.currentTime,duration=.82,size=Math.ceil(context.sampleRate*duration),buffer=context.createBuffer(1,size,context.sampleRate),data=buffer.getChannelData(0);
+    for(let i=0;i<size;i++){const t=i/size;data[i]=(Math.random()*2-1)*Math.exp(-5.2*t);}
+    const boom=context.createBufferSource(),filter=context.createBiquadFilter(),gain=context.createGain();boom.buffer=buffer;filter.type='lowpass';filter.frequency.setValueAtTime(1900,at);filter.frequency.exponentialRampToValueAtTime(135,at+duration);gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(Math.min(.15,.1*power),at+.008);gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
+    const body=context.createOscillator(),bodyGain=context.createGain();body.type='sine';body.frequency.setValueAtTime(88,at);body.frequency.exponentialRampToValueAtTime(34,at+.48);bodyGain.gain.setValueAtTime(Math.min(.22,.14*power),at);bodyGain.gain.exponentialRampToValueAtTime(.0001,at+.52);
+    boom.connect(filter);filter.connect(gain);gain.connect(context.destination);body.connect(bodyGain);bodyGain.connect(context.destination);boom.start(at);boom.stop(at+duration);body.start(at);body.stop(at+.54);
+    [0,.035,.075,.13,.2].forEach((delay,i)=>playTone(620+Math.random()*1150,.045+(i%2)*.025,.022,'square',delay));
+  }catch{}
+}
 function burst(x,y,color,count=70) {
   if(reducedMotion)count=24;
   for(let i=0;i<count;i++) {
     const angle=Math.PI*2*i/count+(Math.random()-.5)*.15,speed=60+Math.random()*240;
     particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1.2+Math.random()*1.4,max:2.6,color,size:1.4+Math.random()*2});
   }
-  playTone(60,.21,.07,'triangle');
+  playFireworkBurst(count>=100?1.3:1);
 }
 function animateFireworks(dt) {
   const width=innerWidth,height=innerHeight;
@@ -670,6 +708,7 @@ function animateFireworks(dt) {
     fireworkNext=fireworkTime+.45+Math.random()*.45;
     const palette=[STAGE_COLORS[session.stageIndex],'#ff7675','#9ce9ff','#ffffff','#dfafff'];
     rockets.push({x:width*(.12+Math.random()*.76),y:height+10,target:height*(.13+Math.random()*.36),speed:340+Math.random()*170,color:palette[Math.floor(Math.random()*palette.length)]});
+    playFireworkLaunch();
   }
   for(let i=rockets.length-1;i>=0;i--) {
     const r=rockets[i];r.y-=r.speed*dt;
@@ -816,7 +855,7 @@ function setupInputs() {
 }
 
 async function init() {
-  const response=await fetch('./arenas.json?v=20260913-2');if(!response.ok)throw new Error(copy().errorFetch);
+  const response=await fetch('./arenas.json?v=20260913-3');if(!response.ok)throw new Error(copy().errorFetch);
   arenas=(await response.json()).arenas;selectedArena=arenas[0];renderArenaMenu();
   const loader=new THREE.ImageLoader();
   await Promise.all(arenas.map(async arena=>{const image=await loader.loadAsync(`./${arena.ballLogo}`);arenaImages.set(arena.id,image);})).catch(()=>{throw new Error(language==='ko'?'Arena 로고를 불러오지 못했어요. 다시 열어 주세요.':'An arena logo could not load. Please reload.');});
