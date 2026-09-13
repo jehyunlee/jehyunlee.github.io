@@ -1,4 +1,4 @@
-import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=extra-second-19';
+import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=sound-on-20';
 import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
 import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=odd-designs-8';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
@@ -12,7 +12,7 @@ const answerButtons=[...document.querySelectorAll('[data-answer]')];
 const answerCanvases=answerButtons.map(button=>button.querySelector('canvas'));
 let displayPending=false,rotationRequired=false,fullscreenBlocked=false,fullscreenModalOpen=false,fullscreenModalBackup=null;
 const art={},crop=[[140,32,302,459],[613,31,307,460],[1112,33,304,458],[139,538,248,462],[608,491,363,509],[1079,492,424,508]];
-let loaded=false,paused=false,helpOpen=false,transitionTime=0,clock=0,lastFrame=0,lastHud=-1,expression='neutral',expressionUntil=0,soundEnabled=false,audioCtx=null,returnFocus=null;
+let loaded=false,paused=false,helpOpen=false,transitionTime=0,clock=0,lastFrame=0,lastHud=-1,expression='neutral',expressionUntil=0,soundEnabled=true,audioCtx=null,returnFocus=null;
 let cookieTiles=[],letteringStage=0,renderedQuestion=null;
 let selectedPlayer=null,assetsLoading=false,assetError=false,familyFrames=[];
 const playerStages=()=>SNACK_MENUS[selectedPlayer?.id]?.stages??STAGES;
