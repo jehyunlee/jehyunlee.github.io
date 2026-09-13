@@ -1,10 +1,11 @@
 import * as THREE from './vendor/three.module.min.js';
-import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260912-3';
+import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260913-1';
 
-import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260912-3';
+import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260913-1';
 
 const $=id=>document.getElementById(id);
 const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
+const KIST_RED='#ef1702',OVERVIEW_PIN_SCALE=3;
 const COPY={
   en:{
     documentTitle:"KIST Maze · Journey into Research",meta:'Choose a KIST era and explore a newly generated 3D logo maze every time you play.',journeyCaption:'KIST · YOUR JOURNEY',
@@ -361,7 +362,8 @@ function makeOverviewBeacon(stage,id,label,color,emphasis=false) {
 }
 
 function makeOverviewPin(stage,id,color,role) {
-  const marker=new THREE.Group();marker.position.fromArray(logoPosition(stage,id,CELL));marker.userData.role=role;
+  const marker=new THREE.Group();marker.position.fromArray(logoPosition(stage,id,CELL));marker.userData.role=role;marker.userData.baseScale=OVERVIEW_PIN_SCALE;
+  marker.scale.setScalar(OVERVIEW_PIN_SCALE);
   const solid=new THREE.MeshBasicMaterial({color,fog:false,toneMapped:false,transparent:true,opacity:1,depthTest:false});
   const glow=new THREE.MeshBasicMaterial({color,fog:false,toneMapped:false,transparent:true,opacity:.32,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending});
   const ring=new THREE.Mesh(new THREE.RingGeometry(1.55,2.05,48),solid);ring.rotation.x=-Math.PI/2;ring.position.y=.38;ring.renderOrder=20;marker.add(ring);
@@ -418,7 +420,7 @@ function buildOverview(entranceIndex=session.stageIndex+1) {
     overviewMarker=makeOverviewPin(session.stage,session.stage.goal,STAGE_COLORS[session.stageIndex],'target');
     overviewGroup.add(overviewMarker);
   }
-  overviewCurrentMarker=makeOverviewPin(session.stage,session.cell,'#ffffff','current');
+  overviewCurrentMarker=makeOverviewPin(session.stage,session.cell,KIST_RED,'current');
   overviewCurrentMarker.visible=entranceIndex===null||entranceIndex>session.stageIndex;overviewGroup.add(overviewCurrentMarker);
   overviewGroup.visible=false;
 }
@@ -429,7 +431,7 @@ function getOverviewFrame() {
   const safeTop=Math.max(topbarBottom,journeyBottom)+18;
   const safeBottom=innerHeight-Math.max(28,Math.min(72,innerHeight*.07));
   const available=Math.max(innerHeight*.42,safeBottom-safeTop);
-  return {offsetY:(innerHeight-safeTop-safeBottom)/2,scale:Math.max(1.08,innerHeight/available*1.08)};
+  return {offsetY:(innerHeight-safeTop-safeBottom)/2,scale:Math.max(1.16,innerHeight/available*1.16)};
 }
 function getOverviewPose() {
   const pose=overviewCameraPose(logoBounds,camera.aspect,camera.fov);
@@ -731,8 +733,8 @@ function animate(timestamp) {
   playerRing.position.set(playerPosition.x,.025,playerPosition.z);
   playerRing.material.opacity=.27+Math.sin(now*1.7)*.055;
   if(portalRing){portalRing.rotation.z=now*.16;portalRing.scale.setScalar(1+Math.sin(now*2)*.045);}
-  if(overviewMarker)overviewMarker.scale.setScalar(1+Math.sin(now*2)*.045);
-  if(overviewCurrentMarker?.visible)overviewCurrentMarker.scale.setScalar(1+Math.sin(now*4)*.08);
+  if(overviewMarker)overviewMarker.scale.setScalar(overviewMarker.userData.baseScale*(1+Math.sin(now*2)*.045));
+  if(overviewCurrentMarker?.visible)overviewCurrentMarker.scale.setScalar(overviewCurrentMarker.userData.baseScale*(1+Math.sin(now*4)*.08));
   overviewGateways.forEach((marker,index)=>marker.scale.setScalar(1+Math.sin(now*2+index*.8)*.025));
   if(mazeGroup.visible)orientVisitNumbers(visitNumbers,yaw);
   renderer.render(scene,camera);
@@ -788,7 +790,7 @@ function setupInputs() {
 }
 
 async function init() {
-  const response=await fetch('./arenas.json?v=20260912-3');if(!response.ok)throw new Error(copy().errorFetch);
+  const response=await fetch('./arenas.json?v=20260913-1');if(!response.ok)throw new Error(copy().errorFetch);
   arenas=(await response.json()).arenas;selectedArena=arenas[0];renderArenaMenu();
   const loader=new THREE.ImageLoader();
   await Promise.all(arenas.map(async arena=>{const image=await loader.loadAsync(`./${arena.ballLogo}`);arenaImages.set(arena.id,image);})).catch(()=>{throw new Error(language==='ko'?'Arena 로고를 불러오지 못했어요. 다시 열어 주세요.':'An arena logo could not load. Please reload.');});
