@@ -1,5 +1,5 @@
-import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=sound-on-20';
-import {isGameFullscreen,enterGameDisplay,exitGameDisplay} from './display.js?v=family-snacks-4';
+import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=ios-fullscreen-21';
+import {isGameFullscreen,enterGameDisplay,exitGameDisplay,supportsIOSViewportFullscreen} from './display.js?v=ios-fullscreen-21';
 import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=odd-designs-8';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
@@ -177,7 +177,7 @@ document.addEventListener('visibilitychange',()=>{lastFrame=0;if(document.hidden
 window.addEventListener('blur',()=>{if(!displayPending&&!paused&&!helpOpen&&['playing','intro','tasting'].includes(game.phase))togglePause();});
 function showFullscreenGate(){
  if(fullscreenModalOpen)return;fullscreenModalBackup={html:$('modal-card').innerHTML,className:$('modal-card').className,hidden:$('overlay').classList.contains('hidden')};fullscreenModalOpen=true;
- const supported=Boolean(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen);showModal(`<div class="small-stamp">가로 · 전체화면 전용</div><h2 id="modal-title">전체화면으로 시작해요</h2><p>${supported?'세 상자와 명령이 모두 보이도록<br>전체화면에서 게임을 진행해요.':'이 브라우저는 게임 전체화면을 지원하지 않아요.<br>전체화면을 지원하는 브라우저로 열어 주세요.'}</p>${supported?'<button class="primary-button" id="enter-fullscreen-button">전체화면으로 시작하기 →</button>':''}<button class="secondary-button" id="choose-family-button">가족 다시 선택하기</button>`);}
+ const iosFallback=supportsIOSViewportFullscreen(),supported=Boolean(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen||iosFallback);showModal(`<div class="small-stamp">가로 · 전체화면 전용</div><h2 id="modal-title">전체화면으로 시작해요</h2><p>${iosFallback?'iPhone 화면을 가득 채워 게임을 시작해요.<br>완전한 전체화면은 Safari의 공유 버튼에서 홈 화면에 추가한 뒤 실행하세요.':supported?'세 상자와 명령이 모두 보이도록<br>전체화면에서 게임을 진행해요.':'이 브라우저는 게임 전체화면을 지원하지 않아요.<br>전체화면을 지원하는 브라우저로 열어 주세요.'}</p>${supported?'<button class="primary-button" id="enter-fullscreen-button">전체화면으로 시작하기 →</button>':''}<button class="secondary-button" id="choose-family-button">가족 다시 선택하기</button>`);}
 async function restoreFullscreen(){if(displayPending)return;displayPending=true;try{await enterGameDisplay();}finally{displayPending=false;updateDisplayState();}}
 function updateDisplayState(){
  const fullscreen=isGameFullscreen(),button=$('fullscreen-button');button.setAttribute('aria-pressed',String(fullscreen));button.setAttribute('aria-label',fullscreen?'전체화면 나가기':'전체화면 보기');fullscreenBlocked=game.phase!=='ready'&&!fullscreen;

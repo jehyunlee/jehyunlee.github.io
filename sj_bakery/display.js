@@ -1,7 +1,22 @@
 // Call from a player gesture: browsers require activation to enter fullscreen.
+let iosViewportFullscreen = false;
+
+export function supportsIOSViewportFullscreen() {
+  const nav = globalThis.navigator;
+  if (!nav) return false;
+  const ua = nav.userAgent || '';
+  return /WebKit/i.test(ua) && (/iPhone|iPod/i.test(ua) || (/Macintosh/i.test(ua) && Number(nav.maxTouchPoints) > 1));
+}
+
+function setIOSViewportFullscreen(active) {
+  iosViewportFullscreen = active;
+  globalThis.document?.documentElement?.classList?.toggle('ios-fullscreen-fallback', active);
+  if (active) globalThis.scrollTo?.(0, 1);
+}
+
 export function isGameFullscreen() {
   const doc = globalThis.document;
-  return Boolean(doc && (doc.fullscreenElement || doc.webkitFullscreenElement || doc.webkitIsFullScreen));
+  return Boolean(iosViewportFullscreen || (doc && (doc.fullscreenElement || doc.webkitFullscreenElement || doc.webkitIsFullScreen)));
 }
 
 export async function enterGameDisplay() {
@@ -21,6 +36,10 @@ export async function enterGameDisplay() {
     }
   }
 
+  // iPhone Safari does not consistently expose element fullscreen. Keep the
+  // game playable in a fixed, safe-area-aware viewport instead of blocking it.
+  if (!isGameFullscreen() && supportsIOSViewportFullscreen()) setIOSViewportFullscreen(true);
+
   const orientation = globalThis.screen?.orientation;
   if (typeof orientation?.lock === 'function') {
     try {
@@ -37,6 +56,7 @@ export async function enterGameDisplay() {
 export async function exitGameDisplay() {
   const doc = globalThis.document;
   try {
+    if (iosViewportFullscreen) setIOSViewportFullscreen(false);
     if (isGameFullscreen()) {
       if (typeof doc.exitFullscreen === 'function') {
         await doc.exitFullscreen();
