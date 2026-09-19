@@ -1,5 +1,5 @@
 export const STAGE_SECONDS=60;
-export const QUESTION_SECONDS=6;
+export const QUESTION_SECONDS=9;
 export const getQuestionSeconds=stage=>QUESTION_SECONDS+Math.max(0,stage-1)*.5;
 export const REVEAL_STEP_SECONDS=.8;
 export const REVEAL_PAUSE_SECONDS=.1;
