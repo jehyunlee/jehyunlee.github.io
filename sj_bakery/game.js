@@ -1,5 +1,5 @@
-import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS} from './engine.js?v=ios-rotate-22';
-import {isGameFullscreen,enterGameDisplay,exitGameDisplay,supportsIOSViewportFullscreen} from './display.js?v=ios-rotate-22';
+import {BakeryGame,STAGES,QUESTIONS_PER_STAGE,PASS_SCORE,REVEAL_STEP_SECONDS,DIFFICULTIES,DEFAULT_DIFFICULTY,getDifficulty,getQuestionSeconds} from './engine.js?v=difficulty-1';
+import {isGameFullscreen,enterGameDisplay,exitGameDisplay,supportsIOSViewportFullscreen} from './display.js?v=difficulty-1';
 import {createPastryTiles,SNACK_MENUS} from './pastries.js?v=odd-designs-8';
 import {PLAYERS,POSES,getPlayer,EATING_MOUTHS,SPRITE_RECTS,keySpriteMatte} from './family.js';
 
@@ -15,6 +15,9 @@ const art={},crop=[[140,32,302,459],[613,31,307,460],[1112,33,304,458],[139,538,
 let loaded=false,paused=false,helpOpen=false,transitionTime=0,clock=0,lastFrame=0,lastHud=-1,expression='neutral',expressionUntil=0,soundEnabled=true,audioCtx=null,returnFocus=null;
 let cookieTiles=[],letteringStage=0,renderedQuestion=null;
 let selectedPlayer=null,assetsLoading=false,assetError=false,familyFrames=[];
+let selectedDifficulty=DEFAULT_DIFFICULTY;
+game.difficulty=selectedDifficulty;
+const difficultyLabel=()=>getDifficulty(selectedDifficulty).label;
 const playerStages=()=>SNACK_MENUS[selectedPlayer?.id]?.stages??STAGES;
 const stageDetails=()=>playerStages()[game.stage-1];
 const selectionHTML=$('modal-card').innerHTML;
@@ -45,8 +48,15 @@ function refreshSelection(){
  button.textContent=assetError?'그림 다시 불러오기':assetsLoading?'가족을 불러오는 중…':selectedPlayer?`${selectedPlayer.as} 시작하기 →`:'이름을 선택해 주세요';
  if(note)note.textContent=assetError?'그림을 불러오지 못했어요. 다시 눌러 주세요.':assetsLoading?'함께할 가족을 불러오고 있어요…':'시작하면 가로 · 전체화면으로 열려요 · 20개 중 15개 성공!';
  for(const input of document.querySelectorAll('input[name="player"]')){input.disabled=!loaded;input.checked=input.value===selectedPlayer?.id;}
+ for(const input of document.querySelectorAll('input[name="difficulty"]'))input.checked=input.value===selectedDifficulty;
+ for(const slot of document.querySelectorAll('[data-difficulty-time]'))slot.textContent=`문제당 ${getQuestionSeconds(1,slot.dataset.difficultyTime)}초부터`;
  for(const portrait of document.querySelectorAll('[data-portrait]')){const c=portrait.getContext('2d');c.clearRect(0,0,160,160);const player=getPlayer(portrait.dataset.portrait);if(!loaded||!player)continue;const sprite=familyFrames[player.column],w=sprite.width,h=sprite.height,headHeight=h*.47,size=Math.max(w,headHeight);c.drawImage(sprite,-(size-w)/2,0,size,size,0,0,160,160);}
- $('player-caption').textContent=selectedPlayer?`${selectedPlayer.name}의 달콤한 도전`:'조금 삐뚤어도, 맛있을 거야!';
+ $('player-caption').textContent=selectedPlayer?`${selectedPlayer.name}의 달콤한 도전 · ${difficultyLabel()}`:'조금 쀬뚟어도, 맛있을 거야!';
+}
+function selectDifficulty(id){
+ if(helpOpen||!DIFFICULTIES.some(d=>d.id===id)||!game.setDifficulty(id))return;
+ selectedDifficulty=id;refreshSelection();updateHud(true);
+ $('announcer').textContent=`난이도 ${difficultyLabel()}. 문제당 ${getQuestionSeconds(1,id)}초부터 시작해 단계마다 0.5초씩 늘어나요.`;
 }
 function selectPlayer(id){const player=getPlayer(id);if(!loaded||game.phase!=='ready'||!player||helpOpen)return;selectedPlayer=player;cookieTiles=createPastryTiles('bakery-preview',player.id);refreshSelection();drawLettering();updateHud(true);$('announcer').textContent=`${player.name} 선택. 포장할 간식: ${SNACK_MENUS[player.id]?.label??'버터 과자'}. 시작 버튼을 눌러 주세요.`;}
 function showCharacterSelection(){
@@ -119,7 +129,7 @@ function updateHud(force=false){
  $('window-time').textContent=preparing?String(Math.ceil(remaining)):remaining.toFixed(1);$('window-fill').style.width=`${remaining/(preparing?PREP_SECONDS:limit)*100}%`;$('window-fill').style.background=preparing?'#4b8461':remaining<.8?'#b54f40':'#be9154';$('window-label').textContent=preparing?'시작까지':'고를 시간';
  if(game.revealing){$('window-time').textContent=game.revealRemaining.toFixed(1);$('window-label').textContent='변신 확인';$('window-fill').style.width='100%';$('window-fill').style.background='#4b8461';}
  if(preparing){$('prep-countdown').textContent=Math.ceil(remaining);$('stage-intro').classList.toggle('compact',remaining<=PREP_SECONDS-1);}
- $('status-tip').innerHTML=preparing?`STAGE ${game.stage} · 명령 ${game.stage}번`:game.score>=PASS_SCORE?'목표 달성! 끝까지 풀어봐요.':'명령을 따라간 뒤<br>알맞은 상자를 고르세요!';
+ $('status-tip').innerHTML=preparing?`STAGE ${game.stage} · 명령 ${game.stage}번 · ${game.difficultyLabel}`:game.score>=PASS_SCORE?'목표 달성! 끝까지 풀어봐요.':'명령을 따라간 뒤<br>알맞은 상자를 고르세요!';
  $('pause-button').disabled=!['playing','intro','tasting'].includes(game.phase);
  if(renderedQuestion!==game.question){renderedQuestion=game.question;drawQuestion();}
 }
@@ -129,7 +139,7 @@ function showModal(html,extraClass=''){$('modal-card').className=`modal-card ${e
 function hideModal(){$('overlay').classList.add('hidden');}
 function startIntro(){
  paused=false;helpOpen=false;hideModal();$('tasting').classList.add('hidden');game.beginStage();game.phase='intro';expression='neutral';expressionUntil=0;transitionTime=PREP_SECONDS;renderedQuestion=null;$('scene-feedback').textContent='';drawLettering();drawQuestion();$('stage-intro').classList.remove('hidden','compact');
- $('announcer').textContent=`스테이지 ${game.stage}. ${stageDetails().name}. 각 문제에는 명령 ${game.stage}개가 나오며, ${game.questionSeconds.toFixed(1)}초 안에 세 상자 중 하나를 고릅니다.`;updateHud(true);playSound('stage');updateDisplayState();
+ $('announcer').textContent=`스테이지 ${game.stage}. ${stageDetails().name}. 난이도 ${game.difficultyLabel}. 각 문제에는 명령 ${game.stage}개가 나오며, ${game.questionSeconds.toFixed(1)}초 안에 세 상자 중 하나를 고릅니다.`;updateHud(true);playSound('stage');updateDisplayState();
 }
 async function newGame(){
  if(!loaded){loadAssets();return;}if(!selectedPlayer||game.phase!=='ready'||displayPending)return;displayPending=true;document.querySelector('.bakery-app').classList.add('game-started');
@@ -140,14 +150,14 @@ async function newGame(){
 function togglePause(){if(!['playing','intro','tasting'].includes(game.phase)||helpOpen||fullscreenBlocked)return;if(paused){paused=false;hideModal();$('pause-button').setAttribute('aria-label','일시정지');return;}paused=true;returnFocus=document.activeElement;$('pause-button').setAttribute('aria-label','계속하기');showModal('<div class="small-stamp">잠깐 쉬어 가요</div><h2 id="modal-title">오븐도 잠깐 휴식!</h2><p>문제 시간도 멈췄어요.<br>준비되면 이어서 풀어 주세요.</p><button class="primary-button" id="resume-button">계속하기 →</button>');}
 function showHelp(){
  if(helpOpen||fullscreenBlocked)return;helpOpen=true;const wasPaused=paused;paused=true;returnFocus=document.activeElement;const previous=$('modal-card').innerHTML,previousClass=$('modal-card').className,wasHidden=$('overlay').classList.contains('hidden');
- showModal('<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>주방장 아저씨가 과자를 비뚤게 놓아요.</li><li>과자 위에 나오는 <b>회전·뒤집기 기호</b>를 왼쪽부터 따라가세요.</li><li>명령을 모두 적용한 모양을 생각하고 <b>세 상자 중 정답</b>을 누르세요. PC에서는 1·2·3 키도 쓸 수 있어요.</li><li>답을 고르면 왼쪽 과자가 지시대로 <b>0.8초씩 변신</b>하고 동작 사이에 <b>0.1초씩 쉬어요.</b></li><li>변신 중에는 현재 동작이 과자 위에 반투명하게 나타나요.</li><li>스테이지 번호만큼 명령이 나와요. 3단계는 3번, 10단계는 10번이에요.</li><li>제한 시간은 1단계 <b>9초</b>부터 단계마다 <b>0.5초씩 늘어나요.</b></li><li>맞으면 O와 함께 상자가 천장으로 날아가고, 틀리면 X와 함께 바닥으로 떨어져요.</li><li>스테이지마다 <b>20문제 중 15문제</b>를 맞히면 통과해요.</li><li>하트는 3개, 스테이지는 모두 10개예요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>');
+ showModal(`<div class="small-stamp">제과점의 작은 안내서</div><h2 id="modal-title">이렇게 포장해요</h2><ol class="help-list"><li>주방장 아저씨가 과자를 비뚤게 놓아요.</li><li>과자 위에 나오는 <b>회전·뒤집기 기호</b>를 왼쪽부터 따라가세요.</li><li>명령을 모두 적용한 모양을 생각하고 <b>세 상자 중 정답</b>을 누르세요. PC에서는 1·2·3 키도 쓸 수 있어요.</li><li>답을 고르면 왼쪽 과자가 지시대로 <b>0.8초씩 변신</b>하고 동작 사이에 <b>0.1초씩 쉬어요.</b></li><li>변신 중에는 현재 동작이 과자 위에 반투명하게 나타나요.</li><li>스테이지 번호만큼 명령이 나와요. 3단계는 3번, 10단계는 10번이에요.</li><li>제한 시간은 <b>${difficultyLabel()}</b> 기준 1단계 <b>${getQuestionSeconds(1,selectedDifficulty)}초</b>부터 단계마다 <b>0.5초씩 늘어나요.</b></li><li>난이도는 시작 전에 골라요. ${DIFFICULTIES.map(d=>`${d.label} <b>${getQuestionSeconds(1,d.id)}초</b>`).join(' · ')}부터 시작해요.</li><li>맞으면 O와 함께 상자가 천장으로 날아가고, 틀리면 X와 함께 바닥으로 떨어져요.</li><li>스테이지마다 <b>20문제 중 15문제</b>를 맞히면 통과해요.</li><li>하트는 3개, 스테이지는 모두 10개예요.</li></ol><button class="primary-button" id="close-help">알겠어요!</button>`);
  $('close-help').onclick=()=>{helpOpen=false;paused=wasPaused;$('modal-card').innerHTML=previous;$('modal-card').className=previousClass;if(wasHidden)hideModal();refreshSelection();returnFocus?.focus?.({preventScroll:true});};
 }
-function showRetry(){showModal(`<div class="small-stamp">다시 생각하면 풀 수 있어요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 정답<br>15개까지 ${15-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>같은 난이도로 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
+function showRetry(){showModal(`<div class="small-stamp">다시 생각하면 풀 수 있어요</div><h2 id="modal-title">한 번 더 해 볼까요?</h2><p>STAGE ${game.stage} · <b>${game.score} / ${game.total}개</b> 정답<br>15개까지 ${15-game.score}개가 모자랐어요.</p><div class="start-rules"><span>남은 기회 <b>${'♥'.repeat(game.lives)}</b></span><span>${game.difficultyLabel} 그대로 다시 도전!</span></div><button class="primary-button" id="retry-button">다시 도전하기 →</button>`);}
 function showResults(){
  $('tasting').classList.add('hidden');$('stage-intro').classList.add('hidden');const allClear=game.phase==='complete',sum=game.history.reduce((s,r)=>s+r.success,0),total=game.history.reduce((s,r)=>s+r.total,0),cleared=game.history.filter(r=>r.passed).length;
  const rows=playerStages().map((s,i)=>{const attempts=game.history.filter(h=>h.stage===i+1);if(!attempts.length)return `<tr><td>${String(i+1).padStart(2,'0')} · ${s.name}</td><td>—</td><td>미도전</td></tr>`;return attempts.map(r=>`<tr><td>${String(i+1).padStart(2,'0')} · ${s.name}${r.attempt>1?` (${r.attempt}차)`:''}</td><td>${r.success} / ${r.total}</td><td class="${r.passed?'result-clear':'result-fail'}">${r.passed?'성공':'실패'}</td></tr>`).join('');}).join('');
- showModal(`<div class="small-stamp">${selectedPlayer.name}의 제과점 영업 기록</div><h2 id="modal-title">${allClear?'최고의 엉뚱한 제과장!':'오늘도 수고했어요!'}</h2><p>${allClear?'10개 스테이지를 모두 완성했어요. 달콤한 대성공!':'하트를 모두 사용했어요. 다음에는 더 잘할 수 있어요.'}</p><div class="results-summary"><span><b>${sum}/${total}</b>개 정답</span><span><b>${cleared}/10</b>단계 완료</span></div><div class="results-table-wrap" tabindex="0" aria-label="스테이지별 전체 기록"><table class="results-table"><thead><tr><th>스테이지</th><th>정답 / 전체</th><th>결과</th></tr></thead><tbody>${rows}</tbody></table></div><button class="primary-button" id="restart-button">가족을 선택하고 다시 풀기 →</button>`,'results-card');
+ showModal(`<div class="small-stamp">${selectedPlayer.name}의 제과점 영업 기록</div><h2 id="modal-title">${allClear?'최고의 엉뚱한 제과장!':'오늘도 수고했어요!'}</h2><p>${allClear?'10개 스테이지를 모두 완성했어요. 달콤한 대성공!':'하트를 모두 사용했어요. 다음에는 더 잘할 수 있어요.'}</p><div class="results-summary"><span><b>${sum}/${total}</b>개 정답</span><span><b>${cleared}/10</b>단계 완료</span><span><b>${game.difficultyLabel}</b> 난이도</span></div><div class="results-table-wrap" tabindex="0" aria-label="스테이지별 전체 기록"><table class="results-table"><thead><tr><th>스테이지</th><th>정답 / 전체</th><th>결과</th></tr></thead><tbody>${rows}</tbody></table></div><button class="primary-button" id="restart-button">가족을 선택하고 다시 풀기 →</button>`,'results-card');
 }
 function stageEnded(passed){updateHud(true);if(passed){expression='happy';expressionUntil=clock+2;drawTasting();$('tasting-subtitle').textContent=`STAGE ${game.stage} CLEAR · ${game.score} / 20`;$('tasting-title').textContent=game.stage===10?'이 맛에 제과장 하지!':'음~ 맛있다!';$('tasting').classList.remove('hidden');transitionTime=1;playSound('stage');}else{expression='crying';expressionUntil=clock+10;transitionTime=.8;}}
 function chooseBox(index){if(!loaded||paused||rotationRequired||displayPending||fullscreenBlocked||game.phase!=='playing')return;if(game.choose(index))showRevealStart(game.question);}
@@ -163,7 +173,7 @@ function frame(now){
  drawScene();updateHud();requestAnimationFrame(frame);
 }
 
-$('overlay').addEventListener('change',e=>{if(e.target.matches('input[name="player"]'))selectPlayer(e.target.value);});
+$('overlay').addEventListener('change',e=>{if(e.target.matches('input[name="player"]'))selectPlayer(e.target.value);if(e.target.matches('input[name="difficulty"]'))selectDifficulty(e.target.value);});
 $('overlay').addEventListener('click',e=>{const id=e.target.closest('button')?.id;if(id==='enter-fullscreen-button'){if(game.phase==='ready')newGame();else restoreFullscreen();return;}if(id==='choose-family-button'){showCharacterSelection();return;}if(id==='start-button')newGame();if(id==='restart-button')showCharacterSelection();if(id==='retry-button')startIntro();if(id==='resume-button'){togglePause();returnFocus?.focus({preventScroll:true});}});
 answerButtons.forEach(button=>button.addEventListener('click',()=>chooseBox(Number(button.dataset.answer))));
 $('pause-button').addEventListener('click',togglePause);$('help-button').addEventListener('click',showHelp);

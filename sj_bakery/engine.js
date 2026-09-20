@@ -1,11 +1,15 @@
-export const STAGE_SECONDS=60;
 export const QUESTION_SECONDS=9;
-export const getQuestionSeconds=stage=>QUESTION_SECONDS+Math.max(0,stage-1)*.5;
+export const DIFFICULTIES=[
+ {id:'beginner',label:'초급자',bonus:5,tagline:'천천히 생각해요'},
+ {id:'intermediate',label:'중급자',bonus:3,tagline:'조금 여유 있게'},
+ {id:'advanced',label:'상급자',bonus:0,tagline:'제과장의 속도'}
+];
+export const DEFAULT_DIFFICULTY='intermediate';
+export const getDifficulty=id=>DIFFICULTIES.find(d=>d.id===id)??DIFFICULTIES.find(d=>d.id===DEFAULT_DIFFICULTY);
+export const getQuestionSeconds=(stage,difficulty=DEFAULT_DIFFICULTY)=>QUESTION_SECONDS+Math.max(0,stage-1)*.5+getDifficulty(difficulty).bonus;
 export const REVEAL_STEP_SECONDS=.8;
 export const REVEAL_PAUSE_SECONDS=.1;
-export const COOKIE_SECONDS=QUESTION_SECONDS;
 export const QUESTIONS_PER_STAGE=20;
-export const COOKIES_PER_STAGE=QUESTIONS_PER_STAGE;
 export const PASS_SCORE=15;
 export const PASTRIES=[
  {name:'버터의 첫걸음',color:'#dba04a'}, {name:'초코칩이 콕콕',color:'#cd8f3f'},
@@ -44,8 +48,10 @@ const shuffle=(values,random)=>{
 };
 
 export class BakeryGame{
- constructor(random=Math.random){this.random=random;this.reset();}
- get questionSeconds(){return getQuestionSeconds(this.stage);}
+ constructor(random=Math.random){this.random=random;this.difficulty=DEFAULT_DIFFICULTY;this.reset();}
+ get questionSeconds(){return getQuestionSeconds(this.stage,this.difficulty);}
+ get difficultyLabel(){return getDifficulty(this.difficulty).label;}
+ setDifficulty(id){if(this.phase!=='ready')return false;this.difficulty=getDifficulty(id).id;return true;}
  get revealRemaining(){
   const reveal=this.question?.reveal;if(!reveal||this.question.result)return 0;const remainingActions=this.question.instructions.length-reveal.step;
   if(reveal.pausing)return Math.max(0,REVEAL_PAUSE_SECONDS-reveal.pauseElapsed)+remainingActions*REVEAL_STEP_SECONDS+Math.max(0,remainingActions-1)*REVEAL_PAUSE_SECONDS;
