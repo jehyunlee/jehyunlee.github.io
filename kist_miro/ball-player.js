@@ -5,6 +5,42 @@ export const BALL_RADIUS=1.02;
 export const LOGO_CROP={x:137,y:24,width:170,height:176};
 const rollAxis=new THREE.Vector3(),rollRotation=new THREE.Quaternion();
 
+// Chuseok 2026 special: the ball becomes a full moon from 2026-09-24 00:00 KST
+// through 2026-09-27 24:00 KST. Fixed UTC epochs, so the window does not depend
+// on the visitor's time zone. `?moon=1` / `?moon=0` force it for previewing.
+export const MOON_EVENT={start:Date.UTC(2026,8,23,15),end:Date.UTC(2026,8,27,15)};
+export const MOON_ASSETS={color:'./moon-color.jpg?v=20260924-moon',bump:'./moon-bump.jpg?v=20260924-moon'};
+// Where the chalk graffiti was baked into the equirectangular map (pixels of 2048×1024).
+export const MOON_GRAFFITI={x:512,y:392,size:600};
+
+export function moonEventActive(now=Date.now(),search=globalThis.location?.search??'') {
+  const forced=new URLSearchParams(search).get('moon');
+  if(forced==='1')return true;
+  if(forced==='0')return false;
+  return now>=MOON_EVENT.start&&now<MOON_EVENT.end;
+}
+
+export async function loadMoonTextures(anisotropy=1) {
+  const loader=new THREE.TextureLoader();
+  const [map,bumpMap]=await Promise.all([loader.loadAsync(MOON_ASSETS.color),loader.loadAsync(MOON_ASSETS.bump)]);
+  map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=anisotropy;bumpMap.anisotropy=anisotropy;
+  return {map,bumpMap};
+}
+
+export function createMoonMaterial({map,bumpMap}) {
+  // Regolith: fully rough, no clearcoat. LOLA elevation drives crater relief;
+  // a faint self-glow keeps the disc reading as a full moon inside the dark maze.
+  return new THREE.MeshStandardMaterial({color:0xcfcfcf,map,bumpMap,bumpScale:.09,roughness:1,metalness:0,emissive:0xffffff,emissiveMap:map,emissiveIntensity:.12,envMapIntensity:.2});
+}
+
+export function drawMoonBadge(context,image,x,y,size) {
+  const g=MOON_GRAFFITI,r=size/2;
+  context.save();
+  context.beginPath();context.arc(x+r,y+r,r,0,Math.PI*2);context.clip();
+  context.drawImage(image,g.x-g.size/2,g.y-g.size/2,g.size,g.size,x,y,size,size);
+  context.restore();
+}
+
 export function drawBallLogo(context,image,x,y,width,height,crop=LOGO_CROP) {
   crop=crop??{x:0,y:0,width:image.naturalWidth||image.width,height:image.naturalHeight||image.height};
   context.drawImage(image,crop.x,crop.y,crop.width,crop.height,x,y,width,height);

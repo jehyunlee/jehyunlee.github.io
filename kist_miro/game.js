@@ -1,7 +1,9 @@
 import * as THREE from './vendor/three.module.min.js';
 import {MazeSession,DIRECTIONS,relativeDirection,hasLineOfSight,LOGO_COLOR,UNVISITED_COLOR,logoPosition,overviewCameraPose,mobileCameraLayout,generateRandomStages} from './maze-core.js?v=20260913-3';
 
-import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall} from './ball-player.js?v=20260913-3';
+import {BALL_RADIUS,LOGO_CROP,createBallTexture,drawBallLogo,resetBallOrientation,rollBall,moonEventActive,loadMoonTextures,createMoonMaterial,drawMoonBadge} from './ball-player.js?v=20260924-moon';
+
+const MOON=moonEventActive();let moonTextures=null;
 
 const $=id=>document.getElementById(id);
 const STAGE_COLORS=['#e2f58a','#93ddf5','#e3b1ff','#ffcd75'];
@@ -49,6 +51,10 @@ const COPY={
   }
 };
 let language='en';
+if(MOON){
+  COPY.en.playerName='Full Moon · Chuseok Special';COPY.ko.playerName='보름달 · 추석 특집';
+  COPY.en.introHint='Chuseok special until Sep 27 · roll the full moon with the arrow keys or the translucent controls · lunar surface: NASA LRO';COPY.ko.introHint='추석 특집 · 9월 27일까지 · 방향키 또는 달 주변의 반투명 키로 보름달을 굴려요 · 달 표면: NASA LRO';
+}
 const copy=()=>COPY[language];
 const stageInfo=index=>({...copy().stages[index%copy().stages.length],color:STAGE_COLORS[index%STAGE_COLORS.length]});
 const CELL=3.2,WALL_HEIGHT=3.3,VISION_RADIUS=5.3;
@@ -158,16 +164,21 @@ function makeEnvironment() {
   scene.environment=environment.texture;texture.dispose();pmrem.dispose();
 }
 
+function drawBadge(image,crop) {
+  const badge=document.querySelector('.player-label canvas'),context=badge.getContext('2d');
+  context.clearRect(0,0,badge.width,badge.height);
+  if(moonTextures){context.fillStyle='#10191e';context.fillRect(0,0,badge.width,badge.height);drawMoonBadge(context,moonTextures.map.image,4,4,72);return;}
+  context.fillStyle='#ffffff';context.fillRect(0,0,badge.width,badge.height);
+  const source=crop??{width:image.naturalWidth,height:image.naturalHeight},height=72*source.height/source.width;
+  drawBallLogo(context,image,4,40-height/2,72,height,crop);
+}
+
 function createAvatar(logoImage,crop=LOGO_CROP) {
   const character=new THREE.Group();
-  const material=new THREE.MeshPhysicalMaterial({color:0xffffff,map:createBallTexture(logoImage,Math.min(8,renderer.capabilities.getMaxAnisotropy()),crop),roughness:.18,metalness:0,clearcoat:1,clearcoatRoughness:.09,envMapIntensity:.85});
+  const material=moonTextures?createMoonMaterial(moonTextures):new THREE.MeshPhysicalMaterial({color:0xffffff,map:createBallTexture(logoImage,Math.min(8,renderer.capabilities.getMaxAnisotropy()),crop),roughness:.18,metalness:0,clearcoat:1,clearcoatRoughness:.09,envMapIntensity:.85});
   ball=new THREE.Mesh(new THREE.SphereGeometry(BALL_RADIUS,64,48),material);
   ball.position.y=BALL_RADIUS;ball.castShadow=true;ball.receiveShadow=true;character.add(ball);
-  const badge=document.querySelector('.player-label canvas'),badgeContext=badge.getContext('2d');
-  badgeContext.fillStyle='#ffffff';badgeContext.fillRect(0,0,badge.width,badge.height);
-  const source=crop??{width:logoImage.naturalWidth,height:logoImage.naturalHeight};
-  const badgeHeight=72*source.height/source.width;
-  drawBallLogo(badgeContext,logoImage,4,40-badgeHeight/2,72,badgeHeight,crop);
+  drawBadge(logoImage,crop);
   const shadowCanvas=document.createElement('canvas');shadowCanvas.width=128;shadowCanvas.height=128;
   const c=shadowCanvas.getContext('2d'),g=c.createRadialGradient(64,64,12,64,64,64);
   g.addColorStop(0,'rgba(0,0,0,.55)');g.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g;c.fillRect(0,0,128,128);
@@ -182,12 +193,9 @@ function applyArenaVisual() {
   document.documentElement.style.setProperty('--arena-color',`#${theme.getHexString()}`);
   document.documentElement.style.setProperty('--arena-light',`#${unvisitedColor.getHexString()}`);
   $('arena-period').textContent=arenaPeriod();
-  if(!ball||!image)return;
+  if(!ball||!image||moonTextures)return; // the moon keeps its face across arenas
   ball.material.map.dispose();ball.material.map=createBallTexture(image,Math.min(8,renderer.capabilities.getMaxAnisotropy()),crop);ball.material.needsUpdate=true;
-  const badge=document.querySelector('.player-label canvas'),context=badge.getContext('2d');
-  context.clearRect(0,0,badge.width,badge.height);context.fillStyle='#ffffff';context.fillRect(0,0,badge.width,badge.height);
-  const source=crop??{width:image.naturalWidth,height:image.naturalHeight},height=72*source.height/source.width;
-  drawBallLogo(context,image,4,40-height/2,72,height,crop);
+  drawBadge(image,crop);
 }
 
 function setMatrix(mesh,index,x,y,z,sx=1,sy=1,sz=1,angle=0) {
@@ -861,6 +869,7 @@ async function init() {
   await Promise.all(arenas.map(async arena=>{const image=await loader.loadAsync(`./${arena.ballLogo}`);arenaImages.set(arena.id,image);})).catch(()=>{throw new Error(language==='ko'?'Arena 로고를 불러오지 못했어요. 다시 열어 주세요.':'An arena logo could not load. Please reload.');});
   session=createRandomSession();
   renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
+  if(MOON)moonTextures=await loadMoonTextures(Math.min(8,renderer.capabilities.getMaxAnisotropy())).catch(error=>{console.warn('Moon textures unavailable; using the logo ball.',error);return null;});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setClearColor(0x10191e);
   renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
@@ -873,7 +882,7 @@ async function init() {
   const key=new THREE.DirectionalLight(0xf1faff,3.4);key.position.set(6,18,10);scene.add(key);
   const fill=new THREE.DirectionalLight(0xa4d1e3,1.6);fill.position.set(-10,8,-5);scene.add(fill);
   avatar=createAvatar(arenaImages.get(selectedArena.id),LOGO_CROP);scene.add(avatar);applyArenaVisual();
-  const lantern=new THREE.PointLight(0xd7e9b9,9,11,1.6);lantern.position.set(0,3.8,-.3);avatar.add(lantern);
+  const lantern=new THREE.PointLight(moonTextures?0xfff0c9:0xd7e9b9,9,11,1.6);lantern.position.set(0,3.8,-.3);avatar.add(lantern);
   playerRing=new THREE.Mesh(new THREE.RingGeometry(1.1,1.12,64),new THREE.MeshBasicMaterial({color:0xe2f58a,side:THREE.DoubleSide,transparent:true,opacity:.3,depthWrite:false}));playerRing.rotation.x=-Math.PI/2;scene.add(playerRing);
   renderJourney();buildMaze();buildOverview(0);mazeGroup.visible=false;overviewGroup.visible=true;scene.fog=null;
   setupInputs();resize();const opening=getOverviewPose();camera.position.copy(opening.position);cameraLook.copy(opening.look);camera.lookAt(cameraLook);
